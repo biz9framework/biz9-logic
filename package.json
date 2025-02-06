@@ -1,0 +1,24 @@
+{
+  "name": "biz9-adapter",
+  "version": "1.0.11",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Certified Coderz",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.6",
+    "biz9-scriptz": "^5.2.14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biz9framework/biz9-adapter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/biz9framework/biz9-adapter/issues"
+  },
+  "homepage": "https://github.com/biz9framework/biz9-adapter#readme",
+  "devDependencies": {},
+  "description": ""
+}
