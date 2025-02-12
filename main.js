@@ -2,7 +2,7 @@
 Copyright 2023 Certified CoderZ
 Author: certifiedcoderz@gmail.com (Certified CoderZ)
 License GNU General Public License v3.0
-Description: BiZ9 Framework: Adapter - Main
+Description: BiZ9 Framework: Logic - Main
 */
 
 const get_new_item_main = (data_type,id) => {

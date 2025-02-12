@@ -2,7 +2,7 @@
 Copyright 2023 Certified CoderZ
 Author: certifiedcoderz@gmail.com (Certified CoderZ)
 License GNU General Public License v3.0
-Description: BiZ9 Framework: Adapter-Server
+Description: BiZ9 Framework: Logic
 */
 const { get_new_item_main,get_data_config_main,get_cloud_url_main } = require('./main.js');
 
