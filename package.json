@@ -1,6 +1,6 @@
 {
   "name": "biz9-logic",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,7 +8,6 @@
   "author": "Certified Coderz",
   "license": "ISC",
   "dependencies": {
-    "async": "^3.2.6",
     "async-series": "^0.0.1",
     "biz9-scriptz": "^5.2.34",
     "biz9-utility": "^1.0.53",
