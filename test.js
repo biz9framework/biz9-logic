@@ -1,5 +1,5 @@
 import series from 'async-series';
-import { get_data_config, get_new_item, get_cloud_url, get_biz_item,get_cloud_url_action_update_item,get_cloud_url_action_get_item, get_cloud_url_action_get_list,get_cloud_url_action_update_list,get_cloud_url_action_delete_item, get_cloud_url_action_delete_list  } from './';
+import { get_data_config, get_new_item, get_cloud_url,get_cloud_url_action_update_item,get_cloud_url_action_get_item, get_cloud_url_action_get_list,get_cloud_url_action_update_list,get_cloud_url_action_delete_item, get_cloud_url_action_delete_list,get_biz_item  } from './';
 
 /* --- TEST CONFIG START --- */
 //const ID='0';
@@ -98,6 +98,22 @@ describe("connect", () => {
                 console.log(cloud_url);
                 console.log('GET-ACTION-DELETE-LIST-SUCCESS');
                 call()
+            },
+ function(call) {
+                console.log('SET-ITEM-BIZ-START');
+                let item_test = get_test_item();
+                item_test.photofilename='abc.png';
+                item_test.field_1 = 'my_field_1';
+                item_test.value_1 = 'my_value_1';
+                item_test.field_2 = 'my_field_2';
+                item_test.value_2 = 'my_value_2';
+                item_test.field_3 = 'my_field_3';
+                item_test.value_3 = 'my_value_3';
+                let item_biz = get_biz_item(biz9_config,item_test,{get_photo:true,get_date:true,get_count:true,get_biz_map:true});
+                //let item_biz = get_biz_item(biz9_config,item_test,{get_photo:false,get_date:false,get_count:false,get_biz_map:false});
+                console.log(item_biz);
+                console.log('SET-ITEM-BIZ-SUCCESS');
+                call();
             },
 
             function(call) {

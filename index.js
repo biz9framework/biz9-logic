@@ -47,46 +47,15 @@ const get_cloud_url_action_update_list = (data_type) => {
     let action_url= "main/crud/update_list/"+data_type;
     return get_cloud_url_main(global.APP_TITLE_ID,global.CLOUD_URL,global.CLOUD_PORT_ID,action_url);
 };
-
-
-
-
-
-
-/*
-const get_cloud_action_url_get_item = (data_type,id) => {
-    return  +"/main/crud/get/"+data_type + "/" + id;
-};
-const get_cloud_action_url_delete_item = (data_type,id) => {
-    return  +"/main/crud/delete/"+data_type + "/" + id;
-};
-const get_cloud_action_url_update_list = (data_type) => {
-    return  +"/main/crud/update_list/"+data_type;
-};
-const get_cloud_action_url_get_list = (data_type) => {
-    return  +"/main/crud/get_list/"+data_type;
-};
-const get_cloud_action_url_delete_list = (data_type) => {
-    return  +"/main/crud/delete_list/"+data_type;
-};
-*/
 const get_cloud_filter_obj = (data_type,filter,sort_by,page_current,page_size)=>{
     return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
-}
-
-
-/*
-const get_data_config = (biz9_config,params) => {
-    return get_data_config_main(biz9_config,params);
-};
-const get_cloud_url = (app_title_id,domain_url,action_url)=>{
-    return get_cloud_url_main(app_title_id,domain_url,action_url);
 }
 const get_biz_item = (biz9_config,item,options)=>{
     return get_biz_item_main(biz9_config,item,options);
 }
-*/
-
+const error_append = (org_error,new_error) => {
+    return error_append_main(org_error,new_error);
+};
 export  {
     global,
     get_new_item,
@@ -97,6 +66,6 @@ export  {
     get_cloud_url_action_get_list,
     get_cloud_url_action_update_list,
     get_cloud_url_action_delete_list,
-    //get_data_config,
-    //get_biz_item
+    get_biz_item,
+    error_append_main
 };
