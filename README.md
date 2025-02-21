@@ -1,6 +1,6 @@
-# BiZ9 Logic
+# BiZ9 Logic-JS
 
-**The BiZ9-Logic Package**
+**The BiZ9-Logic-JS Package**
 
 ## Credits
 ### <a id="credit"></a>Credits
