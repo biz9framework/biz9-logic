@@ -5,31 +5,35 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic - Main
 */
 
-const moment = require('moment');
-const { get_date_time_pretty,get_date_str,get_date_time_str,get_month_title_short,get_date_time_obj,get_time_str } = require('biz9-utility');
+//const moment = require('moment');
+//const { get_date_time_pretty,get_date_str,get_date_time_str,get_month_title_short,get_date_time_obj,get_time_str } from 'biz9-utility';
+
 const get_new_item_main = (data_type,id) => {
     if(!id){
         id=0;
     }
     return {data_type:data_type,id:id};
 }
-const get_cloud_url_main = (app_title_id,domain_url,action_url) =>{
+const get_cloud_url_main = (app_title_id,domain_url,port_id,action_url) =>{
     var app_title_id_url='?app_title_id='+app_title_id;
-    return domain_url+action_url+app_title_id_url;
+    return domain_url+":"+port_id+"/"+action_url+app_title_id_url;
 }
+/*
 const get_data_config_main = (biz9_config,query) =>{
     if(biz9_config.SERVICE_HOST_TYPE == 'multiple'){
         biz9_config.APP_TITLE_ID=query.app_title_id;
     }
     return biz9_config;
 }
+*/
+/*
 const get_biz_item_main=(biz9_config,item,options) =>{
-    /* option
-     * get_photo = true
-     * get_date = true
-     * get_count = true
-     * get_biz_map = true
-     */
+    //option
+    //get_photo = true
+    //get_date = true
+    //get_count = true
+    //get_biz_map = true
+    //
     if(options.get_count){
         if(!item.view_count){
             item.view_count='0';
@@ -68,7 +72,7 @@ const get_biz_item_main=(biz9_config,item,options) =>{
     //photo setting - end
     //date setting - start
     if(options.get_date){
-        no_date_str='';
+        let no_date_str='';
         if(!item.date_create){
             item.date_create= new moment().toISOString();
             item.date_save= new moment().toISOString();
@@ -104,11 +108,12 @@ const get_biz_item_main=(biz9_config,item,options) =>{
 
     return item;
 }
+*/
 
 
-module.exports = {
-    get_data_config_main,
+export {
     get_new_item_main,
-    get_cloud_url_main,
-    get_biz_item_main
+    get_cloud_url_main
+    //get_data_config_main,
+    //get_biz_item_main
 };
