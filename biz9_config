@@ -1,4 +1,4 @@
-VERSION='1.1.7'
-TITLE='BiZ9-Logic-JS'
-REPO='git@github.com:biz9framework/biz9-logic-js.git'
+VERSION='1.1.8'
+TITLE='BiZ9-Logic'
+REPO='git@github.com:biz9framework/biz9-logic.git'
 BRANCH='main'

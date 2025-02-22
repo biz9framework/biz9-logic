@@ -1,4 +1,5 @@
 import series from 'async-series';
+import {w,w_error} from 'biz9-utility-js';
 import { get_data_config, get_new_item, get_cloud_url,get_cloud_url_action_update_item,get_cloud_url_action_get_item, get_cloud_url_action_get_list,get_cloud_url_action_update_list,get_cloud_url_action_delete_item, get_cloud_url_action_delete_list,get_biz_item  } from './';
 
 /* --- TEST CONFIG START --- */
@@ -29,7 +30,8 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                call()
+                //w('connect_url','connect_url');
+                //call()
             },
             function(call) {
                 console.log('GET-NEW-ITEM-START');

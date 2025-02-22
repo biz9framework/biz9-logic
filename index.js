@@ -53,9 +53,6 @@ const get_cloud_filter_obj = (data_type,filter,sort_by,page_current,page_size)=>
 const get_biz_item = (biz9_config,item,options)=>{
     return get_biz_item_main(biz9_config,item,options);
 }
-const error_append = (org_error,new_error) => {
-    return error_append_main(org_error,new_error);
-};
 export  {
     global,
     get_new_item,
@@ -67,5 +64,4 @@ export  {
     get_cloud_url_action_update_list,
     get_cloud_url_action_delete_list,
     get_biz_item,
-    error_append_main
 };
