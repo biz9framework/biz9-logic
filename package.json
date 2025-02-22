@@ -1,12 +1,12 @@
 {
-  "name": "biz9-logic",
-  "version": "1.0.23",
+  "name": "biz9-logic-js",
+  "version": "1.0.24",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Certified Coderz",
-  "license": "ISC",
+  "author": "BiZ9 Framework LLC",
+  "license": "MIT",
   "dependencies": {
     "async-series": "^0.0.1",
     "biz9-scriptz": "^5.2.34",
@@ -17,11 +17,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/biz9framework/biz9-logic.git"
+    "url": "git+https://github.com/biz9framework/biz9-logic-js.git"
   },
   "bugs": {
-    "url": "https://github.com/biz9framework/biz9-logic/issues"
+    "url": "https://github.com/biz9framework/biz9-logic-js/issues"
   },
-  "homepage": "https://github.com/biz9framework/biz9-logic#readme",
-  "description": ""
+  "homepage": "https://github.com/biz9framework/biz9-logic-js#readme",
+  "description": "**The BiZ9-Logic-JS Package** Strict Javascript Required.",
+  "devDependencies": {},
+  "keywords": [
+    "await",
+    "async",
+    "javascript",
+    "axios",
+    "fetch",
+    "random"
+  ]
 }
