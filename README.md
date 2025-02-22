@@ -1,6 +1,7 @@
 # BiZ9 Logic-JS
 
 **The BiZ9-Logic-JS Package**
+Strict Javascript Required.
 
 ## Credits
 ### <a id="credit"></a>Credits
