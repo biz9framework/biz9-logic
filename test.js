@@ -1,6 +1,6 @@
-import series from 'async-series';
-import {w,w_error} from 'biz9-utility-js';
-import { get_data_config, get_new_item, get_cloud_url,get_cloud_url_action_update_item,get_cloud_url_action_get_item, get_cloud_url_action_get_list,get_cloud_url_action_update_list,get_cloud_url_action_delete_item, get_cloud_url_action_delete_list,get_biz_item  } from './';
+const series = require('async-series');
+const {w,w_error,get_test_item} = require('biz9-utility');
+const { get_data_config, Item, get_cloud_url,get_cloud_url_action_update_item,get_cloud_url_action_get_item, get_cloud_url_action_get_list,get_cloud_url_action_update_list,get_cloud_url_action_delete_item, get_cloud_url_action_delete_list, Cloud  }= require('./');
 
 /* --- TEST CONFIG START --- */
 //const ID='0';
@@ -30,80 +30,91 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                //w('connect_url','connect_url');
-                //call()
+                let cloud_url = Cloud.get_url('aa');
+                w('connect_url',cloud_url);
+                call()
             },
+            function(call) {
+                console.log('CLOUD-GET_URL-ACTION-UPDATE-ITEM-START');
+                let data_type = 'dt_blank';
+                let id = 0;
+                let cloud_url = Cloud.get_url_action_update_item(data_type,id);
+                w('get_url_action_update_item',cloud_url);
+                console.log('CLOUD-GET_URL-ACTION-UPDATE-ITEM-SUCCESS');
+                call()
+            },
+
+            function(call) {
+                console.log('CLOUD-GET_URL-ACTION-GET-ITEM-START');
+                let data_type = 'dt_blank';
+                let id = 0;
+                let cloud_url = Cloud.get_url_action_get_item(data_type,id);
+                w('get_url_action_get_item',cloud_url);
+                console.log('CLOUD-GET_URL-ACTION-GET-ITEM-SUCCESS');
+                call()
+            },
+
+            function(call) {
+                console.log('CLOUD-GET_URL-ACTION-DELETE-ITEM-START');
+                let data_type = 'dt_blank';
+                let id = 0;
+                let cloud_url = Cloud.get_url_action_delete_item(data_type,id);
+                w('get_url_action_delete_item',cloud_url);
+                console.log('CLOUD-GET_URL-ACTION-DELETE-ITEM-SUCCESS');
+                call()
+            },
+
+            function(call) {
+                console.log('CLOUD-GET_URL-ACTION-GET-LIST-ITEM-START');
+                let data_type = 'dt_blank';
+                let cloud_url = Cloud.get_url_action_get_list(data_type);
+                w('get_url_action_get_list_item',cloud_url);
+                console.log('CLOUD-GET_URL-ACTION-GET-LIST-ITEM-SUCCESS');
+                call()
+            },
+
+            function(call) {
+                console.log('CLOUD-GET_URL-ACTION-DELETE-LIST-ITEM-START');
+                let data_type = 'dt_blank';
+                let cloud_url = Cloud.get_url_action_delete_list(data_type);
+                w('get_url_action_delete_list_item',cloud_url);
+                console.log('CLOUD-GET_URL-ACTION-DELETE-LIST-ITEM-SUCCESS');
+                call()
+            },
+
+            function(call) {
+                console.log('CLOUD-GET_URL-ACTION-UPDATE-LIST-ITEM-START');
+                let data_type = 'dt_blank';
+                let cloud_url = Cloud.get_url_action_delete_list(data_type);
+                w('get_url_action_delete_list_item',cloud_url);
+                console.log('CLOUD-GET_URL-ACTION-UPDATE-LIST-ITEM-SUCCESS');
+                call()
+            },
+
+            function(call) {
+                console.log('CLOUD-GET_FILTER-OBJECT-START');
+                let data_type = 'dt_blank';
+                let filter = {data_type:'dt_blank'};
+                let sort_by = {title:-1};
+                let page_current = 0;
+                let page_size = 15;
+                let filter_obj = Cloud.get_filter_obj(data_type,filter,sort_by,page_current,page_size);
+                w('get_url_action_filter_obj',filter_obj);
+                console.log('CLOUD-GET_FILTER-OBJECT-SUCCESS');
+                call()
+            },
+
             function(call) {
                 console.log('GET-NEW-ITEM-START');
-                var _new_item = get_new_item(DATA_TYPE,0);
+                var _new_item = Item.get_new(DATA_TYPE,0);
                 console.log(_new_item);
                 console.log('GET-NEW-ITEM-SUCCESS');
-                call()
+                //call()
             },
+
             function(call) {
-                console.log('GET-CLOUD-URL-START');
-                let cloud_url = get_cloud_url('apple');
-                console.log(cloud_url);
-                console.log('GET-CLOUD-URL-SUCCESS');
-                call()
-            },
-            function(call) {
-                console.log('GET-ACTION-UPDATE-ITEM-START');
-                let data_type = 'dt_blank';
-                let id = '0';
-                let cloud_url = get_cloud_url_action_update_item(data_type,id);
-                console.log(cloud_url);
-                console.log('GET-ACTION-UPDATE-ITEM-SUCCESS');
-                call()
-            },
-            function(call) {
-                console.log('GET-ACTION-GET-ITEM-START');
-                let data_type = 'dt_blank';
-                let id = '0';
-                let cloud_url = get_cloud_url_action_get_item(data_type,id);
-                console.log(cloud_url);
-                console.log('GET-ACTION-GET-ITEM-SUCCESS');
-                call()
-            },
-            function(call) {
-                console.log('GET-ACTION-DELETE-START');
-                let data_type = 'dt_blank';
-                let id = '0';
-                let cloud_url = get_cloud_url_action_delete_item(data_type,id);
-                console.log(cloud_url);
-                console.log('GET-ACTION-DELETE-SUCCESS');
-                call()
-            },
-            function(call) {
-                console.log('GET-ACTION-UPDATE-LIST-START');
-                let data_type = 'dt_blank';
-                let id = '0';
-                let cloud_url = get_cloud_url_action_update_list(data_type);
-                console.log(cloud_url);
-                console.log('GET-ACTION-UPDATE-LIST-SUCCESS');
-                call()
-            },
-            function(call) {
-                console.log('GET-ACTION-GET-LIST-START');
-                let data_type = 'dt_blank';
-                let id = '0';
-                let cloud_url = get_cloud_url_action_get_list(data_type);
-                console.log(cloud_url);
-                console.log('GET-ACTION-GET-LIST-SUCCESS');
-                call()
-            },
-             function(call) {
-                console.log('GET-ACTION-DELETE-LIST-START');
-                let data_type = 'dt_blank';
-                let id = '0';
-                let cloud_url = get_cloud_url_action_delete_list(data_type);
-                console.log(cloud_url);
-                console.log('GET-ACTION-DELETE-LIST-SUCCESS');
-                call()
-            },
- function(call) {
                 console.log('SET-ITEM-BIZ-START');
-                let item_test = get_test_item();
+                let item_test = get_test_item('dt_blank',0);
                 item_test.photofilename='abc.png';
                 item_test.field_1 = 'my_field_1';
                 item_test.value_1 = 'my_value_1';

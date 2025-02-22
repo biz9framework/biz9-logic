@@ -111,7 +111,7 @@ const get_biz_item_main=(biz9_config,item,options) =>{
 */
 
 
-export {
+module.exports = {
     get_new_item_main,
     get_cloud_url_main
     //get_data_config_main,
