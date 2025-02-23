@@ -99,7 +99,7 @@ const get_biz_item_main=(biz9_config,item,options) =>{
     //date setting - end
     //biz_map setting - start
     if(options.get_biz_map){
-        for(a=0;a<20;a++){
+        for(let a=0;a<20;a++){
             if(item['field_'+a]){
                 item[item['field_'+a]]=item['value_'+a];
             }
