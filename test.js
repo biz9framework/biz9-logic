@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {w,w_error,get_test_item} = require('biz9-utility');
+const {Log,Test} = require('biz9-utility');
 const { get_data_config, Item, get_cloud_url,get_cloud_url_action_update_item,get_cloud_url_action_get_item, get_cloud_url_action_get_list,get_cloud_url_action_update_list,get_cloud_url_action_delete_item, get_cloud_url_action_delete_list, Cloud  }= require('./');
 
 /* --- TEST CONFIG START --- */
@@ -31,90 +31,88 @@ describe("connect", () => {
             function(call) {
                 console.log('CONNECT-START');
                 let cloud_url = Cloud.get_url('aa');
-                w('connect_url',cloud_url);
+                Log.w('connect_url',cloud_url);
                 call()
             },
             function(call) {
-                console.log('CLOUD-GET_URL-ACTION-UPDATE-ITEM-START');
+                console.log('GET_URL-ACTION-UPDATE-ITEM-START');
                 let data_type = 'dt_blank';
                 let id = 0;
                 let cloud_url = Cloud.get_url_action_update_item(data_type,id);
-                w('get_url_action_update_item',cloud_url);
-                console.log('CLOUD-GET_URL-ACTION-UPDATE-ITEM-SUCCESS');
+                Log.w('get_url_action_update_item',cloud_url);
+                console.log('GET_URL-ACTION-UPDATE-ITEM-SUCCESS');
                 call()
             },
 
             function(call) {
-                console.log('CLOUD-GET_URL-ACTION-GET-ITEM-START');
+                console.log('GET_URL-ACTION-GET-ITEM-START');
                 let data_type = 'dt_blank';
                 let id = 0;
                 let cloud_url = Cloud.get_url_action_get_item(data_type,id);
-                w('get_url_action_get_item',cloud_url);
-                console.log('CLOUD-GET_URL-ACTION-GET-ITEM-SUCCESS');
+                Log.w('get_url_action_get_item',cloud_url);
+                console.log('GET_URL-ACTION-GET-ITEM-SUCCESS');
                 call()
             },
 
             function(call) {
-                console.log('CLOUD-GET_URL-ACTION-DELETE-ITEM-START');
+                console.log('GET_URL-ACTION-DELETE-ITEM-START');
                 let data_type = 'dt_blank';
                 let id = 0;
                 let cloud_url = Cloud.get_url_action_delete_item(data_type,id);
-                w('get_url_action_delete_item',cloud_url);
-                console.log('CLOUD-GET_URL-ACTION-DELETE-ITEM-SUCCESS');
+                Log.w('get_url_action_delete_item',cloud_url);
+                console.log('GET_URL-ACTION-DELETE-ITEM-SUCCESS');
                 call()
             },
 
             function(call) {
-                console.log('CLOUD-GET_URL-ACTION-GET-LIST-ITEM-START');
+                console.log('GET_URL-ACTION-GET-LIST-ITEM-START');
                 let data_type = 'dt_blank';
                 let cloud_url = Cloud.get_url_action_get_list(data_type);
-                w('get_url_action_get_list_item',cloud_url);
-                console.log('CLOUD-GET_URL-ACTION-GET-LIST-ITEM-SUCCESS');
+                Log.w('get_url_action_get_list_item',cloud_url);
+                console.log('GET_URL-ACTION-GET-LIST-ITEM-SUCCESS');
                 call()
             },
 
             function(call) {
-                console.log('CLOUD-GET_URL-ACTION-DELETE-LIST-ITEM-START');
+                console.log('GET_URL-ACTION-DELETE-LIST-ITEM-START');
                 let data_type = 'dt_blank';
                 let cloud_url = Cloud.get_url_action_delete_list(data_type);
-                w('get_url_action_delete_list_item',cloud_url);
-                console.log('CLOUD-GET_URL-ACTION-DELETE-LIST-ITEM-SUCCESS');
+                Log.w('get_url_action_delete_list_item',cloud_url);
+                console.log('GET_URL-ACTION-DELETE-LIST-ITEM-SUCCESS');
                 call()
             },
 
             function(call) {
-                console.log('CLOUD-GET_URL-ACTION-UPDATE-LIST-ITEM-START');
+                console.log('GET_URL-ACTION-UPDATE-LIST-ITEM-START');
                 let data_type = 'dt_blank';
                 let cloud_url = Cloud.get_url_action_delete_list(data_type);
-                w('get_url_action_delete_list_item',cloud_url);
-                console.log('CLOUD-GET_URL-ACTION-UPDATE-LIST-ITEM-SUCCESS');
+                Log.w('get_url_action_delete_list_item',cloud_url);
+                console.log('GET_URL-ACTION-UPDATE-LIST-ITEM-SUCCESS');
                 call()
             },
 
             function(call) {
-                console.log('CLOUD-GET_FILTER-OBJECT-START');
+                console.log('GET_FILTER-OBJECT-START');
                 let data_type = 'dt_blank';
                 let filter = {data_type:'dt_blank'};
                 let sort_by = {title:-1};
                 let page_current = 0;
                 let page_size = 15;
                 let filter_obj = Cloud.get_filter_obj(data_type,filter,sort_by,page_current,page_size);
-                w('get_url_action_filter_obj',filter_obj);
-                console.log('CLOUD-GET_FILTER-OBJECT-SUCCESS');
+                Log.w('get_url_action_filter_obj',filter_obj);
+                console.log('GET_FILTER-OBJECT-SUCCESS');
                 call()
             },
-
             function(call) {
                 console.log('GET-NEW-ITEM-START');
-                var _new_item = Item.get_new(DATA_TYPE,0);
-                console.log(_new_item);
+                var new_item = Item.get_new(DATA_TYPE,0);
+                console.log(new_item);
                 console.log('GET-NEW-ITEM-SUCCESS');
-                //call()
+                call()
             },
-
             function(call) {
                 console.log('SET-ITEM-BIZ-START');
-                let item_test = get_test_item('dt_blank',0);
+                let item_test = Test.get_item('dt_blank',0);
                 item_test.photofilename='abc.png';
                 item_test.field_1 = 'my_field_1';
                 item_test.value_1 = 'my_value_1';
@@ -122,8 +120,7 @@ describe("connect", () => {
                 item_test.value_2 = 'my_value_2';
                 item_test.field_3 = 'my_field_3';
                 item_test.value_3 = 'my_value_3';
-                let item_biz = get_biz_item(biz9_config,item_test,{get_photo:true,get_date:true,get_count:true,get_biz_map:true});
-                //let item_biz = get_biz_item(biz9_config,item_test,{get_photo:false,get_date:false,get_count:false,get_biz_map:false});
+                let item_biz = Item.get_biz(biz9_config,item_test,{get_photo:true,get_date:true,get_count:true,get_biz_map:true});
                 console.log(item_biz);
                 console.log('SET-ITEM-BIZ-SUCCESS');
                 call();

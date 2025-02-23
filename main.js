@@ -5,8 +5,12 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic - Main
 */
 
-//const moment = require('moment');
-//const { get_date_time_pretty,get_date_str,get_date_time_str,get_month_title_short,get_date_time_obj,get_time_str } from 'biz9-utility';
+const moment = require('moment');
+const { DateTime } = require('biz9-utility');
+
+const get_cloud_filter_obj_main = (data_type,filter,sort_by,page_current,page_size) => {
+    return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
+}
 
 const get_new_item_main = (data_type,id) => {
     if(!id){
@@ -18,15 +22,12 @@ const get_cloud_url_main = (app_title_id,domain_url,port_id,action_url) =>{
     var app_title_id_url='?app_title_id='+app_title_id;
     return domain_url+":"+port_id+"/"+action_url+app_title_id_url;
 }
-/*
 const get_data_config_main = (biz9_config,query) =>{
     if(biz9_config.SERVICE_HOST_TYPE == 'multiple'){
         biz9_config.APP_TITLE_ID=query.app_title_id;
     }
     return biz9_config;
 }
-*/
-/*
 const get_biz_item_main=(biz9_config,item,options) =>{
     //option
     //get_photo = true
@@ -78,21 +79,21 @@ const get_biz_item_main=(biz9_config,item,options) =>{
             item.date_save= new moment().toISOString();
         }
         item.date_obj={
-            pretty_create: (item.date_create) ? get_date_time_pretty(item.date_create) : no_date_str,
-            pretty_update: (item.date_create) ? get_date_time_pretty(item.date_save): no_date_str,
-            full_date_create: (item.date_create) ? get_date_str(item.date_create) : no_date_str,
-            full_date_update: (item.date_create) ? get_date_str(item.date_save) : no_date_str,
-            full_date_time_create: (item.date_create) ? get_date_time_str(item.date_create) : no_date_str,
-            full_date_time_update: (item.date_create) ? get_date_time_str(item.date_save) : no_date_str,
-            month_create: (item.date_create) ? get_month_title_short(1+get_date_time_obj(item.date_create).month()) : no_date_str,
-            month_update: (item.date_create) ? get_month_title_short(1+get_date_time_obj(item.date_save).month()) : no_date_str,
-            mo_create: (item.date_create) ? (1+get_date_time_obj(item.date_create).month()) : no_date_str,
-            mo_update: (item.date_create) ? (1+get_date_time_obj(item.date_save).month()) : no_date_str,
-            date_create: (item.date_create) ? get_date_time_obj(item.date_create).date() : no_date_str,
-            year_create: (item.date_create) ? get_date_time_obj(item.date_create).year() : no_date_str,
-            year_update: (item.date_create) ? get_date_time_obj(item.date_save).year() : no_date_str,
-            time_create: (item.date_create) ? get_time_str(item.date_create) : no_date_str,
-            time_update: (item.date_create) ? get_time_str(item.date_save) : no_date_str,
+            pretty_create: (item.date_create) ? DateTime.get_pretty(item.date_create) : no_date_str,
+            pretty_update: (item.date_create) ? DateTime.get_pretty(item.date_save): no_date_str,
+            full_date_create: (item.date_create) ? DateTime.get_date_str(item.date_create) : no_date_str,
+            full_date_update: (item.date_create) ? DateTime.get_date_str(item.date_save) : no_date_str,
+            full_date_time_create: (item.date_create) ? DateTime.get_str(item.date_create) : no_date_str,
+            full_date_time_update: (item.date_create) ? DateTime.get_str(item.date_save) : no_date_str,
+            month_create: (item.date_create) ? DateTime.get_month_title(1+DateTime.get_obj(item.date_create).month()) : no_date_str,
+            month_update: (item.date_create) ? DateTime.get_month_title(1+DateTime.get_obj(item.date_save).month()) : no_date_str,
+            mo_create: (item.date_create) ? (1+DateTime.get_obj(item.date_create).month()) : no_date_str,
+            mo_update: (item.date_create) ? (1+DateTime.get_obj(item.date_save).month()) : no_date_str,
+            date_create: (item.date_create) ? DateTime.get_obj(item.date_create).date() : no_date_str,
+            year_create: (item.date_create) ? DateTime.get_obj(item.date_create).year() : no_date_str,
+            year_update: (item.date_create) ? DateTime.get_obj(item.date_save).year() : no_date_str,
+            time_create: (item.date_create) ? DateTime.get_time_str(item.date_create) : no_date_str,
+            time_update: (item.date_create) ? DateTime.get_time_str(item.date_save) : no_date_str,
         }
     }
     //date setting - end
@@ -108,12 +109,18 @@ const get_biz_item_main=(biz9_config,item,options) =>{
 
     return item;
 }
-*/
-
+const get_title_url_main = (title) => {
+    if(!title){
+        title='';
+    }
+    return title.replace(/[^a-z0-9]+/ig, "_").toLowerCase();
+}
 
 module.exports = {
     get_new_item_main,
-    get_cloud_url_main
-    //get_data_config_main,
-    //get_biz_item_main
+    get_cloud_url_main,
+    get_cloud_filter_obj_main,
+    get_data_config_main,
+    get_title_url_main,
+    get_biz_item_main
 };

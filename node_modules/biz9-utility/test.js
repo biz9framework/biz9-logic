@@ -7,7 +7,8 @@ Description: BiZ9 Framework: Test
 
 const series = require('async-series');
 const moment = require('moment');
-const { w,w_error,get_test_item,error_append,get_id,get_guid,get_title_url,get_date_time_str,get_date_str, get_date_time_pretty} = require('.');
+//const { w,w_error,get_test_item,error_append,get_id,get_guid,get_title_url,get_date_time_str,get_date_str, get_date_time_pretty} = require('.');
+const {DateTime,Log,Test }= require('.');
 
 /* --- TEST CONFIG START --- */
 /* --- TEST DATA CONFIG END --- */
@@ -20,52 +21,57 @@ describe("connect", () => {
                 call()
             },
             function(call) {
-                console.log('GET-DATE-TIME-PRETTY-START');
-                let date_time = new moment().toISOString();
-                console.log(get_date_time_pretty(date_time));
-                console.log('GET-DATE-TIME-PRETTY-SUCCESS');
-                call()
-            },
-            function(call) {
-                console.log('GET-DATE-TIME-STR-START');
-                let date_time = new moment().toISOString();
-                console.log(get_date_time_str(date_time));
-                console.log('GET-DATE-TIME-STR-SUCCESS');
-                call()
-            },
-            function(call) {
-                console.log('GET-DATE-STR-START');
+                console.log('DateTime-GET-STR-START');
                 let date = new moment().toISOString();
-                console.log(get_date_str(date));
-                console.log('GET-DATE-STR-SUCCESS');
+                Log.w('get_str',DateTime.get_str(date));
+                console.log('DateTime-GET-STR-SUCCESS');
                 call()
             },
-            function(call) {
-                console.log('GET-TITLE-URL-START');
-                let title = 'my cool title';
-                console.log(get_title_url(title));
-                console.log('GET-TITLE-URL-SUCCESS');
-                //call()
-            },
-
 
             function(call) {
-                console.log('W-START');
-                w('w_title','w_body');
-                console.log('W-SUCCESS');
+                console.log('DateTime-GET-Date-STR-START');
+                let date = new moment().toISOString();
+                Log.w('get_date_str',DateTime.get_date_str(date));
+                console.log('DateTime-GET-Date-STR-SUCCESS');
                 call()
             },
+
             function(call) {
-                console.log('W-ERROR-START');
-                w_error('w_error_title','w_errow_body');
-                console.log('W-ERROR-SUCCESS');
+                console.log('DateTime-GET-Pretty-START');
+                let date = new moment().toISOString();
+                Log.w('get_date_str',DateTime.get_pretty(date));
+                console.log('DateTime-GET-Pretty-SUCCESS');
+                call()
+            },
+
+            function(call) {
+                console.log('DateTime-GET-Obj-START');
+                let date = new moment().toISOString();
+                Log.w('get_date_str',DateTime.get_obj(date));
+                console.log('DateTime-GET-Obj-SUCCESS');
+                call()
+            },
+
+            function(call) {
+                console.log('Log-W-START');
+                let str = 'str_one';
+                Log.w('get_str','help');
+                console.log('Log-W-END');
+                call()
+            },
+
+            function(call) {
+                console.log('Log-Error-START');
+                let str = 'str_one';
+                Log.error('get_error','help');
+                console.log('Log-Error-END');
                 call()
             },
             function(call) {
                 console.log('W-GET-TEST-ITEM-START');
                 let id= 0;
                 let data_type = 'dt_blank';
-                let test_item = get_test_item(id,data_type);
+                let test_item = Test.get_item(id,data_type);
                 console.log(test_item);
                 console.log('W-GET-TEST-ITEM-SUCCERSS');
                 call()
@@ -75,8 +81,8 @@ describe("connect", () => {
                 let error = 'error1';
                 let error2 = 'error2';
                 let _error_append = null;
-                _error_append = error_append(_error_append,error);
-                _error_append = error_append(_error_append,error2);
+                _error_append = Log.append(_error_append,error);
+                _error_append = Log.append(_error_append,error2);
                 console.log(_error_append);
                 console.log('ERROR-APPEND-SUCCERSS');
                 call()
