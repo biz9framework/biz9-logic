@@ -31,8 +31,8 @@ describe("connect", () => {
             function(call) {
                 console.log('CONNECT-START');
                 let cloud_url = Cloud.get_url_action_connect();
-                Log.w('connect_url',cloud_url);
-                call()
+                //Log.w('connect_url',cloud_url);
+                //call()
             },
             function(call) {
                 console.log('GET_URL-ACTION-UPDATE-ITEM-START');
