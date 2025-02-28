@@ -1,6 +1,7 @@
 const series = require('async-series');
 const {Log,Test} = require('biz9-utility');
 const { Item, Cloud  }= require('./');
+const { get_biz9_config  }= require('biz9-scriptz');
 
 /* --- TEST CONFIG START --- */
 //const ID='0';
@@ -29,10 +30,18 @@ describe("connect", () => {
     it("_connect", () => {
         series([
             function(call) {
+                console.log('GET-BIZ9-CONFIG-FILE-START');
+                let biz9_config = get_biz9_config();
+                console.log(biz9_config);
+                console.log('GET-BIZ9-CONFIG-FILE-SUCCESS');
+                call()
+            },
+            function(call) {
                 console.log('CONNECT-START');
                 let cloud_url = Cloud.get_url_action_connect();
-                //Log.w('connect_url',cloud_url);
-                //call()
+                Log.w('connect_url',cloud_url);
+                console.log('CONNECT-SUCCESS');
+                call()
             },
             function(call) {
                 console.log('GET_URL-ACTION-UPDATE-ITEM-START');
