@@ -31,6 +31,10 @@ class Cloud {
     static get_url = (action_url)=>{
         return get_cloud_url_main(global.APP_TITLE_ID,global.CLOUD_URL,global.CLOUD_PORT_ID,action_url);
     }
+    static get_url_action_connect = () => {
+        let action_url= "main/test/connect/"
+        return get_cloud_url_main(global.APP_TITLE_ID,global.CLOUD_URL,global.CLOUD_PORT_ID,action_url);
+    };
     static get_url_action_update_item = (data_type,id) => {
         let action_url= "main/crud/update/"+data_type + "/" + id;
         return get_cloud_url_main(global.APP_TITLE_ID,global.CLOUD_URL,global.CLOUD_PORT_ID,action_url);

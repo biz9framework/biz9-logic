@@ -1,6 +1,6 @@
 const series = require('async-series');
 const {Log,Test} = require('biz9-utility');
-const { get_data_config, Item, get_cloud_url,get_cloud_url_action_update_item,get_cloud_url_action_get_item, get_cloud_url_action_get_list,get_cloud_url_action_update_list,get_cloud_url_action_delete_item, get_cloud_url_action_delete_list, Cloud  }= require('./');
+const { Item, Cloud  }= require('./');
 
 /* --- TEST CONFIG START --- */
 //const ID='0';
@@ -30,7 +30,7 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                let cloud_url = Cloud.get_url('aa');
+                let cloud_url = Cloud.get_url_action_connect();
                 Log.w('connect_url',cloud_url);
                 call()
             },
