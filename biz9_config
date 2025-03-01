@@ -1,4 +1,8 @@
-VERSION='2.0.6'
-TITLE='BiZ9-Logic'
-REPO='git@github.com:biz9framework/biz9-logic.git'
-BRANCH='main'
+VERSION='2.0.7'
+TITLE='BiZ9-Logic';
+REPO='git@github.com:biz9framework/biz9-logic.git';
+BRANCH='main';
+APP_TITLE_ID='test_app_title_id';
+CLOUD_URL="http://localhost";
+CLOUD_PORT_ID="1901";
+
