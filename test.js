@@ -52,7 +52,6 @@ describe("connect", () => {
                 console.log('GET_URL-ACTION-UPDATE-ITEM-SUCCESS');
                 call()
             },
-
             function(call) {
                 console.log('GET_URL-ACTION-GET-ITEM-START');
                 let data_type = 'dt_blank';
@@ -62,7 +61,6 @@ describe("connect", () => {
                 console.log('GET_URL-ACTION-GET-ITEM-SUCCESS');
                 call()
             },
-
             function(call) {
                 console.log('GET_URL-ACTION-DELETE-ITEM-START');
                 let data_type = 'dt_blank';
@@ -72,7 +70,6 @@ describe("connect", () => {
                 console.log('GET_URL-ACTION-DELETE-ITEM-SUCCESS');
                 call()
             },
-
             function(call) {
                 console.log('GET_URL-ACTION-GET-LIST-ITEM-START');
                 let data_type = 'dt_blank';
@@ -81,7 +78,6 @@ describe("connect", () => {
                 console.log('GET_URL-ACTION-GET-LIST-ITEM-SUCCESS');
                 call()
             },
-
             function(call) {
                 console.log('GET_URL-ACTION-DELETE-LIST-ITEM-START');
                 let data_type = 'dt_blank';
@@ -90,7 +86,6 @@ describe("connect", () => {
                 console.log('GET_URL-ACTION-DELETE-LIST-ITEM-SUCCESS');
                 call()
             },
-
             function(call) {
                 console.log('GET_URL-ACTION-UPDATE-LIST-ITEM-START');
                 let data_type = 'dt_blank';
@@ -99,7 +94,6 @@ describe("connect", () => {
                 console.log('GET_URL-ACTION-UPDATE-LIST-ITEM-SUCCESS');
                 call()
             },
-
             function(call) {
                 console.log('GET_FILTER-OBJECT-START');
                 let data_type = 'dt_blank';

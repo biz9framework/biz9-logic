@@ -5,8 +5,8 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_title_url_main } = require('./main');
-const { get_biz9_config  }= require('biz9-scriptz');
-const biz9_config_file = get_biz9_config();
+const { Scriptz  }= require('biz9-scriptz');
+const biz9_config_file = Scriptz.get_biz9_config();
 class Item {
     static get_new = (data_type,id) => {
         return get_new_item_main(data_type,id);
