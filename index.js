@@ -5,58 +5,48 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_title_url_main } = require('./main');
-const { Scriptz  }= require('biz9-scriptz');
-const biz9_config_file = Scriptz.get_biz9_config();
-class Item {
-    static get_new = (data_type,id) => {
+class Logic {
+    static get_new_item = (data_type,id) => {
         return get_new_item_main(data_type,id);
     };
-    static get_biz = (biz9_config,item,options)=>{
+    static get_biz_item = (biz9_config,item,options)=>{
         return get_biz_item_main(biz9_config,item,options);
     }
-}
-class Cloud {
-    static get_url = (action_url)=>{
-        return get_cloud_url_main(biz9_config_file.APP_TITLE_ID,biz9_config_file.CLOUD_URL,biz9_config_file.CLOUD_PORT_ID,action_url);
+    static get_url = (biz9_config,action_url,params)=>{
+        return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,params);
     }
-    static get_url_action_connect = () => {
+    static get_url_action_connect = (biz9_config) => {
         let action_url= "main/test/connect/";
-        return get_cloud_url_main(biz9_config_file.APP_TITLE_ID,biz9_config_file.CLOUD_URL,biz9_config_file.CLOUD_PORT_ID,action_url);
+        return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
     };
-    static get_url_action_update_item = (data_type,id) => {
+    static get_url_action_update_item = (biz9_config,data_type,id) => {
         let action_url= "main/crud/update/"+data_type + "/" + id;
-        return get_cloud_url_main(biz9_config_file.APP_TITLE_ID,biz9_config_file.CLOUD_URL,biz9_config_file.CLOUD_PORT_ID,action_url);
+        return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
     };
-    static get_url_action_get_item = (data_type,id) => {
+    static get_url_action_get_item = (biz9_config,data_type,id) => {
         let action_url= "main/crud/get/"+data_type + "/" + id;
-        return get_cloud_url_main(biz9_config_file.APP_TITLE_ID,biz9_config_file.CLOUD_URL,biz9_config_file.CLOUD_PORT_ID,action_url);
+        return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
     };
-    static get_url_action_delete_item = (data_type,id) => {
+    static get_url_action_delete_item = (biz9_config,data_type,id) => {
         let action_url= "main/crud/delete/"+data_type + "/" + id;
-        return get_cloud_url_main(biz9_config_file.APP_TITLE_ID,biz9_config_file.CLOUD_URL,biz9_config_file.CLOUD_PORT_ID,action_url);
+        return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
     };
-    static get_url_action_get_list = (data_type) => {
+    static get_url_action_get_list = (biz9_config,data_type) => {
         let action_url= "main/crud/get_list/"+data_type;
-        return get_cloud_url_main(biz9_config_file.APP_TITLE_ID,biz9_config_file.CLOUD_URL,biz9_config_file.CLOUD_PORT_ID,action_url);
+        return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
     };
-    static get_url_action_delete_list = (data_type) => {
+    static get_url_action_delete_list = (biz9_config,data_type) => {
         let action_url= "main/crud/delete_list/"+data_type;
-        return get_cloud_url_main(biz9_config_file.APP_TITLE_ID,biz9_config_file.CLOUD_URL,biz9_config_file.CLOUD_PORT_ID,action_url);
+        return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
     };
-    static get_url_action_update_list = (data_type) => {
+    static get_url_action_update_list = (biz9_config,data_type) => {
         let action_url= "main/crud/update_list/"+data_type;
-        return get_cloud_url_main(biz9_config_file.APP_TITLE_ID,biz9_config_file.CLOUD_URL,biz9_config_file.CLOUD_PORT_ID,action_url);
+        return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
     };
-    static get_filter_obj = (data_type,filter,sort_by,page_current,page_size)=>{
+    static get_filter_obj = (biz9_config,data_type,filter,sort_by,page_current,page_size)=>{
         return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
     }
-}
-const get_data_config = (biz9_config,query) => {
-        return get_data_config_main(biz9_config,query);
 };
 module.exports = {
-    biz9_config_file,
-    Cloud,
-    Item,
-    get_data_config,
+    Logic
 };

@@ -7,6 +7,8 @@ Description: BiZ9 Framework: Logic - Main
 
 const moment = require('moment');
 const { DateTime } = require('biz9-utility');
+const fs = require('fs');
+const biz9_config_local=__dirname+"/../../"+"biz9_config";
 
 const get_cloud_filter_obj_main = (data_type,filter,sort_by,page_current,page_size) => {
     return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
@@ -18,15 +20,12 @@ const get_new_item_main = (data_type,id) => {
     }
     return {data_type:data_type,id:id};
 }
-const get_cloud_url_main = (app_title_id,domain_url,port_id,action_url) =>{
-    var app_title_id_url='?app_title_id='+app_title_id;
-    return domain_url+":"+port_id+"/"+action_url+app_title_id_url;
-}
-const get_data_config_main = (biz9_config,query) =>{
-    if(biz9_config.SERVICE_HOST_TYPE == 'multiple'){
-        biz9_config.APP_TITLE_ID=query.app_title_id;
+const get_cloud_url_main = (app_title_id,domain_url,action_url,params) =>{
+    if(!params){
+        params='';
     }
-    return biz9_config;
+    var app_title_id_url='?app_title_id='+app_title_id;
+    return domain_url+"/"+action_url+app_title_id_url + params;
 }
 const get_biz_item_main=(biz9_config,item,options) =>{
     //option
@@ -120,7 +119,6 @@ module.exports = {
     get_new_item_main,
     get_cloud_url_main,
     get_cloud_filter_obj_main,
-    get_data_config_main,
     get_title_url_main,
     get_biz_item_main
 };
