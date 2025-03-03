@@ -6,7 +6,6 @@ Description: BiZ9 Framework: Logic - Main
 */
 
 const { DateTime } = require('biz9-utility');
-const fs = require('fs');
 const biz9_config_local=__dirname+"/../../"+"biz9_config";
 
 const get_cloud_filter_obj_main = (data_type,filter,sort_by,page_current,page_size) => {
