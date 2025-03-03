@@ -5,7 +5,6 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic - Main
 */
 
-const moment = require('moment');
 const { DateTime } = require('biz9-utility');
 const fs = require('fs');
 const biz9_config_local=__dirname+"/../../"+"biz9_config";
@@ -13,7 +12,6 @@ const biz9_config_local=__dirname+"/../../"+"biz9_config";
 const get_cloud_filter_obj_main = (data_type,filter,sort_by,page_current,page_size) => {
     return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 }
-
 const get_new_item_main = (data_type,id) => {
     if(!id){
         id=0;
@@ -74,8 +72,8 @@ const get_biz_item_main=(biz9_config,item,options) =>{
     if(options.get_date){
         let no_date_str='';
         if(!item.date_create){
-            item.date_create= new moment().toISOString();
-            item.date_save= new moment().toISOString();
+            item.date_create = DateTime.get_new_date();
+            item.date_save = DateTime.get_new_date();
         }
         item.date_obj={
             pretty_create: (item.date_create) ? DateTime.get_pretty(item.date_create) : no_date_str,
