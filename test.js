@@ -9,8 +9,7 @@ const { Scriptz  }= require('biz9-scriptz');
 const ID='f23c2372-df8e-4c09-a919-677fe32ba0bb';
 const APP_TITLE_ID='cool_bean';
 const DATA_TYPE='dt_blank';
-const PORT_ID="1901";
-const URL="http://localhost:"+PORT_ID;
+const URL="http://localhost:1901";
 const biz9_config ={
     SERVICE_HOST_TYPE:'multiple',
     APP_TITLE_ID:APP_TITLE_ID,
