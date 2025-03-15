@@ -112,8 +112,8 @@ describe("connect", () => {
                 console.log('GET_URL-ACTION-UPDATE-LIST-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let data_type = 'dt_blank';
-                let cloud_url = Logic.get_url_action_delete_list(biz9_config,data_type);
-                Log.w('get_url_action_delete_list_item',cloud_url);
+                let cloud_url = Logic.get_url_action_update_list(biz9_config,data_type);
+                Log.w('get_url_action_update_list_item',cloud_url);
                 console.log('GET_URL-ACTION-UPDATE-LIST-ITEM-SUCCESS');
                 call()
             },
@@ -151,7 +151,6 @@ describe("connect", () => {
                 console.log('SET-ITEM-BIZ-SUCCESS');
                 call();
             },
-
             function(call) {
                 // never happens, because "second thing"
                 // passed an error to the done() callback
