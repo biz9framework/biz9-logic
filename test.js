@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {Logic} = require('./');
+const {Logic,DataType} = require('./');
 const {Log,Test} = require('biz9-utility');
 const { Scriptz  }= require('biz9-scriptz');
 
@@ -34,6 +34,11 @@ describe("connect", () => {
                 Log.w('APP_TITLE_ID',biz9_config.APP_TITLE_ID);
                 Log.w('APP_TITLE',biz9_config.TITLE);
                 Log.w('URL',biz9_config.URL);
+                console.log('----------------------');
+                Log.w('DATA_TYPE',DataType.DT_BLANK);
+                Log.w('BLOG_POST',DataType.DT_BLOG_POST);
+                Log.w('SERVICE',DataType.DT_SERVICE);
+                console.log('----------------------');
                 console.log('GET-BIZ9-CONFIG-FILE-SUCCESS');
                 call()
             },

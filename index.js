@@ -5,6 +5,12 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_title_url_main } = require('./main');
+
+class DataType {
+     static DT_BLANK='blank_biz';
+     static DT_BLOG_POST='blog_post_biz';
+     static DT_SERVICE='service_biz';
+}
 class Logic {
     static get_new_item = (data_type,id) => {
         return get_new_item_main(data_type,id);
@@ -48,5 +54,6 @@ class Logic {
     }
 };
 module.exports = {
-    Logic
+    Logic,
+    DataType
 };
