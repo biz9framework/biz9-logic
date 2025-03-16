@@ -16,15 +16,16 @@ class DataType {
     static DT_GALLERY='gallery_biz';
     static DT_ITEM_MAP='item_map_biz';
     static DT_ITEM='item_biz';
+   	static DT_ORDER="order_biz";
+    static DT_ORDER_ITEM="order_item_biz";
+    static DT_PROJECT='project_biz';
+    static DT_PRODUCT='product_biz';
     static DT_PHOTO='photo_biz';
+    static DT_PAGE='page_biz';
     static DT_REVIEW='review_biz';
     static DT_SERVICE='service_biz';
     static DT_USER='user_biz';
-    static DT_PROJECT='project_biz';
-    static DT_PRODUCT='product_biz';
-    static DT_ORDER="order_biz";
-    static DT_ORDER_ITEM="order_item_biz";
-    static DT_VIDEO='video_biz';
+  	static DT_VIDEO='video_biz';
 }
 class Logic {
     static get_new_item = (data_type,id) => {
