@@ -29,6 +29,11 @@ describe("connect", () => {
     it("_connect", () => {
         series([
             function(call) {
+                console.log('GET-BIZ9-GET-DATA-TYPE-START');
+                console.log(DataType.get_data_type_title(DataType.DT_CART_ITEM));
+                console.log('GET-BIZ9-GET-DATA-TYPE-END');
+            },
+            function(call) {
                 console.log('GET-BIZ9-CONFIG-FILE-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 Log.w('APP_TITLE_ID',biz9_config.APP_TITLE_ID);

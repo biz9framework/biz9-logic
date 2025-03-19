@@ -5,8 +5,16 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_title_url_main } = require('./main');
+const {Log,Test,Str} = require('biz9-utility');
 
 class DataType {
+ 	static get_data_type_title = (data_type) => {
+		if(!data_type){
+			return "";
+		}else{
+    		return String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
+		}
+	}
     static DT_ADMIN='admin_biz';
     static DT_BLANK='blank_biz';
     static DT_BLOG_POST='blog_post_biz';

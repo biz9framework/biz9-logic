@@ -272,10 +272,10 @@ const get_older_date_main = (date_1, date_2) =>{
     }
 }
 const set_form_item_list_main = (data_type,item_list_data) =>{
-        for (a=0;a<item_list_data.length;a++){
-            item_list_data['data_type']=data_type;
-        }
-        return item_list_data;
+    for (a=0;a<item_list_data.length;a++){
+        item_list_data['data_type']=data_type;
+    }
+    return item_list_data;
 }
 const set_form_item_main = (data_type,id,item_data) =>{
     if(!data_type){
@@ -284,14 +284,22 @@ const set_form_item_main = (data_type,id,item_data) =>{
     if(!id){
         id=0;
     }
-        var item = {};
-        for (key in  item_data) {
-            item[key] = String(item_data[key]).trim();
-        }
-        item['id'] = id;
-        item['data_type'] = data_type;
-        return item;
+    var item = {};
+    for (key in  item_data) {
+        item[key] = String(item_data[key]).trim();
     }
+    item['id'] = id;
+    item['data_type'] = data_type;
+    return item;
+}
+
+const get_title_main = (str) =>{
+  return str.replace(
+    /\w\S*/g,
+    text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+  );
+}
+
 
 module.exports = {
     w_main,
@@ -320,5 +328,6 @@ module.exports = {
     get_paging_list_main,
     get_older_date_main,
     set_form_item_main,
-    set_form_item_list_main
+    set_form_item_list_main,
+    get_title_main
 };

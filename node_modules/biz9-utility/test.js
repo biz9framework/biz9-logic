@@ -7,9 +7,11 @@ Description: BiZ9 Framework: Test
 
 const series = require('async-series');
 const moment = require('moment');
-const {DateTime,Log,Test,Form }= require('.');
+const {DateTime,Log,Test,Form,Str }= require('.');
+
 
 /* --- TEST CONFIG START --- */
+const DT_BLANK='blank_biz';
 /* --- TEST DATA CONFIG END --- */
 
 describe("connect", () => {
@@ -17,6 +19,12 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
+                call()
+            },
+            function(call) {
+                console.log('GET-TITLE-START');
+                console.log(Str.get_title('1_3what'));
+                console.log('GET-TITLE-START');
                 call()
             },
             function(call) {
@@ -124,7 +132,7 @@ describe("connect", () => {
             console.log(err.message) // "another thing"
         })
 
-     });
+    });
 });
 
 
