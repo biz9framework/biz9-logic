@@ -30,7 +30,9 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('GET-BIZ9-GET-DATA-TYPE-START');
-                console.log(DataType.get_data_type_title(DataType.DT_CART_ITEM));
+                //console.log(DataType.get_data_type_title(DataType.DT_CART_ITEM));
+                console.log(DataType.ID);
+                console.log(DataType.TITLE);
                 console.log('GET-BIZ9-GET-DATA-TYPE-END');
             },
             function(call) {
