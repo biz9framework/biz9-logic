@@ -53,7 +53,7 @@ describe("connect", () => {
             function(call) {
                 console.log('GET-URL-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
-                let action_url = 'test_get_url_action';
+                let action_url = 'test_get_url';
                 let params = '&myparam1=p1&myparam2=p2'
                 let cloud_url = Url.get(biz9_config,action_url,params);
                 Log.w('connect_url',cloud_url);
@@ -63,66 +63,66 @@ describe("connect", () => {
             function(call) {
                 console.log('CONNECT-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
-                let cloud_url = Url.get_action_connect(biz9_config);
+                let cloud_url = Url.connect(biz9_config);
                 Log.w('connect_url',cloud_url);
                 console.log('CONNECT-SUCCESS');
                 call()
             },
             function(call) {
-                console.log('GET_URL-ACTION-UPDATE-ITEM-START');
+                console.log('GET_URL-UPDATE-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let data_type = 'dt_blank';
                 let id = 0;
-                let cloud_url = Url.get_action_update_item(biz9_config,data_type,id);
-                Log.w('get_url_action_update_item',cloud_url);
-                console.log('GET_URL-ACTION-UPDATE-ITEM-SUCCESS');
+                let cloud_url = Url.update_item(biz9_config,data_type,id);
+                Log.w('get_url_update_item',cloud_url);
+                console.log('GET_URL-UPDATE-ITEM-SUCCESS');
                 call()
             },
             function(call) {
-                console.log('GET_URL-ACTION-GET-ITEM-START');
+                console.log('GET_URL-GET-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let data_type = 'dt_blank';
                 let id = 0;
-                let cloud_url = Url.get_action_get_item(biz9_config,data_type,id);
-                Log.w('get_url_action_get_item',cloud_url);
-                console.log('GET_URL-ACTION-GET-ITEM-SUCCESS');
+                let cloud_url = Url.get_item(biz9_config,data_type,id);
+                Log.w('get_url_get_item',cloud_url);
+                console.log('GET_URL-GET-ITEM-SUCCESS');
                 call()
             },
             function(call) {
-                console.log('GET_URL-ACTION-DELETE-ITEM-START');
+                console.log('GET_URL-DELETE-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let data_type = 'dt_blank';
                 let id = 0;
-                let cloud_url = Url.get_action_delete_item(biz9_config,data_type,id);
-                Log.w('get_url_action_delete_item',cloud_url);
-                console.log('GET_URL-ACTION-DELETE-ITEM-SUCCESS');
+                let cloud_url = Url.delete_item(biz9_config,data_type,id);
+                Log.w('get_url_delete_item',cloud_url);
+                console.log('GET_URL-DELETE-ITEM-SUCCESS');
                 call()
             },
             function(call) {
-                console.log('GET_URL-ACTION-GET-LIST-ITEM-START');
+                console.log('GET_URL-GET-LIST-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let data_type = 'dt_blank';
-                let cloud_url = Url.get_action_get_list(biz9_config,data_type);
-                Log.w('get_url_action_get_list_item',cloud_url);
-                console.log('GET_URL-ACTION-GET-LIST-ITEM-SUCCESS');
+                let cloud_url = Url.get_list(biz9_config,data_type);
+                Log.w('get_url_get_list',cloud_url);
+                console.log('GET_URL-GET-LIST-ITEM-SUCCESS');
                 call()
             },
             function(call) {
-                console.log('GET_URL-ACTION-DELETE-LIST-ITEM-START');
+                console.log('GET_URL-DELETE-LIST-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let data_type = 'dt_blank';
-                let cloud_url = Url.get_action_delete_list(biz9_config,data_type);
-                Log.w('get_url_action_delete_list_item',cloud_url);
-                console.log('GET_URL-ACTION-DELETE-LIST-ITEM-SUCCESS');
+                let cloud_url = Url.delete_list(biz9_config,data_type);
+                Log.w('get_url_delete_list_item',cloud_url);
+                console.log('GET_URL-DELETE-LIST-ITEM-SUCCESS');
                 call()
             },
             function(call) {
-                console.log('GET_URL-ACTION-UPDATE-LIST-ITEM-START');
+                console.log('GET_URL-UPDATE-LIST-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let data_type = 'dt_blank';
-                let cloud_url = Url.get_action_update_list(biz9_config,data_type);
-                Log.w('get_url_action_update_list_item',cloud_url);
-                console.log('GET_URL-ACTION-UPDATE-LIST-ITEM-SUCCESS');
+                let cloud_url = Url.update_list(biz9_config,data_type);
+                Log.w('get_url_update_list_item',cloud_url);
+                console.log('GET_URL-UPDATE-LIST-ITEM-SUCCESS');
                 call()
             },
             function(call) {
@@ -133,7 +133,7 @@ describe("connect", () => {
                 let page_current = 0;
                 let page_size = 15;
                 let filter_obj = Obj.get_filter(data_type,filter,sort_by,page_current,page_size);
-                Log.w('get_url_action_filter_obj',filter_obj);
+                Log.w('get_filter_obj',filter_obj);
                 console.log('GET_FILTER-OBJECT-SUCCESS');
                 call()
             },
@@ -154,7 +154,7 @@ describe("connect", () => {
                 item_test.value_2 = 'my_value_2';
                 item_test.field_3 = 'my_field_3';
                 item_test.value_3 = 'my_value_3';
-                let item_biz = Item.get_biz(biz9_config,item_test,{get_photo:true,get_date:true,get_count:true,get_biz_map:true});
+                let item_biz = Item.get_biz(biz9_config,item_test,{get_date:true,get_count:true,get_biz_map:true});
                 console.log(item_biz);
                 console.log('SET-ITEM-BIZ-SUCCESS');
                 call();

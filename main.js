@@ -26,11 +26,8 @@ const get_cloud_url_main = (app_title_id,domain_url,action_url,params) =>{
 }
 const get_biz_item_main=(biz9_config,item,options) =>{
     //option
-    //get_photo = true
-    //get_date = true
     //get_count = true
     //get_biz_map = true
-    //
     if(options.get_count){
         if(!item.view_count){
             item.view_count='0';
@@ -42,31 +39,6 @@ const get_biz_item_main=(biz9_config,item,options) =>{
             item.review_count='0';
         }
     }
-    //photo setting - start
-    if(options.get_photo){
-        //photo
-        if(!item.photofilename){
-            item.photofilename=null;
-        }
-        let no_photo_str='/images/no_image.png';
-        let _photo_size_thumb='thumb_size_';
-        let _photo_size_mid='mid_size_';
-        let _photo_size_large='large_size_';
-        let _photo_size_square_thumb='square_thumb_size_';
-        let _photo_size_square_mid='square_mid_size_';
-        let _photo_size_square_large='square_large_size_';
-        item.photo_obj={
-            album_url : (item.photofilename) ? biz9_config.PHOTO_URL+item.photofilename : no_photo_str,
-            thumb_url : (item.photofilename) ? biz9_config.PHOTO_URL+_photo_size_thumb+item.photofilename : no_photo_str,
-            mid_url   : (item.photofilename) ? biz9_config.PHOTO_URL+_photo_size_mid+item.photofilename : no_photo_str,
-            large_url : (item.photofilename) ? biz9_config.PHOTO_URL+_photo_size_large+item.photofilename : no_photo_str,
-            thumb_url : (item.photofilename) ? biz9_config.PHOTO_URL+_photo_size_thumb+item.photofilename : no_photo_str,
-            square_thumb_url : (item.photofilename) ? biz9_config.PHOTO_URL+_photo_size_square_thumb+item.photofilename : no_photo_str,
-            square_mid_url   : (item.photofilename) ? biz9_config.PHOTO_URL+_photo_size_square_thumb+item.photofilename : no_photo_str,
-            square_large_url : (item.photofilename) ? biz9_config.PHOTO_URL+_photo_size_square_thumb+item.photofilename : no_photo_str,
-        };
-    }
-    //photo setting - end
     //date setting - start
     if(options.get_date){
         let no_date_str='';
