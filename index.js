@@ -64,31 +64,31 @@ class Url {
 	static get = (biz9_config,action_url,params)=>{
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,params);
 	}
-	static get_connect = (biz9_config) => {
+	static connect = (biz9_config) => {
 		let action_url= "main/test/connect/";
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static get_update_item = (biz9_config,data_type,id) => {
+	static update_item = (biz9_config,data_type,id) => {
 		let action_url= "main/crud/update/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static get_get_item = (biz9_config,data_type,id) => {
+	static get_item = (biz9_config,data_type,id) => {
 		let action_url= "main/crud/get/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static get_delete_item = (biz9_config,data_type,id) => {
+	static delete_item = (biz9_config,data_type,id) => {
 		let action_url= "main/crud/delete/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static get_get_list = (biz9_config,data_type) => {
+	static get_list = (biz9_config,data_type) => {
 		let action_url= "main/crud/get_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static get_delete_list = (biz9_config,data_type) => {
+	static delete_list = (biz9_config,data_type) => {
 		let action_url= "main/crud/delete_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static get_update_list = (biz9_config,data_type) => {
+	static update_list = (biz9_config,data_type) => {
 		let action_url= "main/crud/update_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
