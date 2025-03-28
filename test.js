@@ -1,8 +1,8 @@
 const path = require('path');
 const series = require('async-series');
-const {Item,DataType,Url,Obj} = require('./');
+const { Item,DataType,Url,Obj } = require('./');
 const {Log,Test} = require('biz9-utility');
-const { Scriptz  }= require('biz9-scriptz');
+const { Scriptz }= require('biz9-scriptz');
 
 /* --- TEST CONFIG START --- */
 //const ID='0';
@@ -28,6 +28,7 @@ const biz9_config ={
 describe("connect", () => {
     it("_connect", () => {
         series([
+            /*
             function(call) {
                 console.log('GET-BIZ9-GET-DATA-TYPE-START');
                 console.log(DataType.get_data_type_title(DataType.DT_CART_ITEM));
@@ -158,6 +159,17 @@ describe("connect", () => {
                 console.log(item_biz);
                 console.log('SET-ITEM-BIZ-SUCCESS');
                 call();
+            },
+            */
+            function(call) {
+                console.log('GET_URL-BIZ-ITEM-START');
+                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+                let data_type = 'dt_blank';
+                //let cloud_url = Url.get_biz_item(biz9_config,data_type,ID);
+                let cloud_url = Url.delete_biz_item(biz9_config,data_type,ID);
+                Log.w('get_url_biz_item',cloud_url);
+                console.log('GET_URL-BIZ-ITEM-SUCCESS');
+                call()
             },
             function(call) {
                 // never happens, because "second thing"

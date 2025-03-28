@@ -84,12 +84,28 @@ class Url {
 		let action_url= "main/crud/get_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
+	static update_list = (biz9_config,data_type) => {
+		let action_url= "main/crud/update_list/"+data_type;
+		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
+	};
 	static delete_list = (biz9_config,data_type) => {
 		let action_url= "main/crud/delete_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static update_list = (biz9_config,data_type) => {
-		let action_url= "main/crud/update_list/"+data_type;
+	static get_biz_item = (biz9_config,data_type,id) => {
+		let action_url= "main/biz_item/get/"+data_type + "/" + id;
+		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
+	};
+	static delete_biz_item = (biz9_config,data_type,id) => {
+		let action_url= "main/biz_item/delete/"+data_type + "/" + id;
+		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
+	};
+	static get_biz_list = (biz9_config,data_type) => {
+		let action_url= "main/biz_item/get_list/"+data_type;
+		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
+	};
+	static delete_biz_list = (biz9_config,data_type) => {
+		let action_url= "main/biz_item/delete_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
 }
