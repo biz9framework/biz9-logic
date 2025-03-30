@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const { Item,DataType,Url,Obj } = require('./');
+const { DataItem,DataType,Url,Obj } = require('./');
 const {Log,Test} = require('biz9-utility');
 const { Scriptz }= require('biz9-scriptz');
 
@@ -140,7 +140,7 @@ describe("connect", () => {
             },
             function(call) {
                 console.log('GET-NEW-ITEM-START');
-                var new_item = Item.get_new(DATA_TYPE,0);
+                var new_item = DataItem.get_new(DATA_TYPE,0);
                 console.log(new_item);
                 console.log('GET-NEW-ITEM-SUCCESS');
                 call()
@@ -155,7 +155,7 @@ describe("connect", () => {
                 item_test.value_2 = 'my_value_2';
                 item_test.field_3 = 'my_field_3';
                 item_test.value_3 = 'my_value_3';
-                let item_biz = Item.get_biz(biz9_config,item_test,{get_date:true,get_count:true,get_biz_map:true});
+                let item_biz = DataItem.get_biz(biz9_config,item_test,{get_date:true,get_count:true,get_biz_map:true});
                 console.log(item_biz);
                 console.log('SET-ITEM-BIZ-SUCCESS');
                 call();

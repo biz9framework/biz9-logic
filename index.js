@@ -52,7 +52,7 @@ class DataType {
 	static DT_USER='user_biz';
 	static DT_VIDEO='video_biz';
 }
-class Item {
+class DataItem {
 	static get_new = (data_type,id) => {
 		return get_new_item_main(data_type,id);
 	};
@@ -116,7 +116,7 @@ class Obj {
 };
 module.exports = {
 	DataType,
-	Item,
+	DataItem,
 	Url,
 	Obj
 };
