@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const { DataItem,DataType,Url,Obj } = require('./');
+const { DataItem,DataType,Url,Obj,BiZ_Url } = require('./');
 const {Log,Test} = require('biz9-utility');
 const { Scriptz }= require('biz9-scriptz');
 
@@ -28,6 +28,33 @@ const biz9_config ={
 describe("connect", () => {
     it("_connect", () => {
         series([
+
+            function(call) {
+                console.log('GET-BiZ-Full-Url-Item-Get-Item-START');
+                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+                let item = DataItem.get_new(DataType.DT_BLANK,0);
+                let parent_item = DataItem.get_new(DataType.DT_BLANK,0);
+                let top_item = DataItem.get_new(DataType.DT_BLANK,0);
+                Log.w('item',item);
+                let cloud_url = BiZ_Url.get_full_item(biz9_config,item,parent_item,top_item);
+                Log.w('connect_url',cloud_url);
+                console.log('GET-BiZ-Full-Url-Item-Get-Item-SUCCESS');
+                //call()
+            },
+
+
+            /*
+            function(call) {
+                console.log('GET-BiZ-Url-Item-Get-Item-START');
+                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+                let item = DataItem.get_new(DataType.DT_BLANK,0);
+                Log.w('item',item);
+                let cloud_url = BiZ_Url.get_item(biz9_config,item);
+                Log.w('connect_url',cloud_url);
+                console.log('GET-BiZ-Url-Item-Get-Item-SUCCESS');
+                //call()
+            },
+
             function(call) {
                 console.log('GET-BIZ9-GET-DATA-TYPE-START');
                 console.log(DataType.get_data_type_title(DataType.DT_CART_ITEM));
@@ -36,7 +63,6 @@ describe("connect", () => {
                 console.log('GET-BIZ9-GET-DATA-TYPE-END');
                 call();
             },
-            /*
             function(call) {
                 console.log('GET-BIZ9-CONFIG-FILE-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
@@ -160,7 +186,6 @@ describe("connect", () => {
                 console.log('SET-ITEM-BIZ-SUCCESS');
                 call();
             },
-            */
             function(call) {
                 console.log('GET_URL-BIZ-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
@@ -171,6 +196,7 @@ describe("connect", () => {
                 console.log('GET_URL-BIZ-ITEM-SUCCESS');
                 call()
             },
+            */
             function(call) {
                 // never happens, because "second thing"
                 // passed an error to the done() callback

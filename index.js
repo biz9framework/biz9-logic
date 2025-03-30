@@ -60,6 +60,17 @@ class DataItem {
 		return get_biz_item_main(biz9_config,item,options);
 	}
 }
+class BiZ_Url {
+	static get_item = (biz9_config,item) => {
+		let action_url= "main/biz_item/get/"+item.data_type + "/" + item.id;
+		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
+	};
+
+	static get_full_item = (biz9_config,item,parent_item,top_item) => {
+		let action_url= "main/biz_item/get_full/"+item.data_type + "/" + item.id + "/"+parent_item.data_type + "/" + parent_item.id + "/"+top_item.data_type + "/" + top_item.id;
+		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
+	};
+}
 class Url {
 	static get = (biz9_config,action_url,params)=>{
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,params);
@@ -92,10 +103,6 @@ class Url {
 		let action_url= "main/crud/delete_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static get_biz_item = (biz9_config,data_type,id) => {
-		let action_url= "main/biz_item/get/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
-	};
 	static delete_biz_item = (biz9_config,data_type,id) => {
 		let action_url= "main/biz_item/delete/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
@@ -118,5 +125,6 @@ module.exports = {
 	DataType,
 	DataItem,
 	Url,
+	BiZ_Url,
 	Obj
 };
