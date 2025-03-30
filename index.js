@@ -8,7 +8,7 @@ const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_m
 const {Log,Test,Str} = require('biz9-utility');
 
 class DataType {
-	static get_data_type_title = (data_type) => {
+	static get_title = (data_type) => {
 		if(!data_type){
 			return "";
 		}else{
