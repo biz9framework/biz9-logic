@@ -66,7 +66,7 @@ class BiZ_Url {
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
 	static get_full_item = (biz9_config,item,parent_item,top_item) => {
-		let action_url= "main/biz_item/get_full/"+item.data_type + "/" + parent_item.id +"/"+parent_item.data_type + "/" + item.id +"/"+top_item.data_type + "/" + top_item.id;
+		let action_url= "main/biz_item/get_full/"+item.data_type + "/" + parent_item.id +"/"+parent_item.data_type + "/" + parent_item.id +"/"+top_item.data_type + "/" + top_item.id;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
 }
