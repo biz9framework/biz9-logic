@@ -126,6 +126,7 @@ class CMS {
     static Tab_Edit_Title_List = 'list';
     static Tab_Edit_Title_Value = 'value';
     static Tab_Edit_Title_Setting = 'setting';
+    static Tab_Edit_Title_Note = 'note';
 
     static get_new_query_item = (item,parent_item,top_item) => {
              return {
@@ -173,6 +174,8 @@ class CMS {
                 break;
             case CMS.Tab_Edit_Title_Setting:
                 return 'Settings';
+  			case CMS.Tab_Edit_Title_Note:
+                return 'Note';
             default:
                 return 'N/A';
         }
