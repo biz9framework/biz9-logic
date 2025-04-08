@@ -120,10 +120,84 @@ class Obj {
 		return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
 	}
 };
+class CMS {
+    static Tab_Edit_Title_General = 'general';
+    static Tab_Edit_Title_Photo = 'photo';
+    static Tab_Edit_Title_List = 'list';
+    static Tab_Edit_Title_Value = 'value';
+    static Tab_Edit_Title_Setting = 'setting';
+
+    static get_new_query_item = (item,parent_item,top_item) => {
+             return {
+                id: item.id ? item.id : 0,
+                data_type:item.data_type ? item.data_type : DataType.DT_BLANK,
+                parent_id:parent_item.id ? parent_item.id : 0,
+                parent_data_type:parent_item.data_type ? parent_item.data_type : DataType.DT_BLANK,
+
+                top_id:top_item.id ? top_item.id : 0,
+                top_data_type:top_item.data_type ? top_item.data_type : DataType.DT_BLANK
+             }
+    };
+    static get_query_itemz_by_query = (item) => {
+            return [];
+    };
+    static get_query_item_by_page = (item) => {
+            return { id:item.id ? item.id : 0, data_type:item.data_type ? item.data_type : DataType.DT_BLANK };
+    };
+    static get_query_parent_item_by_page = (parent_item) => {
+            return { id:parent_item.id ? parent_item.id : 0, data_type:parent_item.data_type ? parent_item.data_type : DataType.DT_BLANK };
+    };
+    static get_query_top_item_by_page = (top_item) => {
+            return { id:top_item.id ? top_item.id : 0, data_type:top_item.data_type ? top_item.data_type : DataType.DT_BLANK };
+    };
+    static get_query_item_by_query = (query) => {
+        return { id:query.get('id') ? query.get('id') : 0, data_type:query.get('data_type') ? query.get('data_type') : DataType.DT_BLANK } ;
+    };
+    static get_query_parent_item_by_query = (query) => {
+        return { id:query.get('parent_id') ? query.get('parent_id') : 0, data_type:query.get('parent_data_type') ? query.get('parent_data_type') : DataType.DT_BLANK } ;
+    };
+    static get_query_top_item_by_query = (query) => {
+        return { id:query.get('top_id') ? query.get('top_id') : 0, data_type:query.get('top_data_type') ? query.get('top_data_type') : DataType.DT_BLANK } ;
+    };
+    static get_sub_page_title = (title) => {
+        switch(title)
+        {
+            case CMS.Tab_Edit_Title_General:
+                return 'General';
+                break;
+            case CMS.Tab_Edit_Title_Photo:
+                return 'Photos';
+                break;
+            case CMS.Tab_Edit_Title_Value:
+                return 'Values';
+                break;
+            case CMS.Tab_Edit_Title_Setting:
+                return 'Settings';
+            default:
+                return 'N/A';
+        }
+    }
+    static get_page_url = (url,tab_title,item,parent_item,top_item) => {
+        return url+"?tab_title="+tab_title
+                    +"&id="+item.id
+                    +"&data_type="
+                    +item.data_type
+                    +"&parent_id="
+                    +parent_item.id
+                    +"&parent_data_type="
+                    +parent_item.data_type
+                    +"&top_id="
+                    +top_item.id
+                    +"&top_data_type="
+                    +top_item.data_type;
+    }
+}
+
 module.exports = {
 	DataType,
 	DataItem,
 	Url,
 	BiZ_Url,
-	Obj
+	Obj,
+	CMS
 };
