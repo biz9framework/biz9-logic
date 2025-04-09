@@ -124,6 +124,26 @@ class Obj {
 		return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
 	}
 };
+class Category {
+	static get_title_by_type = (data_type) => {
+		switch (data_type) {
+			case DataType.DT_EVENT:
+				return "Event";
+				break;
+			case DataType.DT_GALLERY:
+				return "Gallery";
+				break;
+			case DataType.DT_PRODUCT:
+				return "Product";
+				break;
+			case DataType.DT_SERVICE:
+				return "Service";
+				break;
+			default:
+				return "Blank";
+		}
+	}
+};
 class CMS {
 	static Tab_Edit_Title_General = 'general';
 	static Tab_Edit_Title_Photo = 'photo';
