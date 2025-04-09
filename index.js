@@ -194,7 +194,7 @@ class CMS {
 			+"&top_data_type="
 			+top_item.data_type;
 		if(parms){
-			url = url + parms;
+			r_url = r_url + parms;
 		}
 		return r_url;
 	}
