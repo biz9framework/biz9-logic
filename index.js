@@ -125,12 +125,12 @@ class Obj {
 	}
 };
 class Cat {
-	static get_category_label_list = () => {
+	static get_category_drop_down_list = () => {
 		return [
-			{ data_type: "blog_post_biz", label: "Blog Posts" },
-			{ data_type: "event_biz", label: "Events" },
-			{ data_type: "gallery_biz", label: "Galleries" },
-			{ data_type: "product_biz", label: "Products" }
+			{ value: "blog_post_biz", label: "Blog Posts" },
+			{ value: "event_biz", label: "Events" },
+			{ value: "gallery_biz", label: "Galleries" },
+			{ value: "product_biz", label: "Products" }
 		];
 	};
 	static get_title_by_type = (data_type) => {
