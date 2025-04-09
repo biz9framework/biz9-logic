@@ -196,7 +196,7 @@ class CMS {
 		if(parms){
 			r_url = r_url + parms;
 		}
-		return r_url;
+		return url+r_url;
 	}
 }
 
