@@ -181,7 +181,7 @@ class CMS {
 		}
 	}
 	static get_page_url = (url,tab_title,item,parent_item,top_item,parms) => {
-		let url+"?tab_title="+tab_title
+		let r_url="?tab_title="+tab_title
 			+"&id="+item.id
 			+"&data_type="
 			+item.data_type
@@ -196,7 +196,7 @@ class CMS {
 		if(parms){
 			url = url + parms;
 		}
-		return url;
+		return r_url;
 	}
 }
 
