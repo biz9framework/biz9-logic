@@ -125,6 +125,14 @@ class Obj {
 	}
 };
 class Cat {
+	static get_category_label_list = () => {
+		return [
+			{ data_type: "blog_post_biz", label: "Blog Posts" },
+			{ data_type: "event_biz", label: "Events" },
+			{ data_type: "gallery_biz", label: "Galleries" },
+			{ data_type: "product_biz", label: "Products" }
+		];
+	};
 	static get_title_by_type = (data_type) => {
 		switch (data_type) {
 			case DataType.DT_EVENT:
