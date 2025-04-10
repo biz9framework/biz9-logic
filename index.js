@@ -15,23 +15,7 @@ class DataType {
 			return String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 		}
 	}
-	static ID = 'id';
-	static DATA_TYPE = 'data_type';
-	static TITLE = 'title';
-	static TITLE_URL = 'title_url';
-	static COST = 'cost';
-	static NOTE = 'note';
-	static SUB_NOTE = 'sub_note';
-	static ORDER = 'order';
-	static VISIBLE = 'visible';
-	static PHOTOFILENAME = 'photofilename';
-	static SETTING_SORT_TYPE = 'setting_sort_type';
-	static SETTING_SORT_ORDER = 'setting_sort_order';
-	static DELETE_PROTECTION = 'delete_protection';
-	static TOP_ID = 'top_id';
-	static TOP_DATA_TYPE = 'top_data_type';
-	static PARENT_ID = 'parent_id';
-	static PARENT_DATA_TYPE = 'parent_data_type';
+
 	static DT_ADMIN='admin_biz';
 	static DT_BLANK='blank_biz';
 	static DT_BLOG_POST='blog_post_biz';
@@ -49,6 +33,7 @@ class DataType {
 	static DT_PAGE='page_biz';
 	static DT_REVIEW='review_biz';
 	static DT_SERVICE='service_biz';
+	static DT_TEMPLATE='template_biz';
 	static DT_USER='user_biz';
 	static DT_VIDEO='video_biz';
 }
