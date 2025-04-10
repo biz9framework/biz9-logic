@@ -7,6 +7,11 @@ Description: BiZ9 Framework: Logic-JS
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_title_url_main } = require('./main');
 const {Log,Test,Str} = require('biz9-utility');
 
+class Message {
+	static SUCCESS="Update Success";
+	static LOGIN_GOOD="Login Success";
+	static LOGIN_BAD="Login Incorrect";
+}
 class DataType {
 	static get_title = (data_type) => {
 		if(!data_type){
