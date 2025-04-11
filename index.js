@@ -225,6 +225,7 @@ class CMS {
 module.exports = {
 	DataType,
 	DataItem,
+	Message,
 	Url,
 	BiZ_Url,
 	Obj,
