@@ -135,6 +135,21 @@ class Cat {
 			case DataType.DT_SERVICE:
 				return "Service";
 				break;
+			case DataType.DT_EVENT:
+				return "Event";
+				break;
+			case DataType.DT_PRODUCT:
+				return "Product";
+				break;
+			case DataType.DT_SERVICE:
+				return "Service";
+				break;
+			case DataType.DT_CATEGORY:
+				return "Category";
+				break;
+			case DataType.DT_BLOG_POST:
+				return "Blog Post";
+				break;
 			default:
 				return "Blank";
 		}
