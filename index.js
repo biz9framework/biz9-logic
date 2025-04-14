@@ -150,6 +150,18 @@ class CMS {
 	static Tab_Edit_Title_Setting = 'setting';
 	static Tab_Edit_Title_Note = 'note';
 
+	static get_new_query_item_by_item = (item) => {
+		return {
+			id: item.id ? item.id : 0,
+			data_type:item.data_type ? item.data_type : DataType.DT_BLANK,
+			parent_id:item.parent_id ? item.parent_id : 0,
+			parent_data_type:item.parent_data_type ? item.parent_data_type  : DataType.DT_BLANK,
+
+			top_id:top_item.id ? top_item.id : 0,
+			top_data_type:top_item.data_type ? top_item.data_type : DataType.DT_BLANK
+		}
+	};
+
 	static get_new_query_item = (item,parent_item,top_item) => {
 		return {
 			id: item.id ? item.id : 0,

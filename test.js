@@ -1,7 +1,7 @@
 const path = require('path');
 const series = require('async-series');
 const { DataItem,DataType,Url,Obj,BiZ_Url } = require('./');
-const {Log,Test} = require('biz9-utility');
+const {Log,Test,Number} = require('biz9-utility');
 const { Scriptz }= require('biz9-scriptz');
 
 /* --- TEST CONFIG START --- */
@@ -29,6 +29,23 @@ describe("connect", () => {
     it("_connect", () => {
         series([
 
+        function(call) {
+                console.log('GET-NEW-QUERY-ITEM-BY-ITEM-START');
+                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+                let item = DataItem.get_new(DataType.DT_BLANK,0);
+                item.parent_id = Number.get_id();
+                item.parent_data_type = DataType.DT_BLANK;
+                item.top_id = Number.get_id();
+                item.top_data_type = DataType.DT_BLANK;
+                Log.w('item',item);
+                //let cloud_url = CMS.get_new_query_item_by_item(item);
+                //Log.w('connect_url',cloud_url);
+                console.log('GET-NEW-QUERY-ITEM-BY-ITEM-SUCCESS');
+                //call()
+            },
+
+
+            /*
             function(call) {
                 console.log('GET-BiZ-Full-Url-Item-Get-Item-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
@@ -43,7 +60,6 @@ describe("connect", () => {
             },
 
 
-            /*
             function(call) {
                 console.log('GET-BiZ-Url-Item-Get-Item-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
