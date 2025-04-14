@@ -154,11 +154,12 @@ class CMS {
 		return {
 			id: item.id ? item.id : 0,
 			data_type:item.data_type ? item.data_type : DataType.DT_BLANK,
+
 			parent_id:item.parent_id ? item.parent_id : 0,
 			parent_data_type:item.parent_data_type ? item.parent_data_type  : DataType.DT_BLANK,
 
-			top_id:top_item.id ? top_item.id : 0,
-			top_data_type:top_item.data_type ? top_item.data_type : DataType.DT_BLANK
+			top_id:item.top_id ? item.top_id : 0,
+			top_data_type:item.top_data_type ? item.top_data_type : DataType.DT_BLANK
 		}
 	};
 
