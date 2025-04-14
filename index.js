@@ -59,8 +59,8 @@ class BiZ_Url {
 		let action_url= "main/biz_item/delete/"+item.data_type + "/" + item.id ;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static get_full_item = (biz9_config,item,parent_item,top_item) => {
-		let action_url= "main/biz_item/get_full/"+item.data_type + "/" + item.id +"/"+parent_item.data_type + "/" + parent_item.id +"/"+top_item.data_type + "/" + top_item.id;
+	static get_full_item = (biz9_config,item) => {
+		let action_url= "main/biz_item/get_full/"+item.data_type + "/" + item.id;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
 }
@@ -162,7 +162,6 @@ class CMS {
 			top_data_type:item.top_data_type ? item.top_data_type : DataType.DT_BLANK
 		}
 	};
-
 	static get_new_query_item = (item,parent_item,top_item) => {
 		return {
 			id: item.id ? item.id : 0,
