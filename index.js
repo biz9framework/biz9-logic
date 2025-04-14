@@ -6,7 +6,6 @@ Description: BiZ9 Framework: Logic-JS
 */
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_title_url_main } = require('./main');
 const {Log,Test,Str} = require('biz9-utility');
-
 class Message {
 	static SUCCESS="Update Success";
 	static LOGIN_GOOD="Login Success";
@@ -20,7 +19,6 @@ class DataType {
 			return String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 		}
 	}
-
 	static DT_ADMIN='admin_biz';
 	static DT_BLANK='blank_biz';
 	static DT_BLOG_POST='blog_post_biz';
@@ -51,16 +49,16 @@ class DataItem {
 	}
 }
 class BiZ_Url {
-	static get_item = (biz9_config,item) => {
-		let action_url= "main/biz_item/get/"+item.data_type + "/" + item.id ;
+	static get_item=(biz9_config,data_type,id)=>{
+		let action_url="main/biz_item/get/"+data_type+"/"+id ;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static delete_item = (biz9_config,item) => {
-		let action_url= "main/biz_item/delete/"+item.data_type + "/" + item.id ;
+	static delete_item=(biz9_config,data_type,id)=>{
+		let action_url= "main/biz_item/delete/"+data_type+"/"+id ;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
-	static get_full_item = (biz9_config,item) => {
-		let action_url= "main/biz_item/get_full/"+item.data_type + "/" + item.id;
+	static get_full_item=(biz9_config,data_type,id)=>{
+		let action_url= "main/biz_item/get_full/"+data_type+"/"+id;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
 }
