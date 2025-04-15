@@ -22,6 +22,12 @@ describe("connect", () => {
                 call()
             },
             function(call) {
+                console.log('GET-TITLE-URL');
+                console.log(Str.get_title_url('Apple Butter Sauce'));
+                console.log('GET-TITLE-URL');
+                //call()
+            },
+            function(call) {
                 console.log('GET-TITLE-START');
                 console.log(Str.get_title('1_3what'));
                 console.log('GET-TITLE-START');

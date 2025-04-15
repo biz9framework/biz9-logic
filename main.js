@@ -5,7 +5,7 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic - Main
 */
 
-const { DateTime } = require('biz9-utility');
+const { DateTime,Number } = require('biz9-utility');
 const biz9_config_local=__dirname+"/../../"+"biz9_config";
 
 const get_cloud_filter_obj_main = (data_type,filter,sort_by,page_current,page_size) => {
@@ -25,9 +25,40 @@ const get_cloud_url_main = (app_title_id,domain_url,action_url,params) =>{
     return domain_url+"/"+action_url+app_title_id_url + params;
 }
 const get_biz_item_main=(biz9_config,item,options) =>{
-    //option
-    //get_count = true
-    //get_biz_map = true
+    /*
+    -options {
+        get_count: true/false, false=default --
+        get_date: true/false, false=default --
+        get_biz_map: true/false, false=default --
+        get_money: true/false, false=default --
+    }
+    */
+    //money setting - start
+    if(options.get_money){
+        if(isNaN(item.cost)){
+            item.cost=parseFloat(0.00);
+        }
+        if(isNaN(item.old_cost)){
+            item.old_cost=parseFloat(0.00);
+        }
+        if(isNaN(item.discount)){
+            item.discount=parseFloat(0.00);
+        }
+        discount = item.old_cost - item.cost;
+        console.log('aaaaaaa');
+        console.log(discount);
+        item.discount= parseInt(((discount / item.old_cost) * 100));
+        if(isNaN(item.discount)){
+            item.discount="0%";
+        }else{
+            item.discount=item.discount+"%";
+        }
+        item.cost = Number.get_money(item.cost);
+        item.old_cost = Number.get_money(item.old_cost);
+    }
+    //money setting - end
+
+    //count setting - start
     if(options.get_count){
         if(!item.view_count){
             item.view_count='0';
@@ -39,6 +70,7 @@ const get_biz_item_main=(biz9_config,item,options) =>{
             item.review_count='0';
         }
     }
+    //count setting - end
     //date setting - start
     if(options.get_date){
         let no_date_str='';
@@ -46,7 +78,7 @@ const get_biz_item_main=(biz9_config,item,options) =>{
             item.date_create = DateTime.get_new_date();
             item.date_save = DateTime.get_new_date();
         }
-        item.date_obj={
+        item={
             pretty_create: (item.date_create) ? DateTime.get_pretty(item.date_create) : no_date_str,
             pretty_update: (item.date_create) ? DateTime.get_pretty(item.date_save): no_date_str,
             full_date_create: (item.date_create) ? DateTime.get_date_str(item.date_create) : no_date_str,
@@ -74,7 +106,6 @@ const get_biz_item_main=(biz9_config,item,options) =>{
         }
     }
     //biz_map setting - end
-
     return item;
 }
 const get_title_url_main = (title) => {

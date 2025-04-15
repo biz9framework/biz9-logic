@@ -113,7 +113,7 @@ class Obj {
 	}
 };
 class Cat {
-	static set_category_drop_down_list = (cat_list) => {
+	static get_category_drop_down_list_by_list = (cat_list) => {
 		let category_list = [];
 		for(let a=0;a<cat_list.length;a++){
 			category_list.push({value:cat_list[a].title,label:cat_list[a].title});

@@ -28,6 +28,26 @@ const biz9_config ={
 describe("connect", () => {
     it("_connect", () => {
         series([
+
+            function(call) {
+                console.log('SET-ITEM-BIZ-START');
+                let item_test = Test.get_item('dt_blank',0);
+                item_test.photofilename='abc.png';
+                item_test.cost = '5.55';
+                item_test.old_cost = '9.55';
+                item_test.field_1 = 'my_field_1';
+                item_test.value_1 = 'my_value_1';
+                item_test.field_2 = 'my_field_2';
+                item_test.value_2 = 'my_value_2';
+                item_test.field_3 = 'my_field_3';
+                item_test.value_3 = 'my_value_3';
+                let item_biz = DataItem.get_biz(biz9_config,item_test,{get_date:false,get_count:false,get_biz_map:false,get_money:true});
+                console.log(item_biz);
+                console.log('SET-ITEM-BIZ-SUCCESS');
+                call();
+            },
+
+            /*
         function(call) {
                 console.log('SET_CATEGORY_DROP_DOWN_LIST-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
@@ -42,7 +62,6 @@ describe("connect", () => {
                 //call()
             },
 
-            /*
 
         function(call) {
                 console.log('GET-BiZ-Url-Item-Get-Item-START');
@@ -203,22 +222,7 @@ describe("connect", () => {
                 console.log('GET-NEW-ITEM-SUCCESS');
                 call()
             },
-            function(call) {
-                console.log('SET-ITEM-BIZ-START');
-                let item_test = Test.get_item('dt_blank',0);
-                item_test.photofilename='abc.png';
-                item_test.field_1 = 'my_field_1';
-                item_test.value_1 = 'my_value_1';
-                item_test.field_2 = 'my_field_2';
-                item_test.value_2 = 'my_value_2';
-                item_test.field_3 = 'my_field_3';
-                item_test.value_3 = 'my_value_3';
-                let item_biz = DataItem.get_biz(biz9_config,item_test,{get_date:true,get_count:true,get_biz_map:true});
-                console.log(item_biz);
-                console.log('SET-ITEM-BIZ-SUCCESS');
-                call();
-            },
-            function(call) {
+           function(call) {
                 console.log('GET_URL-BIZ-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let data_type = 'dt_blank';
