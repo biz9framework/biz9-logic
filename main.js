@@ -45,8 +45,6 @@ const get_biz_item_main=(biz9_config,item,options) =>{
             item.discount=parseFloat(0.00);
         }
         discount = item.old_cost - item.cost;
-        console.log('aaaaaaa');
-        console.log(discount);
         item.discount= parseInt(((discount / item.old_cost) * 100));
         if(isNaN(item.discount)){
             item.discount="0%";

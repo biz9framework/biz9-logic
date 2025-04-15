@@ -30,6 +30,30 @@ describe("connect", () => {
         series([
 
             function(call) {
+                console.log('SET-ITEM-BIZ-BY-LIST-START');
+                let item_test_list = [];
+                let item_test = Test.get_item('dt_blank',0);
+                item_test.cost = String(Number.get_id())+'.55';
+                item_test.old_cost = String(Number.get_id())+'.20';
+                item_test.title ='_title_'+Number.get_id();
+
+                item_test_list.push(item_test);
+
+                let item_test_1 = Test.get_item('dt_blank',0);
+                item_test_1.cost = '5.55';
+                item_test_1.old_cost = '9.55';
+                item_test_1.title ='_title_'+Number.get_id();
+
+                item_test_list.push(item_test_1);
+
+                let item_list_biz = DataItem.get_biz_by_list(biz9_config,item_test_list,{get_date:false,get_count:false,get_biz_map:false,get_money:true});
+                console.log(item_list_biz);
+                console.log('SET-ITEM-BIZ-BY-LIST-SUCCESS');
+                //call();
+            },
+
+
+            function(call) {
                 console.log('SET-ITEM-BIZ-START');
                 let item_test = Test.get_item('dt_blank',0);
                 item_test.photofilename='abc.png';

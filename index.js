@@ -47,6 +47,13 @@ class DataItem {
 	static get_biz = (biz9_config,item,options)=>{
 		return get_biz_item_main(biz9_config,item,options);
 	}
+	static get_biz_by_list = (biz9_config,list,options)=>{
+		let r_list = [];
+		for(let a=0;a<list.length;a++){
+			r_list.push(get_biz_item_main(biz9_config,list[a],options));
+		}
+		return r_list;
+	}
 }
 class BiZ_Url {
 	static get_item=(biz9_config,data_type,id)=>{
@@ -169,7 +176,6 @@ class CMS {
 	static Tab_Edit_Title_Value = 'value';
 	static Tab_Edit_Title_Setting = 'setting';
 	static Tab_Edit_Title_Note = 'note';
-
 	static get_new_query_item_by_item = (item) => {
 		return {
 			id: item.id ? item.id : 0,
@@ -253,7 +259,6 @@ class CMS {
 		return url+r_url;
 	}
 }
-
 module.exports = {
 	DataType,
 	DataItem,
