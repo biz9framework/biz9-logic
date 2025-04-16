@@ -24,6 +24,7 @@ class DataType {
 	static DT_BLOG_POST='blog_post_biz';
 	static DT_CART_ITEM="cart_item_biz";
 	static DT_CATEGORY='category_biz';
+	static DT_CONTENT='content_biz';
 	static DT_EVENT='event_biz';
 	static DT_GALLERY='gallery_biz';
 	static DT_ITEM_MAP='item_map_biz';
@@ -75,6 +76,10 @@ class Url {
 	}
 	static connect = (biz9_config) => {
 		let action_url= "main/test/connect/";
+		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
+	};
+	static upload_file = (biz9_config,data_type,id) => {
+		let action_url= "main/crud/update/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
 	static update_item = (biz9_config,data_type,id) => {
