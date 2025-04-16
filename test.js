@@ -28,7 +28,6 @@ const biz9_config ={
 describe("connect", () => {
     it("_connect", () => {
         series([
-
             function(call) {
                 console.log('SET-ITEM-BIZ-BY-LIST-START');
                 let item_test_list = [];
@@ -51,8 +50,6 @@ describe("connect", () => {
                 console.log('SET-ITEM-BIZ-BY-LIST-SUCCESS');
                 //call();
             },
-
-
             function(call) {
                 console.log('SET-ITEM-BIZ-START');
                 let item_test = Test.get_item('dt_blank',0);

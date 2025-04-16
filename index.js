@@ -175,6 +175,8 @@ class CMS {
 	static Tab_Edit_Title_List = 'list';
 	static Tab_Edit_Title_Value = 'value';
 	static Tab_Edit_Title_Setting = 'setting';
+	static Tab_Edit_Title_Audio = 'audio';
+	static Tab_Edit_Title_Video = 'video';
 	static Tab_Edit_Title_Note = 'note';
 	static get_new_query_item_by_item = (item) => {
 		return {
@@ -234,10 +236,19 @@ class CMS {
 				break;
 			case CMS.Tab_Edit_Title_Setting:
 				return 'Settings';
+				break;
 			case CMS.Tab_Edit_Title_Note:
 				return 'Note';
+				break;
+			case CMS.Tab_Edit_Title_Audio:
+				return 'Audio';
+				break;
+			case CMS.Tab_Edit_Title_Video:
+				return 'Video';
+				break;
 			default:
 				return 'N/A';
+				break;
 		}
 	}
 	static get_page_url = (url,tab_title,item,parent_item,top_item,parms) => {
