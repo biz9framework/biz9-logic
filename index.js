@@ -134,10 +134,13 @@ class Cat {
 	};
 	static get_category_drop_down_list = () => {
 		return [
-			{ value: "blog_post_biz", label: "Blog Posts" },
-			{ value: "event_biz", label: "Events" },
-			{ value: "gallery_biz", label: "Galleries" },
-			{ value: "product_biz", label: "Products" }
+			{ value: DataType.BLOG_POST, label: "Blog Posts" },
+			{ value: DataType.DT_CONTENT, label: "Content" }
+			{ value: DataType.DT_EVENT, label: "Events" },
+			{ value: DataType.DT_GALLERY, label: "Galleries" },
+			{ value: DataType.DT_SERVICE, label: "Services" }
+			{ value: DataType.DT_PRODUCT, label: "Products" }
+			{ value: DataType.DT_TEMPLATE, label: "Template" }
 		];
 	};
 	static get_title_by_type = (data_type) => {
@@ -168,6 +171,12 @@ class Cat {
 				break;
 			case DataType.DT_BLOG_POST:
 				return "Blog Post";
+				break;
+			case DataType.DT_TEMPLATE:
+				return "Template";
+				break;
+			case DataType.DT_CONTENT:
+				return "Content";
 				break;
 			default:
 				return "Blank";
