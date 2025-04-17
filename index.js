@@ -135,11 +135,11 @@ class Cat {
 	static get_category_drop_down_list = () => {
 		return [
 			{ value: DataType.BLOG_POST, label: "Blog Posts" },
-			{ value: DataType.DT_CONTENT, label: "Content" }
+			{ value: DataType.DT_CONTENT, label: "Content" },
 			{ value: DataType.DT_EVENT, label: "Events" },
 			{ value: DataType.DT_GALLERY, label: "Galleries" },
-			{ value: DataType.DT_SERVICE, label: "Services" }
-			{ value: DataType.DT_PRODUCT, label: "Products" }
+			{ value: DataType.DT_SERVICE, label: "Services" },
+			{ value: DataType.DT_PRODUCT, label: "Products" },
 			{ value: DataType.DT_TEMPLATE, label: "Template" }
 		];
 	};
