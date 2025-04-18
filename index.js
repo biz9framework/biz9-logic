@@ -132,7 +132,7 @@ class Cat {
 		}
 		return category_list;
 	};
-	static get_category_drop_down_list = () => {
+	static get_category_list = () => {
 		return [
 			{ value: DataType.BLOG_POST, label: "Blog Posts" },
 			{ value: DataType.DT_CONTENT, label: "Content" },
@@ -285,14 +285,15 @@ class CMS {
 	}
 }
 class Stock {
-	static get_event_stock_list = (stock_val) => {
-		return
+	static get_event_stock_list = () => {
+		const r_list=
 		[
 			{ value: "0", label: "Sold Out" },
 			{ value: "1", label: "Less Than 25 Tickets Remaining" },
 			{ value: "2", label: "Tickets Are Availble" },
 			{ value: "3", label: "Sold Out" },
 		];
+		return r_list;
 	};
 	static get_event_stock_by_value = (stock_val) => {
 		switch(title)
@@ -311,13 +312,14 @@ class Stock {
 				break;
 		}
 	};
-	static get_service_stock_list = (stock_val) => {
-		return
+	static get_service_stock_list = () => {
+	const r_list=
 		[
 			{ value: "0", label: "No Sessions Availble" },
 			{ value: "1", label: "Ready For Booking" },
-			{ value: "2", label: "No Sessions Availble" },
+			{ value: "2", label: "No Sessions Availble" }
 		];
+		return r_list;
 	};
 	static get_service_stock_by_value = (stock_val) => {
 		switch(title)
@@ -333,14 +335,15 @@ class Stock {
 				break;
 		}
 	};
-	static get_product_stock_list = (stock_val) => {
-		return
+	static get_product_stock_list = () => {
+		const r_list=
 		[
 			{ value: "0", label: "Out of Stock" },
 			{ value: "1", label: "Only 1 Left" },
 			{ value: "2", label: "Less Than 3 Left" },
 			{ value: "3", label: "Availble" }
 		];
+		return r_list;
 	};
 	static get_product_stock_by_value = (stock_val) => {
 		switch(title)
@@ -363,7 +366,6 @@ class Stock {
 		}
 	};
 }
-
 module.exports = {
 	Stock,
 	DataType,
