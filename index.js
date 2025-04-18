@@ -284,7 +284,88 @@ class CMS {
 		return url+r_url;
 	}
 }
+class Stock {
+	static get_event_stock_list = (stock_val) => {
+		return
+		[
+			{ value: "0", label: "Sold Out" },
+			{ value: "1", label: "Less Than 25 Tickets Remaining" },
+			{ value: "2", label: "Tickets Are Availble" },
+			{ value: "3", label: "Sold Out" },
+		];
+	};
+	static get_event_stock_by_value = (stock_val) => {
+		switch(title)
+		{
+			case "0":
+				return 'Sold Out';
+				break;
+			case "1":
+				return 'Less Than 25 Tickets Remaining';
+				break;
+			case "2":
+				return 'Tickets Are Availble';
+				break;
+			case "3":
+				return 'Sold Out';
+				break;
+		}
+	};
+	static get_service_stock_list = (stock_val) => {
+		return
+		[
+			{ value: "0", label: "No Sessions Availble" },
+			{ value: "1", label: "Ready For Booking" },
+			{ value: "2", label: "No Sessions Availble" },
+		];
+	};
+	static get_service_stock_by_value = (stock_val) => {
+		switch(title)
+		{
+			case "0":
+				return 'No Sessions Availble';
+				break;
+			case "1":
+				return 'Ready For Booking';
+				break;
+			case "2":
+				return 'No Sessions Availble';
+				break;
+		}
+	};
+	static get_product_stock_list = (stock_val) => {
+		return
+		[
+			{ value: "0", label: "Out of Stock" },
+			{ value: "1", label: "Only 1 Left" },
+			{ value: "2", label: "Less Than 3 Left" },
+			{ value: "3", label: "Availble" }
+		];
+	};
+	static get_product_stock_by_value = (stock_val) => {
+		switch(title)
+		{
+			case "0":
+				return 'Out of Stock';
+				break;
+			case "1":
+				return 'Only 1 Left';
+				break;
+			case "2":
+				return 'Less Than 3 Left';
+				break;
+			case "3":
+				return 'Availble';
+				break;
+			default:
+				return 'Availble';
+				break;
+		}
+	};
+}
+
 module.exports = {
+	Stock,
 	DataType,
 	DataItem,
 	Message,
