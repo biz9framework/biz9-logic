@@ -296,7 +296,7 @@ class Stock {
 		return r_list;
 	};
 	static get_event_stock_by_value = (stock_val) => {
-		switch(title)
+		switch(stock_val)
 		{
 			case "0":
 				return 'Sold Out';
@@ -322,7 +322,7 @@ class Stock {
 		return r_list;
 	};
 	static get_service_stock_by_value = (stock_val) => {
-		switch(title)
+		switch(stock_val)
 		{
 			case "0":
 				return 'No Sessions Availble';
@@ -346,7 +346,7 @@ class Stock {
 		return r_list;
 	};
 	static get_product_stock_by_value = (stock_val) => {
-		switch(title)
+		switch(stock_val)
 		{
 			case "0":
 				return 'Out of Stock';
