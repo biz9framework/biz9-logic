@@ -366,19 +366,7 @@ class Stock {
 		}
 	};
 }
-class DateTime {
-	static get_full_date_by_date_time = (date,time) => {
-		return moment(date+ " " + time, 'YYYY-MM-DD h:mm').format("dddd MMMM Do, YYYY");
-	}
-	static get_full_time_by_date_time = (date,time) => {
-		return moment(date+ " " + time, 'YYYY-MM-DD h:mm').format("h:mm a");
-	}
-	static get_full_date_time_by_date_time = (date,time) => {
-		return moment(date+ " " + time, 'YYYY-MM-DD h:mm').format("dddd MMMM Do, YYYY h:mm a");
-	}
-};
 module.exports = {
-	DateTime,
 	Stock,
 	DataType,
 	DataItem,
