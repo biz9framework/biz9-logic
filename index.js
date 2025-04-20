@@ -5,7 +5,7 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_title_url_main } = require('./main');
-const {Log,Test,Str} = require('biz9-utility');
+const {Log,Test,Str,DateTime} = require('biz9-utility');
 class Message {
 	static SUCCESS="Update Success";
 	static LOGIN_GOOD="Login Success";
@@ -365,8 +365,21 @@ class Stock {
 				break;
 		}
 	};
+
 }
+class Schedule {
+	static get_start_date_time_by_list(list){
+		for(a=0;a<list.length;a++){
+			list[a].start_date = DateTime.get_full_date_by_date_time(list[a].date,list[a].time);
+			list[a].start_time = DateTime.get_full_time_by_date_time(list[a].date,list[a].time);
+			list[a].start_date_time = DateTime.get_full_date_time_by_date_time(list[a].date,list[a].time);
+		}
+		return list;
+	}
+};
+
 module.exports = {
+	Schedule,
 	Stock,
 	DataType,
 	DataItem,
