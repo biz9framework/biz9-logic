@@ -287,12 +287,12 @@ class CMS {
 class Stock {
 	static get_event_stock_list = () => {
 		const r_list=
-		[
-			{ value: "0", label: "Sold Out" },
-			{ value: "1", label: "Less Than 25 Tickets Remaining" },
-			{ value: "2", label: "Tickets Are Availble" },
-			{ value: "3", label: "Sold Out" },
-		];
+			[
+				{ value: "0", label: "Sold Out" },
+				{ value: "1", label: "Less Than 25 Tickets Remaining" },
+				{ value: "2", label: "Tickets Are Availble" },
+				{ value: "3", label: "Sold Out" },
+			];
 		return r_list;
 	};
 	static get_event_stock_by_value = (stock_val) => {
@@ -313,12 +313,12 @@ class Stock {
 		}
 	};
 	static get_service_stock_list = () => {
-	const r_list=
-		[
-			{ value: "0", label: "No Sessions Availble" },
-			{ value: "1", label: "Ready For Booking" },
-			{ value: "2", label: "No Sessions Availble" }
-		];
+		const r_list=
+			[
+				{ value: "0", label: "No Sessions Availble" },
+				{ value: "1", label: "Ready For Booking" },
+				{ value: "2", label: "No Sessions Availble" }
+			];
 		return r_list;
 	};
 	static get_service_stock_by_value = (stock_val) => {
@@ -337,12 +337,12 @@ class Stock {
 	};
 	static get_product_stock_list = () => {
 		const r_list=
-		[
-			{ value: "0", label: "Out of Stock" },
-			{ value: "1", label: "Only 1 Left" },
-			{ value: "2", label: "Less Than 3 Left" },
-			{ value: "3", label: "Availble" }
-		];
+			[
+				{ value: "0", label: "Out of Stock" },
+				{ value: "1", label: "Only 1 Left" },
+				{ value: "2", label: "Less Than 3 Left" },
+				{ value: "3", label: "Availble" }
+			];
 		return r_list;
 	};
 	static get_product_stock_by_value = (stock_val) => {
@@ -368,8 +368,26 @@ class Stock {
 
 }
 class Schedule {
+	static get_start_date_time = (item) =>{
+		if(!item.date){
+			item.date = new Date();
+		}
+		if(!item.time){
+			item.time = new Date();
+		}
+		item.start_date = DateTime.get_full_date_by_date_time(item.date,item.time);
+		item.start_time = DateTime.get_full_time_by_date_time(item.date,item.time);
+		item.start_date_time = DateTime.get_full_date_time_by_date_time(item.date,item.time);
+		return item;
+	}
 	static get_start_date_time_by_list = (list) =>{
 		for(let a=0;a<list.length;a++){
+			if(!list[a].date){
+				item.date = new Date();
+			}
+			if(!list[a].time){
+				list[a].time = new Date();
+			}
 			list[a].start_date = DateTime.get_full_date_by_date_time(list[a].date,list[a].time);
 			list[a].start_time = DateTime.get_full_time_by_date_time(list[a].date,list[a].time);
 			list[a].start_date_time = DateTime.get_full_date_time_by_date_time(list[a].date,list[a].time);
@@ -377,15 +395,30 @@ class Schedule {
 		return list;
 	}
 };
+class Storage {
+	static get = (key) =>{
+		return localStorage.getItem(key);
+	}
+	static set = (key,value) =>{
+		localStorage.setItem(key,value);
+	}
+	static remove = (key) =>{
+		localStorage.removeItem(key);
+	}
+	static clear = () =>{
+		localStorage.clear();
+	}
+}
 module.exports = {
+	BiZ_Url,
+	Cat,
+	CMS,
+	DataItem,
+	DataType,
+	Message,
+	Obj,
+	Storage,
 	Schedule,
 	Stock,
-	DataType,
-	DataItem,
-	Message,
 	Url,
-	BiZ_Url,
-	Obj,
-	CMS,
-	Cat
 };

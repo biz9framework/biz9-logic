@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule} = require('./');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage} = require('./');
 const {Log,Test,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -29,6 +29,19 @@ describe("connect", () => {
     it("_connect", () => {
         series([
             function(call) {
+                console.log('GET_START_STORAGE-START');
+                Log.w('storage-start',Storage.set(Number.get_id()));
+                console.log('GET_START_STORAGE-END');
+                //call();
+            },
+
+            function(call) {
+                console.log('GET_START_DATE_TIME-START');
+                Log.w('get_start_date_time',Schedule.get_start_date_time({date:new Date(),time: new Date()}));
+                console.log('GET_START_DATE_TIME-END');
+                //call();
+            },
+            function(call) {
                 console.log('GET_START_DATE_TIME_BY_LIST-START');
                 event_list = [
                     {date:new Date(),time: new Date()},
@@ -39,6 +52,7 @@ describe("connect", () => {
                 console.log('GET_START_DATE_TIME_BY_LIST-END');
                 //call();
             },
+
             function(call) {
                 console.log('GET-ALL-STOCK-LIST-START');
                 Log.w('get_event_list',Stock.get_event_stock_list());
