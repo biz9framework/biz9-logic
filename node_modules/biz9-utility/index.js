@@ -88,7 +88,7 @@ class DateTime {
         return get_month_title_main(date);
     };
     static get_full_date_by_date_time = (date,time) => {
-        return get_full_date_by_date_time_main(date,time)
+        return get_full_time_by_date_time_main(date,time)
     };
     static get_full_time_by_date_time = (date,time) => {
         return get_full_time_by_date_time_main(date,time);

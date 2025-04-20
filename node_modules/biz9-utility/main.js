@@ -350,5 +350,8 @@ module.exports = {
     set_form_item_list_main,
     get_title_main,
     check_is_null_main,
-    get_title_url_main
+    get_title_url_main,
+    get_full_date_by_date_time_main,
+    get_full_time_by_date_time_main,
+    get_full_date_time_by_date_time_main
 };

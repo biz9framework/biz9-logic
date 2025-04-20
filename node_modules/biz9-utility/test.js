@@ -22,6 +22,19 @@ describe("connect", () => {
                 call()
             },
             function(call) {
+                console.log('GET-DATETIME-START');
+                const now = new Date();
+                event_list = [
+                    {date:new Date(),time: now.toLocaleTimeString()},
+                    {date:new Date(),time: new Date()},
+                    {date:new Date(),time: new Date()}
+                ];
+            console.log(DateTime.get_full_date_by_date_time(new Date(), "11:20 AM"));
+                console.log('GET-DATETIME-END');
+                //call()
+            },
+
+            function(call) {
                 console.log('GET-TITLE-URL');
                 console.log(Str.get_title_url('Apple Butter Sauce'));
                 console.log('GET-TITLE-URL');
