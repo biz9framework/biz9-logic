@@ -369,7 +369,7 @@ class Stock {
 }
 class Schedule {
 	static get_start_date_time_by_list = (list) =>{
-		for(a=0;a<list.length;a++){
+		for(let a=0;a<list.length;a++){
 			list[a].start_date = DateTime.get_full_date_by_date_time(list[a].date,list[a].time);
 			list[a].start_time = DateTime.get_full_time_by_date_time(list[a].date,list[a].time);
 			list[a].start_date_time = DateTime.get_full_date_time_by_date_time(list[a].date,list[a].time);
