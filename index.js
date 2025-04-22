@@ -396,11 +396,14 @@ class Schedule {
 	}
 };
 class Storage {
+	static KEY_ADMIN="key_admin";
+	static KEY_USER="key_user";
+	static KEY_GUEST="key_guest";
 	static get = (window,key) => {
-		return window.localStorage.getItem(key);
+		return window.localStorage.getItem(JSON.parse(key));
 	}
-	static set = (window,key,value) => {
-		window.localStorage.setItem(key,value);
+	static set = (window,key,obj) => {
+		window.localStorage.setItem(key,JSON.stringify(obj));
 	}
 	static remove = (window,key) =>{
 		window.localStorage.removeItem(key);
