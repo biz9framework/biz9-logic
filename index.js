@@ -396,17 +396,17 @@ class Schedule {
 	}
 };
 class Storage {
-	static get = (key) =>{
-		return localStorage.getItem(key);
+	static get = (window,key) => {
+		return window.localStorage.getItem(key);
 	}
-	static set = (key,value) =>{
-		localStorage.setItem(key,value);
+	static set = (window,key,value) => {
+		window.localStorage.setItem(key,value);
 	}
-	static remove = (key) =>{
-		localStorage.removeItem(key);
+	static remove = (window,key) =>{
+		window.localStorage.removeItem(key);
 	}
-	static clear = () =>{
-		localStorage.clear();
+	static clear = (window) =>{
+		window.localStorage.clear();
 	}
 }
 module.exports = {
