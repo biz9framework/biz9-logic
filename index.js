@@ -400,7 +400,7 @@ class Storage {
 	static KEY_USER="key_user";
 	static KEY_GUEST="key_guest";
 	static get = (window,key) => {
-		return window.localStorage.getItem(JSON.parse(key));
+		return JSON.parse(window.localStorage.getItem(key));
 	}
 	static set = (window,key,obj) => {
 		window.localStorage.setItem(key,JSON.stringify(obj));
