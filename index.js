@@ -399,6 +399,7 @@ class Schedule {
 class Storage {
 	static KEY_ADMIN="key_admin";
 	static KEY_USER="key_user";
+	static KEY_BUSINESS="key_business";
 	static KEY_GUEST="key_guest";
 	static get = (window,key) => {
 		return JSON.parse(window.localStorage.getItem(key));
