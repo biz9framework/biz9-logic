@@ -21,6 +21,7 @@ class DataType {
 	}
 	static DT_ADMIN='admin_biz';
 	static DT_BLANK='blank_biz';
+	static DT_BUSINESS='business_biz';
 	static DT_BLOG_POST='blog_post_biz';
 	static DT_CART_ITEM="cart_item_biz";
 	static DT_CATEGORY='category_biz';
