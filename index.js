@@ -384,7 +384,7 @@ class Schedule {
 	static get_start_date_time_by_list = (list) =>{
 		for(let a=0;a<list.length;a++){
 			if(!list[a].date){
-				item.date = new Date();
+				list[a].date = new Date();
 			}
 			if(!list[a].time){
 				list[a].time = new Date();
