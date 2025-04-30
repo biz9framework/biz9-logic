@@ -15,6 +15,65 @@ class Message {
 
 }
 
+class TemplateType {
+
+	static Primary='primary';
+	static Header='header';
+	static Navigation='navigation';
+	static BODY='body';
+	static FOOTER='footer';
+}
+
+class PageType {
+
+	static HOME='home';
+	static ABOUT='about';
+	static CONTACT='contact';
+	static SERVICE='service';
+	static PRODUCT='product';
+	static TEAM='team';
+
+	static SECTION_1='section_1';
+	static SECTION_2='section_2';
+	static SECTION_3='section_2';
+	static SECTION_4='section_4';
+	static SECTION_5='section_5';
+	static SECTION_6='section_6';
+	static SECTION_7='section_7';
+	static SECTION_8='section_8';
+	static SECTION_9='section_9';
+	static SECTION_10='section_10';
+	static SECTION_11='section_11';
+	static SECTION_12='section_12';
+	static SECTION_13='section_13';
+	static SECTION_14='section_14';
+	static SECTION_15='section_15';
+	static SECTION_16='section_16';
+	static SECTION_17='section_17';
+	static SECTION_18='section_18';
+	static SECTION_19='section_19';
+
+	static VALUE_1='value_1';
+	static VALUE_2='value_2';
+	static VALUE_3='value_2';
+	static VALUE_4='value_4';
+	static VALUE_5='value_5';
+	static VALUE_6='value_6';
+	static VALUE_7='value_7';
+	static VALUE_8='value_8';
+	static VALUE_9='value_9';
+	static VALUE_10='value_10';
+	static VALUE_11='value_11';
+	static VALUE_12='value_12';
+	static VALUE_13='value_13';
+	static VALUE_14='value_14';
+	static VALUE_15='value_15';
+	static VALUE_16='value_16';
+	static VALUE_17='value_17';
+	static VALUE_18='value_18';
+	static VALUE_19='value_19';
+}
+
 class DataType {
 
 	static get_title = (data_type) => {
@@ -25,29 +84,30 @@ class DataType {
 		}
 	}
 
-	static DT_ADMIN='admin_biz';
-	static DT_BLANK='blank_biz';
-	static DT_BUSINESS='business_biz';
-	static DT_BLOG_POST='blog_post_biz';
-	static DT_CART_ITEM="cart_item_biz";
-	static DT_CATEGORY='category_biz';
-	static DT_CONTENT='content_biz';
-	static DT_EVENT='event_biz';
-	static DT_GALLERY='gallery_biz';
-	static DT_ITEM_MAP='item_map_biz';
-	static DT_ITEM='item_biz';
-	static DT_ORDER="order_biz";
-	static DT_ORDER_ITEM="order_item_biz";
-	static DT_PROJECT='project_biz';
-	static DT_PRODUCT='product_biz';
-	static DT_PHOTO='photo_biz';
-	static DT_PAGE='page_biz';
-	static DT_REVIEW='review_biz';
-	static DT_SERVICE='service_biz';
-	static DT_TEMPLATE='template_biz';
-	static DT_USER='user_biz';
-	static DT_VIDEO='video_biz';
+	static ADMIN='admin_biz';
+	static BLANK='blank_biz';
+	static BUSINESS='business_biz';
+	static BLOG_POST='blog_post_biz';
+	static CART_ITEM="cart_item_biz";
+	static CATEGORY='category_biz';
+	static CONTENT='content_biz';
+	static EVENT='event_biz';
+	static GALLERY='gallery_biz';
+	static ITEM_MAP='item_map_biz';
+	static ITEM='item_biz';
+	static ORDER="order_biz";
+	static ORDER_ITEM="order_item_biz";
+	static PROJECT='project_biz';
+	static PRODUCT='product_biz';
+	static PHOTO='photo_biz';
+	static PAGE='page_biz';
+	static REVIEW='review_biz';
+	static SERVICE='service_biz';
+	static TEMPLATE='template_biz';
+	static USER='user_biz';
+	static VIDEO='video_biz';
 }
+
 class DataItem {
 
 	static get_new = (data_type,id) => {
@@ -84,8 +144,8 @@ class BiZ_Url {
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
 
-	static get_page=(biz9_config,data_type,title_url)=>{
-		let action_url= "main/biz_item/get_page/"+data_type+"/"+title_url;
+	static get_page=(biz9_config,title_url)=>{
+		let action_url= "main/biz_item/get_page/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
 
@@ -95,6 +155,7 @@ class BiZ_Url {
 	};
 
 }
+
 class Url {
 
 	static get = (biz9_config,action_url,params)=>{
@@ -157,6 +218,7 @@ class Url {
 	};
 
 }
+
 class Obj {
 
 	static get_filter = (biz9_config,data_type,filter,sort_by,page_current,page_size)=>{
@@ -164,6 +226,7 @@ class Obj {
 	}
 
 };
+
 class Cat {
 
 	static get_category_drop_down_list_by_list = (cat_list) => {
@@ -177,48 +240,48 @@ class Cat {
 	static get_category_list = () => {
 		return [
 			{ value: DataType.BLOG_POST, label: "Blog Posts" },
-			{ value: DataType.DT_CONTENT, label: "Content" },
-			{ value: DataType.DT_EVENT, label: "Events" },
-			{ value: DataType.DT_GALLERY, label: "Galleries" },
-			{ value: DataType.DT_SERVICE, label: "Services" },
-			{ value: DataType.DT_PRODUCT, label: "Products" },
-			{ value: DataType.DT_TEMPLATE, label: "Template" }
+			{ value: DataType.CONTENT, label: "Content" },
+			{ value: DataType.EVENT, label: "Events" },
+			{ value: DataType.GALLERY, label: "Galleries" },
+			{ value: DataType.SERVICE, label: "Services" },
+			{ value: DataType.PRODUCT, label: "Products" },
+			{ value: DataType.TEMPLATE, label: "Template" }
 		];
 	};
 
 	static get_title_by_type = (data_type) => {
 		switch (data_type) {
-			case DataType.DT_EVENT:
+			case DataType.EVENT:
 				return "Event";
 				break;
-			case DataType.DT_GALLERY:
+			case DataType.GALLERY:
 				return "Gallery";
 				break;
-			case DataType.DT_PRODUCT:
+			case DataType.PRODUCT:
 				return "Product";
 				break;
-			case DataType.DT_SERVICE:
+			case DataType.SERVICE:
 				return "Service";
 				break;
-			case DataType.DT_EVENT:
+			case DataType.EVENT:
 				return "Event";
 				break;
-			case DataType.DT_PRODUCT:
+			case DataType.PRODUCT:
 				return "Product";
 				break;
-			case DataType.DT_SERVICE:
+			case DataType.SERVICE:
 				return "Service";
 				break;
-			case DataType.DT_CATEGORY:
+			case DataType.CATEGORY:
 				return "Category";
 				break;
-			case DataType.DT_BLOG_POST:
+			case DataType.BLOG_POST:
 				return "Blog Post";
 				break;
-			case DataType.DT_TEMPLATE:
+			case DataType.TEMPLATE:
 				return "Template";
 				break;
-			case DataType.DT_CONTENT:
+			case DataType.CONTENT:
 				return "Content";
 				break;
 			default:
@@ -241,25 +304,25 @@ class CMS {
 
 		return {
 			id: item.id ? item.id : 0,
-			data_type:item.data_type ? item.data_type : DataType.DT_BLANK,
+			data_type:item.data_type ? item.data_type : DataType.BLANK,
 
 			parent_id:item.parent_id ? item.parent_id : 0,
-			parent_data_type:item.parent_data_type ? item.parent_data_type  : DataType.DT_BLANK,
+			parent_data_type:item.parent_data_type ? item.parent_data_type  : DataType.BLANK,
 
 			top_id:item.top_id ? item.top_id : 0,
-			top_data_type:item.top_data_type ? item.top_data_type : DataType.DT_BLANK
+			top_data_type:item.top_data_type ? item.top_data_type : DataType.BLANK
 		}
 	};
 
 	static get_new_query_item = (item,parent_item,top_item) => {
 		return {
 			id: item.id ? item.id : 0,
-			data_type:item.data_type ? item.data_type : DataType.DT_BLANK,
+			data_type:item.data_type ? item.data_type : DataType.BLANK,
 			parent_id:parent_item.id ? parent_item.id : 0,
-			parent_data_type:parent_item.data_type ? parent_item.data_type : DataType.DT_BLANK,
+			parent_data_type:parent_item.data_type ? parent_item.data_type : DataType.BLANK,
 
 			top_id:top_item.id ? top_item.id : 0,
-			top_data_type:top_item.data_type ? top_item.data_type : DataType.DT_BLANK
+			top_data_type:top_item.data_type ? top_item.data_type : DataType.BLANK
 		}
 	};
 
@@ -268,27 +331,27 @@ class CMS {
 	};
 
 	static get_query_item_by_page = (item) => {
-		return { id:item.id ? item.id : 0, data_type:item.data_type ? item.data_type : DataType.DT_BLANK };
+		return { id:item.id ? item.id : 0, data_type:item.data_type ? item.data_type : DataType.BLANK };
 	};
 
 	static get_query_parent_item_by_page = (parent_item) => {
-		return { id:parent_item.id ? parent_item.id : 0, data_type:parent_item.data_type ? parent_item.data_type : DataType.DT_BLANK };
+		return { id:parent_item.id ? parent_item.id : 0, data_type:parent_item.data_type ? parent_item.data_type : DataType.BLANK };
 	};
 
 	static get_query_top_item_by_page = (top_item) => {
-		return { id:top_item.id ? top_item.id : 0, data_type:top_item.data_type ? top_item.data_type : DataType.DT_BLANK };
+		return { id:top_item.id ? top_item.id : 0, data_type:top_item.data_type ? top_item.data_type : DataType.BLANK };
 	};
 
 	static get_query_item_by_query = (query) => {
-		return { id:query.get('id') ? query.get('id') : 0, data_type:query.get('data_type') ? query.get('data_type') : DataType.DT_BLANK } ;
+		return { id:query.get('id') ? query.get('id') : 0, data_type:query.get('data_type') ? query.get('data_type') : DataType.BLANK } ;
 	};
 
 	static get_query_parent_item_by_query = (query) => {
-		return { id:query.get('parent_id') ? query.get('parent_id') : 0, data_type:query.get('parent_data_type') ? query.get('parent_data_type') : DataType.DT_BLANK } ;
+		return { id:query.get('parent_id') ? query.get('parent_id') : 0, data_type:query.get('parent_data_type') ? query.get('parent_data_type') : DataType.BLANK } ;
 
 	};
 	static get_query_top_item_by_query = (query) => {
-		return { id:query.get('top_id') ? query.get('top_id') : 0, data_type:query.get('top_data_type') ? query.get('top_data_type') : DataType.DT_BLANK } ;
+		return { id:query.get('top_id') ? query.get('top_id') : 0, data_type:query.get('top_data_type') ? query.get('top_data_type') : DataType.BLANK } ;
 	};
 
 	static get_sub_page_title = (title) => {
@@ -490,6 +553,7 @@ module.exports = {
 	CMS,
 	DataItem,
 	DataType,
+	PageType,
 	Message,
 	Obj,
 	Storage,

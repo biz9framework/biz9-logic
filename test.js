@@ -28,6 +28,22 @@ const biz9_config ={
 describe("connect", () => {
     it("_connect", () => {
         series([
+
+            function(call) {
+                console.log('GET-BiZ-Url-Item-Get-Item-START');
+                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+                let item = DataItem.get_new(DataType.DT_BLANK,0);
+                Log.w('item',item);
+                //let cloud_url = BiZ_Url.get_item(biz9_config,item.data_type,item.id);
+                let title_url = 'primary';
+                //let cloud_url = BiZ_Url.get_template(biz9_config,title_url);
+                let cloud_url = BiZ_Url.get_page(biz9_config,title_url);
+                Log.w('connect_url',cloud_url);
+                console.log('GET-BiZ-Url-Item-Get-Item-SUCCESS');
+                //call()
+            },
+
+
             function(call) {
                 console.log('GET_START_STORAGE-START');
                 Log.w('storage-start',Storage.set(Number.get_id()));
@@ -117,17 +133,6 @@ describe("connect", () => {
                 //call()
             },
 
-
-        function(call) {
-                console.log('GET-BiZ-Url-Item-Get-Item-START');
-                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
-                let item = DataItem.get_new(DataType.DT_BLANK,0);
-                Log.w('item',item);
-                let cloud_url = BiZ_Url.get_item(biz9_config,item.data_type,item.id);
-                Log.w('connect_url',cloud_url);
-                console.log('GET-BiZ-Url-Item-Get-Item-SUCCESS');
-                //call()
-            },
 
 
 
