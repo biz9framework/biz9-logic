@@ -177,6 +177,11 @@ class Url {
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
 
+	static update_delete_cache_item = (biz9_config,data_type,id) => {
+		let action_url= "main/crud/update_delete_cache/"+data_type + "/" + id;
+		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
+	};
+
 	static get_item = (biz9_config,data_type,id) => {
 		let action_url= "main/crud/get/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
