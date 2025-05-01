@@ -559,6 +559,7 @@ module.exports = {
 	DataItem,
 	DataType,
 	PageType,
+	TemplateType,
 	Message,
 	Obj,
 	Storage,
