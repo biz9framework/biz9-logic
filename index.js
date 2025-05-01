@@ -17,9 +17,9 @@ class Message {
 
 class TemplateType {
 
-	static Primary='primary';
-	static Header='header';
-	static Navigation='navigation';
+	static PRIMARY='primary';
+	static HEADER='header';
+	static NAVIGATION='navigation';
 	static BODY='body';
 	static FOOTER='footer';
 }
