@@ -12,7 +12,6 @@ class Message {
 	static SUCCESS="Update Success";
 	static LOGIN_GOOD="Login Success";
 	static LOGIN_BAD="Login Incorrect";
-
 }
 
 class TemplateType {
@@ -106,6 +105,12 @@ class DataType {
 	static TEMPLATE='template_biz';
 	static USER='user_biz';
 	static VIDEO='video_biz';
+}
+class Business {
+
+	static get_full_address(business){
+		return business.address_1 + " "+ business.address_2 + " " + business.city + " " + business.state + " " + business.zip;
+	}
 }
 
 class DataItem {
@@ -554,16 +559,17 @@ class Storage {
 }
 module.exports = {
 	BiZ_Url,
+	Business,
 	Cat,
 	CMS,
 	DataItem,
 	DataType,
-	PageType,
-	TemplateType,
 	Message,
 	Obj,
+	PageType,
+	TemplateType,
+	Url,
 	Storage,
 	Schedule,
 	Stock,
-	Url,
 };

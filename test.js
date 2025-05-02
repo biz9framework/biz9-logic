@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage} = require('./');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business} = require('./');
 const {Log,Test,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -37,8 +37,10 @@ describe("connect", () => {
                 //let cloud_url = BiZ_Url.get_item(biz9_config,item.data_type,item.id);
                 let title_url = 'primary';
                 //let cloud_url = BiZ_Url.get_template(biz9_config,title_url);
-                let cloud_url = BiZ_Url.get_page(biz9_config,title_url);
-                Log.w('connect_url',cloud_url);
+                //let cloud_url = BiZ_Url.get_page(biz9_config,title_url);
+                let business = {address_1:"addrress 1", address_2:"address 2",city:"city",state:"Geogia",zip:30003};
+                Log.w('kusiness',Business.get_full_address(business));
+                //Log.w('connect_url',cloud_url);
                 console.log('GET-BiZ-Url-Item-Get-Item-SUCCESS');
                 //call()
             },
