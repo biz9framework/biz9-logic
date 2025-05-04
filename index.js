@@ -239,6 +239,11 @@ class Url {
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
 	};
 
+	static copy_item = (biz9_config,data_type,id) => {
+		let action_url= "main/biz_item/copy/"+data_type + "/" + id;
+		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
+	};
+
 	static get_list = (biz9_config,data_type) => {
 		let action_url= "main/crud/get_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_TITLE_ID,biz9_config.URL,action_url,null);
