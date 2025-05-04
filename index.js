@@ -4,7 +4,7 @@ Author: certifiedcoderz@gmail.com (Certified CoderZ)
 License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
-const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_title_url_main } = require('./main');
+const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main } = require('./main');
 const { Log,Test,Str,DateTime } = require('biz9-utility');
 
 class Message {
@@ -21,6 +21,35 @@ class TemplateType {
 	static NAVIGATION='navigation';
 	static BODY='body';
 	static FOOTER='footer';
+}
+
+class FieldType {
+
+	static APP_TITLE_ID='app_title_id';
+	static ID='id';
+	static DATA_TYPE='data_type';
+
+	static PARENT_ID='parent_id';
+	static PARENT_DATA_TYPE='parent_data_type';
+	static PHOTO_DATA='photo_data';
+
+	static TOP_ID='top_id';
+	static TOP_DATA_TYPE='top_data_type';
+
+	static DATE_CREATE='date_create';
+	static DATE_SAVE='date_save';
+
+	static TITLE='title';
+	static TITLE_URL='title_url';
+
+	static SETTING_DELETE_PROTECTION='setting_delete_protection';
+	static SETTING_VISIBLE='setting_visible';
+	static SETTING_ORDER='setting_order';
+
+	static SOURCE='source';
+
+	static DATE_CREATE='date_create';
+	static DATE_SAVE='date_save';
 }
 
 class PageType {
@@ -109,6 +138,19 @@ class DataType {
 class Business {
 
 	static get_full_address(business){
+		if(!business.address_1){
+			business.address_1 = "";
+		}
+		if(!business.address_2){
+			business.address_2 = "";
+		}
+		if(!business.city){
+			business.city = "";
+		}
+		if(!business.state){
+			business.state = "";
+		}
+
 		return business.address_1 + " "+ business.address_2 + " " + business.city + " " + business.state + " " + business.zip;
 	}
 }
@@ -564,6 +606,7 @@ module.exports = {
 	CMS,
 	DataItem,
 	DataType,
+	FieldType,
 	Message,
 	Obj,
 	PageType,
