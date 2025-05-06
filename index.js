@@ -31,6 +31,7 @@ class FieldType {
 
 	static PARENT_ID='parent_id';
 	static PARENT_DATA_TYPE='parent_data_type';
+
 	static PHOTO_DATA='photo_data';
 
 	static TOP_ID='top_id';
@@ -47,6 +48,15 @@ class FieldType {
 	static SETTING_ORDER='setting_order';
 
 	static SOURCE='source';
+
+	static SOURCE_ID='source_id';
+	static SOURCE_DATA_TYPE='source_data_type';
+
+	static SOURCE_PARENT_ID='source_parent_id';
+	static SOURCE_PARENT_DATA_TYPE='source_parent_data_type';
+
+	static SOURCE_TOP_ID='source_top_id';
+	static SOURCE_TOP_DATA_TYPE='source_top_data_type';
 
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
