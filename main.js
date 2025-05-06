@@ -17,12 +17,12 @@ const get_new_item_main = (data_type,id) => {
     }
     return {data_type:data_type,id:id};
 }
-const get_cloud_url_main = (app_title_id,domain_url,action_url,params) =>{
+const get_cloud_url_main = (app_id,domain_url,action_url,params) =>{
     if(!params){
         params='';
     }
-    var app_title_id_url='?app_title_id='+app_title_id;
-    return domain_url+"/"+action_url+app_title_id_url + params;
+    var app_id_url='?app_id='+app_id;
+    return domain_url+"/"+action_url+app_id_url + params;
 }
 const get_biz_item_main=(biz9_config,item,options) =>{
     /*
