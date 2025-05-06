@@ -597,6 +597,8 @@ class Storage {
 	static KEY_USER="key_user";
 	static KEY_BUSINESS="key_business";
 	static KEY_GUEST="key_guest";
+	static KEY_APP_ID="key_app_id";
+
 	static get = (window,key) => {
 		return JSON.parse(window.localStorage.getItem(key));
 	}
