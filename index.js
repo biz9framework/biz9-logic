@@ -167,8 +167,8 @@ class Business {
 
 class DataItem {
 
-	static get_new = (data_type,id) => {
-		return get_new_item_main(data_type,id);
+	static get_new = (data_type,id,options) => {
+		return get_new_item_main(data_type,id,options);
 	};
 
 	static get_biz = (biz9_config,item,options)=>{

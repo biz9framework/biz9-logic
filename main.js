@@ -11,11 +11,20 @@ const biz9_config_local=__dirname+"/../../"+"biz9_config";
 const get_cloud_filter_obj_main = (data_type,filter,sort_by,page_current,page_size) => {
     return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 }
-const get_new_item_main = (data_type,id) => {
+const get_new_item_main = (data_type,id,options) => {
     if(!id){
         id=0;
     }
-    return {data_type:data_type,id:id};
+    let item = {data_type:data_type,id:id};
+    if(!options){
+        options = {};
+    }
+    if(options){
+        for (const key in options) {
+            item[key] = options[key];
+        }
+    }
+    return item;
 }
 const get_cloud_url_main = (app_id,domain_url,action_url,params) =>{
     if(!params){

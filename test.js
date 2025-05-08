@@ -32,14 +32,14 @@ describe("connect", () => {
             function(call) {
                 console.log('GET-BiZ-Url-Item-Get-Item-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
-                let item = DataItem.get_new(DataType.BLANK,0);
-                Log.w('item',item);
+                //let item = DataItem.get_new(DataType.BLANK,0,{title:'title',apple:'butter'});
+                //Log.w('item',item);
                 //let cloud_url = BiZ_Url.get_item(biz9_config,item.data_type,item.id);
                 let title_url = 'primary';
                 //let cloud_url = BiZ_Url.get_template(biz9_config,title_url);
                 //let cloud_url = BiZ_Url.get_page(biz9_config,title_url);
                 let business = {address_1:"addrress 1", address_2:"address 2",city:"city",state:"Geogia",zip:30003};
-                Log.w('kusiness',Business.get_full_address(business));
+                //Log.w('kusiness',Business.get_full_address(business));
                 //Log.w('connect_url',cloud_url);
                 console.log('GET-BiZ-Url-Item-Get-Item-SUCCESS');
                 //call()
