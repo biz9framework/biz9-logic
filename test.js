@@ -30,6 +30,17 @@ describe("connect", () => {
         series([
 
             function(call) {
+                console.log('GET-FULL-ITEM-START');
+                let item = DataItem.get_new(DataType.BLANK,0);
+                let parent_item = DataItem.get_new(DataType.BLOG_POST,2);
+                let top_item = DataItem.get_new(DataType.PRODUCT,3);
+                let options={title:'cool_bean'};
+                console.log(DataItem.get_new_full_item(item,parent_item,top_item,options));
+                console.log('GET-FULL-ITEM-END');
+                //call();
+            },
+
+            function(call) {
                 console.log('GET-BiZ-Url-Item-Get-Item-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 //let item = DataItem.get_new(DataType.BLANK,0,{title:'title',apple:'butter'});

@@ -26,6 +26,26 @@ const get_new_item_main = (data_type,id,options) => {
     }
     return item;
 }
+const get_new_full_item_main = (org_item,parent_item,top_item,options) => {
+    if(!options){
+        options = {};
+    }
+	let item = {
+        data_type:org_item.data_type,
+        id:org_item.id,
+        parent_id:parent_item.id,
+        parent_data_type:parent_item.data_type,
+        top_id:top_item.id,
+        top_data_type:top_item.data_type
+    };
+    if(options){
+        for (const key in options) {
+            item[key] = options[key];
+        }
+    }
+    return item;
+}
+
 const get_cloud_url_main = (app_id,domain_url,action_url,params) =>{
     if(!params){
         params='';
@@ -127,5 +147,6 @@ module.exports = {
     get_cloud_url_main,
     get_cloud_filter_obj_main,
     get_title_url_main,
-    get_biz_item_main
+    get_biz_item_main,
+    get_new_full_item_main
 };

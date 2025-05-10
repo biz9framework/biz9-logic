@@ -4,7 +4,7 @@ Author: certifiedcoderz@gmail.com (Certified CoderZ)
 License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
-const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main } = require('./main');
+const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
 const { Log,Test,Str,DateTime } = require('biz9-utility');
 
 class Message {
@@ -169,6 +169,10 @@ class DataItem {
 
 	static get_new = (data_type,id,options) => {
 		return get_new_item_main(data_type,id,options);
+	};
+
+	static get_new_full_item = (item,parent_item,top_item,options) => {
+		return get_new_full_item_main(item,parent_item,top_item,options);
 	};
 
 	static get_biz = (biz9_config,item,options)=>{
