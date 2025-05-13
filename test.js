@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event} = require('./');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page} = require('./');
 const {Log,Test,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -33,7 +33,15 @@ describe("connect", () => {
                 console.log('CONNECT-START');
                 //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 //let cloud_url = Url.connect(biz9_config);
-                console.log(Event.get_test());
+                //console.log(Event.get_test());
+                //console.log(Template.get_test());
+                //get page
+                let product = Product.get_test();
+
+                Log.w('product',product);
+                Log.w('product_section_1',product.section_1);
+
+                console.log(Product.get_test());
                 //Log.w('connect_url',cloud_url);
                 console.log('CONNECT-SUCCESS');
                 //call()

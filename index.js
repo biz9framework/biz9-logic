@@ -6,13 +6,11 @@ Description: BiZ9 Framework: Logic-JS
 */
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
 const { Log,Test,Str,DateTime,Number } = require('biz9-utility');
-
 class Message {
 	static SUCCESS="Update Success";
 	static LOGIN_GOOD="Login Success";
 	static LOGIN_BAD="Login Incorrect";
 }
-
 class TemplateType {
 	static PRIMARY='primary';
 	static HEADER='header';
@@ -20,34 +18,33 @@ class TemplateType {
 	static BODY='body';
 	static FOOTER='footer';
 }
-
 class Template{
     static get_test = () =>{
         let template = DataItem.get_new_full_item(
-            DataItem.get_new(DataType.TEMPLATE,0),
-            DataItem.get_new(DataType.TEMPLATE,0),
-            DataItem.get_new(DataType.TEMPLATE,0),
+            DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
+            DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
+            DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
             Field.get_test("Primary"));
         template.items = [
             DataItem.get_new_full_item(
-                DataItem.get_new(DataType.TEMPLATE,0),
-                DataItem.get_new(DataType.ITEM,0),
-                DataItem.get_new(DataType.ITEM,0),
+                DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
+                DataItem.get_new(DataType.ITEM,Number.get_id()),
+                DataItem.get_new(DataType.ITEM,Number.get_id()),
                 Field.get_test("Header")),
             DataItem.get_new_full_item(
-                DataItem.get_new(DataType.TEMPLATE,0),
-                DataItem.get_new(DataType.ITEM,0),
-                DataItem.get_new(DataType.ITEM,0),
+                DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
+                DataItem.get_new(DataType.ITEM,Number.get_id()),
+                DataItem.get_new(DataType.ITEM,Number.get_id()),
                 Field.get_test("Navigation")),
             DataItem.get_new_full_item(
-                DataItem.get_new(DataType.TEMPLATE,0),
-                DataItem.get_new(DataType.ITEM,0),
-                DataItem.get_new(DataType.ITEM,0),
+                DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
+                DataItem.get_new(DataType.ITEM,Number.get_id()),
+                DataItem.get_new(DataType.ITEM,Number.get_id()),
                 Field.get_test("Body")),
             DataItem.get_new_full_item(
-                DataItem.get_new(DataType.TEMPLATE,0),
-                DataItem.get_new(DataType.ITEM,0),
-                DataItem.get_new(DataType.ITEM,0),
+                DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
+                DataItem.get_new(DataType.ITEM,Number.get_id()),
+                DataItem.get_new(DataType.ITEM,Number.get_id()),
                 Field.get_test("Footer")),
         ];
         for(let a=0;a<template.items.length;a++){
@@ -58,7 +55,7 @@ class Template{
             for(let a=1;a<10;a++){
                 let item_title = "Section " + String(a);
                 let item = DataItem.get_new(
-                    DataType.ITEM,0, {
+                    DataType.ITEM,Number.get_id(), {
                         top_id:top_item.id,
                         top_data_type:top_item.data_type,
                         parent_id:parent_item.id,
@@ -82,10 +79,10 @@ class Template{
 class Page{
     static get_test = (title) =>{
         let page = DataItem.get_new_full_item(
-            DataItem.get_new(DataType.PAGE,0),
-            DataItem.get_new(DataType.PAGE,0),
-            DataItem.get_new(DataType.PAGE,0),
-            Field.get_test("Page " + Number.get_id(9999)));
+            DataItem.get_new(DataType.PAGE,Number.get_id()),
+            DataItem.get_new(DataType.PAGE,Number.get_id()),
+            DataItem.get_new(DataType.PAGE,Number.get_id()),
+            Field.get_test("Page " + Number.get_id()));
         page.items = Section.get_test_list(page,page);
         return page;
     };
@@ -93,26 +90,33 @@ class Page{
 class Product{
     static get_test = () =>{
         let product = DataItem.get_new_full_item(
-            DataItem.get_new(DataType.PRODUCT,0),
-            DataItem.get_new(DataType.PRODUCT,0),
-            DataItem.get_new(DataType.PRODUCT,0),
-            Field.get_test("Product " + Number.get_id(9999)));
+            DataItem.get_new(DataType.PRODUCT,Number.get_id()),
+            DataItem.get_new(DataType.PRODUCT,Number.get_id()),
+            DataItem.get_new(DataType.PRODUCT,Number.get_id()),
+            Field.get_test("Product " + Number.get_id()));
         product.cost = String(Number.get_id()) + "." + String(Number.get_id());
         product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
         product.type = "Type "+String(Number.get_id());
         product.sub_type = "Sub Type "+String(Number.get_id());
         product.stock = String(Number.get_id(3-1));
-        product.items = Section.get_test_list(product,product);
-        return product;
+
+		console.log('aaaaa');
+        let items = Sub_Item.get_list(Section.get_test_list(product,product));
+        //Log.w('aaa',items);
+        Log.w('rrr',Sub_Item.get_list(items));
+        //Log.w('rrr',Sub_Item.get_list(Section.get_test_list(product,product)));
+		//console.log('bbbbb');
+        //product.items = Sub_Item.get_list(Section.get_test_list(product,product));
+        //return product;
     };
 }
 class Service{
     static get_test = () =>{
         let service = DataItem.get_new_full_item(
-            DataItem.get_new(DataType.SERVICE,0),
-            DataItem.get_new(DataType.SERVICE,0),
-            DataItem.get_new(DataType.SERVICE,0),
-            Field.get_test("Service " + Number.get_id(9999)));
+            DataItem.get_new(DataType.SERVICE,Number.get_id()),
+            DataItem.get_new(DataType.SERVICE,Number.get_id()),
+            DataItem.get_new(DataType.SERVICE,Number.get_id()),
+            Field.get_test("Service " + Number.get_id()));
         service.cost = String(Number.get_id()) + "." + String(Number.get_id());
         service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
         service.type = "Type "+String(Number.get_id());
@@ -125,10 +129,10 @@ class Service{
 class Event{
     static get_test = () =>{
         let event = DataItem.get_new_full_item(
-            DataItem.get_new(DataType.EVENT,0),
-            DataItem.get_new(DataType.EVENT,0),
-            DataItem.get_new(DataType.EVENT,0),
-            Field.get_test("Event " + Number.get_id(9999)));
+            DataItem.get_new(DataType.EVENT,Number.get_id()),
+            DataItem.get_new(DataType.EVENT,Number.get_id()),
+            DataItem.get_new(DataType.EVENT,Number.get_id()),
+            Field.get_test("Event " + Number.get_id()));
         event.cost = String(Number.get_id()) + "." + String(Number.get_id());
         event.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
         event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
@@ -149,7 +153,7 @@ class Section{
             for(let a=1;a<10;a++){
                 let item_title = "Section " + String(a);
                 let item = DataItem.get_new(
-                    DataType.ITEM,0, {
+                    DataType.ITEM,Number.get_id(), {
                         top_id:top_item.id,
                         top_data_type:top_item.data_type,
                         parent_id:parent_item.id,
@@ -257,7 +261,6 @@ class PageType {
 	static VALUE_18='value_18';
 	static VALUE_19='value_19';
 }
-
 class DataType {
 	static get_title = (data_type) => {
 		if(!data_type){
@@ -291,7 +294,7 @@ class DataType {
 }
 class Business {
     static get_new = () =>{
-        return DataItem.get_new(DataType.BUSINESS,0,
+        return DataItem.get_new(DataType.BUSINESS,Number.get_id(),
             {
                 title:"",
                 email:"",
@@ -304,17 +307,17 @@ class Business {
             });
     };
     static get_test = () =>{
-        let item = DataItem.get_new(DataType.BUSINESS);
+        let item = DataItem.get_new(DataType.BUSINESS,Number.get_id());
         let city_list = ["Blank","Miami","Atlanta","Chicago","Seattle","New York City"];
         let state_list = ["Blank","Georgia","New York","Illinois","Washington","Flordia"];
-        item.title = "Title "+Number.get_id(999);
+        item.title = "Title "+Number.get_id();
         item.email = "ceo@business.com";
-        item.phone = "123-456-" + Number.get_id(999);
-        item.address_1 = Number.get_id(999) + " Apple St.";
-        item.address_2 = "PO Box "  + Number.get_id(999);
+        item.phone = "123-456-" + Number.get_id();
+        item.address_1 = Number.get_id() + " Apple St.";
+        item.address_2 = "PO Box "  + Number.get_id();
         item.city = city_list[Number.get_id(city_list.length-1)];
         item.state = state_list[Number.get_id(state_list.length-1)];
-        item.zip = "123"+Number.get_id(999);
+        item.zip = "123"+Number.get_id();
         return item;
     };
 	static get_full_address(business){
@@ -333,7 +336,6 @@ class Business {
 		return business.address_1 + " "+ business.address_2 + " " + business.city + " " + business.state + " " + business.zip;
 	}
 }
-
 class DataItem {
 	static get_new = (data_type,id,options) => {
 		return get_new_item_main(data_type,id,options);
@@ -374,8 +376,7 @@ class BiZ_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
 }
-
-class Url {
+class Url{
 	static get = (biz9_config,action_url,params)=>{
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	}
@@ -403,54 +404,42 @@ class Url {
 		let action_url= "main/crud/delete/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static copy_item = (biz9_config,data_type,id) => {
 		let action_url= "main/biz_item/copy/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static get_list = (biz9_config,data_type) => {
 		let action_url= "main/crud/get_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static update_list = (biz9_config,data_type) => {
 		let action_url= "main/crud/update_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static delete_list = (biz9_config,data_type) => {
 		let action_url= "main/crud/delete_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static delete_biz_item = (biz9_config,data_type,id) => {
 		let action_url= "main/biz_item/delete/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static get_biz_list = (biz9_config,data_type) => {
 		let action_url= "main/biz_item/get_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static delete_biz_list = (biz9_config,data_type) => {
 		let action_url= "main/biz_item/delete_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 }
-
 class Obj {
-
 	static get_filter = (biz9_config,data_type,filter,sort_by,page_current,page_size)=>{
 		return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
 	}
-
 };
 
 class Cat {
-
 	static get_category_drop_down_list_by_list = (cat_list) => {
 		let category_list = [];
 		for(let a=0;a<cat_list.length;a++){
@@ -458,7 +447,6 @@ class Cat {
 		}
 		return category_list;
 	};
-
 	static get_category_list = () => {
 		return [
 			{ value: DataType.BLOG_POST, label: "Blog Posts" },
@@ -470,7 +458,6 @@ class Cat {
 			{ value: DataType.TEMPLATE, label: "Template" }
 		];
 	};
-
 	static get_title_by_type = (data_type) => {
 		switch (data_type) {
 			case DataType.EVENT:
@@ -510,10 +497,8 @@ class Cat {
 				return "Blank";
 		}
 	}
-
 };
 class CMS {
-
 	static Tab_Edit_Title_General = 'general';
 	static Tab_Edit_Title_Photo = 'photo';
 	static Tab_Edit_Title_List = 'list';
@@ -523,7 +508,6 @@ class CMS {
 	static Tab_Edit_Title_Video = 'video';
 	static Tab_Edit_Title_Note = 'note';
 	static get_new_query_item_by_item = (item) => {
-
 		return {
 			id: item.id ? item.id : 0,
 			data_type:item.data_type ? item.data_type : DataType.BLANK,
@@ -535,7 +519,6 @@ class CMS {
 			top_data_type:item.top_data_type ? item.top_data_type : DataType.BLANK
 		}
 	};
-
 	static get_new_query_item = (item,parent_item,top_item) => {
 		return {
 			id: item.id ? item.id : 0,
@@ -547,35 +530,27 @@ class CMS {
 			top_data_type:top_item.data_type ? top_item.data_type : DataType.BLANK
 		}
 	};
-
 	static get_query_itemz_by_query = (item) => {
 		return [];
 	};
-
 	static get_query_item_by_page = (item) => {
 		return { id:item.id ? item.id : 0, data_type:item.data_type ? item.data_type : DataType.BLANK };
 	};
-
 	static get_query_parent_item_by_page = (parent_item) => {
 		return { id:parent_item.id ? parent_item.id : 0, data_type:parent_item.data_type ? parent_item.data_type : DataType.BLANK };
 	};
-
 	static get_query_top_item_by_page = (top_item) => {
 		return { id:top_item.id ? top_item.id : 0, data_type:top_item.data_type ? top_item.data_type : DataType.BLANK };
 	};
-
 	static get_query_item_by_query = (query) => {
 		return { id:query.get('id') ? query.get('id') : 0, data_type:query.get('data_type') ? query.get('data_type') : DataType.BLANK } ;
 	};
-
 	static get_query_parent_item_by_query = (query) => {
 		return { id:query.get('parent_id') ? query.get('parent_id') : 0, data_type:query.get('parent_data_type') ? query.get('parent_data_type') : DataType.BLANK } ;
-
 	};
 	static get_query_top_item_by_query = (query) => {
 		return { id:query.get('top_id') ? query.get('top_id') : 0, data_type:query.get('top_data_type') ? query.get('top_data_type') : DataType.BLANK } ;
 	};
-
 	static get_sub_page_title = (title) => {
 		switch(title)
 		{
@@ -605,7 +580,6 @@ class CMS {
 				break;
 		}
 	}
-
 	static get_page_url = (url,tab_title,item,parent_item,top_item,parms) => {
 		let r_url="?tab_title="+tab_title
 			+"&id="+item.id
@@ -624,7 +598,6 @@ class CMS {
 		}
 		return url+r_url;
 	}
-
 }
 class Stock {
 	static get_event_stock_list = () => {
@@ -654,7 +627,6 @@ class Stock {
 				break;
 		}
 	};
-
 	static get_service_stock_list = () => {
 		const r_list=
 			[
@@ -664,7 +636,6 @@ class Stock {
 			];
 		return r_list;
 	};
-
 	static get_service_stock_by_value = (stock_val) => {
 		switch(stock_val)
 		{
@@ -679,7 +650,6 @@ class Stock {
 				break;
 		}
 	};
-
 	static get_product_stock_list = () => {
 		const r_list=
 			[
@@ -690,7 +660,6 @@ class Stock {
 			];
 		return r_list;
 	};
-
 	static get_product_stock_by_value = (stock_val) => {
 		switch(stock_val)
 		{
@@ -711,10 +680,8 @@ class Stock {
 				break;
 		}
 	};
-
 }
 class Schedule {
-
 	static get_start_date_time = (item) =>{
 		if(!item.date){
 			item.date = new Date();
@@ -727,7 +694,6 @@ class Schedule {
 		item.start_date_time = DateTime.get_full_date_time_by_date_time(item.date,item.time);
 		return item;
 	}
-
 	static get_start_date_time_by_list = (list) =>{
 		for(let a=0;a<list.length;a++){
 			if(!list[a].date){
@@ -742,33 +708,49 @@ class Schedule {
 		}
 		return list;
 	}
-
 };
 class Storage {
-
 	static KEY_ADMIN="key_admin";
 	static KEY_USER="key_user";
 	static KEY_BUSINESS="key_business";
 	static KEY_GUEST="key_guest";
 	static KEY_APP_ID="key_app_id";
-
 	static get = (window,key) => {
 		return JSON.parse(window.localStorage.getItem(key));
 	}
-
 	static set = (window,key,obj) => {
 		window.localStorage.setItem(key,JSON.stringify(obj));
 	}
-
 	static remove = (window,key) =>{
 		window.localStorage.removeItem(key);
 	}
-
 	static clear = (window) =>{
 		window.localStorage.clear();
 	}
-
 }
+class Sub_Item{
+  static get_list = (item_list) => {
+       for(let a=0; a<item_list.length; a++){
+                        let item_title_url = Str.get_title_url(item_list[a].title);
+                        let new_item = {id:item_list[a].id,parent_id:item_list[a].parent_id,title:item_list[a].title,items:[]};
+                        item_list[item_title_url] = {title:item_list[a].title,items:[]};
+                        for(let b=0;b<item_list.length;b++){
+                            let sub_item_title_url = Str.get_title_url(item_list[b].title);
+                            if(item_list[a].id == item_list[b].parent_id){
+                                let sub_item = {
+                                    title:item_list[b].title,
+                                    id:item_list[b].id,
+                                    parent_id:item_list[b].parent_id,
+                                };
+                                new_item.items.push(sub_item);
+                                item_list[a][sub_item_title_url] = {title:sub_item.title,items:[]};
+                            }
+                        }
+                    }
+	  return item_list;
+  }
+}
+
 module.exports = {
 	BiZ_Url,
 	Business,
@@ -788,6 +770,7 @@ module.exports = {
 	Url,
 	Section,
 	Service,
+    Sub_Item,
 	Storage,
 	Schedule,
 	Stock,
