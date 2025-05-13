@@ -5,17 +5,15 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
-const { Log,Test,Str,DateTime } = require('biz9-utility');
+const { Log,Test,Str,DateTime,Number } = require('biz9-utility');
 
 class Message {
-
 	static SUCCESS="Update Success";
 	static LOGIN_GOOD="Login Success";
 	static LOGIN_BAD="Login Incorrect";
 }
 
 class TemplateType {
-
 	static PRIMARY='primary';
 	static HEADER='header';
 	static NAVIGATION='navigation';
@@ -23,54 +21,203 @@ class TemplateType {
 	static FOOTER='footer';
 }
 
+class Template{
+    static get_test = () =>{
+        let template = DataItem.get_new_full_item(
+            DataItem.get_new(DataType.TEMPLATE,0),
+            DataItem.get_new(DataType.TEMPLATE,0),
+            DataItem.get_new(DataType.TEMPLATE,0),
+            Field.get_test("Primary"));
+        template.items = [
+            DataItem.get_new_full_item(
+                DataItem.get_new(DataType.TEMPLATE,0),
+                DataItem.get_new(DataType.ITEM,0),
+                DataItem.get_new(DataType.ITEM,0),
+                Field.get_test("Header")),
+            DataItem.get_new_full_item(
+                DataItem.get_new(DataType.TEMPLATE,0),
+                DataItem.get_new(DataType.ITEM,0),
+                DataItem.get_new(DataType.ITEM,0),
+                Field.get_test("Navigation")),
+            DataItem.get_new_full_item(
+                DataItem.get_new(DataType.TEMPLATE,0),
+                DataItem.get_new(DataType.ITEM,0),
+                DataItem.get_new(DataType.ITEM,0),
+                Field.get_test("Body")),
+            DataItem.get_new_full_item(
+                DataItem.get_new(DataType.TEMPLATE,0),
+                DataItem.get_new(DataType.ITEM,0),
+                DataItem.get_new(DataType.ITEM,0),
+                Field.get_test("Footer")),
+        ];
+        for(let a=0;a<template.items.length;a++){
+            template.items[a].items = get_item_section_list(template.items[a],template);
+        }
+        function get_item_section_list(parent_item,top_item){
+            let new_list = [];
+            for(let a=1;a<10;a++){
+                let item_title = "Section " + String(a);
+                let item = DataItem.get_new(
+                    DataType.ITEM,0, {
+                        top_id:top_item.id,
+                        top_data_type:top_item.data_type,
+                        parent_id:parent_item.id,
+                        parent_data_type:parent_item.data_type,
+                        title:item_title,
+                        title_url:Str.get_title_url(item_title),
+                        sub_note:"Sub Note "+String(Number.get_id()),
+                        note:"Note "+String(Number.get_id()),
+                    }
+                );
+                for(let b=1;b<20;b++){
+                    item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
+                }
+                new_list.push(item);
+            }
+            return new_list;
+        }
+        return template;
+    };
+}
+class Page{
+    static get_test = (title) =>{
+        let page = DataItem.get_new_full_item(
+            DataItem.get_new(DataType.PAGE,0),
+            DataItem.get_new(DataType.PAGE,0),
+            DataItem.get_new(DataType.PAGE,0),
+            Field.get_test("Page " + Number.get_id(9999)));
+        page.items = Section.get_test_list(page,page);
+        return page;
+    };
+}
+class Product{
+    static get_test = () =>{
+        let product = DataItem.get_new_full_item(
+            DataItem.get_new(DataType.PRODUCT,0),
+            DataItem.get_new(DataType.PRODUCT,0),
+            DataItem.get_new(DataType.PRODUCT,0),
+            Field.get_test("Product " + Number.get_id(9999)));
+        product.cost = String(Number.get_id()) + "." + String(Number.get_id());
+        product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+        product.type = "Type "+String(Number.get_id());
+        product.sub_type = "Sub Type "+String(Number.get_id());
+        product.stock = String(Number.get_id(3-1));
+        product.items = Section.get_test_list(product,product);
+        return product;
+    };
+}
+class Service{
+    static get_test = () =>{
+        let service = DataItem.get_new_full_item(
+            DataItem.get_new(DataType.SERVICE,0),
+            DataItem.get_new(DataType.SERVICE,0),
+            DataItem.get_new(DataType.SERVICE,0),
+            Field.get_test("Service " + Number.get_id(9999)));
+        service.cost = String(Number.get_id()) + "." + String(Number.get_id());
+        service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+        service.type = "Type "+String(Number.get_id());
+        service.sub_type = "Sub Type "+String(Number.get_id());
+        service.stock = String(Number.get_id(3-1));
+        service.items = Section.get_test_list(service,service);
+        return service;
+    };
+}
+class Event{
+    static get_test = () =>{
+        let event = DataItem.get_new_full_item(
+            DataItem.get_new(DataType.EVENT,0),
+            DataItem.get_new(DataType.EVENT,0),
+            DataItem.get_new(DataType.EVENT,0),
+            Field.get_test("Event " + Number.get_id(9999)));
+        event.cost = String(Number.get_id()) + "." + String(Number.get_id());
+        event.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+        event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
+        event.time = String(Number.get_id(24)) + ":" + String(Number.get_id(59));
+        event.website = "Website "+String(Number.get_id());
+        event.location = "Location "+String(Number.get_id());
+        event.meeting_link = "Meeting Link "+String(Number.get_id());
+        event.stock = String(Number.get_id(3-1));
+        event.items = Section.get_test_list(event,event);
+        return event;
+    };
+}
+class Section{
+    static get_test_list = (parent_item,top_item) =>{
+        let items = get_item_section_list(parent_item,top_item);
+        function get_item_section_list(parent_item,top_item){
+            let new_list = [];
+            for(let a=1;a<10;a++){
+                let item_title = "Section " + String(a);
+                let item = DataItem.get_new(
+                    DataType.ITEM,0, {
+                        top_id:top_item.id,
+                        top_data_type:top_item.data_type,
+                        parent_id:parent_item.id,
+                        parent_data_type:parent_item.data_type,
+                        title:item_title,
+                        title_url:Str.get_title_url(item_title),
+                        sub_note:"Sub Note "+String(Number.get_id()),
+                        note:"Note "+String(Number.get_id()),
+                    }
+                );
+                for(let b=1;b<20;b++){
+                    item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
+                }
+                new_list.push(item);
+            }
+            return new_list;
+        }
+        return items;
+    };
+}
+class Field{
+    static get_test = (title) =>{
+        let item = {
+            title:title,
+            setting_visible:"1",
+            title_url:Str.get_title_url(title),
+            sub_note : "Sub Note "+String(Number.get_id()),
+            note : "Note "+String(Number.get_id())
+        }
+        for(let b = 1;b<20;b++){
+            item['value_'+String(b)] = 'value ' + String(b);
+        }
+        return item;
+    }
+}
 class FieldType {
-
 	static APP_ID='app_id';
 	static ID='id';
 	static DATA_TYPE='data_type';
-
 	static PARENT_ID='parent_id';
 	static PARENT_DATA_TYPE='parent_data_type';
-
 	static PHOTO_DATA='photo_data';
-
 	static TOP_ID='top_id';
 	static TOP_DATA_TYPE='top_data_type';
-
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
-
 	static TITLE='title';
 	static TITLE_URL='title_url';
-
 	static SETTING_DELETE_PROTECTION='setting_delete_protection';
 	static SETTING_VISIBLE='setting_visible';
 	static SETTING_ORDER='setting_order';
-
 	static SOURCE='source';
-
 	static SOURCE_ID='source_id';
 	static SOURCE_DATA_TYPE='source_data_type';
-
 	static SOURCE_PARENT_ID='source_parent_id';
 	static SOURCE_PARENT_DATA_TYPE='source_parent_data_type';
-
 	static SOURCE_TOP_ID='source_top_id';
 	static SOURCE_TOP_DATA_TYPE='source_top_data_type';
-
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
 }
-
 class PageType {
-
 	static HOME='home';
 	static ABOUT='about';
 	static CONTACT='contact';
 	static SERVICE='service';
 	static PRODUCT='product';
 	static TEAM='team';
-
 	static SECTION_1='section_1';
 	static SECTION_2='section_2';
 	static SECTION_3='section_2';
@@ -90,7 +237,6 @@ class PageType {
 	static SECTION_17='section_17';
 	static SECTION_18='section_18';
 	static SECTION_19='section_19';
-
 	static VALUE_1='value_1';
 	static VALUE_2='value_2';
 	static VALUE_3='value_2';
@@ -113,7 +259,6 @@ class PageType {
 }
 
 class DataType {
-
 	static get_title = (data_type) => {
 		if(!data_type){
 			return "";
@@ -121,7 +266,6 @@ class DataType {
 			return String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 		}
 	}
-
 	static ADMIN='admin_biz';
 	static BLANK='blank_biz';
 	static BUSINESS='business_biz';
@@ -146,7 +290,33 @@ class DataType {
 	static VIDEO='video_biz';
 }
 class Business {
-
+    static get_new = () =>{
+        return DataItem.get_new(DataType.BUSINESS,0,
+            {
+                title:"",
+                email:"",
+                phone:"",
+                address_1:"",
+                address_2:"",
+                city:"",
+                state:"",
+                zip:"",
+            });
+    };
+    static get_test = () =>{
+        let item = DataItem.get_new(DataType.BUSINESS);
+        let city_list = ["Blank","Miami","Atlanta","Chicago","Seattle","New York City"];
+        let state_list = ["Blank","Georgia","New York","Illinois","Washington","Flordia"];
+        item.title = "Title "+Number.get_id(999);
+        item.email = "ceo@business.com";
+        item.phone = "123-456-" + Number.get_id(999);
+        item.address_1 = Number.get_id(999) + " Apple St.";
+        item.address_2 = "PO Box "  + Number.get_id(999);
+        item.city = city_list[Number.get_id(city_list.length-1)];
+        item.state = state_list[Number.get_id(state_list.length-1)];
+        item.zip = "123"+Number.get_id(999);
+        return item;
+    };
 	static get_full_address(business){
 		if(!business.address_1){
 			business.address_1 = "";
@@ -160,25 +330,20 @@ class Business {
 		if(!business.state){
 			business.state = "";
 		}
-
 		return business.address_1 + " "+ business.address_2 + " " + business.city + " " + business.state + " " + business.zip;
 	}
 }
 
 class DataItem {
-
 	static get_new = (data_type,id,options) => {
 		return get_new_item_main(data_type,id,options);
 	};
-
 	static get_new_full_item = (item,parent_item,top_item,options) => {
 		return get_new_full_item_main(item,parent_item,top_item,options);
 	};
-
 	static get_biz = (biz9_config,item,options)=>{
 		return get_biz_item_main(biz9_config,item,options);
 	}
-
 	static get_biz_by_list = (biz9_config,list,options)=>{
 		let r_list = [];
 		for(let a=0;a<list.length;a++){
@@ -186,68 +351,54 @@ class DataItem {
 		}
 		return r_list;
 	}
-
 }
 class BiZ_Url {
-
 	static get_item=(biz9_config,data_type,id)=>{
 		let action_url="main/biz_item/get/"+data_type+"/"+id ;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static delete_item=(biz9_config,data_type,id)=>{
 		let action_url= "main/biz_item/delete/"+data_type+"/"+id ;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static get_full_item=(biz9_config,data_type,id)=>{
 		let action_url= "main/biz_item/get_full/"+data_type+"/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static get_page=(biz9_config,title_url)=>{
 		let action_url= "main/biz_item/get_page/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static get_template=(biz9_config,title_url)=>{
 		let action_url= "main/biz_item/get_template/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 }
 
 class Url {
-
 	static get = (biz9_config,action_url,params)=>{
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	}
-
 	static connect = (biz9_config) => {
 		let action_url= "main/test/connect/";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static upload_file = (biz9_config,data_type,id) => {
 		let action_url= "main/crud/update/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static update_item = (biz9_config,data_type,id) => {
 		let action_url= "main/crud/update/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static update_delete_cache_item = (biz9_config,data_type,id) => {
 		let action_url= "main/crud/update_delete_cache/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static get_item = (biz9_config,data_type,id) => {
 		let action_url= "main/crud/get/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-
 	static delete_item = (biz9_config,data_type,id) => {
 		let action_url= "main/crud/delete/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
@@ -476,7 +627,6 @@ class CMS {
 
 }
 class Stock {
-
 	static get_event_stock_list = () => {
 		const r_list=
 			[
@@ -487,7 +637,6 @@ class Stock {
 			];
 		return r_list;
 	};
-
 	static get_event_stock_by_value = (stock_val) => {
 		switch(stock_val)
 		{
@@ -628,11 +777,17 @@ module.exports = {
 	DataItem,
 	DataType,
 	FieldType,
+	Event,
 	Message,
 	Obj,
+	Page,
 	PageType,
+	Product,
 	TemplateType,
+	Template,
 	Url,
+	Section,
+	Service,
 	Storage,
 	Schedule,
 	Stock,

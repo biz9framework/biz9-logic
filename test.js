@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business} = require('./');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event} = require('./');
 const {Log,Test,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -28,6 +28,16 @@ const biz9_config ={
 describe("connect", () => {
     it("_connect", () => {
         series([
+
+        function(call) {
+                console.log('CONNECT-START');
+                //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+                //let cloud_url = Url.connect(biz9_config);
+                console.log(Event.get_test());
+                //Log.w('connect_url',cloud_url);
+                console.log('CONNECT-SUCCESS');
+                //call()
+            },
 
             function(call) {
                 console.log('GET-FULL-ITEM-START');
@@ -211,15 +221,7 @@ describe("connect", () => {
                 console.log('GET-URL-SUCCESS');
                 call()
             },
-            function(call) {
-                console.log('CONNECT-START');
-                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
-                let cloud_url = Url.connect(biz9_config);
-                Log.w('connect_url',cloud_url);
-                console.log('CONNECT-SUCCESS');
-                call()
-            },
-            function(call) {
+           function(call) {
                 console.log('GET_URL-UPDATE-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let data_type = 'dt_blank';
