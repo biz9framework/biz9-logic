@@ -33,15 +33,19 @@ describe("connect", () => {
                 console.log('CONNECT-START');
                 //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 //let cloud_url = Url.connect(biz9_config);
-                //console.log(Event.get_test());
+                //console.log(Business.get_test()); // get_business_test
+                //console.log(Page.get_test()); // get_page_test
+                console.log(Event.get_test());
                 //console.log(Template.get_test());
+                //console.log(Product.get_test());
+                //let product = Product.get_test();
+                //console.log(product.section_1);
                 //get page
-                let product = Product.get_test();
 
-                Log.w('product',product);
-                Log.w('product_section_1',product.section_1);
+                //Log.w('product',product);
+                //Log.w('product_section_1',product.section_1);
 
-                console.log(Product.get_test());
+                //console.log(Product.get_test());
                 //Log.w('connect_url',cloud_url);
                 console.log('CONNECT-SUCCESS');
                 //call()

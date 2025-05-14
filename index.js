@@ -4,6 +4,7 @@ Author: certifiedcoderz@gmail.com (Certified CoderZ)
 License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
+const moment = require('moment');
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
 const { Log,Test,Str,DateTime,Number } = require('biz9-utility');
 class Message {
@@ -19,175 +20,163 @@ class TemplateType {
 	static FOOTER='footer';
 }
 class Template{
-    static get_test = () =>{
-        let template = DataItem.get_new_full_item(
-            DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
-            DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
-            DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
-            Field.get_test("Primary"));
-        template.items = [
-            DataItem.get_new_full_item(
-                DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
-                DataItem.get_new(DataType.ITEM,Number.get_id()),
-                DataItem.get_new(DataType.ITEM,Number.get_id()),
-                Field.get_test("Header")),
-            DataItem.get_new_full_item(
-                DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
-                DataItem.get_new(DataType.ITEM,Number.get_id()),
-                DataItem.get_new(DataType.ITEM,Number.get_id()),
-                Field.get_test("Navigation")),
-            DataItem.get_new_full_item(
-                DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
-                DataItem.get_new(DataType.ITEM,Number.get_id()),
-                DataItem.get_new(DataType.ITEM,Number.get_id()),
-                Field.get_test("Body")),
-            DataItem.get_new_full_item(
-                DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
-                DataItem.get_new(DataType.ITEM,Number.get_id()),
-                DataItem.get_new(DataType.ITEM,Number.get_id()),
-                Field.get_test("Footer")),
-        ];
-        for(let a=0;a<template.items.length;a++){
-            template.items[a].items = get_item_section_list(template.items[a],template);
-        }
-        function get_item_section_list(parent_item,top_item){
-            let new_list = [];
-            for(let a=1;a<10;a++){
-                let item_title = "Section " + String(a);
-                let item = DataItem.get_new(
-                    DataType.ITEM,Number.get_id(), {
-                        top_id:top_item.id,
-                        top_data_type:top_item.data_type,
-                        parent_id:parent_item.id,
-                        parent_data_type:parent_item.data_type,
-                        title:item_title,
-                        title_url:Str.get_title_url(item_title),
-                        sub_note:"Sub Note "+String(Number.get_id()),
-                        note:"Note "+String(Number.get_id()),
-                    }
-                );
-                for(let b=1;b<20;b++){
-                    item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
-                }
-                new_list.push(item);
-            }
-            return new_list;
-        }
-        return template;
-    };
+	static get_test = () =>{
+		let template = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
+			DataItem.get_new(DataType.TEMPLATE,0),
+			DataItem.get_new(DataType.TEMPLATE,0),
+			Field.get_test("Primary"));
+		template=Sub_Item.get_list(template,Section.get_test_list(template,template));
+		let temp_sub_list = get_test_list(template);
+		template = Sub_Item.get_list(template,temp_sub_list);
+		function get_test_list(template){
+			let template_title_list = ["Header","Navigation","Body","Footer"];
+			let template_sub_item_list = [];
+			for(let a=0;a<template_title_list.length;a++){
+				let template_sub_item = DataItem.get_new_full_item(
+					DataItem.get_new(DataType.ITEM,Number.get_id()),
+					DataItem.get_new(DataType.TEMPLATE,template.id),
+					DataItem.get_new(DataType.TEMPLATE,template.id),
+					Field.get_test( template_title_list[a] ));
+				template_sub_item = Sub_Item.get_list(template_sub_item,Section.get_test_list(template_sub_item,template));
+				template_sub_item_list.push(template_sub_item);
+			}
+			return template_sub_item_list;
+		}
+		function get_item_section_list(parent_item,top_item){
+			let new_list = [];
+			for(let a=1;a<3;a++){
+				let item_title = "Section " + String(a);
+				let item = DataItem.get_new(
+					DataType.ITEM,Number.get_id(), {
+						top_id:top_item.id,
+						top_data_type:top_item.data_type,
+						parent_id:parent_item.id,
+						parent_data_type:parent_item.data_type,
+						title:item_title,
+						title_url:Str.get_title_url(item_title),
+						sub_note:"Sub Note "+String(Number.get_id()),
+						note:"Note "+String(Number.get_id()),
+					}
+				);
+				for(let b=1;b<3;b++){
+					item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
+				}
+				new_list.push(item);
+			}
+			return new_list;
+		}
+		return template;
+	};
 }
 class Page{
-    static get_test = (title) =>{
-        let page = DataItem.get_new_full_item(
-            DataItem.get_new(DataType.PAGE,Number.get_id()),
-            DataItem.get_new(DataType.PAGE,Number.get_id()),
-            DataItem.get_new(DataType.PAGE,Number.get_id()),
-            Field.get_test("Page " + Number.get_id()));
-        page.items = Section.get_test_list(page,page);
-        return page;
-    };
+	static get_test = (title) =>{
+		let page = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.PAGE,Number.get_id()),
+			DataItem.get_new(DataType.PAGE,Number.get_id()),
+			DataItem.get_new(DataType.PAGE,Number.get_id()),
+			Field.get_test("Page " + Number.get_id()));
+			return Sub_Item.get_list(page,Section.get_test_list(page,page));
+	};
 }
 class Product{
-    static get_test = () =>{
-        let product = DataItem.get_new_full_item(
-            DataItem.get_new(DataType.PRODUCT,Number.get_id()),
-            DataItem.get_new(DataType.PRODUCT,Number.get_id()),
-            DataItem.get_new(DataType.PRODUCT,Number.get_id()),
-            Field.get_test("Product " + Number.get_id()));
-        product.cost = String(Number.get_id()) + "." + String(Number.get_id());
-        product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
-        product.type = "Type "+String(Number.get_id());
-        product.sub_type = "Sub Type "+String(Number.get_id());
-        product.stock = String(Number.get_id(3-1));
-
-		console.log('aaaaa');
-        let items = Sub_Item.get_list(Section.get_test_list(product,product));
-        //Log.w('aaa',items);
-        Log.w('rrr',Sub_Item.get_list(items));
-        //Log.w('rrr',Sub_Item.get_list(Section.get_test_list(product,product)));
-		//console.log('bbbbb');
-        //product.items = Sub_Item.get_list(Section.get_test_list(product,product));
-        //return product;
-    };
+	static get_test = () =>{
+		let product = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
+			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
+			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
+			Field.get_test("Product " + Number.get_id()));
+		product.cost = String(Number.get_id()) + "." + String(Number.get_id());
+		product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+		product.type = "Type "+String(Number.get_id());
+		product.sub_type = "Sub Type "+String(Number.get_id());
+		product.stock = String(Number.get_id(3-1));
+		return Sub_Item.get_list(product,Section.get_test_list(product,product));
+	};
 }
 class Service{
-    static get_test = () =>{
-        let service = DataItem.get_new_full_item(
-            DataItem.get_new(DataType.SERVICE,Number.get_id()),
-            DataItem.get_new(DataType.SERVICE,Number.get_id()),
-            DataItem.get_new(DataType.SERVICE,Number.get_id()),
-            Field.get_test("Service " + Number.get_id()));
-        service.cost = String(Number.get_id()) + "." + String(Number.get_id());
-        service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
-        service.type = "Type "+String(Number.get_id());
-        service.sub_type = "Sub Type "+String(Number.get_id());
-        service.stock = String(Number.get_id(3-1));
-        service.items = Section.get_test_list(service,service);
-        return service;
-    };
+	static get_test = () =>{
+		let service = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.SERVICE,Number.get_id()),
+			DataItem.get_new(DataType.SERVICE,Number.get_id()),
+			DataItem.get_new(DataType.SERVICE,Number.get_id()),
+			Field.get_test("Service " + Number.get_id()));
+		service.cost = String(Number.get_id()) + "." + String(Number.get_id());
+		service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+		service.type = "Type "+String(Number.get_id());
+		service.sub_type = "Sub Type "+String(Number.get_id());
+		service.stock = String(Number.get_id(3-1));
+		service.items = Section.get_test_list(service,service);
+		return Sub_Item.get_list(service,Section.get_test_list(service,service));
+	};
 }
 class Event{
-    static get_test = () =>{
-        let event = DataItem.get_new_full_item(
-            DataItem.get_new(DataType.EVENT,Number.get_id()),
-            DataItem.get_new(DataType.EVENT,Number.get_id()),
-            DataItem.get_new(DataType.EVENT,Number.get_id()),
-            Field.get_test("Event " + Number.get_id()));
-        event.cost = String(Number.get_id()) + "." + String(Number.get_id());
-        event.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
-        event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
-        event.time = String(Number.get_id(24)) + ":" + String(Number.get_id(59));
-        event.website = "Website "+String(Number.get_id());
-        event.location = "Location "+String(Number.get_id());
-        event.meeting_link = "Meeting Link "+String(Number.get_id());
-        event.stock = String(Number.get_id(3-1));
-        event.items = Section.get_test_list(event,event);
-        return event;
-    };
+	static get_test = () =>{
+		let event = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.EVENT,Number.get_id()),
+			DataItem.get_new(DataType.EVENT,Number.get_id()),
+			DataItem.get_new(DataType.EVENT,Number.get_id()),
+			Field.get_test("Event " + Number.get_id()));
+		event.cost = String(Number.get_id()) + "." + String(Number.get_id());
+		event.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+		event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
+		event.time = String(Number.get_id(24)) + ":" + String(Number.get_id(59));
+		event.website = "Website "+String(Number.get_id());
+		event.location = "Location "+String(Number.get_id());
+		event.meeting_link = "Meeting Link "+String(Number.get_id());
+		event.stock = String(Number.get_id(3-1));
+		event.items = Section.get_test_list(event,event);
+		return Sub_Item.get_list(event,Section.get_test_list(event,event));
+	};
 }
 class Section{
-    static get_test_list = (parent_item,top_item) =>{
-        let items = get_item_section_list(parent_item,top_item);
-        function get_item_section_list(parent_item,top_item){
-            let new_list = [];
-            for(let a=1;a<10;a++){
-                let item_title = "Section " + String(a);
-                let item = DataItem.get_new(
-                    DataType.ITEM,Number.get_id(), {
-                        top_id:top_item.id,
-                        top_data_type:top_item.data_type,
-                        parent_id:parent_item.id,
-                        parent_data_type:parent_item.data_type,
-                        title:item_title,
-                        title_url:Str.get_title_url(item_title),
-                        sub_note:"Sub Note "+String(Number.get_id()),
-                        note:"Note "+String(Number.get_id()),
-                    }
-                );
-                for(let b=1;b<20;b++){
-                    item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
-                }
-                new_list.push(item);
-            }
-            return new_list;
-        }
-        return items;
-    };
+	static get_test_list = (parent_item,top_item) =>{
+		let items = get_item_section_list(parent_item,top_item);
+
+		function get_item_section_list(parent_item,top_item){
+			let new_list = [];
+			for(let a=1;a<10;a++){
+				let item_title = "Section " + String(a);
+				let item = DataItem.get_new(
+					DataType.ITEM,Number.get_id(), {
+						top_id:top_item.id,
+						top_data_type:top_item.data_type,
+						parent_id:parent_item.id,
+						parent_data_type:parent_item.data_type,
+						title:item_title,
+						title_url:Str.get_title_url(item_title),
+						sub_note:"Sub Note "+String(Number.get_id()),
+						note:"Note "+String(Number.get_id()),
+						date_create:new moment().toISOString(),
+						date_save:new moment().toISOString(),
+					}
+				);
+				for(let b=1;b<20;b++){
+					item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
+				}
+				new_list.push(item);
+			}
+			return new_list;
+		}
+		return items;
+	};
 }
 class Field{
-    static get_test = (title) =>{
-        let item = {
-            title:title,
-            setting_visible:"1",
-            title_url:Str.get_title_url(title),
-            sub_note : "Sub Note "+String(Number.get_id()),
-            note : "Note "+String(Number.get_id())
-        }
-        for(let b = 1;b<20;b++){
-            item['value_'+String(b)] = 'value ' + String(b);
-        }
-        return item;
-    }
+	static get_test = (title) =>{
+		let item = {
+			date_create:new moment().toISOString(),
+			date_save:new moment().toISOString(),
+			title:title,
+			setting_visible:"1",
+			title_url:Str.get_title_url(title),
+			sub_note : "Sub Note "+String(Number.get_id()),
+			note : "Note "+String(Number.get_id())
+		}
+		for(let b = 1;b<20;b++){
+			item['value_'+String(b)] = 'value ' + String(b);
+		}
+		return item;
+	}
 }
 class FieldType {
 	static APP_ID='app_id';
@@ -293,33 +282,35 @@ class DataType {
 	static VIDEO='video_biz';
 }
 class Business {
-    static get_new = () =>{
-        return DataItem.get_new(DataType.BUSINESS,Number.get_id(),
-            {
-                title:"",
-                email:"",
-                phone:"",
-                address_1:"",
-                address_2:"",
-                city:"",
-                state:"",
-                zip:"",
-            });
-    };
-    static get_test = () =>{
-        let item = DataItem.get_new(DataType.BUSINESS,Number.get_id());
-        let city_list = ["Blank","Miami","Atlanta","Chicago","Seattle","New York City"];
-        let state_list = ["Blank","Georgia","New York","Illinois","Washington","Flordia"];
-        item.title = "Title "+Number.get_id();
-        item.email = "ceo@business.com";
-        item.phone = "123-456-" + Number.get_id();
-        item.address_1 = Number.get_id() + " Apple St.";
-        item.address_2 = "PO Box "  + Number.get_id();
-        item.city = city_list[Number.get_id(city_list.length-1)];
-        item.state = state_list[Number.get_id(state_list.length-1)];
-        item.zip = "123"+Number.get_id();
-        return item;
-    };
+	static get_new = () =>{
+		return DataItem.get_new(DataType.BUSINESS,Number.get_id(),
+			{
+				title:"",
+				email:"",
+				phone:"",
+				address_1:"",
+				address_2:"",
+				city:"",
+				state:"",
+				zip:"",
+			});
+	};
+	static get_test = () =>{
+		let item = DataItem.get_new(DataType.BUSINESS,Number.get_id());
+		let city_list = ["Blank","Miami","Atlanta","Chicago","Seattle","New York City"];
+		let state_list = ["Blank","Georgia","New York","Illinois","Washington","Flordia"];
+		item.title = "Title "+Number.get_id();
+		item.date_create=new moment().toISOString();
+		item.date_save=new moment().toISOString();
+		item.email="ceo@business.com";
+		item.phone="123-456-"+Number.get_id();
+		item.address_1=Number.get_id()+" Apple St.";
+		item.address_2="PO Box "+Number.get_id();
+		item.city=city_list[Number.get_id(city_list.length-1)];
+		item.state=state_list[Number.get_id(state_list.length-1)];
+		item.zip="123"+Number.get_id();
+		return item;
+	};
 	static get_full_address(business){
 		if(!business.address_1){
 			business.address_1 = "";
@@ -729,28 +720,28 @@ class Storage {
 	}
 }
 class Sub_Item{
-  static get_list = (item_list) => {
-       for(let a=0; a<item_list.length; a++){
-                        let item_title_url = Str.get_title_url(item_list[a].title);
-                        let new_item = {id:item_list[a].id,parent_id:item_list[a].parent_id,title:item_list[a].title,items:[]};
-                        item_list[item_title_url] = {title:item_list[a].title,items:[]};
-                        for(let b=0;b<item_list.length;b++){
-                            let sub_item_title_url = Str.get_title_url(item_list[b].title);
-                            if(item_list[a].id == item_list[b].parent_id){
-                                let sub_item = {
-                                    title:item_list[b].title,
-                                    id:item_list[b].id,
-                                    parent_id:item_list[b].parent_id,
-                                };
-                                new_item.items.push(sub_item);
-                                item_list[a][sub_item_title_url] = {title:sub_item.title,items:[]};
-                            }
-                        }
-                    }
-	  return item_list;
-  }
+	static get_list = (parent_item, item_list) => {
+		parent_item.items = [];
+		for(let a=0; a<item_list.length; a++){
+			let item_title_url = Str.get_title_url(item_list[a].title);
+			let new_item = item_list[a];
+			new_item.items = [];
+			item_list[item_title_url] = item_list[a];
+			for(let b=0;b<item_list.length;b++){
+				let sub_item_title_url = Str.get_title_url(item_list[b].title);
+				if(item_list[a].id == item_list[b].parent_id){
+					let sub_item = item_list[b];
+					new_item.items.push(sub_item);
+					item_list[a][sub_item_title_url] = sub_item;
+					item_list[a][sub_item_title_url].items = [];
+				}
+			}
+			parent_item[item_title_url] = item_list[a];
+			parent_item.items.push(item_list[a]);
+		}
+		return parent_item;
+	}
 }
-
 module.exports = {
 	BiZ_Url,
 	Business,
@@ -770,7 +761,7 @@ module.exports = {
 	Url,
 	Section,
 	Service,
-    Sub_Item,
+	Sub_Item,
 	Storage,
 	Schedule,
 	Stock,
