@@ -43,29 +43,6 @@ class Template{
 			}
 			return template_sub_item_list;
 		}
-		function get_item_section_list(parent_item,top_item){
-			let new_list = [];
-			for(let a=1;a<3;a++){
-				let item_title = "Section " + String(a);
-				let item = DataItem.get_new(
-					DataType.ITEM,Number.get_id(), {
-						top_id:top_item.id,
-						top_data_type:top_item.data_type,
-						parent_id:parent_item.id,
-						parent_data_type:parent_item.data_type,
-						title:item_title,
-						title_url:Str.get_title_url(item_title),
-						sub_note:"Sub Note "+String(Number.get_id()),
-						note:"Note "+String(Number.get_id()),
-					}
-				);
-				for(let b=1;b<3;b++){
-					item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
-				}
-				new_list.push(item);
-			}
-			return new_list;
-		}
 		return template;
 	};
 }
@@ -132,10 +109,9 @@ class Event{
 class Section{
 	static get_test_list = (parent_item,top_item) =>{
 		let items = get_item_section_list(parent_item,top_item);
-
 		function get_item_section_list(parent_item,top_item){
 			let new_list = [];
-			for(let a=1;a<10;a++){
+			for(let a=1;a<20;a++){
 				let item_title = "Section " + String(a);
 				let item = DataItem.get_new(
 					DataType.ITEM,Number.get_id(), {
