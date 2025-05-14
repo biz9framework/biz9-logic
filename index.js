@@ -109,9 +109,9 @@ class Event{
 class Section{
 	static get_test_list = (parent_item,top_item) =>{
 		let items = get_item_section_list(parent_item,top_item);
-		function get_item_section_list(parent_item,top_item){
-			let new_list = [];
-			for(let a=1;a<20;a++){
+
+		function bind_field_items(parent_item,top_item){
+				for(let a=1;a<20;a++){
 				let item_title = "Section " + String(a);
 				let item = DataItem.get_new(
 					DataType.ITEM,Number.get_id(), {
@@ -130,7 +130,15 @@ class Section{
 				for(let b=1;b<20;b++){
 					item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
 				}
-				new_list.push(item);
+			}
+			return item;
+		}
+
+		function get_item_section_list(parent_item,top_item){
+			let new_list = [];
+			for(let a=1;a<20;a++){
+				let item_title = "Section " + String(a);
+				new_list.push(bind_field_items(parent_item,top_item));
 			}
 			return new_list;
 		}
@@ -144,6 +152,7 @@ class Field{
 			date_save:new moment().toISOString(),
 			title:title,
 			setting_visible:"1",
+			photo_data:"/no_img.jpg",
 			title_url:Str.get_title_url(title),
 			sub_note : "Sub Note "+String(Number.get_id()),
 			note : "Note "+String(Number.get_id())
