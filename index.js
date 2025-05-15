@@ -739,7 +739,6 @@ module.exports = {
 	TemplateType,
 	Template,
 	Url,
-	Section,
 	Service,
 	Sub_Item,
 	Storage,
