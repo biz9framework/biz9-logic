@@ -35,11 +35,12 @@ describe("connect", () => {
                 //let cloud_url = Url.connect(biz9_config);
                 //console.log(Template.get_test()); //get_template_test
                 //console.log(Business.get_test()); // get_business_test
-                //console.log(Page.get_test("Page " +String(Number.get_id()))); // get_page_test
+               // console.log(Page.get_test("Page " +String(Number.get_id()))); // get_page_test
+                console.log(Page.get_test("Page " +String("Cool"))); // get_page_test
                 //console.log(Event.get_test());
                 //console.log(Product.get_test("Product " +String(Number.get_id()))); // get_product_test
                 //console.log(Service.get_test("Service " +String(Number.get_id()))); // get_service_test
-                console.log(Event.get_test("Event " +String(Number.get_id()))); // get_service_test
+                //console.log(Event.get_test("Event " +String(Number.get_id()))); // get_service_test
                 //let product = Product.get_test();
                 //console.log(product.section_1);
                 //get page
