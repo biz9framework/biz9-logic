@@ -43,7 +43,7 @@ class Page{
 			DataItem.get_new(DataType.PAGE,0),
 			Field.get_test(title));
 
-		for(let a=0;a<10;a++){
+		for(let a=0;a<20;a++){
 			page=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section "+a,page,page,page);
 		}
 		page = Sub_Item.get_test_bind_item_sub_item(page);
