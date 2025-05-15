@@ -28,10 +28,15 @@ class Template{
 			Field.get_test("Primary"));
 		let template_title_list = ["Header","Navigation","Body","Footer"];
 		for(let a=0;a<template_title_list.length;a++){
-			template = Sub_Item.get_test_bind_new_child(Number.get_id(),template_title_list[a],template,template,template);
+			for(let b=0;b<2;b++){
+				template = Sub_Item.get_test_bind_new_child(Number.get_id(),'Section '+b,template,template,template);
+			}
 		}
+		/*
 		for(let b=0;b<template.items.length;b++){
-			template.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + b,template.items[b],template,template);
+			for(let c=0;c<20;c++){
+				template.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(c),template.items[b],template,template);
+			}
 			for(let c=0;c<template.items[b].items.length;c++){
 				template.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,template.items[b].items[c],template.items[b],template);
 				for(let d=0;d<template.items[c].items.length;d++){
@@ -39,6 +44,7 @@ class Template{
 				}
 			}
 		}
+	*/
 		return template;
 	};
 }
