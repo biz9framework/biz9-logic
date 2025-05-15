@@ -26,25 +26,12 @@ class Template{
 			DataItem.get_new(DataType.TEMPLATE,0),
 			DataItem.get_new(DataType.TEMPLATE,0),
 			Field.get_test("Primary"));
-		let template_title_list = ["Header","Navigation","Body","Footer"];
-		for(let a=0;a<template_title_list.length;a++){
-			for(let b=0;b<2;b++){
-				template = Sub_Item.get_test_bind_new_child(Number.get_id(),'Section '+b,template,template,template);
-			}
+		let template_sub_title_list = ["Header","Navigation","Body","Footer"];
+		for(let a=0;a<template_sub_title_list.length;a++){
+				template = Sub_Item.get_test_bind_new_child(Number.get_id(),template_sub_title_list[a],template,template,template);
 		}
-		/*
-		for(let b=0;b<template.items.length;b++){
-			for(let c=0;c<20;c++){
-				template.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(c),template.items[b],template,template);
-			}
-			for(let c=0;c<template.items[b].items.length;c++){
-				template.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,template.items[b].items[c],template.items[b],template);
-				for(let d=0;d<template.items[c].items.length;d++){
-					template.items[c].items[d] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + d,template.items[c].items[d],template.items[c],template);
-				}
-			}
-		}
-	*/
+		template = Sub_Item.get_test_bind_item_sub_item(template);
+		Log.w('template_sec',template.header.section_1.section_1);
 		return template;
 	};
 }
@@ -55,17 +42,11 @@ class Page{
 			DataItem.get_new(DataType.PAGE,0),
 			DataItem.get_new(DataType.PAGE,0),
 			Field.get_test(title));
-		page = Sub_Item.get_test_bind_new_child(Number.get_id(),title,page,page,page);
-		for(let b=0;b<page.items.length;b++){
-			page.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + b,page.items[b],page,page);
-			for(let c=0;c<page.items[b].items.length;c++){
-				page.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,page.items[b].items[c],page.items[b],page);
-				for(let d=0;d<page.items[c].items.length;d++){
-					page.items[c].items[d] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + d,page.items[c].items[d],page.items[c],page);
-				}
-			}
+		for(let a=0;a<10;a++){
+			page=Sub_Item.get_test_bind_new_child(Number.get_id(),"Page " + String(a),page,page,page);
 		}
-		return page;
+		page = Sub_Item.get_test_bind_item_sub_item(page);
+	return page;
 	};
 }
 class Product{
@@ -81,16 +62,11 @@ class Product{
 		product.type = "Type "+String(Number.get_id());
 		product.sub_type = "Sub Type "+String(Number.get_id());
 		product.stock = String(Number.get_id(3-1));
-		for(let b=0;b<product.items.length;b++){
-			product.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + b,product.items[b],product,product);
-			for(let c=0;c<product.items[b].items.length;c++){
-				product.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,product.items[b].items[c],product.items[b],product);
-				for(let d=0;d<product.items[c].items.length;d++){
-					product.items[c].items[d] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + d,product.items[c].items[d],product.items[c],product);
-				}
-			}
+		for(let a=0;a<10;a++){
+			product=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),product,product,product);
 		}
-		return product;
+		product = Sub_Item.get_test_bind_item_sub_item(product);
+	return product;
 	};
 }
 class Service{
@@ -106,15 +82,10 @@ class Service{
 		service.type = "Type "+String(Number.get_id());
 		service.sub_type = "Sub Type "+String(Number.get_id());
 		service.stock = String(Number.get_id(3-1));
-		for(let b=0;b<service.items.length;b++){
-			service.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + b,service.items[b],service,service);
-			for(let c=0;c<service.items[b].items.length;c++){
-				service.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,service.items[b].items[c],service.items[b],service);
-				for(let d=0;d<service.items[c].items.length;d++){
-					service.items[c].items[d] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + d,service.items[c].items[d],service.items[c],service);
-				}
-			}
+		for(let a=0;a<10;a++){
+			service=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),service,service,service);
 		}
+		service = Sub_Item.get_test_bind_item_sub_item(service);
 		return service;
 	};
 }
@@ -134,64 +105,13 @@ class Event{
 		event.location = "Location "+String(Number.get_id());
 		event.meeting_link = "Meeting Link "+String(Number.get_id());
 		event.stock = String(Number.get_id(3-1));
-		for(let b=0;b<event.items.length;b++){
-			event.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + b,event.items[b],event,event);
-			for(let c=0;c<event.items[b].items.length;c++){
-				event.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,event.items[b].items[c],event.items[b],event);
-				for(let d=0;d<event.items[c].items.length;d++){
-					event.items[c].items[d] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + d,event.items[c].items[d],event.items[c],event);
-				}
-			}
+		for(let a=0;a<10;a++){
+			event=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),event,event,event);
 		}
+		event = Sub_Item.get_test_bind_item_sub_item(event);
 		return event;
 	};
 }
-
-class Section{
-};
-
-//Log.w('new_item',item);
-//Log.w('parent_item',parent_item);
-//Log.w('top_item',top_item);
-
-/*
-				let item_list = get_item_section_list(parent_item,top_item);
-		function get_item_section_list(parent_item,top_item){
-			let new_list = [];
-			for(let a=1;a<3;a++){
-				let item_title = "Section " + String(a);
-				//let new_item = bind_field_items(parent_item,top_item);
-				new_list.push(bind_field_items(parent_item,top_item));
-			}
-			return new_list;
-		}
-
-
-				let item = DataItem.get_new(
-					DataType.ITEM,Number.get_id(),
-					{
-					top_id:top_item.id,
-						top_data_type:top_item.data_type,
-						parent_id:parent_item.id,
-						parent_data_type:parent_item.data_type,
-						title:item_title,
-						title_url:Str.get_title_url(item_title),
-						sub_note:"Sub Note "+String(Number.get_id()),
-						note:"Note "+String(Number.get_id()),
-						date_create:new moment().toISOString(),
-						date_save:new moment().toISOString()
-					});
-					*/
-				//Log.w('rrr',item);
-				//for(let b=1;b<2;b++){
-				//item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
-				//}
-				//return item_list;
-				//}
-
-				//return item_list;
-				//};
-				//}
 				class Field{
 					static get_test = (title) =>{
 						let item = {
@@ -461,7 +381,6 @@ class Obj {
 		return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
 	}
 };
-
 class Cat {
 	static get_category_drop_down_list_by_list = (cat_list) => {
 		let category_list = [];
@@ -752,7 +671,6 @@ class Storage {
 	}
 }
 class Sub_Item{
-
 	static get_bind_new_child = (id,title,item,parent_item,top_item,options) =>{
 		let new_sub_item = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.ITEM,id),
@@ -772,7 +690,17 @@ class Sub_Item{
 		item.items.push(new_sub_item);
 		return item;
 	};
-
+	static get_test_bind_item_sub_item = (item) =>{
+		for(let b=0;b<item.items.length;b++){
+			for(let c=0;c<20;c++){
+				item.items[b]=Sub_Item.get_test_bind_new_child(Number.get_id(),'Section '+String(c),item.items[b],item,item);
+				for(let d=0;d<item.items[b].items.length;d++){
+					item.items[b].items[d]=Sub_Item.get_test_bind_new_child(Number.get_id(),'Section '+String(d),item.items[b].items[d],item.items[b],item);
+				}
+			}
+		}
+		return item;
+	}
 	static get_test_bind_new_child = (id,title,item,parent_item,top_item,options) =>{
 		let new_sub_item = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.ITEM,id),

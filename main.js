@@ -4,10 +4,8 @@ Author: certifiedcoderz@gmail.com (Certified CoderZ)
 License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic - Main
 */
-
 const { DateTime,Number } = require('biz9-utility');
 const biz9_config_local=__dirname+"/../../"+"biz9_config";
-
 const get_cloud_filter_obj_main = (data_type,filter,sort_by,page_current,page_size) => {
     return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 }
@@ -45,7 +43,6 @@ const get_new_full_item_main = (org_item,parent_item,top_item,options) => {
     }
     return item;
 }
-
 const get_cloud_url_main = (app_id,domain_url,action_url,params) =>{
     if(!params){
         params='';
@@ -59,7 +56,6 @@ const get_title_url_main = (title) => {
     }
     return title.replace(/[^a-z0-9]+/ig, "_").toLowerCase();
 }
-
 module.exports = {
     get_new_item_main,
     get_cloud_url_main,
