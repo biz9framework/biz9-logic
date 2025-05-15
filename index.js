@@ -26,22 +26,18 @@ class Template{
 			DataItem.get_new(DataType.TEMPLATE,0),
 			DataItem.get_new(DataType.TEMPLATE,0),
 			Field.get_test("Primary"));
-		template=Sub_Item.get_list(template,Section.get_test_list(template,template));
-		let temp_sub_list = get_test_list(template);
-		template = Sub_Item.get_list(template,temp_sub_list);
-		function get_test_list(template){
-			let template_title_list = ["Header","Navigation","Body","Footer"];
-			let template_sub_item_list = [];
-			for(let a=0;a<template_title_list.length;a++){
-				let template_sub_item = DataItem.get_new_full_item(
-					DataItem.get_new(DataType.ITEM,Number.get_id()),
-					DataItem.get_new(DataType.TEMPLATE,template.id),
-					DataItem.get_new(DataType.TEMPLATE,template.id),
-					Field.get_test( template_title_list[a] ));
-				template_sub_item = Sub_Item.get_list(template_sub_item,Section.get_test_list(template_sub_item,template));
-				template_sub_item_list.push(template_sub_item);
+		let template_title_list = ["Header","Navigation","Body","Footer"];
+		for(let a=0;a<template_title_list.length;a++){
+			template = Sub_Item.get_test_bind_new_child(Number.get_id(),template_title_list[a],template,template,template);
+		}
+		for(let b=0;b<template.items.length;b++){
+			template.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + b,template.items[b],template,template);
+			for(let c=0;c<template.items[b].items.length;c++){
+				template.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,template.items[b].items[c],template.items[b],template);
+				for(let d=0;d<template.items[c].items.length;d++){
+					template.items[c].items[d] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + d,template.items[c].items[d],template.items[c],template);
+				}
 			}
-			return template_sub_item_list;
 		}
 		return template;
 	};
@@ -50,50 +46,80 @@ class Page{
 	static get_test = (title) =>{
 		let page = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PAGE,Number.get_id()),
-			DataItem.get_new(DataType.PAGE,Number.get_id()),
-			DataItem.get_new(DataType.PAGE,Number.get_id()),
-			Field.get_test("Page " + Number.get_id()));
-			return Sub_Item.get_list(page,Section.get_test_list(page,page));
+			DataItem.get_new(DataType.PAGE,0),
+			DataItem.get_new(DataType.PAGE,0),
+			Field.get_test(title));
+		page = Sub_Item.get_test_bind_new_child(Number.get_id(),title,page,page,page);
+		for(let b=0;b<page.items.length;b++){
+			page.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + b,page.items[b],page,page);
+			for(let c=0;c<page.items[b].items.length;c++){
+				page.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,page.items[b].items[c],page.items[b],page);
+				for(let d=0;d<page.items[c].items.length;d++){
+					page.items[c].items[d] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + d,page.items[c].items[d],page.items[c],page);
+				}
+			}
+		}
+		return page;
 	};
 }
 class Product{
-	static get_test = () =>{
+	static get_test = (title) =>{
 		let product = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
-			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
-			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
-			Field.get_test("Product " + Number.get_id()));
+			DataItem.get_new(DataType.PRODUCT,0),
+			DataItem.get_new(DataType.PRODUCT,0),
+			Field.get_test(title));
+		product = Sub_Item.get_test_bind_new_child(Number.get_id(),title,product,product,product);
 		product.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.type = "Type "+String(Number.get_id());
 		product.sub_type = "Sub Type "+String(Number.get_id());
 		product.stock = String(Number.get_id(3-1));
-		return Sub_Item.get_list(product,Section.get_test_list(product,product));
+		for(let b=0;b<product.items.length;b++){
+			product.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + b,product.items[b],product,product);
+			for(let c=0;c<product.items[b].items.length;c++){
+				product.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,product.items[b].items[c],product.items[b],product);
+				for(let d=0;d<product.items[c].items.length;d++){
+					product.items[c].items[d] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + d,product.items[c].items[d],product.items[c],product);
+				}
+			}
+		}
+		return product;
 	};
 }
 class Service{
-	static get_test = () =>{
+	static get_test = (title) =>{
 		let service = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.SERVICE,Number.get_id()),
-			DataItem.get_new(DataType.SERVICE,Number.get_id()),
-			DataItem.get_new(DataType.SERVICE,Number.get_id()),
-			Field.get_test("Service " + Number.get_id()));
+			DataItem.get_new(DataType.SERVICE,0),
+			DataItem.get_new(DataType.SERVICE,0),
+			Field.get_test(title));
+		service = Sub_Item.get_test_bind_new_child(Number.get_id(),title,service,service,service);
 		service.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.type = "Type "+String(Number.get_id());
 		service.sub_type = "Sub Type "+String(Number.get_id());
 		service.stock = String(Number.get_id(3-1));
-		service.items = Section.get_test_list(service,service);
-		return Sub_Item.get_list(service,Section.get_test_list(service,service));
+		for(let b=0;b<service.items.length;b++){
+			service.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + b,service.items[b],service,service);
+			for(let c=0;c<service.items[b].items.length;c++){
+				service.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,service.items[b].items[c],service.items[b],service);
+				for(let d=0;d<service.items[c].items.length;d++){
+					service.items[c].items[d] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + d,service.items[c].items[d],service.items[c],service);
+				}
+			}
+		}
+		return service;
 	};
 }
 class Event{
-	static get_test = () =>{
+	static get_test = (title) =>{
 		let event = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.EVENT,Number.get_id()),
-			DataItem.get_new(DataType.EVENT,Number.get_id()),
-			DataItem.get_new(DataType.EVENT,Number.get_id()),
-			Field.get_test("Event " + Number.get_id()));
+			DataItem.get_new(DataType.EVENT,0),
+			DataItem.get_new(DataType.EVENT,0),
+			Field.get_test(title));
+		event = Sub_Item.get_test_bind_new_child(Number.get_id(),title,event,event,event);
 		event.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		event.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
@@ -102,20 +128,43 @@ class Event{
 		event.location = "Location "+String(Number.get_id());
 		event.meeting_link = "Meeting Link "+String(Number.get_id());
 		event.stock = String(Number.get_id(3-1));
-		event.items = Section.get_test_list(event,event);
-		return Sub_Item.get_list(event,Section.get_test_list(event,event));
+		for(let b=0;b<event.items.length;b++){
+			event.items[b] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + b,event.items[b],event,event);
+			for(let c=0;c<event.items[b].items.length;c++){
+				event.items[b].items[c] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + c,event.items[b].items[c],event.items[b],event);
+				for(let d=0;d<event.items[c].items.length;d++){
+					event.items[c].items[d] = Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + d,event.items[c].items[d],event.items[c],event);
+				}
+			}
+		}
+		return event;
 	};
 }
-class Section{
-	static get_test_list = (parent_item,top_item) =>{
-		let items = get_item_section_list(parent_item,top_item);
 
-		function bind_field_items(parent_item,top_item){
-				for(let a=1;a<20;a++){
+class Section{
+};
+
+//Log.w('new_item',item);
+//Log.w('parent_item',parent_item);
+//Log.w('top_item',top_item);
+
+/*
+				let item_list = get_item_section_list(parent_item,top_item);
+		function get_item_section_list(parent_item,top_item){
+			let new_list = [];
+			for(let a=1;a<3;a++){
 				let item_title = "Section " + String(a);
+				//let new_item = bind_field_items(parent_item,top_item);
+				new_list.push(bind_field_items(parent_item,top_item));
+			}
+			return new_list;
+		}
+
+
 				let item = DataItem.get_new(
-					DataType.ITEM,Number.get_id(), {
-						top_id:top_item.id,
+					DataType.ITEM,Number.get_id(),
+					{
+					top_id:top_item.id,
 						top_data_type:top_item.data_type,
 						parent_id:parent_item.id,
 						parent_data_type:parent_item.data_type,
@@ -124,45 +173,37 @@ class Section{
 						sub_note:"Sub Note "+String(Number.get_id()),
 						note:"Note "+String(Number.get_id()),
 						date_create:new moment().toISOString(),
-						date_save:new moment().toISOString(),
-					}
-				);
-				for(let b=1;b<20;b++){
-					item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
-				}
-			}
-			return item;
-		}
+						date_save:new moment().toISOString()
+					});
+					*/
+				//Log.w('rrr',item);
+				//for(let b=1;b<2;b++){
+				//item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
+				//}
+				//return item_list;
+				//}
 
-		function get_item_section_list(parent_item,top_item){
-			let new_list = [];
-			for(let a=1;a<20;a++){
-				let item_title = "Section " + String(a);
-				new_list.push(bind_field_items(parent_item,top_item));
-			}
-			return new_list;
-		}
-		return items;
-	};
-}
-class Field{
-	static get_test = (title) =>{
-		let item = {
-			date_create:new moment().toISOString(),
-			date_save:new moment().toISOString(),
-			title:title,
-			setting_visible:"1",
-			photo_data:"/no_img.jpg",
-			title_url:Str.get_title_url(title),
-			sub_note : "Sub Note "+String(Number.get_id()),
-			note : "Note "+String(Number.get_id())
-		}
-		for(let b = 1;b<20;b++){
-			item['value_'+String(b)] = 'value ' + String(b);
-		}
-		return item;
-	}
-}
+				//return item_list;
+				//};
+				//}
+				class Field{
+					static get_test = (title) =>{
+						let item = {
+							date_create:new moment().toISOString(),
+							date_save:new moment().toISOString(),
+							title:title,
+							setting_visible:"1",
+							photo_data:"/images/no_img.jpg",
+							title_url:Str.get_title_url(title),
+							sub_note : "Sub Note "+String(Number.get_id()),
+							note : "Note "+String(Number.get_id())
+						}
+						for(let b = 1;b<20;b++){
+							item['value_'+String(b)] = 'value ' + String(b);
+						}
+						return item;
+					}
+				}
 class FieldType {
 	static APP_ID='app_id';
 	static ID='id';
@@ -705,27 +746,46 @@ class Storage {
 	}
 }
 class Sub_Item{
-	static get_list = (parent_item, item_list) => {
-		parent_item.items = [];
-		for(let a=0; a<item_list.length; a++){
-			let item_title_url = Str.get_title_url(item_list[a].title);
-			let new_item = item_list[a];
-			new_item.items = [];
-			item_list[item_title_url] = item_list[a];
-			for(let b=0;b<item_list.length;b++){
-				let sub_item_title_url = Str.get_title_url(item_list[b].title);
-				if(item_list[a].id == item_list[b].parent_id){
-					let sub_item = item_list[b];
-					new_item.items.push(sub_item);
-					item_list[a][sub_item_title_url] = sub_item;
-					item_list[a][sub_item_title_url].items = [];
-				}
+
+	static get_bind_new_child = (id,title,item,parent_item,top_item,options) =>{
+		let new_sub_item = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.ITEM,id),
+			DataItem.get_new(parent_item.data_type,parent_item.id),
+			DataItem.get_new(top_item.data_type,top_item.id)
+		);
+		new_sub_item.title = title;
+		if(options){
+			for (const key in options) {
+				item[key] = options[key];
 			}
-			parent_item[item_title_url] = item_list[a];
-			parent_item.items.push(item_list[a]);
 		}
-		return parent_item;
-	}
+		if(!item.items){
+			item.items = [];
+		}
+		item[Str.get_title_url(title)] = new_sub_item;
+		item.items.push(new_sub_item);
+		return item;
+	};
+
+	static get_test_bind_new_child = (id,title,item,parent_item,top_item,options) =>{
+		let new_sub_item = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.ITEM,id),
+			DataItem.get_new(parent_item.data_type,parent_item.id),
+			DataItem.get_new(top_item.data_type,top_item.id),
+			Field.get_test(title));
+		new_sub_item.title = title;
+		if(options){
+			for (const key in options) {
+				item[key] = options[key];
+			}
+		}
+		if(!item.items){
+			item.items = [];
+		}
+		item[Str.get_title_url(title)] = new_sub_item;
+		item.items.push(new_sub_item);
+		return item;
+	};
 }
 module.exports = {
 	BiZ_Url,
@@ -734,6 +794,7 @@ module.exports = {
 	CMS,
 	DataItem,
 	DataType,
+	Field,
 	FieldType,
 	Event,
 	Message,
