@@ -56,10 +56,19 @@ const get_title_url_main = (title) => {
     }
     return title.replace(/[^a-z0-9]+/ig, "_").toLowerCase();
 }
+const get_title_main = (data_type) => {
+		if(!data_type){
+			return "";
+		}else{
+			return String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
+		}
+	}
+
 module.exports = {
     get_new_item_main,
     get_cloud_url_main,
     get_cloud_filter_obj_main,
     get_title_url_main,
-    get_new_full_item_main
+    get_new_full_item_main,
+    get_title_main
 };

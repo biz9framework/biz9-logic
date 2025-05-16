@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page} = require('./');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category} = require('./index');
 const {Log,Test,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -31,17 +31,40 @@ describe("connect", () => {
 
         function(call) {
                 console.log('CONNECT-START');
+
+                /* --CONFIG--START */
                 //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 //let cloud_url = Url.connect(biz9_config);
+                /* --CONFIG--END */
+
+
+                /* --DATA_TYPE--START */
+                //Log.w('data_type_list',DataType.get_item_list());
+                /* --DATA_TYPE--END */
+
+
+                /* --CATEGORY--START */
+                //Log.w("Category",Category.get_test("Category " + Number.get_id(),{get_items:false}));
+                //let category = Category.get_test_list_by_category();
+                /* --CATEGORY--END */
+
+
+                /* --PRODUCT--START */
+                //let product = Product.get_test_list_by_category();
+                //Log.w('product_test',Product.get_test("Product " + Number.get_id(),{get_items:false}));
+                Log.w('product_list_test',Product.get_test_list_by_category({get_items:false,product_count:2,category_count:3}));
+                //console.log(Product.get_test("Product " + Number.get_id(),{get_items:false}));
+                /* --PRODUCT--END */
+
                 //console.log(Template.get_test()); //get_template_test
                 //console.log(Business.get_test()); // get_business_test
                // console.log(Page.get_test("Page " +String(Number.get_id()))); // get_page_test
-                console.log(Page.get_test("Page " +String("Cool"))); // get_page_test
+                //console.log(Page.get_test("Page " +String("Cool"))); // get_page_test
                 //console.log(Event.get_test());
                 //console.log(Product.get_test("Product " +String(Number.get_id()))); // get_product_test
                 //console.log(Service.get_test("Service " +String(Number.get_id()))); // get_service_test
                 //console.log(Event.get_test("Event " +String(Number.get_id()))); // get_service_test
-                //let product = Product.get_test();
+                //console.log(Category.get_test()); // get_category_test
                 //console.log(product.section_1);
                 //get page
 

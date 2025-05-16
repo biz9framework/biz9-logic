@@ -28,10 +28,9 @@ class Template{
 			Field.get_test("Primary"));
 		let template_sub_title_list = ["Header","Navigation","Body","Footer"];
 		for(let a=0;a<template_sub_title_list.length;a++){
-				template = Sub_Item.get_test_bind_new_child(Number.get_id(),template_sub_title_list[a],template,template,template);
+			template = Sub_Item.get_test_bind_new_child(Number.get_id(),template_sub_title_list[a],template,template,template);
 		}
 		template = Sub_Item.get_test_bind_item_sub_item(template);
-		Log.w('template_sec',template.header.section_1.section_1);
 		return template;
 	};
 }
@@ -48,27 +47,59 @@ class Page{
 		}
 		page = Sub_Item.get_test_bind_item_sub_item(page);
 
-	return page;
+		return page;
 	};
 }
 class Product{
-	static get_test = (title) =>{
+	static get_test = (title,option) =>{
+		if(!option){
+			option={};
+		}
 		let product = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
 			DataItem.get_new(DataType.PRODUCT,0),
 			DataItem.get_new(DataType.PRODUCT,0),
 			Field.get_test(title));
-		product = Sub_Item.get_test_bind_new_child(Number.get_id(),title,product,product,product);
 		product.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.type = "Type "+String(Number.get_id());
 		product.sub_type = "Sub Type "+String(Number.get_id());
 		product.stock = String(Number.get_id(3-1));
+		//product.category = Category.get_type_category_list(DataType.PRODUCT)[Number.get_id(Category.get_type_category_list(DataType.PRODUCT).length-1)].title;
+		product.category ="Category " + String(Number.get_id());
+		if(option.get_items){
+		product = Sub_Item.get_test_bind_new_child(Number.get_id(),title,product,product,product);
 		for(let a=0;a<10;a++){
 			product=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),product,product,product);
 		}
 		product = Sub_Item.get_test_bind_item_sub_item(product);
-	return product;
+		}
+		return product;
+	};
+	static get_test_list_by_category = (option) =>{
+		let product_list = [];
+		let category_count = 9;
+		let product_count = 19;
+		if(!option){
+			option={};
+		}
+		else{
+			if(option.category_count){
+				category_count = parseInt(option.category_count);
+			}
+			if(option.category_count){
+				product_count = parseInt(option.product_count);
+			}
+		}
+		let category_list = Category.get_type_category_list(DataType.PRODUCT,category_count);
+		for(let a=0;a<category_list.length;a++){
+			for(let b=0;b<product_count;b++){
+				let product = Product.get_test("Product " + b);
+				product.category = category_list[Number.get_id(category_list.length-1)].title;
+				product_list.push(product);
+			}
+		}
+		return [category_list,product_list]
 	};
 }
 class Service{
@@ -114,24 +145,24 @@ class Event{
 		return event;
 	};
 }
-				class Field{
-					static get_test = (title) =>{
-						let item = {
-							date_create:new moment().toISOString(),
-							date_save:new moment().toISOString(),
-							title:title,
-							setting_visible:"1",
-							photo_data:"/images/no_img.jpg",
-							title_url:Str.get_title_url(title),
-							sub_note : "Sub Note "+String(Number.get_id()),
-							note : "Note "+String(Number.get_id())
-						}
-						for(let b = 1;b<20;b++){
-							item['value_'+String(b)] = 'value ' + String(b);
-						}
-						return item;
-					}
-				}
+class Field{
+	static get_test = (title) =>{
+		let item = {
+			date_create:new moment().toISOString(),
+			date_save:new moment().toISOString(),
+			title:title,
+			setting_visible:"1",
+			photo_data:"/images/no_img.jpg",
+			title_url:Str.get_title_url(title),
+			sub_note : "Sub Note "+String(Number.get_id()),
+			note : "Note "+String(Number.get_id())
+		}
+		for(let b = 1;b<20;b++){
+			item['value_'+String(b)] = 'value ' + String(b);
+		}
+		return item;
+	}
+}
 class FieldType {
 	static APP_ID='app_id';
 	static ID='id';
@@ -212,6 +243,15 @@ class DataType {
 			return String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 		}
 	}
+	static get_item_list = () =>{
+		return [
+				{	title:DataType.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
+				{	title:DataType.get_title(DataType.SERVICE),type:DataType.SERVICE},
+				{	title:DataType.get_title(DataType.EVENT),type:DataType.EVENT},
+				{	title:DataType.get_title(DataType.GALLERY),type:DataType.GALLERY},
+				{	title:DataType.get_title(DataType.PRODUCT),type:DataType.PRODUCT}
+		]
+	};
 	static ADMIN='admin_biz';
 	static BLANK='blank_biz';
 	static BUSINESS='business_biz';
@@ -383,7 +423,29 @@ class Obj {
 		return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
 	}
 };
-class Cat {
+class Category {
+	static get_test(){
+		let category = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.CATEGORY,Number.get_id()),
+			DataItem.get_new(DataType.CATEGORY,0),
+			DataItem.get_new(DataType.CATEGORY,0),
+			Field.get_test("Category " +Number.get_id()));
+			category.type = Category.get_category_list()[Number.get_id(category_list.length-1)].data_type;
+		return category;
+	}
+	static get_type_category_list(type,count){
+		let category_list = [];
+		for(let a=0;a<count;a++){
+		let category = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.CATEGORY,"Category "+Number.get_id()),
+			DataItem.get_new(DataType.CATEGORY,0),
+			DataItem.get_new(DataType.CATEGORY,0),
+			Field.get_test("Category " +Number.get_id()));
+			category.type = type
+			category_list.push(category);
+		}
+		return category_list;
+	};
 	static get_category_drop_down_list_by_list = (cat_list) => {
 		let category_list = [];
 		for(let a=0;a<cat_list.length;a++){
@@ -393,13 +455,13 @@ class Cat {
 	};
 	static get_category_list = () => {
 		return [
-			{ value: DataType.BLOG_POST, label: "Blog Posts" },
-			{ value: DataType.CONTENT, label: "Content" },
-			{ value: DataType.EVENT, label: "Events" },
-			{ value: DataType.GALLERY, label: "Galleries" },
-			{ value: DataType.SERVICE, label: "Services" },
-			{ value: DataType.PRODUCT, label: "Products" },
-			{ value: DataType.TEMPLATE, label: "Template" }
+			{data_type:DataType.BLOG_POST,value:DataType.BLOG_POST,label:"Blog Posts"},
+			{data_type:DataType.CONTENT,value:DataType.CONTENT,label:"Content"},
+			{data_type:DataType.EVENT,value:DataType.EVENT,label:"Events"},
+			{data_type:DataType.GALLERY,value:DataType.GALLERY,label:"Galleries"},
+			{data_type:DataType.SERVICE,value:DataType.SERVICE,label:"Services"},
+			{data_type:DataType.PRODUCT,value:DataType.PRODUCT,label:"Product"},
+			{data_type:DataType.TEMPLATE,value:DataType.TEMPLATE,label:"Template"}
 		];
 	};
 	static get_title_by_type = (data_type) => {
@@ -722,22 +784,22 @@ class Sub_Item{
 		item[Str.get_title_url(title)] = new_sub_item;
 		item.items.push(new_sub_item);
 		return item;
-	function get_bind_test_field(title){
-						let item = {
-							date_create:new moment().toISOString(),
-							date_save:new moment().toISOString(),
-							title:title,
-							setting_visible:"1",
-							photo_data:"/images/no_img.jpg",
-							title_url:Str.get_title_url(title),
-							sub_note : "Sub Note "+String(Number.get_id()),
-							note : "Note "+String(Number.get_id())
-						}
-						for(let b = 1;b<20;b++){
-							item['value_'+String(b)] = title+ ' value ' + String(b);
-						}
-						return item;
-        };
+		function get_bind_test_field(title){
+			let item = {
+				date_create:new moment().toISOString(),
+				date_save:new moment().toISOString(),
+				title:title,
+				setting_visible:"1",
+				photo_data:"/images/no_img.jpg",
+				title_url:Str.get_title_url(title),
+				sub_note : "Sub Note "+String(Number.get_id()),
+				note : "Note "+String(Number.get_id())
+			}
+			for(let b = 1;b<20;b++){
+				item['value_'+String(b)] = title+ ' value ' + String(b);
+			}
+			return item;
+		};
 
 	};
 
@@ -745,7 +807,7 @@ class Sub_Item{
 module.exports = {
 	BiZ_Url,
 	Business,
-	Cat,
+	Category,
 	CMS,
 	DataItem,
 	DataType,
