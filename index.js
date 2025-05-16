@@ -708,7 +708,8 @@ class Sub_Item{
 			DataItem.get_new(DataType.ITEM,id),
 			DataItem.get_new(parent_item.data_type,parent_item.id),
 			DataItem.get_new(top_item.data_type,top_item.id),
-			Field.get_test(title));
+			get_bind_test_field(title)
+		)
 		new_sub_item.title = title;
 		if(options){
 			for (const key in options) {
@@ -721,7 +722,25 @@ class Sub_Item{
 		item[Str.get_title_url(title)] = new_sub_item;
 		item.items.push(new_sub_item);
 		return item;
+	function get_bind_test_field(title){
+						let item = {
+							date_create:new moment().toISOString(),
+							date_save:new moment().toISOString(),
+							title:title,
+							setting_visible:"1",
+							photo_data:"/images/no_img.jpg",
+							title_url:Str.get_title_url(title),
+							sub_note : "Sub Note "+String(Number.get_id()),
+							note : "Note "+String(Number.get_id())
+						}
+						for(let b = 1;b<20;b++){
+							item['value_'+String(b)] = title+ ' value ' + String(b);
+						}
+						return item;
+        };
+
 	};
+
 }
 module.exports = {
 	BiZ_Url,
