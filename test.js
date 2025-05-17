@@ -52,7 +52,7 @@ describe("connect", () => {
                 /* --PRODUCT--START */
                 //let product = Product.get_test_list_by_category();
                 //Log.w('product_test',Product.get_test("Product " + Number.get_id(),{get_items:false}));
-                Log.w('product_list_test',Product.get_test_list_by_category({get_items:false,product_count:2,category_count:3}));
+                Log.w('product_list_test',Product.get_test_list_by_category({get_items:false,product_count:9,category_count:3}));
                 //console.log(Product.get_test("Product " + Number.get_id(),{get_items:false}));
                 /* --PRODUCT--END */
 

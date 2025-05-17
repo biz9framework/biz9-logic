@@ -92,9 +92,11 @@ class Product{
 			}
 		}
 		let category_list = Category.get_type_category_list(DataType.PRODUCT,category_count);
+		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
 			for(let b=0;b<product_count;b++){
-				let product = Product.get_test("Product " + b);
+				item_count++;
+				let product = Product.get_test("Product " + String(item_count));
 				product.category = category_list[Number.get_id(category_list.length-1)].title;
 				product_list.push(product);
 			}
