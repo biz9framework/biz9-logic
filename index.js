@@ -105,12 +105,15 @@ class Product{
 }
 class Service{
 	static get_test = (option) =>{
+		if(!option){
+			option = {get_value:false,get_item:false};
+		}
 		let service = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.SERVICE,Number.get_id()),
 			DataItem.get_new(DataType.SERVICE,0),
 			DataItem.get_new(DataType.SERVICE,0),
 			Field.get_test("Service "+Number.get_id(),{get_value:false}));
-		service = Sub_Item.get_test_bind_new_child(Number.get_id(),title,service,service,service);
+		service = Sub_Item.get_test_bind_new_child(Number.get_id(),"Service "+Number.get_id(),service,service,service);
 		service.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.type = "Type "+String(Number.get_id());
@@ -126,9 +129,22 @@ class Service{
 		}
 	return service;
 	};
+	static get_test_list=(option)=>{
+		if(!option){
+			option={service_count:19};
+		}
+		let item_list=[];
+		for(let a=0;a<option.service_count;a++){
+			item_list.push(Service.get_test());
+		}
+		return item_list;
+	};
 }
 class Event{
 	static get_test = (option) =>{
+		if(!option){
+			option = {get_value:false,get_item:false};
+		}
 		let event = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.EVENT,Number.get_id()),
 			DataItem.get_new(DataType.EVENT,0),
@@ -147,11 +163,21 @@ class Event{
 		if(option.get_item){
 			event=Sub_Item.get_test_bind_new_child(Number.get_id(),"Event "+Number.get_id(),event,event,event);
 			for(let a=0;a<10;a++){
-				event=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),event,event,event);
+				event=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " +String(a),event,event,event);
 			}
 			event=Sub_Item.get_test_bind_item_sub_item(event);
 		}
 		return event;
+	};
+	static get_test_list=(option)=>{
+		if(!option){
+			option={event_count:19};
+		}
+		let item_list=[];
+		for(let a=0;a<option.event_count;a++){
+			item_list.push(Event.get_test());
+		}
+		return item_list;
 	};
 }
 class Field{
@@ -311,17 +337,20 @@ class Blog_Post{
 		blog_post.tag="tag 1,tag 2,tag 3";
 		blog_post.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			blog_post = Sub_Item.get_test_bind_new_child(Number.get_id(),"Blog Post "+Number.get_id(),blog_post,blog_post,blog_post);
+			blog_post=Sub_Item.get_test_bind_new_child(Number.get_id(),"Blog Post "+Number.get_id(),blog_post,blog_post,blog_post);
 			for(let a=0;a<10;a++){
-				blog_post=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),blog_post,blog_post,blog_post);
+				blog_post=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " +String(a),blog_post,blog_post,blog_post);
 			}
-			blog_post = Sub_Item.get_test_bind_item_sub_item(blog_post);
+			blog_post=Sub_Item.get_test_bind_item_sub_item(blog_post);
 		}
 		return blog_post;
 	};
-	static get_test_list = () =>{
-		let item_list = [];
-		for(let a=0;a<20;a++){
+	static get_test_list=(option)=>{
+		if(!option){
+			option={blog_post_count:19};
+		}
+		let item_list=[];
+		for(let a=0;a<option.blog_post_count;a++){
 			item_list.push(Blog_Post.get_test());
 		}
 		return item_list;
@@ -345,9 +374,12 @@ class Review{
 		review.state=state_list[Number.get_id(state_list.length-1)];
 		return review;
 	};
-	static get_test_list = () =>{
+	static get_test_list=(option)=>{
+		if(!option){
+			option = {review_count:19};
+		}
 		let item_list = [];
-		for(let a=0;a<20;a++){
+		for(let a=0;a<option.review_count;a++){
 			item_list.push(Review.get_test());
 		}
 		return item_list;
@@ -553,6 +585,12 @@ class Category {
 			case DataType.EVENT:
 				return "Event";
 				break;
+			case DataType.PAGE:
+				return "Page";
+				break;
+			case DataType.PHOTO:
+				return "Photo";
+				break;
 			case DataType.GALLERY:
 				return "Gallery";
 				break;
@@ -564,12 +602,6 @@ class Category {
 				break;
 			case DataType.EVENT:
 				return "Event";
-				break;
-			case DataType.PRODUCT:
-				return "Product";
-				break;
-			case DataType.SERVICE:
-				return "Service";
 				break;
 			case DataType.CATEGORY:
 				return "Category";

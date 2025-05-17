@@ -43,18 +43,38 @@ describe("connect", () => {
                 /* --DATA_TYPE--END */
 
                 /* --REVIEW--START */
-                Log.w("Review",Review.get_test());
-                Log.w("Review List",Review.get_test_list());
+                //Log.w("Review",Review.get_test());
+                //Log.w("Review List",Review.get_test_list());
+                /*
+                let review_list = Review.get_test_list({review_count:3,get_item:true})
+                Log.w("Review List",review_list);
+                */
                 /* --REVIEW--END */
 
                 /* --BLOG_POST--START */
-                //let blog_post = Blog_Post.get_test({get_item:true})
-                //Log.w("Blog Post",blog_post);
-                //Log.w("Blog Post Section 1",blog_post.section_1);
-                //Log.w("Blog Post Section 1, Section 1",blog_post.section_1.section_1);
+                /*
+                let blog_post_list = Blog_Post.get_test_list({blog_post_count:3,get_item:true})
+                Log.w("Blog Post List",blog_post_list);
+                */
+                /*
+                let blog_post = Blog_Post.get_test({get_item:true})
+                Log.w("Blog Post",blog_post);
+                Log.w("Blog Post Section 1",blog_post.section_1);
+                Log.w("Blog Post Section 1, Section 1",blog_post.section_1.section_1);
+                */
                 /* --BLOG_POST--END */
 
+                /* --SERVICE--START */
+                let service_list = Service.get_test_list({service_count:3,get_item:true})
+                Log.w("Service List",service_list);
+                /* --SERVICE--END */
+
+
                 /* --EVENT--START */
+                /*
+                let event_list = Event.get_test_list({event_count:3,get_item:true})
+                Log.w("Event List",event_list);
+                */
                 //let event = Event.get_test({get_item:true})
                 //Log.w("Event",event);
                 //Log.w("Event Section 1",event.section_1);
