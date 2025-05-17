@@ -51,7 +51,7 @@ class Page{
 	};
 }
 class Product{
-	static get_test = (title,option) =>{
+	static get_test = (option) =>{
 		if(!option){
 			option={};
 		}
@@ -59,20 +59,19 @@ class Product{
 			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
 			DataItem.get_new(DataType.PRODUCT,0),
 			DataItem.get_new(DataType.PRODUCT,0),
-			Field.get_test(title));
+			Field.get_test("Product "+Number.get_id(),{get_value:false}));
 		product.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.type = "Type "+String(Number.get_id());
 		product.sub_type = "Sub Type "+String(Number.get_id());
 		product.stock = String(Number.get_id(3-1));
-		//product.category = Category.get_type_category_list(DataType.PRODUCT)[Number.get_id(Category.get_type_category_list(DataType.PRODUCT).length-1)].title;
 		product.category ="Category " + String(Number.get_id());
-		if(option.get_items){
-		product = Sub_Item.get_test_bind_new_child(Number.get_id(),title,product,product,product);
-		for(let a=0;a<10;a++){
-			product=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),product,product,product);
-		}
-		product = Sub_Item.get_test_bind_item_sub_item(product);
+		if(option.get_item){
+			product = Sub_Item.get_test_bind_new_child(Number.get_id(),"Product "+Number.get_id(),product,product,product);
+			for(let a=0;a<10;a++){
+				product=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),product,product,product);
+			}
+			product = Sub_Item.get_test_bind_item_sub_item(product);
 		}
 		return product;
 	};
@@ -105,33 +104,37 @@ class Product{
 	};
 }
 class Service{
-	static get_test = (title) =>{
+	static get_test = (option) =>{
 		let service = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.SERVICE,Number.get_id()),
 			DataItem.get_new(DataType.SERVICE,0),
 			DataItem.get_new(DataType.SERVICE,0),
-			Field.get_test(title));
+			Field.get_test("Service "+Number.get_id(),{get_value:false}));
 		service = Sub_Item.get_test_bind_new_child(Number.get_id(),title,service,service,service);
 		service.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.type = "Type "+String(Number.get_id());
 		service.sub_type = "Sub Type "+String(Number.get_id());
 		service.stock = String(Number.get_id(3-1));
-		for(let a=0;a<10;a++){
-			service=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),service,service,service);
+		service.category ="Category " + String(Number.get_id());
+		if(option.get_item){
+			service = Sub_Item.get_test_bind_new_child(Number.get_id(),"Service "+Number.get_id(),service,service,service);
+			for(let a=0;a<10;a++){
+				service=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),service,service,service);
+			}
+			service = Sub_Item.get_test_bind_item_sub_item(service);
 		}
-		service = Sub_Item.get_test_bind_item_sub_item(service);
-		return service;
+	return service;
 	};
 }
 class Event{
-	static get_test = (title) =>{
+	static get_test = (option) =>{
 		let event = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.EVENT,Number.get_id()),
 			DataItem.get_new(DataType.EVENT,0),
 			DataItem.get_new(DataType.EVENT,0),
-			Field.get_test(title));
-		event = Sub_Item.get_test_bind_new_child(Number.get_id(),title,event,event,event);
+			Field.get_test("Event "+Number.get_id(),{get_value:false}));
+		event = Sub_Item.get_test_bind_new_child(Number.get_id(),"Event "+Number.get_id(),event,event,event);
 		event.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		event.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
@@ -140,15 +143,26 @@ class Event{
 		event.location = "Location "+String(Number.get_id());
 		event.meeting_link = "Meeting Link "+String(Number.get_id());
 		event.stock = String(Number.get_id(3-1));
-		for(let a=0;a<10;a++){
-			event=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),event,event,event);
+		event.category ="Category " + String(Number.get_id());
+		if(option.get_item){
+			event=Sub_Item.get_test_bind_new_child(Number.get_id(),"Event "+Number.get_id(),event,event,event);
+			for(let a=0;a<10;a++){
+				event=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),event,event,event);
+			}
+			event=Sub_Item.get_test_bind_item_sub_item(event);
 		}
-		event = Sub_Item.get_test_bind_item_sub_item(event);
 		return event;
 	};
 }
 class Field{
-	static get_test = (title) =>{
+	static get_test = (title,option) =>{
+		if(!title){
+			title="";
+		}
+		if(!option){
+			option={get_value:true};
+		}
+		Log.w('option',option);
 		let item = {
 			date_create:new moment().toISOString(),
 			date_save:new moment().toISOString(),
@@ -159,8 +173,10 @@ class Field{
 			sub_note : "Sub Note "+String(Number.get_id()),
 			note : "Note "+String(Number.get_id())
 		}
-		for(let b = 1;b<20;b++){
-			item['value_'+String(b)] = 'value ' + String(b);
+		if(option.get_value){
+			for(let b = 1;b<20;b++){
+				item['value_'+String(b)] = 'value ' + String(b);
+			}
 		}
 		return item;
 	}
@@ -195,8 +211,12 @@ class PageType {
 	static HOME='home';
 	static ABOUT='about';
 	static CONTACT='contact';
+	static BLOG_POST='blog_post';
+	static GALLERY='gallery';
+	static EVENT='event';
 	static SERVICE='service';
 	static PRODUCT='product';
+	static PROJECT='project';
 	static TEAM='team';
 	static SECTION_1='section_1';
 	static SECTION_2='section_2';
@@ -247,11 +267,11 @@ class DataType {
 	}
 	static get_item_list = () =>{
 		return [
-				{	title:DataType.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
-				{	title:DataType.get_title(DataType.SERVICE),type:DataType.SERVICE},
-				{	title:DataType.get_title(DataType.EVENT),type:DataType.EVENT},
-				{	title:DataType.get_title(DataType.GALLERY),type:DataType.GALLERY},
-				{	title:DataType.get_title(DataType.PRODUCT),type:DataType.PRODUCT}
+			{	title:DataType.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
+			{	title:DataType.get_title(DataType.SERVICE),type:DataType.SERVICE},
+			{	title:DataType.get_title(DataType.EVENT),type:DataType.EVENT},
+			{	title:DataType.get_title(DataType.GALLERY),type:DataType.GALLERY},
+			{	title:DataType.get_title(DataType.PRODUCT),type:DataType.PRODUCT}
 		]
 	};
 	static ADMIN='admin_biz';
@@ -277,27 +297,89 @@ class DataType {
 	static USER='user_biz';
 	static VIDEO='video_biz';
 }
+class Blog_Post{
+	static get_test = (option) =>{
+		if(!option){
+			option = {get_value:false,get_item:false};
+		}
+		let blog_post = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.BLOG_POST,Number.get_id()),
+			DataItem.get_new(DataType.BLOG_POST,0),
+			DataItem.get_new(DataType.BLOG_POST,0),
+			Field.get_test("Blog Post "+Number.get_id(),{get_value:false}));
+		blog_post.author="First Name "+ Number.get_id();
+		blog_post.tag="tag 1,tag 2,tag 3";
+		blog_post.category ="Category " + String(Number.get_id());
+		if(option.get_item){
+			blog_post = Sub_Item.get_test_bind_new_child(Number.get_id(),"Blog Post "+Number.get_id(),blog_post,blog_post,blog_post);
+			for(let a=0;a<10;a++){
+				blog_post=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),blog_post,blog_post,blog_post);
+			}
+			blog_post = Sub_Item.get_test_bind_item_sub_item(blog_post);
+		}
+		return blog_post;
+	};
+	static get_test_list = () =>{
+		let item_list = [];
+		for(let a=0;a<20;a++){
+			item_list.push(Blog_Post.get_test());
+		}
+		return item_list;
+	};
+}
+class Review{
+	static get_test = () =>{
+		let city_list = ["Miami","Atlanta","Chicago","Seattle","New York City"];
+		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
+		let review = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.REVIEW,Number.get_id()),
+			DataItem.get_new(DataType.REVIEW,0),
+			DataItem.get_new(DataType.REVIEW,0),
+			Field.get_test("Review "+Number.get_id(),{get_value:false}));
+		review.email="ceo@biz"+String(Number.get_id())+".com";
+		review.first_name="First Name "+ Number.get_id();
+		review.last_name="Last Name "+ Number.get_id();
+		review.position="Position "+ Number.get_id();
+		review.comment="My comment "+ Number.get_id();
+		review.city=city_list[Number.get_id(city_list.length-1)];
+		review.state=state_list[Number.get_id(state_list.length-1)];
+		return review;
+	};
+	static get_test_list = () =>{
+		let item_list = [];
+		for(let a=0;a<20;a++){
+			item_list.push(Review.get_test());
+		}
+		return item_list;
+	};
+}
 class Business {
-	static get_new = () =>{
-		return DataItem.get_new(DataType.BUSINESS,Number.get_id(),
-			{
-				title:"",
+	static get_new = (title) =>{
+		if(!title){
+			title="";
+		}
+		return DataItem.get_new_full_item(
+			DataItem.get_new(DataType.BUSINESS,0),
+			DataItem.get_new(DataType.BUSINESS,0),
+			DataItem.get_new(DataType.BUSINESS,0),{
+				title:title,
 				email:"",
 				phone:"",
 				address_1:"",
 				address_2:"",
 				city:"",
 				state:"",
-				zip:"",
-			});
+				zip:""});
 	};
 	static get_test = () =>{
 		let item = DataItem.get_new(DataType.BUSINESS,Number.get_id());
-		let city_list = ["Blank","Miami","Atlanta","Chicago","Seattle","New York City"];
-		let state_list = ["Blank","Georgia","New York","Illinois","Washington","Flordia"];
-		item.title = "Title "+Number.get_id();
-		item.date_create=new moment().toISOString();
-		item.date_save=new moment().toISOString();
+		let city_list = ["Miami","Atlanta","Chicago","Seattle","New York City"];
+		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
+		let business = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.BUSINESS,Number.get_id()),
+			DataItem.get_new(DataType.BUSINESS,0),
+			DataItem.get_new(DataType.BUSINESS,0),
+			Field.get_test("Title "+Number.get_id()));
 		item.email="ceo@business.com";
 		item.phone="123-456-"+Number.get_id();
 		item.address_1=Number.get_id()+" Apple St.";
@@ -432,17 +514,17 @@ class Category {
 			DataItem.get_new(DataType.CATEGORY,0),
 			DataItem.get_new(DataType.CATEGORY,0),
 			Field.get_test("Category " +Number.get_id()));
-			category.type = Category.get_category_list()[Number.get_id(category_list.length-1)].data_type;
+		category.type = Category.get_category_list()[Number.get_id(category_list.length-1)].data_type;
 		return category;
 	}
 	static get_type_category_list(type,count){
 		let category_list = [];
 		for(let a=0;a<count;a++){
-		let category = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.CATEGORY,"Category "+Number.get_id()),
-			DataItem.get_new(DataType.CATEGORY,0),
-			DataItem.get_new(DataType.CATEGORY,0),
-			Field.get_test("Category " +Number.get_id()));
+			let category = DataItem.get_new_full_item(
+				DataItem.get_new(DataType.CATEGORY,"Category "+Number.get_id()),
+				DataItem.get_new(DataType.CATEGORY,0),
+				DataItem.get_new(DataType.CATEGORY,0),
+				Field.get_test("Category " +Number.get_id()));
 			category.type = type
 			category_list.push(category);
 		}
@@ -802,13 +884,12 @@ class Sub_Item{
 			}
 			return item;
 		};
-
 	};
-
 }
 module.exports = {
 	BiZ_Url,
 	Business,
+	Blog_Post,
 	Category,
 	CMS,
 	DataItem,
@@ -821,6 +902,7 @@ module.exports = {
 	Page,
 	PageType,
 	Product,
+	Review,
 	TemplateType,
 	Template,
 	Url,

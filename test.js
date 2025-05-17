@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post} = require('./index');
 const {Log,Test,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -42,6 +42,42 @@ describe("connect", () => {
                 //Log.w('data_type_list',DataType.get_item_list());
                 /* --DATA_TYPE--END */
 
+                /* --REVIEW--START */
+                Log.w("Review",Review.get_test());
+                Log.w("Review List",Review.get_test_list());
+                /* --REVIEW--END */
+
+                /* --BLOG_POST--START */
+                //let blog_post = Blog_Post.get_test({get_item:true})
+                //Log.w("Blog Post",blog_post);
+                //Log.w("Blog Post Section 1",blog_post.section_1);
+                //Log.w("Blog Post Section 1, Section 1",blog_post.section_1.section_1);
+                /* --BLOG_POST--END */
+
+                /* --EVENT--START */
+                //let event = Event.get_test({get_item:true})
+                //Log.w("Event",event);
+                //Log.w("Event Section 1",event.section_1);
+                //Log.w("Event Section 1, Section 1",event.section_1.section_1);
+                /* --EVENT--END */
+
+                /* --PRODUCT--START */
+                /*
+                let product = Product.get_test({get_item:true})
+                Log.w("Product",product);
+                Log.w("Product Section 1",product.section_1);
+                Log.w("Product Section 1, Section 1",product.section_1.section_1);
+                */
+                /* --PRODUCT--END */
+
+
+
+
+                /* --BUSINESS--START */
+                //Log.w("Business",Business.get_new("Business " + Number.get_id()));
+                /* --BUSINESS--END */
+
+
 
                 /* --CATEGORY--START */
                 //Log.w("Category",Category.get_test("Category " + Number.get_id(),{get_items:false}));
@@ -52,7 +88,7 @@ describe("connect", () => {
                 /* --PRODUCT--START */
                 //let product = Product.get_test_list_by_category();
                 //Log.w('product_test',Product.get_test("Product " + Number.get_id(),{get_items:false}));
-                Log.w('product_list_test',Product.get_test_list_by_category({get_items:false,product_count:9,category_count:3}));
+                //Log.w('product_list_test',Product.get_test_list_by_category({get_items:false,product_count:9,category_count:3}));
                 //console.log(Product.get_test("Product " + Number.get_id(),{get_items:false}));
                 /* --PRODUCT--END */
 
