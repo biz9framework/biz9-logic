@@ -242,6 +242,12 @@ class FieldType {
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
 }
+class Social {
+	static FACEBOOK_URL="https://facebook.com/";
+	static TWITTER_URL="https://twitter.com/";
+	static INSTAGRAM_URL="https://instagram.com/";
+	static YOUTUBE_URL="https://youtube.com/";
+}
 class PageType {
 	static HOME='home';
 	static ABOUT='about';
@@ -412,7 +418,13 @@ class Business {
 				address_2:"",
 				city:"",
 				state:"",
-				zip:""});
+				zip:"",
+				website:"",
+				youtube:"",
+				instagram:"",
+				facebook:"",
+				twitter:""
+			});
 	};
 	static get_test = () =>{
 		let item = DataItem.get_new(DataType.BUSINESS,Number.get_id());
@@ -424,12 +436,17 @@ class Business {
 			DataItem.get_new(DataType.BUSINESS,0),
 			Field.get_test("Title "+Number.get_id()));
 		item.email="ceo@business.com";
-		item.phone="123-456-"+Number.get_id();
-		item.address_1=Number.get_id()+" Apple St.";
-		item.address_2="PO Box "+Number.get_id();
+		item.phone="123-456-"+Number.get_id(3333);
+		item.address_1=Number.get_id(99)+" Apple St.";
+		item.address_2="PO "+Number.get_id(99);
 		item.city=city_list[Number.get_id(city_list.length-1)];
 		item.state=state_list[Number.get_id(state_list.length-1)];
 		item.zip=Number.get_id(9999);
+		item.website="website_" + Number.get_id(9999);
+		item.youtube="youtube_"+Number.get_id(9999);
+		item.instagram="instagram_"+Number.get_id(9999);
+		item.facebook="facebook_"+Number.get_id(9999);
+		item.twitter="twitter_"+Number.get_id(9999);
 		return item;
 	};
 	static get_full_address(business){
@@ -939,6 +956,7 @@ module.exports = {
 	DataType,
 	Field,
 	FieldType,
+	Social,
 	Event,
 	Message,
 	Obj,
