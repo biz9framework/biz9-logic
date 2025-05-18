@@ -38,6 +38,7 @@ describe("connect", () => {
                 /* --CONFIG--END */
 
                 /* --PAGE--START */
+                //let page = Page.get_test("Home",{item_count:20,page_count:2,get_value:true,get_item:true})
                 /*
                 let page = Page.get_test({item_count:9,page_count:19,get_item:true,get_value:true})
                 //let page = Page.get_test()
@@ -48,9 +49,12 @@ describe("connect", () => {
                 /* --PAGE--END */
 
                 /* --PRODUCT--START */
-                //let product = Product.get_test({item_count:9,product_count:19,get_item:true,get_value:true})
                 /*
+                let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
+                let product = Product.get_test({item_count:9,product_count:19,get_item:true,get_value:true})
                 let product = Product.get_test()
+                Log.w('product_list',product_list);
+                Log.w('category_list',category_list);
                 Log.w("Product",product);
                 Log.w("Product_section_1",product.section_1);
                 Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);

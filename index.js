@@ -98,7 +98,7 @@ class Product{
 		for(let a=0;a<category_list.length;a++){
 			for(let b=0;b<product_count;b++){
 				item_count++;
-				let product = Product.get_test("Product " + String(item_count));
+				let product = Product.get_test({item_count:0,product_count:product_count,get_value:false,get_item:false});
 				product.category = category_list[Number.get_id(category_list.length-1)].title;
 				product_list.push(product);
 			}
@@ -385,7 +385,7 @@ class Review{
 	};
 }
 class Business {
-	static get_new = (title) =>{
+	static get_new = () =>{
 		if(!title){
 			title="";
 		}
@@ -393,7 +393,7 @@ class Business {
 			DataItem.get_new(DataType.BUSINESS,0),
 			DataItem.get_new(DataType.BUSINESS,0),
 			DataItem.get_new(DataType.BUSINESS,0),{
-				title:title,
+				title:"Business " + Number.get_id(),
 				email:"",
 				phone:"",
 				address_1:"",
