@@ -35,31 +35,34 @@ class Template{
 	};
 }
 class Page{
-	static get_test = (title) =>{
+	static get_test = (option) =>{
+		if(!option){
+			option = {item_count:9,page_count:9,get_value:false,get_item:false};
+		}
 		let page = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PAGE,Number.get_id()),
 			DataItem.get_new(DataType.PAGE,0),
 			DataItem.get_new(DataType.PAGE,0),
-			Field.get_test(title));
-
-		for(let a=0;a<20;a++){
-			page=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section "+a,page,page,page);
+			Field.get_test("Page "+ String(Number.get_id()),option));
+		if(option.get_item){
+			for(let a=0;a<option.item_count;a++){
+				page=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section "+a,page,page,page);
+			}
+			page=Sub_Item.get_test_bind_item_sub_item(page);
 		}
-		page = Sub_Item.get_test_bind_item_sub_item(page);
-
 		return page;
 	};
 }
 class Product{
 	static get_test = (option) =>{
 		if(!option){
-			option={};
+			option = {item_count:9,product_count:9,get_value:false,get_item:false};
 		}
 		let product = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
 			DataItem.get_new(DataType.PRODUCT,0),
 			DataItem.get_new(DataType.PRODUCT,0),
-			Field.get_test("Product "+Number.get_id(),{get_value:false}));
+			Field.get_test("Product "+Number.get_id(),option));
 		product.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.type = "Type "+String(Number.get_id());
@@ -67,14 +70,14 @@ class Product{
 		product.stock = String(Number.get_id(3-1));
 		product.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			product = Sub_Item.get_test_bind_new_child(Number.get_id(),"Product "+Number.get_id(),product,product,product);
-			for(let a=0;a<10;a++){
-				product=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),product,product,product);
+			for(let a=0;a<option.item_count;a++){
+				product=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section "+a,product,product,product);
 			}
-			product = Sub_Item.get_test_bind_item_sub_item(product);
+			product=Sub_Item.get_test_bind_item_sub_item(product);
 		}
 		return product;
 	};
+
 	static get_test_list_by_category = (option) =>{
 		let product_list = [];
 		let category_count = 9;
@@ -106,13 +109,13 @@ class Product{
 class Service{
 	static get_test = (option) =>{
 		if(!option){
-			option = {get_value:false,get_item:false};
-		}
+				option = {item_count:9,service_count:9,get_value:false,get_item:false};
+	}
 		let service = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.SERVICE,Number.get_id()),
 			DataItem.get_new(DataType.SERVICE,0),
 			DataItem.get_new(DataType.SERVICE,0),
-			Field.get_test("Service "+Number.get_id(),{get_value:false}));
+			Field.get_test("Service "+ String(Number.get_id()),option));
 		service = Sub_Item.get_test_bind_new_child(Number.get_id(),"Service "+Number.get_id(),service,service,service);
 		service.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
@@ -121,13 +124,12 @@ class Service{
 		service.stock = String(Number.get_id(3-1));
 		service.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			service = Sub_Item.get_test_bind_new_child(Number.get_id(),"Service "+Number.get_id(),service,service,service);
-			for(let a=0;a<10;a++){
-				service=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " + String(a),service,service,service);
+			for(let a=0;a<option.item_count;a++){
+				service=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section "+a,service,service,service);
 			}
-			service = Sub_Item.get_test_bind_item_sub_item(service);
+			service=Sub_Item.get_test_bind_item_sub_item(service);
 		}
-	return service;
+		return service;
 	};
 	static get_test_list=(option)=>{
 		if(!option){
@@ -143,13 +145,13 @@ class Service{
 class Event{
 	static get_test = (option) =>{
 		if(!option){
-			option = {get_value:false,get_item:false};
+			option = {item_count:9,event_count:9,get_value:false,get_item:false};
 		}
 		let event = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.EVENT,Number.get_id()),
 			DataItem.get_new(DataType.EVENT,0),
 			DataItem.get_new(DataType.EVENT,0),
-			Field.get_test("Event "+Number.get_id(),{get_value:false}));
+			Field.get_test("Event "+ String(Number.get_id()),option));
 		event = Sub_Item.get_test_bind_new_child(Number.get_id(),"Event "+Number.get_id(),event,event,event);
 		event.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		event.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
@@ -161,13 +163,12 @@ class Event{
 		event.stock = String(Number.get_id(3-1));
 		event.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			event=Sub_Item.get_test_bind_new_child(Number.get_id(),"Event "+Number.get_id(),event,event,event);
-			for(let a=0;a<10;a++){
-				event=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " +String(a),event,event,event);
+			for(let a=0;a<option.item_count;a++){
+				event=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section "+a,event,event,event);
 			}
 			event=Sub_Item.get_test_bind_item_sub_item(event);
 		}
-		return event;
+	return event;
 	};
 	static get_test_list=(option)=>{
 		if(!option){
@@ -325,20 +326,19 @@ class DataType {
 class Blog_Post{
 	static get_test = (option) =>{
 		if(!option){
-			option = {get_value:false,get_item:false};
+			option = {item_count:9,blog_post_count:9,get_value:false,get_item:false};
 		}
 		let blog_post = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.BLOG_POST,Number.get_id()),
 			DataItem.get_new(DataType.BLOG_POST,0),
 			DataItem.get_new(DataType.BLOG_POST,0),
-			Field.get_test("Blog Post "+Number.get_id(),{get_value:false}));
+			Field.get_test("Blog Post "+Number.get_id(),option));
 		blog_post.author="First Name "+ Number.get_id();
 		blog_post.tag="tag 1,tag 2,tag 3";
 		blog_post.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			blog_post=Sub_Item.get_test_bind_new_child(Number.get_id(),"Blog Post "+Number.get_id(),blog_post,blog_post,blog_post);
-			for(let a=0;a<10;a++){
-				blog_post=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section " +String(a),blog_post,blog_post,blog_post);
+			for(let a=0;a<option.item_count;a++){
+				blog_post=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section "+a,blog_post,blog_post,blog_post);
 			}
 			blog_post=Sub_Item.get_test_bind_item_sub_item(blog_post);
 		}
@@ -346,11 +346,11 @@ class Blog_Post{
 	};
 	static get_test_list=(option)=>{
 		if(!option){
-			option={blog_post_count:19};
+			option = {item_count:9,blog_post_count:9,get_value:false,get_item:false};
 		}
 		let item_list=[];
 		for(let a=0;a<option.blog_post_count;a++){
-			item_list.push(Blog_Post.get_test());
+			item_list.push(Blog_Post.get_test(option));
 		}
 		return item_list;
 	};
@@ -417,7 +417,7 @@ class Business {
 		item.address_2="PO Box "+Number.get_id();
 		item.city=city_list[Number.get_id(city_list.length-1)];
 		item.state=state_list[Number.get_id(state_list.length-1)];
-		item.zip="123"+Number.get_id();
+		item.zip=Number.get_id(9999);
 		return item;
 	};
 	static get_full_address(business){

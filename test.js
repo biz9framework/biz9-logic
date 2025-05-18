@@ -29,7 +29,7 @@ describe("connect", () => {
     it("_connect", () => {
         series([
 
-        function(call) {
+            function(call) {
                 console.log('CONNECT-START');
 
                 /* --CONFIG--START */
@@ -37,10 +37,47 @@ describe("connect", () => {
                 //let cloud_url = Url.connect(biz9_config);
                 /* --CONFIG--END */
 
+                /* --PAGE--START */
+                /*
+                let page = Page.get_test({item_count:9,page_count:19,get_item:true,get_value:true})
+                //let page = Page.get_test()
+                Log.w("Page",page);
+                Log.w("Page_section_1",page.section_1);
+                Log.w("Page_section_1_section_1_section_1",page.section_1.section_1.section_1);
+                */
+                /* --PAGE--END */
 
-                /* --DATA_TYPE--START */
-                //Log.w('data_type_list',DataType.get_item_list());
-                /* --DATA_TYPE--END */
+                /* --PRODUCT--START */
+                //let product = Product.get_test({item_count:9,product_count:19,get_item:true,get_value:true})
+                /*
+                let product = Product.get_test()
+                Log.w("Product",product);
+                Log.w("Product_section_1",product.section_1);
+                Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);
+                */
+                /* --PRODUCT--END */
+
+                /* --SERVICE--START */
+                /*
+                let service = Service.get_test({item_count:9,service_count:19,get_item:true,get_value:true})
+                //let service = Service.get_test()
+                Log.w("Service",service);
+                Log.w("Service_section_1",service.section_1);
+                Log.w("Service_section_1_section_1_section_1",service.section_1.section_1.section_1);
+                */
+                /* --SERVICE--END */
+
+                /* --SERVICE--START */
+                /*
+                let event = Event.get_test({item_count:9,event_count:19,get_item:true,get_value:true})
+                //let service = Service.get_test()
+                Log.w("Event",event);
+                Log.w("Event_section_1",event.section_1);
+                Log.w("Event_section_1_section_1_section_1",event.section_1.section_1.section_1);
+                */
+                /* --SERVICE--END */
+
+
 
                 /* --REVIEW--START */
                 //Log.w("Review",Review.get_test());
@@ -51,44 +88,6 @@ describe("connect", () => {
                 */
                 /* --REVIEW--END */
 
-                /* --BLOG_POST--START */
-                /*
-                let blog_post_list = Blog_Post.get_test_list({blog_post_count:3,get_item:true})
-                Log.w("Blog Post List",blog_post_list);
-                */
-                /*
-                let blog_post = Blog_Post.get_test({get_item:true})
-                Log.w("Blog Post",blog_post);
-                Log.w("Blog Post Section 1",blog_post.section_1);
-                Log.w("Blog Post Section 1, Section 1",blog_post.section_1.section_1);
-                */
-                /* --BLOG_POST--END */
-
-                /* --SERVICE--START */
-                let service_list = Service.get_test_list({service_count:3,get_item:true})
-                Log.w("Service List",service_list);
-                /* --SERVICE--END */
-
-
-                /* --EVENT--START */
-                /*
-                let event_list = Event.get_test_list({event_count:3,get_item:true})
-                Log.w("Event List",event_list);
-                */
-                //let event = Event.get_test({get_item:true})
-                //Log.w("Event",event);
-                //Log.w("Event Section 1",event.section_1);
-                //Log.w("Event Section 1, Section 1",event.section_1.section_1);
-                /* --EVENT--END */
-
-                /* --PRODUCT--START */
-                /*
-                let product = Product.get_test({get_item:true})
-                Log.w("Product",product);
-                Log.w("Product Section 1",product.section_1);
-                Log.w("Product Section 1, Section 1",product.section_1.section_1);
-                */
-                /* --PRODUCT--END */
 
 
 
@@ -99,36 +98,6 @@ describe("connect", () => {
 
 
 
-                /* --CATEGORY--START */
-                //Log.w("Category",Category.get_test("Category " + Number.get_id(),{get_items:false}));
-                //let category = Category.get_test_list_by_category();
-                /* --CATEGORY--END */
-
-
-                /* --PRODUCT--START */
-                //let product = Product.get_test_list_by_category();
-                //Log.w('product_test',Product.get_test("Product " + Number.get_id(),{get_items:false}));
-                //Log.w('product_list_test',Product.get_test_list_by_category({get_items:false,product_count:9,category_count:3}));
-                //console.log(Product.get_test("Product " + Number.get_id(),{get_items:false}));
-                /* --PRODUCT--END */
-
-                //console.log(Template.get_test()); //get_template_test
-                //console.log(Business.get_test()); // get_business_test
-               // console.log(Page.get_test("Page " +String(Number.get_id()))); // get_page_test
-                //console.log(Page.get_test("Page " +String("Cool"))); // get_page_test
-                //console.log(Event.get_test());
-                //console.log(Product.get_test("Product " +String(Number.get_id()))); // get_product_test
-                //console.log(Service.get_test("Service " +String(Number.get_id()))); // get_service_test
-                //console.log(Event.get_test("Event " +String(Number.get_id()))); // get_service_test
-                //console.log(Category.get_test()); // get_category_test
-                //console.log(product.section_1);
-                //get page
-
-                //Log.w('product',product);
-                //Log.w('product_section_1',product.section_1);
-
-                //console.log(Product.get_test());
-                //Log.w('connect_url',cloud_url);
                 console.log('CONNECT-SUCCESS');
                 //call()
             },
@@ -244,10 +213,10 @@ describe("connect", () => {
                 category_list.push({data_type:DataType.BLANK,id:0,title:Number.get_id()});
                 category_list.push({data_type:DataType.BLANK,id:0,title:Number.get_id()});
                 Log.w('cat',Cat.set_category_drop_down_list(category_list));
-                //let cloud_url = CMS.get_new_query_item_by_item(item);
-                //Log.w('connect_url',cloud_url);
-                //console.log('SET_CATEGORY_DROP_DOWN_LIST-END');
-                //call()
+    //let cloud_url = CMS.get_new_query_item_by_item(item);
+    //Log.w('connect_url',cloud_url);
+    //console.log('SET_CATEGORY_DROP_DOWN_LIST-END');
+    //call()
             },
 
 
@@ -262,10 +231,10 @@ describe("connect", () => {
                 item.top_id = Number.get_id();
                 item.top_data_type = DataType.BLANK;
                 Log.w('item',item);
-                //let cloud_url = CMS.get_new_query_item_by_item(item);
-                //Log.w('connect_url',cloud_url);
+//let cloud_url = CMS.get_new_query_item_by_item(item);
+//Log.w('connect_url',cloud_url);
                 console.log('GET-NEW-QUERY-ITEM-BY-ITEM-SUCCESS');
-                //call()
+//call()
             },
 
 
@@ -279,7 +248,7 @@ describe("connect", () => {
                 let cloud_url = BiZ_Url.get_full_item(biz9_config,item,parent_item,top_item);
                 Log.w('connect_url',cloud_url);
                 console.log('GET-BiZ-Full-Url-Item-Get-Item-SUCCESS');
-                //call()
+//call()
             },
 
 
@@ -395,21 +364,21 @@ describe("connect", () => {
                 console.log('GET_URL-BIZ-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let data_type = 'dt_blank';
-                //let cloud_url = Url.get_biz_item(biz9_config,data_type,ID);
+//let cloud_url = Url.get_biz_item(biz9_config,data_type,ID);
                 let cloud_url = Url.delete_biz_item(biz9_config,data_type,ID);
                 Log.w('get_url_biz_item',cloud_url);
                 console.log('GET_URL-BIZ-ITEM-SUCCESS');
                 call()
             },
-            */
-            function(call) {
-                // never happens, because "second thing"
-                // passed an error to the done() callback
-            }
+           */
+    function(call) {
+        // never happens, because "second thing"
+        // passed an error to the done() callback
+    }
         ], function(err) {
             console.log(err.message) // "another thing"
         })
-     });
+    });
 });
 
 
