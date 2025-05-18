@@ -1,9 +1,4 @@
 const { DataItem,DataType } = require('biz9-logic');
-console.log('aaaaaa');
-console.log('aaaaaa');
-console.log('aaaaaa');
-console.log(DataType);
-console.log('bbbbbbbb');
 const get_template_test = () =>{
     let template = DataItem.get_new_full_item(
         DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
