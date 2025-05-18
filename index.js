@@ -39,6 +39,9 @@ class Page{
 		if(!option){
 			option = {item_count:9,page_count:9,get_value:false,get_item:false};
 		}
+		if(!option.item_count){
+			option.item_count=10;
+		}
 		let page = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PAGE,Number.get_id()),
 			DataItem.get_new(DataType.PAGE,0),
@@ -111,6 +114,9 @@ class Service{
 		if(!option){
 				option = {item_count:9,service_count:9,get_value:false,get_item:false};
 	}
+	if(!option.item_count){
+			option.item_count=10;
+		}
 		let service = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.SERVICE,Number.get_id()),
 			DataItem.get_new(DataType.SERVICE,0),
@@ -146,6 +152,9 @@ class Event{
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:9,event_count:9,get_value:false,get_item:false};
+		}
+		if(!option.item_count){
+			option.item_count=10;
 		}
 		let event = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.EVENT,Number.get_id()),
@@ -327,6 +336,9 @@ class Blog_Post{
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:9,blog_post_count:9,get_value:false,get_item:false};
+		}
+		if(!option.item_count){
+			option.item_count=10;
 		}
 		let blog_post = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.BLOG_POST,Number.get_id()),

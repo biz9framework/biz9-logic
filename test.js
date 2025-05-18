@@ -48,17 +48,26 @@ describe("connect", () => {
                 */
                 /* --PAGE--END */
 
+                /* --BLOG_POST--START */
+                //let blog_post = Blog_Post.get_test({item_count:9,blog_post_count:19,get_item:true,get_value:true})
+                //let blog_post = Blog_Post.get_test()
+                //let blog_post_list=Blog_Post.get_test_list({category_count:5,blog_post_count:9,get_value:true,get_item:true});
+                //Log.w('blog_post_list',blog_post_list);
+                //Log.w("Blog_Post",blog_post);
+                //Log.w("BLog_Post_section_1",blog_post.section_1);
+                //Log.w("BLog_Post_section_1_section_1_section_1",blog_post.section_1.section_1.section_1);
+                /* --BLOG_POST--END */
+
+
                 /* --PRODUCT--START */
-                /*
-                let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
+                //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
                 let product = Product.get_test({item_count:9,product_count:19,get_item:true,get_value:true})
-                let product = Product.get_test()
-                Log.w('product_list',product_list);
-                Log.w('category_list',category_list);
-                Log.w("Product",product);
+                //let product = Product.get_test()
+                //Log.w('product_list',product_list);
+                //Log.w('category_list',category_list);
+                //Log.w("Product",product);
                 Log.w("Product_section_1",product.section_1);
                 Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);
-                */
                 /* --PRODUCT--END */
 
                 /* --SERVICE--START */
