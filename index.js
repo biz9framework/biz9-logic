@@ -247,6 +247,7 @@ class Social {
 	static TWITTER_URL="https://twitter.com/";
 	static INSTAGRAM_URL="https://instagram.com/";
 	static YOUTUBE_URL="https://youtube.com/";
+	static LINKEDIN_URL="https://linkedin.com/";
 }
 class PageType {
 	static HOME='home';
