@@ -49,13 +49,13 @@ describe("connect", () => {
                 /* --PAGE--END */
 
                 /* --BLOG_POST--START */
-                let [category_list,blog_post_list]=Blog_Post.get_test_list_by_category({category_count:5,blog_post_count:9});
-                Log.w('blog_post_list',blog_post_list);
+                //let blog_post_list=Blog_Post.get_test_list({category_count:5,blog_post_count:9,get_value:false,get_item:false});
+                //let [category_list,blog_post_list]=Blog_Post.get_test_list_by_category({category_count:5,blog_post_count:9});
+                //Log.w('blog_post_list',blog_post_list);
                 //Log.w('category_list',category_list);
 
                 //let blog_post = Blog_Post.get_test({item_count:9,blog_post_count:19,get_item:true,get_value:true})
                 //let blog_post = Blog_Post.get_test()
-                //let blog_post_list=Blog_Post.get_test_list({category_count:5,blog_post_count:9,get_value:true,get_item:true});
                 //Log.w('blog_post_list',blog_post_list);
                 //Log.w("Blog_Post",blog_post);
                 //Log.w("BLog_Post_section_1",blog_post.section_1);
@@ -75,12 +75,14 @@ describe("connect", () => {
                 /* --PRODUCT--END */
 
                 /* --EVENT--START */
+                let event_list=Event.get_test_list({category_count:5,event_count:9,get_value:false,get_item:false});
                 //let [category_list,event_list]=Event.get_test_list_by_category({category_count:5,event_count:9});
-                //Log.w('event_list',event_list);
+                Log.w('event_list',event_list);
                 //Log.w('category_list',category_list);
                 /* --EVENT--END */
 
                 /* --SERVICE--START */
+                //let service_list=Service.get_test_list({category_count:5,service_count:9,get_value:false,get_item:false});
                 //let [category_list,service_list]=Service.get_test_list_by_category({category_count:5,service_count:9});
                 //Log.w('service_list',service_list);
                 //Log.w('category_list',category_list);

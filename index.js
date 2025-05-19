@@ -139,11 +139,11 @@ class Service{
 	};
 	static get_test_list=(option)=>{
 		if(!option){
-			option={service_count:19};
+			option={service_count:10};
 		}
 		let item_list=[];
 		for(let a=0;a<option.service_count;a++){
-			item_list.push(Service.get_test());
+			item_list.push(Service.get_test(option));
 		}
 		return item_list;
 	};
@@ -208,11 +208,11 @@ class Event{
 	};
 	static get_test_list=(option)=>{
 		if(!option){
-			option={event_count:19};
+			option={service_count:10};
 		}
 		let item_list=[];
 		for(let a=0;a<option.event_count;a++){
-			item_list.push(Event.get_test());
+			item_list.push(Event.get_test(option));
 		}
 		return item_list;
 	};
@@ -416,6 +416,16 @@ class Blog_Post{
 			blog_post=Sub_Item.get_test_bind_item_sub_item(blog_post);
 		}
 		return blog_post;
+	};
+	static get_test_list=(option)=>{
+		if(!option){
+			option = {blog_post_count:10,get_value:false,get_item:false};
+		}
+		let item_list=[];
+		for(let a=0;a<option.blog_post_count;a++){
+			item_list.push(Blog_Post.get_test(option));
+		}
+		return item_list;
 	};
 	static get_test_list_by_category = (option) =>{
 		let blog_post_list = [];
