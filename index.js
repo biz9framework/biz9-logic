@@ -112,9 +112,9 @@ class Product{
 class Service{
 	static get_test = (option) =>{
 		if(!option){
-				option = {item_count:9,service_count:9,get_value:false,get_item:false};
-	}
-	if(!option.item_count){
+			option = {item_count:10,get_value:false,get_item:false};
+		}
+		if(!option.item_count){
 			option.item_count=10;
 		}
 		let service = DataItem.get_new_full_item(
@@ -147,11 +147,38 @@ class Service{
 		}
 		return item_list;
 	};
+	static get_test_list_by_category = (option) =>{
+		let service_list = [];
+		let category_count = 9;
+		let service_count = 19;
+		if(!option){
+			option={};
+		}
+		else{
+			if(option.category_count){
+				category_count = parseInt(option.category_count);
+			}
+			if(option.category_count){
+				service_count = parseInt(option.service_count);
+			}
+		}
+		let category_list = Category.get_type_category_list(DataType.SERVICE,category_count);
+		let item_count = 0;
+		for(let a=0;a<category_list.length;a++){
+			for(let b=0;b<service_count;b++){
+				item_count++;
+				let service = Service.get_test({item_count:0,service_count:service_count,get_value:false,get_item:false});
+				service.category = category_list[Number.get_id(category_list.length-1)].title;
+				service_list.push(service);
+			}
+		}
+		return [category_list,service_list]
+	};
 }
 class Event{
 	static get_test = (option) =>{
 		if(!option){
-			option = {item_count:9,event_count:9,get_value:false,get_item:false};
+			option = {item_count:9,get_value:false,get_item:false};
 		}
 		if(!option.item_count){
 			option.item_count=10;
@@ -177,7 +204,7 @@ class Event{
 			}
 			event=Sub_Item.get_test_bind_item_sub_item(event);
 		}
-	return event;
+		return event;
 	};
 	static get_test_list=(option)=>{
 		if(!option){
@@ -188,6 +215,33 @@ class Event{
 			item_list.push(Event.get_test());
 		}
 		return item_list;
+	};
+	static get_test_list_by_category = (option) =>{
+		let event_list = [];
+		let category_count = 9;
+		let event_count = 19;
+		if(!option){
+			option={};
+		}
+		else{
+			if(option.category_count){
+				category_count = parseInt(option.category_count);
+			}
+			if(option.category_count){
+				event_count = parseInt(option.event_count);
+			}
+		}
+		let category_list = Category.get_type_category_list(DataType.EVENT,category_count);
+		let item_count = 0;
+		for(let a=0;a<category_list.length;a++){
+			for(let b=0;b<event_count;b++){
+				item_count++;
+				let event = Event.get_test({item_count:0,event_count:event_count,get_value:false,get_item:false});
+				event.category = category_list[Number.get_id(category_list.length-1)].title;
+				event_list.push(event);
+			}
+		}
+		return [category_list,event_list]
 	};
 }
 class Field{
@@ -342,7 +396,7 @@ class DataType {
 class Blog_Post{
 	static get_test = (option) =>{
 		if(!option){
-			option = {item_count:9,blog_post_count:9,get_value:false,get_item:false};
+			option = {item_count:10,get_value:false,get_item:false};
 		}
 		if(!option.item_count){
 			option.item_count=10;
@@ -363,15 +417,32 @@ class Blog_Post{
 		}
 		return blog_post;
 	};
-	static get_test_list=(option)=>{
+	static get_test_list_by_category = (option) =>{
+		let blog_post_list = [];
+		let category_count = 9;
+		let blog_post_count = 19;
 		if(!option){
-			option = {item_count:9,blog_post_count:9,get_value:false,get_item:false};
+			option={};
 		}
-		let item_list=[];
-		for(let a=0;a<option.blog_post_count;a++){
-			item_list.push(Blog_Post.get_test(option));
+		else{
+			if(option.category_count){
+				category_count = parseInt(option.category_count);
+			}
+			if(option.category_count){
+				blog_post_count = parseInt(option.blog_post_count);
+			}
 		}
-		return item_list;
+		let category_list = Category.get_type_category_list(DataType.BLOG_POST,category_count);
+		let item_count = 0;
+		for(let a=0;a<category_list.length;a++){
+			for(let b=0;b<blog_post_count;b++){
+				item_count++;
+				let blog_post = Blog_Post.get_test({item_count:0,blog_post_count:blog_post_count,get_value:false,get_item:false});
+				blog_post.category = category_list[Number.get_id(category_list.length-1)].title;
+				blog_post_list.push(blog_post);
+			}
+		}
+		return [category_list,blog_post_list]
 	};
 }
 class Review{
@@ -585,7 +656,7 @@ class Category {
 				DataItem.get_new(DataType.CATEGORY,"Category "+Number.get_id()),
 				DataItem.get_new(DataType.CATEGORY,0),
 				DataItem.get_new(DataType.CATEGORY,0),
-				Field.get_test("Category " +Number.get_id()));
+				Field.get_test("Category " +Number.get_id(),{get_value:false}));
 			category.type = type
 			category_list.push(category);
 		}
