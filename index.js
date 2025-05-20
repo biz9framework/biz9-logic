@@ -80,7 +80,16 @@ class Product{
 		}
 		return product;
 	};
-
+	static get_test_list=(option)=>{
+		if(!option){
+			option={product_count:10};
+		}
+		let item_list=[];
+		for(let a=0;a<option.product_count;a++){
+			item_list.push(Product.get_test(option));
+		}
+		return item_list;
+	};
 	static get_test_list_by_category = (option) =>{
 		let product_list = [];
 		let category_count = 9;
@@ -108,6 +117,7 @@ class Product{
 		}
 		return [category_list,product_list]
 	};
+
 }
 class Service{
 	static get_test = (option) =>{
