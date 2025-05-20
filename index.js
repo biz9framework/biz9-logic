@@ -250,7 +250,7 @@ class Field{
 			title="";
 		}
 		if(!option){
-			option={get_value:true,value_count:20};
+			option={get_value:true,value_count:10};
 		}
 		let item = {
 			date_create:new moment().toISOString(),
@@ -264,8 +264,10 @@ class Field{
 		}
 		if(option.get_value){
 			if(!option.value_count){
-				option.value_count = 20;
+				option.value_count = 10;
 			}
+			console.log('rrr');
+			console.log(option.value_count);
 			for(let b = 1;b<parseInt(option.value_count);b++){
 				item['value_'+String(b)] = 'value ' + String(b);
 			}

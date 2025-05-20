@@ -38,11 +38,11 @@ describe("connect", () => {
                 /* --CONFIG--END */
 
                 /* --PAGE--START */
-                //let page = Page.get_test("Home",{item_count:20,page_count:2,get_value:true,get_item:true})
+                let page = Page.get_test({item_count:2,page_count:2,get_value:true,get_item:true,value_count:50})
+                Log.w("Page",page);
                 /*
                 let page = Page.get_test({item_count:9,page_count:19,get_item:true,get_value:true})
                 //let page = Page.get_test()
-                Log.w("Page",page);
                 Log.w("Page_section_1",page.section_1);
                 Log.w("Page_section_1_section_1_section_1",page.section_1.section_1.section_1);
                 */
@@ -75,9 +75,9 @@ describe("connect", () => {
                 /* --PRODUCT--END */
 
                 /* --EVENT--START */
-                let event_list=Event.get_test_list({category_count:5,event_count:9,get_value:false,get_item:false});
+                //let event_list=Event.get_test_list({category_count:5,event_count:9,get_value:false,get_item:false});
                 //let [category_list,event_list]=Event.get_test_list_by_category({category_count:5,event_count:9});
-                Log.w('event_list',event_list);
+                //Log.w('event_list',event_list);
                 //Log.w('category_list',category_list);
                 /* --EVENT--END */
 
