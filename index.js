@@ -37,7 +37,7 @@ class Template{
 class Page{
 	static get_test = (option) =>{
 		if(!option){
-			option = {item_count:9,page_count:9,get_value:false,get_item:false};
+			option = {item_count:9,page_count:9,get_value:false,get_item:false,value_count:20};
 		}
 		if(!option.item_count){
 			option.item_count=10;
@@ -59,7 +59,7 @@ class Page{
 class Product{
 	static get_test = (option) =>{
 		if(!option){
-			option = {item_count:9,product_count:9,get_value:false,get_item:false};
+			option = {item_count:9,product_count:9,get_value:false,get_item:false,value_count:20};
 		}
 		let product = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
@@ -101,7 +101,7 @@ class Product{
 		for(let a=0;a<category_list.length;a++){
 			for(let b=0;b<product_count;b++){
 				item_count++;
-				let product = Product.get_test({item_count:0,product_count:product_count,get_value:false,get_item:false});
+				let product = Product.get_test({item_count:0,product_count:product_count,get_value:false,get_item:false,value_count:20});
 				product.category = category_list[Number.get_id(category_list.length-1)].title;
 				product_list.push(product);
 			}
@@ -112,7 +112,7 @@ class Product{
 class Service{
 	static get_test = (option) =>{
 		if(!option){
-			option = {item_count:10,get_value:false,get_item:false};
+			option = {item_count:10,get_value:false,get_item:false,value_count:20};
 		}
 		if(!option.item_count){
 			option.item_count=10;
@@ -178,7 +178,7 @@ class Service{
 class Event{
 	static get_test = (option) =>{
 		if(!option){
-			option = {item_count:9,get_value:false,get_item:false};
+			option = {item_count:9,get_value:false,get_item:false,value_count:20};
 		}
 		if(!option.item_count){
 			option.item_count=10;
@@ -236,7 +236,7 @@ class Event{
 		for(let a=0;a<category_list.length;a++){
 			for(let b=0;b<event_count;b++){
 				item_count++;
-				let event = Event.get_test({item_count:0,event_count:event_count,get_value:false,get_item:false});
+				let event = Event.get_test({item_count:0,event_count:event_count,get_value:false,get_item:false,value_count:20});
 				event.category = category_list[Number.get_id(category_list.length-1)].title;
 				event_list.push(event);
 			}
@@ -250,7 +250,7 @@ class Field{
 			title="";
 		}
 		if(!option){
-			option={get_value:true};
+			option={get_value:true,value_count:20};
 		}
 		let item = {
 			date_create:new moment().toISOString(),
@@ -263,7 +263,10 @@ class Field{
 			note : "Note "+String(Number.get_id())
 		}
 		if(option.get_value){
-			for(let b = 1;b<20;b++){
+			if(!option.value_count){
+				option.value_count = 20;
+			}
+			for(let b = 1;b<parseInt(option.value_count);b++){
 				item['value_'+String(b)] = 'value ' + String(b);
 			}
 		}
@@ -396,7 +399,7 @@ class DataType {
 class Blog_Post{
 	static get_test = (option) =>{
 		if(!option){
-			option = {item_count:10,get_value:false,get_item:false};
+			option = {item_count:10,get_value:false,get_item:false,value_count:20};
 		}
 		if(!option.item_count){
 			option.item_count=10;
@@ -419,7 +422,7 @@ class Blog_Post{
 	};
 	static get_test_list=(option)=>{
 		if(!option){
-			option = {blog_post_count:10,get_value:false,get_item:false};
+			option = {blog_post_count:10,get_value:false,get_item:false,value_count:20};
 		}
 		let item_list=[];
 		for(let a=0;a<option.blog_post_count;a++){
@@ -447,7 +450,7 @@ class Blog_Post{
 		for(let a=0;a<category_list.length;a++){
 			for(let b=0;b<blog_post_count;b++){
 				item_count++;
-				let blog_post = Blog_Post.get_test({item_count:0,blog_post_count:blog_post_count,get_value:false,get_item:false});
+				let blog_post = Blog_Post.get_test({item_count:0,blog_post_count:blog_post_count,get_value:false,get_item:false,value_count:20});
 				blog_post.category = category_list[Number.get_id(category_list.length-1)].title;
 				blog_post_list.push(blog_post);
 			}
