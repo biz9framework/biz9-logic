@@ -38,9 +38,9 @@ describe("connect", () => {
                 /* --CONFIG--END */
 
                 /* --PAGE--START */
+                /*
                 let page = Page.get_test({item_count:2,page_count:2,get_value:true,get_item:true,value_count:50})
                 Log.w("Page",page);
-                /*
                 let page = Page.get_test({item_count:9,page_count:19,get_item:true,get_value:true})
                 //let page = Page.get_test()
                 Log.w("Page_section_1",page.section_1);
@@ -63,8 +63,9 @@ describe("connect", () => {
                 /* --BLOG_POST--END */
 
                 /* --PRODUCT--START */
+                let product_list=Product.get_test_list({category_count:5,product_count:9,get_value:false,get_item:false});
+                Log.w('product_list',product_list);
                 //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
-                //Log.w('product_list',product_list);
                 //Log.w('category_list',category_list);
 
                 //let product = Product.get_test({item_count:9,product_count:19,get_item:true,get_value:true})

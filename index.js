@@ -665,7 +665,10 @@ class Obj {
 	}
 };
 class Category {
-	static get_test(){
+	static get_test(option){
+		if(!option){
+			option = {item_count:9,category_count:9,get_value:false,get_item:false,value_count:20};
+		}
 		let category = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.CATEGORY,Number.get_id()),
 			DataItem.get_new(DataType.CATEGORY,0),
@@ -674,6 +677,16 @@ class Category {
 		category.type = Category.get_category_list()[Number.get_id(category_list.length-1)].data_type;
 		return category;
 	}
+	static get_test_list=(option)=>{
+		if(!option){
+			option={category_count:10};
+		}
+		let item_list=[];
+		for(let a=0;a<option.category_count;a++){
+			item_list.push(Category.get_test(option));
+		}
+		return item_list;
+	};
 	static get_type_category_list(type,count){
 		let category_list = [];
 		for(let a=0;a<count;a++){
