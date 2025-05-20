@@ -62,9 +62,15 @@ describe("connect", () => {
                 //Log.w("BLog_Post_section_1_section_1_section_1",blog_post.section_1.section_1.section_1);
                 /* --BLOG_POST--END */
 
+                /* --CATEGORY--START */
+                let category_list=Category.get_test_list({category_count:5,product_count:9,get_value:false,get_item:false});
+                Log.w('category_list',category_list);
+                /* --CATEGORY--END */
+
+
                 /* --PRODUCT--START */
-                let product_list=Product.get_test_list({category_count:5,product_count:9,get_value:false,get_item:false});
-                Log.w('product_list',product_list);
+                //let product_list=Product.get_test_list({category_count:5,product_count:9,get_value:false,get_item:false});
+                //Log.w('product_list',product_list);
                 //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
                 //Log.w('category_list',category_list);
 

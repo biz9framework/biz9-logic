@@ -674,7 +674,7 @@ class Category {
 			DataItem.get_new(DataType.CATEGORY,0),
 			DataItem.get_new(DataType.CATEGORY,0),
 			Field.get_test("Category " +Number.get_id()));
-		category.type = Category.get_category_list()[Number.get_id(category_list.length-1)].data_type;
+		category.type = Category.get_category_list()[Number.get_id(Category.get_category_list().length-1)].data_type;
 		return category;
 	}
 	static get_test_list=(option)=>{
