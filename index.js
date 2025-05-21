@@ -276,8 +276,6 @@ class Field{
 			if(!option.value_count){
 				option.value_count = 10;
 			}
-			console.log('rrr');
-			console.log(option.value_count);
 			for(let b = 1;b<parseInt(option.value_count);b++){
 				item['value_'+String(b)] = 'value ' + String(b);
 			}
