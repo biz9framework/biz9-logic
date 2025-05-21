@@ -267,7 +267,7 @@ class Field{
 			date_save:new moment().toISOString(),
 			title:title,
 			setting_visible:"1",
-			photo_data:"/images/no_img.jpg",
+			photo_data:"images/no_img.jpg",
 			title_url:Str.get_title_url(title),
 			sub_note : "Sub Note "+String(Number.get_id()),
 			note : "Note "+String(Number.get_id())
@@ -1042,7 +1042,7 @@ class Sub_Item{
 				date_save:new moment().toISOString(),
 				title:title,
 				setting_visible:"1",
-				photo_data:"/images/no_img.jpg",
+				photo_data:"images/no_img.jpg",
 				title_url:Str.get_title_url(title),
 				sub_note : "Sub Note "+String(Number.get_id()),
 				note : "Note "+String(Number.get_id())
