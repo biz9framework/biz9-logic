@@ -391,6 +391,7 @@ class DataType {
 	static CATEGORY='category_biz';
 	static CONTENT='content_biz';
 	static EVENT='event_biz';
+	static FAQ='faq_biz';
 	static GALLERY='gallery_biz';
 	static ITEM_MAP='item_map_biz';
 	static ITEM='item_biz';
@@ -466,6 +467,28 @@ class Blog_Post{
 			}
 		}
 		return [category_list,blog_post_list]
+	};
+}
+class Faq{
+	static get_test = () =>{
+		let faq = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.FAQ,Number.get_id()),
+			DataItem.get_new(DataType.FAQ,0),
+			DataItem.get_new(DataType.FAQ,0),
+			Field.get_test("Faq "+Number.get_id(),{get_value:false}));
+		faq.question="What Is Title " + Number.get_id();
+		faq.answer="My comment "+ Number.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+		return faq;
+	};
+	static get_test_list=(option)=>{
+		if(!option){
+			option = {faq_count:19};
+		}
+		let item_list = [];
+		for(let a=0;a<option.faq_count;a++){
+			item_list.push(Faq.get_test());
+		}
+		return item_list;
 	};
 }
 class Review{
@@ -1064,6 +1087,7 @@ module.exports = {
 	DataType,
 	Field,
 	FieldType,
+	Faq,
 	Social,
 	Event,
 	Message,

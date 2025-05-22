@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq} = require('./index');
 const {Log,Test,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -63,8 +63,8 @@ describe("connect", () => {
                 /* --BLOG_POST--END */
 
                 /* --CATEGORY--START */
-                let category_list=Category.get_test_list({category_count:5,product_count:9,get_value:false,get_item:false});
-                Log.w('category_list',category_list);
+                //let category_list=Category.get_test_list({category_count:5,product_count:9,get_value:false,get_item:false});
+                //Log.w('category_list',category_list);
                 /* --CATEGORY--END */
 
 
@@ -112,6 +112,15 @@ describe("connect", () => {
                 */
                 /* --SERVICE--END */
 
+
+                /* --FAQ--START */
+                //Log.w("FAQ",Faq.get_test());
+                Log.w("FAQ List",Faq.get_test_list());
+                /*
+                let review_list = Review.get_test_list({review_count:3,get_item:true})
+                Log.w("Review List",review_list);
+                */
+                /* --FAQ--END */
 
 
                 /* --REVIEW--START */
