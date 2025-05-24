@@ -622,8 +622,8 @@ class BiZ_Url {
 		let action_url= "main/biz_item/get_template/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static get_custom_field=(biz9_config,data_type)=>{
-		let action_url="main/biz_item/get_custom_field/"+data_type;
+	static get_custom_field=(biz9_config,data_type,id)=>{
+		let action_url="main/biz_item/get_custom_field/"+data_type+"/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
 }
