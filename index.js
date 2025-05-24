@@ -856,6 +856,8 @@ class CMS {
 				break;
 			case CMS.Tab_Edit_Title_Video:
 				return 'Video';
+			case CMS.Tab_Edit_Title_Custom_Field:
+				return 'Custom Fields';
 				break;
 			default:
 				return 'N/A';
