@@ -28,6 +28,17 @@ const biz9_config ={
 describe("connect", () => {
     it("_connect", () => {
         series([
+            function(call) {
+                console.log('GET-URL-START');
+                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+                //let action_url = 'test_get_url';
+                //let params = '&myparam1=p1&myparam2=p2'
+                let data_type = DataType.PRODUCT;
+                let cloud_url = BiZ_Url.get_custom_field(biz9_config,data_type);
+                Log.w('connect_url',cloud_url);
+                console.log('GET-URL-SUCCESS');
+                //call()
+            },
 
             function(call) {
                 console.log('CONNECT-START');
@@ -115,7 +126,7 @@ describe("connect", () => {
 
                 /* --FAQ--START */
                 //Log.w("FAQ",Faq.get_test());
-                Log.w("FAQ List",Faq.get_test_list());
+                //Log.w("FAQ List",Faq.get_test_list());
                 /*
                 let review_list = Review.get_test_list({review_count:3,get_item:true})
                 Log.w("Review List",review_list);
@@ -316,16 +327,6 @@ describe("connect", () => {
                 Log.w('SERVICE',DataType.SERVICE);
                 console.log('----------------------');
                 console.log('GET-BIZ9-CONFIG-FILE-SUCCESS');
-                call()
-            },
-            function(call) {
-                console.log('GET-URL-START');
-                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
-                let action_url = 'test_get_url';
-                let params = '&myparam1=p1&myparam2=p2'
-                let cloud_url = Url.get(biz9_config,action_url,params);
-                Log.w('connect_url',cloud_url);
-                console.log('GET-URL-SUCCESS');
                 call()
             },
            function(call) {
