@@ -117,7 +117,6 @@ class Product{
 		}
 		return [category_list,product_list]
 	};
-
 }
 class Service{
 	static get_test = (option) =>{
@@ -786,6 +785,7 @@ class CMS {
 	static Tab_Edit_Title_List = 'list';
 	static Tab_Edit_Title_Value = 'value';
 	static Tab_Edit_Title_Setting = 'setting';
+	static Tab_Edit_Title_Custom_Field = 'custom_field';
 	static Tab_Edit_Title_Audio = 'audio';
 	static Tab_Edit_Title_Video = 'video';
 	static Tab_Edit_Title_Note = 'note';
