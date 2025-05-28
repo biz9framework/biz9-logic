@@ -19,7 +19,7 @@ class TemplateType {
 	static BODY='body';
 	static FOOTER='footer';
 }
-class Template_Logic{
+class Template_Logic {
 	static get_test = () =>{
 		let template = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
@@ -34,7 +34,7 @@ class Template_Logic{
 		return template;
 	};
 }
-class Page_Logic{
+class Page_Logic {
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:9,page_count:9,get_value:false,get_item:false,value_count:20};
@@ -56,7 +56,7 @@ class Page_Logic{
 		return page;
 	};
 }
-class Product_Logic{
+class Product_Logic {
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:9,product_count:9,get_value:false,get_item:false,value_count:20};
@@ -118,7 +118,7 @@ class Product_Logic{
 		return [category_list,product_list]
 	};
 }
-class Service_Logic{
+class Service_Logic {
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:10,get_value:false,get_item:false,value_count:20};
@@ -184,7 +184,7 @@ class Service_Logic{
 		return [category_list,service_list]
 	};
 }
-class Event_Logic{
+class Event_Logic {
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:9,get_value:false,get_item:false,value_count:20};
@@ -253,7 +253,7 @@ class Event_Logic{
 		return [category_list,event_list]
 	};
 }
-class Field{
+class Field {
 	static get_test = (title,option) =>{
 		if(!title){
 			title="";
@@ -407,7 +407,7 @@ class DataType {
 	static USER='user_biz';
 	static VIDEO='video_biz';
 }
-class Blog_Post_Logic{
+class Blog_Post_Logic {
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:10,get_value:false,get_item:false,value_count:20};
@@ -469,7 +469,7 @@ class Blog_Post_Logic{
 		return [category_list,blog_post_list]
 	};
 }
-class Faq_Logic{
+class Faq_Logic {
 	static get_test = () =>{
 		let faq = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.FAQ,Number.get_id()),
@@ -491,7 +491,7 @@ class Faq_Logic{
 		return item_list;
 	};
 }
-class Review_Logic{
+class Review_Logic {
 	static get_test = () =>{
 		let city_list = ["Miami","Atlanta","Chicago","Seattle","New York City"];
 		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
@@ -602,33 +602,33 @@ class DataItem {
 	}
 }
 class BiZ_Url {
-	static get_item=(biz9_config,data_type,id)=>{
-		let action_url="main/biz_item/get/"+data_type+"/"+id ;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+	static get_item = (biz9_config,data_type,id,params) => {
+		let action_url="main/biz_item/get/"+data_type+"/"+id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static delete_item=(biz9_config,data_type,id)=>{
-		let action_url= "main/biz_item/delete/"+data_type+"/"+id ;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+	static delete_item = (biz9_config,data_type,id,params) => {
+		let action_url= "main/biz_item/delete/"+data_type+"/"+id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get_full_item=(biz9_config,data_type,id)=>{
+	static get_full_item = (biz9_config,data_type,id,params) => {
 		let action_url= "main/biz_item/get_full/"+data_type+"/"+id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get_page=(biz9_config,title_url)=>{
+	static get_page = (biz9_config,title_url,params) => {
 		let action_url= "main/biz_item/get_page/"+title_url;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get_template=(biz9_config,title_url)=>{
+	static get_template = (biz9_config,title_url,params) => {
 		let action_url= "main/biz_item/get_template/"+title_url;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get_custom_field=(biz9_config,data_type,id)=>{
+	static get_custom_field = (biz9_config,data_type,id,params) => {
 		let action_url="main/biz_item/get_custom_field/"+data_type+"/"+id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
 class Url{
-	static get = (biz9_config,action_url,params)=>{
+	static get = (biz9_config,action_url,params) => {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	}
 	static connect = (biz9_config) => {
@@ -685,7 +685,7 @@ class Url{
 	};
 }
 class Obj {
-	static get_filter = (biz9_config,data_type,filter,sort_by,page_current,page_size)=>{
+	static get_filter = (biz9_config,data_type,filter,sort_by,page_current,page_size) => {
 		return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
 	}
 };
@@ -702,7 +702,7 @@ class Category_Logic {
 		category.type = Category_Logic.get_category_list()[Number.get_id(Category_Logic.get_category_list().length-1)].data_type;
 		return category;
 	}
-	static get_test_list=(option)=>{
+	static get_test_list = (option) => {
 		if(!option){
 			option={category_count:10};
 		}
@@ -712,7 +712,7 @@ class Category_Logic {
 		}
 		return item_list;
 	};
-	static get_type_category_list(type,count){
+	static get_type_category_list(type,count) {
 		let category_list = [];
 		for(let a=0;a<count;a++){
 			let category = DataItem.get_new_full_item(
@@ -967,7 +967,7 @@ class Stock {
 	};
 }
 class Schedule {
-	static get_start_date_time = (item) =>{
+	static get_start_date_time = (item) => {
 		if(!item.date){
 			item.date = new Date();
 		}
@@ -979,7 +979,7 @@ class Schedule {
 		item.start_date_time = DateTime.get_full_date_time_by_date_time(item.date,item.time);
 		return item;
 	}
-	static get_start_date_time_by_list = (list) =>{
+	static get_start_date_time_by_list = (list) => {
 		for(let a=0;a<list.length;a++){
 			if(!list[a].date){
 				list[a].date = new Date();
@@ -1013,7 +1013,7 @@ class Storage {
 		window.localStorage.clear();
 	}
 }
-class Sub_Item{
+class Sub_Item {
 	static get_bind_new_child = (id,title,item,parent_item,top_item,options) =>{
 		let new_sub_item = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.ITEM,id),
