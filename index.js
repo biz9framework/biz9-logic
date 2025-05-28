@@ -19,7 +19,7 @@ class TemplateType {
 	static BODY='body';
 	static FOOTER='footer';
 }
-class Template{
+class Template_Logic{
 	static get_test = () =>{
 		let template = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.TEMPLATE,Number.get_id()),
@@ -34,7 +34,7 @@ class Template{
 		return template;
 	};
 }
-class Page{
+class Page_Logic{
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:9,page_count:9,get_value:false,get_item:false,value_count:20};
@@ -56,7 +56,7 @@ class Page{
 		return page;
 	};
 }
-class Product{
+class Product_Logic{
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:9,product_count:9,get_value:false,get_item:false,value_count:20};
@@ -118,7 +118,7 @@ class Product{
 		return [category_list,product_list]
 	};
 }
-class Service{
+class Service_Logic{
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:10,get_value:false,get_item:false,value_count:20};
@@ -184,7 +184,7 @@ class Service{
 		return [category_list,service_list]
 	};
 }
-class Event{
+class Event_Logic{
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:9,get_value:false,get_item:false,value_count:20};
@@ -407,7 +407,7 @@ class DataType {
 	static USER='user_biz';
 	static VIDEO='video_biz';
 }
-class Blog_Post{
+class Blog_Post_Logic{
 	static get_test = (option) =>{
 		if(!option){
 			option = {item_count:10,get_value:false,get_item:false,value_count:20};
@@ -469,7 +469,7 @@ class Blog_Post{
 		return [category_list,blog_post_list]
 	};
 }
-class Faq{
+class Faq_Logic{
 	static get_test = () =>{
 		let faq = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.FAQ,Number.get_id()),
@@ -491,7 +491,7 @@ class Faq{
 		return item_list;
 	};
 }
-class Review{
+class Review_Logic{
 	static get_test = () =>{
 		let city_list = ["Miami","Atlanta","Chicago","Seattle","New York City"];
 		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
@@ -520,7 +520,7 @@ class Review{
 		return item_list;
 	};
 }
-class Business {
+class Business_Logic {
 	static get_new = () =>{
 		if(!title){
 			title="";
@@ -689,7 +689,7 @@ class Obj {
 		return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
 	}
 };
-class Category {
+class Category_Logic {
 	static get_test(option){
 		if(!option){
 			option = {item_count:9,category_count:9,get_value:false,get_item:false,value_count:20};
@@ -1086,27 +1086,27 @@ class Sub_Item{
 }
 module.exports = {
 	BiZ_Url,
-	Business,
-	Blog_Post,
-	Category,
+	Business_Logic,
+	Blog_Post_Logic,
+	Category_Logic,
 	CMS,
 	DataItem,
 	DataType,
 	Field,
 	FieldType,
-	Faq,
+	Faq_Logic,
 	Social,
-	Event,
+	Event_Logic,
 	Message,
 	Obj,
-	Page,
+	Page_Logic,
 	PageType,
-	Product,
-	Review,
+	Product_Logic,
+	Review_Logic,
 	TemplateType,
-	Template,
+	Template_Logic,
 	Url,
-	Service,
+	Service_Logic,
 	Sub_Item,
 	Storage,
 	Schedule,
