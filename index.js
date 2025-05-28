@@ -86,7 +86,7 @@ class Product_Logic{
 		}
 		let item_list=[];
 		for(let a=0;a<option.product_count;a++){
-			item_list.push(Product.get_test(option));
+			item_list.push(Product_Logic.get_test(option));
 		}
 		return item_list;
 	};
@@ -105,12 +105,12 @@ class Product_Logic{
 				product_count = parseInt(option.product_count);
 			}
 		}
-		let category_list = Category.get_type_category_list(DataType.PRODUCT,category_count);
+		let category_list = Category_Logic.get_type_category_list(DataType.PRODUCT,category_count);
 		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
 			for(let b=0;b<product_count;b++){
 				item_count++;
-				let product = Product.get_test({item_count:0,product_count:product_count,get_value:false,get_item:false,value_count:20});
+				let product = Product_Logic.get_test({item_count:0,product_count:product_count,get_value:false,get_item:false,value_count:20});
 				product.category = category_list[Number.get_id(category_list.length-1)].title;
 				product_list.push(product);
 			}
@@ -171,7 +171,7 @@ class Service_Logic{
 				service_count = parseInt(option.service_count);
 			}
 		}
-		let category_list = Category.get_type_category_list(DataType.SERVICE,category_count);
+		let category_list = Category_Logic.get_type_category_list(DataType.SERVICE,category_count);
 		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
 			for(let b=0;b<service_count;b++){
@@ -221,7 +221,7 @@ class Event_Logic{
 		}
 		let item_list=[];
 		for(let a=0;a<option.event_count;a++){
-			item_list.push(Event.get_test(option));
+			item_list.push(Event_Logic.get_test(option));
 		}
 		return item_list;
 	};
@@ -240,12 +240,12 @@ class Event_Logic{
 				event_count = parseInt(option.event_count);
 			}
 		}
-		let category_list = Category.get_type_category_list(DataType.EVENT,category_count);
+		let category_list = Category_Logic.get_type_category_list(DataType.EVENT,category_count);
 		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
 			for(let b=0;b<event_count;b++){
 				item_count++;
-				let event = Event.get_test({item_count:0,event_count:event_count,get_value:false,get_item:false,value_count:20});
+				let event = Event_Logic.get_test({item_count:0,event_count:event_count,get_value:false,get_item:false,value_count:20});
 				event.category = category_list[Number.get_id(category_list.length-1)].title;
 				event_list.push(event);
 			}
@@ -437,7 +437,7 @@ class Blog_Post_Logic{
 		}
 		let item_list=[];
 		for(let a=0;a<option.blog_post_count;a++){
-			item_list.push(Blog_Post.get_test(option));
+			item_list.push(Blog_Post_Logic.get_test(option));
 		}
 		return item_list;
 	};
@@ -456,12 +456,12 @@ class Blog_Post_Logic{
 				blog_post_count = parseInt(option.blog_post_count);
 			}
 		}
-		let category_list = Category.get_type_category_list(DataType.BLOG_POST,category_count);
+		let category_list = Category_Logic.get_type_category_list(DataType.BLOG_POST,category_count);
 		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
 			for(let b=0;b<blog_post_count;b++){
 				item_count++;
-				let blog_post = Blog_Post.get_test({item_count:0,blog_post_count:blog_post_count,get_value:false,get_item:false,value_count:20});
+				let blog_post = Blog_Post_Logic.get_test({item_count:0,blog_post_count:blog_post_count,get_value:false,get_item:false,value_count:20});
 				blog_post.category = category_list[Number.get_id(category_list.length-1)].title;
 				blog_post_list.push(blog_post);
 			}
@@ -515,7 +515,7 @@ class Review_Logic{
 		}
 		let item_list = [];
 		for(let a=0;a<option.review_count;a++){
-			item_list.push(Review.get_test());
+			item_list.push(Review_Logic.get_test());
 		}
 		return item_list;
 	};
@@ -699,7 +699,7 @@ class Category_Logic {
 			DataItem.get_new(DataType.CATEGORY,0),
 			DataItem.get_new(DataType.CATEGORY,0),
 			Field.get_test("Category " +Number.get_id()));
-		category.type = Category.get_category_list()[Number.get_id(Category.get_category_list().length-1)].data_type;
+		category.type = Category_Logic.get_category_list()[Number.get_id(Category_Logic.get_category_list().length-1)].data_type;
 		return category;
 	}
 	static get_test_list=(option)=>{
@@ -708,7 +708,7 @@ class Category_Logic {
 		}
 		let item_list=[];
 		for(let a=0;a<option.category_count;a++){
-			item_list.push(Category.get_test(option));
+			item_list.push(Category_Logic.get_test(option));
 		}
 		return item_list;
 	};
@@ -745,9 +745,6 @@ class Category_Logic {
 	};
 	static get_title_by_type = (data_type) => {
 		switch (data_type) {
-			case DataType.EVENT:
-				return "Event";
-				break;
 			case DataType.PAGE:
 				return "Page";
 				break;
