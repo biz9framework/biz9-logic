@@ -378,9 +378,9 @@ class DataType {
 			{	title:DataType.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
 			{	title:DataType.get_title(DataType.GALLERY),type:DataType.GALLERY},
 			{	title:DataType.get_title(DataType.EVENT),type:DataType.EVENT},
-			{	title:DataType.get_title(DataType.TEAM),type:DataType.TEAM}
-			{	title:DataType.get_title(DataType.PRODUCT),type:DataType.PRODUCT}
-			{	title:DataType.get_title(DataType.SERVICE),type:DataType.SERVICE},
+			{	title:DataType.get_title(DataType.TEAM),type:DataType.TEAM},
+			{	title:DataType.get_title(DataType.PRODUCT),type:DataType.PRODUCT},
+			{	title:DataType.get_title(DataType.SERVICE),type:DataType.SERVICE}
 		]
 	};
 	static ADMIN='admin_biz';
@@ -741,7 +741,7 @@ class Category_Logic {
 			{data_type:DataType.GALLERY,value:DataType.GALLERY,label:"Galleries"},
 			{data_type:DataType.SERVICE,value:DataType.SERVICE,label:"Services"},
 			{data_type:DataType.PRODUCT,value:DataType.PRODUCT,label:"Product"},
-			{data_type:DataType.TEMPLATE,value:DataType.TEMPLATE,label:"Template"}
+			{data_type:DataType.TEMPLATE,value:DataType.TEMPLATE,label:"Template"},
 			{data_type:DataType.TEAM,value:DataType.TEAM,label:"Team"}
 		];
 	};
