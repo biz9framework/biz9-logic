@@ -603,6 +603,12 @@ class DataItem {
 		return r_list;
 	}
 }
+class Product_Url {
+	static get = (biz9_config,title_url,params) => {
+		let action_url="product/get/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
 class BiZ_Url {
 	static get_item = (biz9_config,data_type,id,params) => {
 		let action_url="main/biz_item/get/"+data_type+"/"+id;
@@ -1103,6 +1109,7 @@ module.exports = {
 	Message,
 	Obj,
 	Page_Logic,
+	Product_Url,
 	PageType,
 	Product_Logic,
 	Review_Logic,
