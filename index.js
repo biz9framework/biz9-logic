@@ -405,6 +405,7 @@ class DataType {
 	static REVIEW='review_biz';
 	static SERVICE='service_biz';
 	static TEMPLATE='template_biz';
+	static TEAM='team_biz';
 	static USER='user_biz';
 	static VIDEO='video_biz';
 }
