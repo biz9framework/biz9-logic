@@ -34,7 +34,8 @@ describe("connect", () => {
                 //let action_url = 'test_get_url';
                 //let params = '&myparam1=p1&myparam2=p2'
                 let data_type = DataType.PRODUCT;
-                let cloud_url = BiZ_Url.get_custom_field(biz9_config,data_type);
+                let id = "123";
+                let cloud_url = BiZ_Url.get_item(biz9_config,data_type,id,"&cool=1");
                 Log.w('connect_url',cloud_url);
                 console.log('GET-URL-SUCCESS');
                 //call()
