@@ -629,7 +629,7 @@ class Gallery_Url {
 }
 class Category_Url {
 	static get = (biz9_config,title_url,params) => {
-		let action_url="category/get_page/"+title_url;
+		let action_url="category/get/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
