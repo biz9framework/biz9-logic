@@ -609,6 +609,31 @@ class Product_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
+class Service_Url {
+	static get = (biz9_config,title_url,params) => {
+		let action_url="service/get/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Gallery_Url {
+	static get = (biz9_config,title_url,params) => {
+		let action_url="gallery/get/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Blog_Post_Url {
+	static get = (biz9_config,title_url,params) => {
+		let action_url="blog_post/get/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Category_Url {
+	static get_list = (biz9_config,type,params) => {
+		let action_url="category/get_list/"+type;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+
 class BiZ_Url {
 	static get_item = (biz9_config,data_type,id,params) => {
 		let action_url="main/biz_item/get/"+data_type+"/"+id;
@@ -1098,14 +1123,16 @@ module.exports = {
 	BiZ_Url,
 	Business_Logic,
 	Blog_Post_Logic,
+	Blog_Post_Url,
 	Category_Logic,
+	Category_Url,
 	CMS,
 	DataItem,
 	DataType,
 	Field,
 	FieldType,
 	Faq_Logic,
-	Social,
+	Gallery_Url,
 	Event_Logic,
 	Message,
 	Obj,
@@ -1118,6 +1145,8 @@ module.exports = {
 	Template_Logic,
 	Url,
 	Service_Logic,
+	Service_Url,
+	Social,
 	Sub_Item,
 	Storage,
 	Schedule,

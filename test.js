@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url} = require('./index');
 const {Log,Test,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -35,7 +35,8 @@ describe("connect", () => {
                 //let params = '&myparam1=p1&myparam2=p2'
                 let data_type = DataType.PRODUCT;
                 let id = "123";
-                let cloud_url = BiZ_Url.get_item(biz9_config,data_type,id,"&cool=1");
+                //let cloud_url = BiZ_Url.get_item(biz9_config,data_type,id,"&cool=1");
+                let cloud_url = Category_Url.get_list(biz9_config,data_type);
                 Log.w('connect_url',cloud_url);
                 console.log('GET-URL-SUCCESS');
                 //call()
