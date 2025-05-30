@@ -608,8 +608,8 @@ class Product_Url {
 		let action_url="product/get/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get_page = (biz9_config,params) => {
-		let action_url="product/get_page";
+	static get_page = (biz9_config,title_url,params) => {
+		let action_url="product/get_page/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -618,8 +618,8 @@ class Service_Url {
 		let action_url="service/get/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get_page = (biz9_config,params) => {
-		let action_url="service/get_page";
+	static get_page = (biz9_config,title_url,params) => {
+		let action_url="service/get_page/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -628,8 +628,8 @@ class Gallery_Url {
 		let action_url="gallery/get/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get_page = (biz9_config,params) => {
-		let action_url="gallery/get_page";
+	static get_page = (biz9_config,title_url,params) => {
+		let action_url="gallery/get_page/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -638,8 +638,8 @@ class Blog_Post_Url {
 		let action_url="blog_post/get/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get_page = (biz9_config,params) => {
-		let action_url="blog_post/get_page";
+	static get_page = (biz9_config,title_url,params) => {
+		let action_url="blog_post/get_page/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -648,8 +648,8 @@ class Category_Url {
 		let action_url="category/get_list/"+type;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get_page = (biz9_config,params) => {
-		let action_url="category/get_page";
+	static get_page = (biz9_config,title_url,params) => {
+		let action_url="category/get_page/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
