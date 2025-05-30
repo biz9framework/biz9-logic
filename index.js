@@ -743,6 +743,7 @@ class Category_Logic {
 	static get_category_list = () => {
 		return [
 			{data_type:DataType.BLOG_POST,value:DataType.BLOG_POST,label:"Blog Posts"},
+			{data_type:DataType.CATEGORY,value:DataType.CATEGORY,label:"Category"},
 			{data_type:DataType.CONTENT,value:DataType.CONTENT,label:"Content"},
 			{data_type:DataType.EVENT,value:DataType.EVENT,label:"Events"},
 			{data_type:DataType.GALLERY,value:DataType.GALLERY,label:"Galleries"},
