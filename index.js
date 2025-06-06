@@ -389,6 +389,7 @@ class DataType {
 	static BLOG_POST='blog_post_biz';
 	static CART_ITEM="cart_item_biz";
 	static CATEGORY='category_biz';
+	static CUSTOMER='customer_biz';
 	static CUSTOM_FIELD='custom_field_biz';
 	static CONTENT='content_biz';
 	static EVENT='event_biz';
