@@ -609,8 +609,32 @@ class Blog_Post_Url {
 		let action_url="blog_post/get/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static browse = (biz9_config,title_url,params) => {
-		let action_url="blog_post/browse/"+title_url;
+	static browse = (biz9_config,params) => {
+		let action_url="blog_post/browse";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static category = (biz9_config,category,params) => {
+		let action_url="blog_post/category/"+category;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Custom_Field_Url {
+	static get = (biz9_config,id,params) => {
+		let action_url="custom_field/get/"+id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static browse = (biz9_config,params) => {
+		let action_url="custom_field/browse";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class FAQ_Url {
+	static get = (biz9_config,title_url,params) => {
+		let action_url="faq/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static category = (biz9_config,title_url,params) => {
+		let action_url="faq/category/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -619,8 +643,42 @@ class Product_Url {
 		let action_url="product/get/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static browse = (biz9_config,title_url,params) => {
-		let action_url="product/browse/"+title_url;
+	static browse = (biz9_config,params) => {
+		let action_url="product/browse";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static category = (biz9_config,category,params) => {
+		let action_url="product/category/"+category;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static cart = (biz9_config,params) => {
+		let action_url="product/cart";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static checkout = (biz9_config,params) => {
+		let action_url="product/checkout";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Event_Url {
+	static get = (biz9_config,title_url,params) => {
+		let action_url="event/get/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static browse = (biz9_config,params) => {
+		let action_url="event/browse";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static category = (biz9_config,category,params) => {
+		let action_url="event/category/"+category;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static cart = (biz9_config,params) => {
+		let action_url="event/cart";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static checkout = (biz9_config,params) => {
+		let action_url="event/checkout";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -629,8 +687,34 @@ class Service_Url {
 		let action_url="service/get/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static browse = (biz9_config,title_url,params) => {
-		let action_url="service/browse/"+title_url;
+	static browse = (biz9_config,params) => {
+		let action_url="service/browse";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static category = (biz9_config,category,params) => {
+		let action_url="service/category/"+category;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static cart = (biz9_config,params) => {
+		let action_url="service/cart";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static checkout = (biz9_config,params) => {
+		let action_url="service/checkout";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Content_Url {
+	static get = (biz9_config,title_url,params) => {
+		let action_url="content/get/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static browse = (biz9_config,params) => {
+		let action_url="content/browse";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static category = (biz9_config,category,params) => {
+		let action_url="content/category"+category;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -639,14 +723,38 @@ class Gallery_Url {
 		let action_url="gallery/get/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static browse = (biz9_config,title_url,params) => {
-		let action_url="gallery/browse/"+title_url;
+	static browse = (biz9_config,params) => {
+		let action_url="gallery/browse";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static category = (biz9_config,category,params) => {
+		let action_url="gallery/category"+category;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
 class Category_Url {
 	static get = (biz9_config,title_url,params) => {
 		let action_url="category/get/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static browse = (biz9_config,params) => {
+		let action_url="category/browse";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Page_Url {
+	static get = (biz9_config,title_url,params) => {
+		let action_url="page/get/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Team_Url {
+	static get = (biz9_config,title_url,params) => {
+		let action_url="team/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static member = (biz9_config,title_url,params) => {
+		let action_url="team/member/"+title_url;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -700,7 +808,7 @@ class Url{
 	};
 }
 class Obj {
-	static get_filter = (biz9_config,data_type,filter,sort_by,page_current,page_size) => {
+	static get_data_param = (biz9_config,data_type,filter,sort_by,page_current,page_size) => {
 		return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
 	}
 };
@@ -798,7 +906,7 @@ class Category_Logic {
 			case DataType.TEAM:
 				return "Team";
 				break;
-		default:
+			default:
 				return "Blank";
 		}
 	}
