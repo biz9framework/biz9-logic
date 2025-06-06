@@ -761,14 +761,29 @@ class Category_Logic {
 	};
 	static get_title_by_type = (data_type) => {
 		switch (data_type) {
+			case DataType.BLOG_POST:
+				return "Blog Post";
+				break;
+			case DataType.CATEGORY:
+				return "Category";
+				break;
+			case DataType.CUSTOMER:
+				return "Customer";
+				break;
+			case DataType.CONTENT:
+				return "Content";
+				break;
+			case DataType.EVENT:
+				return "Event";
+				break;
+			case DataType.GALLERY:
+				return "Gallery";
+				break;
 			case DataType.PAGE:
 				return "Page";
 				break;
 			case DataType.PHOTO:
 				return "Photo";
-				break;
-			case DataType.GALLERY:
-				return "Gallery";
 				break;
 			case DataType.PRODUCT:
 				return "Product";
@@ -776,25 +791,13 @@ class Category_Logic {
 			case DataType.SERVICE:
 				return "Service";
 				break;
-			case DataType.EVENT:
-				return "Event";
-				break;
-			case DataType.CATEGORY:
-				return "Category";
-				break;
-			case DataType.BLOG_POST:
-				return "Blog Post";
-				break;
 			case DataType.TEMPLATE:
 				return "Template";
 				break;
 			case DataType.TEAM:
 				return "Team";
 				break;
-			case DataType.CONTENT:
-				return "Content";
-				break;
-			default:
+		default:
 				return "Blank";
 		}
 	}
