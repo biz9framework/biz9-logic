@@ -619,8 +619,8 @@ class Blog_Post_Url {
 	};
 }
 class Custom_Field_Url {
-	static get = (biz9_config,id,params) => {
-		let action_url="custom_field/get/"+id;
+	static get = (biz9_config,data_type,id,params) => {
+		let action_url="custom_field/get/"+data_type+"/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static browse = (biz9_config,params) => {
