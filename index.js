@@ -1218,6 +1218,7 @@ module.exports = {
 	Blog_Post_Url,
 	Category_Logic,
 	Category_Url,
+	Custom_Field_Url,
 	CMS,
 	DataItem,
 	DataType,
