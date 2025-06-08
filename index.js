@@ -760,7 +760,7 @@ class Team_Url {
 }
 class Url{
 	static copy_item = (biz9_config,data_type,id) => {
-		let action_url= "main/biz_item/copy/"+data_type + "/" + id;
+		let action_url= "main/crud/copy/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
 	static delete_item = (biz9_config,data_type,id) => {
