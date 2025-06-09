@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url,Blank_Url,Blank_Logic} = require('./index');
 const {Log,Test,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -28,6 +28,7 @@ const biz9_config ={
 describe("connect", () => {
     it("_connect", () => {
         series([
+            /*
             function(call) {
                 console.log('GET-URL-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
@@ -41,9 +42,29 @@ describe("connect", () => {
                 console.log('GET-URL-SUCCESS');
                 //call()
             },
+            */
 
             function(call) {
                 console.log('CONNECT-START');
+                /* --BLANK--START */
+                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+
+                let title_url = "blank_1";
+                let cloud_url = Blank_Url.browse(biz9_config,{});
+                Log.w('cloud_url',cloud_url);
+                //let blank_list=Blank_Logic.get_test_list({category_count:5,blank_count:9,get_value:false,get_item:false});
+                //let [category_list,blank_list]=Blank.get_test_list_by_category({category_count:5,blank_count:9});
+                //Log.w('blank_list',blank_list);
+                //Log.w('category_list',category_list);
+
+                //let blank = Blank_Logic.get_test({item_count:9,blank_count:19,get_item:true,get_value:true})
+                //let blank = Blank.get_test()
+                //Log.w('blank_list',blank_list);
+                //Log.w("Blank",blank);
+                //Log.w("BLog_Post_section_1",blank.section_1);
+                //Log.w("BLog_Post_section_1_section_1_section_1",blank.section_1.section_1.section_1);
+                /* --BLANK--END */
+
 
                 /* --CONFIG--START */
                 //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});

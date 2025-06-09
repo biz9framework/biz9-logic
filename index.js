@@ -19,6 +19,62 @@ class TemplateType {
 	static BODY='body';
 	static FOOTER='footer';
 }
+class Item_Logic {
+	static get_test_list = () =>{
+ 		let new_list = [];
+        for(a=1;a<10;a++){
+            let item_title = DataType.get_title(data_type +" " +  String(a));
+            let item = DataItem.get_new(
+                data_type,0,
+                {
+                    top_id:0,
+                    top_data_type:data_type,
+                    setting_visible:"1",
+                    parent_id:0,
+                    parent_data_type:data_type,
+                    title:item_title,
+                    title_url:Str.get_title_url(item_title),
+                    sub_note:"Sub Note "+String(Number.get_id()),
+                    note:"Note "+String(Number.get_id()),
+                }
+            );
+            for(let b=1;b<20;b++){
+                item['value_'+String(b)] = 'value ' + String(b);
+            }
+            if(data_type == DataType.BLOG_POST)
+            {
+                item.author = "Author "+String(Number.get_id());
+                item.tag = "tag 1, tag 2, tag 3";
+            }else if(data_type == DataType.PRODUCT)
+            {
+                item.cost = String(Number.get_id()) + "." + String(Number.get_id());
+                item.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+                item.type = "Type "+String(Number.get_id());
+                item.sub_type = "Sub Type "+String(Number.get_id());
+                item.stock = String(Number.get_id(3-1));
+            }else if(data_type == DataType.SERVICE)
+            {
+                item.cost = String(Number.get_id()) + "." + String(Number.get_id());
+                item.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+                item.type = "Type "+String(Number.get_id());
+                item.sub_type = "Sub Type "+String(Number.get_id());
+                item.stock = String(Number.get_id(3-1));
+            }else if(data_type == DataType.EVENT){
+                item.cost = String(Number.get_id()) + "." + String(Number.get_id());
+                item.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+                item.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
+                item.time = String(Number.get_id(24)) + ":" + String(Number.get_id(59));
+                item.website = "Website "+String(Number.get_id());
+                item.location = "Location "+String(Number.get_id());
+                item.meeting_link = "Meeting Link "+String(Number.get_id());
+                item.stock = String(Number.get_id(3-1));
+            }
+            new_list.push(item);
+        }
+        return new_list;
+	}
+}
+
 class Template_Logic {
 	static get_test = () =>{
 		let template = DataItem.get_new_full_item(
@@ -410,6 +466,68 @@ class DataType {
 	static USER='user_biz';
 	static VIDEO='video_biz';
 }
+class Blank_Logic {
+	static get_test = (option) =>{
+		if(!option){
+			option = {item_count:10,get_value:false,get_item:false,value_count:20};
+		}
+		if(!option.item_count){
+			option.item_count=10;
+		}
+		let blank = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.BLANK,Number.get_id()),
+			DataItem.get_new(DataType.BLANK,0),
+			DataItem.get_new(DataType.BLANK,0),
+			Field.get_test("Blog Post "+Number.get_id(),option));
+			blank.tag="tag 1,tag 2,tag 3";
+			blank.category ="Category " + String(Number.get_id());
+		if(option.get_item){
+			for(let a=0;a<option.item_count;a++){
+				blank=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section "+a,blank,blank,blank);
+			}
+			blank=Sub_Item.get_test_bind_item_sub_item(blank);
+		}
+		return blank;
+	};
+	static get_test_list=(option)=>{
+		if(!option){
+			option = {blank_count:10,get_value:false,get_item:false,value_count:20};
+		}
+		let item_list=[];
+		for(let a=0;a<option.blank_count;a++){
+			item_list.push(Blank_Logic.get_test(option));
+		}
+		return item_list;
+	};
+	static get_test_list_by_category = (option) =>{
+		let blank_list = [];
+		let category_count = 9;
+		let blank_count = 19;
+		if(!option){
+			option={};
+		}
+		else{
+			if(option.category_count){
+				category_count = parseInt(option.category_count);
+			}
+			if(option.category_count){
+				blank_count = parseInt(option.blank_count);
+			}
+		}
+		let category_list = Category_Logic.get_type_category_list(DataType.BLANK,category_count);
+		let item_count = 0;
+		for(let a=0;a<category_list.length;a++){
+			for(let b=0;b<blank_count;b++){
+				item_count++;
+				let blank = Blank_Logic.get_test({item_count:0,blank_count:blank_count,get_value:false,get_item:false,value_count:20});
+				blank.category = category_list[Number.get_id(category_list.length-1)].title;
+				blank_list.push(blank);
+			}
+		}
+		return [category_list,blank_list]
+	};
+}
+
 class Blog_Post_Logic {
 	static get_test = (option) =>{
 		if(!option){
@@ -603,6 +721,20 @@ class DataItem {
 		}
 		return r_list;
 	}
+}
+class Blank_Url {
+	static get = (biz9_config,title_url,params) => {
+		let action_url="blank/get/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static browse = (biz9_config,params) => {
+		let action_url="blank/browse";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static category = (biz9_config,category,params) => {
+		let action_url="blank/category/"+category;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
 }
 class Blog_Post_Url {
 	static get = (biz9_config,title_url,params) => {
@@ -1214,6 +1346,8 @@ class Sub_Item {
 }
 module.exports = {
 	Business_Logic,
+	Blank_Logic,
+	Blank_Url,
 	Blog_Post_Logic,
 	Blog_Post_Url,
 	Category_Logic,
@@ -1227,6 +1361,7 @@ module.exports = {
 	Faq_Logic,
 	Gallery_Url,
 	Event_Logic,
+	Item_Logic,
 	Message,
 	Obj,
 	Page_Logic,
