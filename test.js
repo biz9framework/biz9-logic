@@ -1,7 +1,7 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url,Blank_Url,Blank_Logic} = require('./index');
-const {Log,Test,Number} = require('biz9-utility');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url,Blank_Url,Blank_Logic,Item_Logic} = require('./index');
+const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
 /* --- TEST CONFIG START --- */
@@ -45,13 +45,19 @@ describe("connect", () => {
             */
 
             function(call) {
-                console.log('CONNECT-START');
-                /* --BLANK--START */
-                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
 
-                let title_url = "blank_1";
-                let cloud_url = Blank_Url.browse(biz9_config,{});
-                Log.w('cloud_url',cloud_url);
+                //let item_test = Item_Logic.get_test_item(DataType.SERVICE,0);
+                let item_test_list = Item_Logic.get_test_item_list(DataType.BLANK,{item_count:10,get_value:true});
+
+                Log.w('item_test_list',item_test_list);
+
+                //console.log('CONNECT-START');
+                /* --BLANK--START */
+                //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+
+                //let title_url = "blank_1";
+                //let cloud_url = Blank_Url.browse(biz9_config);
+                //Log.w('cloud_url',cloud_url);
                 //let blank_list=Blank_Logic.get_test_list({category_count:5,blank_count:9,get_value:false,get_item:false});
                 //let [category_list,blank_list]=Blank.get_test_list_by_category({category_count:5,blank_count:9});
                 //Log.w('blank_list',blank_list);
@@ -245,14 +251,14 @@ describe("connect", () => {
             function(call) {
                 console.log('SET-ITEM-BIZ-BY-LIST-START');
                 let item_test_list = [];
-                let item_test = Test.get_item('dt_blank',0);
+                let item_test = Item_Logic.get_test_item('dt_blank',0);
                 item_test.cost = String(Number.get_id())+'.55';
                 item_test.old_cost = String(Number.get_id())+'.20';
                 item_test.title ='_title_'+Number.get_id();
 
                 item_test_list.push(item_test);
 
-                let item_test_1 = Test.get_item('dt_blank',0);
+                let item_test_1 = Item_Logic.get_test_item('dt_blank',0);
                 item_test_1.cost = '5.55';
                 item_test_1.old_cost = '9.55';
                 item_test_1.title ='_title_'+Number.get_id();
@@ -266,7 +272,7 @@ describe("connect", () => {
             },
             function(call) {
                 console.log('SET-ITEM-BIZ-START');
-                let item_test = Test.get_item('dt_blank',0);
+                let item_test = Item_Logic.get_test_item('dt_blank',0);
                 item_test.photofilename='abc.png';
                 item_test.cost = '5.55';
                 item_test.old_cost = '9.55';

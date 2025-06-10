@@ -6,7 +6,7 @@ Description: BiZ9 Framework: Logic-JS
 */
 const moment = require('moment');
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
-const { Log,Test,Str,DateTime,Number } = require('biz9-utility');
+const { Log,Str,DateTime,Number } = require('biz9-utility');
 class Message {
 	static SUCCESS="Update Success";
 	static LOGIN_GOOD="Login Success";
@@ -20,58 +20,77 @@ class TemplateType {
 	static FOOTER='footer';
 }
 class Item_Logic {
-	static get_test_list = () =>{
- 		let new_list = [];
-        for(a=1;a<10;a++){
-            let item_title = DataType.get_title(data_type +" " +  String(a));
-            let item = DataItem.get_new(
-                data_type,0,
-                {
-                    top_id:0,
-                    top_data_type:data_type,
-                    setting_visible:"1",
-                    parent_id:0,
-                    parent_data_type:data_type,
-                    title:item_title,
-                    title_url:Str.get_title_url(item_title),
-                    sub_note:"Sub Note "+String(Number.get_id()),
-                    note:"Note "+String(Number.get_id()),
-                }
-            );
-            for(let b=1;b<20;b++){
-                item['value_'+String(b)] = 'value ' + String(b);
-            }
-            if(data_type == DataType.BLOG_POST)
-            {
-                item.author = "Author "+String(Number.get_id());
-                item.tag = "tag 1, tag 2, tag 3";
-            }else if(data_type == DataType.PRODUCT)
-            {
-                item.cost = String(Number.get_id()) + "." + String(Number.get_id());
-                item.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
-                item.type = "Type "+String(Number.get_id());
-                item.sub_type = "Sub Type "+String(Number.get_id());
-                item.stock = String(Number.get_id(3-1));
-            }else if(data_type == DataType.SERVICE)
-            {
-                item.cost = String(Number.get_id()) + "." + String(Number.get_id());
-                item.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
-                item.type = "Type "+String(Number.get_id());
-                item.sub_type = "Sub Type "+String(Number.get_id());
-                item.stock = String(Number.get_id(3-1));
-            }else if(data_type == DataType.EVENT){
-                item.cost = String(Number.get_id()) + "." + String(Number.get_id());
-                item.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
-                item.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
-                item.time = String(Number.get_id(24)) + ":" + String(Number.get_id(59));
-                item.website = "Website "+String(Number.get_id());
-                item.location = "Location "+String(Number.get_id());
-                item.meeting_link = "Meeting Link "+String(Number.get_id());
-                item.stock = String(Number.get_id(3-1));
-            }
-            new_list.push(item);
-        }
-        return new_list;
+	static get_test_item = (data_type,id,option)=>{
+		if(option==null){
+			option ={get_value:false};
+		}
+		if(option.get_value == null){
+			option.get_value = false;
+		}
+		if(!data_type){
+			data_type=DataType.BLANK;
+		}
+		if(!id){
+			id=0;
+		}
+		let _id=Number.get_id(9999);
+		let item_test = {data_type:data_type,id:id};
+		item_test.title='title_'+_id;
+		item_test.title_url=Str.get_title_url(item_test.title);
+		item_test.sub_note='sub_note_'+_id;
+		item_test.note='note_'+_id;
+		item_test.category='category_'+_id;
+		item_test.group_id=_id;
+		if(option.get_value){
+			for(let b=1;b<20;b++){
+				item_test['value_'+String(b)] = 'value ' + String(b);
+			}
+		}
+		if(data_type == DataType.BLOG_POST)
+		{
+			item_test.author = "Author "+String(Number.get_id());
+			item_test.tag = "tag 1, tag 2, tag 3";
+		}else if(data_type == DataType.PRODUCT)
+		{
+			item_test.cost = String(Number.get_id()) + "." + String(Number.get_id());
+			item_test.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+			item_test.type = "Type "+String(Number.get_id());
+			item_test.sub_type = "Sub Type "+String(Number.get_id());
+			item_test.stock = String(Number.get_id(3-1));
+		}else if(data_type == DataType.SERVICE)
+		{
+			item_test.cost = String(Number.get_id()) + "." + String(Number.get_id());
+			item_test.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+			item_test.type = "Type "+String(Number.get_id());
+			item_test.sub_type = "Sub Type "+String(Number.get_id());
+			item_test.stock = String(Number.get_id(3-1));
+		}else if(data_type == DataType.EVENT){
+			item_test.cost = String(Number.get_id()) + "." + String(Number.get_id());
+			item_test.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+			item_test.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
+			item_test.time = String(Number.get_id(24)) + ":" + String(Number.get_id(59));
+			item_test.website = "Website "+String(Number.get_id());
+			item_test.location = "Location "+String(Number.get_id());
+			item_test.meeting_link = "Meeting Link "+String(Number.get_id());
+			item_test.stock = String(Number.get_id(3-1));
+		}
+		return item_test;
+	}
+	static get_test_item_list = (data_type,option) =>{
+		if(data_type==null){
+			data_type = DataType.BLANK;
+		}
+		if(option==null){
+			option = {item_count:9};
+		}
+		if(option.item_count==null){
+			option.item_count = 10;
+		}
+		let new_list = [];
+		for(let a=1;a<option.item_count;a++){
+			new_list.push(DataItem.get_new(data_type,0,Item_Logic.get_test_item(data_type,0,option)));
+		}
+		return new_list;
 	}
 }
 
@@ -479,8 +498,8 @@ class Blank_Logic {
 			DataItem.get_new(DataType.BLANK,0),
 			DataItem.get_new(DataType.BLANK,0),
 			Field.get_test("Blog Post "+Number.get_id(),option));
-			blank.tag="tag 1,tag 2,tag 3";
-			blank.category ="Category " + String(Number.get_id());
+		blank.tag="tag 1,tag 2,tag 3";
+		blank.category ="Category " + String(Number.get_id());
 		if(option.get_item){
 			for(let a=0;a<option.item_count;a++){
 				blank=Sub_Item.get_test_bind_new_child(Number.get_id(),"Section "+a,blank,blank,blank);
@@ -846,7 +865,7 @@ class Content_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static category = (biz9_config,category,params) => {
-		let action_url="content/category"+category;
+		let action_url="content/category/"+category;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -860,7 +879,7 @@ class Gallery_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static category = (biz9_config,category,params) => {
-		let action_url="gallery/category"+category;
+		let action_url="gallery/category/"+category;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -989,11 +1008,11 @@ class Category_Logic {
 	};
 	static get_category_list = () => {
 		return [
-			{data_type:DataType.BLOG_POST,value:DataType.BLOG_POST,label:"Blog Posts"},
-			{data_type:DataType.CATEGORY,value:DataType.CATEGORY,label:"Category"},
-			{data_type:DataType.CONTENT,value:DataType.CONTENT,label:"Content"},
-			{data_type:DataType.EVENT,value:DataType.EVENT,label:"Events"},
-			{data_type:DataType.GALLERY,value:DataType.GALLERY,label:"Galleries"},
+			{data_type:DataType.BLOG_POST,value:DataType.BLOG_POST,label:"Blog Posts"}, //
+			{data_type:DataType.CATEGORY,value:DataType.CATEGORY,label:"Category"}, //
+			{data_type:DataType.CONTENT,value:DataType.CONTENT,label:"Content"},//
+			{data_type:DataType.EVENT,value:DataType.EVENT,label:"Events"},//
+			{data_type:DataType.GALLERY,value:DataType.GALLERY,label:"Galleries"}, //
 			{data_type:DataType.SERVICE,value:DataType.SERVICE,label:"Services"},
 			{data_type:DataType.PRODUCT,value:DataType.PRODUCT,label:"Product"},
 			{data_type:DataType.TEMPLATE,value:DataType.TEMPLATE,label:"Template"},
@@ -1352,10 +1371,12 @@ module.exports = {
 	Blog_Post_Url,
 	Category_Logic,
 	Category_Url,
+	Content_Url,
 	Custom_Field_Url,
 	CMS,
 	DataItem,
 	DataType,
+	Event_Url,
 	Field,
 	FieldType,
 	Faq_Logic,
