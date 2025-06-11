@@ -35,11 +35,11 @@ class Item_Logic {
 		}
 		let _id=Number.get_id(9999);
 		let item_test = {data_type:data_type,id:id};
-  		item_test.top_id = 0;
-        item_test.top_data_type = data_type;
-        item_test.setting_visible = "1";
-        item_test.parent_id = 0;
-        item_test.parent_data_type = data_type;
+		item_test.top_id = 0;
+		item_test.top_data_type = data_type;
+		item_test.setting_visible = "1";
+		item_test.parent_id = 0;
+		item_test.parent_data_type = data_type;
 		item_test.title=data_type +" "+_id;
 		item_test.title_url=Str.get_title_url(item_test.title);
 		item_test.sub_note='sub_note_'+_id;
@@ -120,13 +120,12 @@ class Template_Logic {
 			DataItem.get_new(DataType.TEMPLATE,0),
 			DataItem.get_new(DataType.TEMPLATE,0),
 			Field_Logic.get_test(title,option));
-
 		if(option.get_item){
-		let template_sub_title_list = ["Header","Navigation","Body","Footer"];
-		for(let a=0;a<template_sub_title_list.length;a++){
-			template = Sub_Item_Logic.get_test_bind_new_child(template_sub_title_list[a],template,template,template);
-		}
-		template = Sub_Item_Logic.get_test_bind_item_sub_item(template);
+			template.items = [];
+			let template_sub_title_list = ["Header","Navigation","Body","Footer"];
+			for(let a=0;a<template_sub_title_list.length;a++){
+				template.items.push(Sub_Item_Logic.get_test(template_sub_title_list[a],template,template,option));
+			}
 		}
 		return template;
 	};
@@ -134,10 +133,10 @@ class Template_Logic {
 class Page_Logic {
 	static get_test = (title,option) =>{
 		if(!option){
-			option = {item_count:9,get_value:false,get_item:false,value_count:10};
+			option = {get_value:false,get_item:false,get_photo:false,item_count:9,value_count:10};
 		}
-		if(!option.item_count){
-			option.item_count=10;
+		if(!option.get_photo){
+			option.get_photo=false;
 		}
 		if(!option.get_value){
 			option.get_value=false;
@@ -145,22 +144,19 @@ class Page_Logic {
 		if(!option.get_item){
 			option.get_item=false;
 		}
-		if(!option.get_item){
-			option.get_item=false;
+		if(!option.item_count){
+			option.item_count=10;
 		}
 		if(!option.value_count){
-			option.get_item=false;
+			option.value_count=10;
 		}
 		let page = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.PAGE,Number.get_id()),
 			DataItem.get_new(DataType.PAGE,0),
 			DataItem.get_new(DataType.PAGE,0),
-			Field_Logic.get_test("Page "+ String(Number.get_id()),option));
+			DataItem.get_new(DataType.PAGE,0),
+			Field_Logic.get_test(title,option));
 		if(option.get_item){
-			for(let a=0;a<option.item_count;a++){
-				page=Sub_Item_Logic.get_test_bind_new_child("Section "+a,page,page,page);
-			}
-			page=Sub_Item_Logic.get_test_bind_item_sub_item(page);
+			page.items = Sub_Item_Logic.get_test_section_list(page,page,option);
 		}
 		return page;
 	};
@@ -182,10 +178,7 @@ class Product_Logic {
 		product.stock = String(Number.get_id(3-1));
 		product.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			for(let a=0;a<option.item_count;a++){
-				product=Sub_Item_Logic.get_test_bind_new_child("Section "+a,product,product,product);
-			}
-			product=Sub_Item_Logic.get_test_bind_item_sub_item(product);
+			page.items = Sub_Item_Logic.get_test_section_list(product,product,option);
 		}
 		return product;
 	};
@@ -248,10 +241,7 @@ class Service_Logic {
 		service.stock = String(Number.get_id(3-1));
 		service.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			for(let a=0;a<option.item_count;a++){
-				service=Sub_Item_Logic.get_test_bind_new_child("Section "+a,service,service,service);
-			}
-			service=Sub_Item_Logic.get_test_bind_item_sub_item(service);
+			service.items = Sub_Item_Logic.get_test_section_list(service,service,option);
 		}
 		return service;
 	};
@@ -317,10 +307,7 @@ class Event_Logic {
 		event.stock = String(Number.get_id(3-1));
 		event.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			for(let a=0;a<option.item_count;a++){
-				event=Sub_Item_Logic.get_test_bind_new_child("Section "+a,event,event,event);
-			}
-			event=Sub_Item_Logic.get_test_bind_item_sub_item(event);
+			event.items = Sub_Item_Logic.get_test_section_list(event,event,option);
 		}
 		return event;
 	};
@@ -392,23 +379,6 @@ class Field_Logic {
 		}
 		return item;
 	}
-	static get_new_item_fields(item,option){
-		if(!option){
-			option={get_value:true,value_count:10};
-		}
-		if(!option.get_value){
-			option.get_value=false; } if(!option.value_count){
-			option.value_count=10;
-		}
-        item.setting_visible="1";
-        item.title_url=Str.get_title_url(item.title);
-        item.sub_note = "Sub Note "+String(Number.get_id());
-        item.note = "Note "+String(Number.get_id());
-        for(let b = 1;b<option.value_count;b++){
-            item['value_'+String(b)] = 'value ' + String(b);
-        }
-            return item;
-     }
 }
 class FieldType {
 	static APP_ID='app_id';
@@ -554,10 +524,7 @@ class Blank_Logic {
 		blank.tag="tag 1,tag 2,tag 3";
 		blank.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			for(let a=0;a<option.item_count;a++){
-				blank=Sub_Item_Logic.get_test_bind_new_child("Section "+a,blank,blank,blank);
-			}
-			blank=Sub_Item_Logic.get_test_bind_item_sub_item(blank);
+			blank.items = Sub_Item_Logic.get_test_section_list(blank,blank,option);
 		}
 		return blank;
 	};
@@ -599,7 +566,6 @@ class Blank_Logic {
 		return [category_list,blank_list]
 	};
 }
-
 class Blog_Post_Logic {
 	static get_test = (option) =>{
 		if(!option){
@@ -617,10 +583,7 @@ class Blog_Post_Logic {
 		blog_post.tag="tag 1,tag 2,tag 3";
 		blog_post.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			for(let a=0;a<option.item_count;a++){
-				blog_post=Sub_Item_Logic.get_test_bind_new_child("Section "+a,blog_post,blog_post,blog_post);
-			}
-			blog_post=Sub_Item_Logic.get_test_bind_item_sub_item(blog_post);
+			blog_post.items = Sub_Item_Logic.get_test_section_list(blog_post,blog_post,option);
 		}
 		return blog_post;
 	};
@@ -1349,109 +1312,74 @@ class Storage {
 	}
 }
 class Sub_Item_Logic {
- 	static get_item_section_list(parent_item,top_item,option){
-        let new_list = [];
-        if(option==null){
-            option={item_count:10,get_value:true,value_count:10};
-        }
-        if(option.item_count==null){
-            option.item_count = 10;
-        }
- 		if(option.get_value==null){
-            option.get_value = true;
-        }
+	static get_test(title,parent_item,top_item,option){
+		if(option==null){
+			option={get_value:true,value_count:10};
+		}
+		if(option.get_value==null){
+			option.get_value = true;
+		}
 		if(option.value_count==null){
-            option.value_count = 10;
-        }
-        for(let a=1;a<option.item_count;a++){
-            //let item_title =parent_item.title+ " Section " + String(a);
-            let item_title ="Section " + String(a);
-            let sub_item = DataItem.get_new(
-                DataType.ITEM,0, {
-                    top_id:top_item.id,
-                    top_data_type:top_item.data_type,
-                    parent_id:parent_item.id,
-                    parent_data_type:parent_item.data_type,
-                    title:item_title,
-                    title_url:Str.get_title_url(item_title),
-                    sub_note:"Sub Note "+String(Number.get_id()),
-                    note:"Note "+String(Number.get_id()),
-                }
-            );
-			if(option.get_value){
-            for(let b=1;b<option.value_count;b++){
-                sub_item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
-            }
+			option.value_count = 10;
+		}
+		let item_title =title;
+		let item = DataItem.get_new(
+			DataType.ITEM,0, {
+				top_id:top_item.id,
+				top_data_type:top_item.data_type,
+				parent_id:parent_item.id,
+				parent_data_type:parent_item.data_type,
+				title:item_title,
+				title_url:Str.get_title_url(item_title),
+				sub_note:"Sub Note "+String(Number.get_id()),
+				note:"Note "+String(Number.get_id()),
 			}
-            new_list.push(sub_item);
-        }
-        return new_list;
-    }
-	static get_bind_new_child = (id,title,item,parent_item,top_item,options) =>{
-		let new_sub_item = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.ITEM,id),
-			DataItem.get_new(parent_item.data_type,parent_item.id),
-			DataItem.get_new(top_item.data_type,top_item.id)
 		);
-		new_sub_item.title = title;
-		if(options){
-			for (const key in options) {
-				item[key] = options[key];
-			}
-		}
-		if(!item.items){
-			item.items = [];
-		}
-		item[Str.get_title_url(title)] = new_sub_item;
-		item.items.push(new_sub_item);
-		return item;
-	};
-	static get_test_bind_item_sub_item = (item) =>{
-		for(let b=0;b<item.items.length;b++){
-			for(let c=0;c<20;c++){
-				item.items[b]=Sub_Item_Logic.get_test_bind_new_child('Section '+String(c),item.items[b],item,item);
-				for(let d=0;d<item.items[b].items.length;d++){
-					item.items[b].items[d]=Sub_Item_Logic.get_test_bind_new_child('Section '+String(d),item.items[b].items[d],item.items[b],item);
-				}
+		if(option.get_value){
+			for(let b=1;b<option.value_count;b++){
+				item['value_'+String(b)] = item_title+ ' value ' + String(b);
 			}
 		}
 		return item;
 	}
-	static get_test_bind_new_child = (title,item,parent_item,top_item,options) =>{
-		let new_sub_item = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.ITEM,id),
-			DataItem.get_new(parent_item.data_type,parent_item.id),
-			DataItem.get_new(top_item.data_type,top_item.id),
-			get_bind_test_field(title)
-		)
-		new_sub_item.title = title;
-		if(options){
-			for (const key in options) {
-				item[key] = options[key];
-			}
+
+	static get_test_section_list(parent_item,top_item,option){
+		let new_list = [];
+		if(option==null){
+			option={item_count:10,get_value:true,value_count:10};
 		}
-		if(!item.items){
-			item.items = [];
+		if(option.item_count==null){
+			option.item_count = 10;
 		}
-		item[Str.get_title_url(title)] = new_sub_item;
-		item.items.push(new_sub_item);
-		return item;
-		function get_bind_test_field(title){
-			let item = {
-				date_create:new moment().toISOString(),
-				date_save:new moment().toISOString(),
-				title:title,
-				setting_visible:"1",
-				title_url:Str.get_title_url(title),
-				sub_note : "Sub Note "+String(Number.get_id()),
-				note : "Note "+String(Number.get_id())
+		if(option.get_value==null){
+			option.get_value = true;
+		}
+		if(option.value_count==null){
+			option.value_count = 10;
+		}
+		for(let a=1;a<option.item_count;a++){
+			let item_title ="Section " + String(a);
+			let sub_item = DataItem.get_new(
+				DataType.ITEM,0, {
+					top_id:top_item.id,
+					top_data_type:top_item.data_type,
+					parent_id:parent_item.id,
+					parent_data_type:parent_item.data_type,
+					title:item_title,
+					title_url:Str.get_title_url(item_title),
+					sub_note:"Sub Note "+String(Number.get_id()),
+					note:"Note "+String(Number.get_id()),
+				}
+			);
+			if(option.get_value){
+				for(let b=1;b<option.value_count;b++){
+					sub_item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
+				}
 			}
-			for(let b = 1;b<20;b++){
-				item['value_'+String(b)] = title+ ' value ' + String(b);
-			}
-			return item;
-		};
-	};
+			new_list.push(sub_item);
+		}
+		return new_list;
+	}
 }
 module.exports = {
 	Business_Logic,
