@@ -101,7 +101,6 @@ class Item_Logic {
 		return new_list;
 	}
 }
-
 class Template_Logic {
 	static get_test = (title,option) =>{
 		if(!option){
@@ -125,7 +124,7 @@ class Template_Logic {
 		if(option.get_item){
 		let template_sub_title_list = ["Header","Navigation","Body","Footer"];
 		for(let a=0;a<template_sub_title_list.length;a++){
-			template = Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),template_sub_title_list[a],template,template,template);
+			template = Sub_Item_Logic.get_test_bind_new_child(template_sub_title_list[a],template,template,template);
 		}
 		template = Sub_Item_Logic.get_test_bind_item_sub_item(template);
 		}
@@ -159,7 +158,7 @@ class Page_Logic {
 			Field_Logic.get_test("Page "+ String(Number.get_id()),option));
 		if(option.get_item){
 			for(let a=0;a<option.item_count;a++){
-				page=Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),"Section "+a,page,page,page);
+				page=Sub_Item_Logic.get_test_bind_new_child("Section "+a,page,page,page);
 			}
 			page=Sub_Item_Logic.get_test_bind_item_sub_item(page);
 		}
@@ -184,7 +183,7 @@ class Product_Logic {
 		product.category ="Category " + String(Number.get_id());
 		if(option.get_item){
 			for(let a=0;a<option.item_count;a++){
-				product=Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),"Section "+a,product,product,product);
+				product=Sub_Item_Logic.get_test_bind_new_child("Section "+a,product,product,product);
 			}
 			product=Sub_Item_Logic.get_test_bind_item_sub_item(product);
 		}
@@ -241,7 +240,7 @@ class Service_Logic {
 			DataItem.get_new(DataType.SERVICE,0),
 			DataItem.get_new(DataType.SERVICE,0),
 			Field_Logic.get_test("Service "+ String(Number.get_id()),option));
-		service = Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),"Service "+Number.get_id(),service,service,service);
+		service = Sub_Item_Logic.get_test_bind_new_child("Service "+Number.get_id(),service,service,service);
 		service.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.type = "Type "+String(Number.get_id());
@@ -250,7 +249,7 @@ class Service_Logic {
 		service.category ="Category " + String(Number.get_id());
 		if(option.get_item){
 			for(let a=0;a<option.item_count;a++){
-				service=Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),"Section "+a,service,service,service);
+				service=Sub_Item_Logic.get_test_bind_new_child("Section "+a,service,service,service);
 			}
 			service=Sub_Item_Logic.get_test_bind_item_sub_item(service);
 		}
@@ -307,7 +306,7 @@ class Event_Logic {
 			DataItem.get_new(DataType.EVENT,0),
 			DataItem.get_new(DataType.EVENT,0),
 			Field_Logic.get_test("Event "+ String(Number.get_id()),option));
-		event = Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),"Event "+Number.get_id(),event,event,event);
+		event = Sub_Item_Logic.get_test_bind_new_child("Event "+Number.get_id(),event,event,event);
 		event.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		event.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
@@ -319,7 +318,7 @@ class Event_Logic {
 		event.category ="Category " + String(Number.get_id());
 		if(option.get_item){
 			for(let a=0;a<option.item_count;a++){
-				event=Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),"Section "+a,event,event,event);
+				event=Sub_Item_Logic.get_test_bind_new_child("Section "+a,event,event,event);
 			}
 			event=Sub_Item_Logic.get_test_bind_item_sub_item(event);
 		}
@@ -382,7 +381,6 @@ class Field_Logic {
 			date_save:new moment().toISOString(),
 			title:title,
 			setting_visible:"1",
-			photo_data:"images/no_img.jpg",
 			title_url:Str.get_title_url(title),
 			sub_note:"Sub Note "+String(Number.get_id()),
 			note:"Note "+String(Number.get_id())
@@ -394,13 +392,19 @@ class Field_Logic {
 		}
 		return item;
 	}
-
-	static get_new_item_fields(item){
+	static get_new_item_fields(item,option){
+		if(!option){
+			option={get_value:true,value_count:10};
+		}
+		if(!option.get_value){
+			option.get_value=false; } if(!option.value_count){
+			option.value_count=10;
+		}
         item.setting_visible="1";
         item.title_url=Str.get_title_url(item.title);
         item.sub_note = "Sub Note "+String(Number.get_id());
         item.note = "Note "+String(Number.get_id());
-        for(let b = 1;b<20;b++){
+        for(let b = 1;b<option.value_count;b++){
             item['value_'+String(b)] = 'value ' + String(b);
         }
             return item;
@@ -551,7 +555,7 @@ class Blank_Logic {
 		blank.category ="Category " + String(Number.get_id());
 		if(option.get_item){
 			for(let a=0;a<option.item_count;a++){
-				blank=Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),"Section "+a,blank,blank,blank);
+				blank=Sub_Item_Logic.get_test_bind_new_child("Section "+a,blank,blank,blank);
 			}
 			blank=Sub_Item_Logic.get_test_bind_item_sub_item(blank);
 		}
@@ -614,7 +618,7 @@ class Blog_Post_Logic {
 		blog_post.category ="Category " + String(Number.get_id());
 		if(option.get_item){
 			for(let a=0;a<option.item_count;a++){
-				blog_post=Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),"Section "+a,blog_post,blog_post,blog_post);
+				blog_post=Sub_Item_Logic.get_test_bind_new_child("Section "+a,blog_post,blog_post,blog_post);
 			}
 			blog_post=Sub_Item_Logic.get_test_bind_item_sub_item(blog_post);
 		}
@@ -1348,14 +1352,21 @@ class Sub_Item_Logic {
  	static get_item_section_list(parent_item,top_item,option){
         let new_list = [];
         if(option==null){
-            option={item_count:10};
+            option={item_count:10,get_value:true,value_count:10};
         }
         if(option.item_count==null){
             option.item_count = 10;
         }
-        for(a=1;a<option.item_count;a++){
-            let item_title = "Section " + String(a);
-            let item = DataItem.get_new(
+ 		if(option.get_value==null){
+            option.get_value = true;
+        }
+		if(option.value_count==null){
+            option.value_count = 10;
+        }
+        for(let a=1;a<option.item_count;a++){
+            //let item_title =parent_item.title+ " Section " + String(a);
+            let item_title ="Section " + String(a);
+            let sub_item = DataItem.get_new(
                 DataType.ITEM,0, {
                     top_id:top_item.id,
                     top_data_type:top_item.data_type,
@@ -1367,10 +1378,12 @@ class Sub_Item_Logic {
                     note:"Note "+String(Number.get_id()),
                 }
             );
-            for(let b=1;b<9;b++){
-                item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
+			if(option.get_value){
+            for(let b=1;b<option.value_count;b++){
+                sub_item['value_'+String(b)] = 'Section '+ String(a) + ' value ' + String(b);
             }
-            new_list.push(item);
+			}
+            new_list.push(sub_item);
         }
         return new_list;
     }
@@ -1396,15 +1409,15 @@ class Sub_Item_Logic {
 	static get_test_bind_item_sub_item = (item) =>{
 		for(let b=0;b<item.items.length;b++){
 			for(let c=0;c<20;c++){
-				item.items[b]=Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),'Section '+String(c),item.items[b],item,item);
+				item.items[b]=Sub_Item_Logic.get_test_bind_new_child('Section '+String(c),item.items[b],item,item);
 				for(let d=0;d<item.items[b].items.length;d++){
-					item.items[b].items[d]=Sub_Item_Logic.get_test_bind_new_child(Number.get_id(),'Section '+String(d),item.items[b].items[d],item.items[b],item);
+					item.items[b].items[d]=Sub_Item_Logic.get_test_bind_new_child('Section '+String(d),item.items[b].items[d],item.items[b],item);
 				}
 			}
 		}
 		return item;
 	}
-	static get_test_bind_new_child = (id,title,item,parent_item,top_item,options) =>{
+	static get_test_bind_new_child = (title,item,parent_item,top_item,options) =>{
 		let new_sub_item = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.ITEM,id),
 			DataItem.get_new(parent_item.data_type,parent_item.id),
@@ -1429,7 +1442,6 @@ class Sub_Item_Logic {
 				date_save:new moment().toISOString(),
 				title:title,
 				setting_visible:"1",
-				photo_data:"images/no_img.jpg",
 				title_url:Str.get_title_url(title),
 				sub_note : "Sub Note "+String(Number.get_id()),
 				note : "Note "+String(Number.get_id())
