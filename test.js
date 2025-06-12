@@ -45,11 +45,31 @@ describe("connect", () => {
             */
 
             function(call) {
+                /* --ITEM-PARENT-TOP-URL-TEST--START */
+                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+                let cloud_url = Url.get_item_parent_top(biz9_config,DataType.SERVICE,0,DataType.BLOG_POST,1,DataType.PRODUCT,2);
+                console.log(cloud_url);
+                //let item_test_list = Item_Logic.get_test_item_list(DataType.BLANK,{item_count:10,get_value:true});
+                //Log.w('item_test_list',item_test_list);
+                /* --ITEM-PARENT-TOP-TEST-URL-START */
 
+
+                /* --PAGE--START */
+                /*
+                let page = Page.get_test({item_count:2,page_count:2,get_value:true,get_item:true,value_count:50})
+                Log.w("Page",page);
+                let page = Page.get_test({item_count:9,page_count:19,get_item:true,get_value:true})
+                //let page = Page.get_test()
+                Log.w("Page_section_1",page.section_1);
+                Log.w("Page_section_1_section_1_section_1",page.section_1.section_1.section_1);
+                */
+                /* --PAGE--END */
+
+                /* --ITEM-TEST--START */
                 //let item_test = Item_Logic.get_test_item(DataType.SERVICE,0);
-                let item_test_list = Item_Logic.get_test_item_list(DataType.BLANK,{item_count:10,get_value:true});
-
-                Log.w('item_test_list',item_test_list);
+                //let item_test_list = Item_Logic.get_test_item_list(DataType.BLANK,{item_count:10,get_value:true});
+                //Log.w('item_test_list',item_test_list);
+                /* --ITEM-TEST--END */
 
                 //console.log('CONNECT-START');
                 /* --BLANK--START */
