@@ -375,6 +375,7 @@ class Field_Logic {
 		if(option.get_value){
 			for(let b = 1;b<parseInt(option.value_count);b++){
 				item['value_'+String(b)] = title + ' value ' + String(b);
+				item[Str.get_title_url(title + ' value ' + String(b))] = title + ' value ' + String(b);
 			}
 		}
 		return item;
@@ -949,8 +950,8 @@ class Url{
 		let action_url= "main/crud/get/"+data_type + "/" + key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static get_item_parent_top = (biz9_config,data_type,key,parent_data_type,parent_id,top_data_type,top_id) => {
-		let action_url = "main/crud/get_item_parent_top/"+data_type+"/"+key+"/"+parent_data_type+ "/"+parent_id+"/"+top_data_type+ "/"+top_id;
+	static get_item_parent_top = (biz9_config,data_type,id,parent_data_type,parent_id,top_data_type,top_id) => {
+		let action_url = "main/crud/get_item_parent_top/"+data_type+"/"+id+"/"+parent_data_type+ "/"+parent_id+"/"+top_data_type+ "/"+top_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
 	static get_list = (biz9_config,data_type) => {
@@ -1338,7 +1339,10 @@ class Sub_Item_Logic {
 		if(option.get_value){
 			for(let b=1;b<option.value_count;b++){
 				item['value_'+String(b)] = item_title+ ' value ' + String(b);
+				item['field_'+String(b-1)] = Str.get_title_url(item['value_'+String(b)]);
+				item[Str.get_title_url(title + ' value ' + String(b))] = title + ' value ' + String(b);
 			}
+			Log.w('rrrr',item);
 		}
 		return item;
 	}
