@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url,Blank_Url,Blank_Logic,Item_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -45,10 +45,31 @@ describe("connect", () => {
             */
 
             function(call) {
+            /* --TEMPLATE--START */
+                let template = Template_Logic.get_test("Primary",{get_value:false,get_item:false,item_count:2});
+                let template_item_list = Template_Logic.get_test("Primary",template,template,{get_value:false,get_item:false,item_count:2});
+                Log.w('template',template);
+                Log.w('template_item_list',template_item_list);
+                /* --TEMPLATE--END */
+
+
+            /* --SERVICE--START */
+                //Log.w("Service_section_1",service.section_1);
+                //Log.w("Service_section_1_section_1_section_1",service.section_1.section_1);
+
+                //let service_list=Service.get_test_list({category_count:5,service_count:9,get_value:false,get_item:false});
+                //let [category_list,service_list]=Service.get_test_list_by_category({category_count:5,service_count:9});
+                //Log.w('service_list',service_list);
+                //Log.w('category_list',category_list);
+                /*
+               */
+                /* --SERVICE--END */
+
+
                 /* --ITEM-PARENT-TOP-URL-TEST--START */
-                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
-                let cloud_url = Url.get_item_parent_top(biz9_config,DataType.SERVICE,0,DataType.BLOG_POST,1,DataType.PRODUCT,2);
-                console.log(cloud_url);
+                //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+                //let cloud_url = Url.get_item_parent_top(biz9_config,DataType.SERVICE,0,DataType.BLOG_POST,1,DataType.PRODUCT,2);
+                //console.log(cloud_url);
                 //let item_test_list = Item_Logic.get_test_item_list(DataType.BLANK,{item_count:10,get_value:true});
                 //Log.w('item_test_list',item_test_list);
                 /* --ITEM-PARENT-TOP-TEST-URL-START */
@@ -148,21 +169,7 @@ describe("connect", () => {
                 //Log.w('category_list',category_list);
                 /* --EVENT--END */
 
-                /* --SERVICE--START */
-                //let service_list=Service.get_test_list({category_count:5,service_count:9,get_value:false,get_item:false});
-                //let [category_list,service_list]=Service.get_test_list_by_category({category_count:5,service_count:9});
-                //Log.w('service_list',service_list);
-                //Log.w('category_list',category_list);
-                /*
-                let service = Service.get_test({item_count:9,service_count:19,get_item:true,get_value:true})
-                //let service = Service.get_test()
-                Log.w("Service",service);
-                Log.w("Service_section_1",service.section_1);
-                Log.w("Service_section_1_section_1_section_1",service.section_1.section_1.section_1);
-                */
-                /* --SERVICE--END */
-
-                /* --SERVICE--START */
+                               /* --EVENT--START */
                 /*
                 let event = Event.get_test({item_count:9,event_count:19,get_item:true,get_value:true})
                 //let service = Service.get_test()
@@ -170,7 +177,7 @@ describe("connect", () => {
                 Log.w("Event_section_1",event.section_1);
                 Log.w("Event_section_1_section_1_section_1",event.section_1.section_1.section_1);
                 */
-                /* --SERVICE--END */
+                /* --EVENT--END */
 
 
                 /* --FAQ--START */
