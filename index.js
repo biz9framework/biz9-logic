@@ -20,107 +20,37 @@ class TemplateType {
 	static FOOTER='footer';
 }
 class Item_Logic {
-	static get_test_item = (data_type,id,option)=>{
+	static get_test = (title,data_type,id,option)=>{
 		if(!data_type){
 			data_type=DataType.BLANK;
 		}
 		if(!id){
 			id=0;
 		}
-		if(option == null){
-			option = {item_count:10,get_value:false,value_count:10,get_item:false};
-		}
-		if(!option.item_count){
-			option.item_count=10;
-		}
-		if(!option.get_value){
-			option.get_value=false;
-		}
-		if(!option.value_count){
-			option.value_count=10;
-		}
-		if(!option.get_item){
-			option.get_item=false;
-		}
-		let _id=Number.get_id(9999);
-		let item_test = {data_type:data_type,id:id};
-		item_test.top_id = 0;
-		item_test.top_data_type = data_type;
-		item_test.setting_visible = "1";
-		item_test.parent_id = 0;
-		item_test.parent_data_type = data_type;
-		item_test.title=data_type +" "+_id;
-		item_test.title_url=Str.get_title_url(item_test.title);
-		item_test.sub_note='sub_note_'+_id;
-		item_test.note='note_'+_id;
-		item_test.category='category_'+_id;
-		item_test.group_id=_id;
+		option = Field_Logic.get_option(data_type,option);
+		let item = DataItem.get_new_full_item(
+			DataItem.get_new(data_type,0),
+			DataItem.get_new(data_type,0),
+			DataItem.get_new(data_type,0),
+			Field_Logic.get_test(title,option));
 
-		if(option.get_value){
-			for(let b=1;b<10;b++){
-				item_test['value_'+String(b)] = 'value ' + String(b);
-			}
+		if(option.get_item){
+			item.items = Sub_Item_Logic.get_test_item_list(item,item,option);
 		}
-
-		if(data_type == DataType.BLOG_POST)
-		{
-			item_test.author = "Author "+String(Number.get_id());
-			item_test.tag = "tag 1, tag 2, tag 3";
-		}else if(data_type == DataType.PRODUCT)
-		{
-			item_test.cost = String(Number.get_id()) + "." + String(Number.get_id());
-			item_test.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
-			item_test.type = "Type "+String(Number.get_id());
-			item_test.sub_type = "Sub Type "+String(Number.get_id());
-			item_test.stock = String(Number.get_id(3-1));
-		}
-	else if(data_type == DataType.EVENT)
-		{
-			item_test.cost = String(Number.get_id()) + "." + String(Number.get_id());
-			item_test.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
-			item_test.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
-			item_test.time = String(Number.get_id(24)) + ":" + String(Number.get_id(59));
-			item_test.website = "Website "+String(Number.get_id());
-			item_test.location = "Location "+String(Number.get_id());
-			item_test.meeting_link = "Meeting Link "+String(Number.get_id());
-			item_test.stock = String(Number.get_id(3-1));
-		}
-		return item_test;
+		return item;
 	}
-	static get_test_item_list_old = (data_type,option) =>{
-		if(data_type==null){
-			data_type = DataType.BLANK;
+	static get_test_list = (data_type,option) =>{
+		option = Field_Logic.get_option(data_type,option);
+		let item_list = [];
+		for(let a=0;a<option.item_count;a++){
+			item_list.push(Item_Logic.get_test("Item " +a,data_type,option));
 		}
-		if(option==null){
-			option = {item_count:9,get_value:false};
-		}
-		if(option.item_count==null){
-			option.item_count = 10;
-		}
-		if(option.get_value==null){
-			option.get_value = false;
-		}
-		let new_list = [];
-		for(let a=1;a<option.item_count;a++){
-			new_list.push(DataItem.get_new(data_type,0,Item_Logic.get_test_item(data_type,0,option)));
-		}
-		return new_list;
+		return item_list;
 	}
 }
 class Template_Logic {
 	static get_test = (title,option) =>{
-		if(!option){
-			option = {get_value:false,get_item:false};
-		}
-		if(!option.item_count){
-			option.item_count=10;
-		}
-		if(!option.get_value){
-			option.get_value=false;
-		}
-		if(!option.get_item){
-			option.get_item=false;
-		}
+		option = Field_Logic.get_option(DataType.TEMPLATE,option);
 		let template = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.TEMPLATE,0),
 			DataItem.get_new(DataType.TEMPLATE,0),
@@ -135,24 +65,7 @@ class Template_Logic {
 }
 class Page_Logic {
 	static get_test = (title,option) =>{
-		if(!option){
-			option = {get_value:false,get_item:false,get_photo:false,item_count:9,value_count:10};
-		}
-		if(!option.get_photo){
-			option.get_photo=false;
-		}
-		if(!option.get_value){
-			option.get_value=false;
-		}
-		if(!option.get_item){
-			option.get_item=false;
-		}
-		if(!option.item_count){
-			option.item_count=10;
-		}
-		if(!option.value_count){
-			option.value_count=10;
-		}
+		option = Field_Logic.get_option(DataType.PAGE,option);
 		let page = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PAGE,0),
 			DataItem.get_new(DataType.PAGE,0),
@@ -163,17 +76,23 @@ class Page_Logic {
 		}
 		return page;
 	};
+	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.PAGE,option);
+		let item_list = [];
+		for(let a=0;a<option.page_count;a++){
+			item_list.push(Page_Logic.get_test("Page " +parseInt(a+1),option));
+		}
+		return item_list;
+	}
 }
 class Product_Logic {
-	static get_test = (option) =>{
-		if(!option){
-			option = {item_count:9,product_count:9,get_value:false,get_item:false,value_count:20};
-		}
+	static get_test = (title,option) =>{
+		option = Field_Logic.get_option(DataType.PRODUCT,option);
 		let product = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.PRODUCT,Number.get_id()),
 			DataItem.get_new(DataType.PRODUCT,0),
 			DataItem.get_new(DataType.PRODUCT,0),
-			Field_Logic.get_test("Product "+Number.get_id(),option));
+			DataItem.get_new(DataType.PRODUCT,0),
+			Field_Logic.get_test(title,option));
 		product.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.type = "Type "+String(Number.get_id());
@@ -181,114 +100,54 @@ class Product_Logic {
 		product.stock = String(Number.get_id(3-1));
 		product.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			page.items = Sub_Item_Logic.get_test_item_list(product,product,option);
+			product.items = Sub_Item_Logic.get_test_item_list(product,product,option);
 		}
 		return product;
 	};
-	static get_test_list=(option)=>{
-		if(!option){
-			option={product_count:10};
-		}
-		let item_list=[];
-		for(let a=0;a<option.product_count;a++){
-			item_list.push(Product_Logic.get_test(option));
+	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		let item_list = [];
+		for(let a=0;a<option.item_count;a++){
+			item_list.push(Service_Logic.get_test("Service " +parseInt(a+1),option));
 		}
 		return item_list;
-	};
-	static get_test_list_by_category = (option) =>{
-		let product_list = [];
-		let category_count = 9;
-		let product_count = 19;
-		if(!option){
-			option={};
-		}
-		else{
-			if(option.category_count){
-				category_count = parseInt(option.category_count);
-			}
-			if(option.category_count){
-				product_count = parseInt(option.product_count);
-			}
-		}
-		let category_list = Category_Logic.get_type_category_list(DataType.PRODUCT,category_count);
-		let item_count = 0;
-		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<product_count;b++){
-				item_count++;
-				let product = Product_Logic.get_test({item_count:0,product_count:product_count,get_value:false,get_item:false,value_count:20});
-				product.category = category_list[Number.get_id(category_list.length-1)].title;
-				product_list.push(product);
-			}
-		}
-		return [category_list,product_list]
-	};
+	}
 }
 class Service_Logic {
-	static get_test = (option) =>{
-		if(option == null){
-			option = {item_count:10,get_value:false,value_count:10,get_item:false};
-		}
-		if(!option.item_count){
-			option.item_count=10;
-		}
-		if(!option.get_value){
-			option.get_value=false;
-		}
-		if(!option.value_count){
-			option.value_count=10;
-		}
-		if(!option.get_item){
-			option.get_item=false;
-		}
-
+	static get_test = (title,option) =>{
+		option = Field_Logic.get_option(DataType.SERVICE,option);
 		let service = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.SERVICE,0),
 			DataItem.get_new(DataType.SERVICE,0),
 			DataItem.get_new(DataType.SERVICE,0),
-			Field_Logic.get_test("Service "+ String(Number.get_id()),option));
+			Field_Logic.get_test(title,option));
 		service.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		service.type = "Type "+String(Number.get_id());
 		service.sub_type = "Sub Type "+String(Number.get_id());
 		service.stock = String(Number.get_id(3-1));
-
-		if(option.get_item){
+	if(option.get_item){
 			service.items = Sub_Item_Logic.get_test_item_list(service,service,option);
 		}
 		return service;
 	};
-	static get_test_list=(option)=>{
-		if(!option){
-			option={service_count:10,item_count:10,get_value:false,value_count:10,get_item:false};
-		}
-
-		let item_list=[];
-		for(let a=0;a<option.service_count;a++){
-			item_list.push(Service.get_test(option));
+	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		let item_list = [];
+		for(let a=0;a<option.item_count;a++){
+			item_list.push(Service_Logic.get_test("Service " +parseInt(a+1),option));
 		}
 		return item_list;
-	};
+	}
 	static get_test_list_by_category = (option) =>{
+		option = Field_Logic.get_option(DataType.SERVICE,option);
 		let service_list = [];
-		let category_count = 9;
-		let service_count = 19;
-		if(!option){
-			option={};
-		}
-		else{
-			if(option.category_count){
-				category_count = parseInt(option.category_count);
-			}
-			if(option.category_count){
-				service_count = parseInt(option.service_count);
-			}
-		}
-		let category_list = Category_Logic.get_type_category_list(DataType.SERVICE,category_count);
+		let category_list = Category_Logic.get_type_category_list(DataType.SERVICE,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<service_count;b++){
+			for(let b=0;b<option.service_count;b++){
 				item_count++;
-				let service = Service.get_test({item_count:0,service_count:service_count,get_value:false,get_item:false});
+				let service = Service_Logic.get_test("Service "+Number.get_id(),option);
 				service.category = category_list[Number.get_id(category_list.length-1)].title;
 				service_list.push(service);
 			}
@@ -296,20 +155,93 @@ class Service_Logic {
 		return [category_list,service_list]
 	};
 }
+class Content_Logic {
+	static get_test = (title,option) =>{
+		option = Field_Logic.get_option(DataType.CONTENT,option);
+		let content = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.CONTENT,0),
+			DataItem.get_new(DataType.CONTENT,0),
+			DataItem.get_new(DataType.CONTENT,0),
+			Field_Logic.get_test(title,option));
+		content.category ="Category " + String(Number.get_id());
+	if(option.get_item){
+			content.items = Sub_Item_Logic.get_test_item_list(content,content,option);
+		}
+		return content;
+	};
+	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		let item_list = [];
+		for(let a=0;a<option.item_count;a++){
+			item_list.push(Content_Logic.get_test("Content " +parseInt(a+1),option));
+		}
+		return item_list;
+	}
+	static get_test_list_by_category = (option) =>{
+		option = Field_Logic.get_option(DataType.CONTENT,option);
+		let content_list = [];
+		let category_list = Category_Logic.get_type_category_list(DataType.CONTENT,option.category_count);
+		let item_count = 0;
+		for(let a=0;a<category_list.length;a++){
+			for(let b=0;b<option.content_count;b++){
+				item_count++;
+				let content = Content_Logic.get_test("Content "+Number.get_id(),option);
+				content.category = category_list[Number.get_id(category_list.length-1)].title;
+				content_list.push(content);
+			}
+		}
+		return [category_list,content_list]
+	};
+}
+
+class Blog_Post_Logic {
+	static get_test = (title,option) =>{
+		option = Field_Logic.get_option(DataType.BLOG_POST,option);
+		let blog_post = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.BLOG_POST,0),
+			DataItem.get_new(DataType.BLOG_POST,0),
+			DataItem.get_new(DataType.BLOG_POST,0),
+			Field_Logic.get_test(title,option));
+		blog_post.author="First Name "+ Number.get_id();
+		blog_post.tag="tag 1,tag 2,tag 3";
+		blog_post.category ="Category " + String(Number.get_id());
+	if(option.get_item){
+			blog_post.items = Sub_Item_Logic.get_test_item_list(blog_post,blog_post,option);
+		}
+		return blog_post;
+	};
+	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		let item_list = [];
+		for(let a=0;a<option.item_count;a++){
+			item_list.push(Blog_Post_Logic.get_test("Blog_Post " +parseInt(a+1),option));
+		}
+		return item_list;
+	}
+	static get_test_list_by_category = (option) =>{
+		option = Field_Logic.get_option(DataType.BLOG_POST,option);
+		let blog_post_list = [];
+		let category_list = Category_Logic.get_type_category_list(DataType.BLOG_POST,option.category_count);
+		let item_count = 0;
+		for(let a=0;a<category_list.length;a++){
+			for(let b=0;b<option.blog_post_count;b++){
+				item_count++;
+				let blog_post = Blog_Post_Logic.get_test("Blog_Post "+Number.get_id(),option);
+				blog_post.category = category_list[Number.get_id(category_list.length-1)].title;
+				blog_post_list.push(blog_post);
+			}
+		}
+		return [category_list,blog_post_list]
+	};
+}
 class Event_Logic {
-	static get_test = (option) =>{
-		if(!option){
-			option = {item_count:9,get_value:false,get_item:false,value_count:20};
-		}
-		if(!option.item_count){
-			option.item_count=10;
-		}
+	static get_test = (title,option) =>{
+		option = Field_Logic.get_option(DataType.EVENT,option);
 		let event = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.EVENT,Number.get_id()),
 			DataItem.get_new(DataType.EVENT,0),
 			DataItem.get_new(DataType.EVENT,0),
-			Field_Logic.get_test("Event "+ String(Number.get_id()),option));
-		event = Sub_Item_Logic.get_test_bind_new_child("Event "+Number.get_id(),event,event,event);
+			DataItem.get_new(DataType.EVENT,0),
+			Field_Logic.get_test(title,option));
 		event.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		event.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
@@ -319,42 +251,28 @@ class Event_Logic {
 		event.meeting_link = "Meeting Link "+String(Number.get_id());
 		event.stock = String(Number.get_id(3-1));
 		event.category ="Category " + String(Number.get_id());
-		if(option.get_item){
+	if(option.get_item){
 			event.items = Sub_Item_Logic.get_test_item_list(event,event,option);
 		}
 		return event;
 	};
-	static get_test_list=(option)=>{
-		if(!option){
-			option={service_count:10};
-		}
-		let item_list=[];
-		for(let a=0;a<option.event_count;a++){
-			item_list.push(Event_Logic.get_test(option));
+	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		let item_list = [];
+		for(let a=0;a<option.item_count;a++){
+			item_list.push(Event_Logic.get_test("Event " +parseInt(a+1),option));
 		}
 		return item_list;
-	};
+	}
 	static get_test_list_by_category = (option) =>{
+		option = Field_Logic.get_option(DataType.EVENT,option);
 		let event_list = [];
-		let category_count = 9;
-		let event_count = 19;
-		if(!option){
-			option={};
-		}
-		else{
-			if(option.category_count){
-				category_count = parseInt(option.category_count);
-			}
-			if(option.category_count){
-				event_count = parseInt(option.event_count);
-			}
-		}
-		let category_list = Category_Logic.get_type_category_list(DataType.EVENT,category_count);
+		let category_list = Category_Logic.get_type_category_list(DataType.EVENT,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<event_count;b++){
+			for(let b=0;b<option.event_count;b++){
 				item_count++;
-				let event = Event_Logic.get_test({item_count:0,event_count:event_count,get_value:false,get_item:false,value_count:20});
+				let event = Event_Logic.get_test("Event "+Number.get_id(),option);
 				event.category = category_list[Number.get_id(category_list.length-1)].title;
 				event_list.push(event);
 			}
@@ -362,6 +280,8 @@ class Event_Logic {
 		return [category_list,event_list]
 	};
 }
+
+
 class Field_Logic {
 	static get_test = (title,option) =>{
 		if(!title){
@@ -400,14 +320,68 @@ class Field_Logic {
 		if(option.value_count==null){
 			option.value_count = 10;
 		}
-		for(let b=1;b<option.value_count;b++){
-				item['value_'+String(b)] = item.title+ ' value ' + String(b);
-				item['field_'+String(b-1)] = Str.get_title_url(item['value_'+String(b)]);
-				item[Str.get_title_url(item.title + ' value ' + String(b))] = item.title + ' value ' + String(b);
+		for(let b=0;b<option.value_count;b++){
+				item['value_'+String(b+1)] = item.title+ ' value ' + String(b+1);
+				item['field_'+String(b+1)] = Str.get_title_url(item['value_'+String(b+1)]);
+				item[Str.get_title_url(item.title + ' value ' + String(b+1))] = item.title + ' value ' + String(b+1);
 			}
 
 		return item;
 	};
+
+	static get_option(data_type,option){
+		if(!data_type){
+			data_type = DataType.BLANK;
+		}
+		if(!option){
+			option = {get_value:false,get_item:false,get_photo:false,item_count:9,value_count:9};
+		}
+		if(!option.get_photo){
+			option.get_photo=false;
+		}
+		if(!option.get_value){
+			option.get_value=false;
+		}
+		if(!option.value_count){
+			option.value_count=9;
+		}
+		if(!option.get_item){
+			option.get_item=false;
+		}
+		if(!option.item_count){
+			option.item_count=9;
+		}
+		if(!option.category_count){
+			option.category_count=9;
+		}
+		if(option.data_type==DataType.PAGE){
+			if(!option.page_count){
+				option.page_count=9;
+			}
+		}
+		if(option.data_type==DataType.PRODUCT){
+			if(!option.product_count){
+				option.product_count=9;
+			}
+		}
+		if(data_type==DataType.SERVICE){
+			if(!option.service_count){
+				option.service_count=9;
+			}
+		}
+		if(data_type==DataType.BLOG_POST){
+			if(!option.blog_post_count){
+				option.blog_post_count=9;
+			}
+		}
+		if(data_type==DataType.EVENT){
+			if(!option.event_count){
+				option.event_count=9;
+			}
+		}
+		Log.w('option',option);
+	return option;
+	}
 }
 class FieldType {
 	static APP_ID='app_id';
@@ -593,65 +567,6 @@ class Blank_Logic {
 			}
 		}
 		return [category_list,blank_list]
-	};
-}
-class Blog_Post_Logic {
-	static get_test = (option) =>{
-		if(!option){
-			option = {item_count:10,get_value:false,get_item:false,value_count:20};
-		}
-		if(!option.item_count){
-			option.item_count=10;
-		}
-		let blog_post = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.BLOG_POST,Number.get_id()),
-			DataItem.get_new(DataType.BLOG_POST,0),
-			DataItem.get_new(DataType.BLOG_POST,0),
-			Field_Logic.get_test("Blog Post "+Number.get_id(),option));
-		blog_post.author="First Name "+ Number.get_id();
-		blog_post.tag="tag 1,tag 2,tag 3";
-		blog_post.category ="Category " + String(Number.get_id());
-		if(option.get_item){
-			blog_post.items = Sub_Item_Logic.get_test_item_list(blog_post,blog_post,option);
-		}
-		return blog_post;
-	};
-	static get_test_list=(option)=>{
-		if(!option){
-			option = {blog_post_count:10,get_value:false,get_item:false,value_count:20};
-		}
-		let item_list=[];
-		for(let a=0;a<option.blog_post_count;a++){
-			item_list.push(Blog_Post_Logic.get_test(option));
-		}
-		return item_list;
-	};
-	static get_test_list_by_category = (option) =>{
-		let blog_post_list = [];
-		let category_count = 9;
-		let blog_post_count = 19;
-		if(!option){
-			option={};
-		}
-		else{
-			if(option.category_count){
-				category_count = parseInt(option.category_count);
-			}
-			if(option.category_count){
-				blog_post_count = parseInt(option.blog_post_count);
-			}
-		}
-		let category_list = Category_Logic.get_type_category_list(DataType.BLOG_POST,category_count);
-		let item_count = 0;
-		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<blog_post_count;b++){
-				item_count++;
-				let blog_post = Blog_Post_Logic.get_test({item_count:0,blog_post_count:blog_post_count,get_value:false,get_item:false,value_count:20});
-				blog_post.category = category_list[Number.get_id(category_list.length-1)].title;
-				blog_post_list.push(blog_post);
-			}
-		}
-		return [category_list,blog_post_list]
 	};
 }
 class Faq_Logic {
@@ -1399,6 +1314,7 @@ module.exports = {
 	Category_Logic,
 	Category_Url,
 	Content_Url,
+	Content_Logic,
 	Custom_Field_Url,
 	CMS,
 	DataItem,

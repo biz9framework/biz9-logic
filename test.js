@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -28,6 +28,7 @@ const biz9_config ={
 describe("connect", () => {
     it("_connect", () => {
         series([
+
             /*
             function(call) {
                 console.log('GET-URL-START');
@@ -45,25 +46,105 @@ describe("connect", () => {
             */
 
             function(call) {
-            /* --TEMPLATE--START */
-                let template = Template_Logic.get_test("Primary",{get_value:false,get_item:false,item_count:2});
-                let template_item_list = Template_Logic.get_test("Primary",template,template,{get_value:false,get_item:false,item_count:2});
-                Log.w('template',template);
-                Log.w('template_item_list',template_item_list);
-                /* --TEMPLATE--END */
+/* --CONTENT--START */
+                //let content = Content_Logic.get_test("Content 1",{get_value:true,get_item:true})
+                //Log.w("content",content);
+                let content_list = Content_Logic.get_test_list();
+                //let [category_list,content_list]=Content_Logic.get_test_list_by_category();
+                Log.w('content_list',content_list);
+                //Log.w('category_list',category_list);
+                /*
+               */
+                /* --CONTENT--END */
 
 
-            /* --SERVICE--START */
-                //Log.w("Service_section_1",service.section_1);
-                //Log.w("Service_section_1_section_1_section_1",service.section_1.section_1);
+/* --BLOG_POST--START */
+                //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1",{get_value:true,get_item:true})
+                //Log.w("blog_post",blog_post);
+                //let blog_post_list = Blog_Post_Logic.get_test_list();
+                //let [category_list,blog_post_list]=Blog_Post_Logic.get_test_list_by_category();
+                //Log.w('blog_post_list',blog_post_list);
+                //Log.w('category_list',category_list);
+                /*
+               */
+                /* --BLOG_POST--END */
 
-                //let service_list=Service.get_test_list({category_count:5,service_count:9,get_value:false,get_item:false});
-                //let [category_list,service_list]=Service.get_test_list_by_category({category_count:5,service_count:9});
+
+                /* --EVENT--START */
+                //let event = Event_Logic.get_test("Event 1",{get_value:true,get_item:true})
+                //Log.w("event",event);
+                //let event_list = Event_Logic.get_test_list();
+                //let [category_list,event_list]=Event_Logic.get_test_list_by_category();
+                //Log.w('event_list',event_list);
+                //Log.w('category_list',category_list);
+                /*
+               */
+                /* --EVENT--END */
+
+
+                /* --SERVICE--START */
+                //let service = Service_Logic.get_test("Service 1",{get_value:true,get_item:true})
+                //Log.w("service",service);
+                //let service_list = Service_Logic.get_test_list();
+                //let [category_list,service_list]=Service_Logic.get_test_list_by_category();
                 //Log.w('service_list',service_list);
                 //Log.w('category_list',category_list);
                 /*
                */
                 /* --SERVICE--END */
+
+
+/* --PRODUCT--START */
+
+                //let product = Product_Logic.get_test("Product 1",{get_value:true,get_item:true})
+                //Log.w("product",product);
+                //let product_list = Product_Logic.get_test_list({product_count:10});
+                //let product_list = Product_Logic.get_test_list();
+                //Log.w('product_list',product_list);
+                //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
+                //Log.w('category_list',category_list);
+
+                //let product = Product.get_test()
+                //Log.w("Product_section_1",product.section_1);
+                //Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);
+                /* --PRODUCT--END */
+
+
+                /* --PAGE--START */
+                //let page = Page_Logic.get_test("Page "+Number.get_id())
+                //let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_item:true})
+                //Log.w("page",page);
+                //let page_list = Page_Logic.get_test_list({page_count:10});
+                //Log.w("Page_list",page_list);
+                /*
+                let page = Page.get_test({item_count:9,page_count:19,get_item:true,get_value:true})
+                //let page = Page.get_test()
+                Log.w("Page_section_1_section_1_section_1",page.section_1.section_1.section_1);
+                */
+                /* --PAGE--END */
+
+
+               /* --ITEM-TEST--START */
+                //let item = Item_Logic.get_test("Item_" +Number.get_id(),DataType.SERVICE,0);
+                //Log.w('item',item);
+                /*
+                let item_list = Item_Logic.get_test_list(DataType.BLANK,{item_count:10,get_value:true});
+                Log.w('item_list',item_list);
+                Log.w('item_list_len',item_list.length);
+                */
+                /* --ITEM-TEST--END */
+
+
+            /* --TEMPLATE--START */
+                //let template = Template_Logic.get_test("Primary",{});
+                //let template = Template_Logic.get_test("Primary",{get_value:false,get_item:false,item_count:2});
+                /*
+                let template_item_list = Template_Logic.get_test("Primary",template,template,{get_value:false,get_item:false,item_count:2});
+                */
+                //Log.w('template',template);
+                //Log.w('template_item_list',template_item_list);
+                /* --TEMPLATE--END */
+
 
 
                 /* --ITEM-PARENT-TOP-URL-TEST--START */
@@ -75,24 +156,7 @@ describe("connect", () => {
                 /* --ITEM-PARENT-TOP-TEST-URL-START */
 
 
-                /* --PAGE--START */
-                /*
-                let page = Page.get_test({item_count:2,page_count:2,get_value:true,get_item:true,value_count:50})
-                Log.w("Page",page);
-                let page = Page.get_test({item_count:9,page_count:19,get_item:true,get_value:true})
-                //let page = Page.get_test()
-                Log.w("Page_section_1",page.section_1);
-                Log.w("Page_section_1_section_1_section_1",page.section_1.section_1.section_1);
-                */
-                /* --PAGE--END */
-
-                /* --ITEM-TEST--START */
-                //let item_test = Item_Logic.get_test_item(DataType.SERVICE,0);
-                //let item_test_list = Item_Logic.get_test_item_list(DataType.BLANK,{item_count:10,get_value:true});
-                //Log.w('item_test_list',item_test_list);
-                /* --ITEM-TEST--END */
-
-                //console.log('CONNECT-START');
+                                //console.log('CONNECT-START');
                 /* --BLANK--START */
                 //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
 
@@ -129,55 +193,12 @@ describe("connect", () => {
                 */
                 /* --PAGE--END */
 
-                /* --BLOG_POST--START */
-                //let blog_post_list=Blog_Post.get_test_list({category_count:5,blog_post_count:9,get_value:false,get_item:false});
-                //let [category_list,blog_post_list]=Blog_Post.get_test_list_by_category({category_count:5,blog_post_count:9});
-                //Log.w('blog_post_list',blog_post_list);
-                //Log.w('category_list',category_list);
-
-                //let blog_post = Blog_Post.get_test({item_count:9,blog_post_count:19,get_item:true,get_value:true})
-                //let blog_post = Blog_Post.get_test()
-                //Log.w('blog_post_list',blog_post_list);
-                //Log.w("Blog_Post",blog_post);
-                //Log.w("BLog_Post_section_1",blog_post.section_1);
-                //Log.w("BLog_Post_section_1_section_1_section_1",blog_post.section_1.section_1.section_1);
-                /* --BLOG_POST--END */
 
                 /* --CATEGORY--START */
                 //let category_list=Category.get_test_list({category_count:5,product_count:9,get_value:false,get_item:false});
                 //Log.w('category_list',category_list);
                 /* --CATEGORY--END */
 
-
-                /* --PRODUCT--START */
-                //let product_list=Product.get_test_list({category_count:5,product_count:9,get_value:false,get_item:false});
-                //Log.w('product_list',product_list);
-                //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
-                //Log.w('category_list',category_list);
-
-                //let product = Product.get_test({item_count:9,product_count:19,get_item:true,get_value:true})
-                //let product = Product.get_test()
-               //Log.w("Product",product);
-                //Log.w("Product_section_1",product.section_1);
-                //Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);
-                /* --PRODUCT--END */
-
-                /* --EVENT--START */
-                //let event_list=Event.get_test_list({category_count:5,event_count:9,get_value:false,get_item:false});
-                //let [category_list,event_list]=Event.get_test_list_by_category({category_count:5,event_count:9});
-                //Log.w('event_list',event_list);
-                //Log.w('category_list',category_list);
-                /* --EVENT--END */
-
-                               /* --EVENT--START */
-                /*
-                let event = Event.get_test({item_count:9,event_count:19,get_item:true,get_value:true})
-                //let service = Service.get_test()
-                Log.w("Event",event);
-                Log.w("Event_section_1",event.section_1);
-                Log.w("Event_section_1_section_1_section_1",event.section_1.section_1.section_1);
-                */
-                /* --EVENT--END */
 
 
                 /* --FAQ--START */
