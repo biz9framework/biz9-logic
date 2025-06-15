@@ -63,6 +63,46 @@ class Template_Logic {
 		return template;
 	};
 }
+class Team_Logic {
+	static get_test = (title,option) =>{
+		option = Field_Logic.get_option(DataType.TEAM,option);
+		let team = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.TEAM,0),
+			DataItem.get_new(DataType.TEAM,0),
+			DataItem.get_new(DataType.TEAM,0),
+			Field_Logic.get_test(title,option));
+		team.members = [];
+		if(option.get_member){
+			for(let a=0;a<option.member_count;a++){
+			team.members.push(Team_Logic.get_test_member("Full Name " + Number.get_id(),team,option));
+			}
+		}
+		return team;
+	};
+
+	static get_test_member = (title,team,option) =>{
+		option = Field_Logic.get_option(DataType.TEAM,option);
+		let team_member = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.ITEM,0),
+			DataItem.get_new(DataType.TEAM,team.id),
+			DataItem.get_new(DataType.TEAM,team.id));
+			team_member.first_name = "First Name "+ Number.get_id();
+			team_member.last_name = "Last Name "+ Number.get_id();
+			team_member.position = "Position "+ Number.get_id();
+			team_member.city = "City "+ Number.get_id();
+			team_member.state = "State "+ Number.get_id();
+
+		return team_member;
+	};
+	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.TEAM,option);
+		let item_list = [];
+		for(let a=0;a<option.team_count;a++){
+			item_list.push(Team_Logic.get_test("Team " +parseInt(a+1),option));
+		}
+		return item_list;
+	}
+}
 class Page_Logic {
 	static get_test = (title,option) =>{
 		option = Field_Logic.get_option(DataType.PAGE,option);
@@ -85,6 +125,7 @@ class Page_Logic {
 		return item_list;
 	}
 }
+
 class Product_Logic {
 	static get_test = (title,option) =>{
 		option = Field_Logic.get_option(DataType.PRODUCT,option);
@@ -193,7 +234,6 @@ class Content_Logic {
 		return [category_list,content_list]
 	};
 }
-
 class Blog_Post_Logic {
 	static get_test = (title,option) =>{
 		option = Field_Logic.get_option(DataType.BLOG_POST,option);
@@ -328,7 +368,6 @@ class Field_Logic {
 
 		return item;
 	};
-
 	static get_option(data_type,option){
 		if(!data_type){
 			data_type = DataType.BLANK;
@@ -379,6 +418,17 @@ class Field_Logic {
 				option.event_count=9;
 			}
 		}
+		if(data_type==DataType.TEAM){
+			if(!option.get_member){
+				option.get_member=true;
+			}
+			if(!option.member_count){
+				option.member_count=9;
+			}
+
+		}
+
+
 		Log.w('option',option);
 	return option;
 	}
@@ -924,28 +974,27 @@ class Obj {
 	}
 };
 class Category_Logic {
-	static get_test(option){
-		if(!option){
-			option = {item_count:9,category_count:9,get_value:false,get_item:false,value_count:20};
-		}
+static get_test = (title,option) =>{
+		option = Field_Logic.get_option(DataType.CATEGORY,option);
 		let category = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.CATEGORY,Number.get_id()),
 			DataItem.get_new(DataType.CATEGORY,0),
 			DataItem.get_new(DataType.CATEGORY,0),
-			Field_Logic.get_test("Category " +Number.get_id()));
-		category.type = Category_Logic.get_category_list()[Number.get_id(Category_Logic.get_category_list().length-1)].data_type;
-		return category;
-	}
-	static get_test_list = (option) => {
-		if(!option){
-			option={category_count:10};
+			DataItem.get_new(DataType.CATEGORY,0),
+			Field_Logic.get_test(title,option));
+		if(option.get_item){
+			category.items = Sub_Item_Logic.get_test_item_list(category,category,option);
 		}
-		let item_list=[];
-		for(let a=0;a<option.category_count;a++){
-			item_list.push(Category_Logic.get_test(option));
+		return category;
+	};
+	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.CATEGORY,option);
+		let item_list = [];
+		for(let a=0;a<option.item_count;a++){
+			item_list.push(Service_Logic.get_test("Service " +parseInt(a+1),option));
 		}
 		return item_list;
-	};
+	}
+
 	static get_type_category_list(type,count) {
 		let category_list = [];
 		for(let a=0;a<count;a++){
@@ -1269,7 +1318,6 @@ class Sub_Item_Logic {
 		if(option.value_count==null){
 			option.value_count = 10;
 		}
-
 		let item_title =title;
 		let item = DataItem.get_new(
 			DataType.ITEM,0, {
@@ -1341,6 +1389,7 @@ module.exports = {
 	Schedule,
 	Stock,
 	TemplateType,
+	Team_Logic,
 	Template_Logic,
 	Url,
 };

@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -46,12 +46,33 @@ describe("connect", () => {
             */
 
             function(call) {
-/* --CONTENT--START */
+
+               /* --TEAM--START */
+               let team = Team_Logic.get_test("Team 1",{get_value:true,get_member:true})
+                Log.w("team",team);
+               //let team_list = Team_Logic.get_test_list();
+                //let [team_list,team_list]=Team_Logic.get_test_list_by_team();
+                //Log.w('team_list',team_list);
+                //Log.w('team_list',team_list);
+                /* --TEAM--END */
+
+
+               /* --CATEGORY--START */
+               //let category = Category_Logic.get_test("Category 1",{get_value:true,get_item:true})
+                //Log.w("category",category);
+               //let category_list = Category_Logic.get_test_list();
+                //let [category_list,category_list]=Category_Logic.get_test_list_by_category();
+                //Log.w('category_list',category_list);
+                //Log.w('category_list',category_list);
+                /* --CATEGORY--END */
+
+
+                /* --CONTENT--START */
                 //let content = Content_Logic.get_test("Content 1",{get_value:true,get_item:true})
                 //Log.w("content",content);
-                let content_list = Content_Logic.get_test_list();
+                //let content_list = Content_Logic.get_test_list();
                 //let [category_list,content_list]=Content_Logic.get_test_list_by_category();
-                Log.w('content_list',content_list);
+                //Log.w('content_list',content_list);
                 //Log.w('category_list',category_list);
                 /*
                */
@@ -193,11 +214,6 @@ describe("connect", () => {
                 */
                 /* --PAGE--END */
 
-
-                /* --CATEGORY--START */
-                //let category_list=Category.get_test_list({category_count:5,product_count:9,get_value:false,get_item:false});
-                //Log.w('category_list',category_list);
-                /* --CATEGORY--END */
 
 
 
