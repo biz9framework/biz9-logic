@@ -290,7 +290,6 @@ class Blog_Post_Logic {
 			Field_Logic.get_test(title,option));
 		blog_post.author="First Name "+ Number.get_id();
 		blog_post.tag="tag 1,tag 2,tag 3";
-		blog_post.category ="Category " + String(parseInt(a+1));
 		if(option.get_item){
 			blog_post.items = Sub_Item_Logic.get_test_item_list(blog_post,blog_post,option);
 		}
