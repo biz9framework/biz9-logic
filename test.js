@@ -63,9 +63,9 @@ describe("connect", () => {
                //let category = Category_Logic.get_test("Category 1",{get_value:true,get_item:true})
                //let category_list = Category_Logic.get_test_list({get_value:true,get_item:true})
                 //Log.w("category",category);
-               //let category_list = Category_Logic.get_test_list_by_type(DataType.BLANK);
+               let category_list = Category_Logic.get_test_list_by_type(DataType.PRODUCT,{get_value:true});
                 //let [category_list,category_list]=Category_Logic.get_test_list_by_category();
-               //Log.w('category_list',category_list);
+               Log.w('category_list',category_list);
                 //Log.w('category_list',category_list);
                 /* --CATEGORY--END */
 
@@ -228,7 +228,7 @@ describe("connect", () => {
 
 
                 /* --FAQ--START */
-                Log.w("FAQ",Faq_Logic.get_test());
+                //Log.w("FAQ",Faq_Logic.get_test());
                 //Log.w("FAQ List",Faq.get_test_list());
                 /*
                 let review_list = Review.get_test_list({review_count:3,get_item:true})
