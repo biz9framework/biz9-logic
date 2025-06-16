@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -48,8 +48,9 @@ describe("connect", () => {
             function(call) {
 
                /* --TEAM--START */
-               let team = Team_Logic.get_test("Team 1",{get_value:true,get_member:true})
-                Log.w("team",team);
+               //let team = Team_Logic.get_test()
+               //let team = Team_Logic.get_test("Team 1",{get_value:true,get_member:true})
+                //Log.w("team",team);
                //let team_list = Team_Logic.get_test_list();
                 //let [team_list,team_list]=Team_Logic.get_test_list_by_team();
                 //Log.w('team_list',team_list);
@@ -58,16 +59,19 @@ describe("connect", () => {
 
 
                /* --CATEGORY--START */
+               //let category = Category_Logic.get_test("Category 1")
                //let category = Category_Logic.get_test("Category 1",{get_value:true,get_item:true})
+               //let category_list = Category_Logic.get_test_list({get_value:true,get_item:true})
                 //Log.w("category",category);
-               //let category_list = Category_Logic.get_test_list();
+               //let category_list = Category_Logic.get_test_list_by_type(DataType.BLANK);
                 //let [category_list,category_list]=Category_Logic.get_test_list_by_category();
-                //Log.w('category_list',category_list);
+               //Log.w('category_list',category_list);
                 //Log.w('category_list',category_list);
                 /* --CATEGORY--END */
 
 
                 /* --CONTENT--START */
+                //let content = Content_Logic.get_test()
                 //let content = Content_Logic.get_test("Content 1",{get_value:true,get_item:true})
                 //Log.w("content",content);
                 //let content_list = Content_Logic.get_test_list();
@@ -80,11 +84,15 @@ describe("connect", () => {
 
 
 /* --BLOG_POST--START */
+                //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1")
+                //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1",{get_value:true})
+                //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1",{get_value:true})
                 //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1",{get_value:true,get_item:true})
-                //Log.w("blog_post",blog_post);
-                //let blog_post_list = Blog_Post_Logic.get_test_list();
                 //let [category_list,blog_post_list]=Blog_Post_Logic.get_test_list_by_category();
+                //Log.w("blog_post",blog_post);
+                //let blog_post_list = Blog_Post_Logic.get_test_list({get_value:true,get_item:true});
                 //Log.w('blog_post_list',blog_post_list);
+                //Log.w('blog_post_list',blog_post_list[0].items);
                 //Log.w('category_list',category_list);
                 /*
                */
@@ -92,6 +100,7 @@ describe("connect", () => {
 
 
                 /* --EVENT--START */
+                //let event = Event_Logic.get_test("Event 1");
                 //let event = Event_Logic.get_test("Event 1",{get_value:true,get_item:true})
                 //Log.w("event",event);
                 //let event_list = Event_Logic.get_test_list();
@@ -132,6 +141,7 @@ describe("connect", () => {
 
 
                 /* --PAGE--START */
+                //let page = Page_Logic.get_test()
                 //let page = Page_Logic.get_test("Page "+Number.get_id())
                 //let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_item:true})
                 //Log.w("page",page);
@@ -158,7 +168,7 @@ describe("connect", () => {
 
             /* --TEMPLATE--START */
                 //let template = Template_Logic.get_test("Primary",{});
-                //let template = Template_Logic.get_test("Primary",{get_value:false,get_item:false,item_count:2});
+                //let template = Template_Logic.get_test("Primary",{get_value:true,get_item:true,item_count:2});
                 /*
                 let template_item_list = Template_Logic.get_test("Primary",template,template,{get_value:false,get_item:false,item_count:2});
                 */
@@ -189,8 +199,8 @@ describe("connect", () => {
                 //Log.w('blank_list',blank_list);
                 //Log.w('category_list',category_list);
 
-                //let blank = Blank_Logic.get_test({item_count:9,blank_count:19,get_item:true,get_value:true})
-                //let blank = Blank.get_test()
+                //let blank = Blank_Logic.get_test("cool",{item_count:9,blank_count:19,get_item:true,get_value:true})
+                //let blank = Blank_Logic.get_test()
                 //Log.w('blank_list',blank_list);
                 //Log.w("Blank",blank);
                 //Log.w("BLog_Post_section_1",blank.section_1);
@@ -218,7 +228,7 @@ describe("connect", () => {
 
 
                 /* --FAQ--START */
-                //Log.w("FAQ",Faq.get_test());
+                Log.w("FAQ",Faq_Logic.get_test());
                 //Log.w("FAQ List",Faq.get_test_list());
                 /*
                 let review_list = Review.get_test_list({review_count:3,get_item:true})
@@ -241,7 +251,7 @@ describe("connect", () => {
 
 
                 /* --BUSINESS--START */
-                //Log.w("Business",Business.get_new("Business " + Number.get_id()));
+                //Log.w("Business",Business_Logic.get_test("Business " + Number.get_id()));
                 /* --BUSINESS--END */
 
 

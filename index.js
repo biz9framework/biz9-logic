@@ -27,7 +27,7 @@ class Item_Logic {
 		if(!id){
 			id=0;
 		}
-		option = Field_Logic.get_option(data_type,option);
+		option = Field_Logic.get_option(data_type,option?option:{});
 		let item = DataItem.get_new_full_item(
 			DataItem.get_new(data_type,0),
 			DataItem.get_new(data_type,0),
@@ -40,7 +40,7 @@ class Item_Logic {
 		return item;
 	}
 	static get_test_list = (data_type,option) =>{
-		option = Field_Logic.get_option(data_type,option);
+		option = Field_Logic.get_option(data_type,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.item_count;a++){
 			item_list.push(Item_Logic.get_test("Item " +a,data_type,option));
@@ -50,13 +50,16 @@ class Item_Logic {
 }
 class Template_Logic {
 	static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.TEMPLATE,option);
+		if(!title){
+			title = "Template "+ Number.get_id();
+			option = {};
+		}
+		option = Field_Logic.get_option(DataType.TEMPLATE,option?option:{});
 		let template = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.TEMPLATE,0),
 			DataItem.get_new(DataType.TEMPLATE,0),
 			DataItem.get_new(DataType.TEMPLATE,0),
 			Field_Logic.get_test(title,option));
-
 		if(option.get_item){
 			template.items = Sub_Item_Logic.get_test_item_list(template,template,option);
 		}
@@ -65,7 +68,11 @@ class Template_Logic {
 }
 class Team_Logic {
 	static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.TEAM,option);
+		if(!title){
+			title = "Team "+Number.get_id();
+			option = {};
+		}
+		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
 		let team = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.TEAM,0),
 			DataItem.get_new(DataType.TEAM,0),
@@ -74,28 +81,27 @@ class Team_Logic {
 		team.members = [];
 		if(option.get_member){
 			for(let a=0;a<option.member_count;a++){
-			team.members.push(Team_Logic.get_test_member("Full Name " + Number.get_id(),team,option));
+				team.members.push(Team_Logic.get_test_member("Full Name " + Number.get_id(),team,option));
 			}
 		}
 		return team;
 	};
 	static get_test_member = (title,team,option) =>{
-		option = Field_Logic.get_option(DataType.TEAM,option);
+		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
 		let team_member = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.ITEM,0),
 			DataItem.get_new(DataType.TEAM,team.id),
 			DataItem.get_new(DataType.TEAM,team.id));
-			team_member.title = title;
-			team_member.first_name = "First Name "+ Number.get_id();
-			team_member.last_name = "Last Name "+ Number.get_id();
-			team_member.position = "Position "+ Number.get_id();
-			team_member.city = "City "+ Number.get_id();
-			team_member.state = "State "+ Number.get_id();
-
+		team_member.title = title;
+		team_member.first_name = "First Name "+ Number.get_id();
+		team_member.last_name = "Last Name "+ Number.get_id();
+		team_member.position = "Position "+ Number.get_id();
+		team_member.city = "City "+ Number.get_id();
+		team_member.state = "State "+ Number.get_id();
 		return team_member;
 	};
 	static get_test_member_list = (team,option) =>{
-		option = Field_Logic.get_option(DataType.TEAM,option);
+		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.member_count;a++){
 			item_list.push(Team_Logic.get_test_member("Full Name " +parseInt(a+1),team,option));
@@ -103,7 +109,7 @@ class Team_Logic {
 		return item_list;
 	}
 	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.TEAM,option);
+		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.team_count;a++){
 			item_list.push(Team_Logic.get_test("Team " +parseInt(a+1),option));
@@ -113,7 +119,11 @@ class Team_Logic {
 }
 class Page_Logic {
 	static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.PAGE,option);
+		if(!title){
+			title = "Page "+ Number.get_id();
+			option = {};
+		}
+		option = Field_Logic.get_option(DataType.PAGE,option?option:{});
 		let page = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PAGE,0),
 			DataItem.get_new(DataType.PAGE,0),
@@ -125,7 +135,7 @@ class Page_Logic {
 		return page;
 	};
 	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.PAGE,option);
+		option = Field_Logic.get_option(DataType.PAGE,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.page_count;a++){
 			item_list.push(Page_Logic.get_test("Page " +parseInt(a+1),option));
@@ -135,7 +145,11 @@ class Page_Logic {
 }
 class Product_Logic {
 	static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		if(!title){
+			title = "Product "+ Number.get_id();
+			option = {};
+		}
+		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let product = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PRODUCT,0),
 			DataItem.get_new(DataType.PRODUCT,0),
@@ -153,15 +167,15 @@ class Product_Logic {
 		return product;
 	};
 	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.item_count;a++){
+		for(let a=0;a<option.product_count;a++){
 			item_list.push(Product_Logic.get_test("Product " +parseInt(a+1),option));
 		}
 		return item_list;
 	}
 	static get_test_list_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let product_list = [];
 		let category_list = Category_Logic.get_type_category_list(DataType.PRODUCT,option.category_count);
 		let item_count = 0;
@@ -178,7 +192,11 @@ class Product_Logic {
 }
 class Service_Logic {
 	static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.SERVICE,option);
+		if(!title){
+			title = "Service "+ Number.get_id();
+			option = {};
+		}
+		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
 		let service = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.SERVICE,0),
 			DataItem.get_new(DataType.SERVICE,0),
@@ -189,21 +207,21 @@ class Service_Logic {
 		service.type = "Type "+String(Number.get_id());
 		service.sub_type = "Sub Type "+String(Number.get_id());
 		service.stock = String(Number.get_id(3-1));
-	if(option.get_item){
+		if(option.get_item){
 			service.items = Sub_Item_Logic.get_test_item_list(service,service,option);
 		}
 		return service;
 	};
 	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.item_count;a++){
+		for(let a=0;a<option.service_count;a++){
 			item_list.push(Service_Logic.get_test("Service " +parseInt(a+1),option));
 		}
 		return item_list;
 	}
 	static get_test_list_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.SERVICE,option);
+		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
 		let service_list = [];
 		let category_list = Category_Logic.get_type_category_list(DataType.SERVICE,option.category_count);
 		let item_count = 0;
@@ -220,28 +238,32 @@ class Service_Logic {
 }
 class Content_Logic {
 	static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.CONTENT,option);
+		if(!title){
+			title = "Content "+Number.get_id();
+			option = {};
+		}
+		option = Field_Logic.get_option(DataType.CONTENT,option?option:{});
 		let content = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.CONTENT,0),
 			DataItem.get_new(DataType.CONTENT,0),
 			DataItem.get_new(DataType.CONTENT,0),
 			Field_Logic.get_test(title,option));
 		content.category ="Category " + String(Number.get_id());
-	if(option.get_item){
+		if(option.get_item){
 			content.items = Sub_Item_Logic.get_test_section_list(content,content,option);
 		}
 		return content;
 	};
 	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		option = Field_Logic.get_option(DataType.CONTENT,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.item_count;a++){
+		for(let a=0;a<option.content_count;a++){
 			item_list.push(Content_Logic.get_test("Content " +parseInt(a+1),option));
 		}
 		return item_list;
 	}
 	static get_test_list_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.CONTENT,option);
+		option = Field_Logic.get_option(DataType.CONTENT,option?option:{});
 		let content_list = [];
 		let category_list = Category_Logic.get_type_category_list(DataType.CONTENT,option.category_count);
 		let item_count = 0;
@@ -258,7 +280,11 @@ class Content_Logic {
 }
 class Blog_Post_Logic {
 	static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.BLOG_POST,option);
+		if(!title){
+			title = "Blog Post " + Number.get_id();
+			option = {};
+		}
+		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
 		let blog_post = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.BLOG_POST,0),
 			DataItem.get_new(DataType.BLOG_POST,0),
@@ -267,21 +293,21 @@ class Blog_Post_Logic {
 		blog_post.author="First Name "+ Number.get_id();
 		blog_post.tag="tag 1,tag 2,tag 3";
 		blog_post.category ="Category " + String(Number.get_id());
-	if(option.get_item){
+		if(option.get_item){
 			blog_post.items = Sub_Item_Logic.get_test_item_list(blog_post,blog_post,option);
 		}
 		return blog_post;
 	};
 	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.item_count;a++){
+		for(let a=0;a<option.blog_post_count;a++){
 			item_list.push(Blog_Post_Logic.get_test("Blog_Post " +parseInt(a+1),option));
 		}
 		return item_list;
 	}
 	static get_test_list_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.BLOG_POST,option);
+		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
 		let blog_post_list = [];
 		let category_list = Category_Logic.get_type_category_list(DataType.BLOG_POST,option.category_count);
 		let item_count = 0;
@@ -298,7 +324,11 @@ class Blog_Post_Logic {
 }
 class Event_Logic {
 	static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.EVENT,option);
+		if(!title){
+			title = "Event " + Number.get_id();
+			option = {};
+		}
+		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
 		let event = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.EVENT,0),
 			DataItem.get_new(DataType.EVENT,0),
@@ -313,21 +343,21 @@ class Event_Logic {
 		event.meeting_link = "Meeting Link "+String(Number.get_id());
 		event.stock = String(Number.get_id(3-1));
 		event.category ="Category " + String(Number.get_id());
-	if(option.get_item){
+		if(option.get_item){
 			event.items = Sub_Item_Logic.get_test_item_list(event,event,option);
 		}
 		return event;
 	};
 	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.item_count;a++){
+		for(let a=0;a<option.event_count;a++){
 			item_list.push(Event_Logic.get_test("Event " +parseInt(a+1),option));
 		}
 		return item_list;
 	}
 	static get_test_list_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.EVENT,option);
+		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
 		let event_list = [];
 		let category_list = Category_Logic.get_type_category_list(DataType.EVENT,option.category_count);
 		let item_count = 0;
@@ -346,21 +376,19 @@ class Field_Logic {
 	static get_test = (title,option) =>{
 		if(!title){
 			title="";
+			option={};
 		}
 		if(!option){
-			option={get_value:true,value_count:10};
+			option= {};
 		}
-		if(!option.get_value){
-			option.get_value=false;
-		}
-		if(!option.value_count){
-			option.value_count=10;
+		if(!option.category_title){
+			option.category_title = 'Category '+String(Number.get_id());
 		}
 		let item = {
 			title:title,
 			setting_visible:"1",
 			title_url:Str.get_title_url(title),
-			category:'Category '+String(Number.get_id()),
+			category:option.category_title,
 			sub_note:"Sub Note "+String(Number.get_id()),
 			note:"Note "+String(Number.get_id())
 		}
@@ -370,21 +398,11 @@ class Field_Logic {
 		return item;
 	}
 	static get_value_list(item,option){
-		if(option==null){
-			option={get_value:true,value_count:10};
-		}
-		if(option.get_value==null){
-			option.get_value = true;
-		}
-		if(option.value_count==null){
-			option.value_count = 10;
-		}
 		for(let b=0;b<option.value_count;b++){
-				item['value_'+String(b+1)] = 'value ' + String(b+1);
-				item['field_'+String(b+1)] = Str.get_title_url(item['value_'+String(b+1)]);
-				item[Str.get_title_url('value ' + String(b+1))] = item.title + ' value ' + String(b+1);
-			}
-
+			item['value_'+String(b+1)] = 'value ' + String(b+1);
+			item['field_'+String(b+1)] = Str.get_title_url(item['value_'+String(b+1)]);
+			item[Str.get_title_url('value ' + String(b+1))] = item.title + ' value ' + String(b+1);
+		}
 		return item;
 	};
 	static get_option(data_type,option){
@@ -411,6 +429,9 @@ class Field_Logic {
 		}
 		if(!option.category_count){
 			option.category_count=9;
+		}
+		if(!option.category_title){
+			option.category_title=null;
 		}
 		if(option.data_type==DataType.PAGE){
 			if(!option.page_count){
@@ -453,7 +474,12 @@ class Field_Logic {
 				option.question_count=9;
 			}
 		}
-	return option;
+		if(data_type==DataType.CONTENT){
+			if(!option.content_count){
+				option.content_count=9;
+			}
+		}
+		return option;
 	}
 }
 class FieldType {
@@ -586,27 +612,31 @@ class DataType {
 }
 class Blank_Logic {
 	static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.BLANK,option);
+		if(!title){
+			title = "Blank " + Number.get_id();
+			option={};
+		}
+		option = Field_Logic.get_option(DataType.BLANK,option?option:{});
 		let blank = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.BLANK,0),
 			DataItem.get_new(DataType.BLANK,0),
 			DataItem.get_new(DataType.BLANK,0),
 			Field_Logic.get_test(title,option));
-	if(option.get_item){
-			blank.items = Sub_Item_Logic.get_test_item_list(blank,service,option);
+		if(option.get_item){
+			blank.items = Sub_Item_Logic.get_test_item_list(blank,blank,option);
 		}
 		return blank;
 	};
 	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option);
+		option = Field_Logic.get_option(DataType.BLANK,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.item_count;a++){
+		for(let a=0;a<option.blank_count;a++){
 			item_list.push(Blank_Logic.get_test("Blank " +parseInt(a+1),option));
 		}
 		return item_list;
 	}
 	static get_test_list_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.BLANK,option);
+		option = Field_Logic.get_option(DataType.BLANK,option?option:{});
 		let blank_list = [];
 		let category_list = Category_Logic.get_type_category_list(DataType.BLANK,option.category_count);
 		let item_count = 0;
@@ -623,24 +653,27 @@ class Blank_Logic {
 }
 class Faq_Logic {
 	static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.FAQ,option);
+		if(!title){
+			title = "Faq " + Number.get_id();
+			option={};
+		}
+		option = Field_Logic.get_option(DataType.FAQ,option?option:{});
 		option.get_value = false;
 		let faq = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.FAQ,0),
 			DataItem.get_new(DataType.FAQ,0),
 			DataItem.get_new(DataType.FAQ,0),
 			Field_Logic.get_test(title,option));
-			for(let b=0;b<option.question_count;b++){
+		for(let b=0;b<option.question_count;b++){
+			faq['question_'+String(b+1)] = 'question ' + String(b+1);
+			faq['field_'+String(b+1)] = Str.get_title_url(faq['question_'+String(b+1)]);
+			faq[Str.get_title_url('question ' + String(b+1))] = 'Answer ' + String(b+1);
+		}
 
-				faq['question_'+String(b+1)] = 'question ' + String(b+1);
-				faq['field_'+String(b+1)] = Str.get_title_url(faq['question_'+String(b+1)]);
-				faq[Str.get_title_url('question ' + String(b+1))] = 'Answer ' + String(b+1);
-			}
-
-			return faq;
+		return faq;
 	};
 	static get_test_list=(option)=>{
-		option = Field_Logic.get_option(DataType.FAQ,option);
+		option = Field_Logic.get_option(DataType.FAQ,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.question_count;a++){
 			item_list.push(Faq_Logic.get_test("FAQ Questions " +parseInt(a+1),option));
@@ -648,7 +681,7 @@ class Faq_Logic {
 		return item_list;
 	};
 }
-	class Review_Logic {
+class Review_Logic {
 	static get_test = () =>{
 		let city_list = ["Miami","Atlanta","Chicago","Seattle","New York City"];
 		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
@@ -678,15 +711,15 @@ class Faq_Logic {
 	};
 }
 class Business_Logic {
-	static get_new = () =>{
+	static get_new = (title) =>{
 		if(!title){
-			title="";
+			title="Business "+Number.get_id();
 		}
 		return DataItem.get_new_full_item(
 			DataItem.get_new(DataType.BUSINESS,0),
 			DataItem.get_new(DataType.BUSINESS,0),
 			DataItem.get_new(DataType.BUSINESS,0),{
-				title:"Business " + Number.get_id(),
+				title:title,
 				email:"",
 				phone:"",
 				address_1:"",
@@ -701,8 +734,14 @@ class Business_Logic {
 				twitter:""
 			});
 	};
-	static get_test = () =>{
-		let item = DataItem.get_new(DataType.BUSINESS,Number.get_id());
+	static get_test = (title,option) =>{
+		if(!title){
+			title="Business "+Number.get_id();
+			option={};
+		}
+		option = Field_Logic.get_option(DataType.BUSINESS,option?option:{});
+		Log.w('option',option);
+		let item = DataItem.get_new(DataType.BUSINESS,0);
 		let city_list = ["Miami","Atlanta","Chicago","Seattle","New York City"];
 		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
 		let business = DataItem.get_new_full_item(
@@ -741,19 +780,19 @@ class Business_Logic {
 	}
 }
 class DataItem {
-	static get_new = (data_type,id,options) => {
-		return get_new_item_main(data_type,id,options);
+	static get_new = (data_type,id,option) => {
+		return get_new_item_main(data_type,id,option?option:{});
 	};
-	static get_new_full_item = (item,parent_item,top_item,options) => {
-		return get_new_full_item_main(item,parent_item,top_item,options);
+	static get_new_full_item = (item,parent_item,top_item,option) => {
+		return get_new_full_item_main(item,parent_item,top_item,option?option:{});
 	};
-	static get_biz = (biz9_config,item,options)=>{
-		return get_biz_item_main(biz9_config,item,options);
+	static get_biz = (biz9_config,item,option)=>{
+		return get_biz_item_main(biz9_config,item,option?option:{});
 	}
-	static get_biz_by_list = (biz9_config,list,options)=>{
+	static get_biz_by_list = (biz9_config,list,option)=>{
 		let r_list = [];
 		for(let a=0;a<list.length;a++){
-			r_list.push(get_biz_item_main(biz9_config,list[a],options));
+			r_list.push(get_biz_item_main(biz9_config,list[a],option));
 		}
 		return r_list;
 	}
@@ -981,8 +1020,12 @@ class Obj {
 	}
 };
 class Category_Logic {
-static get_test = (title,option) =>{
-		option = Field_Logic.get_option(DataType.CATEGORY,option);
+	static get_test = (title,option) =>{
+		if(!title){
+			title="Category "+Number.get_id();
+			option={};
+		}
+		option = Field_Logic.get_option(DataType.CATEGORY,option?option:{});
 		let category = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.CATEGORY,0),
 			DataItem.get_new(DataType.CATEGORY,0),
@@ -996,19 +1039,20 @@ static get_test = (title,option) =>{
 	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.CATEGORY,option);
 		let item_list = [];
-		for(let a=0;a<option.item_count;a++){
-			item_list.push(Service_Logic.get_test("Service " +parseInt(a+1),option));
+		for(let a=0;a<option.category_count;a++){
+			item_list.push(Category_Logic.get_test("Category " +parseInt(a+1),option));
 		}
 		return item_list;
 	}
-	static get_type_category_list(type,count) {
+	static get_test_list_by_type = (type,option) =>{
+		option = Field_Logic.get_option(DataType.CATEGORY,option);
 		let category_list = [];
-		for(let a=0;a<count;a++){
+		for(let a=0;a<option.category_count;a++){
 			let category = DataItem.get_new_full_item(
 				DataItem.get_new(DataType.CATEGORY,"Category "+Number.get_id()),
 				DataItem.get_new(DataType.CATEGORY,0),
 				DataItem.get_new(DataType.CATEGORY,0),
-				Field_Logic.get_test("Category " +Number.get_id(),{get_value:false}));
+				Field_Logic.get_test("Category " +parseInt(a+1),option));
 			category.type = type
 			category_list.push(category);
 		}
@@ -1358,7 +1402,7 @@ class Sub_Item_Logic {
 		}
 		return new_list;
 	}
-	}
+}
 module.exports = {
 	Business_Logic,
 	Blank_Logic,
