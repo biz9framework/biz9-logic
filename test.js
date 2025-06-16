@@ -58,14 +58,18 @@ describe("connect", () => {
                 /* --TEAM--END */
 
 
+               /* --SEARCH--START */
+                console.log(Url.get_search(DataType.BLOG_POST,{title:-1},{cool:-1},1,10));
+               /* --SEARCH--END */
+
                /* --CATEGORY--START */
                //let category = Category_Logic.get_test("Category 1")
                //let category = Category_Logic.get_test("Category 1",{get_value:true,get_item:true})
                //let category_list = Category_Logic.get_test_list({get_value:true,get_item:true})
                 //Log.w("category",category);
-               let category_list = Category_Logic.get_test_list_by_type(DataType.PRODUCT,{get_value:true});
+               //let category_list = Category_Logic.get_test_list_by_type(DataType.PRODUCT,{get_value:true});
                 //let [category_list,category_list]=Category_Logic.get_test_list_by_category();
-               Log.w('category_list',category_list);
+               //Log.w('category_list',category_list);
                 //Log.w('category_list',category_list);
                 /* --CATEGORY--END */
 

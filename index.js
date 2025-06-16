@@ -966,6 +966,9 @@ class Team_Url {
 	};
 }
 class Url{
+	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
+		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
+	};
 	static copy_item = (biz9_config,data_type,id) => {
 		let action_url = "main/crud/copy/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
