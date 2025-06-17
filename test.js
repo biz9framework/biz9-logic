@@ -59,7 +59,7 @@ describe("connect", () => {
 
 
                /* --SEARCH--START */
-                console.log(Url.get_search(DataType.BLOG_POST,{title:-1},{cool:-1},1,10));
+                //console.log(Url.get_search(DataType.BLOG_POST,{title:-1},{cool:-1},1,10));
                /* --SEARCH--END */
 
                /* --CATEGORY--START */
@@ -147,8 +147,8 @@ describe("connect", () => {
                 /* --PAGE--START */
                 //let page = Page_Logic.get_test()
                 //let page = Page_Logic.get_test("Page "+Number.get_id())
-                //let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_item:true})
-                //Log.w("page",page);
+                let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:false})
+                Log.w("page",page);
                 //let page_list = Page_Logic.get_test_list({page_count:10});
                 //Log.w("Page_list",page_list);
                 /*

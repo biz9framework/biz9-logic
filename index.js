@@ -129,7 +129,7 @@ class Page_Logic {
 			DataItem.get_new(DataType.PAGE,0),
 			DataItem.get_new(DataType.PAGE,0),
 			Field_Logic.get_test(title,option));
-		if(option.get_item){
+		if(option.get_section){
 			page.items = Sub_Item_Logic.get_test_section_list(page,page,option);
 		}
 		return page;
@@ -424,7 +424,7 @@ class Field_Logic {
 		if(!option.get_item){
 			option.get_item=false;
 		}
-		if(!option.item_count){
+	if(!option.item_count){
 			option.item_count=9;
 		}
 		if(!option.category_count){
@@ -436,6 +436,12 @@ class Field_Logic {
 		if(option.data_type==DataType.PAGE){
 			if(!option.page_count){
 				option.page_count=9;
+			}
+			if(!option.section_count){
+				option.section_count=9;
+			}
+			if(!option.get_section){
+			option.get_section=false;
 			}
 		}
 		if(option.data_type==DataType.PRODUCT){
@@ -966,9 +972,6 @@ class Team_Url {
 	};
 }
 class Url{
-	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
-		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
-	};
 	static copy_item = (biz9_config,data_type,id) => {
 		let action_url = "main/crud/copy/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
@@ -1018,8 +1021,8 @@ class Url{
 	};
 }
 class Obj {
-	static get_data_param = (biz9_config,data_type,filter,sort_by,page_current,page_size) => {
-		return get_cloud_filter_obj_main(data_type,filter,sort_by,page_current,page_size);
+	static get_search = (biz9_config,data_type,filter,sort_by,page_current,page_size) => {
+		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
 };
 class Category_Logic {
