@@ -147,7 +147,7 @@ describe("connect", () => {
                 /* --PAGE--START */
                 //let page = Page_Logic.get_test()
                 //let page = Page_Logic.get_test("Page "+Number.get_id())
-                let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:false})
+                let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:true})
                 Log.w("page",page);
                 //let page_list = Page_Logic.get_test_list({page_count:10});
                 //Log.w("Page_list",page_list);

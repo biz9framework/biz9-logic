@@ -33,9 +33,9 @@ class Item_Logic {
 			DataItem.get_new(data_type,0),
 			DataItem.get_new(data_type,0),
 			Field_Logic.get_test(title,option));
-
 		if(option.get_item){
 			item.items = Sub_Item_Logic.get_test_item_list(item,item,option);
+			item = Sub_Item_Logic.bind_parent_child_list(item,item.items);
 		}
 		return item;
 	}
@@ -50,10 +50,6 @@ class Item_Logic {
 }
 class Template_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title = "Template "+ Number.get_id();
-			option = {};
-		}
 		option = Field_Logic.get_option(DataType.TEMPLATE,option?option:{});
 		let template = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.TEMPLATE,0),
@@ -62,16 +58,13 @@ class Template_Logic {
 			Field_Logic.get_test(title,option));
 		if(option.get_item){
 			template.items = Sub_Item_Logic.get_test_item_list(template,template,option);
+			template = Sub_Item_Logic.bind_parent_child_list(template,template.items);
 		}
 		return template;
 	};
 }
 class Team_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title = "Team "+Number.get_id();
-			option = {};
-		}
 		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
 		let team = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.TEAM,0),
@@ -119,10 +112,6 @@ class Team_Logic {
 }
 class Page_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title = "Page "+ Number.get_id();
-			option = {};
-		}
 		option = Field_Logic.get_option(DataType.PAGE,option?option:{});
 		let page = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PAGE,0),
@@ -131,6 +120,7 @@ class Page_Logic {
 			Field_Logic.get_test(title,option));
 		if(option.get_section){
 			page.items = Sub_Item_Logic.get_test_section_list(page,page,option);
+			page = Sub_Item_Logic.bind_parent_child_list(page,page.items);
 		}
 		return page;
 	};
@@ -145,10 +135,6 @@ class Page_Logic {
 }
 class Product_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title = "Product 1";
-			option = {};
-		}
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let product = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PRODUCT,0),
@@ -191,10 +177,6 @@ class Product_Logic {
 }
 class Service_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title = "Service 1";
-			option = {};
-		}
 		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
 		let service = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.SERVICE,0),
@@ -237,10 +219,6 @@ class Service_Logic {
 }
 class Content_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title = "Content 1";
-			option = {};
-		}
 		option = Field_Logic.get_option(DataType.CONTENT,option?option:{});
 		let content = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.CONTENT,0),
@@ -249,6 +227,7 @@ class Content_Logic {
 			Field_Logic.get_test(title,option));
 		if(option.get_item){
 			content.items = Sub_Item_Logic.get_test_section_list(content,content,option);
+			content = Sub_Item_Logic.bind_parent_child_list(content,content.items);
 		}
 		return content;
 	};
@@ -278,10 +257,6 @@ class Content_Logic {
 }
 class Blog_Post_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title = "Blog Post 1";
-			option = {};
-		}
 		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
 		let blog_post = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.BLOG_POST,0),
@@ -321,10 +296,6 @@ class Blog_Post_Logic {
 }
 class Event_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title = "Event " + Number.get_id();
-			option = {};
-		}
 		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
 		let event = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.EVENT,0),
@@ -371,10 +342,6 @@ class Event_Logic {
 }
 class Field_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title="";
-			option={};
-		}
 		if(!option){
 			option= {};
 		}
@@ -424,7 +391,7 @@ class Field_Logic {
 		if(!option.get_item){
 			option.get_item=false;
 		}
-	if(!option.item_count){
+		if(!option.item_count){
 			option.item_count=9;
 		}
 		if(!option.category_count){
@@ -441,7 +408,7 @@ class Field_Logic {
 				option.section_count=9;
 			}
 			if(!option.get_section){
-			option.get_section=false;
+				option.get_section=false;
 			}
 		}
 		if(option.data_type==DataType.PRODUCT){
@@ -618,10 +585,6 @@ class DataType {
 }
 class Blank_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title = "Blank " + Number.get_id();
-			option={};
-		}
 		option = Field_Logic.get_option(DataType.BLANK,option?option:{});
 		let blank = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.BLANK,0),
@@ -630,6 +593,7 @@ class Blank_Logic {
 			Field_Logic.get_test(title,option));
 		if(option.get_item){
 			blank.items = Sub_Item_Logic.get_test_item_list(blank,blank,option);
+			blank = Sub_Item_Logic.bind_parent_child_list(blank,blank.items);
 		}
 		return blank;
 	};
@@ -659,10 +623,6 @@ class Blank_Logic {
 }
 class Faq_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title = "Faq " + Number.get_id();
-			option={};
-		}
 		option = Field_Logic.get_option(DataType.FAQ,option?option:{});
 		option.get_value = false;
 		let faq = DataItem.get_new_full_item(
@@ -741,10 +701,6 @@ class Business_Logic {
 			});
 	};
 	static get_test = (title,option) =>{
-		if(!title){
-			title="Business "+Number.get_id();
-			option={};
-		}
 		option = Field_Logic.get_option(DataType.BUSINESS,option?option:{});
 		Log.w('option',option);
 		let item = DataItem.get_new(DataType.BUSINESS,0);
@@ -1059,7 +1015,7 @@ class Category_Logic {
 				DataItem.get_new(DataType.CATEGORY,0),
 				DataItem.get_new(DataType.CATEGORY,0),
 				Field_Logic.get_test("Category " +String(parseInt(a+1)),option));
-				category.type = type;
+			category.type = type;
 			category_list.push(category);
 		}
 		return category_list;
@@ -1407,6 +1363,13 @@ class Sub_Item_Logic {
 			new_list.push(Sub_Item_Logic.get_test(item_title,parent_item,top_item,option));
 		}
 		return new_list;
+	}
+
+	static bind_parent_child_list(item,item_list){
+		for(let a=0;a<item_list.length;a++){
+			item[Str.get_title_url(item_list[a].title)] = item_list[a];
+		}
+		return item;
 	}
 }
 module.exports = {
