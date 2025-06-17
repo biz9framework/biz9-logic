@@ -1361,11 +1361,12 @@ class Sub_Item_Logic {
 		for(let a=0;a<option.section_count;a++){
 			let item_title ="Section " + String(parseInt(a+1));
 			let item = Sub_Item_Logic.get_test(item_title,parent_item,top_item,option);
+			item.items = [];
 			let new_sub_list = [];
 			for(let b=0;b<option.section_count;b++){
 				let sub_item_title ="Section " + String(parseInt(b+1));
 				let sub_item = Sub_Item_Logic.get_test(sub_item_title,item,top_item,option);
-				new_sub_list.push(sub_item);
+				item.items.push(sub_item);
 			}
 			item = Sub_Item_Logic.bind_parent_child_list(item,new_sub_list);
 			new_list.push(item);

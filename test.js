@@ -150,7 +150,8 @@ describe("connect", () => {
                 let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:true,section_count:2})
                 Log.w("page",page);
                 Log.w("page_section_1",page.section_1);
-                Log.w("page_section_1_section_1",page.section_1.section_1);
+                Log.w("page_section_6",page.section_6.items);
+                //Log.w("page_section_1_section_1",page.section_1.section_1);
                 //let page_list = Page_Logic.get_test_list({page_count:10});
                 //Log.w("Page_list",page_list);
                 /*
