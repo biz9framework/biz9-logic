@@ -977,7 +977,7 @@ class Url{
 	};
 }
 class Obj {
-	static get_search = (biz9_config,data_type,filter,sort_by,page_current,page_size) => {
+	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
 };
