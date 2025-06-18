@@ -128,7 +128,7 @@ class Page_Logic {
 		option = Field_Logic.get_option(DataType.PAGE,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.page_count;a++){
-			item_list.push(Page_Logic.get_test("Page " +parseInt(a+1),option));
+			item_list.push(Page_Logic.get_test( "Page " +parseInt(a+1)? !option.get_blank : "",option));
 		}
 		return item_list;
 	}
@@ -342,19 +342,27 @@ class Event_Logic {
 }
 class Field_Logic {
 	static get_test = (title,option) =>{
+		let sub_note = "Sub Note "+String(Number.get_id());
+		let note = "Note "+String(Number.get_id());
 		if(!option){
 			option= {};
 		}
 		if(!option.category_title){
 			option.category_title = 'Category '+String(Number.get_id());
 		}
+		if(option.get_blank == true){
+			title = "";
+			sub_note = "";
+			note  = "";
+			option.category_title = "";
+		}
 		let item = {
 			title:title,
 			setting_visible:"1",
 			title_url:Str.get_title_url(title),
 			category:option.category_title,
-			sub_note:"Sub Note "+String(Number.get_id()),
-			note:"Note "+String(Number.get_id())
+			sub_note:sub_note,
+			note:note
 		}
 		if(option.get_value){
 			item = Field_Logic.get_value_list(item,option);
@@ -363,9 +371,15 @@ class Field_Logic {
 	}
 	static get_value_list(item,option){
 		for(let b=0;b<option.value_count;b++){
-			item['value_'+String(b+1)] = 'value ' + String(b+1);
-			item['field_'+String(b+1)] = Str.get_title_url(item['value_'+String(b+1)]);
-			item[Str.get_title_url('value ' + String(b+1))] = item.title + ' value ' + String(b+1);
+			if(option.get_blank == false){
+				item['value_'+String(b+1)] = 'value ' + String(b+1);
+				item['field_'+String(b+1)] = Str.get_title_url(item['value_'+String(b+1)]);
+				item[Str.get_title_url('value ' + String(b+1))] = item.title + ' value ' + String(b+1);
+			}else{
+				item['value_'+String(b+1)] = "";
+				item['field_'+String(b+1)] = "";
+				item[Str.get_title_url('value ' + String(b+1))] ="";
+			}
 		}
 		return item;
 	};
@@ -390,9 +404,7 @@ class Field_Logic {
     option.get_product = req.query.get_product?String(req.query.get_product)=='true': false;
     option.get_service = req.query.get_service?String(req.query.get_service)=='true': false;
     option.get_team = req.query.get_team?String(req.query.get_team)=='true': false;
-
 		return option;
-
 	}
 	static get_option(data_type,option){
 		if(!data_type){
@@ -424,6 +436,9 @@ class Field_Logic {
 		}
 		if(!option.category_title){
 			option.category_title=null;
+		}
+		if(!option.get_blank){
+			option.get_blank=false;
 		}
 		if(option.data_type==DataType.PAGE){
 			if(!option.page_count){

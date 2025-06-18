@@ -31,22 +31,40 @@ describe("connect", () => {
         series([
 
             function(call) {
-                console.log('GET-URL-START');
+                //console.log('GET-URL-START');
                 //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 //let action_url = 'test_get_url';
                 //let params = '&myparam1=p1&myparam2=p2'
                 //let data_type = DataType.PRODUCT;
                 //let id = "123";
-                let cloud_url = Page_Url.home(biz9_config);
-                console.log(biz9_config);
+                //let cloud_url = Page_Url.home(biz9_config);
+                //console.log(biz9_config);
                 //let cloud_url = Category_Url.get_page(biz9_config,'cool');
                 //let cloud_url = Category_Url.get_page(biz9_config,'cool');
-                Log.w('cloud_url',cloud_url);
-                console.log('GET-URL-SUCCESS');
-                //call()
+                //Log.w('cloud_url',cloud_url);
+                //console.log('GET-URL-SUCCESS');
+                call();
             },
 
             function(call) {
+                /* --PAGE--START */
+                //let page = Page_Logic.get_test()
+                //let page = Page_Logic.get_test("Page "+Number.get_id())
+                let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:false,section_count:2})
+                Log.w("page",page);
+                //Log.w("page_section_1",page.section_1);
+                //Log.w("page_section_6",page.section_6.items);
+                //Log.w("page_section_1_section_1",page.section_1.section_1);
+                //let page_list = Page_Logic.get_test_list({page_count:10});
+                //Log.w("Page_list",page_list);
+                /*
+                let page = Page.get_test({item_count:9,page_count:19,get_item:true,get_value:true})
+                //let page = Page.get_test()
+                Log.w("Page_section_1_section_1_section_1",page.section_1.section_1.section_1);
+                */
+                /* --PAGE--END */
+
+
                /* --TEAM--START */
                //let team = Team_Logic.get_test()
                //let team = Team_Logic.get_test("Team 1",{get_value:true,get_member:true})
@@ -143,24 +161,6 @@ describe("connect", () => {
                 //Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);
                 /* --PRODUCT--END */
 
-
-                /* --PAGE--START */
-                console.log(PageType.get_title(PageType.BLOG_POST));
-                //let page = Page_Logic.get_test()
-                //let page = Page_Logic.get_test("Page "+Number.get_id())
-                //let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:true,section_count:20})
-                //Log.w("page",page);
-                //Log.w("page_section_1",page.section_1);
-                //Log.w("page_section_6",page.section_6.items);
-                //Log.w("page_section_1_section_1",page.section_1.section_1);
-                //let page_list = Page_Logic.get_test_list({page_count:10});
-                //Log.w("Page_list",page_list);
-                /*
-                let page = Page.get_test({item_count:9,page_count:19,get_item:true,get_value:true})
-                //let page = Page.get_test()
-                Log.w("Page_section_1_section_1_section_1",page.section_1.section_1.section_1);
-                */
-                /* --PAGE--END */
 
 
                /* --ITEM-TEST--START */
