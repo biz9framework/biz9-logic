@@ -1,18 +1,19 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Page_Url} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
 /* --- TEST CONFIG START --- */
 //const ID='0';
 const ID='f23c2372-df8e-4c09-a919-677fe32ba0bb';
-const APP_TITLE_ID='cool_bean';
+const APP_ID='cool_bean';
 const DATA_TYPE='dt_blank';
 const URL="http://localhost:1901";
 const biz9_config ={
     SERVICE_HOST_TYPE:'multiple',
-    APP_TITLE_ID:APP_TITLE_ID,
+    URL:'http://localhost:1901',
+    APP_ID:APP_ID,
     MONGO_IP:'0.0.0.0',
     MONGO_USERNAME_PASSWORD:'',
     MONGO_PORT_ID:"27019",
@@ -29,24 +30,23 @@ describe("connect", () => {
     it("_connect", () => {
         series([
 
-            /*
             function(call) {
                 console.log('GET-URL-START');
-                let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
+                //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 //let action_url = 'test_get_url';
                 //let params = '&myparam1=p1&myparam2=p2'
-                let data_type = DataType.PRODUCT;
-                let id = "123";
-                //let cloud_url = BiZ_Url.get_item(biz9_config,data_type,id,"&cool=1");
-                let cloud_url = Category_Url.get_page(biz9_config,'cool');
-                Log.w('connect_url',cloud_url);
+                //let data_type = DataType.PRODUCT;
+                //let id = "123";
+                let cloud_url = Page_Url.home(biz9_config);
+                console.log(biz9_config);
+                //let cloud_url = Category_Url.get_page(biz9_config,'cool');
+                //let cloud_url = Category_Url.get_page(biz9_config,'cool');
+                Log.w('cloud_url',cloud_url);
                 console.log('GET-URL-SUCCESS');
                 //call()
             },
-            */
 
             function(call) {
-
                /* --TEAM--START */
                //let team = Team_Logic.get_test()
                //let team = Team_Logic.get_test("Team 1",{get_value:true,get_member:true})

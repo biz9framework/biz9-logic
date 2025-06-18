@@ -369,6 +369,31 @@ class Field_Logic {
 		}
 		return item;
 	};
+	static get_option_admin(req){
+    	let option = {};
+		option.category_product_count = req.query.category_product_count?parseInt(req.query.category_product_count): 9;
+    option.product_count = req.query.product_count?parseInt(req.query.product_count): 19;
+    option.category_blog_post_count = req.query.category_blog_post_count?parseInt(req.query.category_blog_post_count): 9;
+    option.blog_post_count = req.query.blog_post_count?parseInt(req.query.blog_post_count): 19;
+    option.category_service_count = req.query.category_service_count?parseInt(req.query.category_service_count): 9;
+    option.service_count = req.query.service_count?parseInt(req.query.service_count): 19;
+    option.category_event_count = req.query.category_event_count?parseInt(req.query.category_event_count): 9;
+    option.event_count = req.query.event_count?parseInt(req.query.event_count): 19;
+
+    option.get_admin = req.query.get_admin?String(req.query.get_admin)=='true': false;
+    option.get_business = req.query.get_business?String(req.query.get_business)=='true': false;
+    option.get_blog_post = req.query.get_blog_post?String(req.query.get_blog_post)=='true': false;
+    option.get_event = req.query.get_event?String(req.query.get_event)=='true': false;
+    option.get_faq = req.query.get_faq?String(req.query.get_faq)=='true': false;
+    option.get_template = req.query.get_template?String(req.query.get_template)=='true': false;
+    option.get_page = req.query.get_page?String(req.query.get_page)=='true': false;
+    option.get_product = req.query.get_product?String(req.query.get_product)=='true': false;
+    option.get_service = req.query.get_service?String(req.query.get_service)=='true': false;
+    option.get_team = req.query.get_team?String(req.query.get_team)=='true': false;
+
+		return option;
+
+	}
 	static get_option(data_type,option){
 		if(!data_type){
 			data_type = DataType.BLANK;
@@ -498,15 +523,15 @@ class PageType {
 	}
 	static get_item_list = () =>{
 		return [
-			{	title:DataType.get_title(PageType.ABOUT),type:DataType.ABOUT},
-			{	title:DataType.get_title(PageType.BLOG_POST),type:DataType.BLOG_POST},
-			{	title:DataType.get_title(PageType.CONTACT),type:DataType.CONTACT},
-			{	title:DataType.get_title(PageType.EVENT),type:DataType.EVENT},
-			{	title:DataType.get_title(PageType.GALLERY),type:DataType.GALLERY},
-			{	title:DataType.get_title(PageType.HOME),type:DataType.HOME},
-			{	title:DataType.get_title(PageType.TEAM),type:DataType.TEAM},
-			{	title:DataType.get_title(PageType.PRODUCT),type:DataType.PRODUCT},
-			{	title:DataType.get_title(PageType.SERVICE),type:DataType.SERVICE}
+			{title:DataType.get_title(PageType.ABOUT),type:DataType.ABOUT},
+			{title:DataType.get_title(PageType.BLOG_POST),type:DataType.BLOG_POST},
+			{title:DataType.get_title(PageType.CONTACT),type:DataType.CONTACT},
+			{title:DataType.get_title(PageType.EVENT),type:DataType.EVENT},
+			{title:DataType.get_title(PageType.GALLERY),type:DataType.GALLERY},
+			{title:DataType.get_title(PageType.HOME),type:DataType.HOME},
+			{title:DataType.get_title(PageType.TEAM),type:DataType.TEAM},
+			{title:DataType.get_title(PageType.PRODUCT),type:DataType.PRODUCT},
+			{title:DataType.get_title(PageType.SERVICE),type:DataType.SERVICE}
 		]
 	};
 	static HOME='home';
@@ -952,6 +977,10 @@ class Category_Url {
 class Page_Url {
 	static get = (biz9_config,title_url,params) => {
 		let action_url="page/get/"+title_url;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static home = (biz9_config,params) => {
+		let action_url=PageType.get_title(PageType.HOME);
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -1442,6 +1471,7 @@ module.exports = {
 	Message,
 	Obj,
 	Page_Logic,
+	Page_Url,
 	Product_Url,
 	PageType,
 	Product_Logic,
