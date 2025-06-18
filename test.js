@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -145,12 +145,13 @@ describe("connect", () => {
 
 
                 /* --PAGE--START */
+                console.log(PageType.get_title(PageType.BLOG_POST));
                 //let page = Page_Logic.get_test()
                 //let page = Page_Logic.get_test("Page "+Number.get_id())
-                let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:true,section_count:20})
-                Log.w("page",page);
-                Log.w("page_section_1",page.section_1);
-                Log.w("page_section_6",page.section_6.items);
+                //let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:true,section_count:20})
+                //Log.w("page",page);
+                //Log.w("page_section_1",page.section_1);
+                //Log.w("page_section_6",page.section_6.items);
                 //Log.w("page_section_1_section_1",page.section_1.section_1);
                 //let page_list = Page_Logic.get_test_list({page_count:10});
                 //Log.w("Page_list",page_list);

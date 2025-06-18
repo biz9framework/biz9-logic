@@ -489,16 +489,54 @@ class Social {
 	static LINKEDIN_URL="https://linkedin.com/";
 }
 class PageType {
+	static get_title = (data_type) => {
+		if(!data_type){
+			return "";
+		}else{
+			return String(Str.get_title(data_type.replaceAll('_',' '))).trim();
+		}
+	}
+	static get_item_list = () =>{
+		return [
+			{	title:DataType.get_title(PageType.ABOUT),type:DataType.ABOUT},
+			{	title:DataType.get_title(PageType.BLOG_POST),type:DataType.BLOG_POST},
+			{	title:DataType.get_title(PageType.CONTACT),type:DataType.CONTACT},
+			{	title:DataType.get_title(PageType.EVENT),type:DataType.EVENT},
+			{	title:DataType.get_title(PageType.GALLERY),type:DataType.GALLERY},
+			{	title:DataType.get_title(PageType.HOME),type:DataType.HOME},
+			{	title:DataType.get_title(PageType.TEAM),type:DataType.TEAM},
+			{	title:DataType.get_title(PageType.PRODUCT),type:DataType.PRODUCT},
+			{	title:DataType.get_title(PageType.SERVICE),type:DataType.SERVICE}
+		]
+	};
 	static HOME='home';
 	static ABOUT='about';
 	static CONTACT='contact';
+
 	static BLOG_POST='blog_post';
-	static GALLERY='gallery';
+	static BLOG_POST_BROWSE='blog_post_browse';
+	static BLOG_POST_DETAIL='blog_post_detail';
+
 	static EVENT='event';
+	static EVENT_BROWSE='event_browse';
+	static EVENT_DETAIL='event_detail';
+
+	static GALLERY='gallery';
+	static GALLERY_BROWSE='gallery_browse';
+	static GALLERY_DETAIL='gallery_detail';
+
 	static SERVICE='service';
+	static SERVICE_BROWSE='service_browse';
+	static SERVICE_DETAIL='service_detail';
+
 	static PRODUCT='product';
+	static PRODUCT_BROWSE='product_browse';
+	static PRODUCT_DETAIL='product_detail';
+
 	static PROJECT='project';
-	static TEAM='team';
+	static PROJECT_BROWSE='project_browse';
+	static PROJECT_DETAIL='project_detail';
+
 	static SECTION_1='section_1';
 	static SECTION_2='section_2';
 	static SECTION_3='section_2';
