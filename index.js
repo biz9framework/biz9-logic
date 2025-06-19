@@ -6,7 +6,7 @@ Description: BiZ9 Framework: Logic-JS
 */
 const moment = require('moment');
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
-const { Log,Str,DateTime,Number } = require('biz9-utility');
+const { Log,Str,DateTime,Number,Obj } = require('/home/think2/www/doqbox/biz9-framework/biz9-utility/code');
 class Message {
 	static SUCCESS="Update Success";
 	static LOGIN_GOOD="Login Success";
@@ -21,12 +21,8 @@ class TemplateType {
 }
 class Item_Logic {
 	static get_test = (title,data_type,id,option)=>{
-		if(!data_type){
-			data_type=DataType.BLANK;
-		}
-		if(!id){
-			id=0;
-		}
+		data_type = data_type ? data_type : DataType.BLANK;
+		id = id ? id : 0;
 		option = Field_Logic.get_option(data_type,option?option:{});
 		let item = DataItem.get_new_full_item(
 			DataItem.get_new(data_type,0),
@@ -46,6 +42,9 @@ class Item_Logic {
 			item_list.push(Item_Logic.get_test("Item " +a,data_type,option));
 		}
 		return item_list;
+	}
+	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
+		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
 }
 class Template_Logic {
@@ -143,11 +142,11 @@ class Product_Logic {
 			Field_Logic.get_test(title,option));
 
 		if(option.get_blank ==false){
-		product.cost = String(Number.get_id()) + "." + String(Number.get_id());
-		product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
-		product.type = "Type "+String(Number.get_id());
-		product.sub_type = "Sub Type "+String(Number.get_id());
-		product.stock = String(Number.get_id(3-1));
+			product.cost = String(Number.get_id()) + "." + String(Number.get_id());
+			product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+			product.type = "Type "+String(Number.get_id());
+			product.sub_type = "Sub Type "+String(Number.get_id());
+			product.stock = String(Number.get_id(3-1));
 		}else{
 			product.cost = "";
 			product.old_cost = "";
@@ -354,12 +353,8 @@ class Field_Logic {
 	static get_test = (title,option) =>{
 		let sub_note = "Sub Note "+String(Number.get_id());
 		let note = "Note "+String(Number.get_id());
-		if(!option){
-			option= {};
-		}
-		if(!option.category_title){
-			option.category_title = 'Category '+String(Number.get_id());
-		}
+		option = option ? option : {};
+		option.category_title = !Str.check_is_null(option.category_title) ? option.category_title : 'Category '+String(Number.get_id());
 		if(option.get_blank == true){
 			title = "";
 			sub_note = "";
@@ -394,119 +389,78 @@ class Field_Logic {
 		return item;
 	};
 	static get_option_admin(req){
-    	let option = {};
-		option.value_count = req.query.value_count?parseInt(req.query.value_count): 19;
-		option.section_count = req.query.section_count?parseInt(req.query.section_count): 19;
-		option.question_count = req.query.question_count?parseInt(req.query.question_count): 19;
+		let option = {};
+		option.value_count = req.query.value_count ? req.query.value_count : 19;
+		option.section_count = req.query.section_count ? req.query.section_count : 19;
+		option.question_count = req.query.question_count ? req.query.question_count : 19;
 
-		option.category_product_count = req.query.category_product_count?parseInt(req.query.category_product_count): 9;
-    option.product_count = req.query.product_count?parseInt(req.query.product_count): 19;
-    option.category_blog_post_count = req.query.category_blog_post_count?parseInt(req.query.category_blog_post_count): 9;
-    option.blog_post_count = req.query.blog_post_count?parseInt(req.query.blog_post_count): 19;
-    option.category_service_count = req.query.category_service_count?parseInt(req.query.category_service_count): 9;
-    option.service_count = req.query.service_count?parseInt(req.query.service_count): 19;
-    option.category_event_count = req.query.category_event_count?parseInt(req.query.category_event_count): 9;
-    option.event_count = req.query.event_count?parseInt(req.query.event_count): 19;
+		option.get_product = req.query.get_product ? req.query.get_product : false;
+		option.get_category_product = req.query.get_category_product ? req.query.get_category_product : false;
+		option.category_product_count = req.query.category_product_count ? req.query.category_product_count : 9;
+		option.product_count = req.query.product_count ? req.query.product_count : 19;
 
-    option.get_admin = req.query.get_admin?String(req.query.get_admin)=='true': false;
-    option.get_business = req.query.get_business?String(req.query.get_business)=='true': false;
-    option.get_blog_post = req.query.get_blog_post?String(req.query.get_blog_post)=='true': false;
-    option.get_event = req.query.get_event?String(req.query.get_event)=='true': false;
-    option.get_faq = req.query.get_faq?String(req.query.get_faq)=='true': false;
-    option.get_template = req.query.get_template?String(req.query.get_template)=='true': false;
-    option.get_page = req.query.get_page?String(req.query.get_page)=='true': false;
-    option.get_product = req.query.get_product?String(req.query.get_product)=='true': false;
-    option.get_service = req.query.get_service?String(req.query.get_service)=='true': false;
-    option.get_team = req.query.get_team?String(req.query.get_team)=='true': false;
+		option.get_service = req.query.get_service ? req.query.get_service : false;
+		option.get_category_service = req.query.get_category_service ? req.query.get_category_service : false;
+		option.category_service_count = req.query.category_service_count ? req.query.category_service_count : 9;
+		option.service_count = req.query.service_count ? req.query.service_count : 19;
 
-		Log.w('option_here',option);
+		option.get_event = req.query.get_event ? req.query.get_event : false;
+		option.get_category_event = req.query.get_category_event ? req.query.get_category_event : false;
+		option.category_event_count = req.query.category_event_count ? req.query.category_event_count : 9;
+		option.event_count = req.query.event_count ? req.query.event_count : 19;
+
+		option.get_blog_post = req.query.get_blog_post ? req.query.get_blog_post : false;
+		option.get_category_blog_post = req.query.get_category_blog_post ? req.query.get_category_blog_post : false;
+		option.category_blog_post_count = req.query.category_blog_post_count ? req.query.category_blog_post_count : 9;
+
+		option.get_admin = req.query.get_admin ? req.query.get_admin : false;
+		option.get_business = req.query.get_business ? req.query.get_business : false;
+		option.get_faq = req.query.get_faq ? req.query.get_faq : false;
+		option.get_template = req.query.get_template ? req.query.get_template : false;
+		option.get_page = req.query.get_page ? req.query.get_page : false;
+		option.get_team = req.query.get_team ? req.query.get_team : false;
+
 		return option;
 	}
 	static get_option(data_type,option){
-		if(!data_type){
-			data_type = DataType.BLANK;
-		}
-		if(!option){
-			option = {get_value:false,get_item:false,get_photo:false,item_count:9,value_count:9};
-		}
-		if(!option.get_photo){
-			option.get_photo=false;
-		}
-		if(!option.get_value){
-			option.get_value=false;
-		}
-		if(!option.value_count){
-			option.value_count=19;
-		}
-		if(!option.section_count){
-			option.section_count=19;
-		}
-		if(!option.get_item){
-			option.get_item=false;
-		}
-		if(!option.item_count){
-			option.item_count=9;
-		}
-		if(!option.category_count){
-			option.category_count=9;
-		}
-		if(!option.category_title){
-			option.category_title=null;
-		}
-		if(!option.get_blank){
-			option.get_blank=false;
-		}
+		data_type = data_type ? data_type : DataType.BLANK;
+		option = !Obj.check_is_empty(option) ? option : {get_value:false,get_item:false,get_photo:false,item_count:9,value_count:9};
+		option.get_photo = option.get_photo ? true : false;
+		option.get_value = option.get_value ? true : false;
+		option.get_item = option.get_item ? true : false;
+		option.get_blank = option.get_blank ? true : false;
+		option.value_count = option.value_count ? option.value_count : 19;
+		option.section_count = option.section_count ? option.section_count : 19;
+		option.item_count = option.item_count ? option.item_count : 9;
+		option.category_count = option.category_count ? option.category_count : 9;
+		option.category_title = option.category_title ? option.category_title : "";
 		if(option.data_type==DataType.PAGE){
-			if(!option.page_count){
-				option.page_count=9;
-			}
-			if(!option.section_count){
-				option.section_count=9;
-			}
-			if(!option.get_section){
-				option.get_section=false;
-			}
+			option.page_count = option.page_count ? option.page_count : 9;
+			option.section_count = option.section_count ? option.section_count : 9;
+			option.get_section = option.get_section ? true : false;
 		}
 		if(option.data_type==DataType.PRODUCT){
-			if(!option.product_count){
-				option.product_count=9;
-			}
+			option.product_count = option.product_count ? option.product_count : 9;
 		}
 		if(data_type==DataType.SERVICE){
-			if(!option.service_count){
-				option.service_count=9;
-			}
+			option.service_count = option.service_count ? option.service_count : 9;
 		}
 		if(data_type==DataType.BLOG_POST){
-			if(!option.blog_post_count){
-				option.blog_post_count=9;
-			}
+			option.blog_post_count = option.blog_post_count ? option.blog_post_count : 9;
 		}
 		if(data_type==DataType.EVENT){
-			if(!option.event_count){
-				option.event_count=9;
-			}
+			option.event_count = option.event_count ? option.event_count : 9;
 		}
 		if(data_type==DataType.TEAM){
-			if(!option.get_member){
-				option.get_member=false;
-			}
-			if(!option.member_count){
-				option.member_count=9;
-			}
+			option.get_member = option.get_member ? true : false;
+			option.member_count = option.member_count ? option.member_count : 9;
 		}
 		if(data_type==DataType.FAQ){
-			if(!option.get_question){
-				option.get_question=false;
-			}
-			if(!option.question_count){
-				option.question_count=9;
-			}
+			option.get_question = option.get_question ? true : false;
+			option.question_count = option.question_count ? option.question_count : 9;
 		}
 		if(data_type==DataType.CONTENT){
-			if(!option.content_count){
-				option.content_count=9;
-			}
+			option.content_count = option.content_count ? option.content_count : 9;
 		}
 		return option;
 	}
@@ -634,11 +588,7 @@ class PageType {
 }
 class DataType {
 	static get_title = (data_type) => {
-		if(!data_type){
-			return "";
-		}else{
-			return String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
-		}
+		return (!data_type) ? "" : String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 	}
 	static get_item_list = () =>{
 		return [
@@ -760,9 +710,7 @@ class Review_Logic {
 		return review;
 	};
 	static get_test_list=(option)=>{
-		if(!option){
-			option = {review_count:19};
-		}
+		option = !Obj.check_is_empty(option) ? option : {review_count:19};
 		let item_list = [];
 		for(let a=0;a<option.review_count;a++){
 			item_list.push(Review_Logic.get_test());
@@ -772,9 +720,7 @@ class Review_Logic {
 }
 class Business_Logic {
 	static get_new = (title) =>{
-		if(!title){
-			title="Business "+Number.get_id();
-		}
+		title=(title) ? title : "Business "+Number.get_id();
 		return DataItem.get_new_full_item(
 			DataItem.get_new(DataType.BUSINESS,0),
 			DataItem.get_new(DataType.BUSINESS,0),
@@ -819,18 +765,11 @@ class Business_Logic {
 		return item;
 	};
 	static get_full_address(business){
-		if(!business.address_1){
-			business.address_1 = "";
-		}
-		if(!business.address_2){
-			business.address_2 = "";
-		}
-		if(!business.city){
-			business.city = "";
-		}
-		if(!business.state){
-			business.state = "";
-		}
+		business.address_1 = (business.address_1) ? business.address_1 : "";
+		business.address_2 = (business.address_2) ? business.address_2 : "";
+		business.city = (business.city) ? business.city : "";
+		business.state = (business.state) ? business.state : "";
+		business.zip = (business.zip) ? business.zip : "";
 		return business.address_1 + " "+ business.address_2 + " " + business.city + " " + business.state + " " + business.zip;
 	}
 }
@@ -1073,17 +1012,9 @@ class Url{
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
 }
-class Obj {
-	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
-		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
-	}
-};
 class Category_Logic {
 	static get_test = (title,option) =>{
-		if(!title){
-			title="Category 1";
-			option={};
-		}
+		title = (title) ? title : "Category 1";
 		option = Field_Logic.get_option(DataType.CATEGORY,option?option:{});
 		let category = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.CATEGORY,0),
@@ -1368,12 +1299,8 @@ class Stock {
 }
 class Schedule {
 	static get_start_date_time = (item) => {
-		if(!item.date){
-			item.date = new Date();
-		}
-		if(!item.time){
-			item.time = new Date();
-		}
+		item.date = (item.date)  ? item.date : new Date();
+		item.time = (item.time)  ? item.time : new Date();
 		item.start_date = DateTime.get_full_date_by_date_time(item.date,item.time);
 		item.start_time = DateTime.get_full_time_by_date_time(item.date,item.time);
 		item.start_date_time = DateTime.get_full_date_time_by_date_time(item.date,item.time);
@@ -1381,12 +1308,8 @@ class Schedule {
 	}
 	static get_start_date_time_by_list = (list) => {
 		for(let a=0;a<list.length;a++){
-			if(!list[a].date){
-				list[a].date = new Date();
-			}
-			if(!list[a].time){
-				list[a].time = new Date();
-			}
+			list[a].date = (list[a].date) ? list[a].date : new Date();
+			list[a].time = (list[a].time) ? list[a].time : new Date();
 			list[a].start_date = DateTime.get_full_date_by_date_time(list[a].date,list[a].time);
 			list[a].start_time = DateTime.get_full_time_by_date_time(list[a].date,list[a].time);
 			list[a].start_date_time = DateTime.get_full_date_time_by_date_time(list[a].date,list[a].time);
@@ -1488,7 +1411,6 @@ module.exports = {
 	Item_Logic,
 	Event_Logic,
 	Message,
-	Obj,
 	Page_Logic,
 	Page_Url,
 	Product_Url,
