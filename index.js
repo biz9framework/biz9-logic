@@ -141,11 +141,21 @@ class Product_Logic {
 			DataItem.get_new(DataType.PRODUCT,0),
 			DataItem.get_new(DataType.PRODUCT,0),
 			Field_Logic.get_test(title,option));
+
+		if(option.get_blank ==false){
 		product.cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
 		product.type = "Type "+String(Number.get_id());
 		product.sub_type = "Sub Type "+String(Number.get_id());
 		product.stock = String(Number.get_id(3-1));
+		}else{
+			product.cost = "";
+			product.old_cost = "";
+			product.type = "";
+			product.sub_type = "";
+			product.stock = "";
+		}
+
 		if(option.get_item){
 			product.items = Sub_Item_Logic.get_test_item_list(product,product,option);
 		}
@@ -385,6 +395,10 @@ class Field_Logic {
 	};
 	static get_option_admin(req){
     	let option = {};
+		option.value_count = req.query.value_count?parseInt(req.query.value_count): 19;
+		option.section_count = req.query.section_count?parseInt(req.query.section_count): 19;
+		option.question_count = req.query.question_count?parseInt(req.query.question_count): 19;
+
 		option.category_product_count = req.query.category_product_count?parseInt(req.query.category_product_count): 9;
     option.product_count = req.query.product_count?parseInt(req.query.product_count): 19;
     option.category_blog_post_count = req.query.category_blog_post_count?parseInt(req.query.category_blog_post_count): 9;
@@ -404,6 +418,8 @@ class Field_Logic {
     option.get_product = req.query.get_product?String(req.query.get_product)=='true': false;
     option.get_service = req.query.get_service?String(req.query.get_service)=='true': false;
     option.get_team = req.query.get_team?String(req.query.get_team)=='true': false;
+
+		Log.w('option_here',option);
 		return option;
 	}
 	static get_option(data_type,option){
@@ -420,10 +436,10 @@ class Field_Logic {
 			option.get_value=false;
 		}
 		if(!option.value_count){
-			option.value_count=9;
+			option.value_count=19;
 		}
 		if(!option.section_count){
-			option.section_count=9;
+			option.section_count=19;
 		}
 		if(!option.get_item){
 			option.get_item=false;

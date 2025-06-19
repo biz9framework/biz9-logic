@@ -50,8 +50,8 @@ describe("connect", () => {
                 /* --PAGE--START */
                 //let page = Page_Logic.get_test()
                 //let page = Page_Logic.get_test("Page "+Number.get_id())
-                let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:false,section_count:2})
-                Log.w("page",page);
+                //let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:false,section_count:2})
+                //Log.w("page",page);
                 //Log.w("page_section_1",page.section_1);
                 //Log.w("page_section_6",page.section_6.items);
                 //Log.w("page_section_1_section_1",page.section_1.section_1);
@@ -150,9 +150,9 @@ describe("connect", () => {
 
                 //let product = Product_Logic.get_test("Product 1",{get_value:true,get_item:true})
                 //Log.w("product",product);
-                //let product_list = Product_Logic.get_test_list({product_count:10});
+                let product_list = Product_Logic.get_test_list({product_count:10,get_blank:true});
                 //let product_list = Product_Logic.get_test_list();
-                //Log.w('product_list',product_list);
+                Log.w('product_list',product_list);
                 //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
                 //Log.w('category_list',category_list);
 
