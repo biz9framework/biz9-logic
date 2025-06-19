@@ -796,7 +796,6 @@ class Business_Logic {
 	};
 	static get_test = (title,option) =>{
 		option = Field_Logic.get_option(DataType.BUSINESS,option?option:{});
-		Log.w('option',option);
 		let item = DataItem.get_new(DataType.BUSINESS,0);
 		let city_list = ["Miami","Atlanta","Chicago","Seattle","New York City"];
 		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
@@ -1416,18 +1415,7 @@ class Storage {
 }
 class Sub_Item_Logic {
 	static get_test(title,parent_item,top_item,option){
-		if(option==null){
-			option={get_value:true,value_count:9};
-		}
-		if(option.item_count==null){
-			option.item_count = 9;
-		}
-		if(option.get_value==null){
-			option.get_value = true;
-		}
-		if(option.value_count==null){
-			option.value_count = 9;
-		}
+		option = Field_Logic.get_option(DataType.ITEM,option?option:{});
 		let item_title =title;
 		let item = DataItem.get_new(
 			DataType.ITEM,0, {
