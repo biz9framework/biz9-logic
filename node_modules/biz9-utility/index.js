@@ -46,6 +46,11 @@ class Number {
         return check_is_guid_main(str);
     };
 }
+class Obj {
+    static check_is_empty = (obj) => {
+      return Object.keys(obj).length === 0 && obj.constructor === Object;
+    };
+}
 class Str {
     static get_title = (str) => {
         return get_title_main(str);
@@ -118,6 +123,7 @@ module.exports = {
     Log,
     Number,
     Str,
+    Obj,
     Form,
     Test,
     DateTime,
