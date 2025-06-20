@@ -394,6 +394,12 @@ class Field_Logic {
 		option.section_count = req.query.section_count ? req.query.section_count : 19;
 		option.question_count = req.query.question_count ? req.query.question_count : 19;
 
+		option.get_blog_post = req.query.get_blog_post ? req.query.get_blog_post : false;
+		option.get_category_blog_post = req.query.get_category_blog_post ? req.query.get_category_blog_post : false;
+		option.category_blog_post_count = req.query.category_blog_post_count ? req.query.category_blog_post_count : 9;
+		option.blog_post_count = req.query.blog_post_count ? req.query.blog_post_count : 9;
+
+
 		option.get_product = req.query.get_product ? req.query.get_product : false;
 		option.get_category_product = req.query.get_category_product ? req.query.get_category_product : false;
 		option.category_product_count = req.query.category_product_count ? req.query.category_product_count : 9;
@@ -409,11 +415,7 @@ class Field_Logic {
 		option.category_event_count = req.query.category_event_count ? req.query.category_event_count : 9;
 		option.event_count = req.query.event_count ? req.query.event_count : 19;
 
-		option.get_blog_post = req.query.get_blog_post ? req.query.get_blog_post : false;
-		option.get_category_blog_post = req.query.get_category_blog_post ? req.query.get_category_blog_post : false;
-		option.category_blog_post_count = req.query.category_blog_post_count ? req.query.category_blog_post_count : 9;
-
-		option.get_admin = req.query.get_admin ? req.query.get_admin : false;
+			option.get_admin = req.query.get_admin ? req.query.get_admin : false;
 		option.get_business = req.query.get_business ? req.query.get_business : false;
 		option.get_faq = req.query.get_faq ? req.query.get_faq : false;
 		option.get_template = req.query.get_template ? req.query.get_template : false;
