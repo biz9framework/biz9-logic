@@ -283,7 +283,7 @@ class Blog_Post_Logic {
 		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.blog_post_count;a++){
-			item_list.push(Blog_Post_Logic.get_test("Blog_Post " +String(parseInt(a+1)),option));
+			item_list.push(Blog_Post_Logic.get_test("Blog Post " +String(parseInt(a+1)),option));
 		}
 		return item_list;
 	}
@@ -295,7 +295,7 @@ class Blog_Post_Logic {
 		for(let a=0;a<category_list.length;a++){
 			for(let b=0;b<option.blog_post_count;b++){
 				item_count++;
-				let blog_post = Blog_Post_Logic.get_test("Blog_Post "+String(parseInt(b+1)),option);
+				let blog_post = Blog_Post_Logic.get_test("Blog Post "+String(parseInt(b+1)),option);
 				blog_post.category = category_list[Number.get_id(category_list.length+1)].title;
 				blog_post_list.push(blog_post);
 			}
