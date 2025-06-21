@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Page_Url} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -50,8 +50,8 @@ describe("connect", () => {
                 /* --PAGE--START */
                 //let page = Page_Logic.get_test()
                 //let page = Page_Logic.get_test("Page "+Number.get_id())
-                let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:false,section_count:2,get_photo:true,get_blank:true})
-                Log.w("page",page);
+                //let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:false,section_count:2,get_photo:true,get_blank:true})
+                //Log.w("page",page);
                 //Log.w("page_section_1",page.section_1);
                 //Log.w("page_section_6",page.section_6.items);
                 //Log.w("page_section_1_section_1",page.section_1.section_1);
@@ -91,9 +91,23 @@ describe("connect", () => {
                 //Log.w('category_list',category_list);
                 /* --CATEGORY--END */
 
+                /* --SUB_ITEM--START */
+                console.log('TEST-SUB_ITEM-START');
+                let item = DataItem.get_new(DataType.BLANK,0);
+                let parent_item = DataItem.get_new(DataType.BLANK,0);
+                let top_item = DataItem.get_new(DataType.BLANK,0);
+                let sub_item = Sub_Item_Logic.get_test("cool 1",item,top_item);
+                //Log.w('sub_item',sub_item);
+                let sub_item_list = Sub_Item_Logic.get_test_list(item,top_item,{get_value:true});
+               // Log.w('sub_item',sub_item);
+                Log.w('sub_item_list',sub_item_list);
+                Log.w('sub_item_list_len',sub_item_list.length);
+                console.log('TEST-SUB_ITEM-END');
+                /* --SUB_ITEM--END */
+
 
                 /* --CONTENT--START */
-                //let content = Content_Logic.get_test()
+                //let content = Content_Logic.get_test("cool 1");
                 //let content = Content_Logic.get_test("Content 1",{get_value:true,get_item:true})
                 //Log.w("content",content);
                 //let content_list = Content_Logic.get_test_list();

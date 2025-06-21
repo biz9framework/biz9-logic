@@ -464,6 +464,9 @@ class Field_Logic {
 		if(data_type==DataType.CONTENT){
 			option.content_count = option.content_count ? option.content_count : 9;
 		}
+		if(data_type==DataType.SUB_ITEM){
+			option.item_count = option.item_count ? option.item_count : 9;
+		}
 		return option;
 	}
 }
@@ -1359,7 +1362,8 @@ class Sub_Item_Logic {
 		}
 		return item;
 	}
-	static get_test_item_list(parent_item,top_item,option){
+	static get_test_list(parent_item,top_item,option){
+		option = Field_Logic.get_option(DataType.SUB_ITEM,option?option:{});
 		let new_list = [];
 		for(let a=0;a<option.item_count;a++){
 			let item_title ="Item " + String(parseInt(a+1));
