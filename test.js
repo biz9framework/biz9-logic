@@ -92,6 +92,7 @@ describe("connect", () => {
                 /* --CATEGORY--END */
 
                 /* --SUB_ITEM--START */
+                /*
                 console.log('TEST-SUB_ITEM-START');
                 let item = DataItem.get_new(DataType.BLANK,0);
                 let parent_item = DataItem.get_new(DataType.BLANK,0);
@@ -103,6 +104,7 @@ describe("connect", () => {
                 Log.w('sub_item_list',sub_item_list);
                 Log.w('sub_item_list_len',sub_item_list.length);
                 console.log('TEST-SUB_ITEM-END');
+                */
                 /* --SUB_ITEM--END */
 
 
@@ -251,7 +253,15 @@ describe("connect", () => {
 
                 /* --FAQ--START */
                 //Log.w("FAQ",Faq_Logic.get_test());
-                //Log.w("FAQ List",Faq.get_test_list());
+                //Log.w("FAQ List",Faq_Logic.get_test_list(Faq_Logic.get_test()));
+                //let faq = Faq_Logic.get_test();
+                //let faq = Faq_Logic.get_test('cool 1');
+                //let faq = Faq_Logic.get_test('cool 1',{count:33});
+                //let faq = Business_Logic.get_test('ser 1',{question_count:33});
+                //let faq_list = Faq_Logic.get_faq_question_list(faq);
+                //let faq_list = Faq_Logic.get_question_list();
+                //Log.w('faq_list',faq_list);
+                //Log.w('faq',faq);
                 /*
                 let review_list = Review.get_test_list({review_count:3,get_item:true})
                 Log.w("Review List",review_list);
@@ -273,7 +283,8 @@ describe("connect", () => {
 
 
                 /* --BUSINESS--START */
-                //Log.w("Business",Business_Logic.get_test("Business " + Number.get_id()));
+                Log.w("Business",Business_Logic.get_test("Business " + Number.get_id()));
+                //Log.w("Business",Business_Logic.get_test());
                 /* --BUSINESS--END */
 
 
