@@ -708,10 +708,9 @@ class Review_Logic {
 		review.email="ceo@biz"+String(Number.get_id())+".com";
 		review.first_name="First Name "+ Number.get_id();
 		review.last_name="Last Name "+ Number.get_id();
+		review.hometown="Hometown "+ Number.get_id();
 		review.position="Position "+ Number.get_id();
 		review.comment="My comment "+ Number.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-		review.city=city_list[Number.get_id(city_list.length-1)];
-		review.state=state_list[Number.get_id(state_list.length-1)];
 		return review;
 	};
 	static get_test_list=(option)=>{
