@@ -161,7 +161,7 @@ class Product_Logic {
 			product.stock = "";
 		}
 		if(option.get_item){
-			product.items = Sub_Item_Logic.get_test_item_list(product,product,option);
+			product.items = Sub_Item_Logic.get_test_list(product,product,option);
 		}
 		return product;
 	};
@@ -204,7 +204,7 @@ class Service_Logic {
 		service.sub_type = "Sub Type "+String(Number.get_id());
 		service.stock = String(Number.get_id(3-1));
 		if(option.get_item){
-			service.items = Sub_Item_Logic.get_test_item_list(service,service,option);
+			service.items = Sub_Item_Logic.get_test_list(service,service,option);
 		}
 		return service;
 	};
@@ -243,7 +243,9 @@ class Content_Logic {
 			Field_Logic.get_test(title,option));
 		if(option.get_item){
 			content.items = Sub_Item_Logic.get_test_section_list(content,content,option);
-			content = Sub_Item_Logic.bind_parent_child_list(content,content.items);
+			if(option.get_item_bind){
+				content = Sub_Item_Logic.bind_parent_child_list(content,content.items);
+			}
 		}
 		return content;
 	};
@@ -283,7 +285,7 @@ class Blog_Post_Logic {
 		blog_post.author="First Name "+ Number.get_id();
 		blog_post.tag="tag 1,tag 2,tag 3";
 		if(option.get_item){
-			blog_post.items = Sub_Item_Logic.get_test_item_list(blog_post,blog_post,option);
+			blog_post.items = Sub_Item_Logic.get_test_list(blog_post,blog_post,option);
 		}
 		return blog_post;
 	};
@@ -330,7 +332,7 @@ class Event_Logic {
 		event.stock = String(Number.get_id(3-1));
 		event.category ="Category " + String(Number.get_id());
 		if(option.get_item){
-			event.items = Sub_Item_Logic.get_test_item_list(event,event,option);
+			event.items = Sub_Item_Logic.get_test_list(event,event,option);
 		}
 		return event;
 	};
@@ -399,9 +401,9 @@ class Field_Logic {
 	};
 	static get_option_admin(req){
 		let option = {};
-		option.value_count = req.query.value_count ? req.query.value_count : 19;
-		option.section_count = req.query.section_count ? req.query.section_count : 19;
-		option.question_count = req.query.question_count ? req.query.question_count : 19;
+		option.value_count = req.query.value_count ? req.query.value_count : 9;
+		option.section_count = req.query.section_count ? req.query.section_count : 9;
+		option.question_count = req.query.question_count ? req.query.question_count : 9;
 
 		option.get_blog_post = req.query.get_blog_post ? req.query.get_blog_post : false;
 		option.get_category_blog_post = req.query.get_category_blog_post ? req.query.get_category_blog_post : false;
@@ -412,17 +414,17 @@ class Field_Logic {
 		option.get_product = req.query.get_product ? req.query.get_product : false;
 		option.get_category_product = req.query.get_category_product ? req.query.get_category_product : false;
 		option.category_product_count = req.query.category_product_count ? req.query.category_product_count : 9;
-		option.product_count = req.query.product_count ? req.query.product_count : 19;
+		option.product_count = req.query.product_count ? req.query.product_count : 9;
 
 		option.get_service = req.query.get_service ? req.query.get_service : false;
 		option.get_category_service = req.query.get_category_service ? req.query.get_category_service : false;
 		option.category_service_count = req.query.category_service_count ? req.query.category_service_count : 9;
-		option.service_count = req.query.service_count ? req.query.service_count : 19;
+		option.service_count = req.query.service_count ? req.query.service_count : 9;
 
 		option.get_event = req.query.get_event ? req.query.get_event : false;
 		option.get_category_event = req.query.get_category_event ? req.query.get_category_event : false;
 		option.category_event_count = req.query.category_event_count ? req.query.category_event_count : 9;
-		option.event_count = req.query.event_count ? req.query.event_count : 19;
+		option.event_count = req.query.event_count ? req.query.event_count : 9;
 
 			option.get_admin = req.query.get_admin ? req.query.get_admin : false;
 		option.get_business = req.query.get_business ? req.query.get_business : false;
@@ -440,8 +442,8 @@ class Field_Logic {
 		option.get_value = option.get_value ? true : false;
 		option.get_item = option.get_item ? true : false;
 		option.get_blank = option.get_blank ? true : false;
-		option.value_count = option.value_count ? option.value_count : 19;
-		option.section_count = option.section_count ? option.section_count : 19;
+		option.value_count = option.value_count ? option.value_count : 9;
+		option.section_count = option.section_count ? option.section_count : 9;
 		option.item_count = option.item_count ? option.item_count : 9;
 		option.category_count = option.category_count ? option.category_count : 9;
 		option.category_title = option.category_title ? option.category_title : "";
@@ -1425,6 +1427,7 @@ class Sub_Item_Logic {
 		for(let a=0;a<option.section_count;a++){
 			let item_title ="Section " + String(parseInt(a+1));
 			let item = Sub_Item_Logic.get_test(item_title,parent_item,top_item,option);
+			/*
 			item.items = [];
 			let new_sub_list = [];
 			for(let b=0;b<option.section_count;b++){
@@ -1433,6 +1436,7 @@ class Sub_Item_Logic {
 				item.items.push(sub_item);
 			}
 			item = Sub_Item_Logic.bind_parent_child_list(item,new_sub_list);
+			*/
 			new_list.push(item);
 		}
 		return new_list;

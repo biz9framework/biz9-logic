@@ -172,7 +172,8 @@ describe("connect", () => {
                 //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
                 //Log.w('category_list',category_list);
 
-                //let product = Product.get_test()
+                let product = Content_Logic.get_test({get_value:true,value_count:3,get_item:true})
+                Log.w("product",product);
                 //Log.w("Product_section_1",product.section_1);
                 //Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);
                 /* --PRODUCT--END */
@@ -283,7 +284,7 @@ describe("connect", () => {
 
 
                 /* --BUSINESS--START */
-                Log.w("Business",Business_Logic.get_test("Business " + Number.get_id()));
+                //Log.w("Business",Business_Logic.get_test("Business " + Number.get_id()));
                 //Log.w("Business",Business_Logic.get_test());
                 /* --BUSINESS--END */
 
