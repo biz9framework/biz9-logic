@@ -30,7 +30,7 @@ class Item_Logic {
 			DataItem.get_new(data_type,0),
 			Field_Logic.get_test(title,option));
 		if(option.get_item){
-			item.items = Sub_Item_Logic.get_test_item_list(item,item,option);
+			item.items = Sub_Item_Logic.get_test_list(item,item,option);
 			item = Sub_Item_Logic.bind_parent_child_list(item,item.items);
 		}
 		return item;
@@ -60,8 +60,10 @@ class Template_Logic {
 			DataItem.get_new(DataType.TEMPLATE,0),
 			Field_Logic.get_test(title,option));
 		if(option.get_item){
-			template.items = Sub_Item_Logic.get_test_item_list(template,template,option);
+			template.items = Sub_Item_Logic.get_test_list(template,template,option);
+			if(option.get_item_bind){
 			template = Sub_Item_Logic.bind_parent_child_list(template,template.items);
+			}
 		}
 		return template;
 	};
@@ -680,7 +682,7 @@ class Blank_Logic {
 			DataItem.get_new(DataType.BLANK,0),
 			Field_Logic.get_test(title,option));
 		if(option.get_item){
-			blank.items = Sub_Item_Logic.get_test_item_list(blank,blank,option);
+			blank.items = Sub_Item_Logic.get_test_list(blank,blank,option);
 			blank = Sub_Item_Logic.bind_parent_child_list(blank,blank.items);
 		}
 		return blank;
@@ -1078,7 +1080,7 @@ class Category_Logic {
 			DataItem.get_new(DataType.CATEGORY,0),
 			Field_Logic.get_test(title,option));
 		if(option.get_item){
-			category.items = Sub_Item_Logic.get_test_item_list(category,category,option);
+			category.items = Sub_Item_Logic.get_test_list(category,category,option);
 		}
 		return category;
 	};
