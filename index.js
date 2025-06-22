@@ -742,7 +742,7 @@ static get_test = (title,option) =>{
     	for(let a=0;a<19;a++){
             let row = a + 1;
             if(!Str.check_is_null(faq['field_'+a]))   {
-                item_list.push({ id: Number.get_id(333), title:faq['field_'+a], value: String(faq[Str.get_title_url(faq['field_'+a]).toLowerCase()   ]) });
+                item_list.push({ id: Number.get_id(333), question:faq['field_'+a], answer: String(faq[Str.get_title_url(faq['field_'+a]).toLowerCase()   ]) });
             }
         }
 		return item_list;

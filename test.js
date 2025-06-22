@@ -172,8 +172,8 @@ describe("connect", () => {
                 //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
                 //Log.w('category_list',category_list);
 
-                let product = Template_Logic.get_test({get_value:true,value_count:3,get_item:true})
-                Log.w("product",product);
+                //let product = Template_Logic.get_test({get_value:true,value_count:3,get_item:true})
+                //Log.w("product",product);
                 //Log.w("Product_section_1",product.section_1);
                 //Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);
                 /* --PRODUCT--END */
@@ -255,13 +255,13 @@ describe("connect", () => {
                 /* --FAQ--START */
                 //Log.w("FAQ",Faq_Logic.get_test());
                 //Log.w("FAQ List",Faq_Logic.get_test_list(Faq_Logic.get_test()));
-                //let faq = Faq_Logic.get_test();
+                let faq = Faq_Logic.get_test();
                 //let faq = Faq_Logic.get_test('cool 1');
                 //let faq = Faq_Logic.get_test('cool 1',{count:33});
                 //let faq = Business_Logic.get_test('ser 1',{question_count:33});
-                //let faq_list = Faq_Logic.get_faq_question_list(faq);
+                let faq_list = Faq_Logic.get_faq_question_list(faq);
                 //let faq_list = Faq_Logic.get_question_list();
-                //Log.w('faq_list',faq_list);
+                Log.w('faq_list',faq_list);
                 //Log.w('faq',faq);
                 /*
                 let review_list = Review.get_test_list({review_count:3,get_item:true})
