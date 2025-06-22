@@ -142,8 +142,8 @@ class Product_Logic {
 			Field_Logic.get_test(title,option));
 
 		if(option.get_blank ==false){
-			product.cost = String(Number.get_id()) + "." + String(Number.get_id());
-			product.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+			product.cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
+			product.old_cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
 			product.type = "Type "+String(Number.get_id());
 			product.sub_type = "Sub Type "+String(Number.get_id());
 			product.stock = String(Number.get_id(3-1));
@@ -192,8 +192,8 @@ class Service_Logic {
 			DataItem.get_new(DataType.SERVICE,0),
 			DataItem.get_new(DataType.SERVICE,0),
 			Field_Logic.get_test(title,option));
-		service.cost = String(Number.get_id()) + "." + String(Number.get_id());
-		service.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+		service.cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
+		service.old_cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
 		service.type = "Type "+String(Number.get_id());
 		service.sub_type = "Sub Type "+String(Number.get_id());
 		service.stock = String(Number.get_id(3-1));
@@ -311,8 +311,8 @@ class Event_Logic {
 			DataItem.get_new(DataType.EVENT,0),
 			DataItem.get_new(DataType.EVENT,0),
 			Field_Logic.get_test(title,option));
-		event.cost = String(Number.get_id()) + "." + String(Number.get_id());
-		event.old_cost = String(Number.get_id()) + "." + String(Number.get_id());
+		event.cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
+		event.old_cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
 		event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
 		event.time = String(Number.get_id(24)) + ":" + String(Number.get_id(59));
 		event.website = "Website "+String(Number.get_id());
