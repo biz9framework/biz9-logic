@@ -85,13 +85,14 @@ class Team_Logic {
 		}
 		return team;
 	};
-	static get_test_member = (title,team,option) =>{
+	static get_test_member = (team,title,option) =>{
+		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
 		let team_member = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.ITEM,0),
 			DataItem.get_new(DataType.TEAM,team.id),
-			DataItem.get_new(DataType.TEAM,team.id));
-		team_member.title = title;
+			DataItem.get_new(DataType.TEAM,team.id),
+			Field_Logic.get_test(title,option));
 		team_member.first_name = "First Name "+ Number.get_id();
 		team_member.last_name = "Last Name "+ Number.get_id();
 		team_member.position = "Position "+ Number.get_id();

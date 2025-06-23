@@ -67,8 +67,10 @@ describe("connect", () => {
 
                /* --TEAM--START */
                //let team = Team_Logic.get_test()
-               //let team = Team_Logic.get_test("Team 1",{get_value:true,get_member:true})
+               let team = Team_Logic.get_test({get_value:false,get_member:true})
+               let team_member = Team_Logic.get_test_member(team,{get_value:true});
                 //Log.w("team",team);
+                Log.w("team_member",team_member);
                //let team_list = Team_Logic.get_test_list();
                 //let [team_list,team_list]=Team_Logic.get_test_list_by_team();
                 //Log.w('team_list',team_list);
@@ -255,13 +257,13 @@ describe("connect", () => {
                 /* --FAQ--START */
                 //Log.w("FAQ",Faq_Logic.get_test());
                 //Log.w("FAQ List",Faq_Logic.get_test_list(Faq_Logic.get_test()));
-                let faq = Faq_Logic.get_test();
+                //let faq = Faq_Logic.get_test();
                 //let faq = Faq_Logic.get_test('cool 1');
                 //let faq = Faq_Logic.get_test('cool 1',{count:33});
                 //let faq = Business_Logic.get_test('ser 1',{question_count:33});
-                let faq_list = Faq_Logic.get_faq_question_list(faq);
+                //let faq_list = Faq_Logic.get_faq_question_list(faq);
                 //let faq_list = Faq_Logic.get_question_list();
-                Log.w('faq_list',faq_list);
+                //Log.w('faq_list',faq_list);
                 //Log.w('faq',faq);
                 /*
                 let review_list = Review.get_test_list({review_count:3,get_item:true})
