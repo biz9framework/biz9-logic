@@ -370,6 +370,8 @@ class Field_Logic {
 		let note = "Note "+String(Number.get_id());
 		option.category_title = !Str.check_is_null(option.category_title) ? option.category_title : 'Category '+String(Number.get_id());
 		if(option.get_blank == true){
+			date_create:"";
+			date_save:"";
 			title = "";
 			sub_note = "";
 			note  = "";
@@ -381,7 +383,10 @@ class Field_Logic {
 			title_url:Str.get_title_url(title),
 			category:option.category_title,
 			sub_note:sub_note,
-			note:note
+			note:note,
+			id:Number.get_guid(),
+			date_create:new moment().toISOString(),
+			date_save:new moment().toISOString()
 		}
 		if(option.get_value){
 			item = Field_Logic.get_value_list(item,option);
