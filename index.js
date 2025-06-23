@@ -386,6 +386,17 @@ class Field_Logic {
 		if(option.get_value){
 			item = Field_Logic.get_value_list(item,option);
 		}
+		if(option.fields){
+			for(let a = 0; a<option.fields.length;a++){
+				if(!option.get_blank == true){
+				item[option.fields[a]] = Str.get_title(option.fields[a]) +"_" + Number.get_id();
+				}else{
+					item[option.fields[a]] = "";
+
+				}
+			}
+		}
+		Log.w('rrr',item);
 		return item;
 	}
 	static get_value_list(item,option){
@@ -450,6 +461,7 @@ class Field_Logic {
 		option.item_count = option.item_count ? option.item_count : 9;
 		option.category_count = option.category_count ? option.category_count : 9;
 		option.category_title = option.category_title ? option.category_title : "";
+		option.fields = option.fields ? option.fields : [];
 		if(option.data_type==DataType.PAGE){
 			option.page_count = option.page_count ? option.page_count : 9;
 			option.section_count = option.section_count ? option.section_count : 9;
