@@ -69,9 +69,10 @@ describe("connect", () => {
                //let team = Team_Logic.get_test()
                let team = Team_Logic.get_test({get_value:false,get_member:true})
                //let team_member = Team_Logic.get_test_member(team,{get_value:true,get_blank:false,fields:['hometown','member_since', 'speaks','last_project','avg_response_time']});
-               let team_member = Blog_Post_Logic.get_test({get_value:true,get_blank:false,fields:['hometown','member_since', 'speaks','last_project','avg_response_time']});
+               //let team_member = Blog_Post_Logic.get_test({get_value:true,get_blank:false,fields:['hometown','member_since', 'speaks','last_project','avg_response_time']});
+                let team_member = Team_Logic.get_test_member(Team_Logic.get_test(),{fields:["hometown_aa","member_since_bb"], get_value:true});
                 //Log.w("team",team);
-                //Log.w("team_member",team_member);
+                Log.w("team_member",team_member);
                //let team_list = Team_Logic.get_test_list();
                 //let [team_list,team_list]=Team_Logic.get_test_list_by_team();
                 //Log.w('team_list',team_list);
