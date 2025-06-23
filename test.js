@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -67,12 +67,12 @@ describe("connect", () => {
 
                /* --TEAM--START */
                //let team = Team_Logic.get_test()
-               let team = Team_Logic.get_test({get_value:false,get_member:true})
+               //let team = Team_Logic.get_test({get_value:false,get_member:true})
                //let team_member = Team_Logic.get_test_member(team,{get_value:true,get_blank:false,fields:['hometown','member_since', 'speaks','last_project','avg_response_time']});
                //let team_member = Blog_Post_Logic.get_test({get_value:true,get_blank:false,fields:['hometown','member_since', 'speaks','last_project','avg_response_time']});
-                let team_member = Team_Logic.get_test_member(Team_Logic.get_test(),{fields:["hometown_aa","member_since_bb"], get_value:true});
+                //let team_member = Team_Logic.get_test_member(Team_Logic.get_test(),{fields:["hometown_aa","member_since_bb"], get_value:true});
                 //Log.w("team",team);
-                Log.w("team_member",team_member);
+                //Log.w("team_member",team_member);
                //let team_list = Team_Logic.get_test_list();
                 //let [team_list,team_list]=Team_Logic.get_test_list_by_team();
                 //Log.w('team_list',team_list);
@@ -166,9 +166,10 @@ describe("connect", () => {
                 /* --SERVICE--END */
 
 
-/* --PRODUCT--START */
-
+                /* --PRODUCT--START */
                 //let product = Product_Logic.get_test("Product 1",{get_value:true,get_item:true})
+                //let product = Product_Logic.get_test({fields:["date_create"]})
+                //let product = Product_Logic.get_test({fields:["cool_beanj]})
                 //Log.w("product",product);
                 //let product_list = Product_Logic.get_test_list({product_count:10,get_blank:true});
                 //let product_list = Product_Logic.get_test_list();
@@ -276,7 +277,7 @@ describe("connect", () => {
 
                 /* --REVIEW--START */
                 //Log.w("Review",Review.get_test());
-                //Log.w("Review List",Review.get_test_list());
+                Log.w("Review List",Review_Logic.get_test_list());
                 /*
                 let review_list = Review.get_test_list({review_count:3,get_item:true})
                 Log.w("Review List",review_list);
@@ -299,6 +300,7 @@ describe("connect", () => {
             },
 
             function(call) {
+                /*
                 console.log('GET-FULL-ITEM-START');
                 let item = DataItem.get_new(DataType.BLANK,0);
                 let parent_item = DataItem.get_new(DataType.BLOG_POST,2);
@@ -306,6 +308,7 @@ describe("connect", () => {
                 let options={title:'cool_bean'};
                 console.log(DataItem.get_new_full_item(item,parent_item,top_item,options));
                 console.log('GET-FULL-ITEM-END');
+                */
                 //call();
             },
 
