@@ -68,7 +68,8 @@ describe("connect", () => {
                /* --TEAM--START */
                //let team = Team_Logic.get_test()
                let team = Team_Logic.get_test({get_value:false,get_member:true})
-               let team_member = Team_Logic.get_test_member(team,{get_value:true,get_blank:false,fields:['hometown','member_since', 'speaks','last_project','avg_response_time']});
+               //let team_member = Team_Logic.get_test_member(team,{get_value:true,get_blank:false,fields:['hometown','member_since', 'speaks','last_project','avg_response_time']});
+               let team_member = Blog_Post_Logic.get_test({get_value:true,get_blank:false,fields:['hometown','member_since', 'speaks','last_project','avg_response_time']});
                 //Log.w("team",team);
                 //Log.w("team_member",team_member);
                //let team_list = Team_Logic.get_test_list();
