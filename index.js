@@ -384,7 +384,7 @@ class Field_Logic {
 			category:option.category_title,
 			sub_note:sub_note,
 			note:note,
-			id:Number.get_guid(),
+			id:0,
 			date_create:new moment().toISOString(),
 			date_save:new moment().toISOString()
 		}
