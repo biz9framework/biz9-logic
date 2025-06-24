@@ -104,7 +104,7 @@ class Team_Logic {
 		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.member_count+1;a++){
-			item_list.push(Team_Logic.get_test_member("Full Name " +parseInt(a+1),team,option));
+			item_list.push(Team_Logic.get_test_member(team,"Full Name " +parseInt(a+1),option));
 		}
 		return item_list;
 	}
@@ -779,7 +779,7 @@ class Review_Logic {
 		review.last_name="Last Name "+ Number.get_id();
 		review.hometown="Hometown "+ Number.get_id();
 		review.position="Position "+ Number.get_id();
-		review.rating=Number.get_id(6);
+		review.rating=parseInt(Number.get_id(6)+1);
 		review.comment="My comment "+ Number.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 		return review;
 	};
