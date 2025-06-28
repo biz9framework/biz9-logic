@@ -471,7 +471,7 @@ class Field_Logic {
 			option.section_count = option.section_count ? option.section_count : 9;
 			option.get_section = option.get_section ? true : false;
 		}
-		if(option.data_type==DataType.PRODUCT){
+		if(data_type==DataType.PRODUCT){
 			option.product_count = option.product_count ? option.product_count : 9;
 		}
 		if(data_type==DataType.SERVICE){
@@ -588,6 +588,10 @@ class PageType {
 	static BLOG_POST='blog_post';
 	static BLOG_POST_BROWSE='blog_post_browse';
 	static BLOG_POST_DETAIL='blog_post_detail';
+
+	static CATEGORY='category';
+	static CATEGORY_BROWSE='category_browse';
+	static CATEGORY_DETAIL='category_detail';
 
 	static EVENT='event';
 	static EVENT_BROWSE='event_browse';

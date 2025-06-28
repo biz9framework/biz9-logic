@@ -172,8 +172,8 @@ describe("connect", () => {
                 //let product = Product_Logic.get_test({fields:["cool_beanj]})
                 //Log.w("product",product);
                 //let product_list = Product_Logic.get_test_list({product_count:10,get_blank:true});
-                //let product_list = Product_Logic.get_test_list();
-                //Log.w('product_list',product_list);
+                let product_list = Product_Logic.get_test_list();
+                Log.w('product_list',product_list);
                 //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
                 //Log.w('category_list',category_list);
 
@@ -277,7 +277,7 @@ describe("connect", () => {
 
                 /* --REVIEW--START */
                 //Log.w("Review",Review.get_test());
-                Log.w("Review List",Review_Logic.get_test_list());
+                //Log.w("Review List",Review_Logic.get_test_list());
                 /*
                 let review_list = Review.get_test_list({review_count:3,get_item:true})
                 Log.w("Review List",review_list);
