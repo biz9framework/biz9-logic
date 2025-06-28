@@ -43,9 +43,32 @@ class Item_Logic {
 		}
 		return item_list;
 	}
+
+	static get_search_filter_by_query(query){
+		let query_filter = [];
+		let sort_by = sort_by;
+		let filter = "";
+
+		if(query['search_sort_by_key']){
+			sort_by[query['search_sort_by_key']
+				//here
+		}
+
+		for(let a = 0; a < 19; a++){
+			if(query['search_filter_key_'+a]){
+				query_filter[query['search_filter_key_'+a]] = query['search_filter_value_'+a]
+			}
+		}
+		console.log('filter_start');
+		console.log(query_filter);
+		console.log(query.data_type);
+		console.log(query.sort_by);
+		console.log('filter_end');
+	}
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
+
 }
 class Template_Logic {
 	static get_test = (title,option) =>{

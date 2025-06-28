@@ -82,6 +82,19 @@ describe("connect", () => {
 
                /* --SEARCH--START */
                 //console.log(Url.get_search(DataType.BLOG_POST,{title:-1},{cool:-1},1,10));
+
+                let data_type = DataType.PRODUCT;
+                let search_filter_key_1 = 'key1';
+                let search_filter_value_1 = 'value1';
+                let search_filter_key_2 = 'key2';
+                let search_filter_value_2 = 'value2';
+
+
+                let query = "?app_id=19&data_type="+data_type+"&sort_by={}&page_current=1&page_size=99&search_filter_key_1="+search_filter_key_1+"&search_filter_value_1="+search_filter_value_1+"&search_filter_key_2="+search_filter_key_2+"&search_filter_value_2="+search_filter_value_2;
+
+                Log.w('query',query);
+
+
                /* --SEARCH--END */
 
                /* --CATEGORY--START */
@@ -172,8 +185,8 @@ describe("connect", () => {
                 //let product = Product_Logic.get_test({fields:["cool_beanj]})
                 //Log.w("product",product);
                 //let product_list = Product_Logic.get_test_list({product_count:10,get_blank:true});
-                let product_list = Product_Logic.get_test_list();
-                Log.w('product_list',product_list);
+                //let product_list = Product_Logic.get_test_list();
+                //Log.w('product_list',product_list);
                 //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
                 //Log.w('category_list',category_list);
 
