@@ -43,32 +43,57 @@ class Item_Logic {
 		}
 		return item_list;
 	}
-
-	static get_search_filter_by_query(query){
-		let query_filter = [];
-		let sort_by = sort_by;
-		let filter = "";
-
-		if(query['search_sort_by_key']){
-			sort_by[query['search_sort_by_key']
-				//here
+	static get_search_query(search){
+		let url = "";
+		if(search.data_type){
+			url = url + "&data_type="+search.data_type;
+		}else{
+			url = url + "&data_type="+DataType.BLANK;
 		}
-
-		for(let a = 0; a < 19; a++){
-			if(query['search_filter_key_'+a]){
-				query_filter[query['search_filter_key_'+a]] = query['search_filter_value_'+a]
+		if(search.sort_by_key){
+			url = url + "&sort_by_key="+search.sort_by_key;
+		}else{
+			url = url + "&sort_by_key=title";
+		}
+		if(search.sort_by_value){
+			url = url + "&sort_by_value="+search.sort_by_value;
+		}else{
+			url = url + "&sort_by_value=-1";
+		}
+		if(search.page_current){
+			url = url + "&page_current="+search.page_current;
+		}else{
+			url = url + "&page_current=1";
+		}
+		if(search.page_size){
+			url = url + "&page_size="+search.page_size;
+		}else{
+			url = url + "&page_size=9";
+		}
+		for(let a=1;a<19;a++){
+			if(!Str.check_is_null(search['filter_key_'+String(a)])){
+			url = url + "&filter_key_"+String(a)+"="+ search['filter_key_'+String(a)];
+			url = url + "&filter_value_"+String(a)+"="+ search['filter_value_'+String(a)];
 			}
 		}
-		console.log('filter_start');
-		console.log(query_filter);
-		console.log(query.data_type);
-		console.log(query.sort_by);
-		console.log('filter_end');
+		return url;
+	}
+	static get_search_by_query(query){
+		let filter = [];
+		let sort_by = [];
+		if(query['sort_by_key']){
+			sort_by[query['sort_by_key']] = query['sort_by_value'];
+		}
+		for(let a = 0; a < 19; a++){
+			if(query['filter_key_'+a]){
+				filter[query['filter_key_'+a]] = query['filter_value_'+a]
+			}
+		}
+		return Item_Logic.get_search(query.data_type,filter,sort_by,query.page_current,query.page_size);
 	}
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
-
 }
 class Template_Logic {
 	static get_test = (title,option) =>{
