@@ -113,7 +113,7 @@ class Template_Logic {
 			template.items = [];
 			for(let a = 0; a<title_list.length;a++){
 				let item = Sub_Item_Logic.get_test(title_list[a],template,template,option);
-				item.items = Sub_Item_Logic.get_test_list(item,template,option);
+				item.items = Sub_Item_Logic.get_test_section_list(item,template,option);
 				item = Sub_Item_Logic.bind_parent_child_list(item,item.items);
 				template.items.push(item);
 				//template.items.push(Sub_Item_Logic.get_test(title_list[a],template,template,option));
