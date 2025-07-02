@@ -115,7 +115,7 @@ class Template_Logic {
 				template.items.push(Sub_Item_Logic.get_test(title_list[a],template,template,option));
 			}
 			if(option.get_item_bind){
-			template = Sub_Item_Logic.bind_parent_child_list(template,template.items);
+				template = Sub_Item_Logic.bind_parent_child_list(template,template.items);
 			}
 		}
 		return template;
@@ -513,6 +513,7 @@ class Field_Logic {
 		option.get_value = option.get_value ? true : false;
 		option.get_item = option.get_item ? true : false;
 		option.get_blank = option.get_blank ? true : false;
+		option.get_item_bind = option.get_item_bind ? true : true;
 		option.value_count = option.value_count ? option.value_count : 9;
 		option.section_count = option.section_count ? option.section_count : 9;
 		option.item_count = option.item_count ? option.item_count : 9;
