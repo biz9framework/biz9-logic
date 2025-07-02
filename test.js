@@ -83,16 +83,18 @@ describe("connect", () => {
                /* --SEARCH--START */
                 //console.log(Url.get_search(DataType.BLOG_POST,{title:-1},{cool:-1},1,10));
 
+                /*
                 let data_type = DataType.PRODUCT;
                 let search_filter_key_1 = 'key1';
                 let search_filter_value_1 = 'value1';
                 let search_filter_key_2 = 'key2';
                 let search_filter_value_2 = 'value2';
+                */
 
 
-                let query = "?app_id=19&data_type="+data_type+"&sort_by={}&page_current=1&page_size=99&search_filter_key_1="+search_filter_key_1+"&search_filter_value_1="+search_filter_value_1+"&search_filter_key_2="+search_filter_key_2+"&search_filter_value_2="+search_filter_value_2;
+                //let query = "?app_id=19&data_type="+data_type+"&sort_by={}&page_current=1&page_size=99&search_filter_key_1="+search_filter_key_1+"&search_filter_value_1="+search_filter_value_1+"&search_filter_key_2="+search_filter_key_2+"&search_filter_value_2="+search_filter_value_2;
 
-                Log.w('query',query);
+                //Log.w('query',query);
 
 
                /* --SEARCH--END */
@@ -211,11 +213,11 @@ describe("connect", () => {
 
             /* --TEMPLATE--START */
                 //let template = Template_Logic.get_test("Primary",{});
-                //let template = Template_Logic.get_test("Primary",{get_value:true,get_item:true,item_count:2});
+                let template = Template_Logic.get_test("Primary",{get_value:true,get_item:true});
                 /*
                 let template_item_list = Template_Logic.get_test("Primary",template,template,{get_value:false,get_item:false,item_count:2});
                 */
-                //Log.w('template',template);
+                Log.w('template',template);
                 //Log.w('template_item_list',template_item_list);
                 /* --TEMPLATE--END */
 

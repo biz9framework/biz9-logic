@@ -108,7 +108,12 @@ class Template_Logic {
 			DataItem.get_new(DataType.TEMPLATE,0),
 			Field_Logic.get_test(title,option));
 		if(option.get_item){
-			template.items = Sub_Item_Logic.get_test_list(template,template,option);
+			let title_list = ['Header','Body','Footer','Navigation']
+			//template.items = Sub_Item_Logic.get_test_list(template,template,option);
+			template.items = [];
+			for(let a = 0; a<title_list.length;a++){
+				template.items.push(Sub_Item_Logic.get_test(title_list[a],template,template,option));
+			}
 			if(option.get_item_bind){
 			template = Sub_Item_Logic.bind_parent_child_list(template,template.items);
 			}
