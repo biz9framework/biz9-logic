@@ -1131,8 +1131,8 @@ class Url{
 		let action_url= "main/crud/get/"+data_type + "/" + key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static get_item_parent_top = (biz9_config,data_type,id,parent_data_type,parent_id,top_data_type,top_id) => {
-		let action_url = "main/crud/get_item_parent_top/"+data_type+"/"+id+"/"+parent_data_type+ "/"+parent_id+"/"+top_data_type+ "/"+top_id;
+	static get_parent_top = (biz9_config,data_type,id,parent_data_type,parent_id,top_data_type,top_id) => {
+		let action_url = "main/crud/get_parent_top/"+data_type+"/"+id+"/"+parent_data_type+ "/"+parent_id+"/"+top_data_type+ "/"+top_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
 	static search = (biz9_config,data_type) => {
