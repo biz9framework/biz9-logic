@@ -1108,26 +1108,26 @@ class Team_Url {
 	};
 }
 class Url{
-	static copy_item = (biz9_config,data_type,id) => {
+	static copy = (biz9_config,data_type,id) => {
 		let action_url = "main/crud/copy/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static delete_item = (biz9_config,data_type,id) => {
+	static delete = (biz9_config,data_type,id) => {
 		let action_url = "main/crud/delete/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static delete_item_check_protection = (biz9_config,data_type,id) => {
+	static delete_check_protection = (biz9_config,data_type,id) => {
 		let action_url = "main/crud/delete_item_check_protection/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static delete_list = (biz9_config,data_type) => {
+	static delete_search = (biz9_config,data_type) => {
 		let action_url = "main/crud/delete_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static get = (biz9_config,action_url,params) => {
+	static url = (biz9_config,action_url,params) => {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	}
-	static get_item = (biz9_config,data_type,key) => {
+	static get = (biz9_config,data_type,key) => {
 		let action_url= "main/crud/get/"+data_type + "/" + key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
@@ -1143,11 +1143,11 @@ class Url{
 		let action_url = "main/crud/update/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static update_item = (biz9_config,data_type,id) => {
+	static update = (biz9_config,data_type,id) => {
 		let action_url = "main/crud/update/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static update_item_delete_cache = (biz9_config,data_type,id) => {
+	static update_delete_cache = (biz9_config,data_type,id) => {
 		let action_url = "main/crud/update_item_delete_cache/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
