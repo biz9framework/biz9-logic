@@ -43,6 +43,9 @@ class Item_Logic {
 		}
 		return item_list;
 	}
+	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
+		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
+	}
 	static get_search_query(search){
 		let url = "";
 		if(search.data_type){
@@ -90,9 +93,6 @@ class Item_Logic {
 			}
 		}
 		return Item_Logic.get_search(query.data_type,filter,sort_by,query.page_current,query.page_size);
-	}
-	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
-		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
 }
 class Template_Logic {
@@ -213,12 +213,14 @@ class Product_Logic {
 			product.type = "Type "+String(Number.get_id());
 			product.sub_type = "Sub Type "+String(Number.get_id());
 			product.stock = String(Number.get_id(3-1));
+			product.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
 		}else{
 			product.cost = "";
 			product.old_cost = "";
 			product.type = "";
 			product.sub_type = "";
 			product.stock = "";
+			product.tag = "";
 		}
 		if(option.get_item){
 			product.items = Sub_Item_Logic.get_test_list(product,product,option);
@@ -263,6 +265,7 @@ class Service_Logic {
 		service.type = "Type "+String(Number.get_id());
 		service.sub_type = "Sub Type "+String(Number.get_id());
 		service.stock = String(Number.get_id(3-1));
+		service.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
 		if(option.get_item){
 			service.items = Sub_Item_Logic.get_test_list(service,service,option);
 		}
@@ -343,7 +346,7 @@ class Blog_Post_Logic {
 			DataItem.get_new(DataType.BLOG_POST,0),
 			Field_Logic.get_test(title,option));
 		blog_post.author="First Name "+ Number.get_id();
-		blog_post.tag="tag 1,tag 2,tag 3";
+		blog_post.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
 		if(option.get_item){
 			blog_post.items = Sub_Item_Logic.get_test_list(blog_post,blog_post,option);
 		}
@@ -391,6 +394,7 @@ class Event_Logic {
 		event.meeting_link = "Meeting Link "+String(Number.get_id());
 		event.stock = String(Number.get_id(3-1));
 		event.category ="Category " + String(Number.get_id());
+		event.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
 		if(option.get_item){
 			event.items = Sub_Item_Logic.get_test_list(event,event,option);
 		}
@@ -589,13 +593,12 @@ class FieldType {
 	static APP_ID='app_id';
 	static ID='id';
 	static DATA_TYPE='data_type';
+	static DATE_CREATE='date_create';
 	static PARENT_ID='parent_id';
 	static PARENT_DATA_TYPE='parent_data_type';
 	static PHOTO_DATA='photo_data';
 	static TOP_ID='top_id';
 	static TOP_DATA_TYPE='top_data_type';
-	static DATE_CREATE='date_create';
-	static DATE_SAVE='date_save';
 	static TITLE='title';
 	static TITLE_URL='title_url';
 	static SETTING_DELETE_PROTECTION='setting_delete_protection';
@@ -610,6 +613,9 @@ class FieldType {
 	static SOURCE_TOP_DATA_TYPE='source_top_data_type';
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
+	static STAT_VIEW_ID='1';
+	static STAT_LIKE_ID='2';
+	static STAT_POST_ID='3';
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
@@ -746,6 +752,7 @@ class DataType {
 	static PAGE='page_biz';
 	static REVIEW='review_biz';
 	static SERVICE='service_biz';
+	static STAT='stat_biz';
 	static TEMPLATE='template_biz';
 	static TEAM='team_biz';
 	static USER='user_biz';
@@ -929,8 +936,8 @@ class DataItem {
 	}
 }
 class Blank_Url {
-	static get = (biz9_config,title_url,params) => {
-		let action_url="blank/get/"+title_url;
+	static get = (biz9_config,key,params) => {
+		let action_url="blank/get/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static browse = (biz9_config,params) => {
@@ -943,8 +950,8 @@ class Blank_Url {
 	};
 }
 class Blog_Post_Url {
-	static get = (biz9_config,title_url,params) => {
-		let action_url="blog_post/get/"+title_url;
+	static get = (biz9_config,key,params) => {
+		let action_url="blog_post/get/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static browse = (biz9_config,params) => {
@@ -957,8 +964,8 @@ class Blog_Post_Url {
 	};
 }
 class Custom_Field_Url {
-	static get = (biz9_config,data_type,id,params) => {
-		let action_url="custom_field/get/"+data_type+"/"+id;
+	static get = (biz9_config,data_type,key,params) => {
+		let action_url="custom_field/get/"+data_type+"/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static browse = (biz9_config,params) => {
@@ -967,8 +974,8 @@ class Custom_Field_Url {
 	};
 }
 class FAQ_Url {
-	static get = (biz9_config,title_url,params) => {
-		let action_url="faq/"+title_url;
+	static get = (biz9_config,key,params) => {
+		let action_url="faq/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static category = (biz9_config,title_url,params) => {
@@ -977,8 +984,8 @@ class FAQ_Url {
 	};
 }
 class Product_Url {
-	static get = (biz9_config,title_url,params) => {
-		let action_url="product/get/"+title_url;
+	static get = (biz9_config,key,params) => {
+		let action_url="product/get/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static browse = (biz9_config,params) => {
@@ -999,8 +1006,8 @@ class Product_Url {
 	};
 }
 class Event_Url {
-	static get = (biz9_config,title_url,params) => {
-		let action_url="event/get/"+title_url;
+	static get = (biz9_config,key,params) => {
+		let action_url="event/get/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static browse = (biz9_config,params) => {
@@ -1021,8 +1028,8 @@ class Event_Url {
 	};
 }
 class Service_Url {
-	static get = (biz9_config,title_url,params) => {
-		let action_url="service/get/"+title_url;
+	static get = (biz9_config,key,params) => {
+		let action_url="service/get/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static browse = (biz9_config,params) => {
@@ -1043,8 +1050,8 @@ class Service_Url {
 	};
 }
 class Content_Url {
-	static get = (biz9_config,title_url,params) => {
-		let action_url="content/get/"+title_url;
+	static get = (biz9_config,key,params) => {
+		let action_url="content/get/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static browse = (biz9_config,params) => {
@@ -1057,8 +1064,8 @@ class Content_Url {
 	};
 }
 class Gallery_Url {
-	static get = (biz9_config,title_url,params) => {
-		let action_url="gallery/get/"+title_url;
+	static get = (biz9_config,key,params) => {
+		let action_url="gallery/get/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static browse = (biz9_config,params) => {
@@ -1071,8 +1078,8 @@ class Gallery_Url {
 	};
 }
 class Category_Url {
-	static get = (biz9_config,title_url,params) => {
-		let action_url="category/get/"+title_url;
+	static get = (biz9_config,key,params) => {
+		let action_url="category/get/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static browse = (biz9_config,params) => {
@@ -1091,8 +1098,8 @@ class Page_Url {
 	};
 }
 class Team_Url {
-	static get = (biz9_config,title_url,params) => {
-		let action_url="team/"+title_url;
+	static get = (biz9_config,key,params) => {
+		let action_url="team/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static member = (biz9_config,title_url,params) => {
@@ -1128,8 +1135,8 @@ class Url{
 		let action_url = "main/crud/get_item_parent_top/"+data_type+"/"+id+"/"+parent_data_type+ "/"+parent_id+"/"+top_data_type+ "/"+top_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static get_list = (biz9_config,data_type) => {
-		let action_url = "main/crud/get_list/"+data_type;
+	static search = (biz9_config,data_type) => {
+		let action_url = "main/crud/search/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
 	static upload_file = (biz9_config,data_type,id) => {
@@ -1473,6 +1480,22 @@ class Storage {
 		window.localStorage.clear();
 	}
 }
+class User_Logic {
+	static get_user(req){
+        if(!req || !req.session.user){
+            let user=DataItem.get_new(DataType.USER,0,{is_guest:true,customer_id:Number.get_id(99999)});
+            req.session.user=user;
+        }
+        return req.session.user;
+    }
+	static set_user(req){
+        req.session.user=user;
+    }
+	static del_user(req){
+        req.session.user=null;
+        delete req.session.user;
+    }
+}
 class Sub_Item_Logic {
 	static get_test(title,parent_item,top_item,option){
 		option = Field_Logic.get_option(DataType.ITEM,option?option:{});
@@ -1568,4 +1591,5 @@ module.exports = {
 	Team_Logic,
 	Template_Logic,
 	Url,
+	User_Logic,
 };

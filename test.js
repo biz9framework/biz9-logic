@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -79,6 +79,11 @@ describe("connect", () => {
                 //Log.w('team_list',team_list);
                 /* --TEAM--END */
 
+                /* --USER--START */
+                 //let user = User_Logic.get_user();
+                //Log.w('user',user);
+
+                /* --USER--END */
 
                /* --SEARCH--START */
                 //console.log(Url.get_search(DataType.BLOG_POST,{title:-1},{cool:-1},1,10));
@@ -141,12 +146,12 @@ describe("connect", () => {
 
 
 /* --BLOG_POST--START */
-                //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1")
+                let blog_post = Blog_Post_Logic.get_test("Blog_Post 1")
                 //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1",{get_value:true})
                 //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1",{get_value:true})
                 //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1",{get_value:true,get_item:true})
                 //let [category_list,blog_post_list]=Blog_Post_Logic.get_test_list_by_category();
-                //Log.w("blog_post",blog_post);
+                Log.w("blog_post",blog_post);
                 //let blog_post_list = Blog_Post_Logic.get_test_list({get_value:true,get_item:true});
                 //Log.w('blog_post_list',blog_post_list);
                 //Log.w('blog_post_list',blog_post_list[0].items);
@@ -211,13 +216,13 @@ describe("connect", () => {
                 /* --ITEM-TEST--END */
 
 
-            /* --TEMPLATE--START */
+                /* --TEMPLATE--START */
                 //let template = Template_Logic.get_test("Primary",{});
-                let template = Template_Logic.get_test("Primary",{get_value:true,get_item:true});
+                //let template = Template_Logic.get_test("Primary",{get_value:true,get_item:true});
                 /*
                 let template_item_list = Template_Logic.get_test("Primary",template,template,{get_value:false,get_item:false,item_count:2});
                 */
-                Log.w('template',template);
+                //Log.w('template',template);
                 //Log.w('template_item_list',template_item_list);
                 /* --TEMPLATE--END */
 
