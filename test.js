@@ -47,6 +47,10 @@ describe("connect", () => {
             },
 
             function(call) {
+                console.log('STORAGE-START');
+                console.log(Storage.get({},'apples'));
+                //Log.w('storage-start',Storage.set(Number.get_id()));
+                console.log('STORAGE-END');
                 /* --PAGE--START */
                 //let page = Page_Logic.get_test()
                 //let page = Page_Logic.get_test("Page "+Number.get_id())
@@ -145,13 +149,13 @@ describe("connect", () => {
                 /* --CONTENT--END */
 
 
-/* --BLOG_POST--START */
-                let blog_post = Blog_Post_Logic.get_test("Blog_Post 1")
+                /* --BLOG_POST--START */
+               // let blog_post = Blog_Post_Logic.get_test("Blog_Post 1")
                 //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1",{get_value:true})
                 //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1",{get_value:true})
                 //let blog_post = Blog_Post_Logic.get_test("Blog_Post 1",{get_value:true,get_item:true})
                 //let [category_list,blog_post_list]=Blog_Post_Logic.get_test_list_by_category();
-                Log.w("blog_post",blog_post);
+                //Log.w("blog_post",blog_post);
                 //let blog_post_list = Blog_Post_Logic.get_test_list({get_value:true,get_item:true});
                 //Log.w('blog_post_list',blog_post_list);
                 //Log.w('blog_post_list',blog_post_list[0].items);

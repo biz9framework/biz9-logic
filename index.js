@@ -75,8 +75,8 @@ class Item_Logic {
 		}
 		for(let a=1;a<19;a++){
 			if(!Str.check_is_null(search['filter_key_'+String(a)])){
-			url = url + "&filter_key_"+String(a)+"="+ search['filter_key_'+String(a)];
-			url = url + "&filter_value_"+String(a)+"="+ search['filter_value_'+String(a)];
+				url = url + "&filter_key_"+String(a)+"="+ search['filter_key_'+String(a)];
+				url = url + "&filter_value_"+String(a)+"="+ search['filter_value_'+String(a)];
 			}
 		}
 		return url;
@@ -455,7 +455,7 @@ class Field_Logic {
 		if(option.fields){
 			for(let a = 0; a<option.fields.length;a++){
 				if(!option.get_blank == true){
-				item[option.fields[a]] = Str.get_title(option.fields[a]) +"_" + Number.get_id();
+					item[option.fields[a]] = Str.get_title(option.fields[a]) +"_" + Number.get_id();
 				}else{
 					item[option.fields[a]] = "";
 
@@ -505,7 +505,7 @@ class Field_Logic {
 		option.category_event_count = req.query.category_event_count ? req.query.category_event_count : 9;
 		option.event_count = req.query.event_count ? req.query.event_count : 9;
 
-			option.get_admin = req.query.get_admin ? req.query.get_admin : false;
+		option.get_admin = req.query.get_admin ? req.query.get_admin : false;
 		option.get_business = req.query.get_business ? req.query.get_business : false;
 		option.get_faq = req.query.get_faq ? req.query.get_faq : false;
 		option.get_template = req.query.get_template ? req.query.get_template : false;
@@ -566,7 +566,7 @@ class Field_Logic {
 			let title = '';
 		}
 		if(!option){
-		let option = {};
+			let option = {};
 		}
 		if(!Str.check_is_null(title) && Obj.check_is_empty(option)){
 			if(Obj.check_is_empty(option)){
@@ -580,10 +580,10 @@ class Field_Logic {
 				}
 			}
 		}else{
-				if(Str.check_is_null(title) && Obj.check_is_empty(option)){
-					title = "Test " + Number.get_id();
-					option = {};
-				}
+			if(Str.check_is_null(title) && Obj.check_is_empty(option)){
+				title = "Test " + Number.get_id();
+				option = {};
+			}
 		}
 		return [title,option];
 	}
@@ -803,7 +803,7 @@ class Blank_Logic {
 	};
 }
 class Faq_Logic {
-static get_test = (title,option) =>{
+	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.FAQ,option?option:{});
 		option.get_value = false;
@@ -812,12 +812,12 @@ static get_test = (title,option) =>{
 			DataItem.get_new(DataType.FAQ,0),
 			DataItem.get_new(DataType.FAQ,0),
 			Field_Logic.get_test(title,option));
-      	for(let a=0;a<option.question_count+1;a++){
+		for(let a=0;a<option.question_count+1;a++){
 			let question_title = "FAQ Question " + String(parseInt(a+1));
 			let answer = "My answer "+ Number.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-         	faq[Str.get_title_url(question_title).toLowerCase()] = answer;
-            faq['field_'+parseInt(a+1)] =question_title;
-        }
+			faq[Str.get_title_url(question_title).toLowerCase()] = answer;
+			faq['field_'+parseInt(a+1)] =question_title;
+		}
 		return faq;
 	};
 	static get_test_list = (option) =>{
@@ -830,12 +830,12 @@ static get_test = (title,option) =>{
 	}
 	static get_faq_question_list(faq){
 		let item_list = [];
-    	for(let a=0;a<19;a++){
-            let row = a + 1;
-            if(!Str.check_is_null(faq['field_'+a]))   {
-                item_list.push({ id: Number.get_id(333), question:faq['field_'+a], answer: String(faq[Str.get_title_url(faq['field_'+a]).toLowerCase()   ]) });
-            }
-        }
+		for(let a=0;a<19;a++){
+			let row = a + 1;
+			if(!Str.check_is_null(faq['field_'+a]))   {
+				item_list.push({ id: Number.get_id(333), question:faq['field_'+a], answer: String(faq[Str.get_title_url(faq['field_'+a]).toLowerCase()   ]) });
+			}
+		}
 		return item_list;
 	}
 }
@@ -899,7 +899,7 @@ class Business_Logic {
 			DataItem.get_new(DataType.BUSINESS,0),
 			DataItem.get_new(DataType.BUSINESS,0),
 			Field_Logic.get_test(title,option));
-    	business.email="ceo@business.com";
+		business.email="ceo@business.com";
 		business.phone=Number.get_id(parseInt(777+100)) + "-" + Number.get_id(parseInt(777+100)) + "-"+Number.get_id(parseInt(7777+1000));
 		business.address_1=Number.get_id(99)+" Main St.";
 		business.address_2="PO "+Number.get_id(99);
@@ -1467,34 +1467,50 @@ class Schedule {
 	}
 };
 class Storage {
-static get = (window,key) => {
-		return JSON.parse(window.localStorage.getItem(key));
+	static get = (window,key) => {
+		if(window){
+			return window.localStorage.getItem(key);
+		}else{
+			return null;
+		}
 	}
 	static set = (window,key,obj) => {
-		window.localStorage.setItem(key,JSON.stringify(obj));
+		if(window){
+			if(window.localStorage){
+				window.localStorage.setItem(key,JSON.stringify(obj));
+			}
+		}
 	}
 	static remove = (window,key) =>{
-		window.localStorage.removeItem(key);
+		if(window){
+			if(window.localStorage){
+				window.localStorage.removeItem(key);
+			}
+		}
 	}
 	static clear = (window) =>{
-		window.localStorage.clear();
+		if(window){
+			if(window.localStorage){
+				window.localStorage.clear();
+			}
+		}
 	}
 }
 class User_Logic {
 	static get_user(req){
-        if(!req || !req.session.user){
-            let user=DataItem.get_new(DataType.USER,0,{is_guest:true,customer_id:Number.get_id(99999)});
-            req.session.user=user;
-        }
-        return req.session.user;
-    }
+		if(!req || !req.session.user){
+			let user=DataItem.get_new(DataType.USER,0,{is_guest:true,customer_id:Number.get_id(99999)});
+			req.session.user=user;
+		}
+		return req.session.user;
+	}
 	static set_user(req){
-        req.session.user=user;
-    }
+		req.session.user=user;
+	}
 	static del_user(req){
-        req.session.user=null;
-        delete req.session.user;
-    }
+		req.session.user=null;
+		delete req.session.user;
+	}
 }
 class Sub_Item_Logic {
 	static get_test(title,parent_item,top_item,option){
