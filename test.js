@@ -47,10 +47,10 @@ describe("connect", () => {
             },
 
             function(call) {
-                console.log('STORAGE-START');
-                console.log(Storage.get({},'apples'));
+                //console.log('STORAGE-START');
+                //console.log(Storage.get({},'apples'));
                 //Log.w('storage-start',Storage.set(Number.get_id()));
-                console.log('STORAGE-END');
+                //console.log('STORAGE-END');
                 /* --PAGE--START */
                 //let page = Page_Logic.get_test()
                 //let page = Page_Logic.get_test("Page "+Number.get_id())
@@ -196,8 +196,9 @@ describe("connect", () => {
                 //let product = Product_Logic.get_test({fields:["cool_beanj]})
                 //Log.w("product",product);
                 //let product_list = Product_Logic.get_test_list({product_count:10,get_blank:true});
+                let product_list = Product_Logic.get_test_list({product_count:2,get_blank:false,fields:'delivery_time,apple'})
                 //let product_list = Product_Logic.get_test_list();
-                //Log.w('product_list',product_list);
+                Log.w('product_list',product_list);
                 //let [category_list,product_list]=Product.get_test_list_by_category({category_count:5,product_count:9});
                 //Log.w('category_list',category_list);
 

@@ -453,12 +453,13 @@ class Field_Logic {
 			item = Field_Logic.get_value_list(item,option);
 		}
 		if(option.fields){
-			for(let a = 0; a<option.fields.length;a++){
-				if(!option.get_blank == true){
-					item[option.fields[a]] = Str.get_title(option.fields[a]) +"_" + Number.get_id();
+			let field_list = option.fields.split(',');
+			Log.w('field_list',field_list);
+			for(let a = 0; a<field_list.length;a++){
+				if(option.get_blank == true){
+					item[field_list[a]] = "";
 				}else{
-					item[option.fields[a]] = "";
-
+					item[Str.get_title_url(field_list[a])] = Str.get_title(field_list[a]) +"_" + Number.get_id();
 				}
 			}
 		}
