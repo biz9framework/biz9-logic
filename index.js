@@ -454,7 +454,6 @@ class Field_Logic {
 		}
 		if(option.fields){
 			let field_list = String(option.fields).split(',');
-			Log.w('field_list',field_list);
 			for(let a = 0; a<field_list.length;a++){
 				if(option.get_blank == true){
 					item[field_list[a]] = "";
