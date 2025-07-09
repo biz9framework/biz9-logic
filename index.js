@@ -1472,13 +1472,11 @@ class Schedule {
 };
 class Storage {
 	static get = (window,key) => {
-		console.log('aaaaaaaa');
-		console.log(window);
-		console.log(key);
-		console.log(window.localStorage.getItem(key));
-		console.log('bbbbbbbbb');
 		if(window){
-			return Obj.check_is_empty(JSON.parse(window.localStorage.getItem(key))) ? window.localStorage.getItem(key) : null;
+			if(Str.check_is_null(window.localStorage.getItem(key))){
+				return null;
+			}else{
+				return JSON.parse(window.localStorage.getItem(key));
 		}else{
 			return null;
 		}
