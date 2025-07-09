@@ -1473,7 +1473,7 @@ class Schedule {
 class Storage {
 	static get = (window,key) => {
 		if(window){
-			return JSON.parse(window.localStorage.getItem(key));
+			return JSON.parse(window.localStorage.getItem(key)) ? window.localStorage.getItem(key) : null;
 		}else{
 			return null;
 		}
