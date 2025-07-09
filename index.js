@@ -1478,7 +1478,7 @@ class Storage {
 		console.log(window.localStorage.getItem(key));
 		console.log('bbbbbbbbb');
 		if(window){
-			return JSON.parse(window.localStorage.getItem(key)) ? window.localStorage.getItem(key) : null;
+			return Obj.check_is_empty(JSON.parse(window.localStorage.getItem(key))) ? window.localStorage.getItem(key) : null;
 		}else{
 			return null;
 		}
