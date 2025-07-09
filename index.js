@@ -1481,8 +1481,8 @@ class Storage {
 			}else{
 				console.log('dddddd');
 				return JSON.parse(window.localStorage.getItem(key));
+		}
 		}else{
-			console.log('eeeeeee');
 			return null;
 		}
 	}
