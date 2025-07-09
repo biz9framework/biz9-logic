@@ -1153,7 +1153,7 @@ class Url{
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
 	static update_delete_cache = (biz9_config,data_type,id) => {
-		let action_url = "main/crud/update_item_delete_cache/"+data_type + "/" + id;
+		let action_url = "main/crud/update_delete_cache/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
 	static update_list = (biz9_config,data_type) => {
@@ -1469,7 +1469,6 @@ class Schedule {
 class Storage {
 	static get = (window,key) => {
 		if(window){
-			//return JSON.parse(window.localStorage.getItem(key)) ? !Str.check_is_null(window.localStorage.getItem(key)): null;
 			return JSON.parse(window.localStorage.getItem(key));
 		}else{
 			return null;
