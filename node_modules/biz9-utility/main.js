@@ -346,7 +346,7 @@ const get_title_url_main=(title)=>{
 }
 const check_is_null_main=(str)=>{
     console.log('111111111111');
-    console.log('17:29');
+    console.log('17:52');
     console.log(str);
     console.log(str.length);
     console.log(String(str));
@@ -356,7 +356,7 @@ const check_is_null_main=(str)=>{
         return true;
     }
     console.log('4444444444444444');
-    if(value == null || value.length === 0){
+    if(str == null || str.length === 0){
       console.log('apple');
         return true;
     }
