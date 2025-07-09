@@ -346,7 +346,7 @@ const get_title_url_main=(title)=>{
 }
 const check_is_null_main=(str)=>{
     console.log('111111111111');
-    console.log('17:09');
+    console.log('17:16');
     console.log(str);
     console.log(str.length);
     console.log(String(str));
@@ -361,8 +361,13 @@ const check_is_null_main=(str)=>{
         console.log('heeeeeeeeeeee');
         return true;
     }
+
     else if (str === undefined) {
         console.log('coool');
+        return true;
+    }
+    else if (String(str) == undefined || String(str) == 'undefined') {
+        console.log('fuck');
         return true;
     }
     else if(str === null){
