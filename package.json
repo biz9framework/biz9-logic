@@ -1,6 +1,6 @@
 {
   "name": "biz9-logic",
-  "version": "4.8.91",
+  "version": "4.8.92",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
   "dependencies": {
     "async-series": "^0.0.1",
     "biz9-scriptz": "^5.8.1",
-    "biz9-utility": "^3.8.15",
+    "biz9-utility": "^3.8.18",
     "jest": "^29.7.0",
     "moment": "^2.30.1"
   },

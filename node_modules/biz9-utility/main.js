@@ -346,8 +346,10 @@ const get_title_url_main=(title)=>{
 }
 const check_is_null_main=(str)=>{
     console.log('111111111111');
-    console.log('17:01');
+    console.log('17:07');
     console.log(str);
+    console.log(String(str));
+    console.log('rrrrrrrrr');
     if(!str){
         console.log('222222222');
         return true;
