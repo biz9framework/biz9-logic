@@ -350,44 +350,53 @@ const check_is_null_main=(str)=>{
     console.log(str);
     console.log(str.length);
     console.log(String(str));
-    console.log('rrrrrrrrr');
+    console.log('2222222222222');
     if(!str){
-        console.log('222222222');
+        console.log('333333333333');
         return true;
     }
+    console.log('4444444444444444');
     if(value == null || value.length === 0){
       console.log('apple');
         return true;
     }
+    console.log('555555555555');
     if (typeof str === 'undefined') {
         console.log('heeeeeeeeeeee');
         return true;
     }
+    console.log('666666666666');
     if (str === undefined) {
         console.log('coool');
         return true;
     }
+    console.log('7777777777777');
     if (String(str) == 'undefined') {
         console.log('weried');
         return true;
     }else{
         console.log('crrrr');
     }
+    console.log('8888888888888888');
 
     if (String(str) == undefined || String(str) == 'undefined') {
         console.log('fuck');
         return true;
     }
+    console.log('99999999999999');
     if(str === null){
         return true;
     }
+    console.log('1000000000000');
     if(str.length==0){
         console.log('33333333');
         return true;
     }
+    console.log('111111111111111111');
     if(str === undefined || str == 0 || str == '0' || str == null){
         return true;
     }
+    console.log('1222222222222222');
     if(String(str) =='null'){
         console.log('55555555');
        return true;
