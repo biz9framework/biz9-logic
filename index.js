@@ -489,7 +489,6 @@ class Field_Logic {
 		option.category_blog_post_count = req.query.category_blog_post_count ? req.query.category_blog_post_count : 9;
 		option.blog_post_count = req.query.blog_post_count ? req.query.blog_post_count : 9;
 
-
 		option.get_product = req.query.get_product ? req.query.get_product : false;
 		option.get_category_product = req.query.get_category_product ? req.query.get_category_product : false;
 		option.category_product_count = req.query.category_product_count ? req.query.category_product_count : 9;
@@ -505,6 +504,7 @@ class Field_Logic {
 		option.category_event_count = req.query.category_event_count ? req.query.category_event_count : 9;
 		option.event_count = req.query.event_count ? req.query.event_count : 9;
 
+		option.user_count = req.query.user_count ? req.query.user_count : 9;
 		option.get_admin = req.query.get_admin ? req.query.get_admin : false;
 		option.get_business = req.query.get_business ? req.query.get_business : false;
 		option.get_faq = req.query.get_faq ? req.query.get_faq : false;
@@ -559,6 +559,10 @@ class Field_Logic {
 		if(data_type==DataType.SUB_ITEM){
 			option.item_count = option.item_count ? option.item_count : 9;
 		}
+		if(data_type==DataType.USER){
+			option.user_count = option.user_count ? option.user_count : 9;
+		}
+
 		return option;
 	}
 	static get_option_title = (title,option) =>{
@@ -1510,6 +1514,27 @@ class User_Logic {
 	static del_user(req){
 		req.session.user=null;
 		delete req.session.user;
+	}
+	static get_test = (title,option) =>{
+		[title,option] = Field_Logic.get_option_title(title,option);
+		option = Field_Logic.get_option(DataType.USER,option?option:{});
+		let user = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.USER,0),
+			DataItem.get_new(DataType.USER,0),
+			DataItem.get_new(DataType.USER,0),
+			Field_Logic.get_test(title,option));
+		user.first_name="First Name "+ Number.get_id();
+		user.last_name="First Name "+ Number.get_id();
+		user.email="email"+ Number.get_id() + "@email.com";
+		return user;
+	};
+	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.USER,option?option:{});
+		let item_list = [];
+		for(let a=0;a<option.user_count+1;a++){
+			item_list.push(User_Logic.get_test("User " +String(parseInt(a+1)),option));
+		}
+		return item_list;
 	}
 }
 class Sub_Item_Logic {
