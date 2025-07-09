@@ -346,7 +346,7 @@ const get_title_url_main=(title)=>{
 }
 const check_is_null_main=(str)=>{
     console.log('111111111111');
-    console.log('17:16');
+    console.log('17:23');
     console.log(str);
     console.log(str.length);
     console.log(String(str));
@@ -355,39 +355,38 @@ const check_is_null_main=(str)=>{
         console.log('222222222');
         return true;
     }
-    else if(value == null || value.length === 0){
+    if(value == null || value.length === 0){
+      console.log('apple');
+        return true;
     }
-    else if (typeof str === 'undefined') {
+    if (typeof str === 'undefined') {
         console.log('heeeeeeeeeeee');
         return true;
     }
-
-    else if (str === undefined) {
+    if (str === undefined) {
         console.log('coool');
         return true;
     }
-    else if (String(str) == undefined || String(str) == 'undefined') {
+    if (String(str) == undefined || String(str) == 'undefined') {
         console.log('fuck');
         return true;
     }
-    else if(str === null){
+    if(str === null){
         return true;
-    }else if(str.length==0){
+    }
+    if(str.length==0){
         console.log('33333333');
         return true;
     }
-    else{
-        console.log('44444444');
     if(str === undefined || str == 0 || str == '0' || str == null){
         return true;
-    }else if(String(str) =='null'){
+    }
+    if(String(str) =='null'){
         console.log('55555555');
        return true;
-    }else{
-        console.log('66666666');
-        return false;
     }
-    }
+
+    return false;
 }
 module.exports = {
     w_main,
