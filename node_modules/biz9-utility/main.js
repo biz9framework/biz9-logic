@@ -355,6 +355,10 @@ const check_is_null_main=(str)=>{
         console.log('heeeeeeeeeeee');
         return true;
     }
+    else if (str === undefined) {
+        console.log('coool');
+        return true;
+    }
     else if(str === null){
         return true;
     }else if(str.length==0){

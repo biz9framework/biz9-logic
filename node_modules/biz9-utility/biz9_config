@@ -1,4 +1,4 @@
-VERSION='3.9.3'
+VERSION='3.9.4'
 TITLE='BiZ9-Utility'
 REPO='git@github.com:biz9framework/biz9-utility.git'
 BRANCH='main'
