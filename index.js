@@ -1473,6 +1473,11 @@ class Schedule {
 class Storage {
 	static get = (window,key) => {
 		console.log('aaaaaaa');
+		console.log('set1');
+		console.log(window.localStorage.getItem(key));
+		console.log(Str.check_is_null(window.localStorage.getItem(key)));
+		console.log('set2');
+
 		if(window){
 			console.log('bbbbbb');
 			if(Str.check_is_null(window.localStorage.getItem(key))){
