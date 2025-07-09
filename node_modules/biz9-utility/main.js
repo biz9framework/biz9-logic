@@ -346,6 +346,7 @@ const get_title_url_main=(title)=>{
 }
 const check_is_null_main=(str)=>{
     console.log('111111111111');
+    console.log('17:01');
     console.log(str);
     if(!str){
         console.log('222222222');
