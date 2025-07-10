@@ -750,6 +750,7 @@ class DataType {
 	static CONTENT='content_biz';
 	static EVENT='event_biz';
 	static FAQ='faq_biz';
+	static FAVORITE='favorite_biz';
 	static GALLERY='gallery_biz';
 	static ITEM_MAP='item_map_biz';
 	static ITEM='item_biz';
