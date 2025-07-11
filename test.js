@@ -84,7 +84,9 @@ describe("connect", () => {
                 /* --TEAM--END */
 
                 /* --USER--START */
-                //let user = User_Logic.get_test();
+                let user = {country:"United States",state:"",city:"Atlanta"};
+                let country_state = User_Logic.get_user_country_state_city(user);
+                Log.w('country_state',country_state);
                 //let user = User_Logic.get_test();
                 //let user_list = User_Logic.get_test_list();
                 //Log.w('user',user);
@@ -195,6 +197,7 @@ describe("connect", () => {
 
                 /* --PRODUCT--START */
                 //let product = Product_Logic.get_test("Product 1",{get_value:true,get_item:true})
+                //let product = Product_Logic.get_test("Product 1")
                 //let product = Product_Logic.get_test({fields:["date_create"]})
                 //let product = Product_Logic.get_test({fields:["cool_beanj]})
                 //Log.w("product",product);
@@ -272,10 +275,12 @@ describe("connect", () => {
                 /* --CONFIG--END */
 
                 /* --PAGE--START */
+                /*
                 let page = Page_Logic.get_test({item_count:2,page_count:2,get_value:true,get_item:true,value_count:5})
                 let page_row_item = Sub_Item_Logic.get_test_section_list(page,page,{get_value:true,value_count:9,section_count:9});
                 Log.w("Page",page);
                 Log.w("Page_Row_Item",page_row_item);
+                */
                 //let page = Page.get_test({item_count:9,page_count:19,get_item:true,get_value:true})
                 //let page = Page.get_test()
                 //Log.w("Page_section_1",page.section_1);

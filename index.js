@@ -207,6 +207,7 @@ class Product_Logic {
 			DataItem.get_new(DataType.PRODUCT,0),
 			DataItem.get_new(DataType.PRODUCT,0),
 			Field_Logic.get_test(title,option));
+		/*
 		if(option.get_blank ==false){
 			product.cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
 			product.old_cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
@@ -225,6 +226,7 @@ class Product_Logic {
 		if(option.get_item){
 			product.items = Sub_Item_Logic.get_test_list(product,product,option);
 		}
+		*/
 		return product;
 	};
 	static get_test_list = (option) =>{
@@ -458,7 +460,9 @@ class Field_Logic {
 				if(option.get_blank == true){
 					item[field_list[a]] = "";
 				}else{
+					if(!Str.check_is_null(field_list[a])){
 					item[Str.get_title_url(field_list[a])] = Str.get_title(field_list[a]) +"_" + Number.get_id();
+					}
 				}
 			}
 		}
@@ -1506,6 +1510,35 @@ class Storage {
 	}
 }
 class User_Logic {
+	static get_user_country_state_city(item){
+		let country_state_city = "";
+		if(item.country == "United States"){
+            let state = "";
+            if(!Str.check_is_null(item.state)){
+				console.log('aaaa');
+                country_state_city = item.state;
+            }
+			if(!Str.check_is_null(item.city)){
+				if(!Str.check_is_null(item.state)){
+					console.log('bbbb');
+        			country_state_city = item.city + ", " + item.state;
+				}else{
+					console.log('cccccc');
+					country_state_city = item.city;
+				}
+        	}
+		}
+		else{
+			console.log('cccc');
+			if(!Str.check_is_null(item.city)){
+				country_state_city = item.city + ", " + item.country;
+			}else{
+				country_state_city = item.country;
+			}
+        }
+		return country_state_city;
+
+	}
 	static get_user(req){
 		if(!req || !req.session.user){
 			let user=DataItem.get_new(DataType.USER,0,{is_guest:true,customer_id:Number.get_id(99999)});
