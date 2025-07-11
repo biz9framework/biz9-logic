@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -83,15 +83,26 @@ describe("connect", () => {
                 //Log.w('team_list',team_list);
                 /* --TEAM--END */
 
-                /* --USER--START */
-                let user = {country:"United States",state:"",city:"Atlanta"};
-                let country_state = User_Logic.get_user_country_state_city(user);
-                Log.w('country_state',country_state);
+                /* --FIELD-LOGIC--START */
+                let field_logic = Field_Logic.get_test();
+                Log.w('field_logic',field_logic);
+                //let country_state = User_Logic.get_user_country_state_city(user);
+                //Log.w('country_state',country_state);
                 //let user = User_Logic.get_test();
                 //let user_list = User_Logic.get_test_list();
                 //Log.w('user',user);
                 //Log.w('user_list',user_list);
+                /* --FIELD-LOGIC--END */
 
+
+                /* --USER--START */
+                //let user = {country:"United States",state:"",city:"Atlanta"};
+                //let country_state = User_Logic.get_user_country_state_city(user);
+                //Log.w('country_state',country_state);
+                //let user = User_Logic.get_test();
+                //let user_list = User_Logic.get_test_list();
+                //Log.w('user',user);
+                //Log.w('user_list',user_list);
                 /* --USER--END */
 
                /* --SEARCH--START */
@@ -104,7 +115,6 @@ describe("connect", () => {
                 let search_filter_key_2 = 'key2';
                 let search_filter_value_2 = 'value2';
                 */
-
 
                 //let query = "?app_id=19&data_type="+data_type+"&sort_by={}&page_current=1&page_size=99&search_filter_key_1="+search_filter_key_1+"&search_filter_value_1="+search_filter_value_1+"&search_filter_key_2="+search_filter_key_2+"&search_filter_value_2="+search_filter_value_2;
 

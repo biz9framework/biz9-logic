@@ -430,7 +430,7 @@ class Field_Logic {
 	static get_test = (title,option) =>{
 		option = !Obj.check_is_empty(option) ? option : {};
 		let sub_note = "Sub Note "+String(Number.get_id());
-		let note = "Note "+String(Number.get_id());
+		let note = "Note "+String(Number.get_id()) + "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 		option.category_title = !Str.check_is_null(option.category_title) ? option.category_title : 'Category '+String(Number.get_id());
 		if(option.get_blank == true){
 			date_create:"";
@@ -1515,21 +1515,17 @@ class User_Logic {
 		if(item.country == "United States"){
             let state = "";
             if(!Str.check_is_null(item.state)){
-				console.log('aaaa');
                 country_state_city = item.state;
             }
 			if(!Str.check_is_null(item.city)){
 				if(!Str.check_is_null(item.state)){
-					console.log('bbbb');
         			country_state_city = item.city + ", " + item.state;
 				}else{
-					console.log('cccccc');
 					country_state_city = item.city;
 				}
         	}
 		}
 		else{
-			console.log('cccc');
 			if(!Str.check_is_null(item.city)){
 				country_state_city = item.city + ", " + item.country;
 			}else{
@@ -1537,7 +1533,6 @@ class User_Logic {
 			}
         }
 		return country_state_city;
-
 	}
 	static get_user(req){
 		if(!req || !req.session.user){
