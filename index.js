@@ -1036,23 +1036,23 @@ class FAQ_Url {
 	};
 }
 class Order_Url {
-	static single-stripe-checkout = (biz9_config,data_type,key,params) => {
+	static single_stripe_checkout = (biz9_config,data_type,key,params) => {
 		let action_url="order/single-stripe-checkout/"+data_type+"/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static user-stripe-checkout = (biz9_config,user_id,params) => {
+	static user_stripe_checkout = (biz9_config,user_id,params) => {
 		let action_url="order/cart-stripe-checkout/"+user_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static checkout-success = (biz9_config,order_id,params) => {
+	static checkout_success = (biz9_config,order_id,params) => {
 		let action_url="order/cart-stripe-checkout/"+order_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static user-cart = (biz9_config,user_id,params) => {
+	static user_cart = (biz9_config,user_id,params) => {
 		let action_url="order/user-cart/"+order_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart-update = (biz9_config,user_id,data_type,id,params) => {
+	static cart_update = (biz9_config,user_id,data_type,id,params) => {
 		let action_url="order/cart-update/"+user_id+"/"+data_type+"/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
@@ -1072,6 +1072,16 @@ class Product_Url {
 	};
 	static search = (biz9_config,params) => {
 		let action_url="product/search";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Review_Url {
+	static update = (biz9_config,parent_data_type,parent_id,user_id,params) => {
+		let action_url="review/"+parent_data_type+"/"+parent_id+"/"+user_id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static search = (biz9_config,parent_data_type,parent_id,params) => {
+		let action_url="review/"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -1719,6 +1729,7 @@ module.exports = {
 	Product_Logic,
 	Review_Logic,
 	Review_Url,
+	Order_Url,
 	Service_Logic,
 	Service_Url,
 	Social,
