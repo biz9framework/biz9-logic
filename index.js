@@ -762,6 +762,7 @@ class DataType {
 	static ITEM='item_biz';
 	static ORDER="order_biz";
 	static ORDER_ITEM="order_item_biz";
+	static ORDER_SUB_ITEM="order_sub_item_biz";
 	static PROJECT='project_biz';
 	static PRODUCT='product_biz';
 	static PHOTO='photo_biz';
