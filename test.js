@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -205,7 +205,13 @@ describe("connect", () => {
                 /* --SERVICE--END */
 
 
-                /* --PRODUCT--START */
+                /* --ORDER--START */
+                console.log('ORDER-START');
+                let order = Order_Logic.get_test("OR"+Number.get_id(),DataType.PRODUCT);
+                Log.w('order',order);
+                console.log('ORDER-END');
+                /* --ORDER--END */
+
                 //let product = Product_Logic.get_test("Product 1",{get_value:true,get_item:true})
                 //let product = Product_Logic.get_test("Product 1")
                 //let product = Product_Logic.get_test({fields:["date_create"]})
@@ -227,8 +233,8 @@ describe("connect", () => {
 
 
                /* --ITEM-TEST--START */
-                let item = Item_Logic.get_test("Item_" +Number.get_id(),DataType.BLOG_POST,0);
-                Log.w('item',item);
+                //let item = Item_Logic.get_test("Item_" +Number.get_id(),DataType.BLOG_POST,0);
+                //Log.w('item',item);
                 /*
                 let item_list = Item_Logic.get_test_list(DataType.BLANK,{item_count:10,get_value:true});
                 Log.w('item_list',item_list);

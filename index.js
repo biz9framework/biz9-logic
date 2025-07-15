@@ -198,16 +198,28 @@ class Page_Logic {
 		return item_list;
 	}
 }
-class Product_Logic {
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
+class Order_Logic {
+	static get_test = (order_id,parent_data_type,option) =>{
+		option = Field_Logic.get_option(parent_data_type,option?option:{});
+		option.product_count = 3;
+		option.generate_id = true;
+		let product = Product_Logic.get_test("Product " + Number.get_id(),{generate_id:true});
+		let sub_product_list = Product_Logic.get_test_list(option);
+		let order = DataItem.get_new(DataType.ORDER,0);
+		order.order_id = order_id;
+		order.parent_data_type = DataType.PRODUCT;
+		order.parent_id = product.id;
+
+
+		Log.w('product',product);
+		Log.w('option',option);
+		//Log.w('order',order);
+		/*
 		let product = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PRODUCT,0),
 			DataItem.get_new(DataType.PRODUCT,0),
 			DataItem.get_new(DataType.PRODUCT,0),
 			Field_Logic.get_test(title,option));
-		/*
 		if(option.get_blank ==false){
 			product.cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
 			product.old_cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
@@ -227,6 +239,59 @@ class Product_Logic {
 			product.items = Sub_Item_Logic.get_test_list(product,product,option);
 		}
 		*/
+		//return product;
+	};
+	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
+		let item_list = [];
+		for(let a=0;a<option.product_count+1;a++){
+			item_list.push(Product_Logic.get_test("Product "+String(parseInt(a+1)),option));
+		}
+		return item_list;
+	}
+	static get_test_list_by_category = (option) =>{
+		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
+		let product_list = [];
+		let category_list = Category_Logic.get_type_category_list(DataType.PRODUCT,option.category_count);
+		let item_count = 0;
+		for(let a=0;a<category_list.length;a++){
+			for(let b=0;b<option.product_count;b++){
+				item_count++;
+				let product = Product_Logic.get_test("Product "+String(parseInt(b+1)),option);
+				product.category = category_list[Number.get_id(category_list.length+1)].title;
+				product_list.push(product);
+			}
+		}
+		return [category_list,product_list]
+	};
+}
+class Product_Logic {
+	static get_test = (title,option) =>{
+		[title,option] = Field_Logic.get_option_title(title,option);
+		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
+		let product = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.PRODUCT,0),
+			DataItem.get_new(DataType.PRODUCT,0),
+			DataItem.get_new(DataType.PRODUCT,0),
+			Field_Logic.get_test(title,option));
+		if(option.get_blank ==false){
+			product.cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
+			product.old_cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
+			product.type = "Type "+String(Number.get_id());
+			product.sub_type = "Sub Type "+String(Number.get_id());
+			product.stock = String(Number.get_id(3-1));
+			product.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
+		}else{
+			product.cost = "";
+			product.old_cost = "";
+			product.type = "";
+			product.sub_type = "";
+			product.stock = "";
+			product.tag = "";
+		}
+		if(option.get_item){
+			product.items = Sub_Item_Logic.get_test_list(product,product,option);
+		}
 		return product;
 	};
 	static get_test_list = (option) =>{
@@ -451,6 +516,9 @@ class Field_Logic {
 			date_create:new moment().toISOString(),
 			date_save:new moment().toISOString()
 		}
+		if(option.generate_id){
+			item.id=Number.get_guid();
+		}
 		if(option.get_value){
 			item = Field_Logic.get_value_list(item,option);
 		}
@@ -521,6 +589,7 @@ class Field_Logic {
 	static get_option(data_type,option){
 		data_type = data_type ? data_type : DataType.BLANK;
 		option = !Obj.check_is_empty(option) ? option : {get_value:false,get_item:false,get_photo:false,item_count:9,value_count:9};
+		option.generate_id = !Str.check_is_null(option.generate_id) ? option.generate_id : false;
 		option.get_photo = option.get_photo ? true : false;
 		option.get_value = option.get_value ? true : false;
 		option.get_item = option.get_item ? true : false;
@@ -566,7 +635,6 @@ class Field_Logic {
 		if(data_type==DataType.USER){
 			option.user_count = option.user_count ? option.user_count : 9;
 		}
-
 		return option;
 	}
 	static get_option_title = (title,option) =>{
@@ -1733,6 +1801,7 @@ module.exports = {
 	Review_Logic,
 	Review_Url,
 	Order_Url,
+	Order_Logic,
 	Service_Logic,
 	Service_Url,
 	Social,
