@@ -875,6 +875,40 @@ class Review_Logic {
 		return item_list;
 	};
 }
+class Admin_Logic {
+	static get_new = (title,option) =>{
+		[title,option] = Field_Logic.get_option_title(title,option);
+		return DataItem.get_new_full_item(
+			DataItem.get_new(DataType.ADMIN,0),
+			DataItem.get_new(DataType.ADMIN,0),
+			DataItem.get_new(DataType.ADMIN,0),{
+				title:title,
+				email:"",
+			});
+	};
+	static get_test = (title,option) =>{
+		[title,option] = Field_Logic.get_option_title(title,option);
+		option = Field_Logic.get_option(DataType.ADMIN,option?option:{});
+		let item = DataItem.get_new(DataType.ADMIN,0);
+		let admin = DataItem.get_new_full_item(
+			DataItem.get_new(DataType.ADMIN,Number.get_id()),
+			DataItem.get_new(DataType.ADMIN,0),
+			DataItem.get_new(DataType.ADMIN,0),
+			Field_Logic.get_test(title,option));
+		admin.email="ceo@admin"+Number.get_id()+".com";
+		admin.password="1234567";
+		return admin;
+	};
+	static get_full_address(admin){
+		admin.address_1 = (admin.address_1) ? admin.address_1 : "";
+		admin.address_2 = (admin.address_2) ? admin.address_2 : "";
+		admin.city = (admin.city) ? admin.city : "";
+		admin.state = (admin.state) ? admin.state : "";
+		admin.zip = (admin.zip) ? admin.zip : "";
+		return admin.address_1 + " "+ admin.address_2 + " " + admin.city + " " + admin.state + " " + admin.zip;
+	}
+}
+
 class Business_Logic {
 	static get_new = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
@@ -908,7 +942,7 @@ class Business_Logic {
 			DataItem.get_new(DataType.BUSINESS,0),
 			DataItem.get_new(DataType.BUSINESS,0),
 			Field_Logic.get_test(title,option));
-		business.email="ceo@business.com";
+		business.email="ceo@business"+Number.get_id()+".com";
 		business.phone=Number.get_id(parseInt(777+100)) + "-" + Number.get_id(parseInt(777+100)) + "-"+Number.get_id(parseInt(7777+1000));
 		business.address_1=Number.get_id(99)+" Main St.";
 		business.address_2="PO "+Number.get_id(99);
@@ -976,6 +1010,10 @@ class Blog_Post_Url {
 		let action_url="blog_post/category/"+category;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
+	static search = (biz9_config,params) => {
+		let action_url="blog_post/search";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
 }
 class Custom_Field_Url {
 	static get = (biz9_config,data_type,key,params) => {
@@ -997,6 +1035,28 @@ class FAQ_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
+class Order_Url {
+	static single-stripe-checkout = (biz9_config,data_type,key,params) => {
+		let action_url="order/single-stripe-checkout/"+data_type+"/"+key;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static user-stripe-checkout = (biz9_config,user_id,params) => {
+		let action_url="order/cart-stripe-checkout/"+user_id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static checkout-success = (biz9_config,order_id,params) => {
+		let action_url="order/cart-stripe-checkout/"+order_id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static user-cart = (biz9_config,user_id,params) => {
+		let action_url="order/user-cart/"+order_id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static cart-update = (biz9_config,user_id,data_type,id,params) => {
+		let action_url="order/cart-update/"+user_id+"/"+data_type+"/"+id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
 class Product_Url {
 	static get = (biz9_config,key,params) => {
 		let action_url="product/get/"+key;
@@ -1010,12 +1070,8 @@ class Product_Url {
 		let action_url="product/category/"+category;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart = (biz9_config,params) => {
-		let action_url="product/cart";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static checkout = (biz9_config,params) => {
-		let action_url="product/checkout";
+	static search = (biz9_config,params) => {
+		let action_url="product/search";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -1032,12 +1088,8 @@ class Event_Url {
 		let action_url="event/category/"+category;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart = (biz9_config,params) => {
-		let action_url="event/cart";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static checkout = (biz9_config,params) => {
-		let action_url="event/checkout";
+	static search = (biz9_config,params) => {
+		let action_url="event/search";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -1054,12 +1106,8 @@ class Service_Url {
 		let action_url="service/category/"+category;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart = (biz9_config,params) => {
-		let action_url="service/cart";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static checkout = (biz9_config,params) => {
-		let action_url="service/checkout";
+	static search = (biz9_config,params) => {
+		let action_url="service/search";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -1076,6 +1124,10 @@ class Content_Url {
 		let action_url="content/category/"+category;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
+	static search = (biz9_config,params) => {
+		let action_url="content/search";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
 }
 class Gallery_Url {
 	static get = (biz9_config,key,params) => {
@@ -1090,6 +1142,10 @@ class Gallery_Url {
 		let action_url="gallery/category/"+category;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
+	static search = (biz9_config,params) => {
+		let action_url="gallery/search";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
 }
 class Category_Url {
 	static get = (biz9_config,key,params) => {
@@ -1098,6 +1154,10 @@ class Category_Url {
 	};
 	static browse = (biz9_config,params) => {
 		let action_url="category/browse";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static search = (biz9_config,params) => {
+		let action_url="category/search";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -1559,6 +1619,9 @@ class User_Logic {
 		user.first_name="First Name "+ Number.get_id();
 		user.last_name="First Name "+ Number.get_id();
 		user.email="email"+ Number.get_id() + "@email.com";
+		user.city="City"+ Number.get_id();
+		user.state="State"+ Number.get_id();
+		user.country="United States";
 		return user;
 	};
 	static get_test_list = (option) =>{
@@ -1627,6 +1690,7 @@ class Sub_Item_Logic {
 	}
 }
 module.exports = {
+	Admin_Logic,
 	Business_Logic,
 	Blank_Logic,
 	Blank_Url,
@@ -1654,6 +1718,7 @@ module.exports = {
 	PageType,
 	Product_Logic,
 	Review_Logic,
+	Review_Url,
 	Service_Logic,
 	Service_Url,
 	Social,

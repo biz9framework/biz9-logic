@@ -84,8 +84,8 @@ describe("connect", () => {
                 /* --TEAM--END */
 
                 /* --FIELD-LOGIC--START */
-                let field_logic = Field_Logic.get_test();
-                Log.w('field_logic',field_logic);
+                //let field_logic = Field_Logic.get_test();
+                //Log.w('field_logic',field_logic);
                 //let country_state = User_Logic.get_user_country_state_city(user);
                 //Log.w('country_state',country_state);
                 //let user = User_Logic.get_test();
@@ -227,8 +227,8 @@ describe("connect", () => {
 
 
                /* --ITEM-TEST--START */
-                //let item = Item_Logic.get_test("Item_" +Number.get_id(),DataType.SERVICE,0);
-                //Log.w('item',item);
+                let item = Item_Logic.get_test("Item_" +Number.get_id(),DataType.BLOG_POST,0);
+                Log.w('item',item);
                 /*
                 let item_list = Item_Logic.get_test_list(DataType.BLANK,{item_count:10,get_value:true});
                 Log.w('item_list',item_list);
