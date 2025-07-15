@@ -624,11 +624,13 @@ class FieldType {
 	static STAT_VIEW_ID='1';
 	static STAT_LIKE_ID='2';
 	static STAT_POST_ID='3';
+
 	static KEY_ADMIN="key_admin";
-	static KEY_USER="key_user";
+	static KEY_APP_ID="key_app_id";
 	static KEY_BUSINESS="key_business";
 	static KEY_GUEST="key_guest";
-	static KEY_APP_ID="key_app_id";
+	static KEY_ORDER="key_order";
+	static KEY_USER="key_user";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
