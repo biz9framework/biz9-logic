@@ -199,43 +199,32 @@ class Page_Logic {
 	}
 }
 class Order_Logic {
-	static get_test = (user_id,order_id,option) =>{
-		/*
-		[order_id,option] = Field_Logic.get_option_title(order_id,option);
-		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
-		option.product_count = 3;
-		option.generate_id = true;
-		let product = Product_Logic.get_test("Product " + Number.get_id(),{generate_id:true});
-		let sub_product_list = Product_Logic.get_test_list(option);
-		let order = DataItem.get_new(DataType.ORDER,order_id,{items:[]});
-		order.user_id = user_id;
-
-		Log.w('order',order);
-		let product = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.PRODUCT,0),
-			DataItem.get_new(DataType.PRODUCT,0),
-			DataItem.get_new(DataType.PRODUCT,0),
-			Field_Logic.get_test(title,option));
-		if(option.get_blank ==false){
-			product.cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
-			product.old_cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
-			product.type = "Type "+String(Number.get_id());
-			product.sub_type = "Sub Type "+String(Number.get_id());
-			product.stock = String(Number.get_id(3-1));
-			product.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
-		}else{
-			product.cost = "";
-			product.old_cost = "";
-			product.type = "";
-			product.sub_type = "";
-			product.stock = "";
-			product.tag = "";
+	static get_test_cart_item = (cart_id,user_id,parent_data_type,parent_id,option) =>{
+		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{});
+		let cart_item = DataItem.get_new(DataType.CART_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Item "+Number.get_id(),option));
+		cart_item.cart_id = cart_id;
+		cart_item.user_id = user_id;
+		cart_item.parent_data_type = parent_data_type;
+		cart_item.parent_id = parent_id;
+		cart_item.cost = Field_Logic.get_test_cost();
+		cart_item.cart_sub_item_list = [];
+		if(option.get_cart_sub_item){
+			for(let a = 0;a<option.cart_sub_item_count;a++){
+				cart_item.cart_sub_item_list.push(Order_Logic.get_test_cart_sub_item(cart_id,user_id,cart_item.id,parent_data_type,parent_id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count}));
+			}
 		}
-		if(option.get_item){
-			product.items = Sub_Item_Logic.get_test_list(product,product,option);
-		}
-		*/
-		//return product;
+		return cart_item;
+	};
+	static get_test_cart_sub_item = (cart_id,user_id,cart_item_id,parent_data_type,parent_id,option) =>{
+		option = Field_Logic.get_option(DataType.CART_SUB_ITEM,option?option:{});
+		let cart_sub_item = DataItem.get_new(DataType.CART_SUB_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Sub Item "+Number.get_id(),option));
+		cart_sub_item.user_id = user_id;
+		cart_sub_item.cart_id = cart_id;
+		cart_sub_item.cart_item_id = cart_item_id;
+		cart_sub_item.parent_data_type = parent_data_type;
+		cart_sub_item.parent_id = parent_id;
+		cart_sub_item.cost = Field_Logic.get_test_cost();
+		return cart_sub_item;
 	};
 	static get_test_order_item = (order_id,user_id,parent_data_type,parent_id,option) =>{
 		option = Field_Logic.get_option(DataType.ORDER_ITEM,option?option:{});
@@ -246,11 +235,10 @@ class Order_Logic {
 		order_item.parent_id = parent_id;
 		order_item.cost = Field_Logic.get_test_cost();
 		order_item.order_sub_item_list = [];
-
 		if(option.get_order_sub_item){
-		for(let a = 0;a<option.order_sub_item_count;a++){
-			order_item.order_sub_item_list.push(Order_Logic.get_test_order_sub_item(order_id,user_id,order_item.id,parent_data_type,parent_id,{get_value:true,get_order_sub_item:option.get_order_sub_item,order_sub_item_count:option.order_sub_item_count}));
-		}
+			for(let a = 0;a<option.order_sub_item_count;a++){
+				order_item.order_sub_item_list.push(Order_Logic.get_test_order_sub_item(order_id,user_id,order_item.id,parent_data_type,parent_id,{get_value:true,get_order_sub_item:option.get_order_sub_item,order_sub_item_count:option.order_sub_item_count}));
+			}
 		}
 		return order_item;
 	};
@@ -265,6 +253,7 @@ class Order_Logic {
 		order_sub_item.cost = Field_Logic.get_test_cost();
 		return order_sub_item;
 	};
+
 	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let item_list = [];
@@ -318,6 +307,36 @@ class Product_Logic {
 		}
 		return product;
 	};
+	static get_test_cart = (cart_id,user_id,option) =>{
+		[cart_id,option] = Field_Logic.get_option_title("CART"+Number.get_id(),option);
+		option = Field_Logic.get_option(DataType.CART,option?option:{});
+		let cart = DataItem.get_new(DataType.CART,Number.get_guid(),Field_Logic.get_test(cart_id,option));
+		cart.user_id = user_id;
+		let product_option = {generate_id:true,product_count:option.cart_item_count};
+		let product_list = Product_Logic.get_test_list(product_option);
+		cart.cart_item_list = [];
+		if(option.get_cart_item){
+			for(let a = 0;a<option.cart_item_count;a++){
+				cart.cart_item_list.push(Order_Logic.get_test_cart_item(cart_id,user_id,product_list[a].data_type,product_list[a].id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count}));
+			}
+		}
+		return cart;
+	};
+	static get_test_cart = (cart_id,user_id,option) =>{
+		[cart_id,option] = Field_Logic.get_option_title(cart_id,option);
+		option = Field_Logic.get_option(DataType.CART,option?option:{});
+		let cart = DataItem.get_new(DataType.CART,Number.get_guid(),Field_Logic.get_test(cart_id,option));
+		cart.user_id = user_id;
+		let product_option = {generate_id:true,product_count:option.cart_item_count};
+		let product_list = Product_Logic.get_test_list(product_option);
+		cart.cart_item_list = [];
+		if(option.get_cart_item){
+			for(let a = 0;a<option.cart_item_count;a++){
+				cart.cart_item_list.push(Order_Logic.get_test_cart_item(cart_id,user_id,product_list[a].data_type,product_list[a].id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count}));
+			}
+		}
+		return cart;
+	};
 	static get_test_order = (order_id,user_id,option) =>{
 		[order_id,option] = Field_Logic.get_option_title(order_id,option);
 		option = Field_Logic.get_option(DataType.ORDER,option?option:{});
@@ -327,13 +346,12 @@ class Product_Logic {
 		let product_list = Product_Logic.get_test_list(product_option);
 		order.order_item_list = [];
 		if(option.get_order_item){
-		for(let a = 0;a<option.order_item_count;a++){
-			order.order_item_list.push(Order_Logic.get_test_order_item(order_id,user_id,product_list[a].data_type,product_list[a].id,{get_value:true,get_order_sub_item:option.get_order_sub_item,order_sub_item_count:option.order_sub_item_count}));
-		}
+			for(let a = 0;a<option.order_item_count;a++){
+				order.order_item_list.push(Order_Logic.get_test_order_item(order_id,user_id,product_list[a].data_type,product_list[a].id,{get_value:true,get_order_sub_item:option.get_order_sub_item,order_sub_item_count:option.order_sub_item_count}));
+			}
 		}
 		return order;
 	};
-
 	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let item_list = [];
@@ -569,7 +587,7 @@ class Field_Logic {
 					item[field_list[a]] = "";
 				}else{
 					if(!Str.check_is_null(field_list[a])){
-					item[Str.get_title_url(field_list[a])] = Str.get_title(field_list[a]) +"_" + Number.get_id();
+						item[Str.get_title_url(field_list[a])] = Str.get_title(field_list[a]) +"_" + Number.get_id();
 					}
 				}
 			}
@@ -638,6 +656,20 @@ class Field_Logic {
 		}
 		if(data_type==DataType.USER){
 			option.user_count = option.user_count ? option.user_count : 9;
+		}
+		if(data_type==DataType.CART){
+			option.category_title = option.category_title ? option.category_title : "";
+			option.value_count = option.value_count ? option.value_count : 9;
+			option.get_cart_item = option.get_cart_item ? option.get_cart_item : false;
+			option.cart_item_count = option.cart_item_count ? option.cart_item_count : 1;
+			option.get_cart_sub_item = option.get_cart_sub_item ? option.get_cart_sub_item : false;
+			option.cart_sub_item_count = option.cart_sub_item_count ? option.cart_sub_item_count : 1;
+		}
+		if(data_type==DataType.CART_ITEM){
+			option.category_title = option.category_title ? option.category_title : "";
+			option.value_count = option.value_count ? option.value_count : 9;
+			option.get_cart_sub_item = option.get_cart_sub_item ? option.get_cart_sub_item : false;
+			option.cart_sub_item_count = option.cart_sub_item_count ? option.cart_sub_item_count : 1;
 		}
 		if(data_type==DataType.ORDER){
 			option.category_title = option.category_title ? option.category_title : "";
@@ -887,9 +919,15 @@ class DataType {
 	static GALLERY='gallery_biz';
 	static ITEM_MAP='item_map_biz';
 	static ITEM='item_biz';
+
+	static CART="cart_biz";
+	static CART_ITEM="cart_item_biz";
+	static CART_SUB_ITEM="cart_sub_item_biz";
+
 	static ORDER="order_biz";
 	static ORDER_ITEM="order_item_biz";
 	static ORDER_SUB_ITEM="order_sub_item_biz";
+
 	static PROJECT='project_biz';
 	static PRODUCT='product_biz';
 	static PHOTO='photo_biz';
@@ -1183,6 +1221,10 @@ class Order_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static cart_update = (biz9_config,user_id,data_type,id,params) => {
+		let action_url="order/cart-update/"+user_id+"/"+data_type+"/"+id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static cart_get = (biz9_config,user_id,data_type,id,params) => {
 		let action_url="order/cart-update/"+user_id+"/"+data_type+"/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
@@ -1682,7 +1724,7 @@ class Storage {
 				return null;
 			}else{
 				return JSON.parse(window.localStorage.getItem(key));
-		}
+			}
 		}else{
 			return null;
 		}
@@ -1713,17 +1755,17 @@ class User_Logic {
 	static get_user_country_state_city(item){
 		let country_state_city = "";
 		if(item.country == "United States"){
-            let state = "";
-            if(!Str.check_is_null(item.state)){
-                country_state_city = item.state;
-            }
+			let state = "";
+			if(!Str.check_is_null(item.state)){
+				country_state_city = item.state;
+			}
 			if(!Str.check_is_null(item.city)){
 				if(!Str.check_is_null(item.state)){
-        			country_state_city = item.city + ", " + item.state;
+					country_state_city = item.city + ", " + item.state;
 				}else{
 					country_state_city = item.city;
 				}
-        	}
+			}
 		}
 		else{
 			if(!Str.check_is_null(item.city)){
@@ -1731,7 +1773,7 @@ class User_Logic {
 			}else{
 				country_state_city = item.country;
 			}
-        }
+		}
 		return country_state_city;
 	}
 	static get_user(req){

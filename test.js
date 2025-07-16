@@ -206,8 +206,20 @@ describe("connect", () => {
 
 
                 console.log('PRODUCT-START');
+
+                console.log('PRODUCT-CART-START');
+                let user = User_Logic.get_test({generate_id:true});
+                let cart_id = "CART"+Number.get_id();
+                let product_cart = Product_Logic.get_test_cart(cart_id,user.id,{get_cart_item:true,cart_item_count:1, get_cart_sub_item:true,cart_sub_item_count:1 });
+                //let product_cart = Product_Logic.get_test_cart(user.id,{get_cart_item:true,order_item_count:1,get_order_sub_item:true,order_sub_item_count:2 });
+                Log.w('product_cart',product_cart);
+                //Log.w('product_cart_item_list',product_order.order_item_list.length);
+                //Log.w('product_cart_item_list_len',product_order.order_item_list[0].order_sub_item_list.length);
+                //Log.w('product_order',product_order.order_item_list[0].order_sub_item_list.length);
+                console.log('PRODUCT-CART-END');
+
+                /*
                 console.log('PRODUCT-ORDER-START');
-                //
                 let order_id = "OR"+Number.get_id();
                 let user = User_Logic.get_test({generate_id:true});
                 let product_order = Product_Logic.get_test_order(order_id,user.id,{get_order_item:true,order_item_count:1,get_order_sub_item:true,order_sub_item_count:2 });
@@ -215,6 +227,8 @@ describe("connect", () => {
                 Log.w('product_order_item_list',product_order.order_item_list.length);
                 Log.w('product_order_item_list_len',product_order.order_item_list[0].order_sub_item_list.length);
                 //Log.w('product_order',product_order.order_item_list[0].order_sub_item_list.length);
+                console.log('PRODUCT-ORDER-END');
+                */
 
                 //let product = Product_Logic.get_test("Product 1",{get_value:true,get_item:true})
                 //let product = Product_Logic.get_test("Product 1")
@@ -233,7 +247,6 @@ describe("connect", () => {
                 //Log.w("Product_section_1",product.section_1);
                 //Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);
                 //
-                console.log('PRODUCT-ORDER-END');
                 console.log('PRODUCT-END');
 
 
