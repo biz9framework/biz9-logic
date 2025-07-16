@@ -791,6 +791,7 @@ class FieldType {
 	static KEY_ADMIN="key_admin";
 	static KEY_APP_ID="key_app_id";
 	static KEY_BUSINESS="key_business";
+	static KEY_CART="key_cart";
 	static KEY_GUEST="key_guest";
 	static KEY_ORDER="key_order";
 	static KEY_USER="key_user";
