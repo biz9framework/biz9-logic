@@ -685,8 +685,6 @@ class Field_Logic {
 			option.get_order_sub_item = option.get_order_sub_item ? option.get_order_sub_item : false;
 			option.order_sub_item_count = option.order_sub_item_count ? option.order_sub_item_count : 1;
 		}
-		Log.w('rrrr',option);
-
 		return option;
 	}
 	static get_option_title = (title,option) =>{
