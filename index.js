@@ -199,22 +199,18 @@ class Page_Logic {
 	}
 }
 class Order_Logic {
-	static get_test = (order_id,parent_data_type,option) =>{
-		option = Field_Logic.get_option(parent_data_type,option?option:{});
+	static get_test = (user_id,order_id,option) =>{
+		/*
+		[order_id,option] = Field_Logic.get_option_title(order_id,option);
+		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		option.product_count = 3;
 		option.generate_id = true;
 		let product = Product_Logic.get_test("Product " + Number.get_id(),{generate_id:true});
 		let sub_product_list = Product_Logic.get_test_list(option);
-		let order = DataItem.get_new(DataType.ORDER,0);
-		order.order_id = order_id;
-		order.parent_data_type = DataType.PRODUCT;
-		order.parent_id = product.id;
+		let order = DataItem.get_new(DataType.ORDER,order_id,{items:[]});
+		order.user_id = user_id;
 
-
-		Log.w('product',product);
-		Log.w('option',option);
-		//Log.w('order',order);
-		/*
+		Log.w('order',order);
 		let product = DataItem.get_new_full_item(
 			DataItem.get_new(DataType.PRODUCT,0),
 			DataItem.get_new(DataType.PRODUCT,0),
@@ -240,6 +236,34 @@ class Order_Logic {
 		}
 		*/
 		//return product;
+	};
+	static get_test_order_item = (order_id,user_id,parent_data_type,parent_id,option) =>{
+		option = Field_Logic.get_option(DataType.ORDER_ITEM,option?option:{});
+		let order_item = DataItem.get_new(DataType.ORDER_ITEM,Number.get_guid(),Field_Logic.get_test("Order Item "+Number.get_id(),option));
+		order_item.order_id = order_id;
+		order_item.user_id = user_id;
+		order_item.parent_data_type = parent_data_type;
+		order_item.parent_id = parent_id;
+		order_item.cost = Field_Logic.get_test_cost();
+		order_item.order_sub_item_list = [];
+
+		if(option.get_order_sub_item){
+		for(let a = 0;a<option.order_sub_item_count;a++){
+			order_item.order_sub_item_list.push(Order_Logic.get_test_order_sub_item(order_id,user_id,order_item.id,parent_data_type,parent_id,{get_value:true,get_order_sub_item:option.get_order_sub_item,order_sub_item_count:option.order_sub_item_count}));
+		}
+		}
+		return order_item;
+	};
+	static get_test_order_sub_item = (order_id,user_id,order_item_id,parent_data_type,parent_id,option) =>{
+		option = Field_Logic.get_option(DataType.ORDER_SUB_ITEM,option?option:{});
+		let order_sub_item = DataItem.get_new(DataType.ORDER_SUB_ITEM,Number.get_guid(),Field_Logic.get_test("Order Sub Item "+Number.get_id(),option));
+		order_sub_item.user_id = user_id;
+		order_sub_item.order_id = order_id;
+		order_sub_item.order_item_id = order_item_id;
+		order_sub_item.parent_data_type = parent_data_type;
+		order_sub_item.parent_id = parent_id;
+		order_sub_item.cost = Field_Logic.get_test_cost();
+		return order_sub_item;
 	};
 	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
@@ -275,8 +299,8 @@ class Product_Logic {
 			DataItem.get_new(DataType.PRODUCT,0),
 			Field_Logic.get_test(title,option));
 		if(option.get_blank ==false){
-			product.cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
-			product.old_cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
+			product.cost = Field_Logic.get_test_cost();
+			product.old_cost = Field_Logic.get_test_cost();
 			product.type = "Type "+String(Number.get_id());
 			product.sub_type = "Sub Type "+String(Number.get_id());
 			product.stock = String(Number.get_id(3-1));
@@ -294,6 +318,22 @@ class Product_Logic {
 		}
 		return product;
 	};
+	static get_test_order = (order_id,user_id,option) =>{
+		[order_id,option] = Field_Logic.get_option_title(order_id,option);
+		option = Field_Logic.get_option(DataType.ORDER,option?option:{});
+		let order = DataItem.get_new(DataType.ORDER,Number.get_guid(),Field_Logic.get_test(order_id,option));
+		order.user_id = user_id;
+		let product_option = {generate_id:true,product_count:option.order_item_count};
+		let product_list = Product_Logic.get_test_list(product_option);
+		order.order_item_list = [];
+		if(option.get_order_item){
+		for(let a = 0;a<option.order_item_count;a++){
+			order.order_item_list.push(Order_Logic.get_test_order_item(order_id,user_id,product_list[a].data_type,product_list[a].id,{get_value:true,get_order_sub_item:option.get_order_sub_item,order_sub_item_count:option.order_sub_item_count}));
+		}
+		}
+		return order;
+	};
+
 	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let item_list = [];
@@ -327,8 +367,8 @@ class Service_Logic {
 			DataItem.get_new(DataType.SERVICE,0),
 			DataItem.get_new(DataType.SERVICE,0),
 			Field_Logic.get_test(title,option));
-		service.cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
-		service.old_cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
+		service.cost = Field_Logic.get_test_cost();
+		service.old_cost = Field_Logic.get_test_cost();
 		service.type = "Type "+String(Number.get_id());
 		service.sub_type = "Sub Type "+String(Number.get_id());
 		service.stock = String(Number.get_id(3-1));
@@ -452,8 +492,8 @@ class Event_Logic {
 			DataItem.get_new(DataType.EVENT,0),
 			DataItem.get_new(DataType.EVENT,0),
 			Field_Logic.get_test(title,option));
-		event.cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
-		event.old_cost = String(Number.get_id(999)) + "." + String(Number.get_id(99));
+		event.cost = Field_Logic.get_test_cost();
+		event.old_cost = Field_Logic.get_test_cost();
 		event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
 		event.time = String(Number.get_id(24)) + ":" + String(Number.get_id(59));
 		event.website = "Website "+String(Number.get_id());
@@ -550,42 +590,6 @@ class Field_Logic {
 		}
 		return item;
 	};
-	static get_option_admin(req){
-		let option = {};
-		option.value_count = req.query.value_count ? req.query.value_count : 9;
-		option.section_count = req.query.section_count ? req.query.section_count : 9;
-		option.question_count = req.query.question_count ? req.query.question_count : 9;
-
-		option.get_blog_post = req.query.get_blog_post ? req.query.get_blog_post : false;
-		option.get_category_blog_post = req.query.get_category_blog_post ? req.query.get_category_blog_post : false;
-		option.category_blog_post_count = req.query.category_blog_post_count ? req.query.category_blog_post_count : 9;
-		option.blog_post_count = req.query.blog_post_count ? req.query.blog_post_count : 9;
-
-		option.get_product = req.query.get_product ? req.query.get_product : false;
-		option.get_category_product = req.query.get_category_product ? req.query.get_category_product : false;
-		option.category_product_count = req.query.category_product_count ? req.query.category_product_count : 9;
-		option.product_count = req.query.product_count ? req.query.product_count : 9;
-
-		option.get_service = req.query.get_service ? req.query.get_service : false;
-		option.get_category_service = req.query.get_category_service ? req.query.get_category_service : false;
-		option.category_service_count = req.query.category_service_count ? req.query.category_service_count : 9;
-		option.service_count = req.query.service_count ? req.query.service_count : 9;
-
-		option.get_event = req.query.get_event ? req.query.get_event : false;
-		option.get_category_event = req.query.get_category_event ? req.query.get_category_event : false;
-		option.category_event_count = req.query.category_event_count ? req.query.category_event_count : 9;
-		option.event_count = req.query.event_count ? req.query.event_count : 9;
-
-		option.user_count = req.query.user_count ? req.query.user_count : 9;
-		option.get_admin = req.query.get_admin ? req.query.get_admin : false;
-		option.get_business = req.query.get_business ? req.query.get_business : false;
-		option.get_faq = req.query.get_faq ? req.query.get_faq : false;
-		option.get_template = req.query.get_template ? req.query.get_template : false;
-		option.get_page = req.query.get_page ? req.query.get_page : false;
-		option.get_team = req.query.get_team ? req.query.get_team : false;
-
-		return option;
-	}
 	static get_option(data_type,option){
 		data_type = data_type ? data_type : DataType.BLANK;
 		option = !Obj.check_is_empty(option) ? option : {get_value:false,get_item:false,get_photo:false,item_count:9,value_count:9};
@@ -635,6 +639,22 @@ class Field_Logic {
 		if(data_type==DataType.USER){
 			option.user_count = option.user_count ? option.user_count : 9;
 		}
+		if(data_type==DataType.ORDER){
+			option.category_title = option.category_title ? option.category_title : "";
+			option.value_count = option.value_count ? option.value_count : 9;
+			option.get_order_item = option.get_order_item ? option.get_order_item : false;
+			option.order_item_count = option.order_item_count ? option.order_item_count : 1;
+			option.get_order_sub_item = option.get_order_sub_item ? option.get_order_sub_item : false;
+			option.order_sub_item_count = option.order_sub_item_count ? option.order_sub_item_count : 1;
+		}
+		if(data_type==DataType.ORDER_ITEM){
+			option.category_title = option.category_title ? option.category_title : "";
+			option.value_count = option.value_count ? option.value_count : 9;
+			option.get_order_sub_item = option.get_order_sub_item ? option.get_order_sub_item : false;
+			option.order_sub_item_count = option.order_sub_item_count ? option.order_sub_item_count : 1;
+		}
+		Log.w('rrrr',option);
+
 		return option;
 	}
 	static get_option_title = (title,option) =>{
@@ -662,6 +682,45 @@ class Field_Logic {
 			}
 		}
 		return [title,option];
+	}
+	static get_test_cost(){
+		return String(Number.get_id(999)) + "." + String(Number.get_id(99));
+	}
+	static get_option_admin(req){
+		let option = {};
+		option.value_count = req.query.value_count ? req.query.value_count : 9;
+		option.section_count = req.query.section_count ? req.query.section_count : 9;
+		option.question_count = req.query.question_count ? req.query.question_count : 9;
+
+		option.get_blog_post = req.query.get_blog_post ? req.query.get_blog_post : false;
+		option.get_category_blog_post = req.query.get_category_blog_post ? req.query.get_category_blog_post : false;
+		option.category_blog_post_count = req.query.category_blog_post_count ? req.query.category_blog_post_count : 9;
+		option.blog_post_count = req.query.blog_post_count ? req.query.blog_post_count : 9;
+
+		option.get_product = req.query.get_product ? req.query.get_product : false;
+		option.get_category_product = req.query.get_category_product ? req.query.get_category_product : false;
+		option.category_product_count = req.query.category_product_count ? req.query.category_product_count : 9;
+		option.product_count = req.query.product_count ? req.query.product_count : 9;
+
+		option.get_service = req.query.get_service ? req.query.get_service : false;
+		option.get_category_service = req.query.get_category_service ? req.query.get_category_service : false;
+		option.category_service_count = req.query.category_service_count ? req.query.category_service_count : 9;
+		option.service_count = req.query.service_count ? req.query.service_count : 9;
+
+		option.get_event = req.query.get_event ? req.query.get_event : false;
+		option.get_category_event = req.query.get_category_event ? req.query.get_category_event : false;
+		option.category_event_count = req.query.category_event_count ? req.query.category_event_count : 9;
+		option.event_count = req.query.event_count ? req.query.event_count : 9;
+
+		option.user_count = req.query.user_count ? req.query.user_count : 9;
+		option.get_admin = req.query.get_admin ? req.query.get_admin : false;
+		option.get_business = req.query.get_business ? req.query.get_business : false;
+		option.get_faq = req.query.get_faq ? req.query.get_faq : false;
+		option.get_template = req.query.get_template ? req.query.get_template : false;
+		option.get_page = req.query.get_page ? req.query.get_page : false;
+		option.get_team = req.query.get_team ? req.query.get_team : false;
+
+		return option;
 	}
 
 }

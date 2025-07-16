@@ -205,12 +205,16 @@ describe("connect", () => {
                 /* --SERVICE--END */
 
 
-                /* --ORDER--START */
-                console.log('ORDER-START');
-                let order = Order_Logic.get_test("OR"+Number.get_id(),DataType.PRODUCT);
-                Log.w('order',order);
-                console.log('ORDER-END');
-                /* --ORDER--END */
+                console.log('PRODUCT-START');
+                console.log('PRODUCT-ORDER-START');
+                //
+                let order_id = "OR"+Number.get_id();
+                let user = User_Logic.get_test({generate_id:true});
+                let product_order = Product_Logic.get_test_order(order_id,user.id,{get_order_item:true,order_item_count:1,get_order_sub_item:true,order_sub_item_count:2 });
+                Log.w('product_order',product_order);
+                Log.w('product_order_item_list',product_order.order_item_list.length);
+                Log.w('product_order_item_list_len',product_order.order_item_list[0].order_sub_item_list.length);
+                //Log.w('product_order',product_order.order_item_list[0].order_sub_item_list.length);
 
                 //let product = Product_Logic.get_test("Product 1",{get_value:true,get_item:true})
                 //let product = Product_Logic.get_test("Product 1")
@@ -228,8 +232,9 @@ describe("connect", () => {
                 //Log.w("product",product);
                 //Log.w("Product_section_1",product.section_1);
                 //Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);
-                /* --PRODUCT--END */
-
+                //
+                console.log('PRODUCT-ORDER-END');
+                console.log('PRODUCT-END');
 
 
                /* --ITEM-TEST--START */
