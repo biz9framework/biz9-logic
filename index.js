@@ -199,6 +199,12 @@ class Page_Logic {
 	}
 }
 class Order_Logic {
+	static get_cart_id = () => {
+		return FieldType.CART_ID + Number.get_id():
+	}
+	static get_order_id = () => {
+		return FieldType.ORDER_ID + Number.get_id():
+	}
 	static get_test_cart_item = (cart_id,user_id,parent_data_type,parent_id,option) =>{
 		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{});
 		let cart_item = DataItem.get_new(DataType.CART_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Item "+Number.get_id(),option));
@@ -788,6 +794,9 @@ class FieldType {
 	static KEY_GUEST="key_guest";
 	static KEY_ORDER="key_order";
 	static KEY_USER="key_user";
+
+	static ORDER_ID="OR-";
+	static CART_ID="CA-";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
@@ -1223,7 +1232,11 @@ class Order_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static cart_get = (biz9_config,user_id,data_type,id,params) => {
-		let action_url="order/cart-update/"+user_id+"/"+data_type+"/"+id;
+		let action_url="order/cart-get/"+user_id+"/"+data_type+"/"+id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static cart_search = (biz9_config,order_id,params) => {
+		let action_url="order/cart-search/"+order_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
