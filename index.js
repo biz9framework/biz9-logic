@@ -200,10 +200,10 @@ class Page_Logic {
 }
 class Order_Logic {
 	static get_cart_id = () => {
-		return FieldType.CART_ID + Number.get_id():
+		return FieldType.CART_ID + Number.get_id();
 	}
 	static get_order_id = () => {
-		return FieldType.ORDER_ID + Number.get_id():
+		return FieldType.ORDER_ID + Number.get_id();
 	}
 	static get_test_cart_item = (cart_id,user_id,parent_data_type,parent_id,option) =>{
 		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{});

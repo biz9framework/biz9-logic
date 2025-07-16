@@ -209,10 +209,11 @@ describe("connect", () => {
 
                 console.log('PRODUCT-CART-START');
                 let user = User_Logic.get_test({generate_id:true});
-                let cart_id = "CART"+Number.get_id();
-                let product_cart = Product_Logic.get_test_cart(cart_id,user.id,{get_cart_item:true,cart_item_count:1, get_cart_sub_item:true,cart_sub_item_count:1 });
+                let cart_id = Order_Logic.get_order_id();
+                Log.w('cccc',cart_id);
+                //let product_cart = Product_Logic.get_test_cart(cart_id,user.id,{get_cart_item:true,cart_item_count:1, get_cart_sub_item:true,cart_sub_item_count:1 });
                 //let product_cart = Product_Logic.get_test_cart(user.id,{get_cart_item:true,order_item_count:1,get_order_sub_item:true,order_sub_item_count:2 });
-                Log.w('product_cart',product_cart);
+                //Log.w('product_cart',product_cart);
                 //Log.w('product_cart_item_list',product_order.order_item_list.length);
                 //Log.w('product_cart_item_list_len',product_order.order_item_list[0].order_sub_item_list.length);
                 //Log.w('product_order',product_order.order_item_list[0].order_sub_item_list.length);
