@@ -1212,7 +1212,7 @@ class Order_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static cart_item_update = (biz9_config,cart_item_id,cart_id,user_id,parent_data_type,parent_id,params) => {
-		let action_url="order/cart-update/"cart_item_id+"/"+cart_id+"/"+user_id+"/"+parent_data_type+"/"+parent_id;
+		let action_url="order/cart-update/"+cart_item_id+"/"+cart_id+"/"+user_id+"/"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static cart_get = (biz9_config,cart_id,params) => {
