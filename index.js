@@ -797,6 +797,11 @@ class Social {
 	static YOUTUBE_URL="https://youtube.com/";
 	static LINKEDIN_URL="https://linkedin.com/";
 }
+class UserType {
+	static ADMIN="admin";
+	static MEMBER="member";
+	static GUEST="guest";
+}
 class PageType {
 	static get_title = (data_type) => {
 		if(!data_type){
@@ -1211,7 +1216,7 @@ class Order_Url {
 		let action_url="order/checkout-success/"+cart_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart_item_update = (biz9_config,cart_item_id,cart_id,user_id,parent_data_type,parent_id,params) => {
+	static cart_update = (biz9_config,cart_item_id,cart_id,user_id,parent_data_type,parent_id,params) => {
 		let action_url="order/cart-update/"+cart_item_id+"/"+cart_id+"/"+user_id+"/"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
@@ -1225,6 +1230,22 @@ class Order_Url {
 	};
 	static cart_search = (biz9_config,params) => {
 		let action_url="order/cart-search/";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static order_update = (biz9_config,order_item_id,order_id,user_id,parent_data_type,parent_id,params) => {
+		let action_url="order/order-update/"+order_item_id+"/"+order_id+"/"+user_id+"/"+parent_data_type+"/"+parent_id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static order_get = (biz9_config,order_id,params) => {
+		let action_url="order/order-get/"+order_id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static order_delete = (biz9_config,id,params) => {
+		let action_url="order/order-delete/"+id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static order_search = (biz9_config,params) => {
+		let action_url="order/order-search/";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -1777,7 +1798,7 @@ class User_Logic {
 	}
 	static get_user(req){
 		if(!req || !req.session.user){
-			let user=DataItem.get_new(DataType.USER,0,{is_guest:true});
+			let user=DataItem.get_new(DataType.USER,Number.get_id(9999999),{is_guest:true});
 			req.session.user=user;
 		}
 		return req.session.user;
