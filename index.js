@@ -1216,7 +1216,7 @@ class Order_Url {
 		let action_url="order/checkout-success/"+cart_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart_update = (biz9_config) => {
+	static cart_update = (biz9_config,params) => {
 		let action_url="order/cart-update/";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
