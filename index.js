@@ -1216,8 +1216,8 @@ class Order_Url {
 		let action_url="order/checkout-success/"+cart_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart_update = (biz9_config,cart_item_id,cart_id,user_id,parent_data_type,parent_id,params) => {
-		let action_url="order/cart-update/"+cart_item_id+"/"+cart_id+"/"+user_id+"/"+parent_data_type+"/"+parent_id;
+	static cart_update = (biz9_config) => {
+		let action_url="order/cart-update/";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static cart_get = (biz9_config,cart_id,params) => {
@@ -1232,8 +1232,8 @@ class Order_Url {
 		let action_url="order/cart-search/";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static order_update = (biz9_config,order_item_id,order_id,user_id,parent_data_type,parent_id,params) => {
-		let action_url="order/order-update/"+order_item_id+"/"+order_id+"/"+user_id+"/"+parent_data_type+"/"+parent_id;
+	static order_update = (biz9_config,params) => {
+		let action_url="order/order-update/";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static order_get = (biz9_config,order_id,params) => {
