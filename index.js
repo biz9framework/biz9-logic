@@ -205,16 +205,16 @@ class Order_Logic {
 	static get_order_id = () => {
 		return FieldType.ORDER_ID + Number.get_id();
 	}
-	static get_test_cart_item = (cart_id,user_id,parent_data_type,parent_id,option) =>{
-		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{});
+	static get_test_cart_item = (cart_item_id,cart_id,user_id,parent_data_type,parent_id,option) =>{
+		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{generate_id:Str.check_is_null(cart_item_id)? true : false  });
 		let cart_item = DataItem.get_new(DataType.CART_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Item "+Number.get_id(),option));
 		cart_item.cart_id = cart_id;
 		cart_item.user_id = user_id;
 		cart_item.parent_data_type = parent_data_type;
 		cart_item.parent_id = parent_id;
 		cart_item.cost = Field_Logic.get_test_cost();
-		cart_item.cart_sub_item_list = [];
 		if(option.get_cart_sub_item){
+		cart_item.cart_sub_item_list = [];
 			for(let a = 0;a<option.cart_sub_item_count;a++){
 				cart_item.cart_sub_item_list.push(Order_Logic.get_test_cart_sub_item(cart_id,user_id,cart_item.id,parent_data_type,parent_id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count}));
 			}
@@ -296,6 +296,8 @@ class Product_Logic {
 		if(option.get_blank ==false){
 			product.cost = Field_Logic.get_test_cost();
 			product.old_cost = Field_Logic.get_test_cost();
+			product.cart_count = 0;
+			product.order_count = 0;
 			product.type = "Type "+String(Number.get_id());
 			product.sub_type = "Sub Type "+String(Number.get_id());
 			product.stock = String(Number.get_id(3-1));
@@ -314,29 +316,14 @@ class Product_Logic {
 		return product;
 	};
 	static get_test_cart = (cart_id,user_id,option) =>{
-		[cart_id,option] = Field_Logic.get_option_title("CART"+Number.get_id(),option);
-		option = Field_Logic.get_option(DataType.CART,option?option:{});
-		let cart = DataItem.get_new(DataType.CART,Number.get_guid(),Field_Logic.get_test(cart_id,option));
-		cart.user_id = user_id;
-		let product_option = {generate_id:true,product_count:option.cart_item_count};
-		let product_list = Product_Logic.get_test_list(product_option);
-		cart.cart_item_list = [];
-		if(option.get_cart_item){
-			for(let a = 0;a<option.cart_item_count;a++){
-				cart.cart_item_list.push(Order_Logic.get_test_cart_item(cart_id,user_id,product_list[a].data_type,product_list[a].id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count}));
-			}
-		}
-		return cart;
-	};
-	static get_test_cart = (cart_id,user_id,option) =>{
 		[cart_id,option] = Field_Logic.get_option_title(cart_id,option);
 		option = Field_Logic.get_option(DataType.CART,option?option:{});
 		let cart = DataItem.get_new(DataType.CART,Number.get_guid(),Field_Logic.get_test(cart_id,option));
 		cart.user_id = user_id;
 		let product_option = {generate_id:true,product_count:option.cart_item_count};
 		let product_list = Product_Logic.get_test_list(product_option);
-		cart.cart_item_list = [];
 		if(option.get_cart_item){
+		cart.cart_item_list = [];
 			for(let a = 0;a<option.cart_item_count;a++){
 				cart.cart_item_list.push(Order_Logic.get_test_cart_item(cart_id,user_id,product_list[a].data_type,product_list[a].id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count}));
 			}
@@ -576,6 +563,7 @@ class Field_Logic {
 			category:option.category_title,
 			sub_note:sub_note,
 			note:note,
+			view_count:0,
 			id:0,
 			date_create:new moment().toISOString(),
 			date_save:new moment().toISOString()
@@ -785,8 +773,11 @@ class FieldType {
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
 	static STAT_VIEW_ID='1';
-	static STAT_LIKE_ID='2';
-	static STAT_POST_ID='3';
+	static STAT_LIKE_ADD_ID='2';
+	static STAT_FAVORITE_ADD_ID='3';
+	static STAT_CART_ADD_ID='4';
+	static STAT_ORDER_ADD_ID='5';
+	static STAT_REVIEW_ADD_ID='6';
 
 	static KEY_ADMIN="key_admin";
 	static KEY_APP_ID="key_app_id";
@@ -1212,32 +1203,28 @@ class FAQ_Url {
 	};
 }
 class Order_Url {
-	static single_stripe_checkout = (biz9_config,data_type,key,params) => {
-		let action_url="order/single-stripe-checkout/"+data_type+"/"+key;
+	static stripe_checkout = (biz9_config,cart_id,params) => {
+		let action_url="order/stripe-checkout/"+cart_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static user_stripe_checkout = (biz9_config,user_id,params) => {
-		let action_url="order/cart-stripe-checkout/"+user_id;
+	static checkout_success = (biz9_config,cart_id,params) => {
+		let action_url="order/checkout-success/"+cart_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static checkout_success = (biz9_config,order_id,params) => {
-		let action_url="order/cart-stripe-checkout/"+order_id;
+	static cart_item_update = (biz9_config,cart_item_id,cart_id,user_id,parent_data_type,parent_id,params) => {
+		let action_url="order/cart-update/"cart_item_id+"/"+cart_id+"/"+user_id+"/"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static user_cart = (biz9_config,user_id,params) => {
-		let action_url="order/user-cart/"+order_id;
+	static cart_get = (biz9_config,cart_id,params) => {
+		let action_url="order/cart-get/"+cart_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart_update = (biz9_config,user_id,data_type,id,params) => {
-		let action_url="order/cart-update/"+user_id+"/"+data_type+"/"+id;
+	static cart_delete = (biz9_config,id,params) => {
+		let action_url="order/cart-delete/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart_get = (biz9_config,user_id,data_type,id,params) => {
-		let action_url="order/cart-get/"+user_id+"/"+data_type+"/"+id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static cart_search = (biz9_config,order_id,params) => {
-		let action_url="order/cart-search/"+order_id;
+	static cart_search = (biz9_config,params) => {
+		let action_url="order/cart-search/";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -1790,7 +1777,7 @@ class User_Logic {
 	}
 	static get_user(req){
 		if(!req || !req.session.user){
-			let user=DataItem.get_new(DataType.USER,0,{is_guest:true,customer_id:Number.get_id(99999)});
+			let user=DataItem.get_new(DataType.USER,0,{is_guest:true});
 			req.session.user=user;
 		}
 		return req.session.user;

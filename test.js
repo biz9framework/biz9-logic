@@ -209,9 +209,14 @@ describe("connect", () => {
 
                 console.log('PRODUCT-CART-START');
                 let user = User_Logic.get_test({generate_id:true});
-                let cart_id = Order_Logic.get_order_id();
-                Log.w('cccc',cart_id);
-                //let product_cart = Product_Logic.get_test_cart(cart_id,user.id,{get_cart_item:true,cart_item_count:1, get_cart_sub_item:true,cart_sub_item_count:1 });
+                let product = Product_Logic.get_test("Product "+Number.get_id(),{get_value:false,get_item:false})
+                //cart_item_id,cart_id,user_id,parent_data_type,parent_id
+                let cart_item = Order_Logic.get_test_cart_item(0,Order_Logic.get_cart_id(),user.id,product.data_type,product.id);
+                Log.w('user',user);
+                Log.w('product',product);
+                Log.w('cart_item',cart_item);
+                //let cart_id = Order_Logic.get_order_id();
+                let product_cart = Product_Logic.get_test_cart(cart_id,user.id,{get_cart_item:true,cart_item_count:1, get_cart_sub_item:true,cart_sub_item_count:1 });
                 //let product_cart = Product_Logic.get_test_cart(user.id,{get_cart_item:true,order_item_count:1,get_order_sub_item:true,order_sub_item_count:2 });
                 //Log.w('product_cart',product_cart);
                 //Log.w('product_cart_item_list',product_order.order_item_list.length);
