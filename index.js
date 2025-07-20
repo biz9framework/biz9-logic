@@ -1391,7 +1391,7 @@ class User_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static favorite_update = (biz9_config,parent_data_type,parent_id,user_id,params) => {
-		let action_url="user/favorite/"+parent_data_type+"/"+parent_id +"/"+user_id;
+		let action_url="user/favorite/"+parent_data_type+"/"+parent_id +"/"user_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static search = (biz9_config,params) => {
@@ -1985,5 +1985,6 @@ module.exports = {
 	Team_Logic,
 	Template_Logic,
 	Url,
+	User_Url,
 	User_Logic,
 };
