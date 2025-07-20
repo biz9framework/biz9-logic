@@ -19,6 +19,8 @@ class TemplateType {
 	static BODY='body';
 	static FOOTER='footer';
 }
+
+
 class Item_Logic {
 	static get_test = (title,data_type,id,option)=>{
 		data_type = data_type ? data_type : DataType.BLANK;
@@ -93,6 +95,16 @@ class Item_Logic {
 			}
 		}
 		return Item_Logic.get_search(query.data_type,filter,sort_by,query.page_current,query.page_size);
+	}
+}
+class Stat_Logic {
+	static get_new = (parent_data_type,user_id,stat_type_id,item_list,option)=>{
+		return {
+			parent_data_type:parent_data_type,
+			user_id:user_id,
+			stat_type_id:stat_type_id,
+			item_list:item_list,
+	}
 	}
 }
 class Template_Logic {
@@ -1243,6 +1255,24 @@ class FAQ_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
+class Cart_Url {
+	static update = (biz9_config,parent_data_type,user_id,params) => {
+		let action_url="cart/update/"+parent_data_type+"/"+user_id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static get = (biz9_config,parent_data_type,cart_number,params) => {
+		let action_url="cart/get/"+parent_data_type+"/"+cart_number;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static delete = (biz9_config,id,params) => {
+		let action_url="cart/delete/"+id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static search = (biz9_config,params) => {
+		let action_url="cart/search";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
 class Order_Url {
 	static stripe_checkout = (biz9_config,cart_number,params) => {
 		let action_url="order/stripe-checkout/"+cart_number;
@@ -1285,6 +1315,7 @@ class Order_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
+
 class Product_Url {
 	static get = (biz9_config,key,params) => {
 		let action_url="product/get/"+key;
@@ -1978,6 +2009,7 @@ module.exports = {
 	Service_Url,
 	Social,
 	Sub_Item_Logic,
+	Stat_Logic,
 	Storage,
 	Schedule,
 	Stock,
