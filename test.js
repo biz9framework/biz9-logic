@@ -205,6 +205,7 @@ describe("connect", () => {
                 /* --SERVICE--END */
 
 
+                /*
                 console.log('PRODUCT-START');
 
                 console.log('PRODUCT-CART-START');
@@ -231,7 +232,8 @@ describe("connect", () => {
                 //Log.w('product_cart_item_list',product_order.order_item_list.length);
                 //Log.w('product_cart_item_list_len',product_order.order_item_list[0].order_sub_item_list.length);
                 //Log.w('product_order',product_order.order_item_list[0].order_sub_item_list.length);
-                console.log('PRODUCT-CART-END');
+                //console.log('PRODUCT-CART-END');
+                */
 
                 /*
                 console.log('PRODUCT-ORDER-START');
@@ -358,14 +360,19 @@ describe("connect", () => {
 
 
                 /* --REVIEW--START */
-                //Log.w("Review",Review.get_test());
-                //Log.w("Review List",Review_Logic.get_test_list());
+                //console.log('REVIEW-START');
+                //let parent_data_type = DataType.PRODUCT;
+                //let parent_id = Number.get_id();
+                //let user_id = Number.get_id();
+                //Log.w("Review",Review_Logic.get_new(parent_data_type,parent_id,user_id));
+                //Log.w("Review",Review_Logic.get_test({generate_id:true}));
+                //Log.w("Review List",Review_Logic.get_test_list({generate_id:true,review_count:3}));
                 /*
                 let review_list = Review.get_test_list({review_count:3,get_item:true})
                 Log.w("Review List",review_list);
                 */
+                //console.log('REVIEW-END');
                 /* --REVIEW--END */
-
 
                 /* --BUSINESS--START */
                 //Log.w("Business",Business_Logic.get_test("Business " + Number.get_id()));

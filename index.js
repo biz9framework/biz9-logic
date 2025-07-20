@@ -4,8 +4,7 @@ Author: certifiedcoderz@gmail.com (Certified CoderZ)
 License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
-const moment = require('moment');
-const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
+const moment = require('moment'); const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
 const { Log,Str,DateTime,Number,Obj } = require('/home/think2/www/doqbox/biz9-framework/biz9-utility/code');
 class Message {
 	static SUCCESS="Update Success";
@@ -19,8 +18,6 @@ class TemplateType {
 	static BODY='body';
 	static FOOTER='footer';
 }
-
-
 class Item_Logic {
 	static get_test = (title,data_type,id,option)=>{
 		data_type = data_type ? data_type : DataType.BLANK;
@@ -47,6 +44,9 @@ class Item_Logic {
 	}
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
+	}
+	static get_note = () => {
+		return "Note "+String(Number.get_id()) + " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 	}
 	static get_search_query(search){
 		let url = "";
@@ -592,8 +592,7 @@ class Field_Logic {
 	static get_test = (title,option) =>{
 		option = !Obj.check_is_empty(option) ? option : {};
 		let sub_note = "Sub Note "+String(Number.get_id());
-		let note = "Note "+String(Number.get_id()) + " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-		if(option.get_blank == true){
+			if(option.get_blank == true){
 			date_create:"";
 			date_save:"";
 			title = "";
@@ -606,7 +605,7 @@ class Field_Logic {
 			setting_visible:"1",
 			title_url:Str.get_title_url(title),
 			sub_note:sub_note,
-			note:note,
+			note:Item_Logic.get_note(),
 			view_count:0,
 			id:0,
 			date_create:new moment().toISOString(),
@@ -784,6 +783,9 @@ class Field_Logic {
 		option.category_event_count = req.query.category_event_count ? req.query.category_event_count : 9;
 		option.event_count = req.query.event_count ? req.query.event_count : 9;
 
+		option.get_product_review = req.query.get_product_review ? req.query.get_product_review : false;
+		option.product_review_count = req.query.product_review_count ? req.query.product_review_count : 19;
+
 		option.user_count = req.query.user_count ? req.query.user_count : 9;
 		option.get_admin = req.query.get_admin ? req.query.get_admin : false;
 		option.get_business = req.query.get_business ? req.query.get_business : false;
@@ -791,6 +793,7 @@ class Field_Logic {
 		option.get_template = req.query.get_template ? req.query.get_template : false;
 		option.get_page = req.query.get_page ? req.query.get_page : false;
 		option.get_team = req.query.get_team ? req.query.get_team : false;
+
 
 		return option;
 	}
@@ -1068,33 +1071,72 @@ class Faq_Logic {
 		return item_list;
 	}
 }
+class Favorite_Logic {
+	static get_new = (parent_data_type,parent_id,user_id,option) =>{
+		option = Field_Logic.get_option(DataType.FAVORITE,option?option:{});
+		let favorite = DataItem.get_new(DataType.FAVORITE,0,{
+			parent_data_type:parent_data_type,
+			parent_id:parent_id,
+			user_id:user_id,
+		});
+		return favorite;
+	}
+	static get_search_filter = (parent_data_type,parent_id,user_id) =>{
+		 return {
+            $and: [
+            { parent_data_type: { $regex:parent_data_type, $options: "i" } },
+            { parent_id: { $regex:parent_id, $options: "i" } },
+            { user_id: { $regex:user_id, $options: "i" } }
+            ] };
+	}
+}
 class Review_Logic {
-	static get_test = () =>{
-		let city_list = ["Miami","Atlanta","Chicago","Seattle","New York City"];
-		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
-		let review = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.REVIEW,Number.get_id()),
-			DataItem.get_new(DataType.REVIEW,0),
-			DataItem.get_new(DataType.REVIEW,0),
-			Field_Logic.get_test("Review "+Number.get_id(),{get_value:false}));
+	static get_new = (parent_data_type,parent_id,user_id,option) =>{
+		option = Field_Logic.get_option(DataType.REVIEW,option?option:{});
+		let review = DataItem.get_new(DataType.REVIEW,0,{
+			parent_data_type:parent_data_type,
+			parent_id:parent_id,
+			user_id:user_id,
+			comment:'',
+			email:'',
+			first_name:'',
+			last_name:'',
+			title:'',
+			hometown:'',
+			position:'',
+			rating:''
+		});
+		return review;
+	}
+	static get_test = (parent_data_type,parent_id,user_id,option) =>{
+		option = Field_Logic.get_option(DataType.REVIEW,option?option:{});
+		let review = DataItem.get_new(DataType.REVIEW,0);
+		if(option.generate_id){
+			review.id = Number.get_id();
+		}
 		review.email="ceo@biz"+String(Number.get_id())+".com";
+		review.title="Review " + Number.get_id()+ Number.get_id();
 		review.first_name="First Name "+ Number.get_id();
 		review.last_name="Last Name "+ Number.get_id();
 		review.hometown="Hometown "+ Number.get_id();
 		review.position="Position "+ Number.get_id();
-		review.rating=parseInt(Number.get_id(6)+1);
-		review.comment="My comment "+ Number.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+		review.rating=Number.get_id(6);
+		review.user_id=user_id;
+		review.parent_data_type=parent_data_type;
+		review.parent_id=parent_id;
+		review.comment="My comment "+ Item_Logic.get_note();
 		return review;
 	};
 	static get_test_list=(option)=>{
 		option = !Obj.check_is_empty(option) ? option : {review_count:19};
 		let item_list = [];
 		for(let a=0;a<option.review_count;a++){
-			item_list.push(Review_Logic.get_test());
+			item_list.push(Review_Logic.get_test(option));
 		}
 		return item_list;
 	};
 }
+
 class Admin_Logic {
 	static get_new = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
@@ -1417,16 +1459,18 @@ class Gallery_Url {
 	};
 }
 class User_Url {
-	static favorite = (biz9_config,user_id,params) => {
-		let action_url="user/favorite/"+user_id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static favorite_update = (biz9_config,parent_data_type,parent_id,user_id,params) => {
-		let action_url="user/favorite/"+parent_data_type+"/"+parent_id +"/"+user_id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
 	static search = (biz9_config,params) => {
 		let action_url="user/search";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Favorite_Url {
+	static get = (biz9_config,parent_data_type,user_id,page_current,page_size,params) => {
+		let action_url="favorite/get/"+parent_data_type+"/"+user_id+"/"+page_current+"/"+page_size;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static update = (biz9_config,parent_data_type,parent_id,user_id,params) => {
+		let action_url="favorite/update/"+parent_data_type+"/"+parent_id +"/"+user_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -1929,7 +1973,7 @@ class Sub_Item_Logic {
 				title:item_title,
 				title_url:Str.get_title_url(item_title),
 				sub_note:"Sub Note "+String(Number.get_id()),
-				note:"Note "+String(Number.get_id()),
+				note:Item_Logic.get_note()
 			}
 		);
 		if(option.get_value){
@@ -1980,6 +2024,7 @@ module.exports = {
 	Blog_Post_Logic,
 	Blog_Post_Url,
 	Cart_Logic,
+	Cart_Url,
 	Category_Logic,
 	Category_Url,
 	Content_Url,
@@ -1992,6 +2037,8 @@ module.exports = {
 	Field_Logic,
 	FieldType,
 	Faq_Logic,
+	Favorite_Logic,
+	Favorite_Url,
 	Gallery_Url,
 	Item_Logic,
 	Event_Logic,
