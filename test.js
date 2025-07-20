@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic} = require('./index');
 const {Log,Number} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -208,15 +208,24 @@ describe("connect", () => {
                 console.log('PRODUCT-START');
 
                 console.log('PRODUCT-CART-START');
+                let data_type = DataType.PRODUCT;
                 let user = User_Logic.get_test({generate_id:true});
-                let product = Product_Logic.get_test("Product "+Number.get_id(),{get_value:false,get_item:false})
-                //cart_item_id,cart_id,user_id,parent_data_type,parent_id
-                let cart_item = Order_Logic.get_test_cart_item(0,Order_Logic.get_cart_id(),user.id,product.data_type,product.id);
-                Log.w('user',user);
-                Log.w('product',product);
-                Log.w('cart_item',cart_item);
-                //let cart_id = Order_Logic.get_order_id();
-                let product_cart = Product_Logic.get_test_cart(cart_id,user.id,{get_cart_item:true,cart_item_count:1, get_cart_sub_item:true,cart_sub_item_count:1 });
+                //Log.w('user',user);
+                let cart_number = Cart_Logic.get_cart_number();
+                let product_cart = Product_Logic.get_test_cart(cart_number,user.id,{get_cart_item:true,cart_item_count:1,get_cart_sub_item:true,cart_sub_item_count:1,category_title:null});
+                Log.w('product_cart',product_cart);
+                Log.w('product_cart_parent',product_cart.cart_item_list[0]);
+                Log.w('product_cart_sub_item_list',product_cart.cart_item_list[0].cart_sub_item_list);
+                //cart.cart_number = cart_number;
+                //Log.w('cart',cart);
+                //let product = Product_Logic.get_test("Product "+Number.get_id(),{get_value:false,get_item:false})
+                //cart_item_id,cart_number,user_id,parent_data_type,parent_id
+                //let cart_item = Cart_Logic.get_test_cart_item(0,Order_Logic.get_cart_number(),user.id,product.data_type,product.id);
+                //Log.w('user',user);
+                //Log.w('product',product);
+                //Log.w('cart_item',cart_item);
+                //let cart_number = Order_Logic.get_order_id();
+                //let product_cart = Product_Logic.get_test_cart(cart_number,user.id,{get_cart_item:true,cart_item_count:1, get_cart_sub_item:true,cart_sub_item_count:1 });
                 //let product_cart = Product_Logic.get_test_cart(user.id,{get_cart_item:true,order_item_count:1,get_order_sub_item:true,order_sub_item_count:2 });
                 //Log.w('product_cart',product_cart);
                 //Log.w('product_cart_item_list',product_order.order_item_list.length);
@@ -358,15 +367,10 @@ describe("connect", () => {
                 /* --REVIEW--END */
 
 
-
-
-
                 /* --BUSINESS--START */
                 //Log.w("Business",Business_Logic.get_test("Business " + Number.get_id()));
                 //Log.w("Business",Business_Logic.get_test());
                 /* --BUSINESS--END */
-
-
 
                 console.log('CONNECT-SUCCESS');
                 //call()

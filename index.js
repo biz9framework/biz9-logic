@@ -199,38 +199,35 @@ class Page_Logic {
 	}
 }
 class Order_Logic {
-	static get_cart_id = () => {
-		return FieldType.CART_ID + Number.get_id();
-	}
 	static get_order_id = () => {
 		return FieldType.ORDER_ID + Number.get_id();
 	}
-	static get_test_cart_item = (cart_item_id,cart_id,user_id,parent_data_type,parent_id,option) =>{
-		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{generate_id:Str.check_is_null(cart_item_id)? true : false  });
-		let cart_item = DataItem.get_new(DataType.CART_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Item "+Number.get_id(),option));
-		cart_item.cart_id = cart_id;
-		cart_item.user_id = user_id;
-		cart_item.parent_data_type = parent_data_type;
-		cart_item.parent_id = parent_id;
-		cart_item.cost = Field_Logic.get_test_cost();
-		if(option.get_cart_sub_item){
-		cart_item.cart_sub_item_list = [];
-			for(let a = 0;a<option.cart_sub_item_count;a++){
-				cart_item.cart_sub_item_list.push(Order_Logic.get_test_cart_sub_item(cart_id,user_id,cart_item.id,parent_data_type,parent_id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count}));
+	static get_test_order_item = (order_item_id,order_id,user_id,parent_data_type,parent_id,option) =>{
+		option = Field_Logic.get_option(DataType.ORDER_ITEM,option?option:{generate_id:Str.check_is_null(order_item_id)? true : false  });
+		let order_item = DataItem.get_new(DataType.ORDER_ITEM,Number.get_guid(),Field_Logic.get_test("Order Item "+Number.get_id(),option));
+		order_item.order_id = order_id;
+		order_item.user_id = user_id;
+		order_item.parent_data_type = parent_data_type;
+		order_item.parent_id = parent_id;
+		order_item.cost = Field_Logic.get_test_cost();
+		if(option.get_order_sub_item){
+		order_item.order_sub_item_list = [];
+			for(let a = 0;a<option.order_sub_item_count;a++){
+				order_item.order_sub_item_list.push(Order_Logic.get_test_order_sub_item(order_id,user_id,order_item.id,parent_data_type,parent_id,{get_value:true,get_order_sub_item:option.get_order_sub_item,order_sub_item_count:option.order_sub_item_count}));
 			}
 		}
-		return cart_item;
+		return order_item;
 	};
-	static get_test_cart_sub_item = (cart_id,user_id,cart_item_id,parent_data_type,parent_id,option) =>{
-		option = Field_Logic.get_option(DataType.CART_SUB_ITEM,option?option:{});
-		let cart_sub_item = DataItem.get_new(DataType.CART_SUB_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Sub Item "+Number.get_id(),option));
-		cart_sub_item.user_id = user_id;
-		cart_sub_item.cart_id = cart_id;
-		cart_sub_item.cart_item_id = cart_item_id;
-		cart_sub_item.parent_data_type = parent_data_type;
-		cart_sub_item.parent_id = parent_id;
-		cart_sub_item.cost = Field_Logic.get_test_cost();
-		return cart_sub_item;
+	static get_test_order_sub_item = (order_id,user_id,order_item_id,parent_data_type,parent_id,option) =>{
+		option = Field_Logic.get_option(DataType.ORDER_SUB_ITEM,option?option:{});
+		let order_sub_item = DataItem.get_new(DataType.ORDER_SUB_ITEM,Number.get_guid(),Field_Logic.get_test("Order Sub Item "+Number.get_id(),option));
+		order_sub_item.user_id = user_id;
+		order_sub_item.order_id = order_id;
+		order_sub_item.order_item_id = order_item_id;
+		order_sub_item.parent_data_type = parent_data_type;
+		order_sub_item.parent_id = parent_id;
+		order_sub_item.cost = Field_Logic.get_test_cost();
+		return order_sub_item;
 	};
 	static get_test_order_item = (order_id,user_id,parent_data_type,parent_id,option) =>{
 		option = Field_Logic.get_option(DataType.ORDER_ITEM,option?option:{});
@@ -259,8 +256,69 @@ class Order_Logic {
 		order_sub_item.cost = Field_Logic.get_test_cost();
 		return order_sub_item;
 	};
-
 	static get_test_list = (option) =>{
+		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
+		let item_list = [];
+		for(let a=0;a<option.product_count+1;a++){
+			item_list.push(Product_Logic.get_test("Product "+String(parseInt(a+1)),option));
+		}
+		return item_list;
+	}
+	static get_test_list_by_category = (option) =>{
+		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
+		let product_list = [];
+		let category_list = Category_Logic.get_type_category_list(DataType.PRODUCT,option.category_count);
+		let item_count = 0;
+		for(let a=0;a<category_list.length;a++){
+			for(let b=0;b<option.product_count;b++){
+				item_count++;
+				let product = Product_Logic.get_test("Product "+String(parseInt(b+1)),option);
+				product.category = category_list[Number.get_id(category_list.length+1)].title;
+				product_list.push(product);
+			}
+		}
+		return [category_list,product_list]
+	};
+
+	//static get_product_order = (order,product_list,,parent_data_type,parent_id,option) =>{
+		//return order_item;
+	//};
+}
+class Cart_Logic {
+	static get_cart_number = () => {
+		return FieldType.CART_NUMBER + Number.get_id(99999);
+	}
+	static get_test_cart_item = (cart_item_id,cart_number,user_id,parent_data_type,parent_id,option) =>{
+		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{generate_id:Str.check_is_null(cart_item_id)? true : false  });
+		let cart_item = DataItem.get_new(DataType.CART_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Item "+Number.get_id(),option));
+		cart_item.cart_item_id = cart_item_id;
+		cart_item.cart_number = cart_number;
+		cart_item.user_id = user_id;
+		cart_item.parent_data_type = parent_data_type;
+		cart_item.parent_id = parent_id;
+		if(option.get_cart_sub_item){
+		cart_item.cart_sub_item_list = [];
+			for(let a = 0;a<option.cart_sub_item_count;a++){
+				let cart_sub_item = Cart_Logic.get_test_cart_sub_item(cart_number,user_id,cart_item.id,parent_data_type,parent_id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count});
+				cart_item.cart_sub_item_list.push(cart_sub_item);
+			}
+		}
+		return cart_item;
+	};
+	static get_test_cart_sub_item = (cart_number,user_id,cart_item_id,parent_data_type,parent_id,option) =>{
+		option = Field_Logic.get_option(DataType.CART_SUB_ITEM,option?option:{});
+		let item_blank = Item_Logic.get_test('Sub Item '+Number.get_id(),DataType.ITEM,0,{generate_id:true});
+		let cart_sub_item = DataItem.get_new(DataType.CART_SUB_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Sub Item "+Number.get_id(),option));
+		cart_sub_item.cart_number = cart_number;
+		cart_sub_item.user_id = user_id;
+		cart_sub_item.cart_item_id = cart_item_id;
+		cart_sub_item.parent_data_type = item_blank.data_type;
+		cart_sub_item.parent_id = item_blank.id;
+		cart_sub_item.cost = Field_Logic.get_test_cost();
+		cart_sub_item.parent_item = item_blank;
+		return cart_sub_item;
+	};
+static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.product_count+1;a++){
@@ -288,11 +346,7 @@ class Product_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
-		let product = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.PRODUCT,0),
-			DataItem.get_new(DataType.PRODUCT,0),
-			DataItem.get_new(DataType.PRODUCT,0),
-			Field_Logic.get_test(title,option));
+		let product = DataItem.get_new(DataType.PRODUCT,0,Field_Logic.get_test(title,option));
 		if(option.get_blank ==false){
 			product.cost = Field_Logic.get_test_cost();
 			product.old_cost = Field_Logic.get_test_cost();
@@ -315,37 +369,25 @@ class Product_Logic {
 		}
 		return product;
 	};
-	static get_test_cart = (cart_id,user_id,option) =>{
-		[cart_id,option] = Field_Logic.get_option_title(cart_id,option);
+	static get_test_cart = (cart_number,user_id,option) =>{
+		[cart_number,option] = Field_Logic.get_option_title(cart_number,option);
 		option = Field_Logic.get_option(DataType.CART,option?option:{});
-		let cart = DataItem.get_new(DataType.CART,Number.get_guid(),Field_Logic.get_test(cart_id,option));
+		let cart = DataItem.get_new(DataType.CART,Number.get_guid(),Field_Logic.get_test(cart_number,option));
 		cart.user_id = user_id;
-		let product_option = {generate_id:true,product_count:option.cart_item_count};
+		cart.cart_number = cart_number;
+	if(option.get_cart_item){
+		let product_option = {product_count:option.cart_item_count,generate_id:true};
 		let product_list = Product_Logic.get_test_list(product_option);
-		if(option.get_cart_item){
 		cart.cart_item_list = [];
-			for(let a = 0;a<option.cart_item_count;a++){
-				cart.cart_item_list.push(Order_Logic.get_test_cart_item(cart_id,user_id,product_list[a].data_type,product_list[a].id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count}));
+			for(let a = 0;a<product_list.length;a++){
+				let product_cart_item =Cart_Logic.get_test_cart_item(cart_number,cart.id,user_id,product_list[a].data_type,product_list[a].id,{get_value:false,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count,generate_id:true});
+				product_cart_item.parent_item = product_list[a];
+				cart.cart_item_list.push(product_cart_item);
 			}
 		}
 		return cart;
 	};
-	static get_test_order = (order_id,user_id,option) =>{
-		[order_id,option] = Field_Logic.get_option_title(order_id,option);
-		option = Field_Logic.get_option(DataType.ORDER,option?option:{});
-		let order = DataItem.get_new(DataType.ORDER,Number.get_guid(),Field_Logic.get_test(order_id,option));
-		order.user_id = user_id;
-		let product_option = {generate_id:true,product_count:option.order_item_count};
-		let product_list = Product_Logic.get_test_list(product_option);
-		order.order_item_list = [];
-		if(option.get_order_item){
-			for(let a = 0;a<option.order_item_count;a++){
-				order.order_item_list.push(Order_Logic.get_test_order_item(order_id,user_id,product_list[a].data_type,product_list[a].id,{get_value:true,get_order_sub_item:option.get_order_sub_item,order_sub_item_count:option.order_sub_item_count}));
-			}
-		}
-		return order;
-	};
-	static get_test_list = (option) =>{
+static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.product_count+1;a++){
@@ -373,11 +415,7 @@ class Service_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
-		let service = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.SERVICE,0),
-			DataItem.get_new(DataType.SERVICE,0),
-			DataItem.get_new(DataType.SERVICE,0),
-			Field_Logic.get_test(title,option));
+		let service = DataItem.get_new(DataType.SERVICE,0,Field_Logic.get_test(title,option));
 		service.cost = Field_Logic.get_test_cost();
 		service.old_cost = Field_Logic.get_test_cost();
 		service.type = "Type "+String(Number.get_id());
@@ -458,11 +496,7 @@ class Blog_Post_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
-		let blog_post = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.BLOG_POST,0),
-			DataItem.get_new(DataType.BLOG_POST,0),
-			DataItem.get_new(DataType.BLOG_POST,0),
-			Field_Logic.get_test(title,option));
+		let blog_post = DataItem.get_new(DataType.BLOG_POST,0,Field_Logic.get_test(title,option));
 		blog_post.author="First Name "+ Number.get_id();
 		blog_post.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
 		if(option.get_item){
@@ -547,7 +581,6 @@ class Field_Logic {
 		option = !Obj.check_is_empty(option) ? option : {};
 		let sub_note = "Sub Note "+String(Number.get_id());
 		let note = "Note "+String(Number.get_id()) + " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-		option.category_title = !Str.check_is_null(option.category_title) ? option.category_title : 'Category '+String(Number.get_id());
 		if(option.get_blank == true){
 			date_create:"";
 			date_save:"";
@@ -560,13 +593,15 @@ class Field_Logic {
 			title:title,
 			setting_visible:"1",
 			title_url:Str.get_title_url(title),
-			category:option.category_title,
 			sub_note:sub_note,
 			note:note,
 			view_count:0,
 			id:0,
 			date_create:new moment().toISOString(),
 			date_save:new moment().toISOString()
+		}
+		if(!Str.check_is_null(option.category_title)){
+			item.category =  'Category ' + Number.get_id();
 		}
 		if(option.generate_id){
 			item.id=Number.get_guid();
@@ -605,7 +640,7 @@ class Field_Logic {
 	static get_option(data_type,option){
 		data_type = data_type ? data_type : DataType.BLANK;
 		option = !Obj.check_is_empty(option) ? option : {get_value:false,get_item:false,get_photo:false,item_count:9,value_count:9};
-		option.generate_id = !Str.check_is_null(option.generate_id) ? option.generate_id : false;
+		option.generate_id = option.generate_id ? option.generate_id : false;
 		option.get_photo = option.get_photo ? true : false;
 		option.get_value = option.get_value ? true : false;
 		option.get_item = option.get_item ? true : false;
@@ -654,10 +689,11 @@ class Field_Logic {
 		if(data_type==DataType.CART){
 			option.category_title = option.category_title ? option.category_title : "";
 			option.value_count = option.value_count ? option.value_count : 9;
+			option.generate_id = option.generate_id ? option.generate_id : true;
 			option.get_cart_item = option.get_cart_item ? option.get_cart_item : false;
-			option.cart_item_count = option.cart_item_count ? option.cart_item_count : 1;
+			option.cart_item_count = option.cart_item_count ? option.cart_item_count : 5;
 			option.get_cart_sub_item = option.get_cart_sub_item ? option.get_cart_sub_item : false;
-			option.cart_sub_item_count = option.cart_sub_item_count ? option.cart_sub_item_count : 1;
+			option.cart_sub_item_count = option.cart_sub_item_count ? option.cart_sub_item_count : 3;
 		}
 		if(data_type==DataType.CART_ITEM){
 			option.category_title = option.category_title ? option.category_title : "";
@@ -669,9 +705,9 @@ class Field_Logic {
 			option.category_title = option.category_title ? option.category_title : "";
 			option.value_count = option.value_count ? option.value_count : 9;
 			option.get_order_item = option.get_order_item ? option.get_order_item : false;
-			option.order_item_count = option.order_item_count ? option.order_item_count : 1;
+			option.order_item_count = option.order_item_count ? option.order_item_count : 5;
 			option.get_order_sub_item = option.get_order_sub_item ? option.get_order_sub_item : false;
-			option.order_sub_item_count = option.order_sub_item_count ? option.order_sub_item_count : 1;
+			option.order_sub_item_count = option.order_sub_item_count ? option.order_sub_item_count : 3;
 		}
 		if(data_type==DataType.ORDER_ITEM){
 			option.category_title = option.category_title ? option.category_title : "";
@@ -772,7 +808,7 @@ class FieldType {
 	static SOURCE_TOP_DATA_TYPE='source_top_data_type';
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
-	static STAT_VIEW_ID='1';
+	static STAT_VIEW_ADD_ID='1';
 	static STAT_LIKE_ADD_ID='2';
 	static STAT_FAVORITE_ADD_ID='3';
 	static STAT_CART_ADD_ID='4';
@@ -787,8 +823,8 @@ class FieldType {
 	static KEY_ORDER="key_order";
 	static KEY_USER="key_user";
 
-	static ORDER_ID="OR-";
-	static CART_ID="CA-";
+	static ORDER_NUMBER="OR-";
+	static CART_NUMBER="CA-";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
@@ -1208,20 +1244,20 @@ class FAQ_Url {
 	};
 }
 class Order_Url {
-	static stripe_checkout = (biz9_config,cart_id,params) => {
-		let action_url="order/stripe-checkout/"+cart_id;
+	static stripe_checkout = (biz9_config,cart_number,params) => {
+		let action_url="order/stripe-checkout/"+cart_number;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static checkout_success = (biz9_config,cart_id,params) => {
-		let action_url="order/checkout-success/"+cart_id;
+	static checkout_success = (biz9_config,cart_number,params) => {
+		let action_url="order/checkout-success/"+cart_number;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static cart_update = (biz9_config,params) => {
 		let action_url="order/cart-update/";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart_get = (biz9_config,cart_id,params) => {
-		let action_url="order/cart-get/"+cart_id;
+	static cart_get = (biz9_config,cart_number,params) => {
+		let action_url="order/cart-get/"+cart_number;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static cart_delete = (biz9_config,id,params) => {
@@ -1292,6 +1328,12 @@ class Event_Url {
 	};
 	static search = (biz9_config,params) => {
 		let action_url="event/search";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Favorite_Url {
+	static user = (biz9_config,user_id,params) => {
+		let action_url="favorite/user/"+user_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -1898,6 +1940,7 @@ module.exports = {
 	Blank_Url,
 	Blog_Post_Logic,
 	Blog_Post_Url,
+	Cart_Logic,
 	Category_Logic,
 	Category_Url,
 	Content_Url,
