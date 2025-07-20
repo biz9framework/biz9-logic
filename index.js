@@ -1331,12 +1331,6 @@ class Event_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
-class Favorite_Url {
-	static user = (biz9_config,user_id,params) => {
-		let action_url="favorite/user/"+user_id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-}
 class Service_Url {
 	static get = (biz9_config,key,params) => {
 		let action_url="service/get/"+key;
@@ -1388,6 +1382,16 @@ class Gallery_Url {
 	};
 	static search = (biz9_config,params) => {
 		let action_url="gallery/search";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class User_Url {
+	static favorite = (biz9_config,user_id,params) => {
+		let action_url="user/favorite/"+user_id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static search = (biz9_config,params) => {
+		let action_url="user/search";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
