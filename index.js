@@ -1472,8 +1472,12 @@ class Gallery_Url {
 	};
 }
 class User_Url {
-	static search = (biz9_config,params) => {
-		let action_url="user/search";
+	static register = (biz9_config,params) => {
+		let action_url="user/register";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+	static login = (biz9_config,params) => {
+		let action_url="user/login";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
