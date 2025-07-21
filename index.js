@@ -1112,7 +1112,7 @@ class Favorite_Logic {
 	}
 }
 class Review_Logic {
-	static get_new = (parent_data_type,parent_id,user,review) =>{
+	static get_new = (parent_data_type,parent_id,user,title,comment,rating) =>{
 		if(!review){
 			review = {};
 		}
@@ -1126,9 +1126,9 @@ class Review_Logic {
 			last_name:user.last_name ? user.last_name : "",
 			location:user.country ? User_Logic.get_user_country_state_city(user) : "",
 
-			title:review.title ? review.title : "",
-			comment:review.comment ? review.comment : "",
-			rating:review.rating ? review.rating : ""
+			title:title ? title : "",
+			comment:comment ? comment : "",
+			rating:rating ? rating : ""
 		});
 	}
 	static get_search_filter = (parent_data_type,parent_id) =>{
