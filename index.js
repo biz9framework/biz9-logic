@@ -599,7 +599,6 @@ class Event_Logic {
 class Field_Logic {
 	static get_test = (title,option) =>{
 		option = !Obj.check_is_empty(option) ? option : {};
-		Log.w('rrrr',option);
 		let item = {};
 			if(option.get_blank == true){
 				option.category_title = "";
