@@ -268,8 +268,8 @@ describe("connect", () => {
 
 
                /* --ITEM-TEST--START */
-                //let item = Item_Logic.get_test("Item_" +Number.get_id(),DataType.BLOG_POST,0);
-                //Log.w('item',item);
+                let item = Item_Logic.get_test("Item_" +Number.get_id(),DataType.BLOG_POST,0,{get_blank:false});
+                Log.w('item',item);
                 /*
                 let item_list = Item_Logic.get_test_list(DataType.BLANK,{item_count:10,get_value:true});
                 Log.w('item_list',item_list);

@@ -599,25 +599,30 @@ class Event_Logic {
 class Field_Logic {
 	static get_test = (title,option) =>{
 		option = !Obj.check_is_empty(option) ? option : {};
-		let sub_note = "Sub Note "+String(Number.get_id());
+		Log.w('rrrr',option);
+		let item = {};
 			if(option.get_blank == true){
-			date_create:"";
-			date_save:"";
-			title = "";
-			sub_note = "";
-			note  = "";
-			option.category_title = "";
-		}
-		let item = {
+				option.category_title = "";
+				 item = {
+					title:"",
+					title_url:"",
+					sub_note:"",
+					note:"",
+					date_create:"",
+					date_save:""
+				}
+		}else{
+		 item = {
 			title:title,
 			setting_visible:"1",
 			title_url:Str.get_title_url(title),
-			sub_note:sub_note,
+			sub_note:"Sub Note "+String(Number.get_id()),
 			note:Item_Logic.get_note(),
 			view_count:0,
 			id:0,
 			date_create:new moment().toISOString(),
 			date_save:new moment().toISOString()
+		}
 		}
 		if(!Str.check_is_null(option.category_title)){
 			item.category =  'Category ' + Number.get_id();
@@ -632,7 +637,9 @@ class Field_Logic {
 			let field_list = String(option.fields).split(',');
 			for(let a = 0; a<field_list.length;a++){
 				if(option.get_blank == true){
+					if(item[field_list[a]]){
 					item[field_list[a]] = "";
+					}
 				}else{
 					if(!Str.check_is_null(field_list[a])){
 						item[Str.get_title_url(field_list[a])] = Str.get_title(field_list[a]) +"_" + Number.get_id();
