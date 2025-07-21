@@ -1113,9 +1113,6 @@ class Favorite_Logic {
 }
 class Review_Logic {
 	static get_new = (parent_data_type,parent_id,user,title,comment,rating) =>{
-		if(!review){
-			review = {};
-		}
 		return DataItem.get_new(DataType.REVIEW,0,{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
