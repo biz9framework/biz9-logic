@@ -1116,7 +1116,7 @@ class Review_Logic {
 		return DataItem.get_new(DataType.REVIEW,0,{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
-			user_id:user.id,
+			user_id:user_id,
 
 			title:title ? title : "",
 			comment:comment ? comment : "",
@@ -1962,6 +1962,7 @@ class User_Logic {
 		user.email="email"+ Number.get_id() + "@email.com";
 		user.city="City"+ Number.get_id();
 		user.state="State"+ Number.get_id();
+		user.password="1234567";
 		user.country="United States";
 		return user;
 	};
