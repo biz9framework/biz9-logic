@@ -264,12 +264,12 @@ describe("connect", () => {
                 //Log.w("Product_section_1",product.section_1);
                 //Log.w("Product_section_1_section_1_section_1",product.section_1.section_1.section_1);
                 //
-                console.log('PRODUCT-END');
+                //console.log('PRODUCT-END');
 
 
                /* --ITEM-TEST--START */
-                let item = Item_Logic.get_test("Item_" +Number.get_id(),DataType.BLOG_POST,0,{get_blank:false});
-                Log.w('item',item);
+                //let item = Item_Logic.get_test("Item_" +Number.get_id(),DataType.BLOG_POST,0,{get_blank:false});
+                //Log.w('item',item);
                 /*
                 let item_list = Item_Logic.get_test_list(DataType.BLANK,{item_count:10,get_value:true});
                 Log.w('item_list',item_list);
@@ -360,10 +360,12 @@ describe("connect", () => {
 
 
                 /* --REVIEW--START */
-                //console.log('REVIEW-START');
-                //let parent_data_type = DataType.PRODUCT;
-                //let parent_id = Number.get_id();
-                //let user_id = Number.get_id();
+                let parent_data_type = DataType.PRODUCT;
+                let parent_id = Number.get_id();
+                let user = User_Logic.get_test({generate_id:false});
+                let product_review = Review_Logic.get_test(parent_data_type,parent_id,user.id);
+                let review = Review_Logic.get_new(parent_data_type,parent_id,user,product_review);
+                Log.w('review',review);
                 //Log.w("Review",Review_Logic.get_new(parent_data_type,parent_id,user_id));
                 //Log.w("Review",Review_Logic.get_test({generate_id:true}));
                 //Log.w("Review List",Review_Logic.get_test_list({generate_id:true,review_count:3}));
@@ -371,7 +373,6 @@ describe("connect", () => {
                 let review_list = Review.get_test_list({review_count:3,get_item:true})
                 Log.w("Review List",review_list);
                 */
-                //console.log('REVIEW-END');
                 /* --REVIEW--END */
 
                 /* --BUSINESS--START */

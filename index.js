@@ -1112,21 +1112,22 @@ class Favorite_Logic {
 	}
 }
 class Review_Logic {
-	static get_new = (parent_data_type,parent_id,user_id,review) =>{
+	static get_new = (parent_data_type,parent_id,user,review) =>{
 		if(!review){
 			review = {};
 		}
 		return DataItem.get_new(DataType.REVIEW,0,{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
-			user_id:user_id,
-			comment:review.comment ? review.comment : "",
-			email:review.email ? review.email : "",
-			first_name:review.first_name ? review.first_name : "",
-			last_name:review.last_name ? review.last_name : "",
+			user_id:user.id,
+
+			email:user.email ? user.email : "",
+			first_name:user.first_name ? user.first_name : "",
+			last_name:user.last_name ? user.last_name : "",
+			location:user.country ? User_Logic.get_user_country_state_city(user) : "",
+
 			title:review.title ? review.title : "",
-			hometown:review.hometown ? review.hometown : "",
-			position:review.position ? review.position : "",
+			comment:review.comment ? review.comment : "",
 			rating:review.rating ? review.rating : ""
 		});
 	}
@@ -1143,17 +1144,14 @@ class Review_Logic {
 		if(option.generate_id){
 			review.id = Number.get_id();
 		}
-		review.email="ceo@biz"+String(Number.get_id())+".com";
-		review.title="Review " + Number.get_id()+ Number.get_id();
-		review.first_name="First Name "+ Number.get_id();
-		review.last_name="Last Name "+ Number.get_id();
-		review.hometown="Hometown "+ Number.get_id();
-		review.position="Position "+ Number.get_id();
-		review.rating=Number.get_id(6);
-		review.user_id=user_id;
-		review.parent_data_type=parent_data_type;
-		review.parent_id=parent_id;
-		review.comment="My comment "+ Item_Logic.get_note();
+		review.title = 'Title ' + Number.get_id();
+		review.parent_data_type = parent_data_type;
+		review.parent_id = parent_id;
+
+		review.rating = Number.get_id(6);
+		review.user_id = user_id;
+		review.comment = "My comment "+ Item_Logic.get_note();
+
 		return review;
 	};
 	static get_test_list=(option)=>{
@@ -1165,7 +1163,6 @@ class Review_Logic {
 		return item_list;
 	};
 }
-
 class Admin_Logic {
 	static get_new = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
@@ -1199,7 +1196,6 @@ class Admin_Logic {
 		return admin.address_1 + " "+ admin.address_2 + " " + admin.city + " " + admin.state + " " + admin.zip;
 	}
 }
-
 class Business_Logic {
 	static get_new = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
@@ -1963,10 +1959,7 @@ class User_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.USER,option?option:{});
-		let user = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.USER,0),
-			DataItem.get_new(DataType.USER,0),
-			DataItem.get_new(DataType.USER,0),
+		let user = DataItem.get_new(DataType.USER,0,
 			Field_Logic.get_test(title,option));
 		user.first_name="First Name "+ Number.get_id();
 		user.last_name="First Name "+ Number.get_id();
