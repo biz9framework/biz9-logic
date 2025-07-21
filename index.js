@@ -98,6 +98,14 @@ class Item_Logic {
 	}
 }
 class Stat_Logic {
+	/*
+	static STAT_VIEW_ADD_ID='1';
+	static STAT_LIKE_ADD_ID='2';
+	static STAT_FAVORITE_ADD_ID='3';
+	static STAT_CART_ADD_ID='4';
+	static STAT_ORDER_ADD_ID='5';
+	static STAT_REVIEW_ADD_ID='6';
+	*/
 	static get_new = (parent_data_type,user_id,stat_type_id,item_list,option)=>{
 		return {
 			parent_data_type:parent_data_type,
@@ -1081,6 +1089,13 @@ class Favorite_Logic {
 		});
 		return favorite;
 	}
+	static get_user_search_filter = (parent_data_type,user_id) =>{
+		 return {
+            $and: [
+            { parent_data_type: { $regex:parent_data_type, $options: "i" } },
+            { user_id: { $regex:user_id, $options: "i" } }
+            ] };
+	}
 	static get_search_filter = (parent_data_type,parent_id,user_id) =>{
 		 return {
             $and: [
@@ -1091,22 +1106,30 @@ class Favorite_Logic {
 	}
 }
 class Review_Logic {
-	static get_new = (parent_data_type,parent_id,user_id,option) =>{
-		option = Field_Logic.get_option(DataType.REVIEW,option?option:{});
-		let review = DataItem.get_new(DataType.REVIEW,0,{
+	static get_new = (parent_data_type,parent_id,user_id,review) =>{
+		if(!review){
+			review = {};
+		}
+		return DataItem.get_new(DataType.REVIEW,0,{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
 			user_id:user_id,
-			comment:'',
-			email:'',
-			first_name:'',
-			last_name:'',
-			title:'',
-			hometown:'',
-			position:'',
-			rating:''
+			comment:review.comment ? review.comment : "",
+			email:review.email ? review.email : "",
+			first_name:review.first_name ? review.first_name : "",
+			last_name:review.last_name ? review.last_name : "",
+			title:review.title ? review.title : "",
+			hometown:review.hometown ? review.hometown : "",
+			position:review.position ? review.position : "",
+			rating:review.rating ? review.rating : ""
 		});
-		return review;
+	}
+	static get_search_filter = (parent_data_type,parent_id) =>{
+		 return {
+            $and: [
+            { parent_data_type: { $regex:parent_data_type, $options: "i" } },
+            { parent_id: { $regex:parent_id, $options: "i" } },
+            ] };
 	}
 	static get_test = (parent_data_type,parent_id,user_id,option) =>{
 		option = Field_Logic.get_option(DataType.REVIEW,option?option:{});
@@ -1378,11 +1401,7 @@ class Product_Url {
 }
 class Review_Url {
 	static update = (biz9_config,parent_data_type,parent_id,user_id,params) => {
-		let action_url="review/"+parent_data_type+"/"+parent_id+"/"+user_id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static search = (biz9_config,parent_data_type,parent_id,params) => {
-		let action_url="review/"+parent_data_type+"/"+parent_id;
+		let action_url="review/update/"+parent_data_type+"/"+parent_id+"/"+user_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
