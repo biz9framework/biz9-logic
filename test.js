@@ -103,6 +103,7 @@ describe("connect", () => {
                 //let user_list = User_Logic.get_test_list();
                 //Log.w('user',user);
                 //Log.w('user_list',user_list);
+                Log.w('guest',User_Logic.get_guest());
                 /* --USER--END */
 
                /* --SEARCH--START */
@@ -360,12 +361,14 @@ describe("connect", () => {
 
 
                 /* --REVIEW--START */
+                /*
                 let parent_data_type = DataType.PRODUCT;
                 let parent_id = Number.get_id();
                 let user = User_Logic.get_test({generate_id:false});
                 let product_review = Review_Logic.get_test(parent_data_type,parent_id,user.id);
                 let review = Review_Logic.get_new(parent_data_type,parent_id,user,product_review);
                 Log.w('review',review);
+                */
                 //Log.w("Review",Review_Logic.get_new(parent_data_type,parent_id,user_id));
                 //Log.w("Review",Review_Logic.get_test({generate_id:true}));
                 //Log.w("Review List",Review_Logic.get_test_list({generate_id:true,review_count:3}));

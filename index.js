@@ -45,10 +45,7 @@ class Item_Logic {
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
-	static get_note = () => {
-		return "Note "+String(Number.get_id()) + " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-	}
-	static get_search_query(search){
+static get_search_query(search){
 		let url = "";
 		if(search.data_type){
 			url = url + "&data_type="+search.data_type;
@@ -217,92 +214,6 @@ class Page_Logic {
 		}
 		return item_list;
 	}
-}
-class Order_Logic {
-	static get_order_id = () => {
-		return FieldType.ORDER_ID + Number.get_id();
-	}
-	static get_test_order_item = (order_item_id,order_id,user_id,parent_data_type,parent_id,option) =>{
-		option = Field_Logic.get_option(DataType.ORDER_ITEM,option?option:{generate_id:Str.check_is_null(order_item_id)? true : false  });
-		let order_item = DataItem.get_new(DataType.ORDER_ITEM,Number.get_guid(),Field_Logic.get_test("Order Item "+Number.get_id(),option));
-		order_item.order_id = order_id;
-		order_item.user_id = user_id;
-		order_item.parent_data_type = parent_data_type;
-		order_item.parent_id = parent_id;
-		order_item.cost = Field_Logic.get_test_cost();
-		if(option.get_order_sub_item){
-		order_item.order_sub_item_list = [];
-			for(let a = 0;a<option.order_sub_item_count;a++){
-				order_item.order_sub_item_list.push(Order_Logic.get_test_order_sub_item(order_id,user_id,order_item.id,parent_data_type,parent_id,{get_value:true,get_order_sub_item:option.get_order_sub_item,order_sub_item_count:option.order_sub_item_count}));
-			}
-		}
-		return order_item;
-	};
-	static get_test_order_sub_item = (order_id,user_id,order_item_id,parent_data_type,parent_id,option) =>{
-		option = Field_Logic.get_option(DataType.ORDER_SUB_ITEM,option?option:{});
-		let order_sub_item = DataItem.get_new(DataType.ORDER_SUB_ITEM,Number.get_guid(),Field_Logic.get_test("Order Sub Item "+Number.get_id(),option));
-		order_sub_item.user_id = user_id;
-		order_sub_item.order_id = order_id;
-		order_sub_item.order_item_id = order_item_id;
-		order_sub_item.parent_data_type = parent_data_type;
-		order_sub_item.parent_id = parent_id;
-		order_sub_item.cost = Field_Logic.get_test_cost();
-		return order_sub_item;
-	};
-	static get_test_order_item = (order_id,user_id,parent_data_type,parent_id,option) =>{
-		option = Field_Logic.get_option(DataType.ORDER_ITEM,option?option:{});
-		let order_item = DataItem.get_new(DataType.ORDER_ITEM,Number.get_guid(),Field_Logic.get_test("Order Item "+Number.get_id(),option));
-		order_item.order_id = order_id;
-		order_item.user_id = user_id;
-		order_item.parent_data_type = parent_data_type;
-		order_item.parent_id = parent_id;
-		order_item.cost = Field_Logic.get_test_cost();
-		order_item.order_sub_item_list = [];
-		if(option.get_order_sub_item){
-			for(let a = 0;a<option.order_sub_item_count;a++){
-				order_item.order_sub_item_list.push(Order_Logic.get_test_order_sub_item(order_id,user_id,order_item.id,parent_data_type,parent_id,{get_value:true,get_order_sub_item:option.get_order_sub_item,order_sub_item_count:option.order_sub_item_count}));
-			}
-		}
-		return order_item;
-	};
-	static get_test_order_sub_item = (order_id,user_id,order_item_id,parent_data_type,parent_id,option) =>{
-		option = Field_Logic.get_option(DataType.ORDER_SUB_ITEM,option?option:{});
-		let order_sub_item = DataItem.get_new(DataType.ORDER_SUB_ITEM,Number.get_guid(),Field_Logic.get_test("Order Sub Item "+Number.get_id(),option));
-		order_sub_item.user_id = user_id;
-		order_sub_item.order_id = order_id;
-		order_sub_item.order_item_id = order_item_id;
-		order_sub_item.parent_data_type = parent_data_type;
-		order_sub_item.parent_id = parent_id;
-		order_sub_item.cost = Field_Logic.get_test_cost();
-		return order_sub_item;
-	};
-	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
-		let item_list = [];
-		for(let a=0;a<option.product_count+1;a++){
-			item_list.push(Product_Logic.get_test("Product "+String(parseInt(a+1)),option));
-		}
-		return item_list;
-	}
-	static get_test_list_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
-		let product_list = [];
-		let category_list = Category_Logic.get_type_category_list(DataType.PRODUCT,option.category_count);
-		let item_count = 0;
-		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<option.product_count;b++){
-				item_count++;
-				let product = Product_Logic.get_test("Product "+String(parseInt(b+1)),option);
-				product.category = category_list[Number.get_id(category_list.length+1)].title;
-				product_list.push(product);
-			}
-		}
-		return [category_list,product_list]
-	};
-
-	//static get_product_order = (order,product_list,,parent_data_type,parent_id,option) =>{
-		//return order_item;
-	//};
 }
 class Cart_Logic {
 	static get_cart_number = () => {
@@ -517,8 +428,14 @@ class Blog_Post_Logic {
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
 		let blog_post = DataItem.get_new(DataType.BLOG_POST,0,Field_Logic.get_test(title,option));
-		blog_post.author="First Name "+ Number.get_id();
-		blog_post.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
+
+		if(!option.get_blank){
+			blog_post.author="First Name "+ Number.get_id();
+			blog_post.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
+		}else{
+			blog_post.author="";
+			blog_post.tag = "";
+		}
 		if(option.get_item){
 			blog_post.items = Sub_Item_Logic.get_test_list(blog_post,blog_post,option);
 		}
@@ -552,11 +469,8 @@ class Event_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
-		let event = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.EVENT,0),
-			DataItem.get_new(DataType.EVENT,0),
-			DataItem.get_new(DataType.EVENT,0),
-			Field_Logic.get_test(title,option));
+		let event = DataItem.get_new(DataType.EVENT,0,Field_Logic.get_test(title,option));
+		if(!option.get_blank){
 		event.cost = Field_Logic.get_test_cost();
 		event.old_cost = Field_Logic.get_test_cost();
 		event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
@@ -567,6 +481,18 @@ class Event_Logic {
 		event.stock = String(Number.get_id(3-1));
 		event.category ="Category " + String(Number.get_id());
 		event.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
+		}else{
+			event.cost = "";
+			event.old_cost = "";
+			event.date = "";
+			event.time = "";
+			event.website = "";
+			event.location = "";
+			event.meeting_link = "";
+			event.stock = "";
+			event.category ="";
+			event.tag = "";
+		}
 		if(option.get_item){
 			event.items = Sub_Item_Logic.get_test_list(event,event,option);
 		}
@@ -597,6 +523,12 @@ class Event_Logic {
 	};
 }
 class Field_Logic {
+	static get_test_cost(){
+		return String(Number.get_id(999)) + "." + String(Number.get_id(99));
+	}
+	static get_test_note = () => {
+		return "Note "+String(Number.get_id()) + " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+	}
 	static get_test = (title,option) =>{
 		option = !Obj.check_is_empty(option) ? option : {};
 		let item = {};
@@ -616,7 +548,7 @@ class Field_Logic {
 			setting_visible:"1",
 			title_url:Str.get_title_url(title),
 			sub_note:"Sub Note "+String(Number.get_id()),
-			note:Item_Logic.get_note(),
+			note:Field_Logic.get_test_note(),
 			view_count:0,
 			id:0,
 			date_create:new moment().toISOString(),
@@ -714,7 +646,6 @@ class Field_Logic {
 		if(data_type==DataType.CART){
 			option.category_title = option.category_title ? option.category_title : "";
 			option.value_count = option.value_count ? option.value_count : 9;
-			option.generate_id = option.generate_id ? option.generate_id : true;
 			option.get_cart_item = option.get_cart_item ? option.get_cart_item : false;
 			option.cart_item_count = option.cart_item_count ? option.cart_item_count : 5;
 			option.get_cart_sub_item = option.get_cart_sub_item ? option.get_cart_sub_item : false;
@@ -767,9 +698,6 @@ class Field_Logic {
 			}
 		}
 		return [title,option];
-	}
-	static get_test_cost(){
-		return String(Number.get_id(999)) + "." + String(Number.get_id(99));
 	}
 	static get_option_admin(req){
 		let option = {};
@@ -1053,16 +981,19 @@ class Faq_Logic {
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.FAQ,option?option:{});
 		option.get_value = false;
-		let faq = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.FAQ,0),
-			DataItem.get_new(DataType.FAQ,0),
-			DataItem.get_new(DataType.FAQ,0),
-			Field_Logic.get_test(title,option));
+		let faq = DataItem.get_new(DataType.FAQ,0,Field_Logic.get_test(title,option));
 		for(let a=0;a<option.question_count+1;a++){
+			if(!option.get_blank){
 			let question_title = "FAQ Question " + String(parseInt(a+1));
 			let answer = "My answer "+ Number.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 			faq[Str.get_title_url(question_title).toLowerCase()] = answer;
 			faq['field_'+parseInt(a+1)] =question_title;
+			}else{
+			let question_title = "";
+			let answer = "";
+			faq[Str.get_title_url(question_title).toLowerCase()] = answer;
+			faq['field_'+parseInt(a+1)] =question_title;
+			}
 		}
 		return faq;
 	};
@@ -1133,17 +1064,21 @@ class Review_Logic {
 	static get_test = (parent_data_type,parent_id,user_id,option) =>{
 		option = Field_Logic.get_option(DataType.REVIEW,option?option:{});
 		let review = DataItem.get_new(DataType.REVIEW,0);
-		if(option.generate_id){
-			review.id = Number.get_id();
-		}
+		if(!option.get_blank){
 		review.title = 'Title ' + Number.get_id();
 		review.parent_data_type = parent_data_type;
 		review.parent_id = parent_id;
-
 		review.rating = Number.get_id(6);
 		review.user_id = user_id;
-		review.comment = "My comment "+ Item_Logic.get_note();
-
+		review.comment = "My comment "+ Field_Logic.get_test_note();
+		}else{
+			review.title = '';
+			review.parent_data_type = parent_data_type;
+			review.parent_id = parent_id;
+			review.rating = 0;
+			review.user_id = user_id;
+			review.comment = "";
+		}
 		return review;
 	};
 	static get_test_list=(option)=>{
@@ -1170,13 +1105,14 @@ class Admin_Logic {
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.ADMIN,option?option:{});
 		let item = DataItem.get_new(DataType.ADMIN,0);
-		let admin = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.ADMIN,Number.get_id()),
-			DataItem.get_new(DataType.ADMIN,0),
-			DataItem.get_new(DataType.ADMIN,0),
-			Field_Logic.get_test(title,option));
-		admin.email="ceo@admin"+Number.get_id()+".com";
-		admin.password="1234567";
+		let admin = DataItem.get_new(DataType.ADMIN,0,Field_Logic.get_test(title,option));
+		if(!option.get_blank){
+			admin.email="ceo@admin"+Number.get_id()+".com";
+			admin.password="1234567";
+		}else{
+			admin.email="";
+			admin.password="";
+		}
 		return admin;
 	};
 	static get_full_address(admin){
@@ -1216,11 +1152,8 @@ class Business_Logic {
 		let item = DataItem.get_new(DataType.BUSINESS,0);
 		let city_list = ["Miami","Atlanta","Chicago","Seattle","New York City"];
 		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
-		let business = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.BUSINESS,Number.get_id()),
-			DataItem.get_new(DataType.BUSINESS,0),
-			DataItem.get_new(DataType.BUSINESS,0),
-			Field_Logic.get_test(title,option));
+		let business = DataItem.get_new(DataType.BUSINESS,0,Field_Logic.get_test(title,option));
+		if(!option.get_blank){
 		business.email="ceo@business"+Number.get_id()+".com";
 		business.phone=Number.get_id(parseInt(777+100)) + "-" + Number.get_id(parseInt(777+100)) + "-"+Number.get_id(parseInt(7777+1000));
 		business.address_1=Number.get_id(99)+" Main St.";
@@ -1233,6 +1166,20 @@ class Business_Logic {
 		business.instagram="instagram_"+Number.get_id(9999);
 		business.facebook="facebook_"+Number.get_id(9999);
 		business.twitter="twitter_"+Number.get_id(9999);
+		}else{
+		business.email="";
+		business.phone="";
+		business.address_1="";
+		business.address_2="";
+		business.city="";
+		business.state="";
+		business.zip="";
+		business.website="";
+		business.youtube="";
+		business.instagram="";
+		business.facebook="";
+		business.twitter="";
+		}
 		return business;
 	};
 	static get_full_address(business){
@@ -1578,11 +1525,7 @@ class Category_Logic {
 	static get_test = (title,option) =>{
 		title = (title) ? title : "Category 1";
 		option = Field_Logic.get_option(DataType.CATEGORY,option?option:{});
-		let category = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.CATEGORY,0),
-			DataItem.get_new(DataType.CATEGORY,0),
-			DataItem.get_new(DataType.CATEGORY,0),
-			Field_Logic.get_test(title,option));
+		let category = DataItem.get_new(DataType.CATEGORY,0,Field_Logic.get_test(title,option));
 		if(option.get_item){
 			category.items = Sub_Item_Logic.get_test_list(category,category,option);
 		}
@@ -1938,6 +1881,9 @@ class User_Logic {
 		}
 		return country_state_city;
 	}
+	static get_guest(){
+		return DataItem.get_new(DataType.USER,Number.get_id(999),{is_guest:true,title:"Guest",country:"United States"});
+	}
 	static get_user(req){
 		if(!req || !req.session.user){
 			let user=DataItem.get_new(DataType.USER,Number.get_id(9999999),{is_guest:true});
@@ -1957,13 +1903,23 @@ class User_Logic {
 		option = Field_Logic.get_option(DataType.USER,option?option:{});
 		let user = DataItem.get_new(DataType.USER,0,
 			Field_Logic.get_test(title,option));
-		user.first_name="First Name "+ Number.get_id();
-		user.last_name="First Name "+ Number.get_id();
-		user.email="email"+ Number.get_id() + "@email.com";
-		user.city="City"+ Number.get_id();
-		user.state="State"+ Number.get_id();
-		user.password="1234567";
-		user.country="United States";
+		if(option.get_blank){
+			user.first_name="";
+			user.last_name="";
+			user.email="";
+			user.city="";
+			user.state="";
+			user.password="";
+			user.country="";
+		}else{
+			user.first_name="First Name "+ Number.get_id();
+			user.last_name="First Name "+ Number.get_id();
+			user.email="email"+ Number.get_id() + "@email.com";
+			user.city="City"+ Number.get_id();
+			user.state="State"+ Number.get_id();
+			user.password="1234567";
+			user.country="United States";
+		}
 		return user;
 	};
 	static get_test_list = (option) =>{
@@ -1988,7 +1944,7 @@ class Sub_Item_Logic {
 				title:item_title,
 				title_url:Str.get_title_url(item_title),
 				sub_note:"Sub Note "+String(Number.get_id()),
-				note:Item_Logic.get_note()
+				note:Field_Logic.get_test_note()
 			}
 		);
 		if(option.get_value){
@@ -2066,7 +2022,6 @@ module.exports = {
 	Review_Logic,
 	Review_Url,
 	Order_Url,
-	Order_Logic,
 	Service_Logic,
 	Service_Url,
 	Social,
