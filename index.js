@@ -1112,16 +1112,11 @@ class Favorite_Logic {
 	}
 }
 class Review_Logic {
-	static get_new = (parent_data_type,parent_id,user,title,comment,rating) =>{
+	static get_new = (parent_data_type,parent_id,user_id,title,comment,rating) =>{
 		return DataItem.get_new(DataType.REVIEW,0,{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
 			user_id:user.id,
-
-			email:user.email ? user.email : "",
-			first_name:user.first_name ? user.first_name : "",
-			last_name:user.last_name ? user.last_name : "",
-			location:user.country ? User_Logic.get_user_country_state_city(user) : "",
 
 			title:title ? title : "",
 			comment:comment ? comment : "",
