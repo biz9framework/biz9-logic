@@ -34,6 +34,20 @@ class Item_Logic {
 		}
 		return item;
 	}
+	static get_not_found = (data_type,id,option) =>{
+		if(!id){
+			id=0;
+		}
+		let item = Item_Logic.get_test("",data_type,id,{get_blank:true})
+		item.id = 0;
+		item.id_key = id;
+		item.title = "Item Not Found";
+		item.title_url = Str.get_title_url(item.title);
+		if(option.app_id){
+			item.app_id = option.app_id;
+		}
+		return item;
+	};
 	static get_test_list = (data_type,option) =>{
 		option = Field_Logic.get_option(data_type,option?option:{});
 		let item_list = [];
@@ -218,8 +232,14 @@ class Page_Logic {
 class Cart_Logic {
 	static get_cart_number = () => {
 		return FieldType.CART_NUMBER + Number.get_id(99999);
-	}
-	static get_test_cart_item = (cart_item_id,cart_number,user_id,parent_data_type,parent_id,option) =>{
+	};
+	static get_cart = (user_id) => {
+         return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Cart_Logic.get_cart_number(),quanity:1,grand_total:0,cart_item_list:[]});
+    };
+    static get_cart_item = (parent_data_type,parent_id,cart_number,user_id,quanity) =>{
+         return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,user_id:user_id,quanity:quanity,sub_total:0,cart_sub_item_list:[]});
+    };
+	static get_test_item = (cart_item_id,cart_number,user_id,parent_data_type,parent_id,option) =>{
 		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{generate_id:Str.check_is_null(cart_item_id)? true : false  });
 		let cart_item = DataItem.get_new(DataType.CART_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Item "+Number.get_id(),option));
 		cart_item.cart_item_id = cart_item_id;
@@ -230,13 +250,13 @@ class Cart_Logic {
 		if(option.get_cart_sub_item){
 		cart_item.cart_sub_item_list = [];
 			for(let a = 0;a<option.cart_sub_item_count;a++){
-				let cart_sub_item = Cart_Logic.get_test_cart_sub_item(cart_number,user_id,cart_item.id,parent_data_type,parent_id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count});
+				let cart_sub_item = Cart_Logic.get_test_sub_item(cart_number,user_id,cart_item.id,parent_data_type,parent_id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count});
 				cart_item.cart_sub_item_list.push(cart_sub_item);
 			}
 		}
 		return cart_item;
 	};
-	static get_test_cart_sub_item = (cart_number,user_id,cart_item_id,parent_data_type,parent_id,option) =>{
+	static get_test_sub_item = (cart_number,user_id,cart_item_id,parent_data_type,parent_id,option) =>{
 		option = Field_Logic.get_option(DataType.CART_SUB_ITEM,option?option:{});
 		let item_blank = Item_Logic.get_test('Sub Item '+Number.get_id(),DataType.ITEM,0,{generate_id:true});
 		let cart_sub_item = DataItem.get_new(DataType.CART_SUB_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Sub Item "+Number.get_id(),option));
@@ -311,7 +331,7 @@ class Product_Logic {
 		let product_list = Product_Logic.get_test_list(product_option);
 		cart.cart_item_list = [];
 			for(let a = 0;a<product_list.length;a++){
-				let product_cart_item =Cart_Logic.get_test_cart_item(cart_number,cart.id,user_id,product_list[a].data_type,product_list[a].id,{get_value:false,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count,generate_id:true});
+				let product_cart_item =Cart_Logic.get_test_item(cart_number,cart.id,user_id,product_list[a].data_type,product_list[a].id,{get_value:false,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count,generate_id:true});
 				product_cart_item.parent_item = product_list[a];
 				cart.cart_item_list.push(product_cart_item);
 			}
@@ -775,6 +795,7 @@ class FieldType {
 	static KEY_ADMIN="key_admin";
 	static KEY_APP_ID="key_app_id";
 	static KEY_BUSINESS="key_business";
+	static KEY_TEMPLATE="key_template";
 	static KEY_CART="key_cart";
 	static KEY_GUEST="key_guest";
 	static KEY_ORDER="key_order";
@@ -1029,16 +1050,16 @@ class Favorite_Logic {
 	static get_user_search_filter = (parent_data_type,user_id) =>{
 		 return {
             $and: [
-            { parent_data_type: { $regex:parent_data_type, $options: "i" } },
-            { user_id: { $regex:user_id, $options: "i" } }
+            { parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
+            { user_id: { $regex:String(user_id), $options: "i" } }
             ] };
 	}
 	static get_search_filter = (parent_data_type,parent_id,user_id) =>{
 		 return {
             $and: [
-            { parent_data_type: { $regex:parent_data_type, $options: "i" } },
-            { parent_id: { $regex:parent_id, $options: "i" } },
-            { user_id: { $regex:user_id, $options: "i" } }
+            { parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
+            { parent_id: { $regex:String(parent_id), $options: "i" } },
+            { user_id: { $regex:String(user_id), $options: "i" } }
             ] };
 	}
 }
@@ -1057,8 +1078,8 @@ class Review_Logic {
 	static get_search_filter = (parent_data_type,parent_id) =>{
 		 return {
             $and: [
-            { parent_data_type: { $regex:parent_data_type, $options: "i" } },
-            { parent_id: { $regex:parent_id, $options: "i" } },
+            { parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
+            { parent_id: { $regex:String(parent_id), $options: "i" } },
             ] };
 	}
 	static get_test = (parent_data_type,parent_id,user_id,option) =>{
@@ -1884,20 +1905,32 @@ class User_Logic {
 	static get_guest(){
 		return DataItem.get_new(DataType.USER,Number.get_id(999),{is_guest:true,title:"Guest",country:"United States"});
 	}
-	static get_user(req){
+	static get_request_user(req){
 		if(!req || !req.session.user){
 			let user=DataItem.get_new(DataType.USER,Number.get_id(9999999),{is_guest:true});
 			req.session.user=user;
 		}
 		return req.session.user;
 	}
-	static set_user(req){
+	static set_request_user(req){
 		req.session.user=user;
 	}
-	static del_user(req){
+	static del_request_user(req){
 		req.session.user=null;
 		delete req.session.user;
 	}
+	static get_not_found = (user_id) =>{
+		if(!user_id){
+			user_id=0;
+		}
+		let user = User_Logic.get_test("",{get_blank:true})
+		user.id = 0;
+		user.id_key = user_id;
+		user.title = "User Not Found";
+		user.first_name = "User Not Found";
+		user.title_url = Str.get_title_url(user.title);
+		return user;
+	};
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.USER,option?option:{});

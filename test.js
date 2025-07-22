@@ -103,7 +103,7 @@ describe("connect", () => {
                 //let user_list = User_Logic.get_test_list();
                 //Log.w('user',user);
                 //Log.w('user_list',user_list);
-                Log.w('guest',User_Logic.get_guest());
+                //Log.w('guest',User_Logic.get_guest());
                 /* --USER--END */
 
                /* --SEARCH--START */
@@ -153,6 +153,8 @@ describe("connect", () => {
 
 
                 /* --CONTENT--START */
+                let item_list = Content_Logic.get_test_list({content_count:6,get_item:false,get_value:false,get_blank:true});
+                Log.w('content_list',item_list);
                 //let content = Content_Logic.get_test("cool 1");
                 //let content = Content_Logic.get_test("Content 1",{get_value:true,get_item:true})
                 //Log.w("content",content);
