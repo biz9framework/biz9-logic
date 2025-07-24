@@ -810,9 +810,9 @@ class FieldType {
 	static ORDER_NUMBER="OR-";
 	static CART_NUMBER="CA-";
 
-	static PAYMENT_PLAN_TYPE_1="1 Payment";
-	static PAYMENT_PLAN_TYPE_2="2 Payments";
-	static PAYMENT_PLAN_TYPE_3="3 Payments";
+	static PAYMENT_PLAN_1="1 Payment";
+	static PAYMENT_PLAN_2="2 Payments";
+	static PAYMENT_PLAN_3="3 Payments";
 	static PAYMENT_PLAN_4="4 Payments";
 
 	static CART_STATUS_OPEN="PENDING";
