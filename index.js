@@ -816,9 +816,6 @@ class FieldType {
 	static PAYMENT_PLAN_3="3 Payments";
 	static PAYMENT_PLAN_4="4 Payments";
 
-	static CART_STATUS_OPEN="Open";
-	static CART_STATUS_PAID="Complete";
-
 	static ORDER_STATUS_CART="Cart";
 	static ORDER_STATUS_OPEN="Open";
 	static ORDER_STATUS_PAYMENT="Payment Plan";
