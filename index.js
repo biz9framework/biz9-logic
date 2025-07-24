@@ -808,6 +808,11 @@ class FieldType {
 
 	static ORDER_NUMBER="OR-";
 	static CART_NUMBER="CA-";
+
+	static PAYMENT_PLAN_TYPE_1="1 Payment";
+	static PAYMENT_PLAN_TYPE_2="2 Payments";
+	static PAYMENT_PLAN_TYPE_3="3 Payments";
+	static PAYMENT_PLAN_4="4 Payments";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
