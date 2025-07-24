@@ -233,6 +233,9 @@ class Order_Logic {
 	static get_order_number = () => {
 		return FieldType.ORDER_NUMBER + Number.get_id(99999);
 	};
+	 static get_transaction_id = () => {
+        return FieldType.TRANSACTION_ID + Number.get_id(99999);
+    };
 }
 class Cart_Logic {
 	static get_cart_number = () => {
@@ -809,6 +812,7 @@ class FieldType {
 
 	static ORDER_NUMBER="OR-";
 	static CART_NUMBER="CA-";
+	static TRANSACTION_ID="TR-";
 
 	static PAYMENT_PLAN_PENDING="Pending";
 	static PAYMENT_PLAN_1="1 Payment";
@@ -816,14 +820,17 @@ class FieldType {
 	static PAYMENT_PLAN_3="3 Payments";
 	static PAYMENT_PLAN_4="4 Payments";
 
-	static ORDER_STATUS_CART="Cart";
+	static ORDER_STATUS_NEW="New";
 	static ORDER_STATUS_OPEN="Open";
 	static ORDER_STATUS_PAYMENT="Payment Plan";
 	static ORDER_STATUS_COMPLETE="Complete";
 
-
 	static ORDER_PAYMENT_PLAN="Open";
 
+	static ORDER_PAYMENT_TYPE_STRIPE="Stripe";
+	static ORDER_PAYMENT_TYPE_CASH="Cash";
+	static ORDER_PAYMENT_TYPE_OTHER="Other";
+	static ORDER_PAYMENT_TYPE_TEST="Test";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
@@ -966,6 +973,7 @@ class DataType {
 	static ORDER="order_biz";
 	static ORDER_ITEM="order_item_biz";
 	static ORDER_SUB_ITEM="order_sub_item_biz";
+	static ORDER_PAYMENT="order_payment_biz";
 
 	static PROJECT='project_biz';
 	static PRODUCT='product_biz';
