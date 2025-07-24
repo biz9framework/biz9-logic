@@ -229,6 +229,11 @@ class Page_Logic {
 		return item_list;
 	}
 }
+class Order_Logic {
+	static get_order_number = () => {
+		return FieldType.ORDER_NUMBER + Number.get_id(99999);
+	};
+}
 class Cart_Logic {
 	static get_cart_number = () => {
 		return FieldType.CART_NUMBER + Number.get_id(99999);
@@ -1287,62 +1292,29 @@ class Cart_Url {
 		let action_url="cart/update/"+parent_data_type+"/"+user_id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get = (biz9_config,parent_data_type,cart_number,params) => {
-		let action_url="cart/get/"+parent_data_type+"/"+cart_number;
+	static get = (biz9_config,cart_number,params) => {
+		let action_url="cart/get/"+cart_number;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static delete = (biz9_config,id,params) => {
 		let action_url="cart/delete/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static search = (biz9_config,params) => {
-		let action_url="cart/search";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
 }
 class Order_Url {
-	static stripe_checkout = (biz9_config,cart_number,params) => {
-		let action_url="order/stripe-checkout/"+cart_number;
+	static update = (biz9_config,params) => {
+		let action_url="order/update";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static checkout_success = (biz9_config,cart_number,params) => {
-		let action_url="order/checkout-success/"+cart_number;
+	static get = (biz9_config,order_number,params) => {
+		let action_url="order/get/"+order_number;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static cart_update = (biz9_config,params) => {
-		let action_url="order/cart-update/";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static cart_get = (biz9_config,cart_number,params) => {
-		let action_url="order/cart-get/"+cart_number;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static cart_delete = (biz9_config,id,params) => {
-		let action_url="order/cart-delete/"+id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static cart_search = (biz9_config,params) => {
-		let action_url="order/cart-search/";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static order_update = (biz9_config,params) => {
-		let action_url="order/order-update/";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static order_get = (biz9_config,order_id,params) => {
-		let action_url="order/order-get/"+order_id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static order_delete = (biz9_config,id,params) => {
-		let action_url="order/order-delete/"+id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static order_search = (biz9_config,params) => {
-		let action_url="order/order-search/";
+	static delete = (biz9_config,id,params) => {
+		let action_url="order/delete/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
-
 class Product_Url {
 	static get = (biz9_config,key,params) => {
 		let action_url="product/get/"+key;
@@ -1919,7 +1891,7 @@ class User_Logic {
 		req.session.user=null;
 		delete req.session.user;
 	}
-	static get_not_found = (user_id) =>{
+	static get_not_found = (user_id,option) =>{
 		if(!user_id){
 			user_id=0;
 		}
@@ -1929,6 +1901,9 @@ class User_Logic {
 		user.title = "User Not Found";
 		user.first_name = "User Not Found";
 		user.title_url = Str.get_title_url(user.title);
+		if(option.app_id){
+			user.app_id = option.app_id;
+		}
 		return user;
 	};
 	static get_test = (title,option) =>{
@@ -2054,6 +2029,7 @@ module.exports = {
 	Product_Logic,
 	Review_Logic,
 	Review_Url,
+	Order_Logic,
 	Order_Url,
 	Service_Logic,
 	Service_Url,
