@@ -790,6 +790,7 @@ class FieldType {
 	static SOURCE_TOP_DATA_TYPE='source_top_data_type';
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
+
 	static STAT_VIEW_ADD_ID='1';
 	static STAT_LIKE_ADD_ID='2';
 	static STAT_FAVORITE_ADD_ID='3';
@@ -813,6 +814,9 @@ class FieldType {
 	static PAYMENT_PLAN_TYPE_2="2 Payments";
 	static PAYMENT_PLAN_TYPE_3="3 Payments";
 	static PAYMENT_PLAN_4="4 Payments";
+
+	static CART_STATUS_OPEN="PENDING";
+	static CART_STATUS_PAID="PAID";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
