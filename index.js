@@ -815,8 +815,14 @@ class FieldType {
 	static PAYMENT_PLAN_3="3 Payments";
 	static PAYMENT_PLAN_4="4 Payments";
 
-	static CART_STATUS_OPEN="PENDING";
-	static CART_STATUS_PAID="PAID";
+	static CART_STATUS_OPEN="OPEN";
+	static CART_STATUS_PAID="COMPLETE";
+
+	static ORDER_STATUS_OPEN="OPEN";
+	static ORDER_STATUS_PAYMENT="PAYMENT PLAN";
+	static ORDER_STATUS_COMPLETE="COMPLETE";
+
+
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
