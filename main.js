@@ -4,7 +4,7 @@ Author: certifiedcoderz@gmail.com (Certified CoderZ)
 License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic - Main
 */
-const { DateTime,Number } = require('biz9-utility');
+const { DateTime,Num } = require('biz9-utility');
 const biz9_config_local=__dirname+"/../../"+"biz9_config";
 const get_cloud_param_obj_main = (data_type,filter,sort_by,page_current,page_size) => {
     return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};

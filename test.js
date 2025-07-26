@@ -1,7 +1,7 @@
 const path = require('path');
 const series = require('async-series');
 const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic} = require('./index');
-const {Log,Number} = require('biz9-utility');
+const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
 /* --- TEST CONFIG START --- */
@@ -49,12 +49,12 @@ describe("connect", () => {
             function(call) {
                 //console.log('STORAGE-START');
                 //console.log(Storage.get({},'apples'));
-                //Log.w('storage-start',Storage.set(Number.get_id()));
+                //Log.w('storage-start',Storage.set(Num.get_id()));
                 //console.log('STORAGE-END');
                 /* --PAGE--START */
                 //let page = Page_Logic.get_test()
-                //let page = Page_Logic.get_test("Page "+Number.get_id())
-                //let page = Page_Logic.get_test("Page "+Number.get_id(),{get_value:true,value_count:5,get_section:false,section_count:2,get_photo:true,get_blank:true})
+                //let page = Page_Logic.get_test("Page "+Num.get_id())
+                //let page = Page_Logic.get_test("Page "+Num.get_id(),{get_value:true,value_count:5,get_section:false,section_count:2,get_photo:true,get_blank:true})
                 //Log.w("page",page);
                 //Log.w("page_section_1",page.section_1);
                 //Log.w("page_section_6",page.section_6.items);
@@ -222,7 +222,7 @@ describe("connect", () => {
                 Log.w('product_cart_sub_item_list',product_cart.cart_item_list[0].cart_sub_item_list);
                 //cart.cart_number = cart_number;
                 //Log.w('cart',cart);
-                //let product = Product_Logic.get_test("Product "+Number.get_id(),{get_value:false,get_item:false})
+                //let product = Product_Logic.get_test("Product "+Num.get_id(),{get_value:false,get_item:false})
                 //cart_item_id,cart_number,user_id,parent_data_type,parent_id
                 //let cart_item = Cart_Logic.get_test_cart_item(0,Order_Logic.get_cart_number(),user.id,product.data_type,product.id);
                 //Log.w('user',user);
@@ -240,7 +240,7 @@ describe("connect", () => {
 
                 /*
                 console.log('PRODUCT-ORDER-START');
-                let order_id = "OR"+Number.get_id();
+                let order_id = "OR"+Num.get_id();
                 let user = User_Logic.get_test({generate_id:true});
                 let product_order = Product_Logic.get_test_order(order_id,user.id,{get_order_item:true,order_item_count:1,get_order_sub_item:true,order_sub_item_count:2 });
                 Log.w('product_order',product_order);
@@ -271,7 +271,7 @@ describe("connect", () => {
 
 
                /* --ITEM-TEST--START */
-                //let item = Item_Logic.get_test("Item_" +Number.get_id(),DataType.BLOG_POST,0,{get_blank:false});
+                //let item = Item_Logic.get_test("Item_" +Num.get_id(),DataType.BLOG_POST,0,{get_blank:false});
                 //Log.w('item',item);
                 /*
                 let item_list = Item_Logic.get_test_list(DataType.BLANK,{item_count:10,get_value:true});
@@ -365,7 +365,7 @@ describe("connect", () => {
                 /* --REVIEW--START */
                 /*
                 let parent_data_type = DataType.PRODUCT;
-                let parent_id = Number.get_id();
+                let parent_id = Num.get_id();
                 let user = User_Logic.get_test({generate_id:false});
                 let product_review = Review_Logic.get_test(parent_data_type,parent_id,user.id);
                 let review = Review_Logic.get_new(parent_data_type,parent_id,user,product_review);
@@ -381,7 +381,7 @@ describe("connect", () => {
                 /* --REVIEW--END */
 
                 /* --BUSINESS--START */
-                //Log.w("Business",Business_Logic.get_test("Business " + Number.get_id()));
+                //Log.w("Business",Business_Logic.get_test("Business " + Num.get_id()));
                 //Log.w("Business",Business_Logic.get_test());
                 /* --BUSINESS--END */
 
@@ -421,7 +421,7 @@ describe("connect", () => {
 
             function(call) {
                 console.log('GET_START_STORAGE-START');
-                Log.w('storage-start',Storage.set(Number.get_id()));
+                Log.w('storage-start',Storage.set(Num.get_id()));
                 console.log('GET_START_STORAGE-END');
                 //call();
             },
@@ -457,16 +457,16 @@ describe("connect", () => {
                 console.log('SET-ITEM-BIZ-BY-LIST-START');
                 let item_test_list = [];
                 let item_test = Item_Logic.get_test_item('dt_blank',0);
-                item_test.cost = String(Number.get_id())+'.55';
-                item_test.old_cost = String(Number.get_id())+'.20';
-                item_test.title ='_title_'+Number.get_id();
+                item_test.cost = String(Num.get_id())+'.55';
+                item_test.old_cost = String(Num.get_id())+'.20';
+                item_test.title ='_title_'+Num.get_id();
 
                 item_test_list.push(item_test);
 
                 let item_test_1 = Item_Logic.get_test_item('dt_blank',0);
                 item_test_1.cost = '5.55';
                 item_test_1.old_cost = '9.55';
-                item_test_1.title ='_title_'+Number.get_id();
+                item_test_1.title ='_title_'+Num.get_id();
 
                 item_test_list.push(item_test_1);
 
@@ -498,9 +498,9 @@ describe("connect", () => {
                 console.log('SET_CATEGORY_DROP_DOWN_LIST-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let category_list = [];
-                category_list.push({data_type:DataType.BLANK,id:0,title:Number.get_id()});
-                category_list.push({data_type:DataType.BLANK,id:0,title:Number.get_id()});
-                category_list.push({data_type:DataType.BLANK,id:0,title:Number.get_id()});
+                category_list.push({data_type:DataType.BLANK,id:0,title:Num.get_id()});
+                category_list.push({data_type:DataType.BLANK,id:0,title:Num.get_id()});
+                category_list.push({data_type:DataType.BLANK,id:0,title:Num.get_id()});
                 Log.w('cat',Cat.set_category_drop_down_list(category_list));
     //let cloud_url = CMS.get_new_query_item_by_item(item);
     //Log.w('connect_url',cloud_url);
@@ -515,9 +515,9 @@ describe("connect", () => {
                 console.log('GET-NEW-QUERY-ITEM-BY-ITEM-START');
                 let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 let item = DataItem.get_new(DataType.BLANK,0);
-                item.parent_id = Number.get_id();
+                item.parent_id = Num.get_id();
                 item.parent_data_type = DataType.BLANK;
-                item.top_id = Number.get_id();
+                item.top_id = Num.get_id();
                 item.top_data_type = DataType.BLANK;
                 Log.w('item',item);
 //let cloud_url = CMS.get_new_query_item_by_item(item);

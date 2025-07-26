@@ -5,7 +5,7 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const moment = require('moment'); const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
-const { Log,Str,DateTime,Number,Obj } = require('/home/think2/www/doqbox/biz9-framework/biz9-utility/code');
+const { Log,Str,DateTime,Num,Obj } = require('/home/think2/www/doqbox/biz9-framework/biz9-utility/code');
 class Message {
 	static SUCCESS="Update Success";
 	static LOGIN_GOOD="Login Success";
@@ -130,7 +130,7 @@ class Template_Logic {
 	static get_test = (title,option) =>{
 		if(!Str.check_is_null(title) && Obj.check_is_empty(option)){
 			option = title;
-			title = "Test " + Number.get_id();
+			title = "Test " + Num.get_id();
 		}
 		option = Field_Logic.get_option(DataType.TEMPLATE,option?option:{});
 		let template = DataItem.get_new_full_item(
@@ -181,11 +181,11 @@ class Team_Logic {
 			DataItem.get_new(DataType.TEAM,team.id),
 			DataItem.get_new(DataType.TEAM,team.id),
 			Field_Logic.get_test(title,option));
-		team_member.first_name = "First Name "+ Number.get_id();
-		team_member.last_name = "Last Name "+ Number.get_id();
-		team_member.position = "Position "+ Number.get_id();
-		team_member.city = "City "+ Number.get_id();
-		team_member.state = "State "+ Number.get_id();
+		team_member.first_name = "First Name "+ Num.get_id();
+		team_member.last_name = "Last Name "+ Num.get_id();
+		team_member.position = "Position "+ Num.get_id();
+		team_member.city = "City "+ Num.get_id();
+		team_member.state = "State "+ Num.get_id();
 		return team_member;
 	};
 	static get_test_member_list = (team,option) =>{
@@ -231,15 +231,15 @@ class Page_Logic {
 }
 class Order_Logic {
 	static get_order_number = () => {
-		return FieldType.ORDER_NUMBER + Number.get_id(99999);
+		return FieldType.ORDER_NUMBER + Num.get_id(99999);
 	};
 	 static get_transaction_id = () => {
-        return FieldType.TRANSACTION_ID + Number.get_id(99999);
+        return FieldType.TRANSACTION_ID + Num.get_id(99999);
     };
 }
 class Cart_Logic {
 	static get_cart_number = () => {
-		return FieldType.CART_NUMBER + Number.get_id(99999);
+		return FieldType.CART_NUMBER + Num.get_id(99999);
 	};
 	static get_cart = (user_id) => {
          return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Cart_Logic.get_cart_number(),quanity:1,grand_total:0,cart_item_list:[]});
@@ -249,7 +249,7 @@ class Cart_Logic {
     };
 	static get_test_item = (cart_item_id,cart_number,user_id,parent_data_type,parent_id,option) =>{
 		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{generate_id:Str.check_is_null(cart_item_id)? true : false  });
-		let cart_item = DataItem.get_new(DataType.CART_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Item "+Number.get_id(),option));
+		let cart_item = DataItem.get_new(DataType.CART_ITEM,Num.get_guid(),Field_Logic.get_test("Cart Item "+Num.get_id(),option));
 		cart_item.cart_item_id = cart_item_id;
 		cart_item.cart_number = cart_number;
 		cart_item.user_id = user_id;
@@ -266,8 +266,8 @@ class Cart_Logic {
 	};
 	static get_test_sub_item = (cart_number,user_id,cart_item_id,parent_data_type,parent_id,option) =>{
 		option = Field_Logic.get_option(DataType.CART_SUB_ITEM,option?option:{});
-		let item_blank = Item_Logic.get_test('Sub Item '+Number.get_id(),DataType.ITEM,0,{generate_id:true});
-		let cart_sub_item = DataItem.get_new(DataType.CART_SUB_ITEM,Number.get_guid(),Field_Logic.get_test("Cart Sub Item "+Number.get_id(),option));
+		let item_blank = Item_Logic.get_test('Sub Item '+Num.get_id(),DataType.ITEM,0,{generate_id:true});
+		let cart_sub_item = DataItem.get_new(DataType.CART_SUB_ITEM,Num.get_guid(),Field_Logic.get_test("Cart Sub Item "+Num.get_id(),option));
 		cart_sub_item.cart_number = cart_number;
 		cart_sub_item.user_id = user_id;
 		cart_sub_item.cart_item_id = cart_item_id;
@@ -294,7 +294,7 @@ static get_test_list = (option) =>{
 			for(let b=0;b<option.product_count;b++){
 				item_count++;
 				let product = Product_Logic.get_test("Product "+String(parseInt(b+1)),option);
-				product.category = category_list[Number.get_id(category_list.length+1)].title;
+				product.category = category_list[Num.get_id(category_list.length+1)].title;
 				product_list.push(product);
 			}
 		}
@@ -311,10 +311,10 @@ class Product_Logic {
 			product.old_cost = Field_Logic.get_test_cost();
 			product.cart_count = 0;
 			product.order_count = 0;
-			product.type = "Type "+String(Number.get_id());
-			product.sub_type = "Sub Type "+String(Number.get_id());
-			product.stock = String(Number.get_id(3-1));
-			product.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
+			product.type = "Type "+String(Num.get_id());
+			product.sub_type = "Sub Type "+String(Num.get_id());
+			product.stock = String(Num.get_id(3-1));
+			product.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
 		}else{
 			product.cost = "";
 			product.old_cost = "";
@@ -331,7 +331,7 @@ class Product_Logic {
 	static get_test_cart = (cart_number,user_id,option) =>{
 		[cart_number,option] = Field_Logic.get_option_title(cart_number,option);
 		option = Field_Logic.get_option(DataType.CART,option?option:{});
-		let cart = DataItem.get_new(DataType.CART,Number.get_guid(),Field_Logic.get_test(cart_number,option));
+		let cart = DataItem.get_new(DataType.CART,Num.get_guid(),Field_Logic.get_test(cart_number,option));
 		cart.user_id = user_id;
 		cart.cart_number = cart_number;
 	if(option.get_cart_item){
@@ -363,7 +363,7 @@ static get_test_list = (option) =>{
 			for(let b=0;b<option.product_count;b++){
 				item_count++;
 				let product = Product_Logic.get_test("Product "+String(parseInt(b+1)),option);
-				product.category = category_list[Number.get_id(category_list.length+1)].title;
+				product.category = category_list[Num.get_id(category_list.length+1)].title;
 				product_list.push(product);
 			}
 		}
@@ -377,10 +377,10 @@ class Service_Logic {
 		let service = DataItem.get_new(DataType.SERVICE,0,Field_Logic.get_test(title,option));
 		service.cost = Field_Logic.get_test_cost();
 		service.old_cost = Field_Logic.get_test_cost();
-		service.type = "Type "+String(Number.get_id());
-		service.sub_type = "Sub Type "+String(Number.get_id());
-		service.stock = String(Number.get_id(3-1));
-		service.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
+		service.type = "Type "+String(Num.get_id());
+		service.sub_type = "Sub Type "+String(Num.get_id());
+		service.stock = String(Num.get_id(3-1));
+		service.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
 		if(option.get_item){
 			service.items = Sub_Item_Logic.get_test_list(service,service,option);
 		}
@@ -403,7 +403,7 @@ class Service_Logic {
 			for(let b=0;b<option.service_count;b++){
 				item_count++;
 				let service = Service_Logic.get_test("Service "+String(parseInt(b+1)),option);
-				service.category = category_list[Number.get_id(category_list.length+1)].title;
+				service.category = category_list[Num.get_id(category_list.length+1)].title;
 				service_list.push(service);
 			}
 		}
@@ -444,7 +444,7 @@ class Content_Logic {
 			for(let b=0;b<option.content_count;b++){
 				item_count++;
 				let content = Content_Logic.get_test("Content "+String(parseInt(b+1)),option);
-				content.category = category_list[Number.get_id(category_list.length+1)].title;
+				content.category = category_list[Num.get_id(category_list.length+1)].title;
 				content_list.push(content);
 			}
 		}
@@ -458,8 +458,8 @@ class Blog_Post_Logic {
 		let blog_post = DataItem.get_new(DataType.BLOG_POST,0,Field_Logic.get_test(title,option));
 
 		if(!option.get_blank){
-			blog_post.author="First Name "+ Number.get_id();
-			blog_post.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
+			blog_post.author="First Name "+ Num.get_id();
+			blog_post.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
 		}else{
 			blog_post.author="";
 			blog_post.tag = "";
@@ -486,7 +486,7 @@ class Blog_Post_Logic {
 			for(let b=0;b<option.blog_post_count;b++){
 				item_count++;
 				let blog_post = Blog_Post_Logic.get_test("Blog Post "+String(parseInt(b+1)),option);
-				blog_post.category = category_list[Number.get_id(category_list.length+1)].title;
+				blog_post.category = category_list[Num.get_id(category_list.length+1)].title;
 				blog_post_list.push(blog_post);
 			}
 		}
@@ -501,14 +501,14 @@ class Event_Logic {
 		if(!option.get_blank){
 		event.cost = Field_Logic.get_test_cost();
 		event.old_cost = Field_Logic.get_test_cost();
-		event.date = String(String(Number.get_id(2030)) + "-" + String(Number.get_id(13)) + "-" + String(Number.get_id(30))).trim();
-		event.time = String(Number.get_id(24)) + ":" + String(Number.get_id(59));
-		event.website = "Website "+String(Number.get_id());
-		event.location = "Location "+String(Number.get_id());
-		event.meeting_link = "Meeting Link "+String(Number.get_id());
-		event.stock = String(Number.get_id(3-1));
-		event.category ="Category " + String(Number.get_id());
-		event.tag = "Tag "+ Number.get_id() + ", Tag "+Number.get_id() + ", Tag "+ Number.get_id();
+		event.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
+		event.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
+		event.website = "Website "+String(Num.get_id());
+		event.location = "Location "+String(Num.get_id());
+		event.meeting_link = "Meeting Link "+String(Num.get_id());
+		event.stock = String(Num.get_id(3-1));
+		event.category ="Category " + String(Num.get_id());
+		event.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
 		}else{
 			event.cost = "";
 			event.old_cost = "";
@@ -543,7 +543,7 @@ class Event_Logic {
 			for(let b=0;b<option.event_count;b++){
 				item_count++;
 				let event = Event_Logic.get_test("Event "+String(parseInt(b+1)),option);
-				event.category = category_list[Number.get_id(category_list.length+1)].title;
+				event.category = category_list[Num.get_id(category_list.length+1)].title;
 				event_list.push(event);
 			}
 		}
@@ -552,10 +552,10 @@ class Event_Logic {
 }
 class Field_Logic {
 	static get_test_cost(){
-		return String(Number.get_id(999)) + "." + String(Number.get_id(99));
+		return String(Num.get_id(999)) + "." + String(Num.get_id(99));
 	}
 	static get_test_note = () => {
-		return "Note "+String(Number.get_id()) + " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+		return "Note "+String(Num.get_id()) + " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 	}
 	static get_test = (title,option) =>{
 		option = !Obj.check_is_empty(option) ? option : {};
@@ -575,7 +575,7 @@ class Field_Logic {
 			title:title,
 			setting_visible:"1",
 			title_url:Str.get_title_url(title),
-			sub_note:"Sub Note "+String(Number.get_id()),
+			sub_note:"Sub Note "+String(Num.get_id()),
 			note:Field_Logic.get_test_note(),
 			view_count:0,
 			id:0,
@@ -584,10 +584,10 @@ class Field_Logic {
 		}
 		}
 		if(!Str.check_is_null(option.category_title)){
-			item.category =  'Category ' + Number.get_id();
+			item.category =  'Category ' + Num.get_id();
 		}
 		if(option.generate_id){
-			item.id=Number.get_guid();
+			item.id=Num.get_guid();
 		}
 		if(option.get_value){
 			item = Field_Logic.get_value_list(item,option);
@@ -601,7 +601,7 @@ class Field_Logic {
 					}
 				}else{
 					if(!Str.check_is_null(field_list[a])){
-						item[Str.get_title_url(field_list[a])] = Str.get_title(field_list[a]) +"_" + Number.get_id();
+						item[Str.get_title_url(field_list[a])] = Str.get_title(field_list[a]) +"_" + Num.get_id();
 					}
 				}
 			}
@@ -715,13 +715,13 @@ class Field_Logic {
 						option = {};
 					}else{
 						option = title;
-						title = "Test " + Number.get_id();
+						title = "Test " + Num.get_id();
 					}
 				}
 			}
 		}else{
 			if(Str.check_is_null(title) && Obj.check_is_empty(option)){
-				title = "Test " + Number.get_id();
+				title = "Test " + Num.get_id();
 				option = {};
 			}
 		}
@@ -814,7 +814,6 @@ class FieldType {
 	static CART_NUMBER="CA-";
 	static TRANSACTION_ID="TR-";
 
-	static PAYMENT_PLAN_PENDING="Pending";
 	static PAYMENT_PLAN_1="1 Payment";
 	static PAYMENT_PLAN_2="2 Payments";
 	static PAYMENT_PLAN_3="3 Payments";
@@ -825,7 +824,7 @@ class FieldType {
 	static ORDER_STATUS_PAYMENT="Payment Plan";
 	static ORDER_STATUS_COMPLETE="Complete";
 
-	static ORDER_PAYMENT_PLAN="Open";
+	static PAYMENT_PLAN="Open";
 
 	static ORDER_PAYMENT_TYPE_STRIPE="Stripe";
 	static ORDER_PAYMENT_TYPE_CASH="Cash";
@@ -1019,7 +1018,7 @@ class Blank_Logic {
 			for(let b=0;b<option.blank_count;b++){
 				item_count++;
 				let blank = Blank_Logic.get_test("Blank "+String(parseInt(b+1)),option);
-				blank.category = category_list[Number.get_id(category_list.length+1)].title;
+				blank.category = category_list[Num.get_id(category_list.length+1)].title;
 				blank_list.push(blank);
 			}
 		}
@@ -1035,7 +1034,7 @@ class Faq_Logic {
 		for(let a=0;a<option.question_count+1;a++){
 			if(!option.get_blank){
 			let question_title = "FAQ Question " + String(parseInt(a+1));
-			let answer = "My answer "+ Number.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+			let answer = "My answer "+ Num.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 			faq[Str.get_title_url(question_title).toLowerCase()] = answer;
 			faq['field_'+parseInt(a+1)] =question_title;
 			}else{
@@ -1060,7 +1059,7 @@ class Faq_Logic {
 		for(let a=0;a<19;a++){
 			let row = a + 1;
 			if(!Str.check_is_null(faq['field_'+a]))   {
-				item_list.push({ id: Number.get_id(333), question:faq['field_'+a], answer: String(faq[Str.get_title_url(faq['field_'+a]).toLowerCase()   ]) });
+				item_list.push({ id: Num.get_id(333), question:faq['field_'+a], answer: String(faq[Str.get_title_url(faq['field_'+a]).toLowerCase()   ]) });
 			}
 		}
 		return item_list;
@@ -1115,10 +1114,10 @@ class Review_Logic {
 		option = Field_Logic.get_option(DataType.REVIEW,option?option:{});
 		let review = DataItem.get_new(DataType.REVIEW,0);
 		if(!option.get_blank){
-		review.title = 'Title ' + Number.get_id();
+		review.title = 'Title ' + Num.get_id();
 		review.parent_data_type = parent_data_type;
 		review.parent_id = parent_id;
-		review.rating = Number.get_id(6);
+		review.rating = Num.get_id(6);
 		review.user_id = user_id;
 		review.comment = "My comment "+ Field_Logic.get_test_note();
 		}else{
@@ -1157,7 +1156,7 @@ class Admin_Logic {
 		let item = DataItem.get_new(DataType.ADMIN,0);
 		let admin = DataItem.get_new(DataType.ADMIN,0,Field_Logic.get_test(title,option));
 		if(!option.get_blank){
-			admin.email="ceo@admin"+Number.get_id()+".com";
+			admin.email="ceo@admin"+Num.get_id()+".com";
 			admin.password="1234567";
 		}else{
 			admin.email="";
@@ -1204,18 +1203,18 @@ class Business_Logic {
 		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
 		let business = DataItem.get_new(DataType.BUSINESS,0,Field_Logic.get_test(title,option));
 		if(!option.get_blank){
-		business.email="ceo@business"+Number.get_id()+".com";
-		business.phone=Number.get_id(parseInt(777+100)) + "-" + Number.get_id(parseInt(777+100)) + "-"+Number.get_id(parseInt(7777+1000));
-		business.address_1=Number.get_id(99)+" Main St.";
-		business.address_2="PO "+Number.get_id(99);
-		business.city=city_list[Number.get_id(city_list.length-1)];
-		business.state=state_list[Number.get_id(state_list.length-1)];
-		business.zip=Number.get_id(parseInt(77777+1000));
-		business.website="website_" + Number.get_id(9999);
-		business.youtube="youtube_"+Number.get_id(9999);
-		business.instagram="instagram_"+Number.get_id(9999);
-		business.facebook="facebook_"+Number.get_id(9999);
-		business.twitter="twitter_"+Number.get_id(9999);
+		business.email="ceo@business"+Num.get_id()+".com";
+		business.phone=Num.get_id(parseInt(777+100)) + "-" + Num.get_id(parseInt(777+100)) + "-"+Num.get_id(parseInt(7777+1000));
+		business.address_1=Num.get_id(99)+" Main St.";
+		business.address_2="PO "+Num.get_id(99);
+		business.city=city_list[Num.get_id(city_list.length-1)];
+		business.state=state_list[Num.get_id(state_list.length-1)];
+		business.zip=Num.get_id(parseInt(77777+1000));
+		business.website="website_" + Num.get_id(9999);
+		business.youtube="youtube_"+Num.get_id(9999);
+		business.instagram="instagram_"+Num.get_id(9999);
+		business.facebook="facebook_"+Num.get_id(9999);
+		business.twitter="twitter_"+Num.get_id(9999);
 		}else{
 		business.email="";
 		business.phone="";
@@ -1899,11 +1898,11 @@ class User_Logic {
 		return country_state_city;
 	}
 	static get_guest(){
-		return DataItem.get_new(DataType.USER,Number.get_id(999),{is_guest:true,title:"Guest",country:"United States"});
+		return DataItem.get_new(DataType.USER,Num.get_id(999),{is_guest:true,title:"Guest",country:"United States"});
 	}
 	static get_request_user(req){
 		if(!req || !req.session.user){
-			let user=DataItem.get_new(DataType.USER,Number.get_id(9999999),{is_guest:true});
+			let user=DataItem.get_new(DataType.USER,Num.get_id(9999999),{is_guest:true});
 			req.session.user=user;
 		}
 		return req.session.user;
@@ -1944,11 +1943,11 @@ class User_Logic {
 			user.password="";
 			user.country="";
 		}else{
-			user.first_name="First Name "+ Number.get_id();
-			user.last_name="First Name "+ Number.get_id();
-			user.email="email"+ Number.get_id() + "@email.com";
-			user.city="City"+ Number.get_id();
-			user.state="State"+ Number.get_id();
+			user.first_name="First Name "+ Num.get_id();
+			user.last_name="First Name "+ Num.get_id();
+			user.email="email"+ Num.get_id() + "@email.com";
+			user.city="City"+ Num.get_id();
+			user.state="State"+ Num.get_id();
 			user.password="1234567";
 			user.country="United States";
 		}
@@ -1975,7 +1974,7 @@ class Sub_Item_Logic {
 				parent_data_type:parent_item.data_type,
 				title:item_title,
 				title_url:Str.get_title_url(item_title),
-				sub_note:"Sub Note "+String(Number.get_id()),
+				sub_note:"Sub Note "+String(Num.get_id()),
 				note:Field_Logic.get_test_note()
 			}
 		);
