@@ -1401,6 +1401,10 @@ class Service_Url {
 	};
 }
 class Content_Url {
+	static portfolio = (biz9_config,params) => {
+		let action_url="content/portfolio";
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
 	static get = (biz9_config,key,params) => {
 		let action_url="content/get/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
