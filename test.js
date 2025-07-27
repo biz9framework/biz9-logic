@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic,Faq_Url} = require('./index');
 const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -153,8 +153,8 @@ describe("connect", () => {
 
 
                 /* --CONTENT--START */
-                let item_list = Content_Logic.get_test_list({content_count:6,get_item:false,get_value:false,get_blank:true});
-                Log.w('content_list',item_list);
+                //let item_list = Content_Logic.get_test_list({content_count:6,get_item:false,get_value:false,get_blank:true});
+                //Log.w('content_list',item_list);
                 //let content = Content_Logic.get_test("cool 1");
                 //let content = Content_Logic.get_test("Content 1",{get_value:true,get_item:true})
                 //Log.w("content",content);
@@ -345,9 +345,10 @@ describe("connect", () => {
 
 
                 /* --FAQ--START */
+                Log.w('faq',Faq_Url.get(biz9_config,'primary'));
                 //Log.w("FAQ",Faq_Logic.get_test());
-                //Log.w("FAQ List",Faq_Logic.get_test_list(Faq_Logic.get_test()));
-                //let faq = Faq_Logic.get_test();
+                //Log.w("FAQ List",Faq_Logic.get_test_list(Faq_Logic.get_test({question_count:3})));
+                //let faq = Faq_Logic.get_test('Cool Quest',{question_count:2});
                 //let faq = Faq_Logic.get_test('cool 1');
                 //let faq = Faq_Logic.get_test('cool 1',{count:33});
                 //let faq = Business_Logic.get_test('ser 1',{question_count:33});

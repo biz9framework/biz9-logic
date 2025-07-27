@@ -659,7 +659,6 @@ class Field_Logic {
 			option.member_count = option.member_count ? option.member_count : 9;
 		}
 		if(data_type==DataType.FAQ){
-			option.get_question = option.get_question ? true : false;
 			option.question_count = option.question_count ? option.question_count : 9;
 		}
 		if(data_type==DataType.CONTENT){
@@ -731,6 +730,8 @@ class Field_Logic {
 		let option = {};
 		option.value_count = req.query.value_count ? req.query.value_count : 9;
 		option.section_count = req.query.section_count ? req.query.section_count : 9;
+
+		option.get_faq = req.query.get_faq ? req.query.get_faq : false;
 		option.question_count = req.query.question_count ? req.query.question_count : 9;
 
 		option.get_blog_post = req.query.get_blog_post ? req.query.get_blog_post : false;
@@ -756,14 +757,15 @@ class Field_Logic {
 		option.get_product_review = req.query.get_product_review ? req.query.get_product_review : false;
 		option.product_review_count = req.query.product_review_count ? req.query.product_review_count : 19;
 
+		option.get_business_review = req.query.get_business_review ? req.query.get_business_review : false;
+		option.business_review_count = req.query.business_review_count ? req.query.business_review_count : 19;
+
 		option.user_count = req.query.user_count ? req.query.user_count : 9;
 		option.get_admin = req.query.get_admin ? req.query.get_admin : false;
 		option.get_business = req.query.get_business ? req.query.get_business : false;
-		option.get_faq = req.query.get_faq ? req.query.get_faq : false;
 		option.get_template = req.query.get_template ? req.query.get_template : false;
 		option.get_page = req.query.get_page ? req.query.get_page : false;
 		option.get_team = req.query.get_team ? req.query.get_team : false;
-
 
 		return option;
 	}
@@ -1031,7 +1033,7 @@ class Faq_Logic {
 		option = Field_Logic.get_option(DataType.FAQ,option?option:{});
 		option.get_value = false;
 		let faq = DataItem.get_new(DataType.FAQ,0,Field_Logic.get_test(title,option));
-		for(let a=0;a<option.question_count+1;a++){
+		for(let a=0;a<parseInt(option.question_count)+1;a++){
 			if(!option.get_blank){
 			let question_title = "FAQ Question " + String(parseInt(a+1));
 			let answer = "My answer "+ Num.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -1054,7 +1056,7 @@ class Faq_Logic {
 		}
 		return item_list;
 	}
-	static get_faq_question_list(faq){
+	static get_faq_question_list_old(faq){
 		let item_list = [];
 		for(let a=0;a<19;a++){
 			let row = a + 1;
@@ -1451,6 +1453,12 @@ class Favorite_Url {
 	};
 	static update = (biz9_config,parent_data_type,parent_id,user_id,params) => {
 		let action_url="favorite/update/"+parent_data_type+"/"+parent_id +"/"+user_id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
+class Faq_Url {
+	static get = (biz9_config,key,params) => {
+		let action_url="faq/get/"+key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
@@ -2039,6 +2047,7 @@ module.exports = {
 	Field_Logic,
 	FieldType,
 	Faq_Logic,
+	Faq_Url,
 	Favorite_Logic,
 	Favorite_Url,
 	Gallery_Url,
