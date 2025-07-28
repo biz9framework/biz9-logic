@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic,Faq_Url} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic,Faq_Url,App_Logic,FieldType} = require('./index');
 const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -47,6 +47,15 @@ describe("connect", () => {
             },
 
             function(call) {
+
+               /* --APP--START */
+                let title = "Food Truck " + Num.get_id();
+                let user_id = Num.get_id();
+                let type = FieldType.APP_TYPE_MOBILE;
+                let app = App_Logic.get_new(title,user_id,type);
+                Log.w('app',app);
+               /* --APP--ENDI */
+
                 //console.log('STORAGE-START');
                 //console.log(Storage.get({},'apples'));
                 //Log.w('storage-start',Storage.set(Num.get_id()));
@@ -345,7 +354,7 @@ describe("connect", () => {
 
 
                 /* --FAQ--START */
-                Log.w('faq',Faq_Url.get(biz9_config,'primary'));
+                //Log.w('faq',Faq_Url.get(biz9_config,'primary'));
                 //Log.w("FAQ",Faq_Logic.get_test());
                 //Log.w("FAQ List",Faq_Logic.get_test_list(Faq_Logic.get_test({question_count:3})));
                 //let faq = Faq_Logic.get_test('Cool Quest',{question_count:2});

@@ -23,11 +23,7 @@ class Item_Logic {
 		data_type = data_type ? data_type : DataType.BLANK;
 		id = id ? id : 0;
 		option = Field_Logic.get_option(data_type,option?option:{});
-		let item = DataItem.get_new_full_item(
-			DataItem.get_new(data_type,0),
-			DataItem.get_new(data_type,0),
-			DataItem.get_new(data_type,0),
-			Field_Logic.get_test(title,option));
+		let item = DataItem.get_new(data_type,0,Field_Logic.get_test(title,option));
 		if(option.get_item){
 			item.items = Sub_Item_Logic.get_test_list(item,item,option);
 			item = Sub_Item_Logic.bind_parent_child_list(item,item.items);
@@ -133,11 +129,7 @@ class Template_Logic {
 			title = "Test " + Num.get_id();
 		}
 		option = Field_Logic.get_option(DataType.TEMPLATE,option?option:{});
-		let template = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.TEMPLATE,0),
-			DataItem.get_new(DataType.TEMPLATE,0),
-			DataItem.get_new(DataType.TEMPLATE,0),
-			Field_Logic.get_test(title,option));
+		let template = DataItem.get_new(DataType.TEMPLATE,0,Field_Logic.get_test(title,option));
 		if(option.get_item){
 			let title_list = ['Header','Body','Footer','Navigation']
 			//template.items = Sub_Item_Logic.get_test_list(template,template,option);
@@ -160,11 +152,7 @@ class Team_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
-		let team = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.TEAM,0),
-			DataItem.get_new(DataType.TEAM,0),
-			DataItem.get_new(DataType.TEAM,0),
-			Field_Logic.get_test(title,option));
+		let team = DataItem.get_new(DataType.TEAM,0,Field_Logic.get_test(title,option));
 		team.members = [];
 		if(option.get_member){
 			for(let a=0;a<option.member_count+1;a++){
@@ -176,11 +164,7 @@ class Team_Logic {
 	static get_test_member = (team,title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
-		let team_member = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.ITEM,0),
-			DataItem.get_new(DataType.TEAM,team.id),
-			DataItem.get_new(DataType.TEAM,team.id),
-			Field_Logic.get_test(title,option));
+		let team_member = DataItem.get_new(DataType.TEAM,team.id,Field_Logic.get_test(title,option));
 		team_member.first_name = "First Name "+ Num.get_id();
 		team_member.last_name = "Last Name "+ Num.get_id();
 		team_member.position = "Position "+ Num.get_id();
@@ -209,11 +193,7 @@ class Page_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.PAGE,option?option:{});
-		let page = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.PAGE,0),
-			DataItem.get_new(DataType.PAGE,0),
-			DataItem.get_new(DataType.PAGE,0),
-			Field_Logic.get_test(title,option));
+		let page = DataItem.get_new(DataType.PAGE,0,Field_Logic.get_test(title,option));
 		if(option.get_section){
 			page.items = Sub_Item_Logic.get_test_section_list(page,page,option);
 			page = Sub_Item_Logic.bind_parent_child_list(page,page.items);
@@ -414,11 +394,7 @@ class Content_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.CONTENT,option?option:{});
-		let content = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.CONTENT,0),
-			DataItem.get_new(DataType.CONTENT,0),
-			DataItem.get_new(DataType.CONTENT,0),
-			Field_Logic.get_test(title,option));
+		let content = DataItem.get_new(DataType.CONTENT,0,Field_Logic.get_test(title,option));
 		if(option.get_item){
 			content.items = Sub_Item_Logic.get_test_section_list(content,content,option);
 			if(option.get_item_bind){
@@ -456,7 +432,6 @@ class Blog_Post_Logic {
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
 		let blog_post = DataItem.get_new(DataType.BLOG_POST,0,Field_Logic.get_test(title,option));
-
 		if(!option.get_blank){
 			blog_post.author="First Name "+ Num.get_id();
 			blog_post.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
@@ -577,7 +552,6 @@ class Field_Logic {
 			title_url:Str.get_title_url(title),
 			sub_note:"Sub Note "+String(Num.get_id()),
 			note:Field_Logic.get_test_note(),
-			view_count:0,
 			id:0,
 			date_create:new moment().toISOString(),
 			date_save:new moment().toISOString()
@@ -832,6 +806,10 @@ class FieldType {
 	static ORDER_PAYMENT_TYPE_CASH="Cash";
 	static ORDER_PAYMENT_TYPE_OTHER="Other";
 	static ORDER_PAYMENT_TYPE_TEST="Test";
+
+	static APP_TYPE_MOBILE="Mobile";
+	static APP_TYPE_WEBSITE="Website";
+	static APP_TYPE_LANDING="Landing";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
@@ -987,16 +965,14 @@ class DataType {
 	static TEAM='team_biz';
 	static USER='user_biz';
 	static VIDEO='video_biz';
+
+	static APP='app_biz';
 }
 class Blank_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.BLANK,option?option:{});
-		let blank = DataItem.get_new_full_item(
-			DataItem.get_new(DataType.BLANK,0),
-			DataItem.get_new(DataType.BLANK,0),
-			DataItem.get_new(DataType.BLANK,0),
-			Field_Logic.get_test(title,option));
+		let blank = DataItem.get_new(DataType.BLANK,0,Field_Logic.get_test(title,option));
 		if(option.get_item){
 			blank.items = Sub_Item_Logic.get_test_list(blank,blank,option);
 			blank = Sub_Item_Logic.bind_parent_child_list(blank,blank.items);
@@ -1441,6 +1417,10 @@ class Gallery_Url {
 	};
 }
 class User_Url {
+	static info = (biz9_config,user_id,params) => {
+		let action_url="user/info/"+user_id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
 	static register = (biz9_config,params) => {
 		let action_url="user/register";
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
@@ -1571,11 +1551,7 @@ class Category_Logic {
 		option = Field_Logic.get_option(DataType.CATEGORY,option);
 		let category_list = [];
 		for(let a=0;a<option.category_count;a++){
-			let category = DataItem.get_new_full_item(
-				DataItem.get_new(DataType.CATEGORY,0),
-				DataItem.get_new(DataType.CATEGORY,0),
-				DataItem.get_new(DataType.CATEGORY,0),
-				Field_Logic.get_test("Category " +String(parseInt(a+1)),option));
+			let category = DataItem.get_new(DataType.CATEGORY,0,Field_Logic.get_test("Category " +String(parseInt(a+1)),option));
 			category.type = type;
 			category_list.push(category);
 		}
@@ -2030,7 +2006,18 @@ class Sub_Item_Logic {
 		return item;
 	}
 }
+class App_Logic {
+	static get_new = (title,user_id,type,option) =>{
+		option = Field_Logic.get_option(DataType.APP,option?option:{});
+		let app = DataItem.get_new(DataType.APP,0);
+		app.title = title;
+		app.user_id = user_id;
+		app.type = type;
+		return app;
+	}
+}
 module.exports = {
+	App_Logic,
 	Admin_Logic,
 	Business_Logic,
 	Blank_Logic,
