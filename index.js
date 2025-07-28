@@ -785,6 +785,7 @@ class FieldType {
 	static KEY_GUEST="key_guest";
 	static KEY_ORDER="key_order";
 	static KEY_USER="key_user";
+	static KEY_DASHBOARD_APP="key_dashboard_app";
 
 	static ORDER_NUMBER="OR-";
 	static CART_NUMBER="CA-";
