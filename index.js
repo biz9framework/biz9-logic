@@ -785,7 +785,6 @@ class FieldType {
 	static KEY_GUEST="key_guest";
 	static KEY_ORDER="key_order";
 	static KEY_USER="key_user";
-	static KEY_DASHBOARD_TYPE="key_dashboard_type";
 
 	static ORDER_NUMBER="OR-";
 	static CART_NUMBER="CA-";
@@ -1482,52 +1481,52 @@ class Team_Url {
 	};
 }
 class Url{
-	static copy = (biz9_config,data_type,id) => {
+	static copy = (biz9_config,data_type,id,params) => {
 		let action_url = "main/crud/copy/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static delete = (biz9_config,data_type,id) => {
+	static delete = (biz9_config,data_type,id,params) => {
 		let action_url = "main/crud/delete/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static delete_check_protection = (biz9_config,data_type,id) => {
+	static delete_check_protection = (biz9_config,data_type,id,params) => {
 		let action_url = "main/crud/delete_item_check_protection/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static delete_search = (biz9_config,data_type) => {
+	static delete_search = (biz9_config,data_type,params) => {
 		let action_url = "main/crud/delete_list/"+data_type;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 	static url = (biz9_config,action_url,params) => {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	}
-	static get = (biz9_config,data_type,key) => {
+	static get = (biz9_config,data_type,key,params) => {
 		let action_url= "main/crud/get/"+data_type + "/" + key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static get_parent_top = (biz9_config,data_type,id) => {
+	static get_parent_top = (biz9_config,data_type,id,params) => {
 		let action_url = "main/crud/get_parent_top/"+data_type+"/"+id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static search = (biz9_config,data_type) => {
+	static search = (biz9_config,data_type,params) => {
 		let action_url = "main/crud/search/"+data_type;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static upload_file = (biz9_config,data_type,id) => {
+	static upload_file = (biz9_config,data_type,id,params) => {
 		let action_url = "main/crud/update/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static update = (biz9_config,data_type,id) => {
+	static update = (biz9_config,data_type,id,params) => {
 		let action_url = "main/crud/update/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static update_delete_cache = (biz9_config,data_type,id) => {
+	static update_delete_cache = (biz9_config,data_type,id,params) => {
 		let action_url = "main/crud/update_delete_cache/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static update_list = (biz9_config,data_type) => {
+	static update_list = (biz9_config,data_type,params) => {
 		let action_url = "main/crud/update_list/"+data_type;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
 class Category_Logic {
