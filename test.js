@@ -430,9 +430,9 @@ describe("connect", () => {
 
 
             function(call) {
-                console.log('GET_START_STORAGE-START');
-                Log.w('storage-start',Storage.set(Num.get_id()));
-                console.log('GET_START_STORAGE-END');
+                //console.log('GET_START_STORAGE-START');
+                //Log.w('storage-start',Storage.set(Num.get_id()));
+                //console.log('GET_START_STORAGE-END');
                 //call();
             },
 
