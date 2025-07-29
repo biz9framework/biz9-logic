@@ -1829,6 +1829,8 @@ class Schedule {
 };
 class Storage {
 	static get = (window,key) => {
+		return 0;
+		/*
 		if(window){
 			if(Str.check_is_null(window.localStorage.getItem(key))){
 				return null;
@@ -1838,27 +1840,37 @@ class Storage {
 		}else{
 			return null;
 		}
+		*/
 	}
 	static set = (window,key,obj) => {
+		return 1;
+		/*
 		if(window){
 			if(window.localStorage){
 				window.localStorage.setItem(key,JSON.stringify(obj));
 			}
 		}
+		*/
 	}
 	static remove = (window,key) =>{
+		return 2;
+		/*
 		if(window){
 			if(window.localStorage){
 				window.localStorage.removeItem(key);
 			}
 		}
+		*/
 	}
 	static clear = (window) =>{
-		if(window){
+		return 3;
+		/*
+		ifwindow){
 			if(window.localStorage){
 				window.localStorage.clear();
 			}
 		}
+		*/
 	}
 }
 class User_Logic {
