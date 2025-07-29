@@ -1505,8 +1505,8 @@ class Url{
 		let action_url= "main/crud/get/"+data_type + "/" + key;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
-	static get_parent_top = (biz9_config,data_type,id,parent_data_type,parent_id,top_data_type,top_id) => {
-		let action_url = "main/crud/get_parent_top/"+data_type+"/"+id+"/"+parent_data_type+ "/"+parent_id+"/"+top_data_type+ "/"+top_id;
+	static get_parent_top = (biz9_config,data_type,id) => {
+		let action_url = "main/crud/get_parent_top/"+data_type+"/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,null);
 	};
 	static search = (biz9_config,data_type) => {
@@ -1829,7 +1829,6 @@ class Schedule {
 };
 class Storage {
 	static get = (window,key) => {
-		console.log('Storage.GET');
 		if(!Obj.check_is_empty(window)){
 			if(Str.check_is_null(window.localStorage.getItem(key))){
 				return null;
@@ -1841,7 +1840,6 @@ class Storage {
 		}
 	}
 	static set = (window,key,obj) => {
-		console.log('Storage.SET');
 		if(!Obj.check_is_empty(window)){
 			if(window.localStorage){
 				window.localStorage.setItem(key,JSON.stringify(obj));
@@ -1849,7 +1847,6 @@ class Storage {
 		}
 	}
 	static remove = (window,key) =>{
-		console.log('Storage.REMOVE');
 		if(!Obj.check_is_empty(window)){
 			if(window.localStorage){
 				window.localStorage.removeItem(key);
@@ -1857,7 +1854,6 @@ class Storage {
 		}
 	}
 	static clear = (window) =>{
-		console.log('Storage.CLEAR');
 		if(!Obj.check_is_empty(window)){
 			if(window.localStorage){
 				window.localStorage.clear();
