@@ -1528,8 +1528,8 @@ class Url{
 		let action_url = "main/crud/update_list/"+data_type;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static update_item_photo_list = (biz9_config,data_type,id,params) => {
-		let action_url = "main/crud/update_item_photo_list/"+data_type+"/"+id;
+	static update_cms_item  = (biz9_config,data_type,id,params) => {
+		let action_url = "main/crud/update_cms_item/"+data_type+"/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
