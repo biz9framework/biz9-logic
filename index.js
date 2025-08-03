@@ -919,6 +919,48 @@ class DataType {
 	static get_title = (data_type) => {
 		return (!data_type) ? "" : String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 	}
+	static get_data_type_url(data_type){
+		switch(data_type){
+			case DataType.BLOG_POST:
+				return 'blog_post';
+			case DataType.SERVICE:
+				return 'service';
+			case DataType.EVENT:
+				return 'event';
+			case DataType.GALLERY:
+				return 'gallery';
+			case DataType.PRODUCT:
+				return 'product';
+			case DataType.BLANK:
+				return 'blank';
+			case DataType.REVIEW:
+				return 'review';
+			case DataType.FAQ:
+				return 'faq';
+			case DataType.FAVORITE:
+				return 'favorite';
+			case DataType.CATEGORY:
+				return 'category';
+			case DataType.VIDEO:
+				return 'video';
+			case DataType.PHOTO:
+				return 'photo';
+			case DataType.PAGE:
+				return 'page';
+			case DataType.USER:
+				return 'user';
+			case DataType.TEMPLATE:
+				return 'template';
+			case DataType.CONTENT:
+				return 'content';
+			case DataType.ITEM:
+				return 'item';
+			case DataType.BUSINESS:
+				return 'business';
+			case DataType.CUSTOM_FIELD:
+				return 'custom_field';
+		}
+	}
 	static get_item_list = () =>{
 		return [
 			{	title:DataType.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
