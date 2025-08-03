@@ -916,8 +916,14 @@ class PageType {
 	static VALUE_19='value_19';
 }
 class DataType {
-	static get_data_type_title = (data_type) => {
-		return (!data_type) ? "" : String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
+	static get_data_type_title = (data_type,get_plural) => {
+		let r_data_type =  (!data_type) ? "" : String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
+		if(get_plural){
+			return r_data_type + "s";
+		}else{
+			return r_data_type;
+		}
+
 	}
 	static get_data_type_url(data_type){
 		switch(data_type){
