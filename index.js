@@ -916,7 +916,7 @@ class PageType {
 	static VALUE_19='value_19';
 }
 class DataType {
-	static get_title = (data_type) => {
+	static get_data_type_title = (data_type) => {
 		return (!data_type) ? "" : String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 	}
 	static get_data_type_url(data_type){
