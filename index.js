@@ -10,6 +10,7 @@ class Message {
 	static SUCCESS="Update Success";
 	static LOGIN_GOOD="Login Success";
 	static LOGIN_BAD="Login Incorrect";
+	static ERROR_TITLE="Please Enter A Valid Title";
 }
 class TemplateType {
 	static PRIMARY='primary';
