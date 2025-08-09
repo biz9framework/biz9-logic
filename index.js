@@ -787,6 +787,10 @@ class FieldType {
 	static KEY_ORDER="key_order";
 	static KEY_USER="key_user";
 
+	static USER_TYPE_ADMIN="user_admin";
+	static USER_TYPE_MEMBER="user_member";
+	static USER_TYPE_CUSTOMER="user_customer";
+
 	static ORDER_NUMBER="OR-";
 	static CART_NUMBER="CA-";
 	static TRANSACTION_ID="TR-";
