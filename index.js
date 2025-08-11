@@ -1916,7 +1916,7 @@ class Storage {
 	}
 }
 class User_Logic {
-	static get_user_country_state_city(item){
+	static get_country_state_city(item){
 		let country_state_city = "";
 		if(item.country == "United States"){
 			let state = "";
