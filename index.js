@@ -1495,7 +1495,7 @@ class Favorite_Url {
 }
 class Item_Url {
 	static update_cms_item  = (biz9_config,data_type,id,params) => {
-		let action_url = "main/item/update_cms_item/"+data_type+"/"+id;
+		let action_url = "item/update_cms_item/"+data_type+"/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
