@@ -1493,6 +1493,12 @@ class Favorite_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
+class Item_Url {
+	static update_cms_item  = (biz9_config,data_type,id,params) => {
+		let action_url = "main/item/update_cms_item/"+data_type+"/"+id;
+		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	};
+}
 class Faq_Url {
 	static get = (biz9_config,key,params) => {
 		let action_url="faq/get/"+key;
@@ -1573,16 +1579,8 @@ class Url{
 		let action_url = "main/crud/update/"+data_type + "/" + id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
-	static update_delete_cache = (biz9_config,data_type,id,params) => {
-		let action_url = "main/crud/update_delete_cache/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
 	static update_list = (biz9_config,data_type,params) => {
 		let action_url = "main/crud/update_list/"+data_type;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static update_cms_item  = (biz9_config,data_type,id,params) => {
-		let action_url = "main/crud/update_cms_item/"+data_type+"/"+id;
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
