@@ -1548,9 +1548,9 @@ class Category_Logic {
 		}
 		return category_list;
 	};
-	static get_category_list = () => {
+	static get_category_type_list = () => {
 		return [
-			{data_type:DataType.BLOG_POST,value:DataType.BLOG_POST,label:"Blog Posts"},
+			{data_type:DataType.BLOG_POST,value:DataType.BLOG_POST,label:"Blog Post"},
 			{data_type:DataType.CATEGORY,value:DataType.CATEGORY,label:"Category"},
 			{data_type:DataType.CONTENT,value:DataType.CONTENT,label:"Content"},
 			{data_type:DataType.EVENT,value:DataType.EVENT,label:"Event"},
@@ -1558,7 +1558,6 @@ class Category_Logic {
 			{data_type:DataType.SERVICE,value:DataType.SERVICE,label:"Service"},
 			{data_type:DataType.USER,value:DataType.USER,label:"User"},
 			{data_type:DataType.PRODUCT,value:DataType.PRODUCT,label:"Product"},
-			{data_type:DataType.TEMPLATE,value:DataType.TEMPLATE,label:"Template"},
 		];
 	};
 	static get_title_by_type = (data_type) => {
