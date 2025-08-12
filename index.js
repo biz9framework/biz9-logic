@@ -2053,7 +2053,6 @@ module.exports = {
 	Schedule,
 	Stock,
 	TemplateType,
-	Team_Logic,
 	Template_Logic,
 	Url,
 	User_Url,
