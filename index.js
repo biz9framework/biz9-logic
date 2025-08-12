@@ -1842,7 +1842,7 @@ class Storage {
 	}
 }
 class User_Logic {
-	static get_user_role_list = () => {
+	static get_role_list = () => {
 		return [
 			{value:'admin',label:"Admin"},
 			{value:'manager',label:"Manager"},
