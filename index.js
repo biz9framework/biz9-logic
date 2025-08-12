@@ -861,7 +861,11 @@ class DataType {
 	static get_data_type_title = (data_type,get_plural) => {
 		let r_data_type =  (!data_type) ? "" : String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 		if(get_plural){
+			if(data_type==DataType.GALLERY){
+				return 'Galleries';
+			}else{
 			return r_data_type + "s";
+			}
 		}else{
 			return r_data_type;
 		}
@@ -1548,11 +1552,11 @@ class Category_Logic {
 		return [
 			{data_type:DataType.BLOG_POST,value:DataType.BLOG_POST,label:"Blog Posts"},
 			{data_type:DataType.CATEGORY,value:DataType.CATEGORY,label:"Category"},
-			{data_type:DataType.CUSTOMER,value:DataType.CUSTOMER,label:"Customer"},
 			{data_type:DataType.CONTENT,value:DataType.CONTENT,label:"Content"},
-			{data_type:DataType.EVENT,value:DataType.EVENT,label:"Events"},
+			{data_type:DataType.EVENT,value:DataType.EVENT,label:"Event"},
 			{data_type:DataType.GALLERY,value:DataType.GALLERY,label:"Gallery"},
-			{data_type:DataType.SERVICE,value:DataType.SERVICE,label:"Services"},
+			{data_type:DataType.SERVICE,value:DataType.SERVICE,label:"Service"},
+			{data_type:DataType.USER,value:DataType.USER,label:"User"},
 			{data_type:DataType.PRODUCT,value:DataType.PRODUCT,label:"Product"},
 			{data_type:DataType.TEMPLATE,value:DataType.TEMPLATE,label:"Template"},
 		];
@@ -1564,9 +1568,6 @@ class Category_Logic {
 				break;
 			case DataType.CATEGORY:
 				return "Category";
-				break;
-			case DataType.CUSTOMER:
-				return "Customer";
 				break;
 			case DataType.CONTENT:
 				return "Content";
