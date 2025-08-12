@@ -787,10 +787,6 @@ class FieldType {
 	static KEY_ORDER="key_order";
 	static KEY_USER="key_user";
 
-	static USER_TYPE_ADMIN="user_admin";
-	static USER_TYPE_MEMBER="user_member";
-	static USER_TYPE_CUSTOMER="user_customer";
-
 	static ORDER_NUMBER="OR-";
 	static CART_NUMBER="CA-";
 	static TRANSACTION_ID="TR-";
@@ -822,11 +818,6 @@ class Social {
 	static INSTAGRAM_URL="https://instagram.com/";
 	static YOUTUBE_URL="https://youtube.com/";
 	static LINKEDIN_URL="https://linkedin.com/";
-}
-class UserType {
-	static ADMIN="admin";
-	static MEMBER="member";
-	static GUEST="guest";
 }
 class PageType {
 	static get_title = (data_type) => {
@@ -988,7 +979,6 @@ class DataType {
 	static BLOG_POST='blog_post_biz';
 	static CART_ITEM="cart_item_biz";
 	static CATEGORY='category_biz';
-	static CUSTOMER='customer_biz';
 	static CUSTOM_FIELD='custom_field_biz';
 	static CONTENT='content_biz';
 	static EVENT='event_biz';
@@ -1626,7 +1616,7 @@ class Category_Logic {
 			{data_type:DataType.CUSTOMER,value:DataType.CUSTOMER,label:"Customer"},
 			{data_type:DataType.CONTENT,value:DataType.CONTENT,label:"Content"},
 			{data_type:DataType.EVENT,value:DataType.EVENT,label:"Events"},
-			{data_type:DataType.GALLERY,value:DataType.GALLERY,label:"Galleries"},
+			{data_type:DataType.GALLERY,value:DataType.GALLERY,label:"Gallery"},
 			{data_type:DataType.SERVICE,value:DataType.SERVICE,label:"Services"},
 			{data_type:DataType.PRODUCT,value:DataType.PRODUCT,label:"Product"},
 			{data_type:DataType.TEMPLATE,value:DataType.TEMPLATE,label:"Template"},
@@ -1917,6 +1907,14 @@ class Storage {
 	}
 }
 class User_Logic {
+	static get_user_role_list = () => {
+		return [
+			{value:'admin',label:"Admin"},
+			{value:'manager',label:"Manager"},
+			{value:'user',label:"User"},
+			{value:'guest',label:"Guest"},
+		];
+	};
 	static get_country_state_city(item){
 		let country_state_city = "";
 		if(item.country == "United States"){
