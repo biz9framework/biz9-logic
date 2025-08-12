@@ -149,47 +149,6 @@ class Template_Logic {
 		return template;
 	};
 }
-class Team_Logic {
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
-		let team = DataItem.get_new(DataType.TEAM,0,Field_Logic.get_test(title,option));
-		team.members = [];
-		if(option.get_member){
-			for(let a=0;a<option.member_count+1;a++){
-				team.members.push(Team_Logic.get_test_member("Full Name " + String(parseInt(a+1)),team,option));
-			}
-		}
-		return team;
-	};
-	static get_test_member = (team,title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
-		let team_member = DataItem.get_new(DataType.TEAM,team.id,Field_Logic.get_test(title,option));
-		team_member.first_name = "First Name "+ Num.get_id();
-		team_member.last_name = "Last Name "+ Num.get_id();
-		team_member.position = "Position "+ Num.get_id();
-		team_member.city = "City "+ Num.get_id();
-		team_member.state = "State "+ Num.get_id();
-		return team_member;
-	};
-	static get_test_member_list = (team,option) =>{
-		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
-		let item_list = [];
-		for(let a=0;a<option.member_count+1;a++){
-			item_list.push(Team_Logic.get_test_member(team,"Full Name " +parseInt(a+1),option));
-		}
-		return item_list;
-	}
-	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.TEAM,option?option:{});
-		let item_list = [];
-		for(let a=0;a<option.team_count+1;a++){
-			item_list.push(Team_Logic.get_test("Team " +parseInt(a+1),option));
-		}
-		return item_list;
-	}
-}
 class Page_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
@@ -629,10 +588,6 @@ class Field_Logic {
 		if(data_type==DataType.EVENT){
 			option.event_count = option.event_count ? option.event_count : 9;
 		}
-		if(data_type==DataType.TEAM){
-			option.get_member = option.get_member ? true : false;
-			option.member_count = option.member_count ? option.member_count : 9;
-		}
 		if(data_type==DataType.FAQ){
 			option.question_count = option.question_count ? option.question_count : 9;
 		}
@@ -740,7 +695,6 @@ class Field_Logic {
 		option.get_business = req.query.get_business ? req.query.get_business : false;
 		option.get_template = req.query.get_template ? req.query.get_template : false;
 		option.get_page = req.query.get_page ? req.query.get_page : false;
-		option.get_team = req.query.get_team ? req.query.get_team : false;
 
 		return option;
 	}
@@ -770,6 +724,11 @@ class FieldType {
 	static SOURCE_TOP_DATA_TYPE='source_top_data_type';
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
+
+	static USER_ROLE_ADMIN='admin';
+	static USER_ROLE_MANAGER='manager';
+	static USER_ROLE_USER='user';
+	static USER_ROLE_GUEST='guest';
 
 	static STAT_VIEW_ADD_ID='1';
 	static STAT_LIKE_ADD_ID='2';
@@ -827,19 +786,6 @@ class PageType {
 			return String(Str.get_title(data_type.replaceAll('_',' '))).trim();
 		}
 	}
-	static get_item_list = () =>{
-		return [
-			{title:DataType.get_title(PageType.ABOUT),type:DataType.ABOUT},
-			{title:DataType.get_title(PageType.BLOG_POST),type:DataType.BLOG_POST},
-			{title:DataType.get_title(PageType.CONTACT),type:DataType.CONTACT},
-			{title:DataType.get_title(PageType.EVENT),type:DataType.EVENT},
-			{title:DataType.get_title(PageType.GALLERY),type:DataType.GALLERY},
-			{title:DataType.get_title(PageType.HOME),type:DataType.HOME},
-			{title:DataType.get_title(PageType.TEAM),type:DataType.TEAM},
-			{title:DataType.get_title(PageType.PRODUCT),type:DataType.PRODUCT},
-			{title:DataType.get_title(PageType.SERVICE),type:DataType.SERVICE}
-		]
-	};
 	static HOME='home';
 	static ABOUT='about';
 	static CONTACT='contact';
@@ -966,9 +912,9 @@ class DataType {
 	static get_item_list = () =>{
 		return [
 			{	title:DataType.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
-			{	title:DataType.get_title(DataType.GALLERY),type:DataType.GALLERY},
 			{	title:DataType.get_title(DataType.EVENT),type:DataType.EVENT},
-			{	title:DataType.get_title(DataType.TEAM),type:DataType.TEAM},
+			{	title:DataType.get_title(DataType.GALLERY),type:DataType.GALLERY},
+			{	title:DataType.get_title(DataType.USER),type:DataType.USER},
 			{	title:DataType.get_title(DataType.PRODUCT),type:DataType.PRODUCT},
 			{	title:DataType.get_title(DataType.SERVICE),type:DataType.SERVICE}
 		]
@@ -1005,7 +951,6 @@ class DataType {
 	static SERVICE='service_biz';
 	static STAT='stat_biz';
 	static TEMPLATE='template_biz';
-	static TEAM='team_biz';
 	static USER='user_biz';
 	static VIDEO='video_biz';
 
@@ -1519,16 +1464,6 @@ class Page_Url {
 		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
 	};
 }
-class Team_Url {
-	static get = (biz9_config,key,params) => {
-		let action_url="team/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-	static member = (biz9_config,title_url,params) => {
-		let action_url="team/member/"+title_url;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
-	};
-}
 class Url{
 	static copy = (biz9_config,data_type,id,params) => {
 		let action_url = "main/crud/copy/"+data_type + "/" + id;
@@ -1620,7 +1555,6 @@ class Category_Logic {
 			{data_type:DataType.SERVICE,value:DataType.SERVICE,label:"Services"},
 			{data_type:DataType.PRODUCT,value:DataType.PRODUCT,label:"Product"},
 			{data_type:DataType.TEMPLATE,value:DataType.TEMPLATE,label:"Template"},
-			{data_type:DataType.TEAM,value:DataType.TEAM,label:"Team"}
 		];
 	};
 	static get_title_by_type = (data_type) => {
@@ -1643,6 +1577,9 @@ class Category_Logic {
 			case DataType.GALLERY:
 				return "Gallery";
 				break;
+			case DataType.USER:
+				return "User";
+				break;
 			case DataType.PAGE:
 				return "Page";
 				break;
@@ -1657,9 +1594,6 @@ class Category_Logic {
 				break;
 			case DataType.TEMPLATE:
 				return "Template";
-				break;
-			case DataType.TEAM:
-				return "Team";
 				break;
 			default:
 				return "Blank";
