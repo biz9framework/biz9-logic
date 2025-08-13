@@ -742,7 +742,6 @@ class FieldType {
 	static KEY_BUSINESS="key_business";
 	static KEY_TEMPLATE="key_template";
 	static KEY_CART="key_cart";
-	static KEY_GUEST="key_guest";
 	static KEY_ORDER="key_order";
 	static KEY_USER="key_user";
 
@@ -779,13 +778,6 @@ class Social {
 	static LINKEDIN_URL="https://linkedin.com/";
 }
 class PageType {
-	static get_title = (data_type) => {
-		if(!data_type){
-			return "";
-		}else{
-			return String(Str.get_title(data_type.replaceAll('_',' '))).trim();
-		}
-	}
 	static HOME='home';
 	static ABOUT='about';
 	static CONTACT='contact';
@@ -858,6 +850,42 @@ class PageType {
 	static VALUE_19='value_19';
 }
 class DataType {
+	static ACTIVITY='activity_biz';
+	static APP='app_biz';
+	static BLANK='blank_biz';
+	static BUSINESS='business_biz';
+	static BLOG_POST='blog_post_biz';
+	static CART_ITEM="cart_item_biz";
+	static CATEGORY='category_biz';
+	static CUSTOM_FIELD='custom_field_biz';
+	static CONTENT='content_biz';
+	static EVENT='event_biz';
+	static FAQ='faq_biz';
+	static FAVORITE='favorite_biz';
+	static GALLERY='gallery_biz';
+	static ITEM_MAP='item_map_biz';
+	static ITEM='item_biz';
+
+	static CART="cart_biz";
+	static CART_ITEM="cart_item_biz";
+	static CART_SUB_ITEM="cart_sub_item_biz";
+
+	static ORDER="order_biz";
+	static ORDER_ITEM="order_item_biz";
+	static ORDER_SUB_ITEM="order_sub_item_biz";
+	static ORDER_PAYMENT="order_payment_biz";
+
+	static PROJECT='project_biz';
+	static PRODUCT='product_biz';
+	static PHOTO='photo_biz';
+	static PAGE='page_biz';
+	static REVIEW='review_biz';
+	static SERVICE='service_biz';
+	static STAT='stat_biz';
+	static TEMPLATE='template_biz';
+	static USER='user_biz';
+	static VIDEO='video_biz';
+
 	static get_data_type_title = (data_type,get_plural) => {
 		let r_data_type =  (!data_type) ? "" : String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 		if(get_plural){
@@ -873,6 +901,8 @@ class DataType {
 	}
 	static get_data_type_url(data_type){
 		switch(data_type){
+			case DataType.ACTIVITY:
+				return 'activity';
 			case DataType.BLOG_POST:
 				return 'blog_post';
 			case DataType.SERVICE:
@@ -923,42 +953,6 @@ class DataType {
 			{	title:DataType.get_title(DataType.SERVICE),type:DataType.SERVICE}
 		]
 	};
-	static ADMIN='admin_biz';
-	static BLANK='blank_biz';
-	static BUSINESS='business_biz';
-	static BLOG_POST='blog_post_biz';
-	static CART_ITEM="cart_item_biz";
-	static CATEGORY='category_biz';
-	static CUSTOM_FIELD='custom_field_biz';
-	static CONTENT='content_biz';
-	static EVENT='event_biz';
-	static FAQ='faq_biz';
-	static FAVORITE='favorite_biz';
-	static GALLERY='gallery_biz';
-	static ITEM_MAP='item_map_biz';
-	static ITEM='item_biz';
-
-	static CART="cart_biz";
-	static CART_ITEM="cart_item_biz";
-	static CART_SUB_ITEM="cart_sub_item_biz";
-
-	static ORDER="order_biz";
-	static ORDER_ITEM="order_item_biz";
-	static ORDER_SUB_ITEM="order_sub_item_biz";
-	static ORDER_PAYMENT="order_payment_biz";
-
-	static PROJECT='project_biz';
-	static PRODUCT='product_biz';
-	static PHOTO='photo_biz';
-	static PAGE='page_biz';
-	static REVIEW='review_biz';
-	static SERVICE='service_biz';
-	static STAT='stat_biz';
-	static TEMPLATE='template_biz';
-	static USER='user_biz';
-	static VIDEO='video_biz';
-
-	static APP='app_biz';
 }
 class Blank_Logic {
 	static get_test = (title,option) =>{
