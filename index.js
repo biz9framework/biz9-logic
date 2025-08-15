@@ -11,6 +11,7 @@ class Message {
 	static LOGIN_GOOD="Login Success";
 	static LOGIN_BAD="Login Incorrect";
 	static ERROR_TITLE="Please Enter A Valid Title";
+	static ERROR_EMAIL="Please Enter A Valid E-mail";
 }
 class TemplateType {
 	static PRIMARY='primary';
@@ -1211,300 +1212,290 @@ class DataItem {
 	static get_new_full_item = (item,parent_item,top_item,option) => {
 		return get_new_full_item_main(item,parent_item,top_item,option?option:{});
 	};
-	static get_biz = (biz9_config,item,option)=>{
-		return get_biz_item_main(biz9_config,item,option?option:{});
-	}
-	static get_biz_by_list = (biz9_config,list,option)=>{
-		let r_list = [];
-		for(let a=0;a<list.length;a++){
-			r_list.push(get_biz_item_main(biz9_config,list[a],option));
-		}
-		return r_list;
-	}
 }
 class Blank_Url {
-	static get = (biz9_config,key,params) => {
+	static get = (app_id,url,key,params) => {
 		let action_url="blank/get/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (biz9_config,params) => {
+	static browse = (app_id,url,params) => {
 		let action_url="blank/browse";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static category = (biz9_config,category,params) => {
+	static category = (app_id,url,category,params) => {
 		let action_url="blank/category/"+category;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Blog_Post_Url {
-	static get = (biz9_config,key,params) => {
+	static get = (app_id,url,key,params) => {
 		let action_url="blog_post/get/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (biz9_config,params) => {
+	static browse = (app_id,url,params) => {
 		let action_url="blog_post/browse";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static category = (biz9_config,category,params) => {
+	static category = (app_id,url,category,params) => {
 		let action_url="blog_post/category/"+category;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static search = (biz9_config,params) => {
+	static search = (app_id,url,params) => {
 		let action_url="blog_post/search";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Custom_Field_Url {
-	static get = (biz9_config,data_type,key,params) => {
+	static get = (app_id,url,data_type,key,params) => {
 		let action_url="custom_field/get/"+data_type+"/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (biz9_config,params) => {
+	static browse = (app_id,url,params) => {
 		let action_url="custom_field/browse";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class FAQ_Url {
-	static get = (biz9_config,key,params) => {
+	static get = (app_id,url,key,params) => {
 		let action_url="faq/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static category = (biz9_config,title_url,params) => {
+	static category = (app_id,url,title_url,params) => {
 		let action_url="faq/category/"+title_url;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Cart_Url {
-	static update = (biz9_config,parent_data_type,user_id,params) => {
+	static update = (app_id,url,parent_data_type,user_id,params) => {
 		let action_url="cart/update/"+parent_data_type+"/"+user_id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static get = (biz9_config,cart_number,params) => {
+	static get = (app_id,url,cart_number,params) => {
 		let action_url="cart/get/"+cart_number;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static delete = (biz9_config,id,params) => {
+	static delete = (app_id,url,id,params) => {
 		let action_url="cart/delete/"+id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Order_Url {
-	static update = (biz9_config,params) => {
+	static update = (app_id,url,params) => {
 		let action_url="order/update";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static get = (biz9_config,order_number,params) => {
+	static get = (app_id,url,order_number,params) => {
 		let action_url="order/get/"+order_number;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static delete = (biz9_config,id,params) => {
+	static delete = (app_id,url,id,params) => {
 		let action_url="order/delete/"+id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Product_Url {
-	static get = (biz9_config,key,params) => {
+	static get = (app_id,url,key,params) => {
 		let action_url="product/get/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (biz9_config,params) => {
+	static browse = (app_id,url,params) => {
 		let action_url="product/browse";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static category = (biz9_config,category,params) => {
+	static category = (app_id,url,category,params) => {
 		let action_url="product/category/"+category;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static search = (biz9_config,params) => {
+	static search = (app_id,url,params) => {
 		let action_url="product/search";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Review_Url {
-	static update = (biz9_config,parent_data_type,parent_id,user_id,params) => {
+	static update = (app_id,url,parent_data_type,parent_id,user_id,params) => {
 		let action_url="review/update/"+parent_data_type+"/"+parent_id+"/"+user_id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Event_Url {
-	static get = (biz9_config,key,params) => {
+	static get = (app_id,url,key,params) => {
 		let action_url="event/get/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (biz9_config,params) => {
+	static browse = (app_id,url,params) => {
 		let action_url="event/browse";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static category = (biz9_config,category,params) => {
+	static category = (app_id,url,category,params) => {
 		let action_url="event/category/"+category;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static search = (biz9_config,params) => {
+	static search = (app_id,url,params) => {
 		let action_url="event/search";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Service_Url {
-	static get = (biz9_config,key,params) => {
+	static get = (app_id,url,key,params) => {
 		let action_url="service/get/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (biz9_config,params) => {
+	static browse = (app_id,url,params) => {
 		let action_url="service/browse";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static category = (biz9_config,category,params) => {
+	static category = (app_id,url,category,params) => {
 		let action_url="service/category/"+category;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static search = (biz9_config,params) => {
+	static search = (app_id,url,params) => {
 		let action_url="service/search";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Content_Url {
-	static portfolio = (biz9_config,params) => {
+	static portfolio = (app_id,url,params) => {
 		let action_url="content/portfolio";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static get = (biz9_config,key,params) => {
+	static get = (app_id,url,key,params) => {
 		let action_url="content/get/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (biz9_config,params) => {
+	static browse = (app_id,url,params) => {
 		let action_url="content/browse";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static category = (biz9_config,category,params) => {
+	static category = (app_id,url,category,params) => {
 		let action_url="content/category/"+category;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static search = (biz9_config,params) => {
+	static search = (app_id,url,params) => {
 		let action_url="content/search";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Gallery_Url {
-	static get = (biz9_config,key,params) => {
+	static get = (app_id,url,key,params) => {
 		let action_url="gallery/get/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (biz9_config,params) => {
+	static browse = (app_id,url,params) => {
 		let action_url="gallery/browse";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static category = (biz9_config,category,params) => {
+	static category = (app_id,url,category,params) => {
 		let action_url="gallery/category/"+category;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static search = (biz9_config,params) => {
+	static search = (app_id,url,params) => {
 		let action_url="gallery/search";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class User_Url {
-	static info = (biz9_config,user_id,params) => {
+	static info = (app_id,url,user_id,params) => {
 		let action_url="user/info/"+user_id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static register = (biz9_config,params) => {
+	static register = (app_id,url,params) => {
 		let action_url="user/register";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static login = (biz9_config,params) => {
+	static login = (app_id,url,params) => {
 		let action_url="user/login";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Favorite_Url {
-	static get = (biz9_config,parent_data_type,user_id,page_current,page_size,params) => {
+	static get = (app_id,url,parent_data_type,user_id,page_current,page_size,params) => {
 		let action_url="favorite/get/"+parent_data_type+"/"+user_id+"/"+page_current+"/"+page_size;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static update = (biz9_config,parent_data_type,parent_id,user_id,params) => {
+	static update = (app_id,url,parent_data_type,parent_id,user_id,params) => {
 		let action_url="favorite/update/"+parent_data_type+"/"+parent_id +"/"+user_id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Item_Url {
-	static update_cms_item  = (biz9_config,data_type,id,params) => {
+	static update_cms_item  = (app_id,url,data_type,id,params) => {
 		let action_url = "item/update_cms_item/"+data_type+"/"+id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Faq_Url {
-	static get = (biz9_config,key,params) => {
+	static get = (app_id,url,key,params) => {
 		let action_url="faq/get/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Category_Url {
-	static get = (biz9_config,key,params) => {
+	static get = (app_id,url,key,params) => {
 		let action_url="category/get/"+key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (biz9_config,params) => {
+	static browse = (app_id,url,params) => {
 		let action_url="category/browse";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static search = (biz9_config,params) => {
+	static search = (app_id,url,params) => {
 		let action_url="category/search";
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Page_Url {
-	static get = (biz9_config,title_url,params) => {
+	static get = (app_id,url,title_url,params) => {
 		let action_url="page/get/"+title_url;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static home = (biz9_config,params) => {
+	static home = (app_id,url,params) => {
 		let action_url=PageType.get_title(PageType.HOME);
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Url{
-	static copy = (biz9_config,data_type,id,params) => {
+	static copy = (app_id,url,data_type,id,params) => {
 		let action_url = "main/crud/copy/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static delete = (biz9_config,data_type,id,params) => {
+	static delete = (app_id,url,data_type,id,params) => {
 		let action_url = "main/crud/delete/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static delete_check_protection = (biz9_config,data_type,id,params) => {
+	static delete_check_protection = (app_id,url,data_type,id,params) => {
 		let action_url = "main/crud/delete_item_check_protection/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static delete_search = (biz9_config,data_type,params) => {
+	static delete_search = (app_id,url,data_type,params) => {
 		let action_url = "main/crud/delete_list/"+data_type;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static url = (biz9_config,action_url,params) => {
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+	static url = (app_id,url,action_url,params) => {
+		return get_cloud_url_main(app_id,url,action_url,params);
 	}
-	static get = (biz9_config,data_type,key,params) => {
+	static get = (app_id,url,data_type,key,params) => {
 		let action_url= "main/crud/get/"+data_type + "/" + key;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static get_parent_top = (biz9_config,data_type,id,params) => {
+	static get_parent_top = (app_id,url,data_type,id,params) => {
 		let action_url = "main/crud/get_parent_top/"+data_type+"/"+id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static search = (biz9_config,data_type,params) => {
+	static search = (app_id,url,data_type,params) => {
 		let action_url = "main/crud/search/"+data_type;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static upload_file = (biz9_config,data_type,id,params) => {
+	static upload_file = (app_id,url,data_type,id,params) => {
 		let action_url = "main/crud/update/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static update = (biz9_config,data_type,id,params) => {
+	static update = (app_id,url,data_type,id,params) => {
 		let action_url = "main/crud/update/"+data_type + "/" + id;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static update_list = (biz9_config,data_type,params) => {
+	static update_list = (app_id,url,data_type,params) => {
 		let action_url = "main/crud/update_list/"+data_type;
-		return get_cloud_url_main(biz9_config.APP_ID,biz9_config.URL,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Category_Logic {
