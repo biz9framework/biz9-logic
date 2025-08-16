@@ -13,6 +13,10 @@ class Message {
 	static ERROR_TITLE="Please Enter A Valid Title";
 	static ERROR_EMAIL="Please Enter A Valid E-mail";
 	static DATA_NOT_FOUND="Data Not Found";
+	static FAVORITE_ADD_SUCCESS="Favorite Add Success";
+	static FAVORITE_REMOVE_SUCCESS="Favorite Remove Success";
+	static REVIEW_ADD_SUCCESS="Review Add Success";
+	static REVIEW_REMOVE_SUCCESS="Review Remove Success";
 }
 class TemplateType {
 	static PRIMARY='primary';
