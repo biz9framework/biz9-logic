@@ -12,6 +12,7 @@ class Message {
 	static LOGIN_BAD="Login Incorrect";
 	static ERROR_TITLE="Please Enter A Valid Title";
 	static ERROR_EMAIL="Please Enter A Valid E-mail";
+	static DATA_NOT_FOUND="Data Not Found";
 }
 class TemplateType {
 	static PRIMARY='primary';
