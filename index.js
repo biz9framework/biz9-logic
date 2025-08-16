@@ -771,6 +771,11 @@ class FieldType {
 	static APP_TYPE_MOBILE="Mobile";
 	static APP_TYPE_WEBSITE="Website";
 	static APP_TYPE_LANDING="Landing";
+
+	static DATA_SOURCE_CACHE="cache";
+	static DATA_SOURCE_DATABASE="database";
+	static DATA_SOURCE_SERVER="server";
+	static DATA_SOURCE_NOT_FOUND="not_found";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
