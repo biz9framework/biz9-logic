@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic,Faq_Url,App_Logic,FieldType} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic,Faq_Url,App_Logic,FieldType,Product_Url} = require('./index');
 const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -31,7 +31,9 @@ describe("connect", () => {
         series([
 
             function(call) {
-                //console.log('GET-URL-START');
+                console.log('PRODUCT-URL-START');
+                console.log(Product_Url.search('cool','google.com'));
+                console.log('PRODUCT-URL-END');
                 //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 //let action_url = 'test_get_url';
                 //let params = '&myparam1=p1&myparam2=p2'
@@ -43,17 +45,19 @@ describe("connect", () => {
                 //let cloud_url = Category_Url.get_page(biz9_config,'cool');
                 //Log.w('cloud_url',cloud_url);
                 //console.log('GET-URL-SUCCESS');
-                call();
+                //call();
             },
 
             function(call) {
 
                /* --APP--START */
+                /*
                 let title = "Food Truck " + Num.get_id();
                 let user_id = Num.get_id();
                 let type = FieldType.APP_TYPE_MOBILE;
                 let app = App_Logic.get_new(title,user_id,type);
                 Log.w('app',app);
+                */
                /* --APP--ENDI */
 
                 //console.log('STORAGE-START');

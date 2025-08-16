@@ -1074,6 +1074,13 @@ class Review_Logic {
 			rating:rating ? rating : ""
 		});
 	}
+	static get_user_search_filter = (parent_data_type,user_id) =>{
+		 return {
+            $and: [
+            { parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
+            { user_id: { $regex:String(user_id), $options: "i" } }
+            ] };
+	}
 	static get_search_filter = (parent_data_type,parent_id) =>{
 		 return {
             $and: [
@@ -1318,6 +1325,10 @@ class Product_Url {
 	};
 }
 class Review_Url {
+	static get = (app_id,url,parent_data_type,user_id,page_current,page_size,params) => {
+		let action_url="review/get/"+parent_data_type+"/"+user_id+"/"+page_current+"/"+page_size;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 	static update = (app_id,url,parent_data_type,parent_id,user_id,params) => {
 		let action_url="review/update/"+parent_data_type+"/"+parent_id+"/"+user_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
