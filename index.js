@@ -1835,21 +1835,21 @@ class Storage {
 			return null;
 		}
 	}
-	static set = (window,key,obj) => {
+	static post = (window,key,obj) => {
 		if(!Obj.check_is_empty(window)){
 			if(window.localStorage){
 				window.localStorage.setItem(key,JSON.stringify(obj));
 			}
 		}
 	}
-	static remove = (window,key) =>{
+	static delete = (window,key) =>{
 		if(!Obj.check_is_empty(window)){
 			if(window.localStorage){
 				window.localStorage.removeItem(key);
 			}
 		}
 	}
-	static clear = (window) =>{
+	static delete_all = (window) =>{
 		if(!Obj.check_is_empty(window)){
 			if(window.localStorage){
 				window.localStorage.clear();
