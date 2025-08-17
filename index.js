@@ -1900,7 +1900,7 @@ class User_Logic {
 		}
 		return req.session.user;
 	}
-	static set_request_user(req){
+	static post_request_user(req){
 		req.session.user=user;
 	}
 	static del_request_user(req){
