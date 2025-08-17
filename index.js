@@ -7,16 +7,27 @@ Description: BiZ9 Framework: Logic-JS
 const moment = require('moment'); const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
 const { Log,Str,DateTime,Num,Obj } = require('/home/think2/www/doqbox/biz9-framework/biz9-utility/code');
 class Message {
-	static SUCCESS="Update Success";
+	static SUCCESS="Success";
 	static LOGIN_GOOD="Login Success";
 	static LOGIN_BAD="Login Incorrect";
-	static ERROR_TITLE="Please Enter A Valid Title";
-	static ERROR_EMAIL="Please Enter A Valid E-mail";
-	static DATA_NOT_FOUND="Data Not Found";
-	static FAVORITE_ADD_SUCCESS="Favorite Add Success";
-	static FAVORITE_REMOVE_SUCCESS="Favorite Remove Success";
-	static REVIEW_ADD_SUCCESS="Review Add Success";
-	static REVIEW_REMOVE_SUCCESS="Review Remove Success";
+
+	static ERROR_TITLE_NOT_VALID="Please Enter A Valid Title.";
+	static ERROR_TITLE_NOT_UNIQUE="Title Not Availble. Please Choose Another.";
+
+	static ERROR_USERNAME_NOT_VALID="Please Enter A Valid Username";
+	static ERROR_USERNAME_NOT_UNIQUE="Username Not Availble. Please Choose Another.";
+
+	static ERROR_EMAIL_NOT_VALID="Please Enter A Valid Email.";
+	static ERROR_EMAIL_NOT_UNIQUE="E-mail Not Availble. Please Choose Another.";
+
+	static DATA_NOT_FOUND="Data Not Found.";
+	static SYSTEM_NOT_FOUND="System Not Found.";
+
+	static FAVORITE_ADD_SUCCESS="Favorite Add Success.";
+	static FAVORITE_REMOVE_SUCCESS="Favorite Remove Success.";
+
+	static REVIEW_ADD_SUCCESS="Review Add Success.";
+	static REVIEW_REMOVE_SUCCESS="Review Remove Success.";
 }
 class TemplateType {
 	static PRIMARY='primary';
