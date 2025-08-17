@@ -1449,6 +1449,10 @@ class User_Url {
 		let action_url="user/login";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static logout = (app_id,url,params) => {
+		let action_url="user/logout";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 }
 class Favorite_Url {
 	static get = (app_id,url,parent_data_type,user_id,page_current,page_size,params) => {
@@ -1911,10 +1915,10 @@ class User_Logic {
 		}
 		return req.session.user;
 	}
-	static post_request_user(req){
+	static post_request_user(req,user){
 		req.session.user=user;
 	}
-	static del_request_user(req){
+	static delete_request_user(req){
 		req.session.user=null;
 		delete req.session.user;
 	}
