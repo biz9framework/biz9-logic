@@ -1880,7 +1880,7 @@ class User_Logic {
 		return country_state_city;
 	}
 	static get_guest(){
-		return DataItem.get_new(DataType.USER,0,{is_guest:true,title:"Guest",country:"United States"});
+		return DataItem.get_new(DataType.USER,0,{is_guest:true,title_url:'guest',first_name:'Guest',last_name:'User',email:'guest@email.com',title:"Guest",country:"United States"});
 	}
 	static get_request_user(req){
 		if(!req || !req.session.user){

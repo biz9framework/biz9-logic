@@ -31,9 +31,13 @@ describe("connect", () => {
         series([
 
             function(call) {
-                console.log('PRODUCT-URL-START');
-                console.log(Product_Url.search('cool','google.com'));
-                console.log('PRODUCT-URL-END');
+                console.log('USER-START');
+                console.log(User_Logic.get_guest());
+                console.log('USER-END');
+
+                //console.log('PRODUCT-URL-START');
+                //console.log(Product_Url.search('cool','google.com'));
+                //console.log('PRODUCT-URL-END');
                 //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 //let action_url = 'test_get_url';
                 //let params = '&myparam1=p1&myparam2=p2'
