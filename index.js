@@ -1050,6 +1050,17 @@ class Favorite_Logic {
 		});
 		return favorite;
 	}
+	static get_favorite_by_list = (favorite_list,item_list) =>{
+		for(let a = 0; a<item_list.length; a++){
+			item_list[a].is_favorite = false;
+			for(let b = 0; b<favorite_list.length; b++){
+				if(item_list[a].id == favorite_list[b].parent_id){
+					item_list[a].is_favorite = true;
+				}
+			}
+		}
+		return item_list;
+	}
 	static get_user_search_filter = (parent_data_type,user_id) =>{
 		 return {
             $and: [
@@ -1283,8 +1294,8 @@ class FAQ_Url {
 	};
 }
 class Cart_Url {
-	static update = (app_id,url,parent_data_type,user_id,params) => {
-		let action_url="cart/update/"+parent_data_type+"/"+user_id;
+	static post = (app_id,url,parent_data_type,user_id,params) => {
+		let action_url="cart/post/"+parent_data_type+"/"+user_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static get = (app_id,url,cart_number,params) => {
@@ -1297,8 +1308,8 @@ class Cart_Url {
 	};
 }
 class Order_Url {
-	static update = (app_id,url,params) => {
-		let action_url="order/update";
+	static post = (app_id,url,params) => {
+		let action_url="order/post";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static get = (app_id,url,order_number,params) => {
@@ -1333,8 +1344,8 @@ class Review_Url {
 		let action_url="review/get/"+parent_data_type+"/"+user_id+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static update = (app_id,url,parent_data_type,parent_id,user_id,params) => {
-		let action_url="review/update/"+parent_data_type+"/"+parent_id+"/"+user_id;
+	static post = (app_id,url,parent_data_type,parent_id,user_id,params) => {
+		let action_url="review/post/"+parent_data_type+"/"+parent_id+"/"+user_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
@@ -1433,14 +1444,14 @@ class Favorite_Url {
 		let action_url="favorite/get/"+parent_data_type+"/"+user_id+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static update = (app_id,url,parent_data_type,parent_id,user_id,params) => {
-		let action_url="favorite/update/"+parent_data_type+"/"+parent_id +"/"+user_id;
+	static post = (app_id,url,parent_data_type,parent_id,user_id,params) => {
+		let action_url="favorite/post/"+parent_data_type+"/"+parent_id +"/"+user_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Item_Url {
-	static update_cms_item  = (app_id,url,data_type,id,params) => {
-		let action_url = "item/update_cms_item/"+data_type+"/"+id;
+	static post_cms_item  = (app_id,url,data_type,id,params) => {
+		let action_url = "item/post_cms_item/"+data_type+"/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
@@ -1507,15 +1518,15 @@ class Url{
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static upload_file = (app_id,url,data_type,id,params) => {
-		let action_url = "main/crud/update/"+data_type + "/" + id;
+		let action_url = "main/crud/post/"+data_type + "/" + id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static update = (app_id,url,data_type,id,params) => {
-		let action_url = "main/crud/update/"+data_type + "/" + id;
+	static post = (app_id,url,data_type,id,params) => {
+		let action_url = "main/crud/post/"+data_type + "/" + id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static update_list = (app_id,url,data_type,params) => {
-		let action_url = "main/crud/update_list/"+data_type;
+	static post_list = (app_id,url,data_type,params) => {
+		let action_url = "main/crud/post_list/"+data_type;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
