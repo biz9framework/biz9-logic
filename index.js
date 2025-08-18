@@ -1252,6 +1252,12 @@ class DataItem {
 		return get_new_full_item_main(item,parent_item,top_item,option?option:{});
 	};
 }
+class Business_Url {
+	static get = (app_id,url,params) => {
+		let action_url="item/get_business";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+}
 class Blank_Url {
 	static get = (app_id,url,key,params) => {
 		let action_url="blank/get/"+key;
@@ -1305,8 +1311,8 @@ class FAQ_Url {
 	};
 }
 class Cart_Url {
-	static post = (app_id,url,parent_data_type,user_id,params) => {
-		let action_url="cart/post/"+parent_data_type+"/"+user_id;
+	static post = (app_id,url,parent_data_type,params) => {
+		let action_url="cart/post/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static get = (app_id,url,cart_number,params) => {
@@ -1351,12 +1357,12 @@ class Product_Url {
 	};
 }
 class Review_Url {
-	static get = (app_id,url,parent_data_type,user_id,page_current,page_size,params) => {
-		let action_url="review/get/"+parent_data_type+"/"+user_id+"/"+page_current+"/"+page_size;
+	static get = (app_id,url,parent_data_type,page_current,page_size,params) => {
+		let action_url="review/get/"+parent_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post = (app_id,url,parent_data_type,parent_id,user_id,params) => {
-		let action_url="review/post/"+parent_data_type+"/"+parent_id+"/"+user_id;
+	static post = (app_id,url,parent_data_type,parent_id,params) => {
+		let action_url="review/post/"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
@@ -1437,8 +1443,8 @@ class Gallery_Url {
 	};
 }
 class User_Url {
-	static info = (app_id,url,user_id,params) => {
-		let action_url="user/info/"+user_id;
+	static info = (app_id,url,params) => {
+		let action_url="user/info/";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static register = (app_id,url,params) => {
@@ -1455,12 +1461,12 @@ class User_Url {
 	};
 }
 class Favorite_Url {
-	static get = (app_id,url,parent_data_type,user_id,page_current,page_size,params) => {
-		let action_url="favorite/get/"+parent_data_type+"/"+user_id+"/"+page_current+"/"+page_size;
+	static get = (app_id,url,parent_data_type,page_current,page_size,params) => {
+		let action_url="favorite/get/"+parent_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post = (app_id,url,parent_data_type,parent_id,user_id,params) => {
-		let action_url="favorite/post/"+parent_data_type+"/"+parent_id +"/"+user_id;
+	static post = (app_id,url,parent_data_type,parent_id,params) => {
+		let action_url="favorite/post/"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
@@ -2039,6 +2045,7 @@ class App_Logic {
 module.exports = {
 	App_Logic,
 	Admin_Logic,
+	Business_Url,
 	Business_Logic,
 	Blank_Logic,
 	Blank_Url,
