@@ -1079,23 +1079,8 @@ class Favorite_Logic {
 			const item_match = item_list.find(item_find => item_find.id === item.parent_id);
 			if (item_match) {
 				item_match.is_favorite = true;
-				console.log('aaaaaaa');
-				console.log(item_match);
-				console.log('bbbbbb');
 			}
 		});
-		return item_list;
-
-		/*
-		for(let a = 0; a<item_list.length; a++){
-			item_list[a].is_favorite = false;
-			for(let b = 0; b<favorite_list.length; b++){
-				if(item_list[a].id == favorite_list[b].parent_id){
-					item_list[a].is_favorite = true;
-				}
-			}
-		}
-		*/
 		return item_list;
 	}
 	static get_user_search_filter = (parent_data_type,user_id) =>{
