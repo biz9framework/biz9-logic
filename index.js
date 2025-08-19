@@ -17,6 +17,7 @@ class Message {
 	static USER_REGISTER_BAD="Register Fail";
 	static USER_EMAIL_BAD="Please Enter A Valid Email.";
 	static USER_EMAIL_NEW_CONFIRM_BAD="The New and Confirm Email Dont Match.";
+	static USER_PASSWORD_NEW_CONFIRM_BAD="The New and Confirm Password Dont Match.";
 	static USER_PASSWORD_BAD="Please Enter A Valid Password.";
 	static USER_EMAIL_NOT_UNIQUE="Email Not Availble. Please Choose Another.";
 	static USER_USERNAME_BAD="Please Enter A Valid Username.";
