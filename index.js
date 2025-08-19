@@ -792,6 +792,10 @@ class FieldType {
 	static DATA_SOURCE_DATABASE="database";
 	static DATA_SOURCE_SERVER="server";
 	static DATA_SOURCE_NOT_FOUND="not_found";
+
+	static ENVIRONMENT_TEST="test";
+	static ENVIRONMENT_STAGE="stage";
+	static ENVIRONMENT_PRODUCTION="production";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
