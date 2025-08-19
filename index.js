@@ -25,6 +25,7 @@ class Message {
 
 	static FAVORITE_ADD_SUCCESS="Favorite Add Success.";
 	static FAVORITE_REMOVE_SUCCESS="Favorite Remove Success.";
+	static FAVORITE_USER_LOGIN="Please Login To Add Favorite.";
 
 	static REVIEW_ADD_SUCCESS="Review Add Success.";
 	static REVIEW_REMOVE_SUCCESS="Review Remove Success.";
@@ -73,7 +74,7 @@ class Item_Logic {
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
-static get_search_query(search){
+	static get_search_query(search){
 		let url = "";
 		if(search.data_type){
 			url = url + "&data_type="+search.data_type;
@@ -137,7 +138,7 @@ class Stat_Logic {
 			user_id:user_id,
 			stat_type_id:stat_type_id,
 			item_list:item_list,
-	}
+		}
 	}
 }
 class Template_Logic {
@@ -190,20 +191,20 @@ class Order_Logic {
 	static get_order_number = () => {
 		return FieldType.ORDER_NUMBER + Num.get_id(99999);
 	};
-	 static get_transaction_id = () => {
-        return FieldType.TRANSACTION_ID + Num.get_id(99999);
-    };
+	static get_transaction_id = () => {
+		return FieldType.TRANSACTION_ID + Num.get_id(99999);
+	};
 }
 class Cart_Logic {
 	static get_cart_number = () => {
 		return FieldType.CART_NUMBER + Num.get_id(99999);
 	};
 	static get_cart = (user_id) => {
-         return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Cart_Logic.get_cart_number(),quanity:1,grand_total:0,cart_item_list:[]});
-    };
-    static get_cart_item = (parent_data_type,parent_id,cart_number,user_id,quanity) =>{
-         return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,user_id:user_id,quanity:quanity,sub_total:0,cart_sub_item_list:[]});
-    };
+		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Cart_Logic.get_cart_number(),quanity:1,grand_total:0,cart_item_list:[]});
+	};
+	static get_cart_item = (parent_data_type,parent_id,cart_number,user_id,quanity) =>{
+		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,user_id:user_id,quanity:quanity,sub_total:0,cart_sub_item_list:[]});
+	};
 	static get_test_item = (cart_item_id,cart_number,user_id,parent_data_type,parent_id,option) =>{
 		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{generate_id:Str.check_is_null(cart_item_id)? true : false  });
 		let cart_item = DataItem.get_new(DataType.CART_ITEM,Num.get_guid(),Field_Logic.get_test("Cart Item "+Num.get_id(),option));
@@ -213,7 +214,7 @@ class Cart_Logic {
 		cart_item.parent_data_type = parent_data_type;
 		cart_item.parent_id = parent_id;
 		if(option.get_cart_sub_item){
-		cart_item.cart_sub_item_list = [];
+			cart_item.cart_sub_item_list = [];
 			for(let a = 0;a<option.cart_sub_item_count;a++){
 				let cart_sub_item = Cart_Logic.get_test_sub_item(cart_number,user_id,cart_item.id,parent_data_type,parent_id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count});
 				cart_item.cart_sub_item_list.push(cart_sub_item);
@@ -234,7 +235,7 @@ class Cart_Logic {
 		cart_sub_item.parent_item = item_blank;
 		return cart_sub_item;
 	};
-static get_test_list = (option) =>{
+	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.product_count+1;a++){
@@ -291,10 +292,10 @@ class Product_Logic {
 		let cart = DataItem.get_new(DataType.CART,Num.get_guid(),Field_Logic.get_test(cart_number,option));
 		cart.user_id = user_id;
 		cart.cart_number = cart_number;
-	if(option.get_cart_item){
-		let product_option = {product_count:option.cart_item_count,generate_id:true};
-		let product_list = Product_Logic.get_test_list(product_option);
-		cart.cart_item_list = [];
+		if(option.get_cart_item){
+			let product_option = {product_count:option.cart_item_count,generate_id:true};
+			let product_list = Product_Logic.get_test_list(product_option);
+			cart.cart_item_list = [];
 			for(let a = 0;a<product_list.length;a++){
 				let product_cart_item =Cart_Logic.get_test_item(cart_number,cart.id,user_id,product_list[a].data_type,product_list[a].id,{get_value:false,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count,generate_id:true});
 				product_cart_item.parent_item = product_list[a];
@@ -303,7 +304,7 @@ class Product_Logic {
 		}
 		return cart;
 	};
-static get_test_list = (option) =>{
+	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.product_count+1;a++){
@@ -451,16 +452,16 @@ class Event_Logic {
 		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
 		let event = DataItem.get_new(DataType.EVENT,0,Field_Logic.get_test(title,option));
 		if(!option.get_blank){
-		event.cost = Field_Logic.get_test_cost();
-		event.old_cost = Field_Logic.get_test_cost();
-		event.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
-		event.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
-		event.website = "Website "+String(Num.get_id());
-		event.location = "Location "+String(Num.get_id());
-		event.meeting_link = "Meeting Link "+String(Num.get_id());
-		event.stock = String(Num.get_id(3-1));
-		event.category ="Category " + String(Num.get_id());
-		event.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
+			event.cost = Field_Logic.get_test_cost();
+			event.old_cost = Field_Logic.get_test_cost();
+			event.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
+			event.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
+			event.website = "Website "+String(Num.get_id());
+			event.location = "Location "+String(Num.get_id());
+			event.meeting_link = "Meeting Link "+String(Num.get_id());
+			event.stock = String(Num.get_id(3-1));
+			event.category ="Category " + String(Num.get_id());
+			event.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
 		}else{
 			event.cost = "";
 			event.old_cost = "";
@@ -512,27 +513,27 @@ class Field_Logic {
 	static get_test = (title,option) =>{
 		option = !Obj.check_is_empty(option) ? option : {};
 		let item = {};
-			if(option.get_blank == true){
-				option.category_title = "";
-				 item = {
-					title:"",
-					title_url:"",
-					sub_note:"",
-					note:"",
-					date_create:"",
-					date_save:""
-				}
+		if(option.get_blank == true){
+			option.category_title = "";
+			item = {
+				title:"",
+				title_url:"",
+				sub_note:"",
+				note:"",
+				date_create:"",
+				date_save:""
+			}
 		}else{
-		 item = {
-			title:title,
-			setting_visible:"1",
-			title_url:Str.get_title_url(title),
-			sub_note:"Sub Note "+String(Num.get_id()),
-			note:Field_Logic.get_test_note(),
-			id:0,
-			date_create:new moment().toISOString(),
-			date_save:new moment().toISOString()
-		}
+			item = {
+				title:title,
+				setting_visible:"1",
+				title_url:Str.get_title_url(title),
+				sub_note:"Sub Note "+String(Num.get_id()),
+				note:Field_Logic.get_test_note(),
+				id:0,
+				date_create:new moment().toISOString(),
+				date_save:new moment().toISOString()
+			}
 		}
 		if(!Str.check_is_null(option.category_title)){
 			item.category =  'Category ' + Num.get_id();
@@ -548,7 +549,7 @@ class Field_Logic {
 			for(let a = 0; a<field_list.length;a++){
 				if(option.get_blank == true){
 					if(item[field_list[a]]){
-					item[field_list[a]] = "";
+						item[field_list[a]] = "";
 					}
 				}else{
 					if(!Str.check_is_null(field_list[a])){
@@ -870,6 +871,14 @@ class PageType {
 	static VALUE_17='value_17';
 	static VALUE_18='value_18';
 	static VALUE_19='value_19';
+	static get_title = (data_type) => {
+		if(!data_type){
+			return "";
+		}else{
+			return String(Str.get_title(data_type.replaceAll('_',' '))).trim();
+		}
+	}
+
 }
 class DataType {
 	static ACTIVITY='activity_biz';
@@ -914,7 +923,7 @@ class DataType {
 			if(data_type==DataType.GALLERY){
 				return 'Galleries';
 			}else{
-			return r_data_type + "s";
+				return r_data_type + "s";
 			}
 		}else{
 			return r_data_type;
@@ -1019,15 +1028,15 @@ class Faq_Logic {
 		let faq = DataItem.get_new(DataType.FAQ,0,Field_Logic.get_test(title,option));
 		for(let a=0;a<parseInt(option.question_count)+1;a++){
 			if(!option.get_blank){
-			let question_title = "FAQ Question " + String(parseInt(a+1));
-			let answer = "My answer "+ Num.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-			faq[Str.get_title_url(question_title).toLowerCase()] = answer;
-			faq['field_'+parseInt(a+1)] =question_title;
+				let question_title = "FAQ Question " + String(parseInt(a+1));
+				let answer = "My answer "+ Num.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+				faq[Str.get_title_url(question_title).toLowerCase()] = answer;
+				faq['field_'+parseInt(a+1)] =question_title;
 			}else{
-			let question_title = "";
-			let answer = "";
-			faq[Str.get_title_url(question_title).toLowerCase()] = answer;
-			faq['field_'+parseInt(a+1)] =question_title;
+				let question_title = "";
+				let answer = "";
+				faq[Str.get_title_url(question_title).toLowerCase()] = answer;
+				faq['field_'+parseInt(a+1)] =question_title;
 			}
 		}
 		return faq;
@@ -1062,6 +1071,18 @@ class Favorite_Logic {
 		return favorite;
 	}
 	static get_favorite_by_list = (favorite_list,item_list) =>{
+		favorite_list.forEach(item => {
+			const item_match = item_list.find(item_find => item_find.id === item.parent_id);
+			if (item_match) {
+				item_match.is_favorite = true;
+				console.log('aaaaaaa');
+				console.log(item_match);
+				console.log('bbbbbb');
+			}
+		});
+		return item_list;
+
+		/*
 		for(let a = 0; a<item_list.length; a++){
 			item_list[a].is_favorite = false;
 			for(let b = 0; b<favorite_list.length; b++){
@@ -1070,22 +1091,23 @@ class Favorite_Logic {
 				}
 			}
 		}
+		*/
 		return item_list;
 	}
 	static get_user_search_filter = (parent_data_type,user_id) =>{
-		 return {
-            $and: [
-            { parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
-            { user_id: { $regex:String(user_id), $options: "i" } }
-            ] };
+		return {
+			$and: [
+				{ parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
+				{ user_id: { $regex:String(user_id), $options: "i" } }
+			] };
 	}
 	static get_search_filter = (parent_data_type,parent_id,user_id) =>{
-		 return {
-            $and: [
-            { parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
-            { parent_id: { $regex:String(parent_id), $options: "i" } },
-            { user_id: { $regex:String(user_id), $options: "i" } }
-            ] };
+		return {
+			$and: [
+				{ parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
+				{ parent_id: { $regex:String(parent_id), $options: "i" } },
+				{ user_id: { $regex:String(user_id), $options: "i" } }
+			] };
 	}
 }
 class Review_Logic {
@@ -1101,29 +1123,29 @@ class Review_Logic {
 		});
 	}
 	static get_user_search_filter = (parent_data_type,user_id) =>{
-		 return {
-            $and: [
-            { parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
-            { user_id: { $regex:String(user_id), $options: "i" } }
-            ] };
+		return {
+			$and: [
+				{ parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
+				{ user_id: { $regex:String(user_id), $options: "i" } }
+			] };
 	}
 	static get_search_filter = (parent_data_type,parent_id) =>{
-		 return {
-            $and: [
-            { parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
-            { parent_id: { $regex:String(parent_id), $options: "i" } },
-            ] };
+		return {
+			$and: [
+				{ parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
+				{ parent_id: { $regex:String(parent_id), $options: "i" } },
+			] };
 	}
 	static get_test = (parent_data_type,parent_id,user_id,option) =>{
 		option = Field_Logic.get_option(DataType.REVIEW,option?option:{});
 		let review = DataItem.get_new(DataType.REVIEW,0);
 		if(!option.get_blank){
-		review.title = 'Title ' + Num.get_id();
-		review.parent_data_type = parent_data_type;
-		review.parent_id = parent_id;
-		review.rating = Num.get_id(6);
-		review.user_id = user_id;
-		review.comment = "My comment "+ Field_Logic.get_test_note();
+			review.title = 'Title ' + Num.get_id();
+			review.parent_data_type = parent_data_type;
+			review.parent_id = parent_id;
+			review.rating = Num.get_id(6);
+			review.user_id = user_id;
+			review.comment = "My comment "+ Field_Logic.get_test_note();
 		}else{
 			review.title = '';
 			review.parent_data_type = parent_data_type;
@@ -1207,31 +1229,31 @@ class Business_Logic {
 		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
 		let business = DataItem.get_new(DataType.BUSINESS,0,Field_Logic.get_test(title,option));
 		if(!option.get_blank){
-		business.email="ceo@business"+Num.get_id()+".com";
-		business.phone=Num.get_id(parseInt(777+100)) + "-" + Num.get_id(parseInt(777+100)) + "-"+Num.get_id(parseInt(7777+1000));
-		business.address_1=Num.get_id(99)+" Main St.";
-		business.address_2="PO "+Num.get_id(99);
-		business.city=city_list[Num.get_id(city_list.length-1)];
-		business.state=state_list[Num.get_id(state_list.length-1)];
-		business.zip=Num.get_id(parseInt(77777+1000));
-		business.website="website_" + Num.get_id(9999);
-		business.youtube="youtube_"+Num.get_id(9999);
-		business.instagram="instagram_"+Num.get_id(9999);
-		business.facebook="facebook_"+Num.get_id(9999);
-		business.twitter="twitter_"+Num.get_id(9999);
+			business.email="ceo@business"+Num.get_id()+".com";
+			business.phone=Num.get_id(parseInt(777+100)) + "-" + Num.get_id(parseInt(777+100)) + "-"+Num.get_id(parseInt(7777+1000));
+			business.address_1=Num.get_id(99)+" Main St.";
+			business.address_2="PO "+Num.get_id(99);
+			business.city=city_list[Num.get_id(city_list.length-1)];
+			business.state=state_list[Num.get_id(state_list.length-1)];
+			business.zip=Num.get_id(parseInt(77777+1000));
+			business.website="website_" + Num.get_id(9999);
+			business.youtube="youtube_"+Num.get_id(9999);
+			business.instagram="instagram_"+Num.get_id(9999);
+			business.facebook="facebook_"+Num.get_id(9999);
+			business.twitter="twitter_"+Num.get_id(9999);
 		}else{
-		business.email="";
-		business.phone="";
-		business.address_1="";
-		business.address_2="";
-		business.city="";
-		business.state="";
-		business.zip="";
-		business.website="";
-		business.youtube="";
-		business.instagram="";
-		business.facebook="";
-		business.twitter="";
+			business.email="";
+			business.phone="";
+			business.address_1="";
+			business.address_2="";
+			business.city="";
+			business.state="";
+			business.zip="";
+			business.website="";
+			business.youtube="";
+			business.instagram="";
+			business.facebook="";
+			business.twitter="";
 		}
 		return business;
 	};
