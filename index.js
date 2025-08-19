@@ -4,16 +4,19 @@ Author: certifiedcoderz@gmail.com (Certified CoderZ)
 License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
-const moment = require('moment'); const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
+const moment = require('moment');
+const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
 const { Log,Str,DateTime,Num,Obj } = require('/home/think2/www/doqbox/biz9-framework/biz9-utility/code');
 class Message {
 	static SUCCESS="Success";
+	static CONFIRM="Are You Sure?";
 
 	static USER_LOGIN_SUCCESS="Login Success";
 	static USER_LOGIN_BAD="Login Incorrect";
 	static USER_REGISTER_SUCCESS="Register Success";
 	static USER_REGISTER_BAD="Register Fail";
 	static USER_EMAIL_NOT_VALID="Please Enter A Valid Email.";
+	static USER_EMAIL_NEW_CONFIRM_BAD="The New and Confirm Email Dont Match.";
 	static USER_PASSWORD_NOT_VALID="Please Enter A Valid Password.";
 	static USER_EMAIL_NOT_UNIQUE="E-mail Not Availble. Please Choose Another.";
 	static USER_USERNAME_NOT_VALID="Please Enter A Valid Username.";
@@ -796,6 +799,9 @@ class FieldType {
 	static ENVIRONMENT_TEST="test";
 	static ENVIRONMENT_STAGE="stage";
 	static ENVIRONMENT_PRODUCTION="production";
+
+	static ACTIVITY_TYPE_LOGIN="login";
+	static ACTIVITY_TYPE_REGISTER="register";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
