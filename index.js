@@ -8,17 +8,16 @@ const moment = require('moment'); const { get_new_item_main,get_data_config_main
 const { Log,Str,DateTime,Num,Obj } = require('/home/think2/www/doqbox/biz9-framework/biz9-utility/code');
 class Message {
 	static SUCCESS="Success";
-	static LOGIN_GOOD="Login Success";
-	static LOGIN_BAD="Login Incorrect";
 
-	static ERROR_TITLE_NOT_VALID="Please Enter A Valid Title.";
-	static ERROR_TITLE_NOT_UNIQUE="Title Not Availble. Please Choose Another.";
-
-	static ERROR_USERNAME_NOT_VALID="Please Enter A Valid Username";
-	static ERROR_USERNAME_NOT_UNIQUE="Username Not Availble. Please Choose Another.";
-
-	static ERROR_EMAIL_NOT_VALID="Please Enter A Valid Email.";
-	static ERROR_EMAIL_NOT_UNIQUE="E-mail Not Availble. Please Choose Another.";
+	static USER_LOGIN_SUCCESS="Login Success";
+	static USER_LOGIN_BAD="Login Incorrect";
+	static USER_REGISTER_SUCCESS="Register Success";
+	static USER_REGISTER_BAD="Register Fail";
+	static USER_EMAIL_NOT_VALID="Please Enter A Valid Email.";
+	static USER_PASSWORD_NOT_VALID="Please Enter A Valid Password.";
+	static USER_EMAIL_NOT_UNIQUE="E-mail Not Availble. Please Choose Another.";
+	static USER_USERNAME_NOT_VALID="Please Enter A Valid Username.";
+	static USER_USERNAME_NOT_UNIQUE="Username Not Availble. Please Choose Another.";
 
 	static DATA_NOT_FOUND="Data Not Found.";
 	static SYSTEM_NOT_FOUND="System Not Found.";
@@ -29,6 +28,7 @@ class Message {
 
 	static REVIEW_ADD_SUCCESS="Review Add Success.";
 	static REVIEW_REMOVE_SUCCESS="Review Remove Success.";
+	static REVIEW_USER_LOGIN="Please Login To Add Review.";
 }
 class TemplateType {
 	static PRIMARY='primary';
