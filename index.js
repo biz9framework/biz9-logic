@@ -22,6 +22,7 @@ class Message {
 	static USER_EMAIL_NOT_UNIQUE="Email Not Availble. Please Choose Another.";
 	static USER_USERNAME_BAD="Please Enter A Valid Username.";
 	static USER_USERNAME_NOT_UNIQUE="Username Not Availble. Please Choose Another.";
+	static ITEM_TITLE_BAD="Please Enter A Valid Title.";
 
 	static DATA_NOT_FOUND="Data Not Found.";
 	static SYSTEM_NOT_FOUND="System Not Found.";
