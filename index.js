@@ -1490,7 +1490,7 @@ class Favorite_Url {
 	};
 }
 class Item_Url {
-	static post_cms_item  = (app_id,url,data_type,id,params) => {
+	static post_cms = (app_id,url,data_type,id,params) => {
 		let action_url = "item/post_cms_item/"+data_type+"/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
