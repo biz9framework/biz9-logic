@@ -34,6 +34,7 @@ describe("connect", () => {
                 console.log('PAGE-SECTION-START');
                 //console.log(Page_Logic.get_section_property('text',1,2,false));
                 console.log(Page_Logic.get_section_property_list(FieldType.SECTION_PROPERTY_TYPE_LIST_VALUE,1,2,3));
+                console.log(Page_Logic.get_section_property_list(FieldType.SECTION_PROPERTY_TYPE_LIST_FIELD,1,2,3));
                 console.log('PAGE-SECTION-END');
 
 
