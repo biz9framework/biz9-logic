@@ -1930,6 +1930,12 @@ class User_Logic {
 		}
 		return country_state_city;
 	}
+	static get_full_name(first_name,last_name){
+		let str_first_name = !Str.check_is_null(first_name) ? first_name : "";
+		let str_last_name = !Str.check_is_null(last_name) ? last_name : "";
+		return !Str.check_is_null(String(str_first_name + " " + str_last_name)) ? String(str_first_name + " " + str_last_name).trim() : "N/A";
+
+	}
 	static get_guest(){
 		return DataItem.get_new(DataType.USER,0,{is_guest:true,title_url:'guest',first_name:'Guest',last_name:'User',email:'guest@email.com',title:"Guest",country:"United States"});
 	}

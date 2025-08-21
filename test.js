@@ -31,9 +31,11 @@ describe("connect", () => {
         series([
 
             function(call) {
-                console.log('USER-START');
-                console.log(User_Logic.get_guest());
-                console.log('USER-END');
+                console.log('FULL-NAME-START');
+                console.log(User_Logic.get_full_name('',''));
+
+                console.log('FULL-NAME-END');
+
 
                 //console.log('PRODUCT-URL-START');
                 //console.log(Product_Url.search('cool','google.com'));
