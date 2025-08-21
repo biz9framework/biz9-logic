@@ -191,7 +191,7 @@ class Page_Logic {
 		}
 		return item_list;
 	};
-	static get_page_section_type_list = () => {
+	static get_section_type_list = () => {
 		return [
 			{value:'text',label:'Text'},
 			{value:'note',label:'Note'},
