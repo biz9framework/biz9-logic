@@ -190,7 +190,15 @@ class Page_Logic {
 			item_list.push(Page_Logic.get_test( "Page " +parseInt(a+1)? !option.get_blank : "",option));
 		}
 		return item_list;
-	}
+	};
+	static get_page_section_type_list = () => {
+		return [
+			{value:'text',label:'Text'},
+			{value:'note',label:'Note'},
+			{value:'photo',label:'Photo'},
+			{value:'list',label:'List'},
+		];
+	};
 	static get_section_property = (type,section_id,value_id,is_title) =>{
 		//page['section_1_value_1_type'] -- / text,note,photo,list
     	//page['section_1_value_1_text_value']
@@ -225,7 +233,7 @@ class Page_Logic {
     	//page['section_1_value_1_list_value_2']
     	//page['section_1_value_1_list_field_3']
     	//page['section_1_value_1_list_value_3']
-		//      section_1_value_2_list_field_value_3
+		//section_1_value_2_list_field_value_3
 		let type_str = '';
 		switch(type){
 			case 'field':
@@ -235,7 +243,6 @@ class Page_Logic {
 				type_str = 'value';
 				break;
 		};
-
 		return 'section_'+section_id + '_value_'+value_id + "_list_" + type_str +"_" +row_id;
 	}
 }
