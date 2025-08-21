@@ -31,10 +31,9 @@ describe("connect", () => {
         series([
 
             function(call) {
-                console.log('FULL-NAME-START');
-                console.log(User_Logic.get_full_name('',''));
-
-                console.log('FULL-NAME-END');
+                console.log('PAGE-SECTION-START');
+                console.log(Page_Logic.get_section_property('text',1,2,false));
+                console.log('PAGE-SECTION-END');
 
 
                 //console.log('PRODUCT-URL-START');

@@ -191,6 +191,31 @@ class Page_Logic {
 		}
 		return item_list;
 	}
+	static get_section_property = (type,section_id,value_id,is_title) =>{
+		//page['section_1_value_1_type'] -- / text,note,photo,list
+    	//page['section_1_value_1_text_value']
+    	//page['section_1_value_1_note_value']
+    	//page['section_1_value_1_photo_value']
+    	//page['section_1_value_1_list_value_1']
+    	//page['section_1_value_1_list_value_2']
+    	//page['section_1_value_1_list_value_3']
+		let type_str = '';
+		switch(type){
+			case 'text':
+				type_str = 'text';
+				break;
+			case 'note':
+				type_str = 'note';
+				break;
+			case 'photo':
+				type_str = 'photo';
+				break;
+			case 'list':
+				type_str = 'list';
+				break;
+		};
+		return !is_title ? 'section_'+section_id + '_value_'+value_id + "_" + type_str + "_value"  : 'Section '+section_id + ' Value '+value_id + " " + Str.get_title(type_str);
+	}
 }
 class Order_Logic {
 	static get_order_number = () => {
@@ -893,6 +918,10 @@ class PageType {
 
 }
 class DataType {
+
+	static SECTION='section';
+	static SUB_SECTION='sub_section';
+
 	static ACTIVITY='activity_biz';
 	static APP='app_biz';
 	static BLANK='blank_biz';
