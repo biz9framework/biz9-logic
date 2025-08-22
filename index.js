@@ -199,14 +199,8 @@ class Page_Logic {
 			{value:'list',label:'List'},
 		];
 	};
-	static get_section_property = (type,section_id,value_id,is_title) =>{
+	static get_section_property_type = (type,section_id,value_id,is_title) =>{
 		//page['section_1_value_1_type'] -- / text,note,photo,list
-    	//page['section_1_value_1_text_value']
-    	//page['section_1_value_1_note_value']
-    	//page['section_1_value_1_photo_value']
-    	//page['section_1_value_1_list_value_1']
-    	//page['section_1_value_1_list_value_2']
-    	//page['section_1_value_1_list_value_3']
 		let type_str = '';
 		switch(type){
 			case 'text':
@@ -222,7 +216,26 @@ class Page_Logic {
 				type_str = 'list';
 				break;
 		};
-		return !is_title ? 'section_'+section_id + '_value_'+value_id + "_" + type_str + "_value"  : 'Section '+section_id + ' Value '+value_id + " " + Str.get_title(type_str);
+		return !is_title ? 'section_'+section_id + '_value_'+value_id + "_type" : 'Section '+section_id + ' Value '+value_id;
+	}
+	static get_section_property_type_value = (type,section_id,value_id) =>{
+    	//page['section_1_value_1_[text,note,photo,list]_value']
+		let type_str = '';
+		switch(type){
+			case 'text':
+				type_str = 'text';
+				break;
+			case 'note':
+				type_str = 'note';
+				break;
+			case 'photo':
+				type_str = 'photo';
+				break;
+			case 'list':
+				type_str = 'list';
+				break;
+		};
+		return 'section_'+section_id + '_value_'+value_id + "_" + type_str + "_value";
 	}
 
 	static get_section_property_list = (type,section_id,value_id,row_id) =>{
