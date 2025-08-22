@@ -200,10 +200,12 @@ class Page_Logic {
 		];
 	};
 	static get_section_property_type = (section_id,value_id,is_title) =>{
+		//section_1_value_1_type
 		//page['section_1_value_1_type'] -- / text,note,photo,list
 		return !is_title ? 'section_'+section_id + '_value_'+value_id + "_type" : 'Section '+section_id + ' Value '+value_id;
 	}
 	static get_section_property_type_value = (type,section_id,value_id) =>{
+		//section_1_value_1_text_value
     	//page['section_1_value_1_[text,note,photo,list]_value']
 		let type_str = '';
 		switch(type){
@@ -223,7 +225,7 @@ class Page_Logic {
 		return 'section_'+section_id + '_value_'+value_id + "_" + type_str + "_value";
 	}
 
-	static get_section_property_list = (type,section_id,value_id,row_id) =>{
+	static get_section_property_type_list = (type,section_id,value_id,row_id) =>{
 		//page['section_1_value_1_type'] -- / list
 		//page['section_1_value_1_list_field_1']
     	//page['section_1_value_1_list_value_1']
