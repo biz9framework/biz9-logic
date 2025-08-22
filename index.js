@@ -199,23 +199,8 @@ class Page_Logic {
 			{value:'list',label:'List'},
 		];
 	};
-	static get_section_property_type = (type,section_id,value_id,is_title) =>{
+	static get_section_property_type = (section_id,value_id,is_title) =>{
 		//page['section_1_value_1_type'] -- / text,note,photo,list
-		let type_str = '';
-		switch(type){
-			case 'text':
-				type_str = 'text';
-				break;
-			case 'note':
-				type_str = 'note';
-				break;
-			case 'photo':
-				type_str = 'photo';
-				break;
-			case 'list':
-				type_str = 'list';
-				break;
-		};
 		return !is_title ? 'section_'+section_id + '_value_'+value_id + "_type" : 'Section '+section_id + ' Value '+value_id;
 	}
 	static get_section_property_type_value = (type,section_id,value_id) =>{
