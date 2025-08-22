@@ -1588,6 +1588,10 @@ class Page_Url {
 		let action_url=PageType.get_title(PageType.HOME);
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static post_section = (app_id,url,page_id,params) => {
+		let action_url="page/post_section/"+page_id;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 }
 class Url{
 	static copy = (app_id,url,data_type,id,params) => {
