@@ -862,13 +862,13 @@ class FieldType {
 	static ACTIVITY_TYPE_LOGIN="login";
 	static ACTIVITY_TYPE_REGISTER="register";
 
-	static SECTION_PROPERTY_TYPE_TEXT="text";
-	static SECTION_PROPERTY_TYPE_NOTE="note";
-	static SECTION_PROPERTY_TYPE_PHOTO="photo";
-	static SECTION_PROPERTY_TYPE_LIST="list";
+	static SECTION_TYPE_TEXT="text";
+	static SECTION_TYPE_NOTE="note";
+	static SECTION_TYPE_PHOTO="photo";
+	static SECTION_TYPE_LIST="list";
 
-	static SECTION_PROPERTY_TYPE_LIST_FIELD="field";
-	static SECTION_PROPERTY_TYPE_LIST_VALUE="value";
+	static SECTION_TYPE_LIST_FIELD="field";
+	static SECTION_TYPE_LIST_VALUE="value";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
