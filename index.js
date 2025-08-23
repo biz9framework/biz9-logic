@@ -805,6 +805,7 @@ class FieldType {
 	static STAT_ORDER_ADD_ID='5';
 	static STAT_REVIEW_ADD_ID='6';
 
+	/*
 	static KEY_ADMIN="key_admin";
 	static KEY_APP_ID="key_app_id";
 	static KEY_BUSINESS="key_business";
@@ -812,6 +813,7 @@ class FieldType {
 	static KEY_CART="key_cart";
 	static KEY_ORDER="key_order";
 	static KEY_USER="key_user";
+	*/
 
 	static ORDER_NUMBER="OR-";
 	static CART_NUMBER="CA-";
