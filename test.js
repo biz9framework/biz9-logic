@@ -32,6 +32,7 @@ describe("connect", () => {
 
             function(call) {
                 //console.log('PAGE-SECTION-START');
+                console.log(Page_Logic.get_page_section('text',1,2,3,'cool',null));
                 //console.log(Page_Logic.get_page_section_type_list());
                 //console.log(Page_Logic.get_section_property_type(1,2,true));
                 //console.log(Page_Logic.get_section_property_type_value('text',1,2,true));
