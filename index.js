@@ -228,25 +228,13 @@ class Page_Logic {
 		return 'section_'+section_id + '_value_'+value_id + "_" + type_str + "_value";
 	}
 
-	static get_section_property_type_list = (type,section_id,value_id,row_id) =>{
+	static get_section_property_type_list_value = (section_id,value_id,row_id) =>{
 		//page['section_1_value_1_type'] -- / list
-		//page['section_1_value_1_list_field_1']
     	//page['section_1_value_1_list_value_1']
-    	//page['section_1_value_1_list_field_2']
     	//page['section_1_value_1_list_value_2']
-    	//page['section_1_value_1_list_field_3']
     	//page['section_1_value_1_list_value_3']
 		//section_1_value_2_list_field_value_3
-		let type_str = '';
-		switch(type){
-			case 'field':
-				type_str = 'field';
-				break;
-			case 'value':
-				type_str = 'value';
-				break;
-		};
-		return 'section_'+section_id + '_value_'+value_id + "_list_" + type_str +"_" +row_id;
+		return 'section_'+section_id + '_value_'+value_id + "_list_value_" +row_id;
 	}
 }
 class Order_Logic {
