@@ -191,8 +191,8 @@ class Page_Logic {
 		}
 		return item_list;
 	};
-	static get_page_section = (type,page_id,section_id,value_id,value,item_list) => {
-		return {type:type,page_id:page_id,section_id:section_id,value_id:value_id,value:value,item_list:item_list};
+	static get_page_section = (type,page_id,section_id,value_id,value,value_list) => {
+		return {type:type,page_id:page_id,section_id:section_id,value_id:value_id,value:value,value_list:value_list};
 	};
 	static get_section_type_list = () => {
 		return [
