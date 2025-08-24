@@ -191,10 +191,18 @@ class Page_Logic {
 		}
 		return item_list;
 	};
-	static get_page_section = (type,page_id,section_id,value_id,value,value_list) => {
-		return {type:type,page_id:page_id,section_id:section_id,value_id:value_id,value:value,value_list:value_list};
+	//text_value_1
+	//note_value_1
+	//photo_value_1
+	//list_value_1
+	//list_value_1_1
+	//list_value_1_2
+	//list_value_1_3
+	//page['section_1_value_1_type'] -- / text,note,photo,list
+	static get_page_value_field = (type,page_id,value_id,value,value_list) => {
+		return {type:type,page_id:page_id,value_id:value_id,value:value,value_list:value_list};
 	};
-	static get_section_type_list = () => {
+	static get_page_value_type_list = () => {
 		return [
 			{value:'text',label:'Text'},
 			{value:'note',label:'Note'},
@@ -202,39 +210,50 @@ class Page_Logic {
 			{value:'list',label:'List'},
 		];
 	};
-	static get_section_property_type = (section_id,value_id,is_title) =>{
-		//section_1_value_1_type
-		//page['section_1_value_1_type'] -- / text,note,photo,list
-		return !is_title ? 'section_'+section_id + '_value_'+value_id + "_type" : 'Section '+section_id + ' Value '+value_id;
+	static get_page_value = (type,page_id,value_id,value,value_list) => {
+       return {type:type,page_id:page_id,value_id:value_id,value:value,value_list:value_list};
+    };
+	static get_page_value_field_value = (type,page,value_id) =>{
+		//text_value_1
+    	//page['[text,note,photo]_value_1']
+		switch(type){
+			case FieldType.PAGE_VALUE_FIELD_TYPE_TEXT:
+			case FieldType.PAGE_VALUE_FIELD_TYPE_NOTE:
+			case FieldType.PAGE_VALUE_FIELD_TYPE_PHOTO:
+				return !Str.check_is_null(page[Page_Logic.get_page_value_field_title(type,value_id)]) ? page[Page_Logic.get_page_value_field_title(type,value_id)] : "";
+				break;
+			case FieldType.PAGE_VALUE_FIELD_TYPE_LIST:
+				let r_list = [];
+				for(let a=0;a<30;a++){
+					if(!Str.check_is_null(page[Page_Logic.get_page_value_field_title(type,value_id,a+1)])){
+						r_list.push(page[Page_Logic.get_page_value_field_title(type,value_id,a+1)]);
+					}
+				}
+				return r_list;
+				break;
+			default:
+				return "";
+		};
 	}
-	static get_section_property_type_value = (type,section_id,value_id) =>{
-		//section_1_value_1_text_value
-    	//page['section_1_value_1_[text,note,photo,list]_value']
+	static get_page_value_field_title = (type,value_id,row_id) =>{
+		//text_value_1
 		let type_str = '';
 		switch(type){
-			case 'text':
-				type_str = 'text';
+			case FieldType.PAGE_VALUE_FIELD_TYPE_TEXT:
+				return 'text'+'_value_'+value_id;
 				break;
-			case 'note':
-				type_str = 'note';
+			case FieldType.PAGE_VALUE_FIELD_TYPE_NOTE:
+				return 'note'+'_value_'+value_id;
 				break;
-			case 'photo':
-				type_str = 'photo';
+			case FieldType.PAGE_VALUE_FIELD_TYPE_PHOTO:
+				return 'photo'+'_value_'+value_id;
 				break;
-			case 'list':
-				type_str = 'list';
+			case FieldType.PAGE_VALUE_FIELD_TYPE_LIST:
+				return 'list'+'_value_'+value_id +'_row_'+row_id;
 				break;
+			default:
+				return "";
 		};
-		return 'section_'+section_id + '_value_'+value_id + "_" + type_str + "_value";
-	}
-
-	static get_section_property_type_list_value = (section_id,value_id,row_id) =>{
-		//page['section_1_value_1_type'] -- / list
-    	//page['section_1_value_1_list_value_1']
-    	//page['section_1_value_1_list_value_2']
-    	//page['section_1_value_1_list_value_3']
-		//section_1_value_2_list_field_value_3
-		return 'section_'+section_id + '_value_'+value_id + "_list_value_" +row_id;
 	}
 }
 class Order_Logic {
@@ -852,13 +871,10 @@ class FieldType {
 	static ACTIVITY_TYPE_LOGIN="login";
 	static ACTIVITY_TYPE_REGISTER="register";
 
-	static SECTION_TYPE_TEXT="text";
-	static SECTION_TYPE_NOTE="note";
-	static SECTION_TYPE_PHOTO="photo";
-	static SECTION_TYPE_LIST="list";
-
-	static SECTION_TYPE_LIST_FIELD="field";
-	static SECTION_TYPE_LIST_VALUE="value";
+	static PAGE_VALUE_FIELD_TYPE_TEXT="text";
+	static PAGE_VALUE_FIELD_TYPE_NOTE="note";
+	static PAGE_VALUE_FIELD_TYPE_PHOTO="photo";
+	static PAGE_VALUE_FIELD_TYPE_LIST="list";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";

@@ -32,7 +32,17 @@ describe("connect", () => {
 
             function(call) {
                 //console.log('PAGE-SECTION-START');
-                console.log(Page_Logic.get_page_section('text',1,2,3,'cool',null));
+                let page = Page_Logic.get_test();
+                //page[Page_Logic.get_page_value_field_title('text',1)] = 'apple';
+                page[Page_Logic.get_page_value_field_title('list',1,1)] = 'cool';
+                page[Page_Logic.get_page_value_field_title('list',1,2)] = 'apple';
+                page[Page_Logic.get_page_value_field_title('list',1,3)] = 'sauce';
+                //Log.w('page',page);
+                Log.w('list_1_value',Page_Logic.get_page_value_field_value(FieldType.PAGE_VALUE_TYPE_LIST,page,1));
+                //Log.w('list_1_value',Page_Logic.get_page_value_field_value(FieldType.PAGE_VALUE_TYPE_LIST,1,1));
+
+
+                //console.log(Page_Logic.get_page_value_field_title('text',1));
                 //console.log(Page_Logic.get_page_section_type_list());
                 //console.log(Page_Logic.get_section_property_type(1,2,true));
                 //console.log(Page_Logic.get_section_property_type_value('text',1,2,true));
