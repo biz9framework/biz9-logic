@@ -451,7 +451,7 @@ class Content_Logic {
 class Template_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
+		option = Field_Logic.get_option(DataType.TEMPLATE,option?option:{});
 		let template = DataItem.get_new(DataType.TEMPLATE,0,Field_Logic.get_test(title,option));
 		return template;
 	};
@@ -497,6 +497,25 @@ class Blog_Post_Logic {
 		return [category_list,blog_post_list]
 	};
 }
+class Gallery_Logic {
+	static get_test = (title,option) =>{
+		[title,option] = Field_Logic.get_option_title(title,option);
+		option = Field_Logic.get_option(DataType.GALLERY,option?option:{});
+		let gallery = DataItem.get_new(DataType.GALLERY,0,Field_Logic.get_test(title,option));
+		if(!option.get_blank){
+			gallery.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
+			gallery.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
+			gallery.website = "Website "+String(Num.get_id());
+		}else{
+			gallery.website = "";
+		}
+		if(option.get_item){
+			gallery.items = Sub_Item_Logic.get_test_list(gallery,gallery,option);
+		}
+		return gallery;
+	};
+};
+
 class Event_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
@@ -759,7 +778,6 @@ class Field_Logic {
 
 		option.user_count = req.query.user_count ? req.query.user_count : 9;
 		option.get_admin = req.query.get_admin ? req.query.get_admin : false;
-		option.get_business = req.query.get_business ? req.query.get_business : false;
 		option.get_template = req.query.get_template ? req.query.get_template : false;
 		option.get_page = req.query.get_page ? req.query.get_page : false;
 
@@ -807,7 +825,6 @@ class FieldType {
 	/*
 	static KEY_ADMIN="key_admin";
 	static KEY_APP_ID="key_app_id";
-	static KEY_BUSINESS="key_business";
 	static KEY_TEMPLATE="key_template";
 	static KEY_CART="key_cart";
 	static KEY_ORDER="key_order";
@@ -867,9 +884,12 @@ class PageType {
 	static HOME='home';
 	static ABOUT='about';
 	static CONTACT='contact';
+	static FAQ='faq';
+	static SEARCH='search';
 
 	static BLOG_POST='blog_post';
 	static BLOG_POST_DETAIL='blog_post_detail';
+
 
 	static CATEGORY='category';
 	static CATEGORY_DETAIL='category_detail';
@@ -944,7 +964,6 @@ class DataType {
 	static ACTIVITY='activity_biz';
 	static APP='app_biz';
 	static BLANK='blank_biz';
-	static BUSINESS='business_biz';
 	static BLOG_POST='blog_post_biz';
 	static CART_ITEM="cart_item_biz";
 	static CATEGORY='category_biz';
@@ -1028,8 +1047,6 @@ class DataType {
 				return 'content';
 			case DataType.ITEM:
 				return 'item';
-			case DataType.BUSINESS:
-				return 'business';
 			case DataType.CUSTOM_FIELD:
 				return 'custom_field';
 		}
@@ -1242,73 +1259,6 @@ class Admin_Logic {
 		admin.state = (admin.state) ? admin.state : "";
 		admin.zip = (admin.zip) ? admin.zip : "";
 		return admin.address_1 + " "+ admin.address_2 + " " + admin.city + " " + admin.state + " " + admin.zip;
-	}
-}
-class Business_Logic {
-	static get_new = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		return DataItem.get_new_full_item(
-			DataItem.get_new(DataType.BUSINESS,0),
-			DataItem.get_new(DataType.BUSINESS,0),
-			DataItem.get_new(DataType.BUSINESS,0),{
-				title:title,
-				email:"",
-				phone:"",
-				address_1:"",
-				address_2:"",
-				city:"",
-				state:"",
-				zip:"",
-				website:"",
-				youtube:"",
-				instagram:"",
-				facebook:"",
-				twitter:""
-			});
-	};
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.BUSINESS,option?option:{});
-		let item = DataItem.get_new(DataType.BUSINESS,0);
-		let city_list = ["Miami","Atlanta","Chicago","Seattle","New York City"];
-		let state_list = ["Georgia","New York","Illinois","Washington","Flordia"];
-		let business = DataItem.get_new(DataType.BUSINESS,0,Field_Logic.get_test(title,option));
-		if(!option.get_blank){
-			business.email="ceo@business"+Num.get_id()+".com";
-			business.phone=Num.get_id(parseInt(777+100)) + "-" + Num.get_id(parseInt(777+100)) + "-"+Num.get_id(parseInt(7777+1000));
-			business.address_1=Num.get_id(99)+" Main St.";
-			business.address_2="PO "+Num.get_id(99);
-			business.city=city_list[Num.get_id(city_list.length-1)];
-			business.state=state_list[Num.get_id(state_list.length-1)];
-			business.zip=Num.get_id(parseInt(77777+1000));
-			business.website="website_" + Num.get_id(9999);
-			business.youtube="youtube_"+Num.get_id(9999);
-			business.instagram="instagram_"+Num.get_id(9999);
-			business.facebook="facebook_"+Num.get_id(9999);
-			business.twitter="twitter_"+Num.get_id(9999);
-		}else{
-			business.email="";
-			business.phone="";
-			business.address_1="";
-			business.address_2="";
-			business.city="";
-			business.state="";
-			business.zip="";
-			business.website="";
-			business.youtube="";
-			business.instagram="";
-			business.facebook="";
-			business.twitter="";
-		}
-		return business;
-	};
-	static get_full_address(business){
-		business.address_1 = (business.address_1) ? business.address_1 : "";
-		business.address_2 = (business.address_2) ? business.address_2 : "";
-		business.city = (business.city) ? business.city : "";
-		business.state = (business.state) ? business.state : "";
-		business.zip = (business.zip) ? business.zip : "";
-		return business.address_1 + " "+ business.address_2 + " " + business.city + " " + business.state + " " + business.zip;
 	}
 }
 class DataItem {
@@ -2036,7 +1986,6 @@ class App_Logic {
 module.exports = {
 	App_Logic,
 	Admin_Logic,
-	Business_Logic,
 	Blank_Logic,
 	Blog_Post_Logic,
 	Blog_Post_Url,
@@ -2054,6 +2003,7 @@ module.exports = {
 	FieldType,
 	Faq_Logic,
 	Favorite_Logic,
+	Gallery_Logic,
 	Gallery_Url,
 	Item_Logic,
 	Item_Url,

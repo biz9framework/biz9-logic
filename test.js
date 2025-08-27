@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic,Faq_Url,App_Logic,FieldType,Product_Url} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic,Faq_Url,App_Logic,FieldType,Product_Url,Gallery_Logic} = require('./index');
 const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -31,10 +31,10 @@ describe("connect", () => {
         series([
 
             function(call) {
-                console.log('TEMPLATE-START');
-                let template = Template_Logic.get_test('Header',{get_blank:true});
-                console.log(template);
-                console.log('TEMPLATE-END');
+                console.log('ITEM-START');
+                let gallery = Gallery_Logic.get_test('Gallery 1',{get_blank:true});
+                console.log(gallery);
+                console.log('ITEM-END');
                 //let page = Page_Logic.get_test();
                 //page[Page_Logic.get_page_value_field_title(FieldType.PAGE_VALUE_FIELD_TYPE_TEXT,1)] = 'apple';
                 //page[Page_Logic.get_page_value_field_title('list',1,1)] = 'cool';
