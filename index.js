@@ -146,32 +146,6 @@ class Stat_Logic {
 		}
 	}
 }
-class Template_Logic {
-	static get_test = (title,option) =>{
-		if(!Str.check_is_null(title) && Obj.check_is_empty(option)){
-			option = title;
-			title = "Test " + Num.get_id();
-		}
-		option = Field_Logic.get_option(DataType.TEMPLATE,option?option:{});
-		let template = DataItem.get_new(DataType.TEMPLATE,0,Field_Logic.get_test(title,option));
-		if(option.get_item){
-			let title_list = ['Header','Body','Footer','Navigation']
-			//template.items = Sub_Item_Logic.get_test_list(template,template,option);
-			template.items = [];
-			for(let a = 0; a<title_list.length;a++){
-				let item = Sub_Item_Logic.get_test(title_list[a],template,template,option);
-				item.items = Sub_Item_Logic.get_test_section_list(item,template,option);
-				item = Sub_Item_Logic.bind_parent_child_list(item,item.items);
-				template.items.push(item);
-				//template.items.push(Sub_Item_Logic.get_test(title_list[a],template,template,option));
-			}
-			if(option.get_item_bind){
-				template = Sub_Item_Logic.bind_parent_child_list(template,template.items);
-			}
-		}
-		return template;
-	};
-}
 class Page_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
@@ -474,6 +448,14 @@ class Content_Logic {
 		return [category_list,content_list]
 	};
 }
+class Template_Logic {
+	static get_test = (title,option) =>{
+		[title,option] = Field_Logic.get_option_title(title,option);
+		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
+		let template = DataItem.get_new(DataType.TEMPLATE,0,Field_Logic.get_test(title,option));
+		return template;
+	};
+}
 class Blog_Post_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
@@ -585,12 +567,10 @@ class Field_Logic {
 		if(option.get_blank == true){
 			option.category_title = "";
 			item = {
-				title:"",
-				title_url:"",
-				sub_note:"",
-				note:"",
-				date_create:"",
-				date_save:""
+				title:title,
+				title_url:title,
+				title_url:Str.get_title_url(title),
+				setting_visible:"1",
 			}
 		}else{
 			item = {
@@ -889,31 +869,24 @@ class PageType {
 	static CONTACT='contact';
 
 	static BLOG_POST='blog_post';
-	static BLOG_POST_BROWSE='blog_post_browse';
 	static BLOG_POST_DETAIL='blog_post_detail';
 
 	static CATEGORY='category';
-	static CATEGORY_BROWSE='category_browse';
 	static CATEGORY_DETAIL='category_detail';
 
 	static EVENT='event';
-	static EVENT_BROWSE='event_browse';
 	static EVENT_DETAIL='event_detail';
 
 	static GALLERY='gallery';
-	static GALLERY_BROWSE='gallery_browse';
 	static GALLERY_DETAIL='gallery_detail';
 
 	static SERVICE='service';
-	static SERVICE_BROWSE='service_browse';
 	static SERVICE_DETAIL='service_detail';
 
 	static PRODUCT='product';
-	static PRODUCT_BROWSE='product_browse';
 	static PRODUCT_DETAIL='product_detail';
 
 	static PROJECT='project';
-	static PROJECT_BROWSE='project_browse';
 	static PROJECT_DETAIL='project_detail';
 
 	static SECTION_1='section_1';
@@ -1346,23 +1319,13 @@ class DataItem {
 		return get_new_full_item_main(item,parent_item,top_item,option?option:{});
 	};
 }
-class Business_Url {
-	static get = (app_id,url,params) => {
-		let action_url="item/get_business";
+class Dashboard_Url {
+	static user_home = (app_id,url,params) => {
+		let action_url="dashboard/user_home";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-}
-class Blank_Url {
-	static get = (app_id,url,key,params) => {
-		let action_url="blank/get/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static browse = (app_id,url,params) => {
-		let action_url="blank/browse";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static category = (app_id,url,category,params) => {
-		let action_url="blank/category/"+category;
+	static app_home = (app_id,url,params) => {
+		let action_url="dashboard/app_home";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
@@ -1371,36 +1334,8 @@ class Blog_Post_Url {
 		let action_url="blog_post/get/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (app_id,url,params) => {
-		let action_url="blog_post/browse";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static category = (app_id,url,category,params) => {
-		let action_url="blog_post/category/"+category;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
 	static search = (app_id,url,params) => {
 		let action_url="blog_post/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-}
-class Custom_Field_Url {
-	static get = (app_id,url,data_type,key,params) => {
-		let action_url="custom_field/get/"+data_type+"/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static browse = (app_id,url,params) => {
-		let action_url="custom_field/browse";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-}
-class FAQ_Url {
-	static get = (app_id,url,key,params) => {
-		let action_url="faq/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static category = (app_id,url,title_url,params) => {
-		let action_url="faq/category/"+title_url;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
@@ -1437,40 +1372,14 @@ class Product_Url {
 		let action_url="product/get/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (app_id,url,params) => {
-		let action_url="product/browse";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static category = (app_id,url,category,params) => {
-		let action_url="product/category/"+category;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
 	static search = (app_id,url,params) => {
 		let action_url="product/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-}
-class Review_Url {
-	static get = (app_id,url,parent_data_type,page_current,page_size,params) => {
-		let action_url="review/get/"+parent_data_type+"/"+page_current+"/"+page_size;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static post = (app_id,url,parent_data_type,parent_id,params) => {
-		let action_url="review/post/"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Event_Url {
 	static get = (app_id,url,key,params) => {
 		let action_url="event/get/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static browse = (app_id,url,params) => {
-		let action_url="event/browse";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static category = (app_id,url,category,params) => {
-		let action_url="event/category/"+category;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static search = (app_id,url,params) => {
@@ -1483,52 +1392,14 @@ class Service_Url {
 		let action_url="service/get/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static browse = (app_id,url,params) => {
-		let action_url="service/browse";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static category = (app_id,url,category,params) => {
-		let action_url="service/category/"+category;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
 	static search = (app_id,url,params) => {
 		let action_url="service/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-}
-class Content_Url {
-	static portfolio = (app_id,url,params) => {
-		let action_url="content/portfolio";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static get = (app_id,url,key,params) => {
-		let action_url="content/get/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static browse = (app_id,url,params) => {
-		let action_url="content/browse";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static category = (app_id,url,category,params) => {
-		let action_url="content/category/"+category;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static search = (app_id,url,params) => {
-		let action_url="content/search";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Gallery_Url {
 	static get = (app_id,url,key,params) => {
 		let action_url="gallery/get/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static browse = (app_id,url,params) => {
-		let action_url="gallery/browse";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static category = (app_id,url,category,params) => {
-		let action_url="gallery/category/"+category;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static search = (app_id,url,params) => {
@@ -1554,35 +1425,39 @@ class User_Url {
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
-class Favorite_Url {
-	static get = (app_id,url,parent_data_type,page_current,page_size,params) => {
-		let action_url="favorite/get/"+parent_data_type+"/"+page_current+"/"+page_size;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static post = (app_id,url,parent_data_type,parent_id,params) => {
-		let action_url="favorite/post/"+parent_data_type+"/"+parent_id;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-}
 class Item_Url {
 	static post_cms = (app_id,url,data_type,id,params) => {
 		let action_url = "item/post_cms/"+data_type+"/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-}
-class Faq_Url {
-	static get = (app_id,url,key,params) => {
-		let action_url="faq/get/"+key;
+	static review = (app_id,url,parent_data_type,page_current,page_size,params) => {
+		let action_url="item/review/"+parent_data_type+"/"+page_current+"/"+page_size;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_review = (app_id,url,parent_data_type,parent_id,params) => {
+		let action_url="item/post_review/"+parent_data_type+"/"+parent_id;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static content = (app_id,url,key,params) => {
+		let action_url="item/content/"+key;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static custom_field = (app_id,url,data_type,key,params) => {
+		let action_url="item/custom_field/"+data_type+"/"+key;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static favorite = (app_id,url,parent_data_type,page_current,page_size,params) => {
+		let action_url="item/favorite/"+parent_data_type+"/"+page_current+"/"+page_size;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_favorite = (app_id,url,parent_data_type,parent_id,params) => {
+		let action_url="item/post_favorite"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
 class Category_Url {
 	static get = (app_id,url,key,params) => {
 		let action_url="category/get/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static browse = (app_id,url,params) => {
-		let action_url="category/browse";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static search = (app_id,url,params) => {
@@ -1596,7 +1471,19 @@ class Page_Url {
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static home = (app_id,url,params) => {
-		let action_url=PageType.get_title(PageType.HOME);
+		let action_url="page/home";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static about = (app_id,url,params) => {
+		let action_url="page/about";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static contact = (app_id,url,params) => {
+		let action_url="page/contact";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static faq = (app_id,url,key,params) => {
+		let action_url="page/faq/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static post_value_field = (app_id,url,type,page_id,value_id,params) => {
@@ -2149,19 +2036,16 @@ class App_Logic {
 module.exports = {
 	App_Logic,
 	Admin_Logic,
-	Business_Url,
 	Business_Logic,
 	Blank_Logic,
-	Blank_Url,
 	Blog_Post_Logic,
 	Blog_Post_Url,
+	Dashboard_Url,
 	Cart_Logic,
 	Cart_Url,
 	Category_Logic,
 	Category_Url,
-	Content_Url,
 	Content_Logic,
-	Custom_Field_Url,
 	CMS,
 	DataItem,
 	DataType,
@@ -2169,9 +2053,7 @@ module.exports = {
 	Field_Logic,
 	FieldType,
 	Faq_Logic,
-	Faq_Url,
 	Favorite_Logic,
-	Favorite_Url,
 	Gallery_Url,
 	Item_Logic,
 	Item_Url,
@@ -2183,7 +2065,6 @@ module.exports = {
 	PageType,
 	Product_Logic,
 	Review_Logic,
-	Review_Url,
 	Order_Logic,
 	Order_Url,
 	Service_Logic,
@@ -2194,8 +2075,8 @@ module.exports = {
 	Storage,
 	Schedule,
 	Stock,
-	TemplateType,
 	Template_Logic,
+	TemplateType,
 	Url,
 	User_Url,
 	User_Logic,

@@ -31,15 +31,18 @@ describe("connect", () => {
         series([
 
             function(call) {
-                //console.log('PAGE-SECTION-START');
-                let page = Page_Logic.get_test();
-                page[Page_Logic.get_page_value_field_title(FieldType.PAGE_VALUE_FIELD_TYPE_TEXT,1)] = 'apple';
+                console.log('TEMPLATE-START');
+                let template = Template_Logic.get_test('Header',{get_blank:true});
+                console.log(template);
+                console.log('TEMPLATE-END');
+                //let page = Page_Logic.get_test();
+                //page[Page_Logic.get_page_value_field_title(FieldType.PAGE_VALUE_FIELD_TYPE_TEXT,1)] = 'apple';
                 //page[Page_Logic.get_page_value_field_title('list',1,1)] = 'cool';
                 //page[Page_Logic.get_page_value_field_title('list',1,2)] = 'apple';
                 //page[Page_Logic.get_page_value_field_title('list',1,3)] = 'sauce';
-                Log.w('page',page);
-                Log.w('text_1_value',Page_Logic.get_page_value_field_value(FieldType.PAGE_VALUE_FIELD_TYPE_TEXT,page,1));
-                //Log.w('list_1_value',Page_Logic.get_page_value_field_value(FieldType.PAGE_VALUE_TYPE_LIST,1,1));
+                //Log.w('page',page);
+                //Log.w('text_1_value',Page_Logic.get_page_value_field_value(FieldType.PAGE_VALUE_FIELD_TYPE_TEXT,page,1));
+                //Log.w('list_1_value',Page_Logic.get_page_value_field_value(FieldType.PAGE_VALUE_FIELD_TYPE_LIST,page,1));
 
 
                 //console.log(Page_Logic.get_page_value_field_title('text',1));
