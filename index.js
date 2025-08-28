@@ -463,7 +463,7 @@ class Blog_Post_Logic {
 		let blog_post = DataItem.get_new(DataType.BLOG_POST,0,Field_Logic.get_test(title,option));
 		if(!option.get_blank){
 			blog_post.author="First Name "+ Num.get_id();
-			blog_post.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
+			blog_post.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id(), " Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
 		}else{
 			blog_post.author="";
 			blog_post.tag = "";
@@ -888,23 +888,18 @@ class PageType {
 
 	static BLOG_POST='blog_post';
 	static BLOG_POST_DETAIL='blog_post_detail';
-	static BLOG_POST_SEARCH='blog_post_search';
 
 	static EVENT='event';
 	static EVENT_DETAIL='event_detail';
-	static EVENT_SEARCH='event_search';
 
 	static GALLERY='gallery';
 	static GALLERY_DETAIL='gallery_detail';
-	static GALLERY_SEARCH='gallery_search';
 
 	static SERVICE='service';
 	static SERVICE_DETAIL='service_detail';
-	static SERVICE_SEARCH='service_search';
 
 	static PRODUCT='product';
 	static PRODUCT_DETAIL='product_detail';
-	static PRODUCT_SEARCH='product_search';
 
 	static PAGE_LIST = [PageType.HOME,PageType.ABOUT,PageType.CONTACT,PageType.FAQ,PageType.BLOG_POST,PageType.EVENT,PageType.GALLERY,PageType.SERVICE,PageType.PRODUCT];
 
