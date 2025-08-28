@@ -890,10 +890,6 @@ class PageType {
 	static BLOG_POST_DETAIL='blog_post_detail';
 	static BLOG_POST_SEARCH='blog_post_search';
 
-	static CATEGORY='category';
-	static CATEGORY_DETAIL='category_detail';
-	static CATEGORY_SEARCH='category_search';
-
 	static EVENT='event';
 	static EVENT_DETAIL='event_detail';
 	static EVENT_SEARCH='event_search';
@@ -910,8 +906,7 @@ class PageType {
 	static PRODUCT_DETAIL='product_detail';
 	static PRODUCT_SEARCH='product_search';
 
-	static PAGE_LIST = [PageType.HOME,PageType.ABOUT,PageType.CONTACT,PageType.FAQ,PageType.BLOG_POST,PageType.CATEGORY,
-		PageType.EVENT,PageType.GALLERY,PageType.SERVICE,PageType.PRODUCT];
+	static PAGE_LIST = [PageType.HOME,PageType.ABOUT,PageType.CONTACT,PageType.FAQ,PageType.BLOG_POST,PageType.EVENT,PageType.GALLERY,PageType.SERVICE,PageType.PRODUCT];
 
 	static get_title = (data_type) => {
 		if(!data_type){
@@ -1249,6 +1244,10 @@ class Blog_Post_Url {
 		let action_url="blog_post/get/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static home = (app_id,url,params) => {
+		let action_url="blog_post";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 	static search = (app_id,url,params) => {
 		let action_url="blog_post/search";
 		return get_cloud_url_main(app_id,url,action_url,params);
@@ -1287,6 +1286,10 @@ class Product_Url {
 		let action_url="product/get/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static home = (app_id,url,params) => {
+		let action_url="product";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 	static search = (app_id,url,params) => {
 		let action_url="product/search";
 		return get_cloud_url_main(app_id,url,action_url,params);
@@ -1295,6 +1298,10 @@ class Product_Url {
 class Event_Url {
 	static get = (app_id,url,key,params) => {
 		let action_url="event/get/"+key;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static home = (app_id,url,params) => {
+		let action_url="event";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static search = (app_id,url,params) => {
@@ -1307,6 +1314,10 @@ class Service_Url {
 		let action_url="service/get/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static home = (app_id,url,params) => {
+		let action_url="service/search";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 	static search = (app_id,url,params) => {
 		let action_url="service/search";
 		return get_cloud_url_main(app_id,url,action_url,params);
@@ -1315,6 +1326,10 @@ class Service_Url {
 class Gallery_Url {
 	static get = (app_id,url,key,params) => {
 		let action_url="gallery/get/"+key;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static home = (app_id,url,params) => {
+		let action_url="gallery";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static search = (app_id,url,params) => {
@@ -1373,6 +1388,10 @@ class Item_Url {
 class Category_Url {
 	static get = (app_id,url,key,params) => {
 		let action_url="category/get/"+key;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static home = (app_id,url,params) => {
+		let action_url="category";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static search = (app_id,url,params) => {
