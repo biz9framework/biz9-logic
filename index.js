@@ -885,68 +885,34 @@ class PageType {
 	static ABOUT='about';
 	static CONTACT='contact';
 	static FAQ='faq';
-	static SEARCH='search';
 
 	static BLOG_POST='blog_post';
 	static BLOG_POST_DETAIL='blog_post_detail';
-
+	static BLOG_POST_SEARCH='blog_post_search';
 
 	static CATEGORY='category';
 	static CATEGORY_DETAIL='category_detail';
+	static CATEGORY_SEARCH='category_search';
 
 	static EVENT='event';
 	static EVENT_DETAIL='event_detail';
+	static EVENT_SEARCH='event_search';
 
 	static GALLERY='gallery';
 	static GALLERY_DETAIL='gallery_detail';
+	static GALLERY_SEARCH='gallery_search';
 
 	static SERVICE='service';
 	static SERVICE_DETAIL='service_detail';
+	static SERVICE_SEARCH='service_search';
 
 	static PRODUCT='product';
 	static PRODUCT_DETAIL='product_detail';
+	static PRODUCT_SEARCH='product_search';
 
-	static PROJECT='project';
-	static PROJECT_DETAIL='project_detail';
+	static PAGE_LIST = [PageType.HOME,PageType.ABOUT,PageType.CONTACT,PageType.FAQ,PageType.BLOG_POST,PageType.CATEGORY,
+		PageType.EVENT,PageType.GALLERY,PageType.SERVICE,PageType.PRODUCT];
 
-	static SECTION_1='section_1';
-	static SECTION_2='section_2';
-	static SECTION_3='section_2';
-	static SECTION_4='section_4';
-	static SECTION_5='section_5';
-	static SECTION_6='section_6';
-	static SECTION_7='section_7';
-	static SECTION_8='section_8';
-	static SECTION_9='section_9';
-	static SECTION_10='section_10';
-	static SECTION_11='section_11';
-	static SECTION_12='section_12';
-	static SECTION_13='section_13';
-	static SECTION_14='section_14';
-	static SECTION_15='section_15';
-	static SECTION_16='section_16';
-	static SECTION_17='section_17';
-	static SECTION_18='section_18';
-	static SECTION_19='section_19';
-	static VALUE_1='value_1';
-	static VALUE_2='value_2';
-	static VALUE_3='value_2';
-	static VALUE_4='value_4';
-	static VALUE_5='value_5';
-	static VALUE_6='value_6';
-	static VALUE_7='value_7';
-	static VALUE_8='value_8';
-	static VALUE_9='value_9';
-	static VALUE_10='value_10';
-	static VALUE_11='value_11';
-	static VALUE_12='value_12';
-	static VALUE_13='value_13';
-	static VALUE_14='value_14';
-	static VALUE_15='value_15';
-	static VALUE_16='value_16';
-	static VALUE_17='value_17';
-	static VALUE_18='value_18';
-	static VALUE_19='value_19';
 	static get_title = (data_type) => {
 		if(!data_type){
 			return "";
@@ -985,7 +951,6 @@ class DataType {
 	static ORDER_SUB_ITEM="order_sub_item_biz";
 	static ORDER_PAYMENT="order_payment_biz";
 
-	static PROJECT='project_biz';
 	static PRODUCT='product_biz';
 	static PHOTO='photo_biz';
 	static PAGE='page_biz';
