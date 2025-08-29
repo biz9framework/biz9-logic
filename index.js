@@ -1394,6 +1394,12 @@ class Category_Url {
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
+class Template_Url {
+	static get = (app_id,url,key,params) => {
+		let action_url="template/"+key;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+}
 class Page_Url {
 	static get = (app_id,url,title_url,params) => {
 		let action_url="page/get/"+title_url;
@@ -2006,6 +2012,7 @@ module.exports = {
 	Stock,
 	Template_Logic,
 	TemplateType,
+	Template_Url,
 	Url,
 	User_Url,
 	User_Logic,
