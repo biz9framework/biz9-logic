@@ -1366,7 +1366,7 @@ class Item_Url {
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static post_field_value = (app_id,url,type,page_id,value_id,params) => {
-		let action_url="page/post_field_value/"+type+"/"+page_id+"/"+value_id;
+		let action_url="item/post_field_value/"+type+"/"+page_id+"/"+value_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
