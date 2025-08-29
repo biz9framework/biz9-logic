@@ -1365,8 +1365,8 @@ class Item_Url {
 		let action_url="item/post_favorite"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_field_value = (app_id,url,data_type,field_value_type,page_id,value_id,params) => {
-		let action_url="item/post_field_value/"+data_type+"/"+field_value_type+"/"+page_id+"/"+value_id;
+	static post_field_value = (app_id,url,item_data_type,item_id,value_id,params) => {
+		let action_url="item/post_field_value/"+item_data_type+"/"+item_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
