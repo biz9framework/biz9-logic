@@ -127,8 +127,8 @@ class Item_Logic {
 		}
 		return Item_Logic.get_search(query.data_type,filter,sort_by,query.page_current,query.page_size);
 	}
-	static get_field_value = (type,item_id,value_id,value,value_list) => {
-		return {type:type,item_id:item_id,value_id:value_id,value:value,value_list:value_list};
+	static get_field_value = (type,item_data_type,item_id,value_id,value,value_list) => {
+		return {type:type,item_data_type:item_data_type,item_id:item_id,value_id:value_id,value:value,value_list:value_list};
 	};
 	static get_item_field_value_type_list = () => {
 		return [
@@ -1365,8 +1365,8 @@ class Item_Url {
 		let action_url="item/post_favorite"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_field_value = (app_id,url,type,page_id,value_id,params) => {
-		let action_url="item/post_field_value/"+type+"/"+page_id+"/"+value_id;
+	static post_field_value = (app_id,url,data_type,field_value_type,page_id,value_id,params) => {
+		let action_url="item/post_field_value/"+data_type+"/"+field_value_type+"/"+page_id+"/"+value_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
