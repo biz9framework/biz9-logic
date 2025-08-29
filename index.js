@@ -127,8 +127,8 @@ class Item_Logic {
 		}
 		return Item_Logic.get_search(query.data_type,filter,sort_by,query.page_current,query.page_size);
 	}
-	static get_field_value = (type,item_data_type,item_id,value_id,value,value_list) => {
-		return {type:type,item_data_type:item_data_type,item_id:item_id,value_id:value_id,value:value,value_list:value_list};
+	static get_field_value = (item_data_type,item_id,value_type,value_id,value,value_list) => {
+		return {item_data_type:item_data_type,item_id:item_id,value_type:value_type,value_id:value_id,value:value,value_list:value_list};
 	};
 	static get_item_field_value_type_list = () => {
 		return [
