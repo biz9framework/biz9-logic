@@ -1365,6 +1365,10 @@ class Item_Url {
 		let action_url="item/post_favorite"+parent_data_type+"/"+parent_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static post_field_value = (app_id,url,type,page_id,value_id,params) => {
+		let action_url="page/post_field_value/"+type+"/"+page_id+"/"+value_id;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 }
 class Category_Url {
 	static get = (app_id,url,key,params) => {
@@ -1405,10 +1409,6 @@ class Page_Url {
 	};
 	static faq = (app_id,url,key,params) => {
 		let action_url="page/faq/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static post_value_field = (app_id,url,type,page_id,value_id,params) => {
-		let action_url="page/post_value_field/"+type+"/"+page_id+"/"+value_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
