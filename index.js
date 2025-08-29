@@ -910,7 +910,6 @@ class PageType {
 			return String(Str.get_title(data_type.replaceAll('_',' '))).trim();
 		}
 	}
-
 }
 class DataType {
 
@@ -951,7 +950,7 @@ class DataType {
 	static USER='user_biz';
 	static VIDEO='video_biz';
 
-	static get_data_type_title = (data_type,get_plural) => {
+	static get_title = (data_type,get_plural) => {
 		let r_data_type =  (!data_type) ? "" : String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 		if(get_plural){
 			if(data_type==DataType.GALLERY){
@@ -964,7 +963,7 @@ class DataType {
 		}
 
 	}
-	static get_data_type_url(data_type){
+	static get_url(data_type){
 		switch(data_type){
 			case DataType.ACTIVITY:
 				return 'activity';
@@ -1006,7 +1005,7 @@ class DataType {
 				return 'custom_field';
 		}
 	}
-	static get_item_list = () =>{
+	static get_list = () =>{
 		return [
 			{	title:DataType.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
 			{	title:DataType.get_title(DataType.EVENT),type:DataType.EVENT},
