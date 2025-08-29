@@ -31,18 +31,21 @@ describe("connect", () => {
         series([
 
             function(call) {
-                //console.log('ITEM-START');
+                console.log('ITEM-START');
                 //let gallery = Gallery_Logic.get_test('Gallery 1',{get_blank:true});
                 //console.log(gallery);
                 //console.log('ITEM-END');
-                //let page = Page_Logic.get_test();
-                //page[Page_Logic.get_page_value_field_title(FieldType.PAGE_VALUE_FIELD_TYPE_TEXT,1)] = 'apple';
-                //page[Page_Logic.get_page_value_field_title('list',1,1)] = 'cool';
-                //page[Page_Logic.get_page_value_field_title('list',1,2)] = 'apple';
-                //page[Page_Logic.get_page_value_field_title('list',1,3)] = 'sauce';
+                console.log('aaaaaaaaaa');
+                console.log(Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_LIST,1,1));
+                console.log('bbbbbb');
+                let page = Page_Logic.get_test();
+                //page[Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_TEXT,1)] = 'apple';
+                page[Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_LIST,1,1)] = 'cool';
+                page[Item_Logic.get_field_value_title('list',1,2)] = 'apple';
+                page[Item_Logic.get_field_value_title('list',1,3)] = 'sauce';
                 //Log.w('page',page);
-                //Log.w('text_1_value',Page_Logic.get_page_value_field_value(FieldType.PAGE_VALUE_FIELD_TYPE_TEXT,page,1));
-                //Log.w('list_1_value',Page_Logic.get_page_value_field_value(FieldType.PAGE_VALUE_FIELD_TYPE_LIST,page,1));
+                //Log.w('text_1_value',Item_Logic.get_field_value_value(FieldType.ITEM_FIELD_VALUE_TYPE_TEXT,page,1));
+                Log.w('list_1_value',Item_Logic.get_field_value_value(FieldType.ITEM_FIELD_VALUE_TYPE_LIST,page,1));
 
 
                 //console.log(Page_Logic.get_page_value_field_title('text',1));
@@ -54,11 +57,13 @@ describe("connect", () => {
                 //console.log('PAGE-SECTION-END');
 
 
+                /*
                 console.log('PRODUCT-URL-START');
                 let search = Item_Logic.get_search(DataType.PRODUCT,{},{},1,0);
                 let cloud_url = Product_Url.search(APP_ID,URL,search);
                 console.log(cloud_url);
                 console.log('PRODUCT-URL-END');
+                */
                 //let biz9_config = Scriptz.get_biz9_config({biz9_config_file:path.resolve('../../biz9_config')});
                 //let action_url = 'test_get_url';
                 //let params = '&myparam1=p1&myparam2=p2'

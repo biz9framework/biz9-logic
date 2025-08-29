@@ -127,6 +127,57 @@ class Item_Logic {
 		}
 		return Item_Logic.get_search(query.data_type,filter,sort_by,query.page_current,query.page_size);
 	}
+	static get_field_value = (type,item_id,value_id,value,value_list) => {
+		return {type:type,item_id:item_id,value_id:value_id,value:value,value_list:value_list};
+	};
+	static get_item_field_value_type_list = () => {
+		return [
+			{value:'text',label:'Text'},
+			{value:'note',label:'Note'},
+			{value:'photo',label:'Photo'},
+			{value:'list',label:'List'},
+		];
+	};
+	static get_field_value_value = (type,item,value_id) =>{
+		switch(type){
+			case FieldType.ITEM_FIELD_VALUE_TYPE_TEXT:
+			case FieldType.ITEM_FIELD_VALUE_TYPE_NOTE:
+			case FieldType.ITEM_FIELD_VALUE_TYPE_PHOTO:
+				return !Str.check_is_null(item[Item_Logic.get_field_value_title(type,value_id)]) ? item[Item_Logic.get_field_value_title(type,value_id)] : "";
+				break;
+			case FieldType.ITEM_FIELD_VALUE_TYPE_LIST:
+				let r_list = [];
+				for(let a=0;a<30;a++){
+					if(!Str.check_is_null(item[Item_Logic.get_field_value_title(type,value_id,a+1)])){
+						r_list.push(item[Item_Logic.get_field_value_title(type,value_id,a+1)]);
+					}
+				}
+				return r_list;
+				break;
+			default:
+				return "";
+		};
+	}
+	static get_field_value_title = (type,value_id,row_id) =>{
+		let type_str = '';
+		switch(type){
+			case FieldType.ITEM_FIELD_VALUE_TYPE_TEXT:
+				return 'text'+'_value_'+value_id;
+				break;
+			case FieldType.ITEM_FIELD_VALUE_TYPE_NOTE:
+				return 'note'+'_value_'+value_id;
+				break;
+			case FieldType.ITEM_FIELD_VALUE_TYPE_PHOTO:
+				return 'photo'+'_value_'+value_id;
+				break;
+			case FieldType.ITEM_FIELD_VALUE_TYPE_LIST:
+				return 'list'+'_value_'+value_id +'_row_'+row_id;
+				break;
+			default:
+				return "";
+		};
+	}
+
 }
 class Stat_Logic {
 	/*
@@ -165,70 +216,6 @@ class Page_Logic {
 		}
 		return item_list;
 	};
-	//text_value_1
-	//note_value_1
-	//photo_value_1
-	//list_value_1
-	//list_value_1_1
-	//list_value_1_2
-	//list_value_1_3
-	//page['section_1_value_1_type'] -- / text,note,photo,list
-	static get_page_value_field = (type,page_id,value_id,value,value_list) => {
-		return {type:type,page_id:page_id,value_id:value_id,value:value,value_list:value_list};
-	};
-	static get_page_value_type_list = () => {
-		return [
-			{value:'text',label:'Text'},
-			{value:'note',label:'Note'},
-			{value:'photo',label:'Photo'},
-			{value:'list',label:'List'},
-		];
-	};
-	static get_page_value = (type,page_id,value_id,value,value_list) => {
-       return {type:type,page_id:page_id,value_id:value_id,value:value,value_list:value_list};
-    };
-	static get_page_value_field_value = (type,page,value_id) =>{
-		//text_value_1
-    	//page['[text,note,photo]_value_1']
-		switch(type){
-			case FieldType.PAGE_VALUE_FIELD_TYPE_TEXT:
-			case FieldType.PAGE_VALUE_FIELD_TYPE_NOTE:
-			case FieldType.PAGE_VALUE_FIELD_TYPE_PHOTO:
-				return !Str.check_is_null(page[Page_Logic.get_page_value_field_title(type,value_id)]) ? page[Page_Logic.get_page_value_field_title(type,value_id)] : "";
-				break;
-			case FieldType.PAGE_VALUE_FIELD_TYPE_LIST:
-				let r_list = [];
-				for(let a=0;a<30;a++){
-					if(!Str.check_is_null(page[Page_Logic.get_page_value_field_title(type,value_id,a+1)])){
-						r_list.push(page[Page_Logic.get_page_value_field_title(type,value_id,a+1)]);
-					}
-				}
-				return r_list;
-				break;
-			default:
-				return "";
-		};
-	}
-	static get_page_value_field_title = (type,value_id,row_id) =>{
-		//text_value_1
-		let type_str = '';
-		switch(type){
-			case FieldType.PAGE_VALUE_FIELD_TYPE_TEXT:
-				return 'text'+'_value_'+value_id;
-				break;
-			case FieldType.PAGE_VALUE_FIELD_TYPE_NOTE:
-				return 'note'+'_value_'+value_id;
-				break;
-			case FieldType.PAGE_VALUE_FIELD_TYPE_PHOTO:
-				return 'photo'+'_value_'+value_id;
-				break;
-			case FieldType.PAGE_VALUE_FIELD_TYPE_LIST:
-				return 'list'+'_value_'+value_id +'_row_'+row_id;
-				break;
-			default:
-				return "";
-		};
-	}
 }
 class Order_Logic {
 	static get_order_number = () => {
@@ -868,10 +855,10 @@ class FieldType {
 	static ACTIVITY_TYPE_LOGIN="login";
 	static ACTIVITY_TYPE_REGISTER="register";
 
-	static PAGE_VALUE_FIELD_TYPE_TEXT="text";
-	static PAGE_VALUE_FIELD_TYPE_NOTE="note";
-	static PAGE_VALUE_FIELD_TYPE_PHOTO="photo";
-	static PAGE_VALUE_FIELD_TYPE_LIST="list";
+	static ITEM_FIELD_VALUE_TYPE_TEXT="text";
+	static ITEM_FIELD_VALUE_TYPE_NOTE="note";
+	static ITEM_FIELD_VALUE_TYPE_PHOTO="photo";
+	static ITEM_FIELD_VALUE_TYPE_LIST="list";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
