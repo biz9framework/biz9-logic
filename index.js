@@ -138,18 +138,18 @@ class Item_Logic {
 			{value:'list',label:'List'},
 		];
 	};
-	static get_field_value_value = (type,item,value_id) =>{
-		switch(type){
+	static get_field_value_value = (value_type,item,value_id) =>{
+		switch(value_type){
 			case FieldType.ITEM_FIELD_VALUE_TYPE_TEXT:
 			case FieldType.ITEM_FIELD_VALUE_TYPE_NOTE:
 			case FieldType.ITEM_FIELD_VALUE_TYPE_PHOTO:
-				return !Str.check_is_null(item[Item_Logic.get_field_value_title(type,value_id)]) ? item[Item_Logic.get_field_value_title(type,value_id)] : "";
+				return !Str.check_is_null(item[Item_Logic.get_field_value_title(value_type,value_id)]) ? item[Item_Logic.get_field_value_title(value_type,value_id)] : "";
 				break;
 			case FieldType.ITEM_FIELD_VALUE_TYPE_LIST:
 				let r_list = [];
 				for(let a=0;a<30;a++){
-					if(!Str.check_is_null(item[Item_Logic.get_field_value_title(type,value_id,a+1)])){
-						r_list.push(item[Item_Logic.get_field_value_title(type,value_id,a+1)]);
+					if(!Str.check_is_null(item[Item_Logic.get_field_value_title(value_type,value_id,a+1)])){
+						r_list.push(item[Item_Logic.get_field_value_title(value_type,value_id,a+1)]);
 					}
 				}
 				return r_list;
@@ -158,9 +158,9 @@ class Item_Logic {
 				return "";
 		};
 	}
-	static get_field_value_title = (type,value_id,row_id) =>{
+	static get_field_value_title = (value_type,value_id,row_id) =>{
 		let type_str = '';
-		switch(type){
+		switch(value_type){
 			case FieldType.ITEM_FIELD_VALUE_TYPE_TEXT:
 				return 'text'+'_value_'+value_id;
 				break;
@@ -177,7 +177,6 @@ class Item_Logic {
 				return "";
 		};
 	}
-
 }
 class Stat_Logic {
 	/*
@@ -188,9 +187,9 @@ class Stat_Logic {
 	static STAT_ORDER_ADD_ID='5';
 	static STAT_REVIEW_ADD_ID='6';
 	*/
-	static get_new = (parent_data_type,user_id,stat_type_id,item_list,option)=>{
+	static get_new = (item_data_type,user_id,stat_type_id,item_list,option)=>{
 		return {
-			parent_data_type:parent_data_type,
+			item_data_type:item_data_type,
 			user_id:user_id,
 			stat_type_id:stat_type_id,
 			item_list:item_list,
@@ -232,21 +231,21 @@ class Cart_Logic {
 	static get_cart = (user_id) => {
 		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Cart_Logic.get_cart_number(),quanity:1,grand_total:0,cart_item_list:[]});
 	};
-	static get_cart_item = (parent_data_type,parent_id,cart_number,user_id,quanity) =>{
-		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,user_id:user_id,quanity:quanity,sub_total:0,cart_sub_item_list:[]});
+	static get_cart_item = (item_data_type,item_id,cart_number,user_id,quanity) =>{
+		return DataItem.get_new(DataType.CART_ITEM,0,{item_data_type:item_data_type,item_id:item_id,cart_number:cart_number,user_id:user_id,quanity:quanity,sub_total:0,cart_sub_item_list:[]});
 	};
-	static get_test_item = (cart_item_id,cart_number,user_id,parent_data_type,parent_id,option) =>{
+	static get_test_item = (cart_item_id,cart_number,user_id,item_data_type,item_id,option) =>{
 		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{generate_id:Str.check_is_null(cart_item_id)? true : false  });
 		let cart_item = DataItem.get_new(DataType.CART_ITEM,Num.get_guid(),Field_Logic.get_test("Cart Item "+Num.get_id(),option));
 		cart_item.cart_item_id = cart_item_id;
 		cart_item.cart_number = cart_number;
 		cart_item.user_id = user_id;
-		cart_item.parent_data_type = parent_data_type;
-		cart_item.parent_id = parent_id;
+		cart_item.item_data_type = item_data_type;
+		cart_item.item_id = item_id;
 		if(option.get_cart_sub_item){
 			cart_item.cart_sub_item_list = [];
 			for(let a = 0;a<option.cart_sub_item_count;a++){
-				let cart_sub_item = Cart_Logic.get_test_sub_item(cart_number,user_id,cart_item.id,parent_data_type,parent_id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count});
+				let cart_sub_item = Cart_Logic.get_test_sub_item(cart_number,user_id,cart_item.id,item_data_type,item_id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count});
 				cart_item.cart_sub_item_list.push(cart_sub_item);
 			}
 		}
@@ -328,7 +327,7 @@ class Product_Logic {
 			cart.cart_item_list = [];
 			for(let a = 0;a<product_list.length;a++){
 				let product_cart_item =Cart_Logic.get_test_item(cart_number,cart.id,user_id,product_list[a].data_type,product_list[a].id,{get_value:false,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count,generate_id:true});
-				product_cart_item.parent_item = product_list[a];
+				product_cart_item.item_item = product_list[a];
 				cart.cart_item_list.push(product_cart_item);
 			}
 		}
@@ -1079,25 +1078,25 @@ class Faq_Logic {
 	}
 }
 class Favorite_Logic {
-	static get_new = (parent_data_type,parent_id,user_id,option) =>{
+	static get_new = (item_data_type,item_id,user_id,option) =>{
 		option = Field_Logic.get_option(DataType.FAVORITE,option?option:{});
 		let favorite = DataItem.get_new(DataType.FAVORITE,0,{
-			parent_data_type:parent_data_type,
-			parent_id:parent_id,
+			item_data_type:item_data_type,
+			item_id:item_id,
 			user_id:user_id,
 		});
 		return favorite;
 	}
 	static get_favorite_by_list = (favorite_list,item_list) =>{
 		favorite_list.forEach(item => {
-			const item_match = item_list.find(item_find => item_find.id === item.parent_id);
+			const item_match = item_list.find(item_find => item_find.id === item.item_id);
 			if (item_match) {
 				item_match.is_favorite = true;
 			}
 		});
 		return item_list;
 	}
-	static get_user_search_filter = (parent_data_type,user_id) =>{
+	static get_user_search_filter = (item_data_type,user_id) =>{
 		return {
 			$and: [
 				{ parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
@@ -1114,10 +1113,10 @@ class Favorite_Logic {
 	}
 }
 class Review_Logic {
-	static get_new = (parent_data_type,parent_id,user_id,title,comment,rating) =>{
+	static get_new = (item_data_type,item_id,user_id,title,comment,rating) =>{
 		return DataItem.get_new(DataType.REVIEW,0,{
-			parent_data_type:parent_data_type,
-			parent_id:parent_id,
+			item_data_type:item_data_type,
+			item_id:item_id,
 			user_id:user_id,
 
 			title:title ? title : "",
@@ -1125,34 +1124,34 @@ class Review_Logic {
 			rating:rating ? rating : ""
 		});
 	}
-	static get_user_search_filter = (parent_data_type,user_id) =>{
+	static get_user_search_filter = (item_data_type,user_id) =>{
 		return {
 			$and: [
-				{ parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
+				{ item_data_type: { $regex:String(item_data_type), $options: "i" } },
 				{ user_id: { $regex:String(user_id), $options: "i" } }
 			] };
 	}
-	static get_search_filter = (parent_data_type,parent_id) =>{
+	static get_search_filter = (item_data_type,parent_id) =>{
 		return {
 			$and: [
-				{ parent_data_type: { $regex:String(parent_data_type), $options: "i" } },
+				{ item_data_type: { $regex:String(item_data_type), $options: "i" } },
 				{ parent_id: { $regex:String(parent_id), $options: "i" } },
 			] };
 	}
-	static get_test = (parent_data_type,parent_id,user_id,option) =>{
+	static get_test = (item_data_type,item_id,user_id,option) =>{
 		option = Field_Logic.get_option(DataType.REVIEW,option?option:{});
 		let review = DataItem.get_new(DataType.REVIEW,0);
 		if(!option.get_blank){
 			review.title = 'Title ' + Num.get_id();
-			review.parent_data_type = parent_data_type;
-			review.parent_id = parent_id;
+			review.item_data_type = item_data_type;
+			review.item_id = item_id;
 			review.rating = Num.get_id(6);
 			review.user_id = user_id;
 			review.comment = "My comment "+ Field_Logic.get_test_note();
 		}else{
 			review.title = '';
-			review.parent_data_type = parent_data_type;
-			review.parent_id = parent_id;
+			review.item_data_type = item_data_type;
+			review.item_id = item_id;
 			review.rating = 0;
 			review.user_id = user_id;
 			review.comment = "";
@@ -1235,8 +1234,8 @@ class Blog_Post_Url {
 	};
 }
 class Cart_Url {
-	static post = (app_id,url,parent_data_type,params) => {
-		let action_url="cart/post/"+parent_data_type;
+	static post = (app_id,url,item_data_type,params) => {
+		let action_url="cart/post/"+item_data_type;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static get = (app_id,url,cart_number,params) => {
@@ -1341,12 +1340,12 @@ class Item_Url {
 		let action_url = "item/post_cms/"+data_type+"/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static review = (app_id,url,parent_data_type,page_current,page_size,params) => {
-		let action_url="item/review/"+parent_data_type+"/"+page_current+"/"+page_size;
+	static review = (app_id,url,item_data_type,page_current,page_size,params) => {
+		let action_url="item/review/"+item_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_review = (app_id,url,parent_data_type,parent_id,params) => {
-		let action_url="item/post_review/"+parent_data_type+"/"+parent_id;
+	static post_review = (app_id,url,item_data_type,item_id,params) => {
+		let action_url="item/post_review/"+item_data_type+"/"+item_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static content = (app_id,url,key,params) => {
@@ -1357,12 +1356,12 @@ class Item_Url {
 		let action_url="item/custom_field/"+data_type+"/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static favorite = (app_id,url,parent_data_type,page_current,page_size,params) => {
-		let action_url="item/favorite/"+parent_data_type+"/"+page_current+"/"+page_size;
+	static favorite = (app_id,url,item_data_type,page_current,page_size,params) => {
+		let action_url="item/favorite/"+item_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_favorite = (app_id,url,parent_data_type,parent_id,params) => {
-		let action_url="item/post_favorite"+parent_data_type+"/"+parent_id;
+	static post_favorite = (app_id,url,item_data_type,item_id,params) => {
+		let action_url="item/post_favorite"+item_data_type+"/"+item_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static post_field_value = (app_id,url,item_data_type,item_id,value_id,params) => {
