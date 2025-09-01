@@ -1220,8 +1220,8 @@ class Dashboard_Url {
 	};
 }
 class Blog_Post_Url {
-	static get = (app_id,url,key,params) => {
-		let action_url="blog_post/get/"+key;
+	static detail = (app_id,url,key,params) => {
+		let action_url="blog_post/detail/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static home = (app_id,url,params) => {
@@ -1262,8 +1262,8 @@ class Order_Url {
 	};
 }
 class Product_Url {
-	static get = (app_id,url,key,params) => {
-		let action_url="product/get/"+key;
+	static detail = (app_id,url,key,params) => {
+		let action_url="product/detail/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static home = (app_id,url,params) => {
@@ -1276,8 +1276,8 @@ class Product_Url {
 	};
 }
 class Event_Url {
-	static get = (app_id,url,key,params) => {
-		let action_url="event/get/"+key;
+	static detail = (app_id,url,key,params) => {
+		let action_url="event/detail/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static home = (app_id,url,params) => {
@@ -1290,8 +1290,8 @@ class Event_Url {
 	};
 }
 class Service_Url {
-	static get = (app_id,url,key,params) => {
-		let action_url="service/get/"+key;
+	static detail = (app_id,url,key,params) => {
+		let action_url="service/detail/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static home = (app_id,url,params) => {
@@ -1304,8 +1304,8 @@ class Service_Url {
 	};
 }
 class Gallery_Url {
-	static get = (app_id,url,key,params) => {
-		let action_url="gallery/get/"+key;
+	static detail = (app_id,url,key,params) => {
+		let action_url="gallery/detail/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static home = (app_id,url,params) => {
@@ -1370,8 +1370,8 @@ class Item_Url {
 	};
 }
 class Category_Url {
-	static get = (app_id,url,key,params) => {
-		let action_url="category/get/"+key;
+	static detail = (app_id,url,key,params) => {
+		let action_url="category/detail/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static home = (app_id,url,params) => {
