@@ -821,17 +821,17 @@ class FieldType {
 	static CART_NUMBER="CA-";
 	static TRANSACTION_ID="TR-";
 
-	static PAYMENT_PLAN_1="1 Payment";
-	static PAYMENT_PLAN_2="2 Payments";
-	static PAYMENT_PLAN_3="3 Payments";
-	static PAYMENT_PLAN_4="4 Payments";
+	static PAYMENT_PLAN_PENDING="Pending";
+	static PAYMENT_PLAN_TYPE_1="1 Payment";
+	static PAYMENT_PLAN_TYPE_2="2 Payments";
+	static PAYMENT_PLAN_TYPE_3="3 Payments";
+	static PAYMENT_PLAN_TYPE_4="4 Payments";
 
+	static ORDER_STATUS_CART="Cart";
 	static ORDER_STATUS_NEW="New";
-	static ORDER_STATUS_OPEN="Open";
+	static ORDER_STATUS_PENDING="Pending";
 	static ORDER_STATUS_PAYMENT="Payment Plan";
 	static ORDER_STATUS_COMPLETE="Complete";
-
-	static PAYMENT_PLAN="Open";
 
 	static ORDER_PAYMENT_TYPE_STRIPE="Stripe";
 	static ORDER_PAYMENT_TYPE_CASH="Cash";
