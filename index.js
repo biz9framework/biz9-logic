@@ -187,12 +187,11 @@ class Stat_Logic {
 	static STAT_ORDER_ADD_ID='5';
 	static STAT_REVIEW_ADD_ID='6';
 	*/
-	static get_new = (item_data_type,user_id,stat_type_id,item_list,option)=>{
+	static get_new = (user_id,stat_type_id,parent_item_list)=>{
 		return {
-			item_data_type:item_data_type,
 			user_id:user_id,
 			stat_type_id:stat_type_id,
-			item_list:item_list,
+			parent_item_list:parent_item_list,
 		}
 	}
 }
@@ -228,11 +227,14 @@ class Cart_Logic {
 	static get_cart_number = () => {
 		return FieldType.CART_NUMBER + Num.get_id(99999);
 	};
-	static get_cart = (user_id) => {
-		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Cart_Logic.get_cart_number(),quanity:1,grand_total:0,cart_item_list:[]});
+	static get_cart = (parent_data_type,user_id) => {
+		return DataItem.get_new(DataType.CART,0,{parent_data_type:parent_data_type,user_id:user_id,cart_number:Cart_Logic.get_cart_number(),grand_total:0,cart_item_list:[]});
 	};
-	static get_cart_item = (item_data_type,item_id,cart_number,user_id,quanity) =>{
-		return DataItem.get_new(DataType.CART_ITEM,0,{item_data_type:item_data_type,item_id:item_id,cart_number:cart_number,user_id:user_id,quanity:quanity,sub_total:0,cart_sub_item_list:[]});
+	static get_cart_item = (parent_data_type,parent_id,cart_number,user_id,quanity) =>{
+		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,user_id:user_id,quanity:quanity,cart_sub_item_list:[]});
+	};
+	static get_cart_sub_item = (parent_sub_data_type,parent_sub_id,cart_number,user_id,quanity) =>{
+		return DataItem.get_new(DataType.CART_ITEM,0,{parent_sub_data_type:parent_sub_data_type,parent_sub_id:parent_sub_id,cart_number:cart_number,user_id:user_id,quanity:quanity});
 	};
 	static get_test_item = (cart_item_id,cart_number,user_id,item_data_type,item_id,option) =>{
 		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{generate_id:Str.check_is_null(cart_item_id)? true : false  });
