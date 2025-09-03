@@ -262,14 +262,14 @@ class Cart_Logic {
 	static get_new = (parent_data_type) => {
 		return DataItem.get_new(DataType.CART,0,{cart_number:Cart_Logic.get_new_cart_number(),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
 	};
-	static get_new_cart_number = () => {
-		return FieldType.CART_NUMBER + Num.get_id(99999);
-	};
 	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity) =>{
 		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cart_sub_item_list:[]});
 	};
 	static get_new_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity) =>{
 		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity});
+	};
+	static get_new_cart_number = () => {
+		return FieldType.CART_NUMBER + Num.get_id(99999);
 	};
 }
 class Product_Logic {
@@ -1292,12 +1292,8 @@ class Item_Url {
 		let action_url = "item/post_cms/"+data_type+"/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static review = (app_id,url,parent_data_type,page_current,page_size,params) => {
-		let action_url="item/review/"+parent_data_type+"/"+page_current+"/"+page_size;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static post_review = (app_id,url,parent_data_type,item_id,params) => {
-		let action_url="item/post_review/"+parent_data_type+"/"+item_id;
+	static post_field_value = (app_id,url,item_data_type,parent_item_id,value_id,params) => {
+		let action_url="item/post_field_value/"+item_data_type+"/"+parent_item_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static content = (app_id,url,key,params) => {
@@ -1308,6 +1304,14 @@ class Item_Url {
 		let action_url="item/custom_field/"+data_type+"/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static review = (app_id,url,parent_data_type,page_current,page_size,params) => {
+		let action_url="item/review/"+parent_data_type+"/"+page_current+"/"+page_size;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_review = (app_id,url,parent_data_type,item_id,params) => {
+		let action_url="item/post_review/"+parent_data_type+"/"+item_id;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 	static favorite = (app_id,url,parent_data_type,page_current,page_size,params) => {
 		let action_url="item/favorite/"+parent_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
@@ -1316,32 +1320,28 @@ class Item_Url {
 		let action_url="item/post_favorite"+parent_data_type+"/"+parent_item_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_field_value = (app_id,url,item_data_type,parent_item_id,value_id,params) => {
-		let action_url="item/post_field_value/"+item_data_type+"/"+parent_item_id;
+	static cart = (app_id,url,cart_number,params) => {
+		let action_url="item/cart"+cart_number;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static post_cart = (app_id,url,parent_data_type,params) => {
-		let action_url="cart/post/"+parent_data_type;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static cart = (app_id,url,cart_number,params) => {
-		let action_url="cart/get/"+cart_number;
+		let action_url="item/post_cart/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static delete_cart = (app_id,url,id,params) => {
-		let action_url="cart/delete/"+id;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static post_order = (app_id,url,params) => {
-		let action_url="order/post";
+		let action_url="item/delete_cart"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static order = (app_id,url,order_number,params) => {
-		let action_url="order/get/"+order_number;
+		let action_url="item/order/"+order_number;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_order = (app_id,url,params) => {
+		let action_url="item/post_order";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static delete_order = (app_id,url,id,params) => {
-		let action_url="order/delete/"+id;
+		let action_url="item/delete_order/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
