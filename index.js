@@ -983,81 +983,6 @@ class DataType {
 		]
 	};
 }
-class Blank_Logic {
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.BLANK,option?option:{});
-		let blank = DataItem.get_new(DataType.BLANK,0,Field_Logic.get_test(title,option));
-		if(option.get_item){
-			blank.items = Sub_Item_Logic.get_test_list(blank,blank,option);
-			blank = Sub_Item_Logic.bind_parent_child_list(blank,blank.items);
-		}
-		return blank;
-	};
-	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.BLANK,option?option:{});
-		let item_list = [];
-		for(let a=0;a<option.blank_count+1;a++){
-			item_list.push(Blank_Logic.get_test("Blank " +String(parseInt(a+1)),option));
-		}
-		return item_list;
-	}
-	static get_test_list_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.BLANK,option?option:{});
-		let blank_list = [];
-		let category_list = Category_Logic.get_type_category_list(DataType.BLANK,option.category_count);
-		let item_count = 0;
-		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<option.blank_count;b++){
-				item_count++;
-				let blank = Blank_Logic.get_test("Blank "+String(parseInt(b+1)),option);
-				blank.category = category_list[Num.get_id(category_list.length+1)].title;
-				blank_list.push(blank);
-			}
-		}
-		return [category_list,blank_list]
-	};
-}
-class Faq_Logic {
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.FAQ,option?option:{});
-		option.get_value = false;
-		let faq = DataItem.get_new(DataType.FAQ,0,Field_Logic.get_test(title,option));
-		for(let a=0;a<parseInt(option.question_count)+1;a++){
-			if(!option.get_blank){
-				let question_title = "FAQ Question " + String(parseInt(a+1));
-				let answer = "My answer "+ Num.get_id() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-				faq[Str.get_title_url(question_title).toLowerCase()] = answer;
-				faq['field_'+parseInt(a+1)] =question_title;
-			}else{
-				let question_title = "";
-				let answer = "";
-				faq[Str.get_title_url(question_title).toLowerCase()] = answer;
-				faq['field_'+parseInt(a+1)] =question_title;
-			}
-		}
-		return faq;
-	};
-	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.FAQ,option?option:{});
-		let item_list = [];
-		for(let a=0;a<option.question_count+1;a++){
-			item_list.push(Faq_Logic.get_test("FAQ " +String(parseInt(a+1)),option));
-		}
-		return item_list;
-	}
-	static get_faq_question_list_old(faq){
-		let item_list = [];
-		for(let a=0;a<19;a++){
-			let row = a + 1;
-			if(!Str.check_is_null(faq['field_'+a]))   {
-				item_list.push({ id: Num.get_id(333), question:faq['field_'+a], answer: String(faq[Str.get_title_url(faq['field_'+a]).toLowerCase()   ]) });
-			}
-		}
-		return item_list;
-	}
-}
 class Favorite_Logic {
 	static get_new = (parent_data_type,parent_id) =>{
 		let favorite = DataItem.get_new(DataType.FAVORITE,0,{
@@ -1211,8 +1136,6 @@ class Blog_Post_Url {
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
-class Order_Url {
-}
 class Product_Url {
 	static detail = (app_id,url,key,params) => {
 		let action_url="product/detail/"+key;
@@ -1344,6 +1267,14 @@ class Item_Url {
 		let action_url="item/delete_order/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static templaste = (app_id,url,key,params) => {
+		let action_url="item/template/"+key;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static content = (app_id,url,key,params) => {
+		let action_url="item/content/"+key;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 }
 class Category_Url {
 	static detail = (app_id,url,key,params) => {
@@ -1356,12 +1287,6 @@ class Category_Url {
 	};
 	static search = (app_id,url,params) => {
 		let action_url="category/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-}
-class Template_Url {
-	static get = (app_id,url,key,params) => {
-		let action_url="template/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
@@ -1898,16 +1823,6 @@ class Sub_Item_Logic {
 		for(let a=0;a<option.section_count;a++){
 			let item_title ="Section " + String(parseInt(a+1));
 			let item = Sub_Item_Logic.get_test(item_title,parent_item,top_item,option);
-			/*
-			item.items = [];
-			let new_sub_list = [];
-			for(let b=0;b<option.section_count;b++){
-				let sub_item_title ="Section " + String(parseInt(b+1));
-				let sub_item = Sub_Item_Logic.get_test(sub_item_title,item,top_item,option);
-				item.items.push(sub_item);
-			}
-			item = Sub_Item_Logic.bind_parent_child_list(item,new_sub_list);
-			*/
 			new_list.push(item);
 		}
 		return new_list;
@@ -1932,7 +1847,6 @@ class App_Logic {
 module.exports = {
 	App_Logic,
 	Admin_Logic,
-	Blank_Logic,
 	Blog_Post_Logic,
 	Blog_Post_Url,
 	Dashboard_Url,
@@ -1946,7 +1860,6 @@ module.exports = {
 	Event_Url,
 	Field_Logic,
 	FieldType,
-	Faq_Logic,
 	Favorite_Logic,
 	Gallery_Logic,
 	Gallery_Url,
@@ -1961,7 +1874,6 @@ module.exports = {
 	Product_Logic,
 	Review_Logic,
 	Order_Logic,
-	Order_Url,
 	Service_Logic,
 	Service_Url,
 	Social,
@@ -1972,7 +1884,6 @@ module.exports = {
 	Stock,
 	Template_Logic,
 	TemplateType,
-	Template_Url,
 	Url,
 	User_Url,
 	User_Logic,
