@@ -1211,33 +1211,7 @@ class Blog_Post_Url {
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
-class Cart_Url {
-	static post = (app_id,url,item_data_type,params) => {
-		let action_url="cart/post/"+item_data_type;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static get = (app_id,url,cart_number,params) => {
-		let action_url="cart/get/"+cart_number;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static delete = (app_id,url,id,params) => {
-		let action_url="cart/delete/"+id;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-}
 class Order_Url {
-	static post = (app_id,url,params) => {
-		let action_url="order/post";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static get = (app_id,url,order_number,params) => {
-		let action_url="order/get/"+order_number;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static delete = (app_id,url,id,params) => {
-		let action_url="order/delete/"+id;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
 }
 class Product_Url {
 	static detail = (app_id,url,key,params) => {
@@ -1338,12 +1312,36 @@ class Item_Url {
 		let action_url="item/favorite/"+parent_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_favorite = (app_id,url,parent_data_type,item_id,params) => {
-		let action_url="item/post_favorite"+parent_data_type+"/"+item_id;
+	static post_favorite = (app_id,url,parent_data_type,parent_item_id,params) => {
+		let action_url="item/post_favorite"+parent_data_type+"/"+parent_item_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_field_value = (app_id,url,item_data_type,item_id,value_id,params) => {
-		let action_url="item/post_field_value/"+item_data_type+"/"+item_id;
+	static post_field_value = (app_id,url,item_data_type,parent_item_id,value_id,params) => {
+		let action_url="item/post_field_value/"+item_data_type+"/"+parent_item_id;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_cart = (app_id,url,parent_data_type,params) => {
+		let action_url="cart/post/"+parent_data_type;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static cart = (app_id,url,cart_number,params) => {
+		let action_url="cart/get/"+cart_number;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static delete_cart = (app_id,url,id,params) => {
+		let action_url="cart/delete/"+id;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_order = (app_id,url,params) => {
+		let action_url="order/post";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static order = (app_id,url,order_number,params) => {
+		let action_url="order/get/"+order_number;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static delete_order = (app_id,url,id,params) => {
+		let action_url="order/delete/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
@@ -1939,7 +1937,6 @@ module.exports = {
 	Blog_Post_Url,
 	Dashboard_Url,
 	Cart_Logic,
-	Cart_Url,
 	Category_Logic,
 	Category_Url,
 	Content_Logic,
