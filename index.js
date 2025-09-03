@@ -223,7 +223,7 @@ class Order_Logic {
 		return FieldType.TRANSACTION_ID + Num.get_id(99999);
 	};
 	static get_order = (cart) => {
-		return DataItem.get_new(DataType.ORDER,0,{
+		let order = DataItem.get_new(DataType.ORDER,0,{
 			order_number:Order_Logic.get_order_number(),
 			parent_data_type:cart.parent_data_type,
 			user_id:cart.user_id,
@@ -231,11 +231,36 @@ class Order_Logic {
 			grand_total:cart.grand_total,
 			order_item_list:[]
 		});
+		cart.cart_item_list.forEach(cart_item => {
+			let order_item = DataItem.get_new(DataType.ORDER_ITEM,0,{
+				order_number:order.order_number,
+				parent_data_type:cart_item.parent_data_type,
+				parent_id:cart_item.parent_id,
+				user_id:order.user_id,
+				quanity:cart_item.quanity,
+				order_sub_item_list:[]
+			});
+			cart_item.cart_sub_item_list.forEach(cart_sub_item => {
+				let order_sub_item = DataItem.get_new(DataType.ORDER_SUB_ITEM,0,{
+					order_number:order.order_number,
+					parent_data_type:cart_sub_item.parent_data_type,
+					parent_id:cart_sub_item.parent_id,
+					user_id:order.user_id,
+					quanity:cart_sub_item.quanity
+				})
+				order_item.order_sub_item_list.push(order_sub_item);
+			});
+
+			order.order_item_list.push(order_item);
+
+		});
+
+		return order;
 	};
-	static get_order_item = (cart_item,order_number) =>{
+	static get_order_item_old = (cart_item,order_number) =>{
 		return DataItem.get_new(DataType.ORDER_ITEM,0,{order_number:order_number,parent_data_type:cart_item.parent_data_type,parent_id:cart_item.parent_id,user_id:cart_item.user_id,quanity:cart_item.quanity,order_sub_item_list:[]});
 	};
-	static get_order_sub_item = (cart_sub_item,order_number) =>{
+	static get_order_sub_item_old = (cart_sub_item,order_number) =>{
 		return DataItem.get_new(DataType.ORDER_SUB_ITEM,0,{order_number:order_number,parent_data_type:cart_sub_item.parent_data_type,parent_id:cart_sub_item.parent_id,user_id:cart_sub_item.user_id,quanity:cart_sub_item.quanity,});
 	};
 }
