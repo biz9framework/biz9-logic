@@ -216,15 +216,9 @@ class Page_Logic {
 	};
 }
 class Order_Logic {
-	static get_order_number = () => {
-		return FieldType.ORDER_NUMBER + Num.get_id(99999);
-	};
-	static get_transaction_id = () => {
-		return FieldType.TRANSACTION_ID + Num.get_id(99999);
-	};
-	static get_order = (cart) => {
+	static get_new = (cart) => {
 		let order = DataItem.get_new(DataType.ORDER,0,{
-			order_number:Order_Logic.get_order_number(),
+			order_number:Order_Logic.get_new_order_number(),
 			parent_data_type:cart.parent_data_type,
 			user_id:cart.user_id,
 			cart_number:cart.cart_number,
@@ -254,28 +248,28 @@ class Order_Logic {
 			order.order_item_list.push(order_item);
 
 		});
-
 		return order;
 	};
-	static get_order_item_old = (cart_item,order_number) =>{
-		return DataItem.get_new(DataType.ORDER_ITEM,0,{order_number:order_number,parent_data_type:cart_item.parent_data_type,parent_id:cart_item.parent_id,user_id:cart_item.user_id,quanity:cart_item.quanity,order_sub_item_list:[]});
+
+	static get_new_order_number = () => {
+		return FieldType.ORDER_NUMBER + Num.get_id(99999);
 	};
-	static get_order_sub_item_old = (cart_sub_item,order_number) =>{
-		return DataItem.get_new(DataType.ORDER_SUB_ITEM,0,{order_number:order_number,parent_data_type:cart_sub_item.parent_data_type,parent_id:cart_sub_item.parent_id,user_id:cart_sub_item.user_id,quanity:cart_sub_item.quanity,});
+	static get_new_transaction_id = () => {
+		return FieldType.TRANSACTION_ID + Num.get_id(99999);
 	};
 }
 class Cart_Logic {
-	static get_cart_number = () => {
+	static get_new = (parent_data_type) => {
+		return DataItem.get_new(DataType.CART,0,{cart_number:Cart_Logic.get_new_cart_number(),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
+	};
+	static get_new_cart_number = () => {
 		return FieldType.CART_NUMBER + Num.get_id(99999);
 	};
-	static get_cart = (parent_data_type,user_id) => {
-		return DataItem.get_new(DataType.CART,0,{cart_number:Cart_Logic.get_cart_number(),parent_data_type:parent_data_type,user_id:user_id,grand_total:0,cart_item_list:[]});
+	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity) =>{
+		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cart_sub_item_list:[]});
 	};
-	static get_cart_item = (parent_data_type,parent_id,cart_number,user_id,quanity) =>{
-		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,user_id:user_id,quanity:quanity,cart_sub_item_list:[]});
-	};
-	static get_cart_sub_item = (parent_data_type,parent_id,cart_number,user_id,quanity) =>{
-		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,user_id:user_id,quanity:quanity});
+	static get_new_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity) =>{
+		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity});
 	};
 }
 class Product_Logic {
@@ -1065,12 +1059,10 @@ class Faq_Logic {
 	}
 }
 class Favorite_Logic {
-	static get_new = (item_data_type,item_id,user_id,option) =>{
-		option = Field_Logic.get_option(DataType.FAVORITE,option?option:{});
+	static get_new = (parent_data_type,parent_id) =>{
 		let favorite = DataItem.get_new(DataType.FAVORITE,0,{
-			item_data_type:item_data_type,
+			item_data_type:itemitem_data_type,
 			item_id:item_id,
-			user_id:user_id,
 		});
 		return favorite;
 	}
@@ -1100,11 +1092,10 @@ class Favorite_Logic {
 	}
 }
 class Review_Logic {
-	static get_new = (item_data_type,item_id,user_id,title,comment,rating) =>{
+	static get_new = (item_data_type,item_id,title,comment,rating) =>{
 		return DataItem.get_new(DataType.REVIEW,0,{
 			item_data_type:item_data_type,
 			item_id:item_id,
-			user_id:user_id,
 
 			title:title ? title : "",
 			comment:comment ? comment : "",
@@ -1327,12 +1318,12 @@ class Item_Url {
 		let action_url = "item/post_cms/"+data_type+"/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static review = (app_id,url,item_data_type,page_current,page_size,params) => {
-		let action_url="item/review/"+item_data_type+"/"+page_current+"/"+page_size;
+	static review = (app_id,url,parent_data_type,page_current,page_size,params) => {
+		let action_url="item/review/"+parent_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_review = (app_id,url,item_data_type,item_id,params) => {
-		let action_url="item/post_review/"+item_data_type+"/"+item_id;
+	static post_review = (app_id,url,parent_data_type,item_id,params) => {
+		let action_url="item/post_review/"+parent_data_type+"/"+item_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static content = (app_id,url,key,params) => {
@@ -1343,12 +1334,12 @@ class Item_Url {
 		let action_url="item/custom_field/"+data_type+"/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static favorite = (app_id,url,item_data_type,page_current,page_size,params) => {
-		let action_url="item/favorite/"+item_data_type+"/"+page_current+"/"+page_size;
+	static favorite = (app_id,url,parent_data_type,page_current,page_size,params) => {
+		let action_url="item/favorite/"+parent_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_favorite = (app_id,url,item_data_type,item_id,params) => {
-		let action_url="item/post_favorite"+item_data_type+"/"+item_id;
+	static post_favorite = (app_id,url,parent_data_type,item_id,params) => {
+		let action_url="item/post_favorite"+parent_data_type+"/"+item_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static post_field_value = (app_id,url,item_data_type,item_id,value_id,params) => {
