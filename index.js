@@ -222,72 +222,35 @@ class Order_Logic {
 	static get_transaction_id = () => {
 		return FieldType.TRANSACTION_ID + Num.get_id(99999);
 	};
+	static get_order = (cart) => {
+		return DataItem.get_new(DataType.ORDER,0,{
+			order_number:Order_Logic.get_order_number(),
+			parent_data_type:cart.parent_data_type,
+			user_id:cart.user_id,
+			cart_number:cart.cart_number,
+			grand_total:cart.grand_total,
+			order_item_list:[]
+		});
+	};
+	static get_order_item = (cart_item,order_number) =>{
+		return DataItem.get_new(DataType.ORDER_ITEM,0,{order_number:order_number,parent_data_type:cart_item.parent_data_type,parent_id:cart_item.parent_id,user_id:cart_item.user_id,quanity:cart_item.quanity,order_sub_item_list:[]});
+	};
+	static get_order_sub_item = (cart_sub_item,order_number) =>{
+		return DataItem.get_new(DataType.ORDER_SUB_ITEM,0,{order_number:order_number,parent_data_type:cart_sub_item.parent_data_type,parent_id:cart_sub_item.parent_id,user_id:cart_sub_item.user_id,quanity:cart_sub_item.quanity,});
+	};
 }
 class Cart_Logic {
 	static get_cart_number = () => {
 		return FieldType.CART_NUMBER + Num.get_id(99999);
 	};
 	static get_cart = (parent_data_type,user_id) => {
-		return DataItem.get_new(DataType.CART,0,{parent_data_type:parent_data_type,user_id:user_id,cart_number:Cart_Logic.get_cart_number(),grand_total:0,cart_item_list:[]});
+		return DataItem.get_new(DataType.CART,0,{cart_number:Cart_Logic.get_cart_number(),parent_data_type:parent_data_type,user_id:user_id,grand_total:0,cart_item_list:[]});
 	};
 	static get_cart_item = (parent_data_type,parent_id,cart_number,user_id,quanity) =>{
 		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,user_id:user_id,quanity:quanity,cart_sub_item_list:[]});
 	};
-	static get_cart_sub_item = (parent_sub_data_type,parent_sub_id,cart_number,user_id,quanity) =>{
-		return DataItem.get_new(DataType.CART_ITEM,0,{parent_sub_data_type:parent_sub_data_type,parent_sub_id:parent_sub_id,cart_number:cart_number,user_id:user_id,quanity:quanity});
-	};
-	static get_test_item = (cart_item_id,cart_number,user_id,item_data_type,item_id,option) =>{
-		option = Field_Logic.get_option(DataType.CART_ITEM,option?option:{generate_id:Str.check_is_null(cart_item_id)? true : false  });
-		let cart_item = DataItem.get_new(DataType.CART_ITEM,Num.get_guid(),Field_Logic.get_test("Cart Item "+Num.get_id(),option));
-		cart_item.cart_item_id = cart_item_id;
-		cart_item.cart_number = cart_number;
-		cart_item.user_id = user_id;
-		cart_item.item_data_type = item_data_type;
-		cart_item.item_id = item_id;
-		if(option.get_cart_sub_item){
-			cart_item.cart_sub_item_list = [];
-			for(let a = 0;a<option.cart_sub_item_count;a++){
-				let cart_sub_item = Cart_Logic.get_test_sub_item(cart_number,user_id,cart_item.id,item_data_type,item_id,{get_value:true,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count});
-				cart_item.cart_sub_item_list.push(cart_sub_item);
-			}
-		}
-		return cart_item;
-	};
-	static get_test_sub_item = (cart_number,user_id,cart_item_id,parent_data_type,parent_id,option) =>{
-		option = Field_Logic.get_option(DataType.CART_SUB_ITEM,option?option:{});
-		let item_blank = Item_Logic.get_test('Sub Item '+Num.get_id(),DataType.ITEM,0,{generate_id:true});
-		let cart_sub_item = DataItem.get_new(DataType.CART_SUB_ITEM,Num.get_guid(),Field_Logic.get_test("Cart Sub Item "+Num.get_id(),option));
-		cart_sub_item.cart_number = cart_number;
-		cart_sub_item.user_id = user_id;
-		cart_sub_item.cart_item_id = cart_item_id;
-		cart_sub_item.parent_data_type = item_blank.data_type;
-		cart_sub_item.parent_id = item_blank.id;
-		cart_sub_item.cost = Field_Logic.get_test_cost();
-		cart_sub_item.parent_item = item_blank;
-		return cart_sub_item;
-	};
-	static get_test_list = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
-		let item_list = [];
-		for(let a=0;a<option.product_count+1;a++){
-			item_list.push(Product_Logic.get_test("Product "+String(parseInt(a+1)),option));
-		}
-		return item_list;
-	}
-	static get_test_list_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
-		let product_list = [];
-		let category_list = Category_Logic.get_type_category_list(DataType.PRODUCT,option.category_count);
-		let item_count = 0;
-		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<option.product_count;b++){
-				item_count++;
-				let product = Product_Logic.get_test("Product "+String(parseInt(b+1)),option);
-				product.category = category_list[Num.get_id(category_list.length+1)].title;
-				product_list.push(product);
-			}
-		}
-		return [category_list,product_list]
+	static get_cart_sub_item = (parent_data_type,parent_id,cart_number,user_id,quanity) =>{
+		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,user_id:user_id,quanity:quanity});
 	};
 }
 class Product_Logic {
@@ -823,22 +786,19 @@ class FieldType {
 	static CART_NUMBER="CA-";
 	static TRANSACTION_ID="TR-";
 
-	static PAYMENT_PLAN_PENDING="Pending";
+	static ORDER_PAYMENT_STATUS_OPEN="Open";
+	static ORDER_PAYMENT_STATUS_COMPLETE="Complete";
+
+	static PAYMENT_PLAN_TYPE_PENDING="Pending";
 	static PAYMENT_PLAN_TYPE_1="1 Payment";
 	static PAYMENT_PLAN_TYPE_2="2 Payments";
 	static PAYMENT_PLAN_TYPE_3="3 Payments";
 	static PAYMENT_PLAN_TYPE_4="4 Payments";
 
-	static ORDER_STATUS_CART="Cart";
-	static ORDER_STATUS_NEW="New";
-	static ORDER_STATUS_PENDING="Pending";
-	static ORDER_STATUS_PAYMENT="Payment Plan";
-	static ORDER_STATUS_COMPLETE="Complete";
-
-	static ORDER_PAYMENT_TYPE_STRIPE="Stripe";
-	static ORDER_PAYMENT_TYPE_CASH="Cash";
-	static ORDER_PAYMENT_TYPE_OTHER="Other";
-	static ORDER_PAYMENT_TYPE_TEST="Test";
+	static PAYMENT_TYPE_STRIPE="Stripe";
+	static PAYMENT_TYPE_CASH="Cash";
+	static PAYMENT_TYPE_OTHER="Other";
+	static PAYMENT_TYPE_TEST="Test";
 
 	static APP_TYPE_MOBILE="Mobile";
 	static APP_TYPE_WEBSITE="Website";
