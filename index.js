@@ -1267,7 +1267,7 @@ class Item_Url {
 		let action_url="item/delete_order/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static templaste = (app_id,url,key,params) => {
+	static template = (app_id,url,key,params) => {
 		let action_url="item/template/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
