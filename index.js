@@ -1262,6 +1262,10 @@ class Item_Url {
 		let action_url="item/post_order";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static search_order = (app_id,url,params) => {
+		let action_url="item/search_order";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 	static delete_order = (app_id,url,id,params) => {
 		let action_url="item/delete_order/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
