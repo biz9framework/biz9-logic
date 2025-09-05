@@ -218,7 +218,7 @@ class Page_Logic {
 class Order_Logic {
 	static get_new = (cart) => {
 		let order = DataItem.get_new(DataType.ORDER,0,{
-			order_number:Order_Logic.get_new_order_number(),
+			order_number:FieldType.ORDER_NUMBER + Num.get_id(99999),
 			parent_data_type:cart.parent_data_type,
 			user_id:cart.user_id,
 			cart_number:cart.cart_number,
@@ -250,26 +250,25 @@ class Order_Logic {
 		});
 		return order;
 	};
-
-	static get_new_order_number = () => {
-		return FieldType.ORDER_NUMBER + Num.get_id(99999);
-	};
-	static get_new_transaction_id = () => {
-		return FieldType.TRANSACTION_ID + Num.get_id(99999);
+	static get_new_order_payment = (order_number,payment_type,payment_amount) => {
+		return DataItem.get_new(DataType.ORDER_PAYMENT,0,
+			{
+				order_number:order_number,
+				payment_type:payment_type,
+				payment_amount:payment_amount,
+				transaction_id:FieldType.TRANSACTION_ID + Num.get_id(99999)
+			});
 	};
 }
 class Cart_Logic {
 	static get_new = (parent_data_type) => {
-		return DataItem.get_new(DataType.CART,0,{cart_number:Cart_Logic.get_new_cart_number(),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
+		return DataItem.get_new(DataType.CART,0,{cart_number:FieldType.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
 	};
 	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity) =>{
 		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cart_sub_item_list:[]});
 	};
 	static get_new_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity) =>{
 		return DataItem.get_new(DataType.CART_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity});
-	};
-	static get_new_cart_number = () => {
-		return FieldType.CART_NUMBER + Num.get_id(99999);
 	};
 }
 class Product_Logic {
