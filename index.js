@@ -250,11 +250,11 @@ class Order_Logic {
 		});
 		return order;
 	};
-	static get_new_order_payment = (order_number,payment_type,payment_amount) => {
+	static get_new_order_payment = (order_number,payment_method,payment_amount) => {
 		return DataItem.get_new(DataType.ORDER_PAYMENT,0,
 			{
 				order_number:order_number,
-				payment_type:payment_type,
+				payment_method:payment_method,
 				payment_amount:payment_amount,
 				transaction_id:FieldType.TRANSACTION_ID + Num.get_id(99999)
 			});
@@ -813,10 +813,10 @@ class FieldType {
 	static PAYMENT_PLAN_TYPE_3="3 Payments";
 	static PAYMENT_PLAN_TYPE_4="4 Payments";
 
-	static PAYMENT_TYPE_STRIPE="Stripe";
-	static PAYMENT_TYPE_CASH="Cash";
-	static PAYMENT_TYPE_OTHER="Other";
-	static PAYMENT_TYPE_TEST="Test";
+	static PAYMENT_METHOD_STRIPE="Stripe";
+	static PAYMENT_METHOD_CASH="Cash";
+	static PAYMENT_METHOD_OTHER="Other";
+	static PAYMENT_METHOD_TEST="Test";
 
 	static APP_TYPE_MOBILE="Mobile";
 	static APP_TYPE_WEBSITE="Website";
