@@ -1227,12 +1227,16 @@ class User_Url {
 	};
 }
 class Item_Url {
-	static post_cms = (app_id,url,data_type,id,params) => {
-		let action_url = "item/post_cms/"+data_type+"/"+id;
+	static activity = (app_id,url,params) => {
+		let action_url="item/activity";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_field_value = (app_id,url,item_data_type,parent_item_id,value_id,params) => {
-		let action_url="item/post_field_value/"+item_data_type+"/"+parent_item_id;
+	static cart = (app_id,url,cart_number,params) => {
+		let action_url="item/cart"+cart_number;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static content = (app_id,url,key,params) => {
+		let action_url="item/content/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static content = (app_id,url,key,params) => {
@@ -1243,56 +1247,56 @@ class Item_Url {
 		let action_url="item/custom_field/"+data_type+"/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static review = (app_id,url,parent_data_type,page_current,page_size,params) => {
-		let action_url="item/review/"+parent_data_type+"/"+page_current+"/"+page_size;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static post_review = (app_id,url,parent_data_type,item_id,params) => {
-		let action_url="item/post_review/"+parent_data_type+"/"+item_id;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static favorite = (app_id,url,parent_data_type,page_current,page_size,params) => {
-		let action_url="item/favorite/"+parent_data_type+"/"+page_current+"/"+page_size;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static post_favorite = (app_id,url,parent_data_type,parent_item_id,params) => {
-		let action_url="item/post_favorite"+parent_data_type+"/"+parent_item_id;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static cart = (app_id,url,cart_number,params) => {
-		let action_url="item/cart"+cart_number;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static post_cart = (app_id,url,parent_data_type,params) => {
-		let action_url="item/post_cart/"+parent_data_type;
+	static delete_order = (app_id,url,id,params) => {
+		let action_url="item/delete_order/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static delete_cart = (app_id,url,id,params) => {
 		let action_url="item/delete_cart"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static favorite = (app_id,url,parent_data_type,page_current,page_size,params) => {
+		let action_url="item/favorite/"+parent_data_type+"/"+page_current+"/"+page_size;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 	static order = (app_id,url,order_number,params) => {
 		let action_url="item/order/"+order_number;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_cart = (app_id,url,parent_data_type,params) => {
+		let action_url="item/post_cart/"+parent_data_type;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_cms = (app_id,url,data_type,id,params) => {
+		let action_url = "item/post_cms/"+data_type+"/"+id;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_favorite = (app_id,url,parent_data_type,parent_item_id,params) => {
+		let action_url="item/post_favorite"+parent_data_type+"/"+parent_item_id;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_field_value = (app_id,url,item_data_type,parent_item_id,value_id,params) => {
+		let action_url="item/post_field_value/"+item_data_type+"/"+parent_item_id;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_review = (app_id,url,parent_data_type,item_id,params) => {
+		let action_url="item/post_review/"+parent_data_type+"/"+item_id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static post_order = (app_id,url,params) => {
 		let action_url="item/post_order";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static review = (app_id,url,parent_data_type,page_current,page_size,params) => {
+		let action_url="item/review/"+parent_data_type+"/"+page_current+"/"+page_size;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 	static search_order = (app_id,url,parent_data_type,params) => {
 		let action_url="item/search_order/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static delete_order = (app_id,url,id,params) => {
-		let action_url="item/delete_order/"+id;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
 	static template = (app_id,url,key,params) => {
 		let action_url="item/template/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static content = (app_id,url,key,params) => {
-		let action_url="item/content/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
