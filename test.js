@@ -36,13 +36,13 @@ describe("connect", () => {
                 //console.log(gallery);
                 //console.log('ITEM-END');
                 console.log('aaaaaaaaaa');
-                console.log(Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_LIST,1,1));
+                console.log(FieldType.get_title(FieldType.USER_ROLE_ADMIN));
                 console.log('bbbbbb');
                 let page = Page_Logic.get_test();
                 //page[Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_TEXT,1)] = 'apple';
-                page[Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_LIST,1,1)] = 'cool';
-                page[Item_Logic.get_field_value_title('list',1,2)] = 'apple';
-                page[Item_Logic.get_field_value_title('list',1,3)] = 'sauce';
+                //page[Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_LIST,1,1)] = 'cool';
+                //page[Item_Logic.get_field_value_title('list',1,2)] = 'apple';
+                //page[Item_Logic.get_field_value_title('list',1,3)] = 'sauce';
                 //Log.w('page',page);
                 //Log.w('text_1_value',Item_Logic.get_field_value_value(FieldType.ITEM_FIELD_VALUE_TYPE_TEXT,page,1));
                 Log.w('list_1_value',Item_Logic.get_field_value_value(FieldType.ITEM_FIELD_VALUE_TYPE_LIST,page,1));

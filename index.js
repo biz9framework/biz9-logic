@@ -250,11 +250,11 @@ class Order_Logic {
 		});
 		return order;
 	};
-	static get_new_order_payment = (order_number,payment_method,payment_amount) => {
+	static get_new_order_payment = (order_number,payment_method_type,payment_amount) => {
 		return DataItem.get_new(DataType.ORDER_PAYMENT,0,
 			{
 				order_number:order_number,
-				payment_method:payment_method,
+				payment_method_type:payment_method_type,
 				payment_amount:payment_amount,
 				transaction_id:FieldType.TRANSACTION_ID + Num.get_id(99999)
 			});
@@ -779,6 +779,7 @@ class FieldType {
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
 
+	static USER_ROLE_SUPER_ADMIN='super_admin';
 	static USER_ROLE_ADMIN='admin';
 	static USER_ROLE_MANAGER='manager';
 	static USER_ROLE_USER='user';
@@ -838,6 +839,21 @@ class FieldType {
 	static ITEM_FIELD_VALUE_TYPE_NOTE="note";
 	static ITEM_FIELD_VALUE_TYPE_PHOTO="photo";
 	static ITEM_FIELD_VALUE_TYPE_LIST="list";
+
+	static get_title(field_type){
+		switch(field_type){
+			case FieldType.USER_ROLE_SUPER_ADMIN:
+				return "Super Admin";
+			case FieldType.USER_ROLE_ADMIN:
+				return "Admin";
+			case FieldType.USER_ROLE_Manager:
+				return "Manager";
+			case FieldType.USER_ROLE_USER:
+				return "User";
+			case FieldType.USER_ROLE_GUEST:
+				return "Guest";
+		}
+	}
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
@@ -911,6 +927,7 @@ class DataType {
 	static PAGE='page_biz';
 	static REVIEW='review_biz';
 	static SERVICE='service_biz';
+	static SECURITY='security_biz';
 	static STAT='stat_biz';
 	static TEMPLATE='template_biz';
 	static USER='user_biz';
