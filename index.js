@@ -1291,6 +1291,10 @@ class Item_Url {
 		let action_url="item/review/"+parent_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static search_cart = (app_id,url,parent_data_type,params) => {
+		let action_url="item/search_cart/"+parent_data_type;
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 	static search_order = (app_id,url,parent_data_type,params) => {
 		let action_url="item/search_order/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,params);
