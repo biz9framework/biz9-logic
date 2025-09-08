@@ -1232,7 +1232,7 @@ class Item_Url {
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static cart = (app_id,url,cart_number,params) => {
-		let action_url="item/cart"+cart_number;
+		let action_url="item/cart/"+cart_number;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static content = (app_id,url,key,params) => {
