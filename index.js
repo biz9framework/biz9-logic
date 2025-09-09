@@ -1239,10 +1239,6 @@ class Item_Url {
 		let action_url="item/content/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static content = (app_id,url,key,params) => {
-		let action_url="item/content/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
 	static custom_field = (app_id,url,data_type,key,params) => {
 		let action_url="item/custom_field/"+data_type+"/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
@@ -1252,7 +1248,7 @@ class Item_Url {
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static delete_cart = (app_id,url,id,params) => {
-		let action_url="item/delete_cart"+id;
+		let action_url="item/delete_cart/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static favorite = (app_id,url,parent_data_type,page_current,page_size,params) => {
