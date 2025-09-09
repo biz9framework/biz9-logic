@@ -261,8 +261,8 @@ class Order_Logic {
 	};
 }
 class Cart_Logic {
-	static get_new = (parent_data_type) => {
-		return DataItem.get_new(DataType.CART,0,{cart_number:FieldType.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
+	static get_new = (parent_data_type,user_id) => {
+		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:FieldType.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
 	};
 	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity) =>{
 		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cart_sub_item_list:[]});
