@@ -1002,8 +1002,8 @@ class DataType {
 class Favorite_Logic {
 	static get_new = (parent_data_type,parent_id) =>{
 		let favorite = DataItem.get_new(DataType.FAVORITE,0,{
-			item_data_type:itemitem_data_type,
-			item_id:item_id,
+			parent_data_type:itemitem_data_type,
+			parent_id:item_id,
 		});
 		return favorite;
 	}
@@ -1033,14 +1033,14 @@ class Favorite_Logic {
 	}
 }
 class Review_Logic {
-	static get_new = (item_data_type,item_id,title,comment,rating) =>{
+	static get_new = (parent_data_type,parent_id,user_id,title,comment,rating) =>{
 		return DataItem.get_new(DataType.REVIEW,0,{
-			item_data_type:item_data_type,
-			item_id:item_id,
-
+			parent_data_type:parent_data_type,
+			parent_id:parent_id,
+			user_id:user_id,
 			title:title ? title : "",
 			comment:comment ? comment : "",
-			rating:rating ? rating : ""
+			rating:rating ? rating : 5
 		});
 	}
 	static get_user_search_filter = (item_data_type,user_id) =>{
