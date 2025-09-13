@@ -177,6 +177,17 @@ class Item_Logic {
 				return "";
 		};
 	}
+	static get_data_search_result = (app_id,data_type,item_count,page_count,filter,data_list,option) =>{
+		return{
+			option:option?option:{},
+			data_type:data_type?data_type:DataType.BLANK,
+			item_count:item_count?item_count:0,
+			page_count:page_count?page_count:1,
+			filter:filter?filter:{},
+			data_list:data_list?data_list:[],
+			app_id:app_id?app_id:null,
+		}
+	}
 }
 class Stat_Logic {
 	/*
@@ -1000,12 +1011,12 @@ class DataType {
 	};
 }
 class Favorite_Logic {
-	static get_new = (parent_data_type,parent_id) =>{
-		let favorite = DataItem.get_new(DataType.FAVORITE,0,{
-			parent_data_type:itemitem_data_type,
-			parent_id:item_id,
+	static get_new = (parent_data_type,parent_id,user_id) =>{
+		return DataItem.get_new(DataType.FAVORITE,0,{
+			parent_data_type:parent_data_type,
+			parent_id:parent_id,
+			user_id:user_id
 		});
-		return favorite;
 	}
 	static get_favorite_by_list = (favorite_list,item_list) =>{
 		favorite_list.forEach(item => {
@@ -1376,8 +1387,8 @@ class Url{
 		let action_url = "main/crud/post/"+data_type + "/" + id;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_list = (app_id,url,data_type,params) => {
-		let action_url = "main/crud/post_list/"+data_type;
+	static post_list = (app_id,url,params) => {
+		let action_url = "main/crud/post_list";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
