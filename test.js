@@ -35,8 +35,9 @@ describe("connect", () => {
                 //let gallery = Gallery_Logic.get_test('Gallery 1',{get_blank:true});
                 //console.log(gallery);
                 //console.log('ITEM-END');
-                console.log('aaaaaaaaaa');
-                console.log(FieldType.get_title(FieldType.USER_ROLE_ADMIN));
+                console.log('cool');
+                console.log(DataType.get_title(DataType.TEMPLATE,true));
+                //console.log(FieldType.get_title(FieldType.USER_ROLE_ADMIN));
                 console.log('bbbbbb');
                 let page = Page_Logic.get_test();
                 //page[Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_TEXT,1)] = 'apple';

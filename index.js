@@ -1310,6 +1310,10 @@ class Item_Url {
 		let action_url="item/template/"+key;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static cloud_flare_photo_list = (app_id,url,params) => {
+		let action_url="item/cloud_flare_photo_list";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 }
 class Category_Url {
 	static detail = (app_id,url,key,params) => {
