@@ -1274,7 +1274,7 @@ class Item_Url {
 		let action_url="item/post_cart/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
-	static post_cdn_photo_list = (app_id,url,params) => {
+	static post_cdn_photo = (app_id,url,params) => {
 		let action_url="item/post_cdn_photo";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
