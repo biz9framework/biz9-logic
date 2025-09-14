@@ -1274,6 +1274,10 @@ class Item_Url {
 		let action_url="item/post_cart/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
+	static post_cdn_photo_list = (app_id,url,params) => {
+		let action_url="item/post_cdn_photo";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
 	static post_cms = (app_id,url,data_type,id,params) => {
 		let action_url = "item/post_cms/"+data_type+"/"+id;
 		return get_cloud_url_main(app_id,url,action_url,params);
@@ -1308,10 +1312,6 @@ class Item_Url {
 	};
 	static template = (app_id,url,key,params) => {
 		let action_url="item/template/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static cloud_flare_photo_list = (app_id,url,params) => {
-		let action_url="item/cloud_flare_photo_list";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
