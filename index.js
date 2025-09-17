@@ -1245,8 +1245,8 @@ class User_Url {
 	};
 }
 class Image_Url {
-	static post_file = (app_id,url,params) => {
-		let action_url="main/image/post_file";
+	static post = (app_id,url,params) => {
+		let action_url="main/image/post";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static post_cdn = (app_id,url,params) => {
