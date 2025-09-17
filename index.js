@@ -851,6 +851,13 @@ class FieldType {
 	static ITEM_FIELD_VALUE_TYPE_IMAGE="image";
 	static ITEM_FIELD_VALUE_TYPE_LIST="list";
 
+	static IMAGE_SIZE_THUMB="thumb";
+	static IMAGE_SIZE_MID="mid";
+	static IMAGE_SIZE_LARGE="large";
+	static IMAGE_SIZE_SQUARE_THUMB="squre_thumb";
+	static IMAGE_SIZE_SQUARE_MID="squre_mid";
+	static IMAGE_SIZE_SQUARE_LARGE="squre_large";
+
 	static get_title(field_type){
 		switch(field_type){
 			case FieldType.USER_ROLE_SUPER_ADMIN:
@@ -1909,6 +1916,7 @@ module.exports = {
 	Gallery_Logic,
 	Gallery_Url,
 	Item_Logic,
+	Image_Url,
 	Item_Url,
 	Event_Logic,
 	Message,
