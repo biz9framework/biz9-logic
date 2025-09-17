@@ -134,7 +134,7 @@ class Item_Logic {
 		return [
 			{value:'text',label:'Text'},
 			{value:'note',label:'Note'},
-			{value:'photo',label:'Photo'},
+			{value:'image',label:'Image'},
 			{value:'list',label:'List'},
 		];
 	};
@@ -142,7 +142,7 @@ class Item_Logic {
 		switch(value_type){
 			case FieldType.ITEM_FIELD_VALUE_TYPE_TEXT:
 			case FieldType.ITEM_FIELD_VALUE_TYPE_NOTE:
-			case FieldType.ITEM_FIELD_VALUE_TYPE_PHOTO:
+			case FieldType.ITEM_FIELD_VALUE_TYPE_IMAGE:
 				return !Str.check_is_null(item[Item_Logic.get_field_value_title(value_type,value_id)]) ? item[Item_Logic.get_field_value_title(value_type,value_id)] : "";
 				break;
 			case FieldType.ITEM_FIELD_VALUE_TYPE_LIST:
@@ -167,8 +167,8 @@ class Item_Logic {
 			case FieldType.ITEM_FIELD_VALUE_TYPE_NOTE:
 				return 'note'+'_value_'+value_id;
 				break;
-			case FieldType.ITEM_FIELD_VALUE_TYPE_PHOTO:
-				return 'photo'+'_value_'+value_id;
+			case FieldType.ITEM_FIELD_VALUE_TYPE_IMAGE:
+				return 'image'+'_value_'+value_id;
 				break;
 			case FieldType.ITEM_FIELD_VALUE_TYPE_LIST:
 				return 'list'+'_value_'+value_id +'_row_'+row_id;
@@ -624,9 +624,9 @@ class Field_Logic {
 	};
 	static get_option(data_type,option){
 		data_type = data_type ? data_type : DataType.BLANK;
-		option = !Obj.check_is_empty(option) ? option : {get_value:false,get_item:false,get_photo:false,item_count:9,value_count:9};
+		option = !Obj.check_is_empty(option) ? option : {get_value:false,get_item:false,get_image:false,item_count:9,value_count:9};
 		option.generate_id = option.generate_id ? option.generate_id : false;
-		option.get_photo = option.get_photo ? true : false;
+		option.get_image = option.get_image ? true : false;
 		option.get_value = option.get_value ? true : false;
 		option.get_item = option.get_item ? true : false;
 		option.get_blank = option.get_blank ? true : false;
@@ -772,7 +772,7 @@ class FieldType {
 	static DATE_CREATE='date_create';
 	static PARENT_ID='parent_id';
 	static PARENT_DATA_TYPE='parent_data_type';
-	static PHOTO_DATA='photo_data';
+	static IMAGE_DATA='image_data';
 	static TOP_ID='top_id';
 	static TOP_DATA_TYPE='top_data_type';
 	static TITLE='title';
@@ -848,7 +848,7 @@ class FieldType {
 
 	static ITEM_FIELD_VALUE_TYPE_TEXT="text";
 	static ITEM_FIELD_VALUE_TYPE_NOTE="note";
-	static ITEM_FIELD_VALUE_TYPE_PHOTO="photo";
+	static ITEM_FIELD_VALUE_TYPE_IMAGE="image";
 	static ITEM_FIELD_VALUE_TYPE_LIST="list";
 
 	static get_title(field_type){
@@ -934,7 +934,7 @@ class DataType {
 	static ORDER_PAYMENT="order_payment_biz";
 
 	static PRODUCT='product_biz';
-	static PHOTO='photo_biz';
+	static IMAGE='image_biz';
 	static PAGE='page_biz';
 	static REVIEW='review_biz';
 	static SERVICE='service_biz';
@@ -983,8 +983,8 @@ class DataType {
 				return 'category';
 			case DataType.VIDEO:
 				return 'video';
-			case DataType.PHOTO:
-				return 'photo';
+			case DataType.IMAGE:
+				return 'image';
 			case DataType.PAGE:
 				return 'page';
 			case DataType.USER:
@@ -1237,6 +1237,16 @@ class User_Url {
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 }
+class Image_Url {
+	static post_file = (app_id,url,params) => {
+		let action_url="item/post_file";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+	static post_cdn = (app_id,url,params) => {
+		let action_url="item/post_cdn";
+		return get_cloud_url_main(app_id,url,action_url,params);
+	};
+}
 class Item_Url {
 	static activity = (app_id,url,params) => {
 		let action_url="item/activity";
@@ -1272,14 +1282,6 @@ class Item_Url {
 	};
 	static post_cart = (app_id,url,parent_data_type,params) => {
 		let action_url="item/post_cart/"+parent_data_type;
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static post_file_photo = (app_id,url,params) => {
-		let action_url="item/post_file_photo";
-		return get_cloud_url_main(app_id,url,action_url,params);
-	};
-	static post_cdn_photo = (app_id,url,params) => {
-		let action_url="item/post_cdn_photo";
 		return get_cloud_url_main(app_id,url,action_url,params);
 	};
 	static post_cms = (app_id,url,data_type,id,params) => {
@@ -1470,8 +1472,8 @@ class Category_Logic {
 			case DataType.PAGE:
 				return "Page";
 				break;
-			case DataType.PHOTO:
-				return "Photo";
+			case DataType.IMAGE:
+				return "Image";
 				break;
 			case DataType.PRODUCT:
 				return "Product";
@@ -1489,7 +1491,7 @@ class Category_Logic {
 };
 class CMS {
 	static Tab_Edit_Title_General = 'general';
-	static Tab_Edit_Title_Photo = 'photo';
+	static Tab_Edit_Title_Image = 'image';
 	static Tab_Edit_Title_List = 'list';
 	static Tab_Edit_Title_Value = 'value';
 	static Tab_Edit_Title_Setting = 'setting';
@@ -1547,8 +1549,8 @@ class CMS {
 			case CMS.Tab_Edit_Title_General:
 				return 'General';
 				break;
-			case CMS.Tab_Edit_Title_Photo:
-				return 'Photos';
+			case CMS.Tab_Edit_Title_Image:
+				return 'Images';
 				break;
 			case CMS.Tab_Edit_Title_Value:
 				return 'Values';
