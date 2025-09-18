@@ -1147,266 +1147,266 @@ class DataItem {
 	};
 }
 class Dashboard_Url {
-	static user_home = (app_id,url,params) => {
+	static user_home = (app_id,url,param) => {
 		let action_url="dashboard/user_home";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static app_home = (app_id,url,params) => {
+	static app_home = (app_id,url,param) => {
 		let action_url="dashboard/app_home";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Blog_Post_Url {
-	static detail = (app_id,url,key,params) => {
+	static detail = (app_id,url,key,param) => {
 		let action_url="blog_post/detail/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static home = (app_id,url,params) => {
+	static home = (app_id,url,param) => {
 		let action_url="blog_post";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static search = (app_id,url,params) => {
+	static search = (app_id,url,param) => {
 		let action_url="blog_post/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Product_Url {
-	static detail = (app_id,url,key,params) => {
+	static detail = (app_id,url,key,param) => {
 		let action_url="product/detail/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static home = (app_id,url,params) => {
+	static home = (app_id,url,param) => {
 		let action_url="product";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static search = (app_id,url,params) => {
+	static search = (app_id,url,param) => {
 		let action_url="product/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Event_Url {
-	static detail = (app_id,url,key,params) => {
+	static detail = (app_id,url,key,param) => {
 		let action_url="event/detail/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static home = (app_id,url,params) => {
+	static home = (app_id,url,param) => {
 		let action_url="event";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static search = (app_id,url,params) => {
+	static search = (app_id,url,param) => {
 		let action_url="event/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Service_Url {
-	static detail = (app_id,url,key,params) => {
+	static detail = (app_id,url,key,param) => {
 		let action_url="service/detail/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static home = (app_id,url,params) => {
+	static home = (app_id,url,param) => {
 		let action_url="service/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static search = (app_id,url,params) => {
+	static search = (app_id,url,param) => {
 		let action_url="service/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Gallery_Url {
-	static detail = (app_id,url,key,params) => {
+	static detail = (app_id,url,key,param) => {
 		let action_url="gallery/detail/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static home = (app_id,url,params) => {
+	static home = (app_id,url,param) => {
 		let action_url="gallery";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static search = (app_id,url,params) => {
+	static search = (app_id,url,param) => {
 		let action_url="gallery/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class User_Url {
-	static info = (app_id,url,params) => {
+	static info = (app_id,url,param) => {
 		let action_url="user/info/";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static register = (app_id,url,params) => {
+	static register = (app_id,url,param) => {
 		let action_url="user/register";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static login = (app_id,url,params) => {
+	static login = (app_id,url,param) => {
 		let action_url="user/login";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static logout = (app_id,url,params) => {
+	static logout = (app_id,url,param) => {
 		let action_url="user/logout";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Image_Url {
-	static post = (app_id,url,params) => {
+	static post = (app_id,url,param) => {
 		let action_url="main/image/post";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post_cdn = (app_id,url,params) => {
+	static post_cdn = (app_id,url,param) => {
 		let action_url="main/image/post_cdn";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Item_Url {
-	static activity = (app_id,url,params) => {
+	static activity = (app_id,url,param) => {
 		let action_url="item/activity";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static cart = (app_id,url,cart_number,params) => {
+	static cart = (app_id,url,cart_number,param) => {
 		let action_url="item/cart/"+cart_number;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static content = (app_id,url,key,params) => {
+	static content = (app_id,url,key,param) => {
 		let action_url="item/content/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static custom_field = (app_id,url,data_type,key,params) => {
+	static custom_field = (app_id,url,data_type,key,param) => {
 		let action_url="item/custom_field/"+data_type+"/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static delete_order = (app_id,url,id,params) => {
+	static delete_order = (app_id,url,id,param) => {
 		let action_url="item/delete_order/"+id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static delete_cart = (app_id,url,id,params) => {
+	static delete_cart = (app_id,url,id,param) => {
 		let action_url="item/delete_cart/"+id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static favorite = (app_id,url,parent_data_type,page_current,page_size,params) => {
+	static favorite = (app_id,url,parent_data_type,page_current,page_size,param) => {
 		let action_url="item/favorite/"+parent_data_type+"/"+page_current+"/"+page_size;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static order = (app_id,url,order_number,params) => {
+	static order = (app_id,url,order_number,param) => {
 		let action_url="item/order/"+order_number;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post_cart = (app_id,url,parent_data_type,params) => {
+	static post_cart = (app_id,url,parent_data_type,param) => {
 		let action_url="item/post_cart/"+parent_data_type;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post_cms = (app_id,url,data_type,id,params) => {
+	static post_cms = (app_id,url,data_type,id,param) => {
 		let action_url = "item/post_cms/"+data_type+"/"+id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post_favorite = (app_id,url,parent_data_type,parent_item_id,params) => {
+	static post_favorite = (app_id,url,parent_data_type,parent_item_id,param) => {
 		let action_url="item/post_favorite"+parent_data_type+"/"+parent_item_id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post_field_value = (app_id,url,item_data_type,parent_item_id,value_id,params) => {
+	static post_field_value = (app_id,url,item_data_type,parent_item_id,value_id,param) => {
 		let action_url="item/post_field_value/"+item_data_type+"/"+parent_item_id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post_review = (app_id,url,parent_data_type,item_id,params) => {
+	static post_review = (app_id,url,parent_data_type,item_id,param) => {
 		let action_url="item/post_review/"+parent_data_type+"/"+item_id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post_order = (app_id,url,params) => {
+	static post_order = (app_id,url,param) => {
 		let action_url="item/post_order";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static review = (app_id,url,parent_data_type,page_current,page_size,params) => {
+	static review = (app_id,url,parent_data_type,page_current,page_size,param) => {
 		let action_url="item/review/"+parent_data_type+"/"+page_current+"/"+page_size;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static search_cart = (app_id,url,parent_data_type,params) => {
+	static search_cart = (app_id,url,parent_data_type,param) => {
 		let action_url="item/search_cart/"+parent_data_type;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static search_order = (app_id,url,parent_data_type,params) => {
+	static search_order = (app_id,url,parent_data_type,param) => {
 		let action_url="item/search_order/"+parent_data_type;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static template = (app_id,url,key,params) => {
+	static template = (app_id,url,key,param) => {
 		let action_url="item/template/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Category_Url {
-	static detail = (app_id,url,key,params) => {
+	static detail = (app_id,url,key,param) => {
 		let action_url="category/detail/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static home = (app_id,url,params) => {
+	static home = (app_id,url,param) => {
 		let action_url="category";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static search = (app_id,url,params) => {
+	static search = (app_id,url,param) => {
 		let action_url="category/search";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Page_Url {
-	static get = (app_id,url,title_url,params) => {
+	static get = (app_id,url,title_url,param) => {
 		let action_url="page/get/"+title_url;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static home = (app_id,url,params) => {
+	static home = (app_id,url,param) => {
 		let action_url="page/home";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static about = (app_id,url,params) => {
+	static about = (app_id,url,param) => {
 		let action_url="page/about";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static contact = (app_id,url,params) => {
+	static contact = (app_id,url,param) => {
 		let action_url="page/contact";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static faq = (app_id,url,key,params) => {
+	static faq = (app_id,url,key,param) => {
 		let action_url="page/faq/"+key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Url{
-	static copy = (app_id,url,data_type,id,params) => {
+	static copy = (app_id,url,data_type,id,param) => {
 		let action_url = "main/crud/copy/"+data_type + "/" + id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static delete = (app_id,url,data_type,id,params) => {
+	static delete = (app_id,url,data_type,id,param) => {
 		let action_url = "main/crud/delete/"+data_type + "/" + id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static delete_check_protection = (app_id,url,data_type,id,params) => {
+	static delete_check_protection = (app_id,url,data_type,id,param) => {
 		let action_url = "main/crud/delete_item_check_protection/"+data_type + "/" + id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static delete_search = (app_id,url,data_type,params) => {
+	static delete_search = (app_id,url,data_type,param) => {
 		let action_url = "main/crud/delete_list/"+data_type;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static url = (app_id,url,action_url,params) => {
-		return get_cloud_url_main(app_id,url,action_url,params);
+	static url = (app_id,url,action_url,param) => {
+		return get_cloud_url_main(app_id,url,action_url,param);
 	}
-	static get = (app_id,url,data_type,key,params) => {
+	static get = (app_id,url,data_type,key,param) => {
 		let action_url= "main/crud/get/"+data_type + "/" + key;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static get_parent_top = (app_id,url,data_type,id,params) => {
+	static get_parent_top = (app_id,url,data_type,id,param) => {
 		let action_url = "main/crud/get_parent_top/"+data_type+"/"+id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static search = (app_id,url,data_type,params) => {
+	static search = (app_id,url,data_type,param) => {
 		let action_url = "main/crud/search/"+data_type;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static upload_file = (app_id,url,data_type,id,params) => {
+	static upload_file = (app_id,url,data_type,id,param) => {
 		let action_url = "main/crud/post/"+data_type + "/" + id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post = (app_id,url,data_type,id,params) => {
+	static post = (app_id,url,data_type,id,param) => {
 		let action_url = "main/crud/post/"+data_type + "/" + id;
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post_list = (app_id,url,params) => {
+	static post_list = (app_id,url,param) => {
 		let action_url = "main/crud/post_list";
-		return get_cloud_url_main(app_id,url,action_url,params);
+		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
 class Category_Logic {
@@ -1897,8 +1897,11 @@ class App_Logic {
 	}
 }
 class Image_Logic {
-	static get_url = (host,image_filename,size) =>{
-		return host+"/"+size + "_"+image_filename;
+	static get_url = (host,image_filename,size,param) =>{
+		if(!param){
+			param="";
+		}
+		return host+"/"+size + "_"+image_filename+param;
 	}
 static get_process_list = (upload_dir,image_filename) =>{
 		 return [
