@@ -5,7 +5,6 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const moment = require('moment');
-const path = require('path');
 const { exec } = require('child_process');
 const sharp = require('sharp');
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
@@ -2030,13 +2029,12 @@ class Image_Logic {
                 });
             }
         });
-
 	}
 	static get_process_list = (upload_dir,image_filename) =>{
 		 return [
 			{
 				image_filename:FieldType.IMAGE_SIZE_THUMB+"_"+image_filename,
-				path_filename:path.join(upload_dir,FieldType.IMAGE_SIZE_THUMB+"_"+image_filename),
+				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_THUMB+"_"+image_filename,
 				size:250,
 				is_square:false,
 				post_file:false,
@@ -2044,7 +2042,7 @@ class Image_Logic {
 			},
 			{
 				image_filename:FieldType.IMAGE_SIZE_MID+"_"+image_filename,
-				path_filename:path.join(upload_dir,FieldType.IMAGE_SIZE_MID+"_"+image_filename),
+				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_MID+"_"+image_filename,
 				size:720,
 				is_square:false,
 				post_file:false,
@@ -2052,7 +2050,7 @@ class Image_Logic {
 			},
 			{
 				image_filename:FieldType.IMAGE_SIZE_LARGE+"_"+image_filename,
-				path_filename:path.join(upload_dir,FieldType.IMAGE_SIZE_LARGE+"_"+image_filename),
+				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_LARGE+"_"+image_filename,
 				size:1000,
 				is_square:false,
 				post_file:false,
@@ -2060,7 +2058,7 @@ class Image_Logic {
 			},
 			{
 				image_filename:FieldType.IMAGE_SIZE_SQUARE_THUMB+"_"+image_filename,
-				path_filename:path.join(upload_dir,FieldType.IMAGE_SIZE_SQUARE_THUMB+"_"+image_filename),
+				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_SQUARE_THUMB+"_"+image_filename,
 				size:250,
 				is_square:true,
 				post_file:false,
@@ -2068,7 +2066,7 @@ class Image_Logic {
 			},
 			{
 				image_filename:FieldType.IMAGE_SIZE_SQUARE_MID+"_"+image_filename,
-				path_filename:path.join(upload_dir,FieldType.IMAGE_SIZE_SQUARE_MID+"_"+image_filename),
+				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_SQUARE_MID+"_"+image_filename,
 				size:720,
 				is_square:true,
 				post_file:false,
@@ -2076,17 +2074,13 @@ class Image_Logic {
 			},
 			{
 				image_filename:FieldType.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename,
-				path_filename:path.join(upload_dir,FieldType.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename),
+				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename,
 				size:1000,
 				is_square:true,
 				post_file:false,
 				post_cdn:false
 			},
 		];
-	}
-	static get_process_square_list = (upload_dir,image_filename,path) =>{
-		 return [
-				];
 	}
 }
 module.exports = {

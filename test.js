@@ -1,6 +1,6 @@
 const path = require('path');
 const series = require('async-series');
-const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic,Faq_Url,App_Logic,FieldType,Product_Url,Gallery_Logic} = require('./index');
+const {DataItem,DataType,Url,Obj,BiZ_Url,Cat,Stock,Schedule,Storage,Business,Product,Service,Event,Template,Page,Category,Review,Blog_Post,Faq_Logic,Category_Url,Blank_Url,Blank_Logic,Item_Logic,Service_Logic,Template_Logic,Page_Logic,Product_Logic,Event_Logic,Blog_Post_Logic,Content_Logic,Category_Logic,Team_Logic,Business_Logic,PageType,Sub_Item_Logic,Page_Url,Review_Logic,User_Logic,Field_Logic,Order_Logic,Cart_Logic,Faq_Url,App_Logic,FieldType,Product_Url,Gallery_Logic,Image_Logic} = require('./index');
 const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -36,17 +36,18 @@ describe("connect", () => {
                 //console.log(gallery);
                 //console.log('ITEM-END');
                 console.log('cool');
-                console.log(DataType.get_title(DataType.TEMPLATE,true));
+                console.log(Image_Logic.get_process_list('upload/photos','apple'));
+                //console.log(DataType.get_title(DataType.TEMPLATE,true));
                 //console.log(FieldType.get_title(FieldType.USER_ROLE_ADMIN));
-                console.log('bbbbbb');
-                let page = Page_Logic.get_test();
+                //console.log('bbbbbb');
+                //let page = Page_Logic.get_test();
                 //page[Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_TEXT,1)] = 'apple';
                 //page[Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_LIST,1,1)] = 'cool';
                 //page[Item_Logic.get_field_value_title('list',1,2)] = 'apple';
                 //page[Item_Logic.get_field_value_title('list',1,3)] = 'sauce';
                 //Log.w('page',page);
                 //Log.w('text_1_value',Item_Logic.get_field_value_value(FieldType.ITEM_FIELD_VALUE_TYPE_TEXT,page,1));
-                Log.w('list_1_value',Item_Logic.get_field_value_value(FieldType.ITEM_FIELD_VALUE_TYPE_LIST,page,1));
+                //Log.w('list_1_value',Item_Logic.get_field_value_value(FieldType.ITEM_FIELD_VALUE_TYPE_LIST,page,1));
 
 
                 //console.log(Page_Logic.get_page_value_field_title('text',1));
