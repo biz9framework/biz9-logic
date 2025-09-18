@@ -5,8 +5,6 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const moment = require('moment');
-const { exec } = require('child_process');
-const sharp = require('sharp');
 const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
 const { Log,Str,DateTime,Num,Obj } = require('/home/think2/www/doqbox/biz9-framework/biz9-utility/code');
 class Message {
@@ -1898,139 +1896,11 @@ class App_Logic {
 		return app;
 	}
 }
-
 class Image_Logic {
 	static get_url = (host,image_filename,size) =>{
 		return host+"/"+size + "_"+image_filename;
 	}
-	static get_new_by_base64 = (base64) =>{
-		return DataItem.get_new(DataType.IMAGE,0,
-			{
-				mime_type:!Str.check_is_null(Str.get_file_type_from_base64(base64)) ? Str.get_file_type_from_base64(base64).mimeType : 'image/jpeg',
-				extension:!Str.check_is_null(Str.get_file_type_from_base64(base64)) ? Str.get_file_type_from_base64(base64).extension : 'jpeg',
-				image_filename:!Str.check_is_null(Str.get_file_type_from_base64(base64)) ? Str.get_guid()+"."+Str.get_file_type_from_base64(base64).extension : 'not_found.jpeg',
-				buffer:!Str.check_is_null(Str.get_file_type_from_base64(base64)) ? Buffer.from(base64.split(';base64,').pop(), 'base64') : null,
-		});
-	}
- 	static get_cloud_flare_batch_token = (cloud_flare_account_id,cloud_flare_api_token) => {
-        return new Promise((callback) => {
-            let data_batch,error=null;
-            const url = "https://api.cloudflare.com/client/v4/accounts/"+cloud_flare_account_id+"/images/v1/batch_token";
-            const headers = {
-                "Accept": "application/json",
-                "Authorization": "Bearer " +cloud_flare_api_token
-            };
-            let curlCommand = `curl -s -H "Accept: ${headers.Accept}"`;
-            if (headers.Authorization) {
-                curlCommand += ` -H "Authorization: ${headers.Authorization}"`;
-            }
-            curlCommand += ` "${url}"`;
-            exec(curlCommand,async(err,stdout,stderr) => {
-                if (err) {
-                    err = `1 Error executing curl command: ${error.message}`;
-                    console.error(err);
-                    error=Log.append(error,err);
-                    return;
-                }
-                if (stderr) {
-                    err = `2 Curl stderr: ${stderr}`;
-                    console.error(err);
-                    error=Log.append(error,err);
-                    return;
-                }
-                try {
-                    const jsonData =await JSON.parse(stdout);
-                    data_batch =  jsonData.result.token;
-                    if(data_batch!== null){
-                        callback([error,data_batch]);
-                    }
-                } catch (parseError) {
-                    console.error(`Error parsing JSON response: ${parseError.message}`);
-                    console.log('Raw Response:', stdout);
-                    callback([parseError,null]);
-                }
-            });
-        });
-    };
- 	static post_cloud_flare_batch_image = (cloud_flare_api_token,batch_token,image_filename,item_file_path) => {
-        let error = null;
-        return new Promise((callback) => {
-            async.series([
-                async function(call){
-                    const post_url = "https://batch.imagedelivery.net/images/v1";
-                    const headers = {
-                        "Accept": "application/json",
-                        "Authorization": "Bearer " +batch_token
-                    };
-                    let curlCommand = `curl -s -H "Accept: ${headers.Accept}"`;
-                    curlCommand += ` -H "Authorization: ${headers.Authorization}"`;
-                    curlCommand += " -H X-Auth-Key: "+ cloud_flare_api_token;
-                    curlCommand += " -F requireSignedURLs=false";
-                    curlCommand += " -F id="+image_filename;
-                    curlCommand += " -F file=@"+item_file_path;
-                    curlCommand += ` "${post_url}"`;
-                    exec(curlCommand, (err, stdout, stderr) => {
-                        if (err) {
-                            err = `Error executing curl command: ${err.message}`;
-                            console.error(err);
-                            error=Log.append(error,err);
-                        }
-                        if (stderr) {
-                            err = `Curl stderr: ${stderr}`;
-                            console.error(err);
-                            error=Log.append(error,err);
-                        }
-                        try {
-                            const jsonData = JSON.parse(stdout);
-                            console.log('cool');
-                            console.log(jsonData);
-                            console.log('bean');
-                            if(jsonData!== null){
-                                callback([error,jsonData]);
-                            }
-                        } catch (parseError) {
-                            console.error(`Error parsing JSON response: ${parseError.message}`);
-                            console.log('Raw Response:', stdout);
-                            error=Log.append(error,parseError);
-                            callback([error,null]);
-                        }
-                    });
-                },
-            ])
-        });
-    };
-
- 	static post_write = (buffer,size,path_filename,is_square) => {
-        return new Promise((callback) => {
-            let data,error=null;
-            if(is_square){
-            sharp(buffer)
-                .resize(size)
-                .toFile(path_filename,(err, info) => {
-                    if(err){
-                        error=Log.append(error,'Error thumb saving file:');
-                        console.error('Error thumb saving file:', err);
-                    }
-                    if(info!==null){
-                        callback([error,true]);
-                    }
-                });
-            }else{
-            sharp(buffer)
-                .resize(size,size,{fit:sharp.fit.fill,quality:100})
-                .toFile(path_filename,(err, info) => {
-                    if(err){
-                        error=Log.append(error,'Error thumb saving file:');
-                        console.error('Error thumb saving file:', err);
-                    }
-                    if(info!==null){
-                        callback([error,true]);
-                    }
-                });
-            }
-        });
-	}
-	static get_process_list = (upload_dir,image_filename) =>{
+static get_process_list = (upload_dir,image_filename) =>{
 		 return [
 			{
 				image_filename:FieldType.IMAGE_SIZE_THUMB+"_"+image_filename,
