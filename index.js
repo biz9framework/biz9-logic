@@ -1910,48 +1910,36 @@ static get_process_list = (upload_dir,image_filename) =>{
 				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_THUMB+"_"+image_filename,
 				size:250,
 				is_square:false,
-				post_file:false,
-				post_cdn:false
 			},
 			{
 				image_filename:FieldType.IMAGE_SIZE_MID+"_"+image_filename,
 				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_MID+"_"+image_filename,
 				size:720,
 				is_square:false,
-				post_file:false,
-				post_cdn:false
 			},
 			{
 				image_filename:FieldType.IMAGE_SIZE_LARGE+"_"+image_filename,
 				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_LARGE+"_"+image_filename,
 				size:1000,
 				is_square:false,
-				post_file:false,
-				post_cdn:false
 			},
 			{
 				image_filename:FieldType.IMAGE_SIZE_SQUARE_THUMB+"_"+image_filename,
 				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_SQUARE_THUMB+"_"+image_filename,
 				size:250,
 				is_square:true,
-				post_file:false,
-				post_cdn:false
 			},
 			{
 				image_filename:FieldType.IMAGE_SIZE_SQUARE_MID+"_"+image_filename,
 				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_SQUARE_MID+"_"+image_filename,
 				size:720,
 				is_square:true,
-				post_file:false,
-				post_cdn:false
 			},
 			{
 				image_filename:FieldType.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename,
 				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename,
 				size:1000,
 				is_square:true,
-				post_file:false,
-				post_cdn:false
 			},
 		];
 	}
