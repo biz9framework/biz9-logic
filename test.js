@@ -38,7 +38,7 @@ describe("connect", () => {
                 //console.log('cool');
                 //console.log(Image_Logic.get_process_list('upload/photos','apple'));
                 //console.log(DataType.get_title(DataType.TEMPLATE,true));
-                //console.log(FieldType.get_title(FieldType.USER_ROLE_ADMIN));
+                console.log(User_Logic.get_role_title(FieldType.USER_ROLE_MANAGER));
                 //console.log('bbbbbb');
                 //let page = Page_Logic.get_test();
                 //page[Item_Logic.get_field_value_title(FieldType.ITEM_FIELD_VALUE_TYPE_TEXT,1)] = 'apple';
@@ -141,10 +141,9 @@ describe("connect", () => {
 
 
                 /* --USER--START */
-                console.log('aaaaa');
-                let user = {country:"United States",state:"Michigan",city:"cccccccccdddd"};
-                let country_state = User_Logic.get_country_state_city(user);
-                Log.w('country_state',country_state);
+                //let user = {country:"United States",state:"Michigan",city:"cccccccccdddd"};
+                //let country_state = User_Logic.get_country_state_city(user);
+                //Log.w('country_state',country_state);
                 //let user = User_Logic.get_test();
                 //let user_list = User_Logic.get_test_list();
                 //Log.w('user',user);

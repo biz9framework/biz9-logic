@@ -857,21 +857,6 @@ class FieldType {
 	static IMAGE_SIZE_SQUARE_THUMB="squre_thumb";
 	static IMAGE_SIZE_SQUARE_MID="squre_mid";
 	static IMAGE_SIZE_SQUARE_LARGE="squre_large";
-
-	static get_title(field_type){
-		switch(field_type){
-			case FieldType.USER_ROLE_SUPER_ADMIN:
-				return "Super Admin";
-			case FieldType.USER_ROLE_ADMIN:
-				return "Admin";
-			case FieldType.USER_ROLE_MANAGER:
-				return "Manager";
-			case FieldType.USER_ROLE_USER:
-				return "User";
-			case FieldType.USER_ROLE_GUEST:
-				return "Guest";
-		}
-	}
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
@@ -1747,7 +1732,7 @@ class User_Logic {
 				return "Super Admin";
 			case FieldType.USER_ROLE_ADMIN:
 				return "Admin";
-			case FieldType.USER_ROLE_Manager:
+			case FieldType.USER_ROLE_MANAGER:
 				return "Manager";
 			case FieldType.USER_ROLE_USER:
 				return "User";
