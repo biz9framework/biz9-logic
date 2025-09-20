@@ -1261,7 +1261,7 @@ class Item_Url {
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static favorite = (app_id,url,parent_data_type,user_id,page_current,page_size,param) => {
-		let action_url="item/favorite/"+parent_data_type+"/"+user_id+"/"++page_current+"/"+page_size;
+		let action_url="item/favorite/"+parent_data_type+"/"+user_id+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static order = (app_id,url,order_number,param) => {
