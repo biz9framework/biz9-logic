@@ -1260,8 +1260,8 @@ class Item_Url {
 		let action_url="item/delete_cart/"+id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static favorite = (app_id,url,parent_data_type,user_id,page_current,page_size,param) => {
-		let action_url="item/favorite/"+parent_data_type+"/"+user_id+"/"+page_current+"/"+page_size;
+	static favorite = (app_id,url,parent_data_type,param) => {
+		let action_url="item/favorite/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static order = (app_id,url,order_number,param) => {
