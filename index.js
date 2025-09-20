@@ -1276,16 +1276,16 @@ class Item_Url {
 		let action_url = "item/post_cms/"+data_type+"/"+id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post_favorite = (app_id,url,parent_data_type,parent_item_id,param) => {
-		let action_url="item/post_favorite/"+parent_data_type+"/"+parent_item_id;
+	static post_favorite = (app_id,url,parent_data_type,parent_id,user_id,param) => {
+		let action_url="item/post_favorite/"+parent_data_type+"/"+parent_id+"/"+user_id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static post_field_value = (app_id,url,item_data_type,parent_item_id,value_id,param) => {
 		let action_url="item/post_field_value/"+item_data_type+"/"+parent_item_id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static post_review = (app_id,url,parent_data_type,item_id,param) => {
-		let action_url="item/post_review/"+parent_data_type+"/"+item_id;
+	static post_review = (app_id,url,parent_data_type,parent_id,user_id,param) => {
+		let action_url="item/post_review/"+parent_data_type+"/"+parent_id+"/"+user_id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static post_order = (app_id,url,param) => {
