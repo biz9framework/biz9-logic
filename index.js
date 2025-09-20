@@ -864,7 +864,7 @@ class FieldType {
 				return "Super Admin";
 			case FieldType.USER_ROLE_ADMIN:
 				return "Admin";
-			case FieldType.USER_ROLE_Manager:
+			case FieldType.USER_ROLE_MANAGER:
 				return "Manager";
 			case FieldType.USER_ROLE_USER:
 				return "User";
