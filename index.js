@@ -1255,10 +1255,6 @@ class Image_Url {
 	};
 }
 class Item_Url {
-	static activity = (app_id,url,param) => {
-		let action_url="item/activity";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
 	static cart = (app_id,url,cart_number,param) => {
 		let action_url="item/cart/"+cart_number;
 		return get_cloud_url_main(app_id,url,action_url,param);
@@ -1745,6 +1741,20 @@ class User_Logic {
 			{value:'guest',label:"Guest"},
 		];
 	};
+	static get_role_title(role_type){
+		switch(role_type){
+			case FieldType.USER_ROLE_SUPER_ADMIN:
+				return "Super Admin";
+			case FieldType.USER_ROLE_ADMIN:
+				return "Admin";
+			case FieldType.USER_ROLE_Manager:
+				return "Manager";
+			case FieldType.USER_ROLE_USER:
+				return "User";
+			case FieldType.USER_ROLE_GUEST:
+				return "Guest";
+		}
+	}
 	static get_country_state_city(item){
 		let country_state_city = "";
 		if(item.country == "United States"){
@@ -1898,12 +1908,15 @@ class App_Logic {
 }
 class Image_Logic {
 	static get_url = (host,image_filename,size,param) =>{
-		if(!param){
-			param="";
-		}
+		host = host ? host : "";
+		image_filename = image_filename ? image_filename : "";
+		size = size ? size : "";
+		param = param ? param : "";
 		return host+"/"+size + "_"+image_filename+param;
 	}
 static get_process_list = (upload_dir,image_filename) =>{
+		upload_dir = upload_dir ? upload_dir : "";
+		image_filename = image_filename ? image_filename : "";
 		 return [
 			{
 				image_filename:FieldType.IMAGE_SIZE_THUMB+"_"+image_filename,

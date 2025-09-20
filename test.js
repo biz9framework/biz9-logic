@@ -35,8 +35,8 @@ describe("connect", () => {
                 //let gallery = Gallery_Logic.get_test('Gallery 1',{get_blank:true});
                 //console.log(gallery);
                 //console.log('ITEM-END');
-                console.log('cool');
-                console.log(Image_Logic.get_process_list('upload/photos','apple'));
+                //console.log('cool');
+                //console.log(Image_Logic.get_process_list('upload/photos','apple'));
                 //console.log(DataType.get_title(DataType.TEMPLATE,true));
                 //console.log(FieldType.get_title(FieldType.USER_ROLE_ADMIN));
                 //console.log('bbbbbb');
@@ -77,7 +77,7 @@ describe("connect", () => {
                 //let cloud_url = Category_Url.get_page(biz9_config,'cool');
                 //Log.w('cloud_url',cloud_url);
                 //console.log('GET-URL-SUCCESS');
-                //call();
+                call();
             },
 
             function(call) {
@@ -141,9 +141,10 @@ describe("connect", () => {
 
 
                 /* --USER--START */
-                //let user = {country:"United States",state:"",city:"Atlanta"};
-                //let country_state = User_Logic.get_user_country_state_city(user);
-                //Log.w('country_state',country_state);
+                console.log('aaaaa');
+                let user = {country:"United States",state:"Michigan",city:"cccccccccdddd"};
+                let country_state = User_Logic.get_country_state_city(user);
+                Log.w('country_state',country_state);
                 //let user = User_Logic.get_test();
                 //let user_list = User_Logic.get_test_list();
                 //Log.w('user',user);
