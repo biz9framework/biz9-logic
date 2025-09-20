@@ -1277,7 +1277,7 @@ class Item_Url {
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static post_favorite = (app_id,url,parent_data_type,parent_item_id,param) => {
-		let action_url="item/post_favorite"+parent_data_type+"/"+parent_item_id;
+		let action_url="item/post_favorite/"+parent_data_type+"/"+parent_item_id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static post_field_value = (app_id,url,item_data_type,parent_item_id,value_id,param) => {
