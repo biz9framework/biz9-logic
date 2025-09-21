@@ -1240,6 +1240,10 @@ class Image_Url {
 	};
 }
 class Item_Url {
+	static activity = (app_id,url,param) => {
+		let action_url="item/activity";
+		return get_cloud_url_main(app_id,url,action_url,param);
+	};
 	static cart = (app_id,url,cart_number,param) => {
 		let action_url="item/cart/"+cart_number;
 		return get_cloud_url_main(app_id,url,action_url,param);
