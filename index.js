@@ -839,9 +839,9 @@ class FieldType {
 	static DATA_SOURCE_SERVER="server";
 	static DATA_SOURCE_NOT_FOUND="not_found";
 
-	static ENVIRONMENT_TEST="test";
-	static ENVIRONMENT_STAGE="stage";
-	static ENVIRONMENT_PRODUCTION="production";
+	static ENV_TEST="test";
+	static ENV_STAGE="stage";
+	static ENV_PRODUCTION="production";
 
 	static ACTIVITY_TYPE_LOGIN="login";
 	static ACTIVITY_TYPE_REGISTER="register";
@@ -1240,22 +1240,6 @@ class Image_Url {
 	};
 }
 class Item_Url {
-	static activity = (app_id,url,param) => {
-		let action_url="item/activity";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static cart = (app_id,url,cart_number,param) => {
-		let action_url="item/cart/"+cart_number;
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static content = (app_id,url,key,param) => {
-		let action_url="item/content/"+key;
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static custom_field = (app_id,url,data_type,key,param) => {
-		let action_url="item/custom_field/"+data_type+"/"+key;
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
 	static delete_order = (app_id,url,id,param) => {
 		let action_url="item/delete_order/"+id;
 		return get_cloud_url_main(app_id,url,action_url,param);
@@ -1264,12 +1248,24 @@ class Item_Url {
 		let action_url="item/delete_cart/"+id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static favorite = (app_id,url,parent_data_type,param) => {
-		let action_url="item/favorite/"+parent_data_type;
+	static get_cart = (app_id,url,cart_number,param) => {
+		let action_url="item/get_cart/"+cart_number;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static order = (app_id,url,order_number,param) => {
-		let action_url="item/order/"+order_number;
+	static get_template = (app_id,url,key,param) => {
+		let action_url="item/template/"+key;
+		return get_cloud_url_main(app_id,url,action_url,param);
+	};
+	static get_content = (app_id,url,key,param) => {
+		let action_url="item/get_content/"+key;
+		return get_cloud_url_main(app_id,url,action_url,param);
+	};
+	static get_custom_field = (app_id,url,data_type,key,param) => {
+		let action_url="item/get_custom_field/"+data_type+"/"+key;
+		return get_cloud_url_main(app_id,url,action_url,param);
+	};
+	static get_order = (app_id,url,order_number,param) => {
+		let action_url="item/get_order/"+order_number;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static post_cart = (app_id,url,parent_data_type,param) => {
@@ -1296,8 +1292,16 @@ class Item_Url {
 		let action_url="item/post_order";
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static review = (app_id,url,parent_data_type,page_current,page_size,param) => {
-		let action_url="item/review/"+parent_data_type+"/"+page_current+"/"+page_size;
+	static search_activity = (app_id,url,param) => {
+		let action_url="item/search_activity";
+		return get_cloud_url_main(app_id,url,action_url,param);
+	};
+	static search_favorite = (app_id,url,parent_data_type,param) => {
+		let action_url="item/search_favorite/"+parent_data_type;
+		return get_cloud_url_main(app_id,url,action_url,param);
+	};
+	static search_review = (app_id,url,parent_data_type,page_current,page_size,param) => {
+		let action_url="item/search_review/"+parent_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static search_cart = (app_id,url,parent_data_type,param) => {
@@ -1306,10 +1310,6 @@ class Item_Url {
 	};
 	static search_order = (app_id,url,parent_data_type,param) => {
 		let action_url="item/search_order/"+parent_data_type;
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static template = (app_id,url,key,param) => {
-		let action_url="item/template/"+key;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 }
