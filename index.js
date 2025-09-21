@@ -1253,7 +1253,7 @@ class Item_Url {
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static get_template = (app_id,url,key,param) => {
-		let action_url="item/template/"+key;
+		let action_url="item/get_template/"+key;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static get_content = (app_id,url,key,param) => {
