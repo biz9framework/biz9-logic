@@ -234,7 +234,7 @@ class Page_Logic {
 			return String(Str.get_title(data_type.replaceAll('_',' '))).trim();
 		}
 	}
-	static url_get_page = (app_id,url,title_url,param) => {
+	static url_page = (app_id,url,title_url,param) => {
 		let action_url="page/get/"+title_url;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
@@ -292,19 +292,19 @@ class Order_Logic {
 	static TYPE_PAYMENT_METHOD_OTHER="Other";
 	static TYPE_PAYMENT_METHOD_TEST="Test";
 
-	static url_search_order = (app_id,url,parent_data_type,param) => {
+	static url_search = (app_id,url,parent_data_type,param) => {
 		let action_url="item/search_order/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static url_post_order = (app_id,url,param) => {
+	static url_post = (app_id,url,param) => {
 		let action_url="item/post_order";
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static url_get_order = (app_id,url,order_number,param) => {
+	static url_get = (app_id,url,order_number,param) => {
 		let action_url="item/get_order/"+order_number;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static url_delete_order = (app_id,url,id,param) => {
+	static url_delete = (app_id,url,id,param) => {
 		let action_url="item/delete_order/"+id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
@@ -355,19 +355,19 @@ class Order_Logic {
 class Cart_Logic {
 	static CART_NUMBER="CA-";
 
-	static url_search_cart = (app_id,url,parent_data_type,param) => {
+	static url_search = (app_id,url,parent_data_type,param) => {
 		let action_url="item/search_cart/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static url_post_cart = (app_id,url,parent_data_type,param) => {
+	static url_post = (app_id,url,parent_data_type,param) => {
 		let action_url="item/post_cart/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static url_delete_cart = (app_id,url,id,param) => {
+	static url_delete = (app_id,url,id,param) => {
 		let action_url="item/delete_cart/"+id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static url_get_cart = (app_id,url,cart_number,param) => {
+	static url_get = (app_id,url,cart_number,param) => {
 		let action_url="item/get_cart/"+cart_number;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
@@ -617,7 +617,7 @@ class Template_Logic {
 	static TYPE_PAGE_BODY='body';
 	static TYPE_PAGE_FOOTER='footer';
 
-	static url_get_template = (app_id,url,key,param) => {
+	static url_get = (app_id,url,key,param) => {
 		let action_url="item/get_template/"+key;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
@@ -1198,11 +1198,11 @@ class Favorite_Logic {
 			user_id:user_id
 		});
 	}
-	static url_search_favorite = (app_id,url,parent_data_type,param) => {
+	static url_search = (app_id,url,parent_data_type,param) => {
 		let action_url="item/search_favorite/"+parent_data_type;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static url_post_favorite = (app_id,url,parent_data_type,parent_id,user_id,param) => {
+	static url_post = (app_id,url,parent_data_type,parent_id,user_id,param) => {
 		let action_url="item/post_favorite/"+parent_data_type+"/"+parent_id+"/"+user_id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
@@ -1232,11 +1232,11 @@ class Favorite_Logic {
 	}
 }
 class Review_Logic {
-	static url_post_review = (app_id,url,parent_data_type,parent_id,user_id,param) => {
+	static url_post = (app_id,url,parent_data_type,parent_id,user_id,param) => {
 		let action_url="item/post_review/"+parent_data_type+"/"+parent_id+"/"+user_id;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static url_search_review = (app_id,url,parent_data_type,page_current,page_size,param) => {
+	static url_search = (app_id,url,parent_data_type,page_current,page_size,param) => {
 		let action_url="item/search_review/"+parent_data_type+"/"+page_current+"/"+page_size;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
