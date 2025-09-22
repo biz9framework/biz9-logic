@@ -43,6 +43,12 @@ class TemplateType {
 	static FOOTER='footer';
 }
 class Item_Logic {
+
+	static TYPE_FIELD_VALUE_TEXT="text";
+	static TYPE_FIELD_VALUE_NOTE="note";
+	static TYPE_FIELD_VALUE_IMAGE="image";
+	static TYPE_FIELD_VALUE_LIST="list";
+
 	static get_test = (title,data_type,id,option)=>{
 		data_type = data_type ? data_type : DataType.BLANK;
 		id = id ? id : 0;
@@ -140,12 +146,12 @@ class Item_Logic {
 	};
 	static get_field_value_value = (value_type,item,value_id) =>{
 		switch(value_type){
-			case FieldType.ITEM_FIELD_VALUE_TYPE_TEXT:
-			case FieldType.ITEM_FIELD_VALUE_TYPE_NOTE:
-			case FieldType.ITEM_FIELD_VALUE_TYPE_IMAGE:
+			case Item_Logic.TYPE_FIELD_VALUE_TEXT:
+			case Item_Logic.TYPE_FIELD_VALUE_NOTE:
+			case Item_Logic.TYPE_FIELD_VALUE_IMAGE:
 				return !Str.check_is_null(item[Item_Logic.get_field_value_title(value_type,value_id)]) ? item[Item_Logic.get_field_value_title(value_type,value_id)] : "";
 				break;
-			case FieldType.ITEM_FIELD_VALUE_TYPE_LIST:
+			case Item_Logic.TYPE_FIELD_VALUE_LIST:
 				let r_list = [];
 				for(let a=0;a<30;a++){
 					if(!Str.check_is_null(item[Item_Logic.get_field_value_title(value_type,value_id,a+1)])){
@@ -161,16 +167,16 @@ class Item_Logic {
 	static get_field_value_title = (value_type,value_id,row_id) =>{
 		let type_str = '';
 		switch(value_type){
-			case FieldType.ITEM_FIELD_VALUE_TYPE_TEXT:
+			case Item_Logic.TYPE_FIELD_VALUE_TEXT:
 				return 'text'+'_value_'+value_id;
 				break;
-			case FieldType.ITEM_FIELD_VALUE_TYPE_NOTE:
+			case Item_Logic.TYPE_FIELD_VALUE_NOTE:
 				return 'note'+'_value_'+value_id;
 				break;
-			case FieldType.ITEM_FIELD_VALUE_TYPE_IMAGE:
+			case Item_Logic.TYPE_FIELD_VALUE_IMAGE:
 				return 'image'+'_value_'+value_id;
 				break;
-			case FieldType.ITEM_FIELD_VALUE_TYPE_LIST:
+			case Item_Logic.TYPE_FIELD_VALUE_LIST:
 				return 'list'+'_value_'+value_id +'_row_'+row_id;
 				break;
 			default:
@@ -190,14 +196,15 @@ class Item_Logic {
 	}
 }
 class Stat_Logic {
-	/*
-	static STAT_VIEW_ADD_ID='1';
-	static STAT_LIKE_ADD_ID='2';
-	static STAT_FAVORITE_ADD_ID='3';
-	static STAT_CART_ADD_ID='4';
-	static STAT_ORDER_ADD_ID='5';
-	static STAT_REVIEW_ADD_ID='6';
-	*/
+	static TYPE_ACTION_VIEW_ADD_ID='1';
+	static TYPE_ACTION_LIKE_ADD_ID='2';
+	static TYPE_ACTION_FAVORITE_ADD_ID='3';
+	static TYPE_ACTION_CART_ADD_ID='4';
+	static TYPE_ACTION_ORDER_ADD_ID='5';
+	static TYPE_ACTION_REVIEW_ADD_ID='6';
+	static TYPE_ACTION_LOGIN_ID='7';
+	static TYPE_ACTION_REGISTER_ID='8';
+
 	static get_new = (user_id,stat_type_id,parent_item_list)=>{
 		return {
 			user_id:user_id,
@@ -227,9 +234,27 @@ class Page_Logic {
 	};
 }
 class Order_Logic {
+
+	static ORDER_NUMBER="OR-";
+	static TRANSACTION_ID="TR-";
+
+	static TYPE_PAYMENT_STATUS_OPEN="Open";
+	static TYPE_PAYMENT_STATUS_COMPLETE="Complete";
+
+	static TYPE_PAYMENT_PLAN_PENDING="Pending";
+	static TYPE_PAYMENT_PLAN_1="1 Payment";
+	static TYPE_PAYMENT_PLAN_2="2 Payments";
+	static TYPE_PAYMENT_PLAN_3="3 Payments";
+	static TYPE_PAYMENT_PLAN_4="4 Payments";
+
+	static TYPE_PAYMENT_METHOD_STRIPE="Stripe";
+	static TYPE_PAYMENT_METHOD_CASH="Cash";
+	static TYPE_PAYMENT_METHOD_OTHER="Other";
+	static TYPE_PAYMENT_METHOD_TEST="Test";
+
 	static get_new = (cart) => {
 		let order = DataItem.get_new(DataType.ORDER,0,{
-			order_number:FieldType.ORDER_NUMBER + Num.get_id(99999),
+			order_number:Order_Logic.ORDER_NUMBER + Num.get_id(99999),
 			parent_data_type:cart.parent_data_type,
 			user_id:cart.user_id,
 			cart_number:cart.cart_number,
@@ -267,13 +292,15 @@ class Order_Logic {
 				order_number:order_number,
 				payment_method_type:payment_method_type,
 				payment_amount:payment_amount,
-				transaction_id:FieldType.TRANSACTION_ID + Num.get_id(99999)
+				transaction_id:Order_Logic.TRANSACTION_ID + Num.get_id(99999)
 			});
 	};
 }
 class Cart_Logic {
+	static CART_NUMBER="CA-";
+
 	static get_new = (parent_data_type,user_id) => {
-		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:FieldType.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
+		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Cart_Logic.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
 	};
 	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity) =>{
 		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cart_sub_item_list:[]});
@@ -766,6 +793,7 @@ class Field_Logic {
 
 }
 class FieldType {
+	/*
 	static APP_ID='app_id';
 	static ID='id';
 	static DATA_TYPE='data_type';
@@ -789,74 +817,8 @@ class FieldType {
 	static SOURCE_TOP_DATA_TYPE='source_top_data_type';
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
-
-	static USER_ROLE_SUPER_ADMIN='super_admin';
-	static USER_ROLE_ADMIN='admin';
-	static USER_ROLE_MANAGER='manager';
-	static USER_ROLE_USER='user';
-	static USER_ROLE_GUEST='guest';
-
-	static STAT_VIEW_ADD_ID='1';
-	static STAT_LIKE_ADD_ID='2';
-	static STAT_FAVORITE_ADD_ID='3';
-	static STAT_CART_ADD_ID='4';
-	static STAT_ORDER_ADD_ID='5';
-	static STAT_REVIEW_ADD_ID='6';
-
-	/*
-	static KEY_ADMIN="key_admin";
-	static KEY_APP_ID="key_app_id";
-	static KEY_TEMPLATE="key_template";
-	static KEY_CART="key_cart";
-	static KEY_ORDER="key_order";
-	static KEY_USER="key_user";
 	*/
 
-	static ORDER_NUMBER="OR-";
-	static CART_NUMBER="CA-";
-	static TRANSACTION_ID="TR-";
-
-	static ORDER_PAYMENT_STATUS_OPEN="Open";
-	static ORDER_PAYMENT_STATUS_COMPLETE="Complete";
-
-	static PAYMENT_PLAN_TYPE_PENDING="Pending";
-	static PAYMENT_PLAN_TYPE_1="1 Payment";
-	static PAYMENT_PLAN_TYPE_2="2 Payments";
-	static PAYMENT_PLAN_TYPE_3="3 Payments";
-	static PAYMENT_PLAN_TYPE_4="4 Payments";
-
-	static PAYMENT_METHOD_STRIPE="Stripe";
-	static PAYMENT_METHOD_CASH="Cash";
-	static PAYMENT_METHOD_OTHER="Other";
-	static PAYMENT_METHOD_TEST="Test";
-
-	static APP_TYPE_MOBILE="Mobile";
-	static APP_TYPE_WEBSITE="Website";
-	static APP_TYPE_LANDING="Landing";
-
-	static DATA_SOURCE_CACHE="cache";
-	static DATA_SOURCE_DATABASE="database";
-	static DATA_SOURCE_SERVER="server";
-	static DATA_SOURCE_NOT_FOUND="not_found";
-
-	static ENV_TEST="test";
-	static ENV_STAGE="stage";
-	static ENV_PRODUCTION="production";
-
-	static ACTIVITY_TYPE_LOGIN="login";
-	static ACTIVITY_TYPE_REGISTER="register";
-
-	static ITEM_FIELD_VALUE_TYPE_TEXT="text";
-	static ITEM_FIELD_VALUE_TYPE_NOTE="note";
-	static ITEM_FIELD_VALUE_TYPE_IMAGE="image";
-	static ITEM_FIELD_VALUE_TYPE_LIST="list";
-
-	static IMAGE_SIZE_THUMB="thumb";
-	static IMAGE_SIZE_MID="mid";
-	static IMAGE_SIZE_LARGE="large";
-	static IMAGE_SIZE_SQUARE_THUMB="squre_thumb";
-	static IMAGE_SIZE_SQUARE_MID="squre_mid";
-	static IMAGE_SIZE_SQUARE_LARGE="squre_large";
 }
 class Social {
 	static FACEBOOK_URL="https://facebook.com/";
@@ -1012,7 +974,7 @@ class Favorite_Logic {
 	}
 	static get_favorite_by_list = (favorite_list,item_list) =>{
 		favorite_list.forEach(item => {
-			const item_match = item_list.find(item_find => item_find.id === item.item_id);
+			const item_match = item_list.find(item_find => item_find.id === item.parent_id);
 			if (item_match) {
 				item_match.is_favorite = true;
 			}
@@ -1722,6 +1684,12 @@ class Storage {
 	}
 }
 class User_Logic {
+	static TYPE_ROLE_SUPER_ADMIN='super_admin';
+	static TYPE_ROLE_ADMIN='admin';
+	static TYPE_ROLE_MANAGER='manager';
+	static TYPE_ROLE_USER='user';
+	static TYPE_ROLE_GUEST='guest';
+
 	static get_role_list(){
 		return [
 			{value:'admin',label:"Admin"},
@@ -1732,15 +1700,15 @@ class User_Logic {
 	};
 	static get_role_title(role_type){
 		switch(role_type){
-			case FieldType.USER_ROLE_SUPER_ADMIN:
+			case User_Logic.TYPE_ROLE_SUPER_ADMIN:
 				return "Super Admin";
-			case FieldType.USER_ROLE_ADMIN:
+			case User_Logic.TYPE_ROLE_ADMIN:
 				return "Admin";
-			case FieldType.USER_ROLE_MANAGER:
+			case User_Logic.TYPE_ROLE_MANAGER:
 				return "Manager";
-			case FieldType.USER_ROLE_USER:
+			case User_Logic.TYPE_ROLE_USER:
 				return "User";
-			case FieldType.USER_ROLE_GUEST:
+			case User_Logic.TYPE_ROLE_GUEST:
 				return "Guest";
 		}
 	}
@@ -1886,6 +1854,19 @@ class Sub_Item_Logic {
 	}
 }
 class App_Logic {
+	static TYPE_APP_MOBILE="Mobile";
+	static TYPE_APP_WEBSITE="Website";
+	static TYPE_APP_LANDING="Landing";
+
+	static TYPE_DATA_SOURCE_CACHE="cache";
+	static TYPE_DATA_SOURCE_DATABASE="database";
+	static TYPE_DATA_SOURCE_SERVER="server";
+	static TYPE_DATA_SOURCE_NOT_FOUND="not_found";
+
+	static TYPE_ENV_TEST="test";
+	static TYPE_ENV_STAGE="stage";
+	static TYPE_ENV_PRODUCTION="production";
+
 	static get_new = (title,user_id,type,option) =>{
 		option = Field_Logic.get_option(DataType.APP,option?option:{});
 		let app = DataItem.get_new(DataType.APP,0);
@@ -1896,6 +1877,18 @@ class App_Logic {
 	}
 }
 class Image_Logic {
+	static TYPE_SIZE_THUMB="thumb";
+	static TYPE_SIZE_MID="mid";
+	static TYPE_SIZE_LARGE="large";
+	static TYPE_SIZE_ORIGINAL="original";
+	static TYPE_SIZE_SQUARE_THUMB="squre_thumb";
+	static TYPE_SIZE_SQUARE_MID="squre_mid";
+	static TYPE_SIZE_SQUARE_LARGE="squre_large";
+
+	static TYPE_RE_SIZE_NORMAL="normal";
+	static TYPE_RE_SIZE_SQUARE="squre";
+	static TYPE_RE_SIZE_NONE="none";
+
 	static get_url = (host,image_filename,size,param) =>{
 		host = host ? host : "";
 		image_filename = image_filename ? image_filename : "";
@@ -1903,43 +1896,43 @@ class Image_Logic {
 		param = param ? param : "";
 		return host+"/"+size + "_"+image_filename+param;
 	}
-static get_process_list = (upload_dir,image_filename) =>{
+	static get_process_list = (upload_dir,image_filename) =>{
 		upload_dir = upload_dir ? upload_dir : "";
 		image_filename = image_filename ? image_filename : "";
 		 return [
 			{
-				image_filename:FieldType.IMAGE_SIZE_THUMB+"_"+image_filename,
-				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_THUMB+"_"+image_filename,
+				image_filename:Image_Logic.TYPE_SIZE_THUMB+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_THUMB+"_"+image_filename,
 				size:250,
 				is_square:false,
 			},
 			{
-				image_filename:FieldType.IMAGE_SIZE_MID+"_"+image_filename,
-				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_MID+"_"+image_filename,
+				image_filename:Image_Logic.TYPE_SIZE_MID+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_MID+"_"+image_filename,
 				size:720,
 				is_square:false,
 			},
 			{
-				image_filename:FieldType.IMAGE_SIZE_LARGE+"_"+image_filename,
-				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_LARGE+"_"+image_filename,
+				image_filename:Image_Logic.TYPE_SIZE_LARGE+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_LARGE+"_"+image_filename,
 				size:1000,
 				is_square:false,
 			},
 			{
-				image_filename:FieldType.IMAGE_SIZE_SQUARE_THUMB+"_"+image_filename,
-				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_SQUARE_THUMB+"_"+image_filename,
+				image_filename:Image_Logic.TYPE_SIZE_SQUARE_THUMB+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_SQUARE_THUMB+"_"+image_filename,
 				size:250,
 				is_square:true,
 			},
 			{
-				image_filename:FieldType.IMAGE_SIZE_SQUARE_MID+"_"+image_filename,
-				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_SQUARE_MID+"_"+image_filename,
+				image_filename:Image_Logic.TYPE_SIZE_SQUARE_MID+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_SQUARE_MID+"_"+image_filename,
 				size:720,
 				is_square:true,
 			},
 			{
-				image_filename:FieldType.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename,
-				path_filename:upload_dir+"/"+FieldType.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename,
+				image_filename:Image_Logic.TYPE_SIZE_SQUARE_LARGE+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_SQUARE_LARGE+"_"+image_filename,
 				size:1000,
 				is_square:true,
 			},
@@ -1961,7 +1954,6 @@ module.exports = {
 	DataType,
 	Event_Url,
 	Field_Logic,
-	FieldType,
 	Favorite_Logic,
 	Gallery_Logic,
 	Gallery_Url,
