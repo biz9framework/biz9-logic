@@ -36,11 +36,6 @@ class Message {
 	static REVIEW_USER_LOGIN="Please Login To Add Review.";
 }
 class Item_Logic {
-	static TYPE_FIELD_VALUE_TEXT="text";
-	static TYPE_FIELD_VALUE_NOTE="note";
-	static TYPE_FIELD_VALUE_IMAGE="image";
-	static TYPE_FIELD_VALUE_LIST="list";
-
 	static url_post_cms = (app_id,url,data_type,id,param) => {
 		let action_url = "item/post_cms/"+data_type+"/"+id;
 		return get_cloud_url_main(app_id,url,action_url,param);
@@ -128,56 +123,6 @@ class Item_Logic {
 			}
 		}
 		return Item_Logic.get_search(query.data_type,filter,sort_by,query.page_current,query.page_size);
-	}
-	static get_field_value = (item_data_type,item_id,value_type,value_id,value,value_list) => {
-		return {item_data_type:item_data_type,item_id:item_id,value_type:value_type,value_id:value_id,value:value,value_list:value_list};
-	};
-	static get_item_field_value_type_list = () => {
-		return [
-			{value:'text',label:'Text'},
-			{value:'note',label:'Note'},
-			{value:'image',label:'Image'},
-			{value:'list',label:'List'},
-		];
-	};
-	static get_field_value_value = (value_type,item,value_id) =>{
-		switch(value_type){
-			case Item_Logic.TYPE_FIELD_VALUE_TEXT:
-			case Item_Logic.TYPE_FIELD_VALUE_NOTE:
-			case Item_Logic.TYPE_FIELD_VALUE_IMAGE:
-				return !Str.check_is_null(item[Item_Logic.get_field_value_title(value_type,value_id)]) ? item[Item_Logic.get_field_value_title(value_type,value_id)] : "";
-				break;
-			case Item_Logic.TYPE_FIELD_VALUE_LIST:
-				let r_list = [];
-				for(let a=0;a<30;a++){
-					if(!Str.check_is_null(item[Item_Logic.get_field_value_title(value_type,value_id,a+1)])){
-						r_list.push(item[Item_Logic.get_field_value_title(value_type,value_id,a+1)]);
-					}
-				}
-				return r_list;
-				break;
-			default:
-				return "";
-		};
-	}
-	static get_field_value_title = (value_type,value_id,row_id) =>{
-		let type_str = '';
-		switch(value_type){
-			case Item_Logic.TYPE_FIELD_VALUE_TEXT:
-				return 'text'+'_value_'+value_id;
-				break;
-			case Item_Logic.TYPE_FIELD_VALUE_NOTE:
-				return 'note'+'_value_'+value_id;
-				break;
-			case Item_Logic.TYPE_FIELD_VALUE_IMAGE:
-				return 'image'+'_value_'+value_id;
-				break;
-			case Item_Logic.TYPE_FIELD_VALUE_LIST:
-				return 'list'+'_value_'+value_id +'_row_'+row_id;
-				break;
-			default:
-				return "";
-		};
 	}
 	static get_data_search_result = (app_id,data_type,item_count,page_count,filter,data_list,option) =>{
 		return{
@@ -472,7 +417,7 @@ class Product_Logic {
 		return product;
 	};
 	static get_test_cart = (cart_number,user_id,option) =>{
-		[cart_number,option] = Field_Logic.get_option_title(cart_number,option);
+		[cart_number,option] = ield_Logic.get_option_title(cart_number,option);
 		option = Field_Logic.get_option(DataType.CART,option?option:{});
 		let cart = DataItem.get_new(DataType.CART,Num.get_guid(),Field_Logic.get_test(cart_number,option));
 		cart.user_id = user_id;
@@ -830,6 +775,10 @@ class Event_Logic {
 	};
 }
 class Field_Logic {
+	static TYPE_FIELD_VALUE_TEXT="text";
+	static TYPE_FIELD_VALUE_NOTE="note";
+	static TYPE_FIELD_VALUE_IMAGE="image";
+	static TYPE_FIELD_VALUE_LIST="list";
 	static url_copy = (app_id,url,data_type,id,param) => {
 		let action_url = "main/crud/copy/"+data_type + "/" + id;
 		return get_cloud_url_main(app_id,url,action_url,param);
@@ -866,8 +815,6 @@ class Field_Logic {
 		let action_url = "main/crud/post_list";
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-
-
 	static url_post_field_value = (app_id,url,item_data_type,parent_item_id,value_id,param) => {
 		let action_url="item/post_field_value/"+item_data_type+"/"+parent_item_id;
 		return get_cloud_url_main(app_id,url,action_url,param);
@@ -876,7 +823,57 @@ class Field_Logic {
 		let action_url="item/get_custom_field/"+data_type+"/"+key;
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static get_test_cost(){
+	static get_field_value = (item_data_type,item_id,value_type,value_id,value,value_list) => {
+		return {item_data_type:item_data_type,item_id:item_id,value_type:value_type,value_id:value_id,value:value,value_list:value_list};
+	};
+	static get_item_field_value_type_list = () => {
+		return [
+			{value:'text',label:'Text'},
+			{value:'note',label:'Note'},
+			{value:'image',label:'Image'},
+			{value:'list',label:'List'},
+		];
+	};
+	static get_field_value_value = (value_type,item,value_id) =>{
+		switch(value_type){
+			case Field_Logic.TYPE_FIELD_VALUE_TEXT:
+			case Field_Logic.TYPE_FIELD_VALUE_NOTE:
+			case Field_Logic.TYPE_FIELD_VALUE_IMAGE:
+				return !Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id)]) ? item[Field_Logic.get_field_value_title(value_type,value_id)] : "";
+				break;
+			case Field_Logic.TYPE_FIELD_VALUE_LIST:
+				let r_list = [];
+				for(let a=0;a<30;a++){
+					if(!Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id,a+1)])){
+						r_list.push(item[Field_Logic.get_field_value_title(value_type,value_id,a+1)]);
+					}
+				}
+				return r_list;
+				break;
+			default:
+				return "";
+		};
+	}
+	static get_field_value_title = (value_type,value_id,row_id) =>{
+		let type_str = '';
+		switch(value_type){
+			case Field_Logic.TYPE_FIELD_VALUE_TEXT:
+				return 'text'+'_value_'+value_id;
+				break;
+			case Field_Logic.TYPE_FIELD_VALUE_NOTE:
+				return 'note'+'_value_'+value_id;
+				break;
+			case Field_Logic.TYPE_FIELD_VALUE_IMAGE:
+				return 'image'+'_value_'+value_id;
+				break;
+			case Field_Logic.TYPE_FIELD_VALUE_LIST:
+				return 'list'+'_value_'+value_id +'_row_'+row_id;
+				break;
+			default:
+				return "";
+		};
+	}
+static get_test_cost(){
 		return String(Num.get_id(999)) + "." + String(Num.get_id(99));
 	}
 	static get_test_note = () => {
