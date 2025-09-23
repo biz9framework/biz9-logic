@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,DataType} = require('./index');
+const {DataItem,DataType,Page_Logic} = require('./index');
 
 const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
@@ -30,7 +30,9 @@ describe("connect", () => {
     it("_connect", () => {
         series([
             function(call) {
-                console.log('ITEM-START');
+                console.log('CONNECT-START');
+                console.log(Page_Logic.get_page_list());
+                console.log('CONNECT-END');
                 call();
             },
             function(call) {

@@ -230,36 +230,34 @@ class Stat_Logic {
 	}
 }
 class Page_Logic {
-	static TYPE_PAGE_HOME='home';
 	static TYPE_PAGE_ABOUT='about';
-	static TYPE_PAGE_CONTACT='contact';
-	static TYPE_PAGE_FAQ='faq';
-
 	static TYPE_PAGE_BLOG_POST='blog_post';
 	static TYPE_PAGE_BLOG_POST_DETAIL='blog_post_detail';
-
+	static TYPE_PAGE_CONTACT='contact';
 	static TYPE_PAGE_EVENT='event';
 	static TYPE_PAGE_EVENT_DETAIL='event_detail';
-
+	static TYPE_PAGE_FAQ='faq';
 	static TYPE_PAGE_GALLERY='gallery';
 	static TYPE_PAGE_GALLERY_DETAIL='gallery_detail';
-
+	static TYPE_PAGE_HOME='home';
+	static TYPE_PAGE_PRODUCT='product';
+	static TYPE_PAGE_PRODUCT_DETAIL='product_detail';
 	static TYPE_PAGE_SERVICE='service';
 	static TYPE_PAGE_SERVICE_DETAIL='service_detail';
 
-	static TYPE_PAGE_PRODUCT='product';
-	static TYPE_PAGE_PRODUCT_DETAIL='product_detail';
-
-	static TYPE_PAGE_LIST = [
-	Page_Logic.TYPE_PAGE_HOME,
-	Page_Logic.TYPE_PAGE_ABOUT,
-	Page_Logic.TYPE_PAGE_CONTACT,
-	Page_Logic.TYPE_PAGE_FAQ,
-	Page_Logic.TYPE_PAGE_BLOG_POST,
-	Page_Logic.TYPE_PAGE_EVENT,
-	Page_Logic.TYPE_PAGE_GALLERY,
-	Page_Logic.TYPE_PAGE_SERVICE,
-	Page_Logic.TYPE_PAGE_PRODUCT];
+	static get_page_list =()=>{
+	return [
+			{value:Page_Logic.TYPE_PAGE_ABOUT,label:"About"},
+			{value:Page_Logic.TYPE_PAGE_BLOG_POST,label:"Blog Post"},
+			{value:Page_Logic.TYPE_PAGE_CONTACT,label:"Contact"},
+			{value:Page_Logic.TYPE_PAGE_EVENT,label:"Event"},
+			{value:Page_Logic.TYPE_PAGE_FAQ,label:"Faq"},
+			{value:Page_Logic.TYPE_PAGE_GALLERY,label:"Gallery"},
+			{value:Page_Logic.TYPE_PAGE_HOME,label:"Home"},
+			{value:Page_Logic.TYPE_PAGE_PRODUCT,label:"Product"},
+			{value:Page_Logic.TYPE_PAGE_SERVICE,label:"Service"},
+		];
+	};
 
 	static get_page_title = (data_type) => {
 		if(!data_type){
