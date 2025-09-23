@@ -194,6 +194,40 @@ class Stat_Logic {
 			parent_item_list:parent_item_list,
 		}
 	}
+
+	static get_stat_title = (stat_title)=>{
+		switch(stat_title){
+			case Stat_Logic.TYPE_STAT_VIEW:
+				return "View";
+				break;
+			case Stat_Logic.TYPE_STAT_LIKE:
+				return "Like";
+				break;
+			case Stat_Logic.TYPE_STAT_FAVORITE:
+				return "Favorite";
+				break;
+			case Stat_Logic.TYPE_STAT_CART:
+				return "Cart";
+				break;
+			case Stat_Logic.TYPE_STAT_ORDER:
+				return "Order";
+				break;
+			case Stat_Logic.TYPE_STAT_REVIEW:
+				return "Review";
+				break;
+			case Stat_Logic.TYPE_STAT_LOGIN:
+				return "Login";
+				break;
+			case Stat_Logic.TYPE_STAT_REGISTER:
+				return "Register";
+				break;
+			default:
+				return "N/A";
+				break;
+
+
+		}
+	}
 }
 class Page_Logic {
 	static TYPE_PAGE_HOME='home';
