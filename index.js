@@ -1811,6 +1811,17 @@ class Url_Logic {
 	static URL_CATEGORY_SEARCH="category/search";
 	//content
 	static URL_CONTENT_GET="item/get_content";
+	//crud
+	static URL_COPY="main/crud/copy";
+	static URL_DELETE="main/crud/delete";
+	static URL_DELETE_CHECK_PROTECTION="main/crud/delete_item_check_protection";
+	static URL_DELETE_LIST="main/crud/delete_list";
+	static URL_GET="main/crud/get";
+	static URL_GET_PARENT_TOP="main/crud/get_parent_top";
+	static URL_POST="main/crud/post";
+	static URL_POST_CMS="main/crud/post_cms";
+	static URL_POST_LIST="main/crud/post_list";
+	static URL_SEARCH="main/crud/search";
 	//dashboard
 	static URL_DASHBOARD_USER_HOME="dashboard/user_home";
 	static URL_DASHBOARD_APP_HOME="dashboard/app_home";
