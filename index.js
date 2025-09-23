@@ -1846,6 +1846,10 @@ class Url_Logic {
 	static URL_SERVICE_DETAIL="service/detail";
 	static URL_SERVICE_HOME="service/home";
 	static URL_SERVICE_SEARCH="service/search";
+	//user
+	static URL_USER_LOGIN="user/login";
+	static URL_USER_LOGOUT="user/logout";
+	static URL_USER_REGISTER="user/register";
 	//stat
 	static URL_SEARCH_ACTIVITY="item/search_activity";
 	//template
