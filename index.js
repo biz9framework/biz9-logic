@@ -224,8 +224,6 @@ class Stat_Logic {
 			default:
 				return "N/A";
 				break;
-
-
 		}
 	}
 }
@@ -1797,6 +1795,65 @@ class Image_Logic {
 		];
 	}
 }
+class Url_Logic {
+	//blog_post
+	static URL_BLOG_POST_DETAIL="blog_post/detail";
+	static URL_BLOG_POST_HOME="blog_post/home";
+	static URL_BLOG_POST_SEARCH="blog_post/search";
+	//cart
+	static URL_CART_DELETE="item/delete_cart";
+	static URL_CART_GET="item/get_cart";
+	static URL_CART_POST="item/post_cart";
+	static URL_CART_SEARCH="item/search_cart";
+	//category
+	static URL_CATEGORY_DETAIL="category/detail";
+	static URL_CATEGORY_HOME="category/home";
+	static URL_CATEGORY_SEARCH="category/search";
+	//content
+	static URL_CONTENT_GET="item/get_content";
+	//dashboard
+	static URL_DASHBOARD_USER_HOME="dashboard/user_home";
+	static URL_DASHBOARD_APP_HOME="dashboard/app_home";
+	//event
+	static URL_EVENT_DETAIL="event/detail";
+	static URL_EVENT_HOME="event/home";
+	static URL_EVENT_SEARCH="event/search";
+	//favorite
+	static URL_FAVORITE_POST="item/post_favorite";
+	static URL_FAVORITE_SEARCH="item/search_review";
+	//gallery
+	static URL_GALLERY_DETAIL="gallery/detail";
+	static URL_GALLERY_HOME="gallery/home";
+	static URL_GALLERY_SEARCH="gallery/search";
+	//order
+	static URL_ORDER_DELETE="item/delete_order";
+	static URL_ORDER_GET="item/get_order";
+	static URL_ORDER_POST="item/post_order";
+	static URL_ORDER_SEARCH="item/search_order";
+	//page
+	static URL_PAGE_HOME="page/home";
+	static URL_PAGE_ABOUT="page/about";
+	static URL_PAGE_CONTACT="page/contact";
+	static URL_PAGE_FAQ="page/faq";
+	//product
+	static URL_PRODUCT_DETAIL="product/detail";
+	static URL_PRODUCT_HOME="product/home";
+	static URL_PRODUCT_SEARCH="product/search";
+	//review
+	static URL_REVIEW_POST="item/post_review";
+	static URL_REVIEW_SEARCH="item/search_review";
+	//service
+	static URL_SERVICE_DETAIL="service/detail";
+	static URL_SERVICE_HOME="service/home";
+	static URL_SERVICE_SEARCH="service/search";
+	//stat
+	static URL_SEARCH_ACTIVITY="item/search_activity";
+	//template
+	static URL_TEMPLATE_GET="item/get_template";
+	static get_url = (app_id,host,url,param) => {
+		return get_cloud_url_main(app_id,host,url,param);
+	};
+}
 module.exports = {
 	App_Logic,
 	Admin_Logic,
@@ -1823,4 +1880,5 @@ module.exports = {
 	Storage,
 	Template_Logic,
 	User_Logic,
+	Url_Logic
 };
