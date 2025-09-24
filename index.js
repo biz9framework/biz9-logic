@@ -1836,6 +1836,9 @@ class Url_Logic {
 	static URL_GALLERY_DETAIL="gallery/detail";
 	static URL_GALLERY_HOME="gallery/home";
 	static URL_GALLERY_SEARCH="gallery/search";
+	//image
+	static URL_IMAGE_POST="main/image/post";
+	static URL_IMAGE_POST="main/image/post_cdn";
 	//order
 	static URL_ORDER_DELETE="item/delete_order";
 	static URL_ORDER_GET="item/get_order";
