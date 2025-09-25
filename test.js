@@ -31,7 +31,12 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                console.log(Page_Logic.get_page_list());
+                console.log();
+                let my_list = Page_Logic.get_page_list()
+                my_list.forEach(item => {
+                    console.log(item);
+                });
+
                 console.log('CONNECT-END');
                 call();
             },
