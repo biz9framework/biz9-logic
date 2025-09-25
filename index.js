@@ -1832,6 +1832,9 @@ class Url_Logic {
 	//favorite
 	static URL_FAVORITE_POST="item/post_favorite";
 	static URL_FAVORITE_SEARCH="item/search_review";
+	//field
+	static URL_CUSTOM_FIELD="item/custom_field";
+	static URL_POST_FIELD_VALUE="item/post_field_value";
 	//gallery
 	static URL_GALLERY_DETAIL="gallery/detail";
 	static URL_GALLERY_HOME="gallery/home";

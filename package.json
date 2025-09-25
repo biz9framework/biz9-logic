@@ -1,6 +1,6 @@
 {
   "name": "biz9-logic",
-  "version": "4.8.336",
+  "version": "4.8.337",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
