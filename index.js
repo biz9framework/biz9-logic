@@ -313,15 +313,15 @@ class Stat_Logic {
 class Page_Logic {
 	static get_page_list(){
 	return [
-			{value:Type.ABOUT,label:Title.ABOUT},
-			{value:Type.BLOG_POST,label:Title.BLOG_POST},
-			{value:Type.CONTACT,label:Title.CONTACT},
-			{value:Type.EVENT,label:Title.EVENT},
-			{value:Type.FAQ,label:Title.FAQ},
-			{value:Type.GALLERY,label:Title.GALLERY},
-			{value:Type.HOME,label:Title.HOME},
-			{value:Type.PRODUCT,label:Title.PRODUCT},
-			{value:Type.SERVICE,label:Title.SERVICE},
+			{value:Type.PAGE_ABOUT,label:Title.PAGE_ABOUT},
+			{value:Type.PAGE_BLOG_POST,label:Title.PAGE_BLOG_POST},
+			{value:Type.PAGE_CONTACT,label:Title.PAGE_CONTACT},
+			{value:Type.PAGE_EVENT,label:Title.PAGE_EVENT},
+			{value:Type.PAGE_FAQ,label:Title.PAGE_FAQ},
+			{value:Type.PAGE_GALLERY,label:Title.PAGE_GALLERY},
+			{value:Type.PAGE_HOME,label:Title.PAGE_HOME},
+			{value:Type.PAGE_PRODUCT,label:Title.PAGE_PRODUCT},
+			{value:Type.PAGE_SERVICE,label:Title.PAGE_SERVICE},
 		];
 	};
 	static get_page_title = (data_type) => {
@@ -437,7 +437,6 @@ class Product_Logic {
 				break;
 		}
 	};
-
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
@@ -530,7 +529,6 @@ class Service_Logic {
 				break;
 		}
 	};
-
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
@@ -674,7 +672,6 @@ class Gallery_Logic {
 		return gallery;
 	};
 };
-
 class Event_Logic {
 	static get_stock_list = () => {
 		const r_list=
@@ -773,12 +770,12 @@ class Field_Logic {
 	};
 	static get_field_value_value = (value_type,item,value_id) =>{
 		switch(value_type){
-			case Field_Logic.TYPE_FIELD_VALUE_TEXT:
-			case Field_Logic.TYPE_FIELD_VALUE_NOTE:
-			case Field_Logic.TYPE_FIELD_VALUE_IMAGE:
+			case Type.FIELD_VALUE_TEXT:
+			case Type.FIELD_VALUE_NOTE:
+			case Type.FIELD_VALUE_IMAGE:
 				return !Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id)]) ? item[Field_Logic.get_field_value_title(value_type,value_id)] : "";
 				break;
-			case Field_Logic.TYPE_FIELD_VALUE_LIST:
+			case Type.FIELD_VALUE_LIST:
 				let r_list = [];
 				for(let a=0;a<30;a++){
 					if(!Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id,a+1)])){
@@ -794,16 +791,16 @@ class Field_Logic {
 	static get_field_value_title = (value_type,value_id,row_id) =>{
 		let type_str = '';
 		switch(value_type){
-			case Field_Logic.TYPE_FIELD_VALUE_TEXT:
+			case Type.FIELD_VALUE_TEXT:
 				return 'text'+'_value_'+value_id;
 				break;
-			case Field_Logic.TYPE_FIELD_VALUE_NOTE:
+			case Type.FIELD_VALUE_NOTE:
 				return 'note'+'_value_'+value_id;
 				break;
-			case Field_Logic.TYPE_FIELD_VALUE_IMAGE:
+			case Type.FIELD_VALUE_IMAGE:
 				return 'image'+'_value_'+value_id;
 				break;
-			case Field_Logic.TYPE_FIELD_VALUE_LIST:
+			case Type.FIELD_VALUE_LIST:
 				return 'list'+'_value_'+value_id +'_row_'+row_id;
 				break;
 			default:
@@ -1600,40 +1597,40 @@ class Image_Logic {
 				type_resize:Type.RESIZE_NONE,
 			},
 			{
-				image_filename:TYPE_SIZE_THUMB+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_THUMB+"_"+image_filename,
+				image_filename:Type.SIZE_THUMB+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_THUMB+"_"+image_filename,
 				size:250,
-				type_resize:Image_Logic.TYPE_RESIZE_NORMAL,
+				type_resize:Image_Logic.Type.RESIZE_NORMAL,
 			},
 			{
-				image_filename:Image_Logic.TYPE_SIZE_MID+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_MID+"_"+image_filename,
+				image_filename:Image_Logic.Type.SIZE_MID+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_MID+"_"+image_filename,
 				size:720,
-				type_resize:Image_Logic.TYPE_RESIZE_NORMAL,
+				type_resize:Image_Logic.Type.RESIZE_NORMAL,
 			},
 			{
-				image_filename:Image_Logic.TYPE_SIZE_LARGE+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_LARGE+"_"+image_filename,
+				image_filename:Image_Logic.Type.SIZE_LARGE+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_LARGE+"_"+image_filename,
 				size:1000,
-				type_resize:Image_Logic.TYPE_RESIZE_NORMAL,
+				type_resize:Image_Logic.Type.RESIZE_NORMAL,
 			},
 			{
-				image_filename:Image_Logic.TYPE_SIZE_SQUARE_THUMB+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_SQUARE_THUMB+"_"+image_filename,
+				image_filename:Image_Logic.Type.SIZE_SQUARE_THUMB+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_SQUARE_THUMB+"_"+image_filename,
 				size:250,
-				type_resize:Image_Logic.TYPE_RESIZE_SQUARE,
+				type_resize:Image_Logic.Type.RESIZE_SQUARE,
 			},
 			{
-				image_filename:Image_Logic.TYPE_SIZE_SQUARE_MID+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_SQUARE_MID+"_"+image_filename,
+				image_filename:Image_Logic.Type.SIZE_SQUARE_MID+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_SQUARE_MID+"_"+image_filename,
 				size:720,
-				type_resize:Image_Logic.TYPE_RESIZE_SQUARE,
+				type_resize:Image_Logic.Type.RESIZE_SQUARE,
 			},
 			{
-				image_filename:Image_Logic.TYPE_SIZE_SQUARE_LARGE+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.TYPE_SIZE_SQUARE_LARGE+"_"+image_filename,
+				image_filename:Image_Logic.Type.SIZE_SQUARE_LARGE+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_SQUARE_LARGE+"_"+image_filename,
 				size:1000,
-				type_resize:Image_Logic.TYPE_RESIZE_SQUARE,
+				type_resize:Image_Logic.Type.RESIZE_SQUARE,
 			},
 		];
 	}
@@ -1743,6 +1740,7 @@ module.exports = {
 	Storage,
 	Template_Logic,
 	Type,
+	Title,
 	User_Logic,
 	Url
 };
