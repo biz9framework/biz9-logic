@@ -1809,6 +1809,8 @@ class Url_Logic {
 	static URL_CATEGORY_DETAIL="category/detail";
 	static URL_CATEGORY_HOME="category/home";
 	static URL_CATEGORY_SEARCH="category/search";
+	//cms
+	static URL_POST_CMS="item/post_cms";
 	//content
 	static URL_CONTENT="item/content";
 	//crud
@@ -1819,7 +1821,6 @@ class Url_Logic {
 	static URL_GET="main/crud/get";
 	static URL_PARENT_TOP="main/crud/parent_top";
 	static URL_POST="main/crud/post";
-	static URL_POST_CMS="main/crud/post_cms";
 	static URL_POST_LIST="main/crud/post_list";
 	static URL_SEARCH="main/crud/search";
 	//dashboard
