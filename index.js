@@ -1641,10 +1641,10 @@ class Url {
 	static BLOG_POST_HOME="blog_post/home";
 	static BLOG_POST_SEARCH="blog_post/search";
 	//cart
-	static CART_DELETE="item/delete_cart";
+	static DELETE_CART="item/delete_cart";
 	static CART="item/cart";
-	static CART_POST="item/post_cart";
-	static CART_SEARCH="item/search_cart";
+	static POST_CART="item/post_cart";
+	static SEARCH_CART="item/search_cart";
 	//category
 	static CATEGORY_DETAIL="category/detail";
 	static CATEGORY_HOME="category/home";
@@ -1671,8 +1671,8 @@ class Url {
 	static EVENT_HOME="event/home";
 	static EVENT_SEARCH="event/search";
 	//favorite
-	static FAVORITE_POST="item/post_favorite";
-	static FAVORITE_SEARCH="item/search_review";
+	static POST_FAVORITE="item/post_favorite";
+	static SEARCH_FAVORITE="item/search_review";
 	//field
 	static CUSTOM_FIELD="item/custom_field";
 	static POST_FIELD_VALUE="item/post_field_value";
@@ -1684,10 +1684,10 @@ class Url {
 	static IMAGE_POST="main/image/post";
 	static IMAGE_CDN_POST="main/image/post_cdn";
 	//order
-	static ORDER_DELETE="item/delete_order";
+	static DELETE_ORDER="item/delete_order";
 	static ORDER="item/order";
-	static ORDER_POST="item/post_order";
-	static ORDER_SEARCH="item/search_order";
+	static POST_ORDER="item/post_order";
+	static SEARCH_ORDER="item/search_order";
 	//page
 	static PAGE_HOME="page/home";
 	static PAGE_ABOUT="page/about";
@@ -1698,8 +1698,8 @@ class Url {
 	static PRODUCT_HOME="product/home";
 	static PRODUCT_SEARCH="product/search";
 	//review
-	static REVIEW_POST="item/post_review";
-	static REVIEW_SEARCH="item/search_review";
+	static POST_REVIEW="item/post_review";
+	static SEARCH_REVIEW="item/search_review";
 	//service
 	static SERVICE_DETAIL="service/detail";
 	static SERVICE_HOME="service/home";
