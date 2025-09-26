@@ -1689,10 +1689,10 @@ class Url {
 	static POST_ORDER="item/post_order";
 	static SEARCH_ORDER="item/search_order";
 	//page
-	static PAGE_HOME="page/home";
-	static PAGE_ABOUT="page/about";
-	static PAGE_CONTACT="page/contact";
-	static PAGE_FAQ="page/faq";
+	static HOME="page/home";
+	static ABOUT="page/about";
+	static CONTACT="page/contact";
+	static FAQ="page/faq";
 	//product
 	static PRODUCT_DETAIL="product/detail";
 	static PRODUCT_HOME="product/home";
