@@ -1641,16 +1641,16 @@ class Url {
 	static BLOG_POST_HOME="blog_post/home";
 	static BLOG_POST_SEARCH="blog_post/search";
 	//cart
-	static DELETE_CART="item/delete_cart";
+	static CART_DELETE="item/cart_delete";
 	static CART="item/cart";
-	static POST_CART="item/post_cart";
-	static SEARCH_CART="item/search_cart";
+	static CART_POST="item/cart_post";
+	static SEARCH_CART="item/cart_search";
 	//category
 	static CATEGORY_DETAIL="category/detail";
 	static CATEGORY_HOME="category/home";
 	static CATEGORY_SEARCH="category/search";
 	//cms
-	static POST_CMS="item/post_cms";
+	static CMS_POST="item/cms_post";
 	//content
 	static CONTENT="item/content";
 	//crud
@@ -1671,23 +1671,23 @@ class Url {
 	static EVENT_HOME="event/home";
 	static EVENT_SEARCH="event/search";
 	//favorite
-	static POST_FAVORITE="item/post_favorite";
-	static SEARCH_FAVORITE="item/search_review";
+	static FAVORITE_POST="item/favorite_post";
+	static FAVORITE_SEARCH="item/favorite_search";
 	//field
 	static CUSTOM_FIELD="item/custom_field";
-	static POST_FIELD_VALUE="item/post_field_value";
+	static FIELD_VALUE_POST="item/field_value_post";
 	//gallery
 	static GALLERY_DETAIL="gallery/detail";
 	static GALLERY_HOME="gallery/home";
 	static GALLERY_SEARCH="gallery/search";
 	//image
 	static IMAGE_POST="main/image/post";
-	static IMAGE_CDN_POST="main/image/post_cdn";
+	static IMAGE_CDN_POST="main/image/cdn_post";
 	//order
-	static DELETE_ORDER="item/delete_order";
+	static ORDER_DELETE="item/order_delete";
 	static ORDER="item/order";
-	static POST_ORDER="item/post_order";
-	static SEARCH_ORDER="item/search_order";
+	static ORDER_POST="item/order_post";
+	static ORDER_SEARCH="item/order_search";
 	//page
 	static HOME="page/home";
 	static ABOUT="page/about";
@@ -1698,8 +1698,8 @@ class Url {
 	static PRODUCT_HOME="product/home";
 	static PRODUCT_SEARCH="product/search";
 	//review
-	static POST_REVIEW="item/post_review";
-	static SEARCH_REVIEW="item/search_review";
+	static REVIEW_POST="item/review_post";
+	static REVIEW_SEARCH="item/review_search";
 	//service
 	static SERVICE_DETAIL="service/detail";
 	static SERVICE_HOME="service/home";
@@ -1709,7 +1709,7 @@ class Url {
 	static USER_LOGOUT="user/logout";
 	static USER_REGISTER="user/register";
 	//stat
-	static SEARCH_ACTIVITY="item/search_activity";
+	static ACTIVITY_SEARCH="item/activity_search";
 	//template
 	static TEMPLATE="item/template";
 
