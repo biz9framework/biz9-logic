@@ -174,11 +174,11 @@ class Title {
 	static DATA_TYPE_CONTENT="Content";
 
 	//role
-	static ROLE_SUPER_ADMIN='Super Admin';
-	static ROLE_ADMIN='Admin';
-	static ROLE_MANAGER='Manager';
-	static ROLE_USER='User';
-	static ROLE_GUEST='Guest';
+	static USER_ROLE_SUPER_ADMIN='Super Admin';
+	static USER_ROLE_ADMIN='Admin';
+	static USER_ROLE_MANAGER='Manager';
+	static USER_ROLE_USER='User';
+	static USER_ROLE_GUEST='Guest';
 
 	//app
 	static APP_MOBILE="Mobile";
@@ -234,11 +234,11 @@ class Type {
 	static FIELD_VALUE_LIST="list";
 
 	//role
-	static ROLE_SUPER_ADMIN='super_admin';
-	static ROLE_ADMIN='admin';
-	static ROLE_MANAGER='manager';
-	static ROLE_USER='user';
-	static ROLE_GUEST='guest';
+	static USER_ROLE_SUPER_ADMIN='super_admin';
+	static USER_ROLE_ADMIN='admin';
+	static USER_ROLE_MANAGER='manager';
+	static USER_ROLE_USER='user';
+	static USER_ROLE_GUEST='guest';
 
 	//data_source
 	static DATA_SOURCE_CACHE="cache";
