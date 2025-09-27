@@ -302,11 +302,26 @@ class Stat_Logic {
 		let action_url="item/search_activity";
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static get_new = (user_id,stat_type_id,parent_item_list)=>{
+	static get_new_user = (user_id,stat_type,data)=>{
 		return {
 			user_id:user_id,
-			stat_type_id:stat_type_id,
+			type:stat_type,
+			data:data,
+		}
+	}
+	static get_new = (user_id,stat_type,parent_item_list,data)=>{
+		return {
+			user_id:user_id,
+			type:stat_type,
 			parent_item_list:parent_item_list,
+			data:data,
+		}
+	}
+	static get_new_activity = (user_id,stat_type,activity_data)=>{
+		return {
+			user_id:user_id,
+			type:stat_type,
+			activity:data,
 		}
 	}
 }
@@ -1023,7 +1038,6 @@ class DataType {
 	static SECTION='section';
 	static SUB_SECTION='sub_section';
 
-	static ACTIVITY='activity_biz';
 	static APP='app_biz';
 	static BLANK='blank_biz';
 	static BLOG_POST='blog_post_biz';
@@ -1073,8 +1087,6 @@ class DataType {
 	}
 	static get_url(data_type){
 		switch(data_type){
-			case DataType.ACTIVITY:
-				return 'activity';
 			case DataType.BLOG_POST:
 				return 'blog_post';
 			case DataType.SERVICE:
@@ -1709,7 +1721,7 @@ class Url {
 	static USER_LOGOUT="user/logout";
 	static USER_REGISTER="user/register";
 	//stat
-	static ACTIVITY_SEARCH="item/activity_search";
+	static STAT_SEARCH="item/stat_search";
 	//template
 	static TEMPLATE="item/template";
 
