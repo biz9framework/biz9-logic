@@ -252,13 +252,13 @@ class Type {
 	static ENV_PRODUCTION="production";
 
 	//size
-	static SIZE_THUMB="thumb";
-	static SIZE_MID="mid";
-	static SIZE_LARGE="large";
-	static SIZE_ORIGINAL="original";
-	static SIZE_SQUARE_THUMB="squre_thumb";
-	static SIZE_SQUARE_MID="squre_mid";
-	static SIZE_SQUARE_LARGE="squre_large";
+	static IMAGE_SIZE_THUMB="thumb";
+	static IMAGE_SIZE_MID="mid";
+	static IMAGE_SIZE_LARGE="large";
+	static IMAGE_SIZE_ORIGINAL="original";
+	static IMAGE_SIZE_SQUARE_THUMB="squre_thumb";
+	static IMAGE_SIZE_SQUARE_MID="squre_mid";
+	static IMAGE_SIZE_SQUARE_LARGE="squre_large";
 
 	//re_size
 	static RESIZE_NORMAL="normal";
