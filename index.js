@@ -273,7 +273,7 @@ class Type {
 			case Type.STAT_LIKE:
 				return "Like";
 				break;
-			case Tpe.STAT_FAVORITE:
+			case Type.STAT_FAVORITE:
 				return "Favorite";
 				break;
 			case Type.STAT_CART:
