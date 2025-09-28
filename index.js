@@ -367,18 +367,11 @@ class Type {
 	}
 }
 class Stat_Logic {
-	static get_all_activity = () =>{
-		return {
-			$or: [
-				{ type: { $regex:String(Type.STAT_LOGIN), $options: "i" } },
-				{ type: { $regex:String(Type.STAT_REGISTER), $options: "i" } },
-			] };
-	}
-	static get_user_activity = (user_id) =>{
+	static get_user_activity_filter = (user_id_filter) =>{
 		return {
 			   $and: [
         { $or: [ { type: Type.STAT_LOGIN }, { type: Type.STAT_REGISTER } ] },
-        { user_id: user_id }
+        user_id_filter
     			]
 		}
 	}
