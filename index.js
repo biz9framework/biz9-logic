@@ -272,6 +272,7 @@ class Type {
 		 * get_url = ex. true,false /  def. false
 		*/
 		let r_type = "";
+		option = option ? option : {get_lowercase:false,get_plural:false,get_url:false};
 		switch(type){
 			case Type.STAT_VIEW:
 				return "View";
