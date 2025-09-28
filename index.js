@@ -1673,7 +1673,6 @@ class Url {
 	static EVENT_SEARCH="event/search";
 	//favorite
 	static FAVORITE_POST="item/favorite_post";
-	static FAVORITE_SEARCH="item/favorite_search";
 	//field
 	static CUSTOM_FIELD="item/custom_field";
 	static FIELD_VALUE_POST="item/field_value_post";
