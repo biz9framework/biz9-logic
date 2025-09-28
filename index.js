@@ -209,17 +209,15 @@ class Type {
 	static PAGE_PRODUCT_DETAIL='product_detail';
 	static PAGE_SERVICE='service';
 	static PAGE_SERVICE_DETAIL='service_detail';
-
 	//stat
 	static STAT_VIEW='view_post';
+	static STAT_LOGIN='login_post';
+	static STAT_REGISTER='register_post';
 	static STAT_LIKE='like_post';
 	static STAT_FAVORITE='favorite_post';
 	static STAT_CART='cart_post';
 	static STAT_ORDER='order_post';
 	static STAT_REVIEW='review_post';
-	static STAT_LOGIN='login_post';
-	static STAT_REGISTER='register_post';
-
 	//template
 	static TEMPLATE_PRIMARY='primary';
 	static TEMPLATE_HEADER='header';
@@ -369,6 +367,21 @@ class Type {
 	}
 }
 class Stat_Logic {
+	static get_all_activity = () =>{
+		return {
+			$or: [
+				{ type: { $regex:String(Type.STAT_LOGIN), $options: "i" } },
+				{ type: { $regex:String(Type.STAT_REGISTER), $options: "i" } },
+			] };
+	}
+	static get_user_activity = (user_id) =>{
+		return {
+			   $and: [
+        { $or: [ { type: Type.STAT_LOGIN }, { type: Type.STAT_REGISTER } ] },
+        { user_id: user_id }
+    			]
+		}
+	}
 	static url_search_activity = (app_id,url,param) => {
 		let action_url="item/search_activity";
 		return get_cloud_url_main(app_id,url,action_url,param);
@@ -1331,42 +1344,6 @@ class Category_Logic {
 			{data_type:Type.PAGE_PRODUCT,value:DataType.PRODUCT,label:Title.PAGE_PRODUCT},
 		];
 	};
-	static get_title_by_type = (type) => {
-		switch (ype) {
-			case DataType.BLOG_POST:
-				return Title.DATA_TYPE_BLOG_POST;
-				break;
-			case DataType.CATEGORY:
-				return Title.DATA_TYPE_CATEGORY;
-				break;
-			case DataType.CONTENT:
-				return Title.DATA_TYPE_CONTENT;
-				break;
-			case DataType.EVENT:
-				return Title.DATA_TYPE_EVENT;
-				break;
-			case DataType.GALLERY:
-				return Title.DATA_TYPE_GALLERY;
-				break;
-			case DataType.USER:
-				return Title.ROLE_USER;
-				break;
-			case DataType.PAGE:
-				return Title.DATA_TYPE_PAGE;
-				break;
-			case DataType.PRODUCT:
-				return Title.DATA_TYPE_PRODUCT;
-				break;
-			case DataType.SERVICE:
-				return Title.DATA_TYPE_SERVICE;
-				break;
-			case DataType.TEMPLATE:
-				return Title.DATA_TYPE_TEMPLATE;
-				break;
-			default:
-				return "Blank";
-		}
-	}
 };
 class Storage {
 	static get = (window,key) => {
