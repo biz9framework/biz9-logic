@@ -1,6 +1,5 @@
 const series = require('async-series');
-const {DataItem,DataType,Page_Logic} = require('./index');
-
+const {DataItem,DataType,Page_Logic,Type} = require('./index');
 const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -31,12 +30,7 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                console.log();
-                let my_list = Page_Logic.get_page_list()
-                my_list.forEach(item => {
-                    console.log(item);
-                });
-
+                console.log(Type.get_title(DataType.BLOG_POST,true));
                 console.log('CONNECT-END');
                 call();
             },

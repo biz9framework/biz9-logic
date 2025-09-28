@@ -306,9 +306,45 @@ class Type {
 			case Type.PAGE_PRODUCT_DETAIL:
 			case Type.PAGE_SERVICE:
 			case Type.PAGE_SERVICE_DETAIL:
-				return String(Str.get_title(type.replaceAll('_',' '))).trim();
-				break;
-
+			case Type.USER_ROLE_SUPER_ADMIN:
+			case Type.USER_ROLE_ADMIN:
+			case Type.USER_ROLE_MANAGER:
+			case Type.USER_ROLE_USER:
+			case Type.USER_ROLE_GUEST:
+			case DataType.SECTION:
+			case DataType.SUB_SECTION:
+			case DataType.APP:
+			case DataType.BLANK:
+			case DataType.BLOG_POST:
+			case DataType.CART_ITEM:
+			case DataType.CATEGORY:
+			case DataType.CUSTOM_FIELD:
+			case DataType.CONTENT:
+			case DataType.EVENT:
+			case DataType.FAQ:
+			case DataType.FAVORITE:
+			case DataType.GALLERY:
+			case DataType.ITEM_MAP:
+			case DataType.ITEM:
+			case DataType.CART:
+			case DataType.CART_ITEM:
+			case DataType.CART_SUB_ITEM:
+			case DataType.ORDER:
+			case DataType.ORDER_ITEM:
+			case DataType.ORDER_SUB_ITEM:
+			case DataType.ORDER_PAYMENT:
+			case DataType.PRODUCT:
+			case DataType.IMAGE:
+			case DataType.PAGE:
+			case DataType.REVIEW:
+			case DataType.SERVICE:
+			case DataType.SECURITY:
+			case DataType.STAT:
+			case DataType.TEMPLATE:
+			case DataType.USER:
+			case DataType.VIDEO:
+			return !plural ? String(Str.get_title(type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim() : String(Str.get_title(type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim()+'s' ;
+			break;
 			default:
 				return "N/A";
 				break;
