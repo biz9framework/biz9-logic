@@ -265,7 +265,7 @@ class Type {
 	static RESIZE_SQUARE="squre";
 	static RESIZE_NONE="none";
 
-		static get_title = (type)=>{
+	static get_title = (type,plural)=>{
 		switch(type){
 			case Type.STAT_VIEW:
 				return "View";
@@ -291,6 +291,24 @@ class Type {
 			case Type.STAT_REGISTER:
 				return "Register";
 				break;
+			case Type.PAGE_ABOUT:
+			case Type.PAGE_BLOG_POST:
+			case Type.PAGE_BLOG_POST_DETAIL:
+			case Type.PAGE_CONTACT:
+			case Type.PAGE_CATEGORY:
+			case Type.PAGE_EVENT:
+			case Type.PAGE_EVENT_DETAIL:
+			case Type.PAGE_FAQ:
+			case Type.PAGE_GALLERY:
+			case Type.PAGE_GALLERY_DETAIL:
+			case Type.PAGE_HOME:
+			case Type.PAGE_PRODUCT:
+			case Type.PAGE_PRODUCT_DETAIL:
+			case Type.PAGE_SERVICE:
+			case Type.PAGE_SERVICE_DETAIL:
+				return String(Str.get_title(type.replaceAll('_',' '))).trim();
+				break;
+
 			default:
 				return "N/A";
 				break;
@@ -327,7 +345,7 @@ class Stat_Logic {
 }
 class Page_Logic {
 	static get_page_list(){
-	return [
+		return [
 			{value:Type.PAGE_ABOUT,label:Title.PAGE_ABOUT},
 			{value:Type.PAGE_BLOG_POST,label:Title.PAGE_BLOG_POST},
 			{value:Type.PAGE_CONTACT,label:Title.PAGE_CONTACT},
@@ -339,6 +357,7 @@ class Page_Logic {
 			{value:Type.PAGE_SERVICE,label:Title.PAGE_SERVICE},
 		];
 	};
+	/*
 	static get_page_title = (data_type) => {
 		if(!data_type){
 			return "";
@@ -346,6 +365,7 @@ class Page_Logic {
 			return String(Str.get_title(data_type.replaceAll('_',' '))).trim();
 		}
 	}
+	*/
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.PAGE,option?option:{});
@@ -822,7 +842,7 @@ class Field_Logic {
 				return "";
 		};
 	}
-static get_test_cost(){
+	static get_test_cost(){
 		return String(Num.get_id(999)) + "." + String(Num.get_id(99));
 	}
 	static get_test_note = () => {
@@ -1601,7 +1621,7 @@ class Image_Logic {
 	static get_process_list = (upload_dir,image_filename) =>{
 		upload_dir = upload_dir ? upload_dir : "";
 		image_filename = image_filename ? image_filename : "";
-		 return [
+		return [
 			{
 				image_filename:Type.SIZE_ORIGINAL+"_"+image_filename,
 				path_filename:upload_dir+"/"+Type.SIZE_ORIGINAL+"_"+image_filename,
