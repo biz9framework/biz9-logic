@@ -261,9 +261,9 @@ class Type {
 	static IMAGE_SIZE_SQUARE_LARGE="squre_large";
 
 	//re_size
-	static RESIZE_NORMAL="normal";
-	static RESIZE_SQUARE="squre";
-	static RESIZE_NONE="none";
+	static IMAGE_RESIZE_NORMAL="normal";
+	static IMAGE_RESIZE_SQUARE="squre";
+	static IMAGE_RESIZE_NONE="none";
 
 	static get_title = (type,option)=>{
 		/* option
@@ -1630,46 +1630,46 @@ class Image_Logic {
 		image_filename = image_filename ? image_filename : "";
 		return [
 			{
-				image_filename:Type.SIZE_ORIGINAL+"_"+image_filename,
-				path_filename:upload_dir+"/"+Type.SIZE_ORIGINAL+"_"+image_filename,
+				image_filename:Type.IMAGE_SIZE_ORIGINAL+"_"+image_filename,
+				path_filename:upload_dir+"/"+Type.IMAGE_SIZE_ORIGINAL+"_"+image_filename,
 				size:0,
-				type_resize:Type.RESIZE_NONE,
+				type_resize:Type.IMAGE_RESIZE_NONE,
 			},
 			{
-				image_filename:Type.SIZE_THUMB+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_THUMB+"_"+image_filename,
+				image_filename:Type.IMAGE_SIZE_THUMB+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.IMAGE_SIZE_THUMB+"_"+image_filename,
 				size:250,
-				type_resize:Image_Logic.Type.RESIZE_NORMAL,
+				type_resize:Image_Logic.Type.IMAGE_RESIZE_NORMAL,
 			},
 			{
-				image_filename:Image_Logic.Type.SIZE_MID+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_MID+"_"+image_filename,
+				image_filename:Image_Logic.Type.IMAGE_SIZE_MID+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.IMAGE_SIZE_MID+"_"+image_filename,
 				size:720,
-				type_resize:Image_Logic.Type.RESIZE_NORMAL,
+				type_resize:Image_Logic.Type.IMAGE_RESIZE_NORMAL,
 			},
 			{
-				image_filename:Image_Logic.Type.SIZE_LARGE+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_LARGE+"_"+image_filename,
+				image_filename:Image_Logic.Type.IMAGE_SIZE_LARGE+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.IMAGE_SIZE_LARGE+"_"+image_filename,
 				size:1000,
-				type_resize:Image_Logic.Type.RESIZE_NORMAL,
+				type_resize:Image_Logic.Type.IMAGE_RESIZE_NORMAL,
 			},
 			{
-				image_filename:Image_Logic.Type.SIZE_SQUARE_THUMB+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_SQUARE_THUMB+"_"+image_filename,
+				image_filename:Image_Logic.Type.IMAGE_SIZE_SQUARE_THUMB+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.IMAGE_SIZE_SQUARE_THUMB+"_"+image_filename,
 				size:250,
-				type_resize:Image_Logic.Type.RESIZE_SQUARE,
+				type_resize:Image_Logic.Type.IMAGE_RESIZE_SQUARE,
 			},
 			{
-				image_filename:Image_Logic.Type.SIZE_SQUARE_MID+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_SQUARE_MID+"_"+image_filename,
+				image_filename:Image_Logic.Type.IMAGE_SIZE_SQUARE_MID+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.IMAGE_SIZE_SQUARE_MID+"_"+image_filename,
 				size:720,
-				type_resize:Image_Logic.Type.RESIZE_SQUARE,
+				type_resize:Image_Logic.Type.IMAGE_RESIZE_SQUARE,
 			},
 			{
-				image_filename:Image_Logic.Type.SIZE_SQUARE_LARGE+"_"+image_filename,
-				path_filename:upload_dir+"/"+Image_Logic.Type.SIZE_SQUARE_LARGE+"_"+image_filename,
+				image_filename:Image_Logic.Type.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename,
+				path_filename:upload_dir+"/"+Image_Logic.Type.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename,
 				size:1000,
-				type_resize:Image_Logic.Type.RESIZE_SQUARE,
+				type_resize:Image_Logic.Type.IMAGE_RESIZE_SQUARE,
 			},
 		];
 	}
