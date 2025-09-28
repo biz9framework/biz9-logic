@@ -30,7 +30,7 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                console.log(Type.get_title(DataType.BLOG_POST,true));
+                console.log(Type.get_title(Type.STAT_VIEW,{get_plural:false,get_lowercase:true,get_url:true}));
                 console.log('CONNECT-END');
                 call();
             },

@@ -265,7 +265,13 @@ class Type {
 	static RESIZE_SQUARE="squre";
 	static RESIZE_NONE="none";
 
-	static get_title = (type,plural)=>{
+	static get_title = (type,option)=>{
+		/* option
+		 * get_lowercase = ex. true,false / def. false
+		 * get_plural = ex. true,false /  def. false
+		 * get_url = ex. true,false /  def. false
+		*/
+		let r_type = "";
 		switch(type){
 			case Type.STAT_VIEW:
 				return "View";
@@ -343,12 +349,30 @@ class Type {
 			case DataType.TEMPLATE:
 			case DataType.USER:
 			case DataType.VIDEO:
-			return !plural ? String(Str.get_title(type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim() : String(Str.get_title(type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim()+'s' ;
+			r_type = String(Str.get_title(type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
+				console.log(r_type);
+				console.log('11111111');
 			break;
 			default:
-				return "N/A";
+				r_type = "N/A";
 				break;
 		}
+			console.log(type);
+			console.log('aaaaa');
+			console.log(r_type);
+			if(option.get_plural){
+				console.log('bbbbbbbb');
+				r_type = r_type + 's';
+			}
+			if(option.get_lowercase){
+				console.log('cccccccc');
+				r_type = r_type.toLowerCase();
+			}
+			if(option.get_url){
+				console.log('dddddddd');
+				r_type = r_type.replace(" ","_").toLowerCase();
+			}
+			return r_type;
 	}
 }
 class Stat_Logic {
@@ -1127,68 +1151,14 @@ class DataType {
 	static TEMPLATE='template_biz';
 	static USER='user_biz';
 	static VIDEO='video_biz';
-
-	static get_title = (data_type,get_plural) => {
-		let r_data_type =  (!data_type) ? "" : String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
-		if(get_plural){
-			if(data_type==DataType.GALLERY){
-				return 'Galleries';
-			}else{
-				return r_data_type + "s";
-			}
-		}else{
-			return r_data_type;
-		}
-
-	}
-	static get_url(data_type){
-		switch(data_type){
-			case DataType.BLOG_POST:
-				return 'blog_post';
-			case DataType.SERVICE:
-				return 'service';
-			case DataType.EVENT:
-				return 'event';
-			case DataType.GALLERY:
-				return 'gallery';
-			case DataType.PRODUCT:
-				return 'product';
-			case DataType.BLANK:
-				return 'blank';
-			case DataType.REVIEW:
-				return 'review';
-			case DataType.FAQ:
-				return 'faq';
-			case DataType.FAVORITE:
-				return 'favorite';
-			case DataType.CATEGORY:
-				return 'category';
-			case DataType.VIDEO:
-				return 'video';
-			case DataType.IMAGE:
-				return 'image';
-			case DataType.PAGE:
-				return 'page';
-			case DataType.USER:
-				return 'user';
-			case DataType.TEMPLATE:
-				return 'template';
-			case DataType.CONTENT:
-				return 'content';
-			case DataType.ITEM:
-				return 'item';
-			case DataType.CUSTOM_FIELD:
-				return 'custom_field';
-		}
-	}
 	static get_list = () =>{
 		return [
-			{	title:DataType.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
-			{	title:DataType.get_title(DataType.EVENT),type:DataType.EVENT},
-			{	title:DataType.get_title(DataType.GALLERY),type:DataType.GALLERY},
-			{	title:DataType.get_title(DataType.USER),type:DataType.USER},
-			{	title:DataType.get_title(DataType.PRODUCT),type:DataType.PRODUCT},
-			{	title:DataType.get_title(DataType.SERVICE),type:DataType.SERVICE}
+			{	title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
+			{	title:Type.get_title(DataType.EVENT),type:DataType.EVENT},
+			{	title:Type.get_title(DataType.GALLERY),type:DataType.GALLERY},
+			{	title:Type.get_title(DataType.USER),type:DataType.USER},
+			{	title:Type.get_title(DataType.PRODUCT),type:DataType.PRODUCT},
+			{	title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE}
 		]
 	};
 }
