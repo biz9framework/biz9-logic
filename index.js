@@ -1659,7 +1659,8 @@ class Url {
 	static CATEGORY_HOME="category/home";
 	static CATEGORY_SEARCH="category/search";
 	//cms
-	static CMS_POST="item/cms_post";
+	static CMS_POST="cms/post";
+	static CMS_ITEM_TYPE_CATEGORY="cms/item_type_category";
 	//content
 	static CONTENT="item/content";
 	//crud
