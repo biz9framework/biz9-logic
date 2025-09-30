@@ -958,13 +958,13 @@ class Field_Logic {
 	}
 	static get_field_type_list = () =>{
 		return [
-			{	title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
-			{	title:Type.get_title(DataType.CATEGORY),type:DataType.CATEGORY},
-			{	title:Type.get_title(DataType.EVENT),type:DataType.EVENT},
-			{	title:Type.get_title(DataType.GALLERY),type:DataType.GALLERY},
-			{	title:Type.get_title(DataType.USER),type:DataType.USER},
-			{	title:Type.get_title(DataType.PRODUCT),type:DataType.PRODUCT},
-			{	title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE}
+			{	label:Type.get_title(DataType.BLOG_POST),value:DataType.BLOG_POST},
+			{	label:Type.get_title(DataType.CATEGORY),value:DataType.CATEGORY},
+			{	label:Type.get_title(DataType.EVENT),value:DataType.EVENT},
+			{	label:Type.get_title(DataType.GALLERY),value:DataType.GALLERY},
+			{	label:Type.get_title(DataType.USER),value:DataType.USER},
+			{	label:Type.get_title(DataType.PRODUCT),value:DataType.PRODUCT},
+			{	label:Type.get_title(DataType.SERVICE),value:DataType.SERVICE}
 		]
 	};
 	static get_value_list(item,option){
