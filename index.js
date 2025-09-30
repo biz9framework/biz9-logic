@@ -318,8 +318,6 @@ class Type {
 			case Type.USER_ROLE_MANAGER:
 			case Type.USER_ROLE_USER:
 			case Type.USER_ROLE_GUEST:
-			case DataType.SECTION:
-			case DataType.SUB_SECTION:
 			case DataType.APP:
 			case DataType.BLANK:
 			case DataType.BLOG_POST:
@@ -348,6 +346,7 @@ class Type {
 			case DataType.SECURITY:
 			case DataType.STAT:
 			case DataType.TEMPLATE:
+			case DataType.TYPE:
 			case DataType.USER:
 			case DataType.VIDEO:
 			r_type = String(Str.get_title(type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
@@ -1116,13 +1115,13 @@ class Field_Logic {
 }
 class DataType {
 
-	static SECTION='section';
-	static SUB_SECTION='sub_section';
-
-	static APP='app_biz';
+static APP='app_biz';
 	static BLANK='blank_biz';
 	static BLOG_POST='blog_post_biz';
 	static CART_ITEM="cart_item_biz";
+	static CART="cart_biz";
+	static CART_ITEM="cart_item_biz";
+	static CART_SUB_ITEM="cart_sub_item_biz";
 	static CATEGORY='category_biz';
 	static CUSTOM_FIELD='custom_field_biz';
 	static CONTENT='content_biz';
@@ -1130,20 +1129,13 @@ class DataType {
 	static FAQ='faq_biz';
 	static FAVORITE='favorite_biz';
 	static GALLERY='gallery_biz';
-	static ITEM_MAP='item_map_biz';
+	static IMAGE='image_biz';
 	static ITEM='item_biz';
-
-	static CART="cart_biz";
-	static CART_ITEM="cart_item_biz";
-	static CART_SUB_ITEM="cart_sub_item_biz";
-
 	static ORDER="order_biz";
 	static ORDER_ITEM="order_item_biz";
 	static ORDER_SUB_ITEM="order_sub_item_biz";
 	static ORDER_PAYMENT="order_payment_biz";
-
 	static PRODUCT='product_biz';
-	static IMAGE='image_biz';
 	static PAGE='page_biz';
 	static REVIEW='review_biz';
 	static SERVICE='service_biz';
