@@ -71,68 +71,6 @@ class Item_Logic {
 		}
 		return item_list;
 	}
-	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
-		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
-	}
-	static get_search_query(search){
-		let url = "";
-		if(search.data_type){
-			url = url + "&data_type="+search.data_type;
-		}else{
-			url = url + "&data_type="+DataType.BLANK;
-		}
-		if(search.sort_by_key){
-			url = url + "&sort_by_key="+search.sort_by_key;
-		}else{
-			url = url + "&sort_by_key=title";
-		}
-		if(search.sort_by_value){
-			url = url + "&sort_by_value="+search.sort_by_value;
-		}else{
-			url = url + "&sort_by_value=-1";
-		}
-		if(search.page_current){
-			url = url + "&page_current="+search.page_current;
-		}else{
-			url = url + "&page_current=1";
-		}
-		if(search.page_size){
-			url = url + "&page_size="+search.page_size;
-		}else{
-			url = url + "&page_size=9";
-		}
-		for(let a=1;a<19;a++){
-			if(!Str.check_is_null(search['filter_key_'+String(a)])){
-				url = url + "&filter_key_"+String(a)+"="+ search['filter_key_'+String(a)];
-				url = url + "&filter_value_"+String(a)+"="+ search['filter_value_'+String(a)];
-			}
-		}
-		return url;
-	}
-	static get_search_by_query(query){
-		let filter = [];
-		let sort_by = [];
-		if(query['sort_by_key']){
-			sort_by[query['sort_by_key']] = query['sort_by_value'];
-		}
-		for(let a = 0; a < 19; a++){
-			if(query['filter_key_'+a]){
-				filter[query['filter_key_'+a]] = query['filter_value_'+a]
-			}
-		}
-		return Item_Logic.get_search(query.data_type,filter,sort_by,query.page_current,query.page_size);
-	}
-	static get_data_search_result = (app_id,data_type,item_count,page_count,filter,data_list,option) =>{
-		return{
-			option:option?option:{},
-			data_type:data_type?data_type:DataType.BLANK,
-			item_count:item_count?item_count:0,
-			page_count:page_count?page_count:1,
-			filter:filter?filter:{},
-			data_list:data_list?data_list:[],
-			app_id:app_id?app_id:null,
-		}
-	}
 }
 class Title {
 	//page
@@ -1578,6 +1516,69 @@ class App_Logic {
 		app.type = type;
 		return app;
 	}
+	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
+		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
+	}
+	static get_search_query(search){
+		let url = "";
+		if(search.data_type){
+			url = url + "&data_type="+search.data_type;
+		}else{
+			url = url + "&data_type="+DataType.BLANK;
+		}
+		if(search.sort_by_key){
+			url = url + "&sort_by_key="+search.sort_by_key;
+		}else{
+			url = url + "&sort_by_key=title";
+		}
+		if(search.sort_by_value){
+			url = url + "&sort_by_value="+search.sort_by_value;
+		}else{
+			url = url + "&sort_by_value=-1";
+		}
+		if(search.page_current){
+			url = url + "&page_current="+search.page_current;
+		}else{
+			url = url + "&page_current=1";
+		}
+		if(search.page_size){
+			url = url + "&page_size="+search.page_size;
+		}else{
+			url = url + "&page_size=9";
+		}
+		for(let a=1;a<19;a++){
+			if(!Str.check_is_null(search['filter_key_'+String(a)])){
+				url = url + "&filter_key_"+String(a)+"="+ search['filter_key_'+String(a)];
+				url = url + "&filter_value_"+String(a)+"="+ search['filter_value_'+String(a)];
+			}
+		}
+		return url;
+	}
+	static get_search_by_query(query){
+		let filter = [];
+		let sort_by = [];
+		if(query['sort_by_key']){
+			sort_by[query['sort_by_key']] = query['sort_by_value'];
+		}
+		for(let a = 0; a < 19; a++){
+			if(query['filter_key_'+a]){
+				filter[query['filter_key_'+a]] = query['filter_value_'+a]
+			}
+		}
+		return App_Logic.get_search(query.data_type,filter,sort_by,query.page_current,query.page_size);
+	}
+	static get_data_search_result = (app_id,data_type,item_count,page_count,filter,data_list,option) =>{
+		return{
+			option:option?option:{},
+			data_type:data_type?data_type:DataType.BLANK,
+			item_count:item_count?item_count:0,
+			page_count:page_count?page_count:1,
+			filter:filter?filter:{},
+			data_list:data_list?data_list:[],
+			app_id:app_id?app_id:null,
+		}
+	}
+
 }
 class Image_Logic {
 	static url_post = (app_id,url,param) => {
