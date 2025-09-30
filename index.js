@@ -924,7 +924,7 @@ class Field_Logic {
 				title:title,
 				setting_visible:"1",
 				title_url:Str.get_title_url(title),
-				sub_note:"Sub Note "+String(Num.get_id()),
+				description:"Description "+String(Num.get_id()),
 				note:Field_Logic.get_test_note(),
 				id:0,
 				date_create:new moment().toISOString(),
@@ -956,6 +956,17 @@ class Field_Logic {
 		}
 		return item;
 	}
+	static get_field_type_list = () =>{
+		return [
+			{	title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST},
+			{	title:Type.get_title(DataType.CATEGORY),type:DataType.CATEGORY},
+			{	title:Type.get_title(DataType.EVENT),type:DataType.EVENT},
+			{	title:Type.get_title(DataType.GALLERY),type:DataType.GALLERY},
+			{	title:Type.get_title(DataType.USER),type:DataType.USER},
+			{	title:Type.get_title(DataType.PRODUCT),type:DataType.PRODUCT},
+			{	title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE}
+		]
+	};
 	static get_value_list(item,option){
 		for(let b=0;b<option.value_count;b++){
 			if(option.get_blank == false){
@@ -1513,7 +1524,7 @@ class Sub_Item_Logic {
 				parent_data_type:parent_item.data_type?parent_item.data_type:DataType.BLANK,
 				title:item_title,
 				title_url:Str.get_title_url(item_title),
-				sub_note:"Sub Note "+String(Num.get_id()),
+				description:"Description "+String(Num.get_id()),
 				note:Field_Logic.get_test_note()
 			}
 		);
