@@ -56,6 +56,8 @@ class Item_Logic {
 		item.id_key = id;
 		item.title = "Item Not Found";
 		item.title_url = Str.get_title_url(item.title);
+		item.images = [];
+		item.items = [];
 		if(option.app_id){
 			item.app_id = option.app_id;
 		}
@@ -1148,6 +1150,7 @@ class DataType {
 	static SECURITY='security_biz';
 	static STAT='stat_biz';
 	static TEMPLATE='template_biz';
+	static TYPE='type_biz';
 	static USER='user_biz';
 	static VIDEO='video_biz';
 	static get_list = () =>{
@@ -1466,6 +1469,8 @@ class User_Logic {
 		user.title = "User Not Found";
 		user.first_name = "User Not Found";
 		user.title_url = Str.get_title_url(user.title);
+		user.images = [];
+		user.items = [];
 		if(option.app_id){
 			user.app_id = option.app_id;
 		}
@@ -1510,10 +1515,10 @@ class Sub_Item_Logic {
 		let item_title =title;
 		let item = DataItem.get_new(
 			DataType.ITEM,0, {
-				top_id:top_item.id,
-				top_data_type:top_item.data_type,
-				parent_id:parent_item.id,
-				parent_data_type:parent_item.data_type,
+				top_id:top_item.id?top_item.id:0,
+				top_data_type:top_item.data_type?top_item.data_type:DataType.BLANK,
+				parent_id:parent_item.id?parent_item.id:0,
+				parent_data_type:parent_item.data_type?parent_item.data_type:DataType.BLANK,
 				title:item_title,
 				title_url:Str.get_title_url(item_title),
 				sub_note:"Sub Note "+String(Num.get_id()),
