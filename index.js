@@ -1384,23 +1384,6 @@ class User_Logic {
 		req.session.user=null;
 		delete req.session.user;
 	}
-	static get_not_found = (user_id,option) =>{
-		if(!user_id){
-			user_id=0;
-		}
-		let user = User_Logic.get_test("",{get_blank:true})
-		user.id = 0;
-		user.id_key = user_id;
-		user.title = "User Not Found";
-		user.first_name = "User Not Found";
-		user.title_url = Str.get_title_url(user.title);
-		user.images = [];
-		user.items = [];
-		if(option.app_id){
-			user.app_id = option.app_id;
-		}
-		return user;
-	};
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.USER,option?option:{});
@@ -1504,6 +1487,7 @@ class App_Logic {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
 	static get_not_found = (data_type,id,option) =>{
+		if(data_type != DataType.USER){
 		if(!id){
 			id=0;
 		}
@@ -1518,6 +1502,24 @@ class App_Logic {
 			item.app_id = option.app_id;
 		}
 		return item;
+		}else{
+		if(!user_id){
+			user_id=0;
+		}
+		let user = User_Logic.get_test("",{get_blank:true})
+		user.id = 0;
+		user.id_key = user_id;
+		user.title = "User Not Found";
+		user.first_name = "User Not Found";
+		user.title_url = Str.get_title_url(user.title);
+		user.images = [];
+		user.items = [];
+		if(option.app_id){
+			user.app_id = option.app_id;
+		}
+		return user;
+		}
+
 	};
 	static get_search_query(search){
 		let url = "";
