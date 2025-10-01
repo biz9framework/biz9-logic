@@ -191,13 +191,13 @@ class Type {
 			{title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST,label:Type.get_title(DataType.BLOG_POST),value:DataType.BLOG_POST},
 			{title:Type.get_title(DataType.CATEGORY),type:DataType.CATEGORY,label:Type.get_title(DataType.CATEGORY),value:DataType.CATEGORY},
 			{title:Type.get_title(DataType.CONTENT),type:DataType.CONTENT,label:Type.get_title(DataType.CONTENT),value:DataType.CONTENT},
-			{title:Type.get_title(DataType.EVENT),type:DataType.EVENT,type:Type.get_title(DataType.EVENT),value:DataType.EVENT},
+			{title:Type.get_title(DataType.EVENT),type:DataType.EVENT,label:Type.get_title(DataType.EVENT),value:DataType.EVENT},
 			{title:Type.get_title(DataType.GALLERY),type:DataType.GALLERY,label:Type.get_title(DataType.GALLERY),value:DataType.GALLERY},
 			{title:Type.get_title(DataType.USER),type:DataType.USER,label:Type.get_title(DataType.USER),value:DataType.USER},
-			{title:Type.get_title(DataType.ORDER),type:DataType.ORDER,type:Type.get_title(DataType.ORDER),value:DataType.ORDER},
-			{title:Type.get_title(DataType.PAGE),type:DataType.PAGE,type:Type.get_title(DataType.PAGE),value:DataType.PAGE},
-			{title:Type.get_title(DataType.PRODUCT),type:DataType.PRODUCT,type:Type.get_title(DataType.PRODUCT),value:DataType.PRODUCT},
-			{title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE,type:Type.get_title(DataType.SERVICE),value:DataType.SERVICE}
+			{title:Type.get_title(DataType.ORDER),type:DataType.ORDER,label:Type.get_title(DataType.ORDER),value:DataType.ORDER},
+			{title:Type.get_title(DataType.PAGE),type:DataType.PAGE,label:Type.get_title(DataType.PAGE),value:DataType.PAGE},
+			{title:Type.get_title(DataType.PRODUCT),type:DataType.PRODUCT,label:Type.get_title(DataType.PRODUCT),value:DataType.PRODUCT},
+			{title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE,label:Type.get_title(DataType.SERVICE),value:DataType.SERVICE}
 		]
 	};
 	static get_title = (type,option)=>{
