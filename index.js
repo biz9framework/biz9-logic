@@ -193,6 +193,7 @@ class Type {
 		 * get_plural = ex. true,false /  def. false
 		 * get_url = ex. true,false /  def. false
 		*/
+		type = type?type:"";
 		let r_type = "";
 		option = option ? option : {get_lowercase:false,get_plural:false,get_url:false};
 		switch(type){
