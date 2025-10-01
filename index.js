@@ -47,23 +47,7 @@ class Item_Logic {
 		}
 		return item;
 	}
-	static get_not_found = (data_type,id,option) =>{
-		if(!id){
-			id=0;
-		}
-		let item = Item_Logic.get_test("",data_type,id,{get_blank:true})
-		item.id = 0;
-		item.id_key = id;
-		item.title = "Item Not Found";
-		item.title_url = Str.get_title_url(item.title);
-		item.images = [];
-		item.items = [];
-		if(option.app_id){
-			item.app_id = option.app_id;
-		}
-		return item;
-	};
-	static get_test_list = (data_type,option) =>{
+static get_test_list = (data_type,option) =>{
 		option = Field_Logic.get_option(data_type,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.item_count+1;a++){
@@ -1519,6 +1503,22 @@ class App_Logic {
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
+	static get_not_found = (data_type,id,option) =>{
+		if(!id){
+			id=0;
+		}
+		let item = Item_Logic.get_test("",data_type,id,{get_blank:true})
+		item.id = 0;
+		item.id_key = id;
+		item.title = "Item Not Found";
+		item.title_url = Str.get_title_url(item.title);
+		item.images = [];
+		item.items = [];
+		if(option.app_id){
+			item.app_id = option.app_id;
+		}
+		return item;
+	};
 	static get_search_query(search){
 		let url = "";
 		if(search.data_type){
