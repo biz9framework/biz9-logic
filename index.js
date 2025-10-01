@@ -186,6 +186,20 @@ class Type {
 	static IMAGE_RESIZE_NORMAL="normal";
 	static IMAGE_RESIZE_SQUARE="squre";
 	static IMAGE_RESIZE_NONE="none";
+	static get_data_type_list = () =>{
+		return [
+			{title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST,label:Type.get_title(DataType.BLOG_POST),value:DataType.BLOG_POST},
+			{title:Type.get_title(DataType.CATEGORY),type:DataType.CATEGORY,label:Type.get_title(DataType.CATEGORY),value:DataType.CATEGORY},
+			{title:Type.get_title(DataType.CONTENT),type:DataType.CONTENT,label:Type.get_title(DataType.CONTENT),value:DataType.CONTENT},
+			{title:Type.get_title(DataType.EVENT),type:DataType.EVENT,label:Type.get_title(DataType.EVENT),value:DataType.EVENT},
+			{title:Type.get_title(DataType.FAQ),type:DataType.FAQ,label:Type.get_title(DataType.FAQ),value:DataType.FAQ},
+			{title:Type.get_title(DataType.GALLERY),type:DataType.GALLERY,label:Type.get_title(DataType.GALLERY),value:DataType.GALLERY},
+			{title:Type.get_title(DataType.USER),type:DataType.USER,label:Type.get_title(DataType.USER),value:DataType.USER},
+			{title:Type.get_title(DataType.PAGE),type:DataType.PAGE,label:Type.get_title(DataType.PAGE),value:DataType.PAGE},
+			{title:Type.get_title(DataType.PRODUCT),type:DataType.PRODUCT,label:Type.get_title(DataType.PRODUCT),value:DataType.PRODUCT},
+			{title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE,label:Type.get_title(DataType.SERVICE),value:DataType.SERVICE}
+		]
+	};
 	static get_type_list = () =>{
 		return [
 			{title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST,label:Type.get_title(DataType.BLOG_POST),value:DataType.BLOG_POST},
@@ -194,12 +208,12 @@ class Type {
 			{title:Type.get_title(DataType.EVENT),type:DataType.EVENT,label:Type.get_title(DataType.EVENT),value:DataType.EVENT},
 			{title:Type.get_title(DataType.GALLERY),type:DataType.GALLERY,label:Type.get_title(DataType.GALLERY),value:DataType.GALLERY},
 			{title:Type.get_title(DataType.USER),type:DataType.USER,label:Type.get_title(DataType.USER),value:DataType.USER},
-			{title:Type.get_title(DataType.ORDER),type:DataType.ORDER,label:Type.get_title(DataType.ORDER),value:DataType.ORDER},
 			{title:Type.get_title(DataType.PAGE),type:DataType.PAGE,label:Type.get_title(DataType.PAGE),value:DataType.PAGE},
 			{title:Type.get_title(DataType.PRODUCT),type:DataType.PRODUCT,label:Type.get_title(DataType.PRODUCT),value:DataType.PRODUCT},
 			{title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE,label:Type.get_title(DataType.SERVICE),value:DataType.SERVICE}
 		]
 	};
+
 	static get_title = (type,option)=>{
 		/* option
 		 * get_lowercase = ex. true,false / def. false
