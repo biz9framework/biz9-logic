@@ -879,17 +879,6 @@ class Field_Logic {
 		}
 		return item;
 	}
-	static get_field_type_list = () =>{
-		return [
-			{	label:Type.get_title(DataType.BLOG_POST),value:DataType.BLOG_POST},
-			{	label:Type.get_title(DataType.CATEGORY),value:DataType.CATEGORY},
-			{	label:Type.get_title(DataType.EVENT),value:DataType.EVENT},
-			{	label:Type.get_title(DataType.GALLERY),value:DataType.GALLERY},
-			{	label:Type.get_title(DataType.USER),value:DataType.USER},
-			{	label:Type.get_title(DataType.PRODUCT),value:DataType.PRODUCT},
-			{	label:Type.get_title(DataType.SERVICE),value:DataType.SERVICE}
-		]
-	};
 	static get_value_list(item,option){
 		for(let b=0;b<option.value_count;b++){
 			if(option.get_blank == false){
@@ -1079,7 +1068,7 @@ static APP='app_biz';
 	static TYPE='type_biz';
 	static USER='user_biz';
 	static VIDEO='video_biz';
-	static get_list = () =>{
+	static get_type_list = () =>{
 		return [
 			{title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST,label:Type.get_title(DataType.BLOG_POST),value:DataType.BLOG_POST},
 			{title:Type.get_title(DataType.CATEGORY),type:DataType.CATEGORY,label:Type.get_title(DataType.CATEGORY),value:DataType.CATEGORY},
