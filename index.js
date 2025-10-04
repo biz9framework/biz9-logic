@@ -211,6 +211,7 @@ class Type {
 			{title:Type.get_title(DataType.PAGE),type:DataType.PAGE,label:Type.get_title(DataType.PAGE),value:DataType.PAGE},
 			{title:Type.get_title(DataType.PRODUCT),type:DataType.PRODUCT,label:Type.get_title(DataType.PRODUCT),value:DataType.PRODUCT},
 			{title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE,label:Type.get_title(DataType.SERVICE),value:DataType.SERVICE}
+			{title:Type.get_title(DataType.TYPE),type:DataType.TYPE,label:Type.get_title(DataType.TYPE),value:DataType.TYPE}
 		]
 	};
 
@@ -593,7 +594,7 @@ class Service_Logic {
 		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
 		let item_list = [];
 		for(let a=0;a<option.service_count+1;a++){
-			item_list.push(Service_Logic.get_test("Service "+String(parseInt(a+1))),option);
+			item_list.push(Service_Logic.get_test("Service "+String(parseInt(a+1)),option));
 		}
 		return item_list;
 	}
@@ -1260,18 +1261,6 @@ class Category_Logic {
 			category_list.push({value:cat_list[a].title,label:cat_list[a].title});
 		}
 		return category_list;
-	};
-	static get_category_type_list = () => {
-		return [
-			{data_type:Type.PAGE_BLOG_POST,value:DataType.BLOG_POST,label:Title.PAGE_BLOG_POST},
-			{data_type:Type.PAGE_CATEGORY,value:DataType.CATEGORY,label:Title.PAGE_CATEGORY},
-			{data_type:Type.PAGE_CONTENT,value:DataType.CONTENT,label:Title.PAGE_CONTENT},
-			{data_type:Type.PAGE_EVENT,value:DataType.EVENT,label:Title.PAGE_EVENT},
-			{data_type:Type.PAGE_GALLERY,value:DataType.GALLERY,label:Title.PAGE_GALLERY},
-			{data_type:Type.PAGE_SERVICE,value:DataType.SERVICE,label:Title.PAGE_SERVICE},
-			{data_type:Type.PAGE_USER,value:DataType.USER,label:Title.PAGE_USER},
-			{data_type:Type.PAGE_PRODUCT,value:DataType.PRODUCT,label:Title.PAGE_PRODUCT},
-		];
 	};
 };
 class Storage {

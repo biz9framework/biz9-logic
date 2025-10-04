@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,DataType,Page_Logic,Type,Stat_Logic} = require('./index');
+const {DataItem,DataType,Page_Logic,Product_Logic,Type,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic} = require('./index');
 const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -30,7 +30,8 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                console.log(Stat_Logic.get_user_activity_filter({user_id:1}));
+                //console.log(Product_Logic.get_test_list());
+                console.log(Event_Logic.get_test_list());
                 console.log('CONNECT-END');
                 call();
             },
