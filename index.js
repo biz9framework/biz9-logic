@@ -1718,6 +1718,7 @@ class Url {
 	static USER_LOGIN="user/login";
 	static USER_LOGOUT="user/logout";
 	static USER_REGISTER="user/register";
+	static USER_POST="user/post";
 	//stat
 	static STAT_SEARCH="item/stat_search";
 	//template
