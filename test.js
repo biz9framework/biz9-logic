@@ -30,8 +30,7 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                //console.log(Product_Logic.get_test_list());
-                console.log(Event_Logic.get_test_list());
+                console.log(Product_Logic.get_new_type('New Type',{get_category:true,categorys:'Cat1,Cat2,Cat3'}));
                 console.log('CONNECT-END');
                 call();
             },

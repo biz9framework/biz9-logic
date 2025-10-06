@@ -36,6 +36,11 @@ class Message {
 	static REVIEW_USER_LOGIN="Please Login To Add Review.";
 }
 class Item_Logic {
+	static get_new = (title,data_type,option)=>{
+		option = option ? option : {};
+		const item = DataItem.get_new(data_type,0,{title:title,title_url:Str.get_title_url(title),setting_visible:"1"});
+		return item;
+	};
 	static get_test = (title,data_type,id,option)=>{
 		data_type = data_type ? data_type : DataType.BLANK;
 		id = id ? id : 0;
@@ -453,6 +458,33 @@ class Cart_Logic {
 	};
 }
 class Product_Logic {
+	static get_new_type = (title,option) => {
+		option = option ? option : {get_category:false,categorys:''};
+		const item = Item_Logic.get_new(title,DataType.TYPE);
+		if(option.get_category){
+			item.categorys = [];
+			let category_title_list = option.categorys.split(',');
+			category_title_list.forEach(cat_item => {
+				item.categorys.push(Product_Logic.get_new_category(cat_item,item.title,DataType.PRODUCT));
+			});
+		}
+		return item;
+	};
+	static get_new_category = (title,type,category,option) => {
+		option = option ? option : {};
+		const item = Item_Logic.get_new(title,DataType.CATEGORY);
+		item.type = type;
+		item.category = category = category?category:"";
+		return item;
+	};
+	static get_new_product = (title,type,category,option) => {
+		option = option ? option : {};
+		const item = Item_Logic.get_new(title,DataType.PRODUCT);
+		item.type = type;
+		item.category = category = category?category:"";
+		return item;
+	};
+
 	static get_stock_list = () => {
 		const r_list=
 			[
