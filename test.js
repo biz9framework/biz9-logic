@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,DataType,Page_Logic,Product_Logic,Type,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Type_Logic} = require('./index');
+const {DataItem,DataType,Page_Logic,Product_Logic,Type,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic} = require('./index');
 const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -25,12 +25,19 @@ const biz9_config ={
 };
 /* --- TEST DATA CONFIG END --- */
 
+//9_connect
 describe("connect", () => {
     it("_connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                console.log(Type_Logic.get_new('New Type',{get_category:true,categorys:'Cat1,Cat2,Cat3'}));
+                let demo_type_1 = Demo_Logic.get_new_type('New Type',{
+                    get_category:true,category_data_type:DataType.PRODUCT,categorys:'Cat1,Cat2,Cat3',
+                    get_item:true,item_data_type:DataType.PRODUCT,items:'Item1,Item2,Item3'
+                });
+                Log.w('demo_type_1',demo_type_1);
+                Log.w('demo_type_1',demo_type_1.categorys[0]);
+
                 console.log('CONNECT-END');
                 call();
             },

@@ -121,6 +121,38 @@ class Title {
 	static SOCIAL_URL_YOUTUBE="https://youtube.com/";
 	static SOCIAL_URL_LINKEDIN="https://linkedin.com/";
 }
+class Demo_Logic {
+	static get_new_type = (title,option) => {
+		option = option ? option : {get_category:false,categorys:'',category_data_type:DataType.BLANK,get_item:false,items:'',item_data_type:DataType.BLANK};
+		const item = Item_Logic.get_new(title,DataType.TYPE);
+		if(option.get_category){
+			item.categorys = [];
+			let category_title_list = option.categorys.split(',');
+			category_title_list.forEach(cat_item => {
+				item.categorys.push(Category_Logic.get_new(cat_item,item.title,option.category_data_type));
+			});
+		}
+		if(option.get_item){
+			let item_title_list = option.items.split(',');
+			for(const cat_item of item.categorys){
+				cat_item.items = [];
+				for(const item of item_title_list){
+					let child_item = Item_Logic.get_new(item,option.item_data_type);
+						if(option.item_data_type == DataType.PRODUCT){
+							child_item.cost = Num.get_id(9000);
+						}
+						child_item.type = cat_item.type;
+						child_item.category = cat_item.title;
+						child_item.description = "Description "+String(Num.get_id());
+						child_item.note = Field_Logic.get_test_note(),
+						cat_item.items.push(child_item);
+				}
+			}
+		}
+		return item;
+	};
+}
+
 class Type {
 	//page
 	static PAGE_ABOUT='about';
@@ -218,18 +250,6 @@ class Type {
 			{title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE,label:Type.get_title(DataType.SERVICE),value:DataType.SERVICE},
 			{title:Type.get_title(DataType.TYPE),type:DataType.TYPE,label:Type.get_title(DataType.TYPE),value:DataType.TYPE}
 		]
-	};
-	static get_new = (title,option) => {
-		option = option ? option : {get_category:false,categorys:''};
-		const item = Item_Logic.get_new(title,DataType.TYPE);
-		if(option.get_category){
-			item.categorys = [];
-			let category_title_list = option.categorys.split(',');
-			category_title_list.forEach(cat_item => {
-				item.categorys.push(Category_Logic.get_new(cat_item,item.title,DataType.PRODUCT));
-			});
-		}
-		return item;
 	};
 	static get_title = (type,option)=>{
 		/* option
@@ -1764,6 +1784,7 @@ module.exports = {
 	Content_Logic,
 	DataItem,
 	DataType,
+	Demo_Logic,
 	Event_Logic,
 	Field_Logic,
 	Favorite_Logic,
