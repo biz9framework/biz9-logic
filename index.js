@@ -123,25 +123,44 @@ class Title {
 }
 class Demo_Logic {
 	static get_new_type = (title,option) => {
-		option = option ? option : {get_category:false,categorys:'',category_data_type:DataType.BLANK,get_item:false,items:'',item_data_type:DataType.BLANK};
+		option = option ? option : {get_category:false,category_count:6,categorys:'',category_data_type:DataType.BLANK,get_item:false,items:'',item_data_type:DataType.BLANK,item_count:6};
 		const item = Item_Logic.get_new(title,DataType.TYPE);
 		if(option.get_category){
 			item.categorys = [];
-			let category_title_list = option.categorys.split(',');
+			let category_title_list = [];
+			if(option.categorys){
+				category_title_list = option.categorys.split(',');
+			}else{
+				for(let a = 1;a<option.category_count+1;a++){
+					category_title_list.push(title + " Category " +a);
+				}
+			}
 			category_title_list.forEach(cat_item => {
 				item.categorys.push(Category_Logic.get_new(cat_item,item.title,option.category_data_type));
 			});
 		}
 		if(option.get_item){
-			let item_title_list = option.items.split(',');
+			let item_title_list = [];
+			if(option.items){
+				item_title_list = option.items.split(',');
+			}else{
+				for(let a = 0;a<item.categorys.length;a++){
+					for(let b = 1;b<option.item_count+1;b++){
+						let num = parseInt(a+b);
+						item_title_list.push(title+" " +Type.get_title(item.categorys[a].category)+" "+ num);
+					}
+				}
+			}
 			for(const cat_item of item.categorys){
 				cat_item.items = [];
 				for(const item of item_title_list){
 					let child_item = Item_Logic.get_new(item,option.item_data_type);
 						if(option.item_data_type == DataType.PRODUCT){
 							child_item.cost = Num.get_id(9000);
+							child_item.old_cost = Num.get_id(90000);
 						}
 						child_item.type = cat_item.type;
+						child_item.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
 						child_item.category = cat_item.title;
 						child_item.description = "Description "+String(Num.get_id());
 						child_item.note = Field_Logic.get_test_note(),

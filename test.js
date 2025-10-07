@@ -31,12 +31,11 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                let demo_type_1 = Demo_Logic.get_new_type('New Type',{
-                    get_category:true,category_data_type:DataType.PRODUCT,categorys:'Cat1,Cat2,Cat3',
-                    get_item:true,item_data_type:DataType.PRODUCT,items:'Item1,Item2,Item3'
-                });
+                let demo_type_1 = Demo_Logic.get_new_type('Computer',{
+                    get_category:true,category_count:9,category_data_type:DataType.PRODUCT,categorys:'',
+                   get_item:true,item_count:9,item_data_type:DataType.PRODUCT,items:''});
                 Log.w('demo_type_1',demo_type_1);
-                Log.w('demo_type_1',demo_type_1.categorys[0]);
+                Log.w('demo_type_1_categorys',demo_type_1.categorys);
 
                 console.log('CONNECT-END');
                 call();
