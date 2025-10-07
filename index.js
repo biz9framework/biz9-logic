@@ -1609,7 +1609,6 @@ class App_Logic {
 			app_id:app_id?app_id:null,
 		}
 	}
-
 }
 class Image_Logic {
 	static url_post = (app_id,url,param) => {
@@ -1700,7 +1699,7 @@ class Url {
 	static COPY="main/crud/copy";
 	static DELETE="main/crud/delete";
 	static DELETE_CHECK_PROTECTION="main/crud/delete_item_check_protection";
-	static DELETE_LIST="main/crud/delete_list";
+	static DELETE_SEARCH="main/crud/delete_search";
 	static GET="main/crud/get";
 	static PARENT_TOP="main/crud/parent_top";
 	static POST="main/crud/post";
