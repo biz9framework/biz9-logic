@@ -219,7 +219,18 @@ class Type {
 			{title:Type.get_title(DataType.TYPE),type:DataType.TYPE,label:Type.get_title(DataType.TYPE),value:DataType.TYPE}
 		]
 	};
-
+	static get_new = (title,option) => {
+		option = option ? option : {get_category:false,categorys:''};
+		const item = Item_Logic.get_new(title,DataType.TYPE);
+		if(option.get_category){
+			item.categorys = [];
+			let category_title_list = option.categorys.split(',');
+			category_title_list.forEach(cat_item => {
+				item.categorys.push(Category_Logic.get_new(cat_item,item.title,DataType.PRODUCT));
+			});
+		}
+		return item;
+	};
 	static get_title = (type,option)=>{
 		/* option
 		 * get_lowercase = ex. true,false / def. false
@@ -458,33 +469,13 @@ class Cart_Logic {
 	};
 }
 class Product_Logic {
-	static get_new_type = (title,option) => {
-		option = option ? option : {get_category:false,categorys:''};
-		const item = Item_Logic.get_new(title,DataType.TYPE);
-		if(option.get_category){
-			item.categorys = [];
-			let category_title_list = option.categorys.split(',');
-			category_title_list.forEach(cat_item => {
-				item.categorys.push(Product_Logic.get_new_category(cat_item,item.title,DataType.PRODUCT));
-			});
-		}
-		return item;
-	};
-	static get_new_category = (title,type,category,option) => {
-		option = option ? option : {};
-		const item = Item_Logic.get_new(title,DataType.CATEGORY);
-		item.type = type;
-		item.category = category = category?category:"";
-		return item;
-	};
-	static get_new_product = (title,type,category,option) => {
+static get_new = (title,type,category,option) => {
 		option = option ? option : {};
 		const item = Item_Logic.get_new(title,DataType.PRODUCT);
 		item.type = type;
 		item.category = category = category?category:"";
 		return item;
 	};
-
 	static get_stock_list = () => {
 		const r_list=
 			[
@@ -1260,6 +1251,13 @@ class DataItem {
 	};
 }
 class Category_Logic {
+	static get_new = (title,type,category,option) => {
+		option = option ? option : {};
+		const item = Item_Logic.get_new(title,DataType.CATEGORY);
+		item.type = type;
+		item.category = category = category?category:"";
+		return item;
+	};
 	static get_test = (title,option) =>{
 		title = (title) ? title : "Category 1";
 		option = Field_Logic.get_option(DataType.CATEGORY,option?option:{});
