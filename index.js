@@ -1690,6 +1690,7 @@ class Url {
 	static CATEGORY_HOME="category/home";
 	static CATEGORY_SEARCH="category/search";
 	//cms
+	static CMS_DEMO_POST="cms/demo_post";
 	static CMS_POST="cms/post";
 	static CMS_ITEM_PARENT_TOP_TYPE_CATEGORY="cms/item_parent_top_type_category";
 	static CMS_SEARCH_ITEM_TYPE_CATEGORY="cms/search_item_type_category";
