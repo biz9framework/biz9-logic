@@ -34,8 +34,10 @@ describe("connect", () => {
                 let demo_type_1 = Demo_Logic.get_new_type('Computer',{
                     get_category:true,category_count:9,category_data_type:DataType.PRODUCT,categorys:'',
                    get_item:true,item_count:9,item_data_type:DataType.PRODUCT,items:null});
-                Log.w('demo_type_1',demo_type_1);
                 Log.w('demo_type_1_categorys',demo_type_1.categorys);
+                Log.w('demo_type_1_categorys',demo_type_1.categorys[0]);
+
+                Log.w('demo_type_1',demo_type_1);
 
                 console.log('CONNECT-END');
                 call();

@@ -144,12 +144,9 @@ class Demo_Logic {
 			if(option.items){
 				item_title_list = option.items.split(',');
 			}else{
-				for(let a = 0;a<item.categorys.length;a++){
 					for(let b = 1;b<option.item_count+1;b++){
-						let num = parseInt(a+b);
-						item_title_list.push(title+" " +Type.get_title(item.categorys[a].category)+" "+ num);
+						item_title_list.push(title+" " +Type.get_title(item.categorys[Num.get_id(item.categorys.length)].category)+" "+ b);
 					}
-				}
 			}
 			for(const cat_item of item.categorys){
 				cat_item.items = [];
