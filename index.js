@@ -55,7 +55,7 @@ class Item_Logic {
 static get_test_list = (data_type,option) =>{
 		option = Field_Logic.get_option(data_type,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.item_count+1;a++){
+		for(let a=0;a<parseInt(option.item_count)+1;a++){
 			item_list.push(Item_Logic.get_test("Item " +String(parseInt(a+1)),data_type,option));
 		}
 		return item_list;
@@ -131,7 +131,7 @@ class Demo_Logic {
 			if(option.categorys){
 				category_title_list = option.categorys.split(',');
 			}else{
-				for(let a = 1;a<option.category_count+1;a++){
+				for(let a = 1;a<parseInt(option.category_count)+1;a++){
 					category_title_list.push(title + " Category " +a);
 				}
 			}
@@ -144,7 +144,7 @@ class Demo_Logic {
 			if(option.items){
 				item_title_list = option.items.split(',');
 			}else{
-					for(let b = 1;b<option.item_count+1;b++){
+					for(let b = 1;b<parseInt(option.item_count)+1;b++){
 						item_title_list.push(title+" " +Type.get_title(item.categorys[Num.get_id(item.categorys.length)].category)+" "+ b);
 					}
 			}
@@ -442,7 +442,7 @@ class Page_Logic {
 	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.PAGE,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.page_count+1;a++){
+		for(let a=0;a<parseInt(option.page_count)+1;a++){
 			item_list.push(Page_Logic.get_test( "Page " +parseInt(a+1)? !option.get_blank : "",option));
 		}
 		return item_list;
@@ -652,7 +652,7 @@ class Service_Logic {
 	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.service_count+1;a++){
+		for(let a=0;a<parseInt(option.service_count)+1;a++){
 			item_list.push(Service_Logic.get_test("Service "+String(parseInt(a+1)),option));
 		}
 		return item_list;
@@ -663,7 +663,7 @@ class Service_Logic {
 		let category_list = Category_Logic.get_type_category_list(DataType.SERVICE,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<option.service_count;b++){
+			for(let b=0;b<parseInt(option.service_count);b++){
 				item_count++;
 				let service = Service_Logic.get_test("Service "+String(parseInt(b+1)),option);
 				service.category = category_list[Num.get_id(category_list.length+1)].title;
@@ -689,7 +689,7 @@ class Content_Logic {
 	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.CONTENT,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.content_count+1;a++){
+		for(let a=0;a<parseInt(option.content_count)+1;a++){
 			item_list.push(Content_Logic.get_test("Content " +String(parseInt(a+1)),option));
 		}
 		return item_list;
@@ -700,7 +700,7 @@ class Content_Logic {
 		let category_list = Category_Logic.get_type_category_list(DataType.CONTENT,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<option.content_count;b++){
+			for(let b=0;b<parseInt(option.content_count);b++){
 				item_count++;
 				let content = Content_Logic.get_test("Content "+String(parseInt(b+1)),option);
 				content.category = category_list[Num.get_id(category_list.length+1)].title;
@@ -738,7 +738,7 @@ class Blog_Post_Logic {
 	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.blog_post_count+1;a++){
+		for(let a=0;a<parseInt(option.blog_post_count)+1;a++){
 			item_list.push(Blog_Post_Logic.get_test("Blog Post " +String(parseInt(a+1)),option));
 		}
 		return item_list;
@@ -749,7 +749,7 @@ class Blog_Post_Logic {
 		let category_list = Category_Logic.get_type_category_list(DataType.BLOG_POST,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<option.blog_post_count;b++){
+			for(let b=0;b<parseInt(option.blog_post_count);b++){
 				item_count++;
 				let blog_post = Blog_Post_Logic.get_test("Blog Post "+String(parseInt(b+1)),option);
 				blog_post.category = category_list[Num.get_id(category_list.length+1)].title;
@@ -840,7 +840,7 @@ class Event_Logic {
 	static get_test_list = (option) =>{
 		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
 		let item_list = [];
-		for(let a=0;a<option.event_count+1;a++){
+		for(let a=0;a<parseInt(option.event_count)+1;a++){
 			item_list.push(Event_Logic.get_test("Event "+String(parseInt(a+1)),option));
 		}
 		return item_list;
@@ -851,7 +851,7 @@ class Event_Logic {
 		let category_list = Category_Logic.get_type_category_list(DataType.EVENT,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<category_list.length;a++){
-			for(let b=0;b<option.event_count;b++){
+			for(let b=0;b<parseInt(option.event_count);b++){
 				item_count++;
 				let event = Event_Logic.get_test("Event "+String(parseInt(b+1)),option);
 				event.category = category_list[Num.get_id(category_list.length+1)].title;
@@ -967,7 +967,7 @@ class Field_Logic {
 		return item;
 	}
 	static get_value_list(item,option){
-		for(let b=0;b<option.value_count;b++){
+		for(let b=0;b<parseInt(option.value_count);b++){
 			if(option.get_blank == false){
 				item['value_'+String(b+1)] = 'value ' + String(b+1);
 				item['field_'+String(b+1)] = Str.get_title_url(item['value_'+String(b+1)]);
