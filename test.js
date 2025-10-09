@@ -31,19 +31,32 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                let demo_type_1 = Demo_Logic.get_new_type('Computer',{
-                    get_category:true,category_count:9,category_data_type:DataType.PRODUCT,categorys:'',
-                   get_item:true,item_count:9,item_data_type:DataType.PRODUCT,items:null});
-                //Log.w('demo_type_1_categorys',demo_type_1.categorys);
-                //Log.w('demo_type_1_categorys',demo_type_1.categorys[0]);
+                let post_type_list = [
+                Demo_Logic.get_new_type('Computer 1',{
+                    get_category:true,category_count:12,category_data_type:DataType.PRODUCT,categorys:'',
+                   get_item:true,item_count:50,item_data_type:DataType.PRODUCT,items:null}),
+                Demo_Logic.get_new_type('Computer 2',{
+                    get_category:true,category_count:12,category_data_type:DataType.PRODUCT,categorys:'',
+                   get_item:true,item_count:50,item_data_type:DataType.PRODUCT,items:null})
+                ];
 
-                //Log.w('demo_type_1',demo_type_1);
-                let total = 0;
-                for(a=0;a<demo_type_1.categorys.length;a++){
-                    console.log(demo_type_1.categorys[a]);
-                    total = total+1;
-                }
-                Log.w('total',total);
+                Log.w('post_type_list',post_type_list);
+                let post_item_count = 0;
+                let post_category_count = 0;
+                for(const item_type of post_type_list){
+                    for(const item_cat of item_type.categorys){
+                        post_category_count = post_category_count+1;
+                        if(!item_cat.items){
+                            item_cat.items = []
+                        }
+                            for(const item_item of item_cat.items){
+                                post_item_count = post_item_count+1;
+                            }
+                    }
+                };
+
+                Log.w('post_type_list',post_type_list);
+                Log.w('post_item_count',post_item_count);
 
                 console.log('CONNECT-END');
                 call();

@@ -148,8 +148,10 @@ class Demo_Logic {
 						item_title_list.push(title+" " +Type.get_title(item.categorys[Num.get_id(item.categorys.length)].category)+" "+ b);
 					}
 			}
-			for(const cat_item of item.categorys){
+			const cat_item = item.categorys[Num.get_id(item.categorys.length)];
+			if(!cat_item.items){
 				cat_item.items = [];
+			}
 				for(const item of item_title_list){
 					let child_item = Item_Logic.get_new(item,option.item_data_type);
 						if(option.item_data_type == DataType.PRODUCT){
@@ -163,7 +165,6 @@ class Demo_Logic {
 						child_item.note = Field_Logic.get_test_note(),
 						cat_item.items.push(child_item);
 				}
-			}
 		}
 		return item;
 	};
