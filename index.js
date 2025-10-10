@@ -452,7 +452,7 @@ class Page_Logic {
 class Order_Logic {
 	static get_new = (cart) => {
 		let order = DataItem.get_new(DataType.ORDER,0,{
-			order_number:Type.ORDER_NUMBER + Num.get_id(99999),
+			order_number:Title.ORDER_NUMBER + Num.get_id(99999),
 			parent_data_type:cart.parent_data_type,
 			user_id:cart.user_id,
 			cart_number:cart.cart_number,
@@ -496,7 +496,7 @@ class Order_Logic {
 }
 class Cart_Logic {
 	static get_new = (parent_data_type,user_id) => {
-		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Type.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
+		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
 	};
 	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity) =>{
 		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cart_sub_item_list:[]});

@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,DataType,Page_Logic,Product_Logic,Type,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic} = require('./index');
+const {DataItem,DataType,Page_Logic,Product_Logic,Type,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic,Cart_Logic} = require('./index');
 const {Log,Num} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -31,6 +31,9 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
+                console.log(Cart_Logic.get_new(DataType.PRODUCT,123));
+
+                /*
                 let post_type_list = [
                 Demo_Logic.get_new_type('Computer 1',{
                     get_category:true,category_count:12,category_data_type:DataType.PRODUCT,categorys:'',
@@ -58,6 +61,7 @@ describe("connect", () => {
                 Log.w('post_type_list',post_type_list);
                 Log.w('post_item_count',post_item_count);
 
+                */
                 console.log('CONNECT-END');
                 call();
             },
