@@ -34,10 +34,10 @@ describe("connect", () => {
                 let post_type_list = [
                 Demo_Logic.get_new_type('Computer 1',{
                     get_category:true,category_count:12,category_data_type:DataType.PRODUCT,categorys:'',
-                   get_item:true,item_count:50,item_data_type:DataType.PRODUCT,items:null}),
+                   get_item:true,item_count:500,item_data_type:DataType.PRODUCT,items:null}),
                 Demo_Logic.get_new_type('Computer 2',{
                     get_category:true,category_count:12,category_data_type:DataType.PRODUCT,categorys:'',
-                   get_item:true,item_count:50,item_data_type:DataType.PRODUCT,items:null})
+                   get_item:true,item_count:500,item_data_type:DataType.PRODUCT,items:null})
                 ];
 
                 Log.w('post_type_list',post_type_list);
