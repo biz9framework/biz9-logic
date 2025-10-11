@@ -456,7 +456,7 @@ class Order_Logic {
 			parent_data_type:cart.parent_data_type,
 			user_id:cart.user_id,
 			cart_number:cart.cart_number,
-			grand_total:cart.grand_total,
+			grand_total:0,
 			order_item_list:[]
 		});
 		cart.cart_item_list.forEach(cart_item => {
@@ -481,7 +481,6 @@ class Order_Logic {
 				order_item.order_sub_item_list.push(order_sub_item);
 			});
 			order.order_item_list.push(order_item);
-
 		});
 		order = Order_Logic.get_total(order);
 		return order;
