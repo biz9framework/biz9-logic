@@ -33,7 +33,6 @@ describe("connect", () => {
                 console.log('CONNECT-START');
                 console.log(Cart_Logic.get_new(DataType.PRODUCT,123));
 
-                /*
                 let post_type_list = [
                 Demo_Logic.get_new_type('Computer 1',{
                     get_category:true,category_count:12,category_data_type:DataType.PRODUCT,categorys:'',
@@ -44,6 +43,7 @@ describe("connect", () => {
                 ];
 
                 Log.w('post_type_list',post_type_list);
+
                 let post_item_count = 0;
                 let post_category_count = 0;
                 for(const item_type of post_type_list){
@@ -59,11 +59,11 @@ describe("connect", () => {
                 };
 
                 Log.w('post_type_list',post_type_list);
-                Log.w('post_item_count',post_item_count);
+                Log.w('post_type_list',post_type_list[0].categorys);
+                //Log.w('post_item_count',post_item_count);
 
-                */
                 console.log('CONNECT-END');
-                call();
+                //call();
             },
             function(call) {
                 console.log('GET_START_DATE_TIME_BY_LIST-START');

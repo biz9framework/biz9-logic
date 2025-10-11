@@ -483,7 +483,7 @@ class Order_Logic {
 			order.order_item_list.push(order_item);
 
 		});
-		order.grand_total = Order_Logic.get_grand_total(order);
+		order = Order_Logic.caculate_total(order);
 		return order;
 	};
 	static get_new_order_payment = (order_number,payment_method_type,payment_amount) => {
@@ -495,23 +495,23 @@ class Order_Logic {
 				transaction_id:Order_Logic.TRANSACTION_ID + Num.get_id(99999)
 			});
 	};
-	 static get_grand_total = (order) => {
+	 static caculate_total = (order) => {
         let grand_total = 0;
         order.order_item_list.forEach(order_item => {
             order_item.sub_total = 0;
             if(!isNaN(order_item.cost)){
                 order_item.sub_total = (order_item.sub_total + order_item.cost) * order_item.quanity;
-                grand_total = grand_total + order_item.sub_total;
+                order.grand_total = order.grand_total + order_item.sub_total;
             }
             order_item.order_sub_item_list.forEach(order_sub_item => {
                 order_sub_item.sub_total = 0;
                 if(!isNaN(order_sub_item.cost)){
                     order_sub_item.sub_total = (order_sub_item.sub_total + order_sub_item.cost) * order_sub_item.quanity;
-                    grand_total = grand_total + order_sub_item.sub_total;
+                    order.grand_total = order.grand_total + order_sub_item.sub_total;
                 }
             });
         });
-        return grand_total;
+        return order;
     };
 }
 class Cart_Logic {
