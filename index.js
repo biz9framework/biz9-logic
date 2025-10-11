@@ -483,7 +483,7 @@ class Order_Logic {
 			order.order_item_list.push(order_item);
 
 		});
-		order = Order_Logic.caculate_total(order);
+		order = Order_Logic.get_total(order);
 		return order;
 	};
 	static get_new_order_payment = (order_number,payment_method_type,payment_amount) => {
@@ -495,22 +495,23 @@ class Order_Logic {
 				transaction_id:Order_Logic.TRANSACTION_ID + Num.get_id(99999)
 			});
 	};
-	 static caculate_total = (order) => {
+	 static get_total = (order) => {
         let grand_total = 0;
         order.order_item_list.forEach(order_item => {
             order_item.sub_total = 0;
             if(!isNaN(order_item.cost)){
                 order_item.sub_total = (order_item.sub_total + order_item.cost) * order_item.quanity;
-                order.grand_total = order.grand_total + order_item.sub_total;
+                grand_total = grand_total + order_item.sub_total;
             }
             order_item.order_sub_item_list.forEach(order_sub_item => {
                 order_sub_item.sub_total = 0;
                 if(!isNaN(order_sub_item.cost)){
                     order_sub_item.sub_total = (order_sub_item.sub_total + order_sub_item.cost) * order_sub_item.quanity;
-                    order.grand_total = order.grand_total + order_sub_item.sub_total;
+                    grand_total = grand_total + order_sub_item.sub_total;
                 }
             });
         });
+		 order.grand_total = grand_total;
         return order;
     };
 }
@@ -524,7 +525,7 @@ class Cart_Logic {
 	static get_new_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
 		return DataItem.get_new(DataType.CART_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cost:cost?cost:0});
 	};
-    static get_grand_total = (cart) => {
+    static get_total = (cart) => {
         let grand_total = 0;
         cart.cart_item_list.forEach(cart_item => {
             cart_item.sub_total = 0;
@@ -540,7 +541,8 @@ class Cart_Logic {
                 }
             });
         });
-        return grand_total;
+		cart.grand_total = grand_total;
+        return cart;
     };
 }
 class Product_Logic {
