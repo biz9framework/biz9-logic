@@ -466,6 +466,7 @@ class Order_Logic {
 				parent_id:cart_item.parent_id,
 				user_id:order.user_id,
 				quanity:cart_item.quanity,
+				cost:cart_item.cost,
 				order_sub_item_list:[]
 			});
 			cart_item.cart_sub_item_list.forEach(cart_sub_item => {
@@ -474,14 +475,15 @@ class Order_Logic {
 					parent_data_type:cart_sub_item.parent_data_type,
 					parent_id:cart_sub_item.parent_id,
 					user_id:order.user_id,
-					quanity:cart_sub_item.quanity
+					quanity:cart_sub_item.quanity,
+					cost:cart_sub_item.cost
 				})
 				order_item.order_sub_item_list.push(order_sub_item);
 			});
-
 			order.order_item_list.push(order_item);
 
 		});
+		order.grand_total = Order_Logic.get_grand_total(order);
 		return order;
 	};
 	static get_new_order_payment = (order_number,payment_method_type,payment_amount) => {
@@ -493,17 +495,53 @@ class Order_Logic {
 				transaction_id:Order_Logic.TRANSACTION_ID + Num.get_id(99999)
 			});
 	};
+	 static get_grand_total = (order) => {
+        let grand_total = 0;
+        order.order_item_list.forEach(order_item => {
+            order_item.sub_total = 0;
+            if(!isNaN(order_item.cost)){
+                order_item.sub_total = (order_item.sub_total + order_item.cost) * order_item.quanity;
+                grand_total = grand_total + order_item.sub_total;
+            }
+            order_item.order_sub_item_list.forEach(order_sub_item => {
+                order_sub_item.sub_total = 0;
+                if(!isNaN(order_sub_item.cost)){
+                    order_sub_item.sub_total = (order_sub_item.sub_total + order_sub_item.cost) * order_sub_item.quanity;
+                    grand_total = grand_total + order_sub_item.sub_total;
+                }
+            });
+        });
+        return grand_total;
+    };
 }
 class Cart_Logic {
 	static get_new = (parent_data_type,user_id) => {
 		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
 	};
-	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity) =>{
-		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cart_sub_item_list:[]});
+	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
+		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cost:cost?cost:0,cart_sub_item_list:[]});
 	};
-	static get_new_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity) =>{
-		return DataItem.get_new(DataType.CART_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity});
+	static get_new_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
+		return DataItem.get_new(DataType.CART_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cost:cost?cost:0});
 	};
+    static get_grand_total = (cart) => {
+        let grand_total = 0;
+        cart.cart_item_list.forEach(cart_item => {
+            cart_item.sub_total = 0;
+            if(!isNaN(cart_item.cost)){
+                cart_item.sub_total = (cart_item.sub_total + cart_item.cost) * cart_item.quanity;
+                grand_total = grand_total + cart_item.sub_total;
+            }
+            cart_item.cart_sub_item_list.forEach(cart_sub_item => {
+                cart_sub_item.sub_total = 0;
+                if(!isNaN(cart_sub_item.cost)){
+                    cart_sub_item.sub_total = (cart_sub_item.sub_total + cart_sub_item.cost) * cart_sub_item.quanity;
+                    grand_total = grand_total + cart_sub_item.sub_total;
+                }
+            });
+        });
+        return grand_total;
+    };
 }
 class Product_Logic {
 static get_new = (title,type,category,option) => {
@@ -1551,6 +1589,7 @@ class App_Logic {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
 	static get_not_found = (data_type,id,option) =>{
+		option=option?option:{app_id:'blank'};
 		if(data_type != DataType.USER){
 		if(!id){
 			id=0;
@@ -1567,12 +1606,9 @@ class App_Logic {
 		}
 		return item;
 		}else{
-		if(!user_id){
-			user_id=0;
-		}
 		let user = User_Logic.get_test("",{get_blank:true})
 		user.id = 0;
-		user.id_key = user_id;
+		user.id_key = id;
 		user.title = "User Not Found";
 		user.first_name = "User Not Found";
 		user.title_url = Str.get_title_url(user.title);
@@ -1719,7 +1755,6 @@ class Url {
 	static CART_DELETE="item/cart_delete";
 	static CART="item/cart";
 	static CART_POST="item/cart_post";
-	static SEARCH_CART="item/cart_search";
 	//category
 	static CATEGORY_DETAIL="category/detail";
 	static CATEGORY_HOME="category/home";
@@ -1764,7 +1799,6 @@ class Url {
 	static ORDER_DELETE="item/order_delete";
 	static ORDER="item/order";
 	static ORDER_POST="item/order_post";
-	static ORDER_SEARCH="item/order_search";
 	//page
 	static HOME="page/home";
 	static ABOUT="page/about";
