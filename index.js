@@ -64,21 +64,23 @@ static get_test_list = (data_type,option) =>{
 class Title {
 	//page
 	static PAGE_ABOUT='About';
-	static PAGE_BLOG_POST='Blog Post';
-	static PAGE_BLOG_POST_DETAIL='Blog Post Detail';
-	static PAGE_CATEGORY='Category';
 	static PAGE_CONTACT='Contact';
-	static PAGE_EVENT='Event';
-	static PAGE_EVENT_DETAIL='Event Detail';
-	static PAGE_FAQ='Faq';
-	static PAGE_GALLERY='Gallery';
-	static PAGE_GALLERY_DETAIL='Gallery Detail';
 	static PAGE_HOME='Home';
+	static PAGE_BLOG_POST='Blog Post';
+	static PAGE_BLOG_POST_HOME='Blog Post Home';
+	static PAGE_BLOG_POST_SEARCH='Blog Post Search';
 	static PAGE_PRODUCT='Product';
-	static PAGE_PRODUCT_DETAIL='Product Detail';
+	static PAGE_PRODUCT_HOME='Product Home';
+	static PAGE_PRODUCT_SEARCH='Product Search';
+	static PAGE_EVENT='Event';
+	static PAGE_EVENT_HOME='Event Home';
+	static PAGE_EVENT_SEARCH='Event Search';
+	static PAGE_GALLERY='Gallery';
+	static PAGE_GALLERY_HOME='Gallery Home';
+	static PAGE_GALLERY_SEARCH='Gallery Search';
 	static PAGE_SERVICE='Service';
-	static PAGE_SERVICE_DETAIL='Service Detail';
-
+	static PAGE_SERVICE_HOME='Service Home';
+	static PAGE_SERVICE_SEARCH='Service Search';
 	//order
 	static ORDER_NUMBER="OR-";
 	static ORDER_TRANSACTION_ID="TR-";
@@ -173,20 +175,25 @@ class Demo_Logic {
 class Type {
 	//page
 	static PAGE_ABOUT='about';
-	static PAGE_BLOG_POST='blog_post';
-	static PAGE_BLOG_POST_DETAIL='blog_post_detail';
 	static PAGE_CONTACT='contact';
-	static PAGE_CATEGORY='category';
-	static PAGE_EVENT='event';
-	static PAGE_EVENT_DETAIL='event_detail';
-	static PAGE_FAQ='faq';
-	static PAGE_GALLERY='gallery';
-	static PAGE_GALLERY_DETAIL='gallery_detail';
 	static PAGE_HOME='home';
+	static PAGE_FAQ='faq';
+
+	static PAGE_BLOG_POST='blog_post';
+	static PAGE_BLOG_POST_HOME='blog_post_home';
+	static PAGE_BLOG_POST_SEARCH='blog_post_search';
+	static PAGE_EVENT='event';
+	static PAGE_EVENT_HOME='event_home';
+	static PAGE_EVENT_SEARCH='event_search';
+	static PAGE_GALLERY='gallery';
+	static PAGE_GALLERY_HOME='gallery_home';
+	static PAGE_GALLERY_SEARCH='gallery_search';
 	static PAGE_PRODUCT='product';
-	static PAGE_PRODUCT_DETAIL='product_detail';
+	static PAGE_PRODUCT_HOME='product_home';
+	static PAGE_PRODUCT_SEARCH='product_search';
 	static PAGE_SERVICE='service';
-	static PAGE_SERVICE_DETAIL='service_detail';
+	static PAGE_SERVICE_HOME='service_home';
+	static PAGE_SERVICE_SEARCH='service_search';
 	//stat
 	static STAT_VIEW='view_post';
 	static STAT_LOGIN='login_post';
@@ -202,31 +209,26 @@ class Type {
 	static TEMPLATE_NAVIGATION='navigation';
 	static TEMPLATE_BODY='body';
 	static TEMPLATE_FOOTER='footer';
-
 	//field_value
 	static FIELD_VALUE_TEXT="text";
 	static FIELD_VALUE_NOTE="note";
 	static FIELD_VALUE_IMAGE="image";
 	static FIELD_VALUE_LIST="list";
-
 	//role
 	static USER_ROLE_SUPER_ADMIN='super_admin';
 	static USER_ROLE_ADMIN='admin';
 	static USER_ROLE_MANAGER='manager';
 	static USER_ROLE_USER='user';
 	static USER_ROLE_GUEST='guest';
-
 	//data_source
 	static DATA_SOURCE_CACHE="cache";
 	static DATA_SOURCE_DATABASE="database";
 	static DATA_SOURCE_SERVER="server";
 	static DATA_SOURCE_NOT_FOUND="not_found";
-
 	//env
 	static ENV_TEST="test";
 	static ENV_STAGE="stage";
 	static ENV_PRODUCTION="production";
-
 	//size
 	static IMAGE_SIZE_THUMB="thumb";
 	static IMAGE_SIZE_MID="mid";
@@ -235,7 +237,6 @@ class Type {
 	static IMAGE_SIZE_SQUARE_THUMB="squre_thumb";
 	static IMAGE_SIZE_SQUARE_MID="squre_mid";
 	static IMAGE_SIZE_SQUARE_LARGE="squre_large";
-
 	//re_size
 	static IMAGE_RESIZE_NORMAL="normal";
 	static IMAGE_RESIZE_SQUARE="squre";
@@ -411,7 +412,11 @@ class Page_Logic {
 	static get_page_list(){
 		return [
 			{value:Type.PAGE_ABOUT,label:Title.PAGE_ABOUT},
+
 			{value:Type.PAGE_BLOG_POST,label:Title.PAGE_BLOG_POST},
+			{value:Type.PAGE_BLOG_POST_HOME,label:Title.PAGE_BLOG_POST_HOME},
+			{value:Type.PAGE_BLOG_POST_SEARCH,label:Title.PAGE_BLOG_POST_SEARCH},
+
 			{value:Type.PAGE_CONTACT,label:Title.PAGE_CONTACT},
 			{value:Type.PAGE_EVENT,label:Title.PAGE_EVENT},
 			{value:Type.PAGE_FAQ,label:Title.PAGE_FAQ},
@@ -1748,18 +1753,10 @@ class Image_Logic {
 	}
 }
 class Url {
-	//blog_post
-	static BLOG_POST_DETAIL="blog_post/detail";
-	static BLOG_POST_HOME="blog_post/home";
-	static BLOG_POST_SEARCH="blog_post/search";
 	//cart
 	static CART_DELETE="item/cart_delete";
 	static CART="item/cart";
 	static CART_POST="item/cart_post";
-	//category
-	static CATEGORY_DETAIL="category/detail";
-	static CATEGORY_HOME="category/home";
-	static CATEGORY_SEARCH="category/search";
 	//cms
 	static CMS_DEMO_POST="cms/demo_post";
 	static CMS_POST="cms/post";
@@ -1780,19 +1777,11 @@ class Url {
 	//dashboard
 	static DASHBOARD_USER_HOME="dashboard/user_home";
 	static DASHBOARD_APP_HOME="dashboard/app_home";
-	//event
-	static EVENT_DETAIL="event/detail";
-	static EVENT_HOME="event/home";
-	static EVENT_SEARCH="event/search";
 	//favorite
 	static FAVORITE_POST="item/favorite_post";
 	//field
 	static CUSTOM_FIELD="item/custom_field";
 	static FIELD_VALUE_POST="item/field_value_post";
-	//gallery
-	static GALLERY_DETAIL="gallery/detail";
-	static GALLERY_HOME="gallery/home";
-	static GALLERY_SEARCH="gallery/search";
 	//image
 	static IMAGE_POST="main/image/post";
 	static IMAGE_CDN_POST="main/image/cdn_post";
@@ -1801,21 +1790,28 @@ class Url {
 	static ORDER="item/order";
 	static ORDER_POST="item/order_post";
 	//page
-	static HOME="page/home";
-	static ABOUT="page/about";
-	static CONTACT="page/contact";
-	static FAQ="page/faq";
-	//product
-	static PRODUCT_DETAIL="product/detail";
-	static PRODUCT_HOME="product/home";
-	static PRODUCT_SEARCH="product/search";
+	static PAGE_ABOUT="page/about";
+	static PAGE_CONTACT="page/contact";
+	static PAGE_HOME="page/home";
+	static PAGE_FAQ="page/faq";
+	static PAGE_BLOG_POST="page/blog_post";
+	static PAGE_BLOG_POST_HOME="page/blog_post_home";
+	static PAGE_BLOG_POST_SEARCH="page/blog_post_search";
+	static PAGE_PRODUCT="page/product";
+	static PAGE_PRODUCT_HOME="page/product_home";
+	static PAGE_PRODUCT_SEARCH="page/product_search";
+	static PAGE_EVENT="page/event";
+	static PAGE_EVENT_HOME="page/event_home";
+	static PAGE_EVENT_SEARCH="page/event_search";
+	static PAGE_GALLERY="page/gallery";
+	static PAGE_GALLERY_HOME="page/gallery_home";
+	static PAGE_GALLERY_SEARCH="page/gallery_search";
+	static PAGE_SERVICE="page/service";
+	static PAGE_SERVICE_HOME="page/service_home";
+	static PAGE_SERVICE_SEARCH="page/service_search";
 	//review
 	static REVIEW_POST="item/review_post";
 	static REVIEW_SEARCH="item/review_search";
-	//service
-	static SERVICE_DETAIL="service/detail";
-	static SERVICE_HOME="service/home";
-	static SERVICE_SEARCH="service/search";
 	//user
 	static USER_LOGIN="user/login";
 	static USER_LOGOUT="user/logout";
