@@ -32,8 +32,10 @@ describe("connect", () => {
             function(call) {
                 console.log('CONNECT-START');
 
+                let post_cart = {};
                 //let post_cart = Cart_Logic.get_new(DataType.PRODUCT,0,);
-                let post_cart = Cart_Logic.get_new(DataType.PRODUCT,0);
+                post_cart = Cart_Logic.get_new(DataType.PRODUCT,0);
+                Log.w('post_cart',post_cart);
                 //let post_cart_list = [];
                 //let post_cart_item = Cart_Logic.get_new_cart_item(DataType.PRODUCT,123,post_cart.cart_number,1,30);
                 //let post_cart_sub_item = Cart_Logic.get_new_cart_sub_item(DataType.PRODUCT,1234,post_cart.cart_number,1,10);
@@ -43,7 +45,7 @@ describe("connect", () => {
                 //post_cart.cart_item_list.push(post_cart_item);
 
                 //Log.w('post_cart',post_cart);
-                Log.w('post_order',Order_Logic.get_new(post_cart,{get_payment_plan:true,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_STATUS_OPEN}));
+                //Log.w('post_order',Order_Logic.get_new(post_cart,{get_payment_plan:true,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_STATUS_OPEN}));
                 //Log.w('post_cart_2',Cart_Logic.get_total(post_cart));
 
                 console.log('CONNECT-END');

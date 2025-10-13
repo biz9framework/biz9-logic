@@ -451,6 +451,8 @@ class Page_Logic {
 }
 class Order_Logic {
 	static get_new = (cart,option) => {
+		console.log('aaaaaaaaaaaaa');
+		console.log('aaaaaaaaaaaaa');
 		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_STATUS_OPEN};
 		let order = DataItem.get_new(DataType.ORDER,0,{
 			order_number:Title.ORDER_NUMBER + Num.get_id(99999),
@@ -460,6 +462,8 @@ class Order_Logic {
 			grand_total:0,
 			order_item_list:[]
 		});
+		console.log('bbbbbbbb');
+		console.log('bbbbbbbb');
 		if(option.get_payment_plan){
 			order.payment_plan = option.payment_plan;
 			order.payment_status = option.payment_plan_status;
@@ -487,7 +491,6 @@ class Order_Logic {
 			});
 			order.order_item_list.push(order_item);
 		});
-		order = Order_Logic.get_total(order);
 		return order;
 	};
 	static get_new_order_payment = (order_number,payment_method_type,payment_amount) => {
