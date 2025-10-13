@@ -95,27 +95,22 @@ class Title {
 	static ORDER_PAYMENT_METHOD_CASH="Cash";
 	static ORDER_PAYMENT_METHOD_OTHER="Other";
 	static ORDER_PAYMENT_METHOD_TEST="Test";
-
 	//cart
 	static CART_NUMBER="CA-";
-
 	//data_type
 	static DATA_TYPE_BLOG_POST="Blog Post";
 	static DATA_TYPE_CATEGORY="Category";
 	static DATA_TYPE_CONTENT="Content";
-
 	//role
 	static USER_ROLE_SUPER_ADMIN='Super Admin';
 	static USER_ROLE_ADMIN='Admin';
 	static USER_ROLE_MANAGER='Manager';
 	static USER_ROLE_USER='User';
 	static USER_ROLE_GUEST='Guest';
-
 	//app
 	static APP_MOBILE="Mobile";
 	static APP_WEBSITE="Website";
 	static APP_LANDING="Landing";
-
 	//social
 	static SOCIAL_URL_FACEBOOK="https://facebook.com/";
 	static SOCIAL_URL_TWITTER="https://twitter.com/";
@@ -496,7 +491,7 @@ class Order_Logic {
 				order_number:order_number,
 				payment_method_type:payment_method_type,
 				payment_amount:payment_amount,
-				transaction_id:Order_Logic.TRANSACTION_ID + Num.get_id(99999)
+				transaction_id:Title.ORDER_TRANSACTION_ID + Num.get_id(99999)
 			});
 	};
 	 static get_total = (order) => {

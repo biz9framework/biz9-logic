@@ -31,40 +31,19 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-START');
-                //console.log(Cart_Logic.get_new(DataType.PRODUCT,123));
-                //console.log(Type.get_title(Str.get_title(DataType.BLOG_POST)));
-                console.log(Type.get_title(DataType.BLOG_POST));
-                /*
 
-                let post_type_list = [
-                Demo_Logic.get_new_type('Computer 1',{
-                    get_category:true,category_count:12,category_data_type:DataType.PRODUCT,categorys:'',
-                   get_item:true,item_count:500,item_data_type:DataType.PRODUCT,items:null}),
-                Demo_Logic.get_new_type('Computer 2',{
-                    get_category:true,category_count:12,category_data_type:DataType.PRODUCT,categorys:'',
-                   get_item:true,item_count:500,item_data_type:DataType.PRODUCT,items:null})
-                ];
+                let post_cart = Cart_Logic.get_new(DataType.PRODUCT,0);
+                let post_cart_list = [];
+                let post_cart_item = Cart_Logic.get_new_cart_item(DataType.PRODUCT,123,post_cart.cart_number,1,30);
+                let post_cart_sub_item = Cart_Logic.get_new_cart_sub_item(DataType.PRODUCT,1234,post_cart.cart_number,1,10);
+                let post_cart_sub_item_2 = Cart_Logic.get_new_cart_sub_item(DataType.PRODUCT,1234,post_cart.cart_number,1,30);
+                post_cart_item.cart_sub_item_list.push(post_cart_sub_item);
+                post_cart_item.cart_sub_item_list.push(post_cart_sub_item_2);
+                post_cart.cart_item_list.push(post_cart_item);
 
-                Log.w('post_type_list',post_type_list);
+                Log.w('post_cart',post_cart);
+                Log.w('post_cart_2',Cart_Logic.get_total(post_cart));
 
-                let post_item_count = 0;
-                let post_category_count = 0;
-                for(const item_type of post_type_list){
-                    for(const item_cat of item_type.categorys){
-                        post_category_count = post_category_count+1;
-                        if(!item_cat.items){
-                            item_cat.items = []
-                        }
-                            for(const item_item of item_cat.items){
-                                post_item_count = post_item_count+1;
-                            }
-                    }
-                };
-
-                Log.w('post_type_list',post_type_list);
-                Log.w('post_type_list',post_type_list[0].categorys);
-                */
-                //Log.w('post_item_count',post_item_count);
 
                 console.log('CONNECT-END');
                 //call();
