@@ -517,8 +517,9 @@ class Order_Logic {
 }
 class Cart_Logic {
 	static get_new = (parent_data_type,user_id,option) => {
-		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_PLAN_STATUS_OPEN}:
-		order = DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
+		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_STATUS_OPEN};
+		Log.w('rrrrr',option);
+		let order = DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
 		if(option.get_payment_plan){
 			order.payment_plan = option.payment_plan;
 			order.payment_status = option.payment_plan_status;
