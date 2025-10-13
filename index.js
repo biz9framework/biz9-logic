@@ -86,11 +86,11 @@ class Title {
 	static ORDER_TRANSACTION_ID="TR-";
 	static ORDER_PAYMENT_STATUS_OPEN="Open";
 	static ORDER_PAYMENT_STATUS_COMPLETE="Complete";
-	static ORDER_PAYMENT_PLAN_PENDING="Pending";
 	static ORDER_PAYMENT_PLAN_1="1 Payment";
 	static ORDER_PAYMENT_PLAN_2="2 Payments";
 	static ORDER_PAYMENT_PLAN_3="3 Payments";
 	static ORDER_PAYMENT_PLAN_4="4 Payments";
+	static ORDER_PAYMENT_PLAN_5="5 Payments";
 	static ORDER_PAYMENT_METHOD_STRIPE="Stripe";
 	static ORDER_PAYMENT_METHOD_CASH="Cash";
 	static ORDER_PAYMENT_METHOD_OTHER="Other";
@@ -465,8 +465,8 @@ class Order_Logic {
 				parent_data_type:cart_item.parent_data_type,
 				parent_id:cart_item.parent_id,
 				user_id:order.user_id,
-				quanity:cart_item.quanity,
-				cost:cart_item.cost,
+				quanity:cart_item.quanity?cart_item.quanity:0,
+				cost:cart_item.cost?cart_item.cost:0,
 				order_sub_item_list:[]
 			});
 			cart_item.cart_sub_item_list.forEach(cart_sub_item => {
@@ -475,8 +475,8 @@ class Order_Logic {
 					parent_data_type:cart_sub_item.parent_data_type,
 					parent_id:cart_sub_item.parent_id,
 					user_id:order.user_id,
-					quanity:cart_sub_item.quanity,
-					cost:cart_sub_item.cost
+					quanity:cart_sub_item.quanity?cart_sub_item.quanity:0,
+					cost:cart_sub_item.cost?cart_sub_item.cost:0
 				})
 				order_item.order_sub_item_list.push(order_sub_item);
 			});
@@ -491,10 +491,11 @@ class Order_Logic {
 				order_number:order_number,
 				payment_method_type:payment_method_type,
 				payment_amount:payment_amount,
+				payment_amount:payment_amount,
 				transaction_id:Title.ORDER_TRANSACTION_ID + Num.get_id(99999)
 			});
 	};
-	 static get_total = (order) => {
+ 	static get_total = (order) => {
         let grand_total = 0;
         order.order_item_list.forEach(order_item => {
             order_item.sub_total = 0;
@@ -510,19 +511,25 @@ class Order_Logic {
                 }
             });
         });
-		 order.grand_total = grand_total;
+		order.grand_total = grand_total;
         return order;
     };
 }
 class Cart_Logic {
-	static get_new = (parent_data_type,user_id) => {
-		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
+	static get_new = (parent_data_type,user_id,option) => {
+		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_PLAN_STATUS_OPEN}:
+		order = DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_item_list:[]});
+		if(option.get_payment_plan){
+			order.payment_plan = option.payment_plan;
+			order.payment_status = option.payment_plan_status;
+		}
+		return order;
 	};
 	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
-		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cost:cost?cost:0,cart_sub_item_list:[]});
+		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0,cart_sub_item_list:[]});
 	};
 	static get_new_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
-		return DataItem.get_new(DataType.CART_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity,cost:cost?cost:0});
+		return DataItem.get_new(DataType.CART_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0});
 	};
     static get_total = (cart) => {
         let grand_total = 0;
