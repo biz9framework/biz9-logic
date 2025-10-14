@@ -394,37 +394,40 @@ class Stat_Logic {
 		let action_url="item/search_activity";
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static get_new = (user_id,parent_data_type,parent_id,stat_type,data)=>{
-		return {
-			user_id:user_id,
-			parent_data_type:parent_data_type,
-			parent_id:parent_id,
-			type:stat_type,
-			data:data
-		}
-	}
 	static get_new_user = (user_id,stat_type,data)=>{
 		return {
 			user_id:user_id,
 			type:stat_type,
 			data:data,
 		}
-	}
+	};
 	static get_new = (user_id,stat_type,parent_item_list,data)=>{
-		return {
-			user_id:user_id,
-			type:stat_type,
-			parent_item_list:parent_item_list,
-			data:data,
-		}
-	}
+		let stat_list = [];
+		for(const item of parent_item_list){
+			let stat = DataItem.get_new(DataType.STAT,0);
+			stat.user_id=user_id;
+			stat.type=stat_type;
+			stat.parent_id=item.id;
+			stat.parent_data_type=item.parent_data_type;
+			if(item.parent_data_type==DataType.PRODUCT || item.parent_data_type==DataType.SERVICE  || item.parent_data_type==DataType.EVENT ){
+				stat.parent_cost = item.cost;
+				stat.parent_quanity = item.quanity;
+			}
+			if(item.data_type==DataType.CART_ITEM){
+				stat.parent_cart_id = item.cart_id;
+				stat.parent_cart_number = item.cart_number;
+			}
+			stat_list.push(stat);
+		};
+		return stat_list;
+	};
 	static get_new_activity = (user_id,stat_type,activity_data)=>{
 		return {
 			user_id:user_id,
 			type:stat_type,
 			activity:data,
 		}
-	}
+	};
 }
 class Page_Logic {
 	static get_page_list(){
