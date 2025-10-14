@@ -166,9 +166,7 @@ class Demo_Logic {
 		return item;
 	};
 }
-
 class Type {
-
 	static get_stat_type_list = () =>{
 		return [
 			{title:Type.get_title(Type.STAT_VIEW),type:Type.STAT_VIEW,label:Type.get_title(Type.STAT_VIEW),value:Type.STAT_VIEW},
@@ -178,10 +176,10 @@ class Type {
 			{title:Type.get_title(Type.STAT_FAVORITE),type:Type.STAT_FAVORITE,label:Type.get_title(Type.STAT_FAVORITE),value:Type.STAT_FAVORITE},
 			{title:Type.get_title(Type.STAT_CART),type:Type.STAT_CART,label:Type.get_title(Type.STAT_CART),value:Type.STAT_CART},
 			{title:Type.get_title(Type.STAT_ORDER),type:Type.STAT_ORDER,label:Type.get_title(Type.STAT_ORDER),value:Type.STAT_ORDER},
+			{title:Type.get_title(Type.STAT_ORDER_PAYMENT),type:Type.STAT_ORDER_PAYMENT,label:Type.get_title(Type.STAT_ORDER_PAYMENT),value:Type.STAT_ORDER_PAYMENT},
 			{title:Type.get_title(Type.STAT_REVIEW),type:Type.STAT_REVIEW,label:Type.get_title(Type.STAT_REVIEW),value:Type.STAT_REVIEW},
 		]
 	};
-
 	//page
 	static PAGE_ABOUT='about';
 	static PAGE_CONTACT='contact';
@@ -211,6 +209,7 @@ class Type {
 	static STAT_FAVORITE='favorite_post';
 	static STAT_CART='cart_post';
 	static STAT_ORDER='order_post';
+	static STAT_ORDER_PAYMENT='order_payment_post';
 	static STAT_REVIEW='review_post';
 	//template
 	static TEMPLATE_PRIMARY='primary';
@@ -407,8 +406,12 @@ class Stat_Logic {
 			let stat = DataItem.get_new(DataType.STAT,0);
 			stat.user_id=user_id;
 			stat.type=stat_type;
-			stat.parent_id=item.id;
-			stat.parent_data_type=item.parent_data_type;
+			if(item.parent_id){
+				stat.parent_id=item.parent_id;
+			}
+			if(item.parent_data_type){
+				stat.parent_data_type=item.parent_data_type;
+			}
 			if(item.parent_data_type==DataType.PRODUCT || item.parent_data_type==DataType.SERVICE  || item.parent_data_type==DataType.EVENT ){
 				stat.parent_cost = item.cost;
 				stat.parent_quanity = item.quanity;
@@ -417,6 +420,16 @@ class Stat_Logic {
 				stat.parent_cart_id = item.cart_id;
 				stat.parent_cart_number = item.cart_number;
 			}
+			if(item.data_type==DataType.ORDER_PAYMENT){
+				//here
+				stat.parent_cart_id = item.cart_id;
+				order_number:order_number,
+				payment_method_type:payment_method_type,
+				payment_amount:payment_amount,
+				transaction_id:Title.ORDER_TRANSACTION_ID + Num.get_id(99999)
+
+			}
+
 			stat_list.push(stat);
 		};
 		return stat_list;
