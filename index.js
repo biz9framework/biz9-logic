@@ -394,6 +394,15 @@ class Stat_Logic {
 		let action_url="item/search_activity";
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
+	static get_new = (user_id,parent_data_type,parent_id,stat_type,data)=>{
+		return {
+			user_id:user_id,
+			parent_data_type:parent_data_type,
+			parent_id:parent_id,
+			type:stat_type,
+			data:data
+		}
+	}
 	static get_new_user = (user_id,stat_type,data)=>{
 		return {
 			user_id:user_id,
