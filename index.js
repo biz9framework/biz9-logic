@@ -169,7 +169,7 @@ class Demo_Logic {
 
 class Type {
 
-	static get_stat_list = () =>{
+	static get_stat_type_list = () =>{
 		return [
 			{title:Type.get_title(Type.STAT_VIEW),type:Type.STAT_VIEW,label:Type.get_title(Type.STAT_VIEW),value:Type.STAT_VIEW},
 			{title:Type.get_title(Type.STAT_LOGIN),type:Type.STAT_LOGIN,label:Type.get_title(Type.STAT_LOGIN),value:Type.STAT_LOGIN},
