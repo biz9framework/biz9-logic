@@ -34,8 +34,7 @@ describe("connect", () => {
 
                 let post_cart = {};
                 //let post_cart = Cart_Logic.get_new(DataType.PRODUCT,0,);
-                post_cart = Cart_Logic.get_new(DataType.PRODUCT,0);
-                Log.w('post_cart',post_cart);
+                Log.w('11_type',Type.get_stat_list());
                 //let post_cart_list = [];
                 //let post_cart_item = Cart_Logic.get_new_cart_item(DataType.PRODUCT,123,post_cart.cart_number,1,30);
                 //let post_cart_sub_item = Cart_Logic.get_new_cart_sub_item(DataType.PRODUCT,1234,post_cart.cart_number,1,10);
