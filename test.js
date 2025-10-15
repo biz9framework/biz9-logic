@@ -30,7 +30,62 @@ describe("connect", () => {
     it("_connect", () => {
         series([
             function(call) {
-                console.log('CONNECT-START');
+            console.log('CONNECT-CMS-DEMO-START');
+
+        let category_type = DataType.PRODUCT;
+        let category_count = 12;
+        let item_count = 500;
+        let category_type_title_list = ['Add On','Admin Panel','Hosting','Landing Page','Mobile','Website'];
+        let category_title_list = ['Beauty','Church','Fashion','Food Trucks','Health Care','Music','Pets','Services','Service Repair','Sports','Trucking'];
+        let item_title_list = [];
+		let post_type_list = [];
+        let val_category_title = '';
+        let cat_max = 0;
+        let option = {get_category:true,category_count:category_count,category_data_type:category_type,categorys:val_category_title?val_category_title:null,
+                   get_item:true,item_count:item_count,item_data_type:category_type,items:null}
+
+        if(category_title_list.length >0){
+            cat_max = category_title_list.length;
+        }else{
+            if(category_count.length){
+                cat_max = category_count;
+            }else{
+                cat_max = 0;
+            }
+        }
+        option.item_count = item_count / cat_max;
+        for(const item of category_type_title_list){
+            post_type_list.push(
+            Demo_Logic.get_new_type(item,option));
+        }
+
+        Log.w('post_type_list',post_type_list);
+        //Log.w('category_type_title_list',category_type_title_list);
+        //Log.w('category_title_list',category_title_list);
+        //Log.w('option',option);
+
+        /*
+        let post_category_count = 0;
+        let post_item_count = 0;
+        for(const item_type of post_type_list){
+            for(const item_cat of item_type.categorys){
+                post_category_count = post_category_count+1;
+                if(!item_cat.items){
+                    item_cat.items = [];
+                }
+                for(const item_item of item_cat.items){
+                    post_item_count = post_item_count+1;
+                }
+            }
+        };
+        let data = await App_User_Data.post(Url.CMS_DEMO_POST,{data_type:category_type,type_list:post_type_list,option:option});
+        alert_prop.current.showValidation("Demo OK. "+ post_type_list.length + " Types "+ category_count+" Categorys "+" "+item_count+" " +" Items");
+        */
+        console.log('CONNECT-CMS-DEMO-SUCCESS');
+
+            },
+            function(call) {
+                //console.log('CONNECT-START');
                 //let post_cart = Cart_Logic.get_new(DataType.PRODUCT,0,);
                 //let post_cart_list = [];
                 //let post_cart_item = Cart_Logic.get_new_cart_item(DataType.PRODUCT,123,post_cart.cart_number,1,30);
@@ -44,7 +99,7 @@ describe("connect", () => {
                 //Log.w('post_order',Order_Logic.get_new(post_cart,{get_payment_plan:true,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_STATUS_OPEN}));
                 //Log.w('post_cart_2',Cart_Logic.get_total(post_cart));
 
-                console.log('CONNECT-END');
+                //console.log('CONNECT-END');
                 //call();
             },
             function(call) {

@@ -127,7 +127,11 @@ class Demo_Logic {
 			let category_title_list = [];
 			if(option.categorys){
 				category_title_list = option.categorys.split(',');
+				option.category_count = category_title_list.length;
 			}else{
+				if(!option.category_count){
+					option.category_count = 1;
+				}
 				for(let a = 1;a<parseInt(option.category_count)+1;a++){
 					category_title_list.push(title + " Category " +a);
 				}
@@ -140,12 +144,14 @@ class Demo_Logic {
 			let item_title_list = [];
 			if(option.items){
 				item_title_list = option.items.split(',');
+				option.item_count = item_title_list.length;
 			}else{
 					for(let b = 1;b<parseInt(option.item_count)+1;b++){
-						item_title_list.push(title+" " +Type.get_title(item.categorys[Num.get_id(item.categorys.length)].category)+" "+ b);
+						item_title_list.push(title+" " +Type.get_title(item.categorys[Num.get_id(option.category_count)].category)+" "+ b);
 					}
 			}
-			const cat_item = item.categorys[Num.get_id(item.categorys.length)];
+			for(let a = 0;a < option.item_count; a++){
+			const cat_item = item.categorys[Num.get_id(option.category_count)];
 			if(!cat_item.items){
 				cat_item.items = [];
 			}
@@ -162,6 +168,7 @@ class Demo_Logic {
 						child_item.note = Field_Logic.get_test_note(),
 						cat_item.items.push(child_item);
 				}
+			}
 		}
 		return item;
 	};
