@@ -409,27 +409,32 @@ class Stat_Logic {
 			if(item.parent_id){
 				stat.parent_id=item.parent_id;
 			}
-			if(item.parent_data_type){
-				stat.parent_data_type=item.parent_data_type;
-			}
 			if(item.parent_data_type==DataType.PRODUCT || item.parent_data_type==DataType.SERVICE  || item.parent_data_type==DataType.EVENT ){
+				stat.parent_data_type=item.parent_data_type;
+				stat.parent_id=item.parent_id;
 				stat.parent_cost = item.cost;
 				stat.parent_quanity = item.quanity;
 			}
 			if(item.data_type==DataType.CART_ITEM){
+				stat.parent_data_type=item.parent_data_type;
+				stat.parent_id=item.parent_id;
 				stat.parent_cart_id = item.cart_id;
 				stat.parent_cart_number = item.cart_number;
 			}
-			if(item.data_type==DataType.ORDER_PAYMENT){
-				//here
-				stat.parent_cart_id = item.cart_id;
-				order_number:order_number,
-				payment_method_type:payment_method_type,
-				payment_amount:payment_amount,
-				transaction_id:Title.ORDER_TRANSACTION_ID + Num.get_id(99999)
-
+			if(item.data_type==DataType.ORDER){
+				stat.parent_data_type=item.data_type;
+				stat.parent_id=item.id;
+				stat.parent_order_id = item.order_id;
+				stat.parent_order_number = item.order_number;
 			}
-
+			if(item.data_type==DataType.ORDER_PAYMENT){
+				stat.parent_data_type=item.data_type;
+				stat.parent_id=item.id;
+				stat.parent_order_number = item.order_number;
+				stat.parent_payment_method_type = item.payment_method_type;
+				stat.parent_payment_amount = item.payment_amount;
+				stat.parent_transaction_id = item.transaction_id;
+			}
 			stat_list.push(stat);
 		};
 		return stat_list;
