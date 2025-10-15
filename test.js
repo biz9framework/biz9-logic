@@ -60,27 +60,6 @@ describe("connect", () => {
         }
 
         Log.w('post_type_list',post_type_list);
-        //Log.w('category_type_title_list',category_type_title_list);
-        //Log.w('category_title_list',category_title_list);
-        //Log.w('option',option);
-
-        /*
-        let post_category_count = 0;
-        let post_item_count = 0;
-        for(const item_type of post_type_list){
-            for(const item_cat of item_type.categorys){
-                post_category_count = post_category_count+1;
-                if(!item_cat.items){
-                    item_cat.items = [];
-                }
-                for(const item_item of item_cat.items){
-                    post_item_count = post_item_count+1;
-                }
-            }
-        };
-        let data = await App_User_Data.post(Url.CMS_DEMO_POST,{data_type:category_type,type_list:post_type_list,option:option});
-        alert_prop.current.showValidation("Demo OK. "+ post_type_list.length + " Types "+ category_count+" Categorys "+" "+item_count+" " +" Items");
-        */
         console.log('CONNECT-CMS-DEMO-SUCCESS');
 
             },
