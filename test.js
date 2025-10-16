@@ -44,22 +44,18 @@ describe("connect", () => {
         let option = {get_category:true,category_count:category_count,category_data_type:category_type,categorys:val_category_title?val_category_title:null,
                    get_item:true,item_count:item_count,item_data_type:category_type,items:null}
 
-        if(category_title_list.length >0){
-            cat_max = category_title_list.length;
-        }else{
-            if(category_count.length){
-                cat_max = category_count;
-            }else{
-                cat_max = 0;
-            }
-        }
-        option.item_count = item_count / cat_max;
-        for(const item of category_type_title_list){
+       for(const item of category_type_title_list){
             post_type_list.push(
             Demo_Logic.get_new_type(item,option));
         }
 
-        Log.w('post_type_list',post_type_list);
+        Log.w('44-post_type_list',post_type_list);
+        Log.w('55-post_type_list-a',post_type_list.length);
+        Log.w('55-post_type_list-b',post_type_list[0].categorys[0].items.length);
+        Log.w('55-post_type_list-b',post_type_list[0].categorys[1].items.length);
+        Log.w('55-post_type_list-b',post_type_list[0].categorys[2].items.length);
+        Log.w('55-post_type_list-b',post_type_list[0].categorys[3].items.length);
+        Log.w('55-post_type_list-b',post_type_list[0].categorys[4].items.length);
         console.log('CONNECT-CMS-DEMO-SUCCESS');
 
             },

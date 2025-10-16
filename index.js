@@ -141,6 +141,8 @@ class Demo_Logic {
 			});
 		}
 		if(option.get_item){
+			let full_item_list = [];
+
 			let item_title_list = [];
 			if(option.items){
 				item_title_list = option.items.split(',');
@@ -150,13 +152,12 @@ class Demo_Logic {
 						item_title_list.push(title+" " +Type.get_title(item.categorys[Num.get_id(option.category_count)].category)+" "+ b);
 					}
 			}
-			for(let a = 0;a < option.item_count; a++){
-			const cat_item = item.categorys[Num.get_id(option.category_count)];
-			if(!cat_item.items){
-				cat_item.items = [];
-			}
-				for(const item of item_title_list){
-					let child_item = Item_Logic.get_new(item,option.item_data_type);
+			for(const child_item_title of item_title_list){
+				const cat_item = item.categorys[Num.get_id(option.category_count)];
+					if(!cat_item.items){
+						cat_item.items = [];
+					}
+					let child_item = Item_Logic.get_new(child_item_title,option.item_data_type);
 						if(option.item_data_type == DataType.PRODUCT){
 							child_item.cost = Num.get_id(9000);
 							child_item.old_cost = Num.get_id(90000);
@@ -167,8 +168,8 @@ class Demo_Logic {
 						child_item.description = "Description "+String(Num.get_id());
 						child_item.note = Field_Logic.get_test_note(),
 						cat_item.items.push(child_item);
+						full_item_list.push(child_item);
 				}
-			}
 		}
 		return item;
 	};
