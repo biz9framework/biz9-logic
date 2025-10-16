@@ -429,9 +429,9 @@ class Stat_Logic {
 				stat.parent_cart_id = item.cart_id;
 				stat.parent_cart_number = item.cart_number;
 			}
-			if(item.data_type==DataType.ORDER){
-				stat.parent_data_type=item.data_type;
-				stat.parent_id=item.id;
+			if(item.data_type==DataType.ORDER_ITEM){
+				stat.parent_data_type=item.parent_data_type;
+				stat.parent_id=item.parent_id;
 				stat.parent_order_id = item.order_id;
 				stat.parent_order_number = item.order_number;
 			}
