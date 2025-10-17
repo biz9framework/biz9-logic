@@ -29,14 +29,21 @@ const biz9_config ={
 describe("connect", () => {
     it("_connect", () => {
         series([
+
+ /* --- TEST LOGIC - CONNECT - START --- */
             function(call) {
             console.log('CONNECT-CMS-DEMO-START');
-
         let category_type = DataType.PRODUCT;
         let category_count = 12;
         let item_count = 500;
-        let category_type_title_list = ['Add On','Admin Panel','Hosting','Landing Page','Mobile','Website'];
-        let category_title_list = ['Beauty','Church','Fashion','Food Trucks','Health Care','Music','Pets','Services','Service Repair','Sports','Trucking'];
+
+        //let category_type_title_list = ['Add On','Admin Panel','Hosting','Landing Page','Mobile','Website'];
+        //let category_title_list = ['Beauty','Church','Fashion','Food Trucks','Health Care','Music','Pets','Services','Service Repair','Sports','Trucking'];
+
+        let category_type_title_list = '';
+        let category_title_list = '';
+
+
         let item_title_list = [];
 		let post_type_list = [];
         let val_category_title = '';
@@ -81,11 +88,14 @@ describe("connect", () => {
                 //console.log('CONNECT-END');
                 //call();
             },
-            */
+            /* --- TEST LOGIC - CONNECT - END --- */
+
+            /*
             function(call) {
                 console.log('BLANK-START');
                 console.log('BLANK-END');
             },
+            */
         ], function(err) {
             console.log(err.message) // "another thing"
         })

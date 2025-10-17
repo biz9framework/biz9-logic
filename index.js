@@ -117,12 +117,14 @@ class Title {
 	static SOCIAL_URL_INSTAGRAM="https://instagram.com/";
 	static SOCIAL_URL_YOUTUBE="https://youtube.com/";
 	static SOCIAL_URL_LINKEDIN="https://linkedin.com/";
-	//type
-	static Type='Type';
+	//str
+	static CATEGORY='Category';
+	static DESCRIPTION='Description';
+	static TYPE='Type';
 }
 class Demo_Logic {
 	static get_new_type = (title,option) => {
-		title = !Str.check_is_null(title)?title:Title.Type+" " +Num.get_id(999);
+		title = !Str.check_is_null(title)?title:Title.TYPE+" " +Num.get_id(999);
 		option = option ? option : {get_category:false,category_count:6,categorys:'',category_data_type:DataType.BLANK,get_item:false,items:'',item_data_type:DataType.BLANK,item_count:6};
 		const item = Item_Logic.get_new(title,DataType.TYPE);
 		//category
@@ -137,7 +139,7 @@ class Demo_Logic {
 					option.category_count = 1;
 				}
 				for(let a = 1;a<parseInt(option.category_count)+1;a++){
-					category_title_list.push(title + " Category " +a);
+					category_title_list.push(Title.CATEGORY+" "+a);
 				}
 			}
 			category_title_list.forEach(cat_item => {
@@ -170,7 +172,7 @@ class Demo_Logic {
 						child_item.type = cat_item.type;
 						child_item.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
 						child_item.category = cat_item.title;
-						child_item.description = "Description "+String(Num.get_id());
+						child_item.description =Title.DESCRIPTION+" "+ String(Num.get_id());
 						child_item.note = Field_Logic.get_test_note(),
 						cat_item.items.push(child_item);
 						full_item_list.push(child_item);
