@@ -117,11 +117,15 @@ class Title {
 	static SOCIAL_URL_INSTAGRAM="https://instagram.com/";
 	static SOCIAL_URL_YOUTUBE="https://youtube.com/";
 	static SOCIAL_URL_LINKEDIN="https://linkedin.com/";
+	//type
+	static Type='Type';
 }
 class Demo_Logic {
 	static get_new_type = (title,option) => {
+		title = !Str.check_is_null(title)?title:Title.Type+" " +Num.get_id(999);
 		option = option ? option : {get_category:false,category_count:6,categorys:'',category_data_type:DataType.BLANK,get_item:false,items:'',item_data_type:DataType.BLANK,item_count:6};
 		const item = Item_Logic.get_new(title,DataType.TYPE);
+		//category
 		if(option.get_category){
 			item.categorys = [];
 			let category_title_list = [];
@@ -140,6 +144,7 @@ class Demo_Logic {
 				item.categorys.push(Category_Logic.get_new(cat_item,item.title,option.category_data_type));
 			});
 		}
+		//item
 		if(option.get_item){
 			let full_item_list = [];
 

@@ -44,6 +44,8 @@ describe("connect", () => {
         let option = {get_category:true,category_count:category_count,category_data_type:category_type,categorys:val_category_title?val_category_title:null,
                    get_item:true,item_count:item_count,item_data_type:category_type,items:null}
 
+        console.log(Demo_Logic.get_new_type('',option));
+                /*
        for(const item of category_type_title_list){
             post_type_list.push(
             Demo_Logic.get_new_type(item,option));
@@ -57,8 +59,10 @@ describe("connect", () => {
         Log.w('55-post_type_list-b',post_type_list[0].categorys[3].items.length);
         Log.w('55-post_type_list-b',post_type_list[0].categorys[4].items.length);
         console.log('CONNECT-CMS-DEMO-SUCCESS');
+        */
 
             },
+            /*
             function(call) {
                 //console.log('CONNECT-START');
                 //let post_cart = Cart_Logic.get_new(DataType.PRODUCT,0,);
@@ -77,8 +81,10 @@ describe("connect", () => {
                 //console.log('CONNECT-END');
                 //call();
             },
+            */
             function(call) {
-                console.log('GET_START_DATE_TIME_BY_LIST-START');
+                console.log('BLANK-START');
+                console.log('BLANK-END');
             },
         ], function(err) {
             console.log(err.message) // "another thing"
