@@ -424,6 +424,9 @@ class Stat_Logic {
 			if(item.parent_id){
 				stat.parent_id=item.parent_id;
 				stat.parent_data_type=item.parent_data_type;
+			}else{
+				stat.parent_id=item.id;
+				stat.parent_data_type=item.data_type;
 			}
 			if(item.cost){
 				stat.parent_cost = item.cost;
