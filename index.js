@@ -448,6 +448,10 @@ class Stat_Logic {
 				stat.parent_payment_amount = item.payment_amount;
 				stat.parent_transaction_id = item.transaction_id;
 			}
+			if(item.data_type==DataType.REVIEW){
+				stat.rating = item.rating;
+			}
+
 			stat_list.push(stat);
 		};
 		return stat_list;
