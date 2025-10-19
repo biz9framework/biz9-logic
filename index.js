@@ -117,6 +117,8 @@ class Title {
 	static SOCIAL_URL_INSTAGRAM="https://instagram.com/";
 	static SOCIAL_URL_YOUTUBE="https://youtube.com/";
 	static SOCIAL_URL_LINKEDIN="https://linkedin.com/";
+	//stat
+	static STAT_NUMBER="ST-";
 	//str
 	static CATEGORY='Category';
 	static DESCRIPTION='Description';
@@ -407,21 +409,56 @@ class Type {
 	}
 }
 class Stat_Logic {
+	static get_new = (parent_data_type,stat_type,user_id) => {
+		return DataItem.get_new(DataType.STAT,0,
+			{
+				user_id:user_id,
+				stat_number:Title.STAT_NUMBER + Num.get_id(99999),
+				stat_type:stat_type,
+				parent_data_type:parent_data_type,
+				stat_item_list:[]
+			});
+	};
+	static get_new_stat_item = (parent_data_type,parent_id,stat_number,post_data) =>{
+		return DataItem.get_new(DataType.STAT_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,stat_number:stat_number,post_data:post_data,stat_sub_item_list:[]});
+	};
+	static get_new_stat_sub_item = (parent_data_type,parent_id,stat_number,post_data) =>{
+		return DataItem.get_new(DataType.STAT_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,stat_number:stat_number,post_data:post_data});
+	};
+}
+class Stat_Logic_Old {
 	static get_new = (user_id,stat_type,post_data)=>{
-		let stat = DataItem.get_new(DataType.STAT,0,{user_id:user_id,stat_type:stat_type,post_data:{}});
-		for (const prop in post_data) {
-  			if (Object.prototype.hasOwnProperty.call(post_data, prop)) { // Ensure it's not an inherited property
+		console.log('4444444444444');
+		Log.w('55_user_id',user_id);
+		Log.w('66_stat_type',stat_type);
+		Log.w('77_post_data',post_data);
+		let stat = DataItem.get_new(DataType.STAT,0,{user_id:user_id,stat_type:stat_type,post_data_list:[]});
+		console.log('55555555');
+		if(post_data[Type.PARENT_ID] && post_data[Type.PARENT_DATA_TYPE]){
+			console.log('666666666666');
+			stat.post_data[Type.PARENT_ID] = post_data[Type.PARENT_ID];
+			stat.post_data[Type.PARENT_DATA_TYPE] = post_data[Type.PARENT_DATA_TYPE];
+		}else{
+			console.log('77777777777777');
+			console.log(post_data);
+			/*
+			console.log(post_data[Type.ID]);
+			stat.post_data[Type.PARENT_ID] = post_data[Type.ID];
+			stat.post_data[Type.PARENT_DATA_TYPE] = post_data[Type.DATA_TYPE];
+			*/
+		}
+		/*
+		for(const prop in post_data) {
+  			if (Object.prototype.hasOwnProperty.call(post_data, prop)){
     			const value = post_data[prop];
-				if(prop == Type.PARENT_ID){
-					stat.post_data[Type.PARENT_ID] == post_data[prop];
-				}else if(prop == Type.DataType){
-					stat.post_data[Type.PARENT_DATA_TYPE] == post_data[prop];
-				}
-				}else if (!Array.isArray(value) && prop != Type.DATE_CREATE  && prop != Type.DATE_SAVE ) {
+			}else if (!Array.isArray(value) && prop != Type.DATE_CREATE  && prop != Type.DATE_SAVE ) {
 			 		stat.post_data[prop] = post_data[prop];
     			}
   			}
-		return  stat;
+		*/
+		Log.w('88_post_data',stat);
+
+		//return  stat;
 	}
 	static get_user_activity_filter = (user_id_filter) =>{
 		return {
@@ -1283,6 +1320,7 @@ static APP='app_biz';
 	static SERVICE='service_biz';
 	static SECURITY='security_biz';
 	static STAT='stat_biz';
+	static STAT_ITEM='stat_item_biz';
 	static TEMPLATE='template_biz';
 	static TYPE='type_biz';
 	static USER='user_biz';

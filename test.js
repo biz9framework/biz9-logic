@@ -31,17 +31,19 @@ describe("connect", () => {
         series([
 
    function(call) {
-        console.log('CONNECT-BASE-START');
+       console.log('CONNECT-BASE-START');
+       let data_type = DataType.PRODUCT;
+       let id = 0;
        let parent_data_type = DataType.PRODUCT;
        let parent_id = 0;
        let user_id = 0;
        let item = Product_Logic.get_test();
        item.id = 333;
        item.items = ['a','b'];
-       let stat = Stat_Logic.get_new(user_id,Type.STAT_VIEW,item);
-
-       Log.w('11_item',item);
-       Log.w('22_item',stat);
+       let stat = Stat_Logic.get_new(data_type,Type.STAT_VIEW,user_id);
+       let stat_item = Stat_Logic.get_new_stat_item(data_type,item.id,stat.stat_number,item);
+       Log.w('11_stat',stat);
+       Log.w('22_stat_item',stat_item);
 
          console.log('CONNECT-BASE-END');
     }
