@@ -182,19 +182,15 @@ class Demo_Logic {
 	};
 }
 class Type {
-	static get_stat_type_list = () =>{
-		return [
-			{title:Type.get_title(Type.STAT_VIEW),type:Type.STAT_VIEW,label:Type.get_title(Type.STAT_VIEW),value:Type.STAT_VIEW},
-			{title:Type.get_title(Type.STAT_LOGIN),type:Type.STAT_LOGIN,label:Type.get_title(Type.STAT_LOGIN),value:Type.STAT_LOGIN},
-			{title:Type.get_title(Type.STAT_REGISTER),type:Type.STAT_REGISTER,label:Type.get_title(Type.STAT_REGISTER),value:Type.STAT_REGISTER},
-			{title:Type.get_title(Type.STAT_LIKE),type:Type.STAT_LIKE,label:Type.get_title(Type.STAT_LIKE),value:Type.STAT_LIKE},
-			{title:Type.get_title(Type.STAT_FAVORITE),type:Type.STAT_FAVORITE,label:Type.get_title(Type.STAT_FAVORITE),value:Type.STAT_FAVORITE},
-			{title:Type.get_title(Type.STAT_CART),type:Type.STAT_CART,label:Type.get_title(Type.STAT_CART),value:Type.STAT_CART},
-			{title:Type.get_title(Type.STAT_ORDER),type:Type.STAT_ORDER,label:Type.get_title(Type.STAT_ORDER),value:Type.STAT_ORDER},
-			{title:Type.get_title(Type.STAT_ORDER_PAYMENT),type:Type.STAT_ORDER_PAYMENT,label:Type.get_title(Type.STAT_ORDER_PAYMENT),value:Type.STAT_ORDER_PAYMENT},
-			{title:Type.get_title(Type.STAT_REVIEW),type:Type.STAT_REVIEW,label:Type.get_title(Type.STAT_REVIEW),value:Type.STAT_REVIEW},
-		]
-	};
+//field
+	static ID='id';
+	static DATA_TYPE='data_type';
+	static DATE_CREATE='date_create';
+	static DATE_SAVE='date_save';
+	static PARENT_ID='parent_id';
+	static PARENT_DATA_TYPE='parent_data_type';
+	static SETTING_VISIBLE='setting_visible';
+
 	//page
 	static PAGE_ABOUT='about';
 	static PAGE_CONTACT='contact';
@@ -264,6 +260,21 @@ class Type {
 	static IMAGE_RESIZE_NORMAL="normal";
 	static IMAGE_RESIZE_SQUARE="squre";
 	static IMAGE_RESIZE_NONE="none";
+	//
+	static get_stat_type_list = () =>{
+		return [
+			{title:Type.get_title(Type.STAT_VIEW),type:Type.STAT_VIEW,label:Type.get_title(Type.STAT_VIEW),value:Type.STAT_VIEW},
+			{title:Type.get_title(Type.STAT_LOGIN),type:Type.STAT_LOGIN,label:Type.get_title(Type.STAT_LOGIN),value:Type.STAT_LOGIN},
+			{title:Type.get_title(Type.STAT_REGISTER),type:Type.STAT_REGISTER,label:Type.get_title(Type.STAT_REGISTER),value:Type.STAT_REGISTER},
+			{title:Type.get_title(Type.STAT_LIKE),type:Type.STAT_LIKE,label:Type.get_title(Type.STAT_LIKE),value:Type.STAT_LIKE},
+			{title:Type.get_title(Type.STAT_FAVORITE),type:Type.STAT_FAVORITE,label:Type.get_title(Type.STAT_FAVORITE),value:Type.STAT_FAVORITE},
+			{title:Type.get_title(Type.STAT_CART),type:Type.STAT_CART,label:Type.get_title(Type.STAT_CART),value:Type.STAT_CART},
+			{title:Type.get_title(Type.STAT_ORDER),type:Type.STAT_ORDER,label:Type.get_title(Type.STAT_ORDER),value:Type.STAT_ORDER},
+			{title:Type.get_title(Type.STAT_ORDER_PAYMENT),type:Type.STAT_ORDER_PAYMENT,label:Type.get_title(Type.STAT_ORDER_PAYMENT),value:Type.STAT_ORDER_PAYMENT},
+			{title:Type.get_title(Type.STAT_REVIEW),type:Type.STAT_REVIEW,label:Type.get_title(Type.STAT_REVIEW),value:Type.STAT_REVIEW},
+		]
+	};
+
 	static get_data_type_list = () =>{
 		return [
 			{title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST,label:Type.get_title(DataType.BLOG_POST),value:DataType.BLOG_POST},
@@ -396,6 +407,22 @@ class Type {
 	}
 }
 class Stat_Logic {
+	static get_new = (user_id,stat_type,post_data)=>{
+		let stat = DataItem.get_new(DataType.STAT,0,{user_id:user_id,stat_type:stat_type,post_data:{}});
+		for (const prop in post_data) {
+  			if (Object.prototype.hasOwnProperty.call(post_data, prop)) { // Ensure it's not an inherited property
+    			const value = post_data[prop];
+				if(prop == Type.PARENT_ID){
+					stat.post_data[Type.PARENT_ID] == post_data[prop];
+				}else if(prop == Type.DataType){
+					stat.post_data[Type.PARENT_DATA_TYPE] == post_data[prop];
+				}
+				}else if (!Array.isArray(value) && prop != Type.DATE_CREATE  && prop != Type.DATE_SAVE ) {
+			 		stat.post_data[prop] = post_data[prop];
+    			}
+  			}
+		return  stat;
+	}
 	static get_user_activity_filter = (user_id_filter) =>{
 		return {
 			   $and: [
@@ -415,7 +442,7 @@ class Stat_Logic {
 			data:data,
 		}
 	};
-	static get_new = (user_id,stat_type,parent_item_list,data)=>{
+	static old_get_new = (user_id,stat_type,parent_item_list,data)=>{
 		let stat_list = [];
 		for(const item of parent_item_list){
 			let stat = DataItem.get_new(DataType.STAT,0);

@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,DataType,Page_Logic,Product_Logic,Type,Title,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic,Cart_Logic,Order_Logic} = require('./index');
+const {DataItem,DataType,Item_Logic,Page_Logic,Product_Logic,Type,Title,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic,Cart_Logic,Order_Logic} = require('./index');
 const {Log,Num,Str} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -30,45 +30,49 @@ describe("connect", () => {
     it("_connect", () => {
         series([
 
- /* --- TEST LOGIC - CONNECT - START --- */
-            function(call) {
+   function(call) {
+        console.log('CONNECT-BASE-START');
+       let parent_data_type = DataType.PRODUCT;
+       let parent_id = 0;
+       let user_id = 0;
+       let item = Product_Logic.get_test();
+       item.id = 333;
+       item.items = ['a','b'];
+       let stat = Stat_Logic.get_new(user_id,Type.STAT_VIEW,item);
+
+       Log.w('11_item',item);
+       Log.w('22_item',stat);
+
+         console.log('CONNECT-BASE-END');
+    }
+        /*
+        function(call) {
             console.log('CONNECT-CMS-DEMO-START');
-        let category_type = DataType.PRODUCT;
-        let category_count = 12;
-        let item_count = 500;
+            let category_type = DataType.PRODUCT;
+            let category_count = 12;
+            let item_count = 500;
 
-        //let category_type_title_list = ['Add On','Admin Panel','Hosting','Landing Page','Mobile','Website'];
-        //let category_title_list = ['Beauty','Church','Fashion','Food Trucks','Health Care','Music','Pets','Services','Service Repair','Sports','Trucking'];
+            //let category_type_title_list = ['Add On','Admin Panel','Hosting','Landing Page','Mobile','Website'];
+            //let category_title_list = ['Beauty','Church','Fashion','Food Trucks','Health Care','Music','Pets','Services','Service Repair','Sports','Trucking'];
 
-        let category_type_title_list = '';
-        let category_title_list = '';
+            let category_type_title_list = '';
+            let category_title_list = '';
 
-
-        let item_title_list = [];
-		let post_type_list = [];
-        let val_category_title = '';
-        let cat_max = 0;
-        let option = {get_category:true,category_count:category_count,category_data_type:category_type,categorys:val_category_title?val_category_title:null,
+            let item_title_list = [];
+		    let post_type_list = [];
+            let val_category_title = '';
+            let cat_max = 0;
+            let option = {get_category:true,category_count:category_count,category_data_type:category_type,categorys:val_category_title?val_category_title:null,
                    get_item:true,item_count:item_count,item_data_type:category_type,items:null}
 
-        console.log(Demo_Logic.get_new_type('',option));
-                /*
-       for(const item of category_type_title_list){
-            post_type_list.push(
-            Demo_Logic.get_new_type(item,option));
-        }
-
-        Log.w('44-post_type_list',post_type_list);
-        Log.w('55-post_type_list-a',post_type_list.length);
-        Log.w('55-post_type_list-b',post_type_list[0].categorys[0].items.length);
-        Log.w('55-post_type_list-b',post_type_list[0].categorys[1].items.length);
-        Log.w('55-post_type_list-b',post_type_list[0].categorys[2].items.length);
-        Log.w('55-post_type_list-b',post_type_list[0].categorys[3].items.length);
-        Log.w('55-post_type_list-b',post_type_list[0].categorys[4].items.length);
-        console.log('CONNECT-CMS-DEMO-SUCCESS');
-        */
-
+            console.log(Demo_Logic.get_new_type('',option));
+            for(const item of category_type_title_list){
+                post_type_list.push(
+                    Demo_Logic.get_new_type(item,option));
+            }
+            console.log('CONNECT-CMS-DEMO-SUCCESS');
             },
+        */
             /*
             function(call) {
                 //console.log('CONNECT-START');
