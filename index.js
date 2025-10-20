@@ -192,6 +192,7 @@ class Type {
 	static PARENT_ID='parent_id';
 	static PARENT_DATA_TYPE='parent_data_type';
 	static SETTING_VISIBLE='setting_visible';
+	static SOURCE='source';
 
 	//page
 	static PAGE_ABOUT='about';
@@ -419,12 +420,29 @@ class Stat_Logic {
 				stat_item_list:[]
 			});
 	};
-	static get_new_stat_item = (parent_data_type,parent_id,stat_number,post_data) =>{
-		return DataItem.get_new(DataType.STAT_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,stat_number:stat_number,post_data:post_data,stat_sub_item_list:[]});
+	static get_new_stat_item = (stat,post_data) =>{
+		let new_stat = DataItem.get_new(DataType.STAT_ITEM,0,{
+			parent_data_type:stat.parent_data_type,
+			parent_id:!Str.check_is_null(post_data.parent_id)?post_data.parent_id:post_data.id,
+			stat_type:stat.stat_type,
+			stat_number:stat.stat_number,
+			user_id:stat.user_id
+		});
+		if(!Obj.check_is_empty(post_data)){
+			new_stat = Obj.merge(new_stat,Stat_Logic.filter_stat(post_data));
+		}
+		return new_stat;
 	};
-	static get_new_stat_sub_item = (parent_data_type,parent_id,stat_number,post_data) =>{
-		return DataItem.get_new(DataType.STAT_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,stat_number:stat_number,post_data:post_data});
-	};
+	static filter_stat = (post_data) =>{
+		let filter_stat = {};
+		for(const prop in post_data) {
+    		const value = post_data[prop];
+			if (!Array.isArray(value)  && prop != Type.SOURCE && prop != Type.DATE_CREATE && prop != Type.DATE_SAVE  && prop != Type.DATA_TYPE && prop != Type.ID) {
+			 		filter_stat[prop] = post_data[prop];
+    			}
+  		}
+		return filter_stat;
+	}
 }
 class Stat_Logic_Old {
 	static get_new = (user_id,stat_type,post_data)=>{

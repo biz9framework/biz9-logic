@@ -40,10 +40,12 @@ describe("connect", () => {
        let item = Product_Logic.get_test();
        item.id = 333;
        item.items = ['a','b'];
+       console.log('here');
        let stat = Stat_Logic.get_new(data_type,Type.STAT_VIEW,user_id);
-       let stat_item = Stat_Logic.get_new_stat_item(data_type,item.id,stat.stat_number,item);
-       Log.w('11_stat',stat);
-       Log.w('22_stat_item',stat_item);
+       let stat_item = Stat_Logic.get_new_stat_item(stat,item);
+       //Log.w('33_stat',item);
+       //Log.w('11_stat',stat);
+       //Log.w('22_stat_item',stat_item);
 
          console.log('CONNECT-BASE-END');
     }
