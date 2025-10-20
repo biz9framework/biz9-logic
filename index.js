@@ -410,24 +410,15 @@ class Type {
 	}
 }
 class Stat_Logic {
-	static get_new = (parent_data_type,stat_type,user_id) => {
-		return DataItem.get_new(DataType.STAT,0,
+	static get_new = (parent_data_type,parent_id,stat_type,user_id,post_data) => {
+		let new_stat = DataItem.get_new(DataType.STAT,0,
 			{
 				user_id:user_id,
 				stat_number:Title.STAT_NUMBER + Num.get_id(99999),
 				stat_type:stat_type,
 				parent_data_type:parent_data_type,
-				stat_item_list:[]
+				parent_id:parent_id
 			});
-	};
-	static get_new_stat_item = (stat,post_data) =>{
-		let new_stat = DataItem.get_new(DataType.STAT_ITEM,0,{
-			parent_data_type:stat.parent_data_type,
-			parent_id:!Str.check_is_null(post_data.parent_id)?post_data.parent_id:post_data.id,
-			stat_type:stat.stat_type,
-			stat_number:stat.stat_number,
-			user_id:stat.user_id
-		});
 		if(!Obj.check_is_empty(post_data)){
 			new_stat = Obj.merge(new_stat,Stat_Logic.filter_stat(post_data));
 		}
@@ -443,108 +434,6 @@ class Stat_Logic {
   		}
 		return filter_stat;
 	}
-}
-class Stat_Logic_Old {
-	static get_new = (user_id,stat_type,post_data)=>{
-		console.log('4444444444444');
-		Log.w('55_user_id',user_id);
-		Log.w('66_stat_type',stat_type);
-		Log.w('77_post_data',post_data);
-		let stat = DataItem.get_new(DataType.STAT,0,{user_id:user_id,stat_type:stat_type,post_data_list:[]});
-		console.log('55555555');
-		if(post_data[Type.PARENT_ID] && post_data[Type.PARENT_DATA_TYPE]){
-			console.log('666666666666');
-			stat.post_data[Type.PARENT_ID] = post_data[Type.PARENT_ID];
-			stat.post_data[Type.PARENT_DATA_TYPE] = post_data[Type.PARENT_DATA_TYPE];
-		}else{
-			console.log('77777777777777');
-			console.log(post_data);
-			/*
-			console.log(post_data[Type.ID]);
-			stat.post_data[Type.PARENT_ID] = post_data[Type.ID];
-			stat.post_data[Type.PARENT_DATA_TYPE] = post_data[Type.DATA_TYPE];
-			*/
-		}
-		/*
-		for(const prop in post_data) {
-  			if (Object.prototype.hasOwnProperty.call(post_data, prop)){
-    			const value = post_data[prop];
-			}else if (!Array.isArray(value) && prop != Type.DATE_CREATE  && prop != Type.DATE_SAVE ) {
-			 		stat.post_data[prop] = post_data[prop];
-    			}
-  			}
-		*/
-		Log.w('88_post_data',stat);
-
-		//return  stat;
-	}
-	static get_user_activity_filter = (user_id_filter) =>{
-		return {
-			   $and: [
-        { $or: [ { type: Type.STAT_LOGIN }, { type: Type.STAT_REGISTER } ] },
-        user_id_filter
-    			]
-		}
-	}
-	static url_search_activity = (app_id,url,param) => {
-		let action_url="item/search_activity";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static get_new_user = (user_id,stat_type,data)=>{
-		return {
-			user_id:user_id,
-			type:stat_type,
-			data:data,
-		}
-	};
-	static old_get_new = (user_id,stat_type,parent_item_list,data)=>{
-		let stat_list = [];
-		for(const item of parent_item_list){
-			let stat = DataItem.get_new(DataType.STAT,0);
-			stat.user_id=user_id;
-			stat.type=stat_type;
-			if(item.parent_id){
-				stat.parent_id=item.parent_id;
-				stat.parent_data_type=item.parent_data_type;
-			}else{
-				stat.parent_id=item.id;
-				stat.parent_data_type=item.data_type;
-			}
-			if(item.cost){
-				stat.parent_cost = item.cost;
-			}
-			if(item.quanity){
-				stat.parent_quanity = item.quanity;
-			}
-			if(item.data_type==DataType.CART_ITEM){
-				stat.parent_cart_id = item.cart_id;
-				stat.parent_cart_number = item.cart_number;
-			}
-			if(item.data_type==DataType.ORDER_ITEM){
-				stat.parent_order_id = item.order_id;
-				stat.parent_order_number = item.order_number;
-			}
-			if(item.data_type==DataType.ORDER_PAYMENT){
-				stat.parent_order_number = item.order_number;
-				stat.parent_payment_method_type = item.payment_method_type;
-				stat.parent_payment_amount = item.payment_amount;
-				stat.parent_transaction_id = item.transaction_id;
-			}
-			if(item.data_type==DataType.REVIEW){
-				stat.rating = item.rating;
-			}
-
-			stat_list.push(stat);
-		};
-		return stat_list;
-	};
-	static get_new_activity = (user_id,stat_type,activity_data)=>{
-		return {
-			user_id:user_id,
-			type:stat_type,
-			activity:data,
-		}
-	};
 }
 class Page_Logic {
 	static get_page_list(){
@@ -1338,12 +1227,10 @@ static APP='app_biz';
 	static SERVICE='service_biz';
 	static SECURITY='security_biz';
 	static STAT='stat_biz';
-	static STAT_ITEM='stat_item_biz';
 	static TEMPLATE='template_biz';
 	static TYPE='type_biz';
 	static USER='user_biz';
 	static VIDEO='video_biz';
-
 }
 class Favorite_Logic {
 	static get_new = (parent_data_type,parent_id,user_id) =>{
@@ -1353,13 +1240,18 @@ class Favorite_Logic {
 			user_id:user_id
 		});
 	}
-	static get_favorite_by_list = (favorite_list,item_list) =>{
+	static old_get_favorite_by_list = (favorite_list,item_list) =>{
+		if(!item_list){
+			item_list = [];
+		}
+		if(item_list.length>0){
 		favorite_list.forEach(item => {
 			const item_match = item_list.find(item_find => item_find.id === item.parent_id);
 			if (item_match) {
 				item_match.is_favorite = true;
 			}
 		});
+		}
 		return item_list;
 	}
 	static get_user_search_filter = (item_data_type,user_id) =>{

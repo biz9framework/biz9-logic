@@ -35,18 +35,14 @@ describe("connect", () => {
        let data_type = DataType.PRODUCT;
        let id = 0;
        let parent_data_type = DataType.PRODUCT;
-       let parent_id = 0;
+       let parent_id = 3334;
        let user_id = 0;
        let item = Product_Logic.get_test();
        item.id = 333;
        item.items = ['a','b'];
        console.log('here');
-       let stat = Stat_Logic.get_new(data_type,Type.STAT_VIEW,user_id);
-       let stat_item = Stat_Logic.get_new_stat_item(stat,item);
-       //Log.w('33_stat',item);
-       //Log.w('11_stat',stat);
-       //Log.w('22_stat_item',stat_item);
-
+       let stat = Stat_Logic.get_new(parent_data_type,parent_id,Type.STAT_VIEW,user_id,item);
+       Log.w('stat',stat);
          console.log('CONNECT-BASE-END');
     }
         /*
