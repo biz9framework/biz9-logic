@@ -41,6 +41,12 @@ class Item_Logic {
 		const item = DataItem.get_new(data_type,0,{title:title,title_url:Str.get_title_url(title),setting_visible:"1"});
 		return item;
 	};
+	static bind_child_parent_obj = (child_obj,parent_obj)=>{
+		for(const prop in parent_obj) {
+			child_obj['parent_'+prop] = parent_obj[prop];
+		}
+    	return child_obj;
+	};
 	static get_test = (title,data_type,id,option)=>{
 		data_type = data_type ? data_type : DataType.BLANK;
 		id = id ? id : 0;
@@ -117,8 +123,6 @@ class Title {
 	static SOCIAL_URL_INSTAGRAM="https://instagram.com/";
 	static SOCIAL_URL_YOUTUBE="https://youtube.com/";
 	static SOCIAL_URL_LINKEDIN="https://linkedin.com/";
-	//stat
-	static STAT_NUMBER="ST-";
 	//str
 	static CATEGORY='Category';
 	static DESCRIPTION='Description';
@@ -414,7 +418,6 @@ class Stat_Logic {
 		let new_stat = DataItem.get_new(DataType.STAT,0,
 			{
 				user_id:user_id,
-				stat_number:Title.STAT_NUMBER + Num.get_id(99999),
 				stat_type:stat_type,
 				parent_data_type:parent_data_type,
 				parent_id:parent_id
