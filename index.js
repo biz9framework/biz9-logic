@@ -332,6 +332,12 @@ class Type {
 			case Type.STAT_CART:
 				return "Cart";
 				break;
+			case Type.STAT_CART_ITEM:
+				return "Cart Item";
+				break;
+			case Type.STAT_CART_SUB_ITEM:
+				return "Cart Sub Item";
+				break;
 			case Type.STAT_FAVORITE:
 				return "Favorite";
 				break;
@@ -344,9 +350,16 @@ class Type {
 			case Type.STAT_ORDER:
 				return "Order";
 				break;
+			case Type.STAT_ORDER_ITEM:
+				return "Order Item";
+				break;
+			case Type.STAT_ORDER_SUB_ITEM:
+				return "Order Sub Item";
+				break;
 			case Type.STAT_ORDER_PAYMENT:
 				return "Order Payment";
 				break;
+
 			case Type.STAT_REGISTER:
 				return "Register";
 				break;
