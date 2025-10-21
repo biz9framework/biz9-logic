@@ -221,14 +221,14 @@ class Type {
 	static PAGE_SERVICE_HOME='service_home';
 	static PAGE_SERVICE_SEARCH='service_search';
 	//stat
-	static STAT_VIEW='view_post';
-	static STAT_LOGIN='login_post';
-	static STAT_REGISTER='register_post';
-	static STAT_LIKE='like_post';
-	static STAT_FAVORITE='favorite_post';
 	static STAT_CART='cart_post';
+	static STAT_FAVORITE='favorite_post';
+	static STAT_LIKE='like_post';
+	static STAT_LOGIN='login_post';
 	static STAT_ORDER='order_post';
 	static STAT_ORDER_PAYMENT='order_payment_post';
+	static STAT_REGISTER='register_post';
+	static STAT_VIEW='view_post';
 	static STAT_REVIEW='review_post';
 	//template
 	static TEMPLATE_PRIMARY='primary';
@@ -271,15 +271,16 @@ class Type {
 	//
 	static get_stat_type_list = () =>{
 		return [
-			{title:Type.get_title(Type.STAT_VIEW),type:Type.STAT_VIEW,label:Type.get_title(Type.STAT_VIEW),value:Type.STAT_VIEW},
-			{title:Type.get_title(Type.STAT_LOGIN),type:Type.STAT_LOGIN,label:Type.get_title(Type.STAT_LOGIN),value:Type.STAT_LOGIN},
-			{title:Type.get_title(Type.STAT_REGISTER),type:Type.STAT_REGISTER,label:Type.get_title(Type.STAT_REGISTER),value:Type.STAT_REGISTER},
-			{title:Type.get_title(Type.STAT_LIKE),type:Type.STAT_LIKE,label:Type.get_title(Type.STAT_LIKE),value:Type.STAT_LIKE},
-			{title:Type.get_title(Type.STAT_FAVORITE),type:Type.STAT_FAVORITE,label:Type.get_title(Type.STAT_FAVORITE),value:Type.STAT_FAVORITE},
+
 			{title:Type.get_title(Type.STAT_CART),type:Type.STAT_CART,label:Type.get_title(Type.STAT_CART),value:Type.STAT_CART},
+			{title:Type.get_title(Type.STAT_FAVORITE),type:Type.STAT_FAVORITE,label:Type.get_title(Type.STAT_FAVORITE),value:Type.STAT_FAVORITE},
+			{title:Type.get_title(Type.STAT_LIKE),type:Type.STAT_LIKE,label:Type.get_title(Type.STAT_LIKE),value:Type.STAT_LIKE},
+			{title:Type.get_title(Type.STAT_LOGIN),type:Type.STAT_LOGIN,label:Type.get_title(Type.STAT_LOGIN),value:Type.STAT_LOGIN},
 			{title:Type.get_title(Type.STAT_ORDER),type:Type.STAT_ORDER,label:Type.get_title(Type.STAT_ORDER),value:Type.STAT_ORDER},
 			{title:Type.get_title(Type.STAT_ORDER_PAYMENT),type:Type.STAT_ORDER_PAYMENT,label:Type.get_title(Type.STAT_ORDER_PAYMENT),value:Type.STAT_ORDER_PAYMENT},
+			{title:Type.get_title(Type.STAT_REGISTER),type:Type.STAT_REGISTER,label:Type.get_title(Type.STAT_REGISTER),value:Type.STAT_REGISTER},
 			{title:Type.get_title(Type.STAT_REVIEW),type:Type.STAT_REVIEW,label:Type.get_title(Type.STAT_REVIEW),value:Type.STAT_REVIEW},
+			{title:Type.get_title(Type.STAT_VIEW),type:Type.STAT_VIEW,label:Type.get_title(Type.STAT_VIEW),value:Type.STAT_VIEW},
 		]
 	};
 
@@ -321,31 +322,34 @@ class Type {
 		let r_type = "";
 		option = option ? option : {get_lowercase:false,get_plural:false,get_url:false};
 		switch(type){
-			case Type.STAT_VIEW:
-				return "View";
-				break;
-			case Type.STAT_LIKE:
-				return "Like";
+			case Type.STAT_CART:
+				return "Cart";
 				break;
 			case Type.STAT_FAVORITE:
 				return "Favorite";
 				break;
-			case Type.STAT_CART:
-				return "Cart";
-				break;
-			case Type.STAT_ORDER:
-				return "Order";
-				break;
-			case Type.STAT_REVIEW:
-				return "Review";
+			case Type.STAT_LIKE:
+				return "Like";
 				break;
 			case Type.STAT_LOGIN:
 				return "Login";
 				break;
+			case Type.STAT_ORDER:
+				return "Order";
+				break;
+			case Type.STAT_ORDER_PAYMENT:
+				return "Order Payment";
+				break;
 			case Type.STAT_REGISTER:
 				return "Register";
 				break;
-			case Type.PAGE_ABOUT:
+			case Type.STAT_REVIEW:
+				return "Review";
+				break;
+			case Type.STAT_VIEW:
+				return "View";
+				break;
+	case Type.PAGE_ABOUT:
 			case Type.PAGE_BLOG_POST:
 			case Type.PAGE_BLOG_POST_DETAIL:
 			case Type.PAGE_CONTACT:
