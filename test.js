@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,DataType,Item_Logic,User_Logic,Page_Logic,Product_Logic,Type,Title,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic,Cart_Logic,Order_Logic} = require('./index');
+const {DataItem,DataType,Item_Logic,User_Logic,Page_Logic,Product_Logic,Type,Title,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic,Cart_Logic,Order_Logic,App_Logic} = require('./index');
 const {Log,Num,Str} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -37,11 +37,21 @@ describe("connect", () => {
        let parent_data_type = DataType.PRODUCT;
        let parent_id = 3334;
        let user_id = 0;
-       let item = Product_Logic.get_test();
-       let user = User_Logic.get_test();
-       item.id = 333;
-       item.items = ['a','b'];
-       Log.w('bind_obj',Item_Logic.bind_child_parent_obj(item,user));
+       let item_list = [];
+       for(let a = 0; a < 3;a++){
+            let item = Product_Logic.get_test();
+            let parent_item = Product_Logic.get_test();
+            let user = User_Logic.get_test();
+           item.parent_item = parent_item;
+           item.user = user;
+           item_list.push(item);
+       }
+       //Log.w('item_list',item_list);
+       Log.w('bind_obj_list',App_Logic.bind_item_parent_user_list(item_list));
+
+       //item.id = 333;
+       //item.items = ['a','b'];
+       //Log.w('bind_obj',App_Logic.bind_item_parent_user_obj(item,parent_item,user));
        //let stat = Stat_Logic.get_new(parent_data_type,parent_id,Type.STAT_VIEW,user_id,item);
        //Log.w('stat',stat);
          console.log('CONNECT-BASE-END');

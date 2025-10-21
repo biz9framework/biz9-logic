@@ -41,6 +41,7 @@ class Item_Logic {
 		const item = DataItem.get_new(data_type,0,{title:title,title_url:Str.get_title_url(title),setting_visible:"1"});
 		return item;
 	};
+
 	static bind_child_parent_obj = (child_obj,parent_obj)=>{
 		for(const prop in parent_obj) {
 			child_obj['parent_'+prop] = parent_obj[prop];
@@ -1612,6 +1613,36 @@ class Sub_Item_Logic {
 class App_Logic {
 	static get_url = (app_id,host,url,param) => {
 		return get_cloud_url_main(app_id,host,url,param);
+	};
+	static bind_item_parent_user_list = (item,parent_item,user)=>{
+		for(const prop in parent_item) {
+			item['parent_'+prop] = parent_item[prop];
+		}
+		for(const prop in user) {
+			item['user_'+prop] = user[prop];
+		}
+    	return item;
+	};
+	static bind_item_parent_user_list = (item_list)=>{
+		for(let item of item_list) {
+			item = App_Logic.bind_item_parent_user_obj(item);
+		}
+    	return item_list;
+	};
+	static bind_item_parent_user_obj = (item)=>{
+		if(!item.user){
+			item.user = {};
+		}
+		if(!item.parent_item){
+			item.parent_item = {};
+		}
+		for(const prop in item.parent_item) {
+			item['parent_'+prop] = item.parent_item[prop];
+		}
+		for(const prop in item.user) {
+			item['user_'+prop] = item.user[prop];
+		}
+    	return item;
 	};
 	static url_dashboard_user_home = (app_id,url,param) => {
 		let action_url="dashboard/user_home";
