@@ -222,10 +222,14 @@ class Type {
 	static PAGE_SERVICE_SEARCH='service_search';
 	//stat
 	static STAT_CART='cart_post';
+	static STAT_CART_ITEM='cart_item_post';
+	static STAT_CART_SUB_ITEM='cart_sub_item_post';
 	static STAT_FAVORITE='favorite_post';
 	static STAT_LIKE='like_post';
 	static STAT_LOGIN='login_post';
 	static STAT_ORDER='order_post';
+	static STAT_ORDER_ITEM='order_item_post';
+	static STAT_ORDER_SUB_ITEM='order_sub_item_post';
 	static STAT_ORDER_PAYMENT='order_payment_post';
 	static STAT_REGISTER='register_post';
 	static STAT_VIEW='view_post';
@@ -271,12 +275,15 @@ class Type {
 	//
 	static get_stat_type_list = () =>{
 		return [
-
 			{title:Type.get_title(Type.STAT_CART),type:Type.STAT_CART,label:Type.get_title(Type.STAT_CART),value:Type.STAT_CART},
+			{title:Type.get_title(Type.STAT_CART_ITEM),type:Type.STAT_CART_ITEM,label:Type.get_title(Type.STAT_CART_ITEM),value:Type.STAT_CART_ITEM},
+			{title:Type.get_title(Type.STAT_CART_SUB_ITEM),type:Type.STAT_CART_SUB_ITEM,label:Type.get_title(Type.STAT_CART_SUB_ITEM),value:Type.STAT_CART_SUB_ITEM},
 			{title:Type.get_title(Type.STAT_FAVORITE),type:Type.STAT_FAVORITE,label:Type.get_title(Type.STAT_FAVORITE),value:Type.STAT_FAVORITE},
 			{title:Type.get_title(Type.STAT_LIKE),type:Type.STAT_LIKE,label:Type.get_title(Type.STAT_LIKE),value:Type.STAT_LIKE},
 			{title:Type.get_title(Type.STAT_LOGIN),type:Type.STAT_LOGIN,label:Type.get_title(Type.STAT_LOGIN),value:Type.STAT_LOGIN},
 			{title:Type.get_title(Type.STAT_ORDER),type:Type.STAT_ORDER,label:Type.get_title(Type.STAT_ORDER),value:Type.STAT_ORDER},
+			{title:Type.get_title(Type.STAT_ORDER_ITEM),type:Type.STAT_ORDER_ITEM,label:Type.get_title(Type.STAT_ORDER_ITEM),value:Type.STAT_ORDER_ITEM},
+			{title:Type.get_title(Type.STAT_ORDER_SUB_ITEM),type:Type.STAT_ORDER_SUB_ITEM,label:Type.get_title(Type.STAT_ORDER_SUB_ITEM),value:Type.STAT_ORDER_ITEM},
 			{title:Type.get_title(Type.STAT_ORDER_PAYMENT),type:Type.STAT_ORDER_PAYMENT,label:Type.get_title(Type.STAT_ORDER_PAYMENT),value:Type.STAT_ORDER_PAYMENT},
 			{title:Type.get_title(Type.STAT_REGISTER),type:Type.STAT_REGISTER,label:Type.get_title(Type.STAT_REGISTER),value:Type.STAT_REGISTER},
 			{title:Type.get_title(Type.STAT_REVIEW),type:Type.STAT_REVIEW,label:Type.get_title(Type.STAT_REVIEW),value:Type.STAT_REVIEW},
