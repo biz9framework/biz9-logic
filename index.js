@@ -389,6 +389,17 @@ class Type {
 			case Type.USER_ROLE_MANAGER:
 			case Type.USER_ROLE_USER:
 			case Type.USER_ROLE_GUEST:
+			case Type.ORDER_PAYMENT_STATUS_OPEN:
+			case Type.ORDER_PAYMENT_STATUS_COMPLETE:
+			case Type.ORDER_PAYMENT_PLAN_PENDING:
+			case Type.ORDER_PAYMENT_PLAN_1:
+			case Type.ORDER_PAYMENT_PLAN_2:
+			case Type.ORDER_PAYMENT_PLAN_3:
+			case Type.ORDER_PAYMENT_PLAN_4:
+			case Type.ORDER_PAYMENT_METHOD_STRIPE:
+			case Type.ORDER_PAYMENT_METHOD_CASH:
+			case Type.ORDER_PAYMENT_METHOD_OTHER:
+			case Type.ORDER_PAYMENT_METHOD_TEST:
 			case DataType.APP:
 			case DataType.BLANK:
 			case DataType.BLOG_POST:
