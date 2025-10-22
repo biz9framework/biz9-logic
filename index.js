@@ -189,7 +189,16 @@ class Demo_Logic {
 	};
 }
 class Type {
-//field
+	//app_status
+	static APP_ENV_TEST='test';
+	static APP_ENV_STAGE='stage';
+	static APP_ENV_PROD='prod';
+	static APP_LINK_TYPE_WEBSITE='website';
+	static APP_LINK_TYPE_GOOGLE_PLAY='google_play';
+	static APP_LINK_TYPE_APPLE_STORE='apple_store';
+	static APP_LINK_TYPE_CMS='cms';
+
+	//field
 	static ID='id';
 	static DATA_TYPE='data_type';
 	static DATE_CREATE='date_create';
@@ -319,6 +328,22 @@ class Type {
 			{title:Type.get_title(DataType.TYPE),type:DataType.TYPE,label:Type.get_title(DataType.TYPE),value:DataType.TYPE}
 		]
 	};
+	static get_app_environment_list = () =>{
+		return [
+			{title:Type.get_title(Type.APP_ENV_TEST),type:Type.APP_ENV_TEST,label:Type.get_title(Type.APP_ENV_TEST),value:Type.APP_ENV_TEST},
+			{title:Type.get_title(Type.APP_ENV_STAGE),type:Type.APP_ENV_STAGE,label:Type.get_title(Type.APP_ENV_STAGE),value:Type.APP_ENV_STAGE},
+			{title:Type.get_title(Type.APP_ENV_PROD),type:Type.APP_ENV_PROD,label:Type.get_title(Type.APP_ENV_PROD),value:Type.APP_ENV_PROD},
+		]
+	};
+	static get_app_link_list = () =>{
+		return [
+			{title:Type.get_title(Type.APP_LINK_TYPE_WEBSITE),type:Type.APP_LINK_TYPE_WEBSITE,label:Type.get_title(Type.APP_LINK_TYPE_WEBSITE),value:Type.APP_LINK_TYPE_WEBSITE},
+			{title:Type.get_title(Type.APP_LINK_TYPE_GOOGLE_PLAY),type:Type.APP_LINK_TYPE_GOOGLE_PLAY,label:Type.get_title(Type.APP_LINK_TYPE_GOOGLE_PLAY),value:Type.APP_LINK_TYPE_GOOGLE_PLAY},
+			{title:Type.get_title(Type.APP_LINK_TYPE_APPLE_STORE),type:Type.APP_LINK_TYPE_APPLE_STORE,label:Type.get_title(Type.APP_LINK_TYPE_APPLE_STORE),value:Type.APP_LINK_TYPE_APPLE_STORE},
+		]
+	};
+
+
 	static get_title = (type,option)=>{
 		/* option
 		 * get_lowercase = ex. true,false / def. false
@@ -359,7 +384,6 @@ class Type {
 			case Type.STAT_ORDER_PAYMENT:
 				return "Order Payment";
 				break;
-
 			case Type.STAT_REGISTER:
 				return "Register";
 				break;
@@ -369,7 +393,28 @@ class Type {
 			case Type.STAT_VIEW:
 				return "View";
 				break;
-	case Type.PAGE_ABOUT:
+			case Type.APP_ENV_TEST:
+				return "Testing";
+				break;
+			case Type.APP_ENV_STAGE:
+				return "Staging";
+				break;
+			case Type.APP_ENV_PROD:
+				return "Production";
+				break;
+			case Type.APP_LINK_TYPE_WEBSITE:
+				return "Website";
+				break;
+			case Type.APP_LINK_TYPE_GOOGLE_PLAY:
+				return "Google Play";
+				break;
+			case Type.APP_LINK_TYPE_APPLE_STORE:
+				return "Apple Store";
+				break;
+			case Type.APP_LINK_TYPE_CMS:
+				return "Content Management System";
+				break;
+			case Type.PAGE_ABOUT:
 			case Type.PAGE_BLOG_POST:
 			case Type.PAGE_BLOG_POST_DETAIL:
 			case Type.PAGE_CONTACT:

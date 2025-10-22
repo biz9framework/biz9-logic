@@ -46,8 +46,9 @@ describe("connect", () => {
            item.user = user;
            item_list.push(item);
        }
+       Log.w('aaaaa',Type.get_app_link_list());
        //Log.w('item_list',item_list);
-       Log.w('bind_obj_list',App_Logic.bind_item_parent_user_list(item_list));
+       //Log.w('bind_obj_list',App_Logic.bind_item_parent_user_list(item_list));
 
        //item.id = 333;
        //item.items = ['a','b'];
