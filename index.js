@@ -528,7 +528,7 @@ class Order_Logic {
 			parent_data_type:cart.parent_data_type,
 			user_id:cart.user_id,
 			cart_number:cart.cart_number,
-			grand_total:0,
+			grand_total:cart.grand_total,
 			order_item_list:[]
 		});
 		if(option.get_payment_plan){
