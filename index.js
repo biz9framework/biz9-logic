@@ -209,12 +209,14 @@ class Type {
 	static DATE_SAVE='date_save';
 	static ID='id';
 	static N_A='n/a';
+	static USER='user';
 	static USER_ID='user_id';
 	static CART_ITEM_LIST='cart_item_list';
 	static CART_SUB_ITEM_LIST='cart_sub_item_list';
 	static ORDER_ITEM_LIST='order_item_list';
 	static ORDER_SUB_ITEM_LIST='order_sub_item_list';
 	static PARENT_ID='parent_id';
+	static PARENT_ITEM='parent_item';
 	static PARENT_DATA_TYPE='parent_data_type';
 	static SETTING_VISIBLE='setting_visible';
 	static SOURCE='source';
@@ -316,7 +318,6 @@ class Type {
 			{title:Type.get_title(Type.STAT_VIEW),type:Type.STAT_VIEW,label:Type.get_title(Type.STAT_VIEW),value:Type.STAT_VIEW},
 		]
 	};
-
 	static get_data_type_list = () =>{
 		return [
 			{title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST,label:Type.get_title(DataType.BLOG_POST),value:DataType.BLOG_POST},
@@ -359,8 +360,6 @@ class Type {
 			{title:Type.get_title(Type.APP_LINK_TYPE_APPLE_STORE),type:Type.APP_LINK_TYPE_APPLE_STORE,label:Type.get_title(Type.APP_LINK_TYPE_APPLE_STORE),value:Type.APP_LINK_TYPE_APPLE_STORE},
 		]
 	};
-
-
 	static get_title = (type,option)=>{
 		/* option
 		 * get_lowercase = ex. true,false / def. false
@@ -593,6 +592,18 @@ class Order_Logic {
 			grand_total:cart.grand_total,
 			order_item_list:[]
 		});
+		for(const key in cart) {
+			if(!Str.check_is_null(cart[key])
+				&& key != Type.ID && key != Type.DATA_TYPE
+				&& key != Type.PARENT_ITEM && key != Type.USER
+                && key != Type.CART_ITEM_LIST && key != Type.CART_SUB_ITEM_LIST
+                && key != Type.ORDER_ITEM_LIST && key != Type.ORDER_SUB_ITEM_LIST
+                && key != Type.SOURCE && key != Type.SOURCE_ID
+                && key != Type.STAT_ITEM_LIST && key != Type.STAT_SUB_ITEM_LIST
+                && key != Type.DATE_CREATE && key != Type.DATE_SAVE){
+				order[key] = cart[key];
+             }
+        }
 		if(option.get_payment_plan){
 			order.payment_plan = option.payment_plan;
 			order.payment_status = option.payment_plan_status;
@@ -607,6 +618,18 @@ class Order_Logic {
 				cost:cart_item.cost?cart_item.cost:0,
 				order_sub_item_list:[]
 			});
+		for(const key in cart_item){
+			if(!Str.check_is_null(cart_item[key])
+				&& key != Type.ID && key != Type.DATA_TYPE
+				&& key != Type.PARENT_ITEM && key != Type.USER
+                && key != Type.CART_ITEM_LIST && key != Type.CART_SUB_ITEM_LIST
+                && key != Type.ORDER_ITEM_LIST && key != Type.ORDER_SUB_ITEM_LIST
+                && key != Type.SOURCE && key != Type.SOURCE_ID
+                && key != Type.STAT_ITEM_LIST && key != Type.STAT_SUB_ITEM_LIST
+                && key != Type.DATE_CREATE && key != Type.DATE_SAVE){
+					order_item[key] = cart_item[key];
+             }
+        }
 			cart_item.cart_sub_item_list.forEach(cart_sub_item => {
 				let order_sub_item = DataItem.get_new(DataType.ORDER_SUB_ITEM,0,{
 					order_number:order.order_number,
@@ -616,6 +639,18 @@ class Order_Logic {
 					quanity:cart_sub_item.quanity?cart_sub_item.quanity:0,
 					cost:cart_sub_item.cost?cart_sub_item.cost:0
 				})
+				for(const key in cart_sub_item){
+					if(!Str.check_is_null(cart_sub_item[key])
+						&& key != Type.ID && key != Type.DATA_TYPE
+						&& key != Type.PARENT_ITEM && key != Type.USER
+                		&& key != Type.CART_ITEM_LIST && key != Type.CART_SUB_ITEM_LIST
+                		&& key != Type.ORDER_ITEM_LIST && key != Type.ORDER_SUB_ITEM_LIST
+                		&& key != Type.SOURCE && key != Type.SOURCE_ID
+                		&& key != Type.STAT_ITEM_LIST && key != Type.STAT_SUB_ITEM_LIST
+                		&& key != Type.DATE_CREATE && key != Type.DATE_SAVE){
+						order_sub_item[key] = cart_sub_item[key];
+             		}
+        		}
 				order_item.order_sub_item_list.push(order_sub_item);
 			});
 			order.order_item_list.push(order_item);
