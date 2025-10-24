@@ -199,14 +199,31 @@ class Type {
 	static APP_LINK_TYPE_CMS='cms';
 
 	//field
-	static ID='id';
+	static ASC='asc';
+	static BLANK='blank';
+	static CART_ITEM_LIST='cart_item_list';
+	static CART_SUB_ITEM_LIST='cart_sub_item_list';
 	static DATA_TYPE='data_type';
+	static DESC='desc';
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
+	static ID='id';
+	static N_A='n/a';
+	static USER_ID='user_id';
+	static CART_ITEM_LIST='cart_item_list';
+	static CART_SUB_ITEM_LIST='cart_sub_item_list';
+	static ORDER_ITEM_LIST='order_item_list';
+	static ORDER_SUB_ITEM_LIST='order_sub_item_list';
 	static PARENT_ID='parent_id';
 	static PARENT_DATA_TYPE='parent_data_type';
 	static SETTING_VISIBLE='setting_visible';
 	static SOURCE='source';
+	static SOURCE_ID='source_id';
+	static SOURCE_PARENT_ID='source_parent_id';
+	static STAT_ITEM_LIST='stat_item_list';
+	static STAT_SUB_ITEM_LIST='stat_sub_item_list';
+	static TITLE='title';
+	static TITLE_URL='title_url';
 
 	//page
 	static PAGE_ABOUT='about';
