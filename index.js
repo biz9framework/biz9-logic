@@ -222,8 +222,6 @@ class Type {
 	static SOURCE='source';
 	static SOURCE_ID='source_id';
 	static SOURCE_PARENT_ID='source_parent_id';
-	static STAT_ITEM_LIST='stat_item_list';
-	static STAT_SUB_ITEM_LIST='stat_sub_item_list';
 	static TITLE='title';
 	static TITLE_URL='title_url';
 
@@ -360,6 +358,7 @@ class Type {
 			{title:Type.get_title(Type.APP_LINK_TYPE_APPLE_STORE),type:Type.APP_LINK_TYPE_APPLE_STORE,label:Type.get_title(Type.APP_LINK_TYPE_APPLE_STORE),value:Type.APP_LINK_TYPE_APPLE_STORE},
 		]
 	};
+	//9_get_title
 	static get_title = (type,option)=>{
 		/* option
 		 * get_lowercase = ex. true,false / def. false
@@ -371,65 +370,71 @@ class Type {
 		option = option ? option : {get_lowercase:false,get_plural:false,get_url:false};
 		switch(type){
 			case Type.STAT_CART:
-				return "Cart";
+				r_type = "Cart";
 				break;
 			case Type.STAT_CART_ITEM:
-				return "Cart Item";
+				r_type = "Cart Item";
 				break;
 			case Type.STAT_CART_SUB_ITEM:
-				return "Cart Sub Item";
+				r_type = "Cart Sub Item";
 				break;
 			case Type.STAT_FAVORITE:
-				return "Favorite";
+				r_type = "Favorite";
 				break;
 			case Type.STAT_LIKE:
-				return "Like";
+				r_type = "Like";
 				break;
 			case Type.STAT_LOGIN:
-				return "Login";
+				r_type = "Login";
 				break;
 			case Type.STAT_ORDER:
-				return "Order";
+				r_type = "Order";
 				break;
 			case Type.STAT_ORDER_ITEM:
-				return "Order Item";
+				r_type = "Order Item";
 				break;
 			case Type.STAT_ORDER_SUB_ITEM:
-				return "Order Sub Item";
+				r_type = "Order Sub Item";
 				break;
 			case Type.STAT_ORDER_PAYMENT:
-				return "Order Payment";
+				r_type = "Order Payment";
 				break;
 			case Type.STAT_REGISTER:
-				return "Register";
+				r_type = "Register";
 				break;
 			case Type.STAT_REVIEW:
-				return "Review";
+				r_type = "Review";
 				break;
 			case Type.STAT_VIEW:
-				return "View";
+				r_type = "View";
 				break;
 			case Type.APP_ENV_TEST:
-				return "Testing";
+				r_type = "Testing";
 				break;
 			case Type.APP_ENV_STAGE:
-				return "Staging";
+				r_type = "Staging";
 				break;
 			case Type.APP_ENV_PROD:
-				return "Production";
+				r_type = "Production";
 				break;
 			case Type.APP_LINK_TYPE_WEBSITE:
-				return "Website";
+				r_type = "Website";
 				break;
 			case Type.APP_LINK_TYPE_GOOGLE_PLAY:
-				return "Google Play";
+				r_type = "Google Play";
 				break;
 			case Type.APP_LINK_TYPE_APPLE_STORE:
-				return "Apple Store";
+				r_type = "Apple Store";
 				break;
 			case Type.APP_LINK_TYPE_CMS:
-				return "Content Management System";
+				r_type = "Content Management System";
 				break;
+
+			case Type.ID:
+				r_type = "ID";
+			case Type.N_A:
+				r_type = "N/A";
+
 			case Type.PAGE_ABOUT:
 			case Type.PAGE_BLOG_POST:
 			case Type.PAGE_BLOG_POST_DETAIL:
@@ -508,7 +513,10 @@ class Type {
 				r_type = r_type.replace(" ","_").toLowerCase();
 			}
 			return r_type;
-	}
+	};
+	static get_type_title = (data_type) => {
+		return String(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz','')).trim();
+	};
 }
 class Stat_Logic {
 	static get_new = (parent_data_type,parent_id,stat_type,user_id,post_data) => {
@@ -528,7 +536,18 @@ class Stat_Logic {
 		let filter_stat = {};
 		for(const prop in post_data) {
     		const value = post_data[prop];
-			if (!Array.isArray(value)  && prop != Type.SOURCE && prop != Type.DATE_CREATE && prop != Type.DATE_SAVE  && prop != Type.DATA_TYPE && prop != Type.ID) {
+			if (!Array.isArray(value)
+				&& prop != Type.SOURCE
+				&& prop != Type.DATE_CREATE
+				&& prop != Type.DATE_SAVE
+				&& prop != Type.DATA_TYPE
+  				&& prop != Type.CART_ITEM_LIST
+				&& prop != Type.CART_SUB_ITEM_LIST
+                && prop != Type.ORDER_ITEM_LIST
+				&& prop != Type.ORDER_SUB_ITEM_LIST
+                && prop != Type.SOURCE
+				&& prop != Type.SOURCE_ID
+				&& prop != Type.ID) {
 			 		filter_stat[prop] = post_data[prop];
     			}
   		}
@@ -599,7 +618,6 @@ class Order_Logic {
                 && key != Type.CART_ITEM_LIST && key != Type.CART_SUB_ITEM_LIST
                 && key != Type.ORDER_ITEM_LIST && key != Type.ORDER_SUB_ITEM_LIST
                 && key != Type.SOURCE && key != Type.SOURCE_ID
-                && key != Type.STAT_ITEM_LIST && key != Type.STAT_SUB_ITEM_LIST
                 && key != Type.DATE_CREATE && key != Type.DATE_SAVE){
 				order[key] = cart[key];
              }
@@ -625,7 +643,6 @@ class Order_Logic {
                 && key != Type.CART_ITEM_LIST && key != Type.CART_SUB_ITEM_LIST
                 && key != Type.ORDER_ITEM_LIST && key != Type.ORDER_SUB_ITEM_LIST
                 && key != Type.SOURCE && key != Type.SOURCE_ID
-                && key != Type.STAT_ITEM_LIST && key != Type.STAT_SUB_ITEM_LIST
                 && key != Type.DATE_CREATE && key != Type.DATE_SAVE){
 					order_item[key] = cart_item[key];
              }
@@ -646,7 +663,6 @@ class Order_Logic {
                 		&& key != Type.CART_ITEM_LIST && key != Type.CART_SUB_ITEM_LIST
                 		&& key != Type.ORDER_ITEM_LIST && key != Type.ORDER_SUB_ITEM_LIST
                 		&& key != Type.SOURCE && key != Type.SOURCE_ID
-                		&& key != Type.STAT_ITEM_LIST && key != Type.STAT_SUB_ITEM_LIST
                 		&& key != Type.DATE_CREATE && key != Type.DATE_SAVE){
 						order_sub_item[key] = cart_sub_item[key];
              		}
