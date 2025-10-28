@@ -1812,7 +1812,7 @@ class App_Logic {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
 	static get_not_found = (data_type,id,option) =>{
-		option=option?option:{app_id:'blank'};
+		option=option?option:{};
 		if(data_type != DataType.USER){
 		if(!id){
 			id=0;
@@ -1824,9 +1824,6 @@ class App_Logic {
 		item.title_url = Str.get_title_url(item.title);
 		item.images = [];
 		item.items = [];
-		if(option.app_id){
-			item.app_id = option.app_id;
-		}
 		return item;
 		}else{
 		let user = User_Logic.get_test("",{get_blank:true})
@@ -1837,9 +1834,6 @@ class App_Logic {
 		user.title_url = Str.get_title_url(user.title);
 		user.images = [];
 		user.items = [];
-		if(option.app_id){
-			user.app_id = option.app_id;
-		}
 		return user;
 		}
 
@@ -1899,8 +1893,7 @@ class App_Logic {
 			item_count:item_count?item_count:0,
 			page_count:page_count?page_count:1,
 			filter:filter?filter:{},
-			data_list:data_list?data_list:[],
-			app_id:app_id?app_id:null,
+			data_list:data_list?data_list:[]
 		}
 	}
 }
