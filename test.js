@@ -46,7 +46,8 @@ describe("connect", () => {
            item.user = user;
            item_list.push(item);
        }
-       Log.w('aaaaa',Type.get_app_link_list());
+       //Log.w('aaaaa',Type.get_app_link_list());
+       Log.w('Link Title',Type.get_title(DataType.LINK));
        //Log.w('item_list',item_list);
        //Log.w('bind_obj_list',App_Logic.bind_item_parent_user_list(item_list));
 

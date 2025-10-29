@@ -469,7 +469,9 @@ class Type {
 			case DataType.APP:
 			case DataType.BLANK:
 			case DataType.BLOG_POST:
+			case DataType.CART:
 			case DataType.CART_ITEM:
+			case DataType.CART_SUB_ITEM:
 			case DataType.CATEGORY:
 			case DataType.CUSTOM_FIELD:
 			case DataType.CONTENT:
@@ -479,9 +481,7 @@ class Type {
 			case DataType.GALLERY:
 			case DataType.ITEM_MAP:
 			case DataType.ITEM:
-			case DataType.CART:
-			case DataType.CART_ITEM:
-			case DataType.CART_SUB_ITEM:
+			case DataType.LINK:
 			case DataType.ORDER:
 			case DataType.ORDER_ITEM:
 			case DataType.ORDER_SUB_ITEM:
@@ -1352,8 +1352,7 @@ class Field_Logic {
 
 }
 class DataType {
-
-static APP='app_biz';
+	static APP='app_biz';
 	static BLANK='blank_biz';
 	static BLOG_POST='blog_post_biz';
 	static CART_ITEM="cart_item_biz";
@@ -1369,6 +1368,7 @@ static APP='app_biz';
 	static GALLERY='gallery_biz';
 	static IMAGE='image_biz';
 	static ITEM='item_biz';
+	static LINK='link_biz';
 	static ORDER="order_biz";
 	static ORDER_ITEM="order_item_biz";
 	static ORDER_SUB_ITEM="order_sub_item_biz";
