@@ -197,7 +197,6 @@ class Type {
 	static APP_LINK_TYPE_GOOGLE_PLAY='google_play';
 	static APP_LINK_TYPE_APPLE_STORE='apple_store';
 	static APP_LINK_TYPE_CMS='cms';
-
 	//field
 	static ASC='asc';
 	static BLANK='blank';
@@ -224,13 +223,11 @@ class Type {
 	static SOURCE_PARENT_ID='source_parent_id';
 	static TITLE='title';
 	static TITLE_URL='title_url';
-
 	//page
 	static PAGE_ABOUT='about';
 	static PAGE_CONTACT='contact';
 	static PAGE_HOME='home';
 	static PAGE_FAQ='faq';
-
 	static PAGE_BLOG_POST='blog_post';
 	static PAGE_BLOG_POST_HOME='blog_post_home';
 	static PAGE_BLOG_POST_SEARCH='blog_post_search';
@@ -271,7 +268,7 @@ class Type {
 	static FIELD_VALUE_NOTE="note";
 	static FIELD_VALUE_IMAGE="image";
 	static FIELD_VALUE_LIST="list";
-	//role
+	//user_role
 	static USER_ROLE_SUPER_ADMIN='super_admin';
 	static USER_ROLE_ADMIN='admin';
 	static USER_ROLE_MANAGER='manager';
@@ -298,6 +295,16 @@ class Type {
 	static IMAGE_RESIZE_NORMAL="normal";
 	static IMAGE_RESIZE_SQUARE="squre";
 	static IMAGE_RESIZE_NONE="none";
+	//
+	static get_user_role_list(){
+		return [
+			{value:Type.USER_ROLE_SUPER_ADMIN,label:Title.USER_ROLE_SUPER_ADMIN},
+			{value:Type.USER_ROLE_ADMIN,label:Title.USER_ROLE_ADMIN},
+			{value:Type.USER_ROLE_MANAGER,label:Title.USER_ROLE_MANAGER},
+			{value:Type.USER_ROLE_USER,label:Title.USER_ROLE_USER},
+			{value:Type.USER_ROLE_GUEST,label:Title.USER_ROLE_GUEST},
+		];
+	};
 	//
 	static get_stat_type_list = () =>{
 		return [
@@ -429,12 +436,10 @@ class Type {
 			case Type.APP_LINK_TYPE_CMS:
 				r_type = "Content Management System";
 				break;
-
 			case Type.ID:
 				r_type = "ID";
 			case Type.N_A:
 				r_type = "N/A";
-
 			case Type.PAGE_ABOUT:
 			case Type.PAGE_BLOG_POST:
 			case Type.PAGE_BLOG_POST_DETAIL:
@@ -1608,30 +1613,6 @@ class User_Logic {
 		let action_url="user/logout";
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static get_role_list(){
-		return [
-			{value:Type.ROLE_SUPER_ADMIN,label:Title.ROLE_SUPER_ADMIN},
-			{value:Type.ROLE_ADMIN,label:Title.ROLE_ADMIN},
-			{value:Type.ROLE_MANAGER,label:Title.ROLE_MANAGER},
-			{value:Type.ROLE_GUEST,label:Title.ROLE_GUEST},
-		];
-	};
-	static get_role_title(type){
-		switch(type){
-			case Type.ROLE_SUPER_ADMIN:
-				return Title.ROLE_SUPER_ADMIN;
-			case Type.ROLE_ADMIN:
-				return Title.ROLE_ADMIN;
-			case Type.ROLE_MANAGER:
-				return Title.ROLE_MANAGER;
-			case Type.ROLE_USER:
-				return Title.ROLE_USER;
-			case Type.ROLE_GUEST:
-				return Title.ROLE_GUEST;
-			default:
-				return Title.ROLE_USER;
-		}
-	}
 	static get_country_state_city(item){
 		let country_state_city = "";
 		if(item.country == "United States"){
