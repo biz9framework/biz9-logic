@@ -38,16 +38,8 @@ describe("connect", () => {
        let parent_id = 3334;
        let user_id = 0;
        let item_list = [];
-       for(let a = 0; a < 3;a++){
-            let item = Product_Logic.get_test();
-            let parent_item = Product_Logic.get_test();
-            let user = User_Logic.get_test();
-           item.parent_item = parent_item;
-           item.user = user;
-           item_list.push(item);
-       }
-       //Log.w('aaaaa',Type.get_app_link_list());
-       Log.w('Link Title',Type.get_title(DataType.LINK));
+       Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
+       Log.w('Title 2',Type.get_title(Type.ORDER_STATUS_COMPLETE));
        //Log.w('item_list',item_list);
        //Log.w('bind_obj_list',App_Logic.bind_item_parent_user_list(item_list));
 
