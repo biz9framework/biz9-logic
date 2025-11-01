@@ -87,16 +87,15 @@ class Title {
 	//order
 	static ORDER_NUMBER="OR-";
 	static ORDER_TRANSACTION_ID="TR-";
-
 	static ORDER_STATUS_CANCELLED="Cancelled";
 	static ORDER_STATUS_COMPLETE="Complete";
 	static ORDER_STATUS_NEW="New";
 	static ORDER_STATUS_OPEN="Open";
 	static ORDER_STATUS_ON_HOLD="On Hold";
 	static ORDER_STATUS_RETURNED="Returned";
-
-	static ORDER_PAYMENT_STATUS_OPEN="Open";
 	static ORDER_PAYMENT_STATUS_COMPLETE="Complete";
+	static ORDER_PAYMENT_STATUS_NEW="New";
+	static ORDER_PAYMENT_STATUS_OPEN="Open";
 	static ORDER_PAYMENT_PLAN_NEW="New";
 	static ORDER_PAYMENT_PLAN_1="1 Payment";
 	static ORDER_PAYMENT_PLAN_2="2 Payments";
@@ -483,8 +482,9 @@ class Type {
 			case Type.ORDER_STATUS_RETURNED:
 			case Type.ORDER_STATUS_ON_HOLD:
 			case Type.ORDER_STATUS_CANCELLED:
-			case Type.ORDER_PAYMENT_STATUS_OPEN:
 			case Type.ORDER_PAYMENT_STATUS_COMPLETE:
+			case Type.ORDER_PAYMENT_STATUS_NEW:
+			case Type.ORDER_PAYMENT_STATUS_OPEN:
 			case Type.ORDER_PAYMENT_PLAN_NEW:
 			case Type.ORDER_PAYMENT_PLAN_1:
 			case Type.ORDER_PAYMENT_PLAN_2:
