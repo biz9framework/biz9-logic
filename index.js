@@ -87,12 +87,17 @@ class Title {
 	//order
 	static ORDER_NUMBER="OR-";
 	static ORDER_TRANSACTION_ID="TR-";
-	static ORDER_STATUS_PENDING="Pending";
-	static ORDER_STATUS_OPEN="Open";
+
+	static ORDER_STATUS_CANCELLED="Cancelled";
 	static ORDER_STATUS_COMPLETE="Complete";
+	static ORDER_STATUS_NEW="New";
+	static ORDER_STATUS_OPEN="Open";
+	static ORDER_STATUS_ON_HOLD="On Hold";
+	static ORDER_STATUS_RETURNED="Returned";
+
 	static ORDER_PAYMENT_STATUS_OPEN="Open";
 	static ORDER_PAYMENT_STATUS_COMPLETE="Complete";
-	static ORDER_PAYMENT_PLAN_PENDING="Pending";
+	static ORDER_PAYMENT_PLAN_NEW="New";
 	static ORDER_PAYMENT_PLAN_1="1 Payment";
 	static ORDER_PAYMENT_PLAN_2="2 Payments";
 	static ORDER_PAYMENT_PLAN_3="3 Payments";
@@ -293,19 +298,22 @@ class Type {
 	static IMAGE_RESIZE_SQUARE="squre";
 	static IMAGE_RESIZE_NONE="none";
 	//order
-	static ORDER_STATUS_PENDING="pending";
+	static ORDER_STATUS_NEW="new";
 	static ORDER_STATUS_OPEN="open";
 	static ORDER_STATUS_COMPLETE="complete";
-
+	static ORDER_STATUS_RETURNED="returned";
+	static ORDER_STATUS_ON_HOLD="on_hold";
+	static ORDER_STATUS_CANCELLED="cancelled";
 	static get_order_status_list(){
 		return [
-			{value:Type.ORDER_STATUS_PENDING,label:Title.ORDER_STATUS_PENDING},
+			{value:Type.ORDER_STATUS_NEW,label:Title.ORDER_STATUS_NEW},
 			{value:Type.ORDER_STATUS_OPEN,label:Title.ORDER_STATUS_OPEN},
 			{value:Type.ORDER_STATUS_COMPLETE,label:Title.ORDER_STATUS_COMPLETE},
+			{value:Type.ORDER_STATUS_RETURNED,label:Title.ORDER_STATUS_RETURNED},
+			{value:Type.ORDER_STATUS_ON_HOLD,label:Title.ORDER_STATUS_ON_HOLD},
+			{value:Type.ORDER_STATUS_CANCELLED,label:Title.ORDER_STATUS_CANCELLED},
 		];
 	};
-
-	//
 	static get_user_role_list(){
 		return [
 			{value:Type.USER_ROLE_SUPER_ADMIN,label:Title.USER_ROLE_SUPER_ADMIN},
@@ -315,7 +323,6 @@ class Type {
 			{value:Type.USER_ROLE_GUEST,label:Title.USER_ROLE_GUEST},
 		];
 	};
-	//
 	static get_stat_type_list = () =>{
 		return [
 			{title:Type.get_title(Type.STAT_CART),type:Type.STAT_CART,label:Type.get_title(Type.STAT_CART),value:Type.STAT_CART},
@@ -470,12 +477,15 @@ class Type {
 			case Type.USER_ROLE_MANAGER:
 			case Type.USER_ROLE_USER:
 			case Type.USER_ROLE_GUEST:
-			case Type.ORDER_STATUS_PENDING:
+			case Type.ORDER_STATUS_NEW:
 			case Type.ORDER_STATUS_OPEN:
 			case Type.ORDER_STATUS_COMPLETE:
+			case Type.ORDER_STATUS_RETURNED:
+			case Type.ORDER_STATUS_ON_HOLD:
+			case Type.ORDER_STATUS_CANCELLED:
 			case Type.ORDER_PAYMENT_STATUS_OPEN:
 			case Type.ORDER_PAYMENT_STATUS_COMPLETE:
-			case Type.ORDER_PAYMENT_PLAN_PENDING:
+			case Type.ORDER_PAYMENT_PLAN_NEW:
 			case Type.ORDER_PAYMENT_PLAN_1:
 			case Type.ORDER_PAYMENT_PLAN_2:
 			case Type.ORDER_PAYMENT_PLAN_3:
