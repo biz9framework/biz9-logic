@@ -93,9 +93,6 @@ class Title {
 	static ORDER_STATUS_OPEN="Open";
 	static ORDER_STATUS_ON_HOLD="On Hold";
 	static ORDER_STATUS_RETURNED="Returned";
-	static ORDER_PAYMENT_STATUS_COMPLETE="Complete";
-	static ORDER_PAYMENT_STATUS_NEW="New";
-	static ORDER_PAYMENT_STATUS_OPEN="Open";
 	static ORDER_PAYMENT_PLAN_NEW="New";
 	static ORDER_PAYMENT_PLAN_1="1 Payment";
 	static ORDER_PAYMENT_PLAN_2="2 Payments";
@@ -482,9 +479,6 @@ class Type {
 			case Type.ORDER_STATUS_RETURNED:
 			case Type.ORDER_STATUS_ON_HOLD:
 			case Type.ORDER_STATUS_CANCELLED:
-			case Type.ORDER_PAYMENT_STATUS_COMPLETE:
-			case Type.ORDER_PAYMENT_STATUS_NEW:
-			case Type.ORDER_PAYMENT_STATUS_OPEN:
 			case Type.ORDER_PAYMENT_PLAN_NEW:
 			case Type.ORDER_PAYMENT_PLAN_1:
 			case Type.ORDER_PAYMENT_PLAN_2:
@@ -630,7 +624,7 @@ class Page_Logic {
 }
 class Order_Logic {
 	static get_new = (cart,option) => {
-		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_STATUS_PENDING};
+		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1};
 		let order = DataItem.get_new(DataType.ORDER,0,{
 			order_number:Title.ORDER_NUMBER + Num.get_id(99999),
 			parent_data_type:cart.parent_data_type,
@@ -653,7 +647,6 @@ class Order_Logic {
         }
 		if(option.get_payment_plan){
 			order.payment_plan = option.payment_plan;
-			order.payment_status = option.payment_plan_status;
 		}
 		cart.cart_item_list.forEach(cart_item => {
 			let order_item = DataItem.get_new(DataType.ORDER_ITEM,0,{
