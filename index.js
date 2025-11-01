@@ -10,7 +10,6 @@ const { Log,Str,DateTime,Num,Obj } = require('/home/think2/www/doqbox/biz9-frame
 class Message {
 	static SUCCESS="Success";
 	static CONFIRM="Are You Sure?";
-
 	static USER_LOGIN_SUCCESS="Login Success";
 	static USER_LOGIN_BAD="Login Incorrect";
 	static USER_REGISTER_SUCCESS="Register Success";
@@ -23,14 +22,11 @@ class Message {
 	static USER_USERNAME_BAD="Please Enter A Valid Username.";
 	static USER_USERNAME_NOT_UNIQUE="Username Not Availble. Please Choose Another.";
 	static ITEM_TITLE_BAD="Please Enter A Valid Title.";
-
 	static DATA_NOT_FOUND="Data Not Found.";
 	static SYSTEM_NOT_FOUND="System Not Found.";
-
 	static FAVORITE_ADD_SUCCESS="Favorite Add Success.";
 	static FAVORITE_REMOVE_SUCCESS="Favorite Remove Success.";
 	static FAVORITE_USER_LOGIN="Please Login To Add Favorite.";
-
 	static REVIEW_ADD_SUCCESS="Review Add Success.";
 	static REVIEW_REMOVE_SUCCESS="Review Remove Success.";
 	static REVIEW_USER_LOGIN="Please Login To Add Review.";
@@ -91,6 +87,9 @@ class Title {
 	//order
 	static ORDER_NUMBER="OR-";
 	static ORDER_TRANSACTION_ID="TR-";
+	static ORDER_STATUS_PENDING="Pending";
+	static ORDER_STATUS_OPEN="Open";
+	static ORDER_STATUS_COMPLETE="Complete";
 	static ORDER_PAYMENT_STATUS_OPEN="Open";
 	static ORDER_PAYMENT_STATUS_COMPLETE="Complete";
 	static ORDER_PAYMENT_PLAN_PENDING="Pending";
@@ -132,9 +131,7 @@ class Title {
 class Demo_Logic {
 	static get_new_type = (title,option) => {
 		title = !Str.check_is_null(title)?title:Title.TYPE+" " +Num.get_id(999);
-		option = option ? option : {get_category:false,category_count:6,categorys:'',category_data_type:DataType.BLANK,get_item:false,items:'',item_data_type:DataType.BLANK,item_count:6};
-		const item = Item_Logic.get_new(title,DataType.TYPE);
-		//category
+		option = option ? option : {get_category:false,category_count:6,categorys:'',category_data_type:DataType.BLANK,get_item:false,items:'',item_data_type:DataType.BLANK,item_count:6}; const item = Item_Logic.get_new(title,DataType.TYPE); //category
 		if(option.get_category){
 			item.categorys = [];
 			let category_title_list = [];
@@ -295,6 +292,19 @@ class Type {
 	static IMAGE_RESIZE_NORMAL="normal";
 	static IMAGE_RESIZE_SQUARE="squre";
 	static IMAGE_RESIZE_NONE="none";
+	//order
+	static ORDER_STATUS_PENDING="pending";
+	static ORDER_STATUS_OPEN="open";
+	static ORDER_STATUS_COMPLETE="complete";
+
+	static get_order_status_list(){
+		return [
+			{value:Type.ORDER_STATUS_PENDING,label:Title.ORDER_STATUS_PENDING},
+			{value:Type.ORDER_STATUS_OPEN,label:Title.ORDER_STATUS_OPEN},
+			{value:Type.ORDER_STATUS_COMPLETE,label:Title.ORDER_STATUS_COMPLETE},
+		];
+	};
+
 	//
 	static get_user_role_list(){
 		return [
@@ -460,6 +470,9 @@ class Type {
 			case Type.USER_ROLE_MANAGER:
 			case Type.USER_ROLE_USER:
 			case Type.USER_ROLE_GUEST:
+			case Type.ORDER_STATUS_PENDING:
+			case Type.ORDER_STATUS_OPEN:
+			case Type.ORDER_STATUS_COMPLETE:
 			case Type.ORDER_PAYMENT_STATUS_OPEN:
 			case Type.ORDER_PAYMENT_STATUS_COMPLETE:
 			case Type.ORDER_PAYMENT_PLAN_PENDING:
@@ -607,7 +620,7 @@ class Page_Logic {
 }
 class Order_Logic {
 	static get_new = (cart,option) => {
-		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_STATUS_OPEN};
+		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_STATUS_PENDING};
 		let order = DataItem.get_new(DataType.ORDER,0,{
 			order_number:Title.ORDER_NUMBER + Num.get_id(99999),
 			parent_data_type:cart.parent_data_type,
