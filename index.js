@@ -637,6 +637,7 @@ class Order_Logic {
 			user_id:cart.user_id,
 			cart_number:cart.cart_number,
 			grand_total:cart.grand_total,
+			status:Type.ORDER_STATUS_NEW
 			order_item_list:[]
 		});
 		for(const key in cart) {
