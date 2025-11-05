@@ -312,7 +312,6 @@ class Type {
 	};
 	static get_user_role_list(){
 		return [
-			{value:Type.USER_ROLE_SUPER_ADMIN,label:Title.USER_ROLE_SUPER_ADMIN},
 			{value:Type.USER_ROLE_ADMIN,label:Title.USER_ROLE_ADMIN},
 			{value:Type.USER_ROLE_MANAGER,label:Title.USER_ROLE_MANAGER},
 			{value:Type.USER_ROLE_USER,label:Title.USER_ROLE_USER},
@@ -1982,6 +1981,7 @@ class Url {
 	static POST="main/crud/post";
 	static POST_LIST="main/crud/post_list";
 	static SEARCH="main/crud/search";
+	static DATABASE_INFO="main/crud/database_info";
 	//dashboard
 	static DASHBOARD_USER_HOME="dashboard/user_home";
 	static DASHBOARD_APP_HOME="dashboard/app_home";
