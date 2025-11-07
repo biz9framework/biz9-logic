@@ -318,6 +318,21 @@ class Type {
 			{value:Type.USER_ROLE_GUEST,label:Title.USER_ROLE_GUEST},
 		];
 	};
+	static get_page_list(){
+		return [
+			{value:Type.PAGE_ABOUT,label:Title.PAGE_ABOUT},
+			{value:Type.PAGE_BLOG_POST,label:Title.PAGE_BLOG_POST},
+			{value:Type.PAGE_BLOG_POST_HOME,label:Title.PAGE_BLOG_POST_HOME},
+			{value:Type.PAGE_BLOG_POST_SEARCH,label:Title.PAGE_BLOG_POST_SEARCH},
+			{value:Type.PAGE_CONTACT,label:Title.PAGE_CONTACT},
+			{value:Type.PAGE_EVENT,label:Title.PAGE_EVENT},
+			{value:Type.PAGE_FAQ,label:Title.PAGE_FAQ},
+			{value:Type.PAGE_GALLERY,label:Title.PAGE_GALLERY},
+			{value:Type.PAGE_HOME,label:Title.PAGE_HOME},
+			{value:Type.PAGE_PRODUCT,label:Title.PAGE_PRODUCT},
+			{value:Type.PAGE_SERVICE,label:Title.PAGE_SERVICE},
+		];
+	};
 	static get_stat_type_list = () =>{
 		return [
 			{title:Type.get_title(Type.STAT_CART),type:Type.STAT_CART,label:Type.get_title(Type.STAT_CART),value:Type.STAT_CART},
@@ -576,33 +591,7 @@ class Stat_Logic {
 	}
 }
 class Page_Logic {
-	static get_page_list(){
-		return [
-			{value:Type.PAGE_ABOUT,label:Title.PAGE_ABOUT},
-
-			{value:Type.PAGE_BLOG_POST,label:Title.PAGE_BLOG_POST},
-			{value:Type.PAGE_BLOG_POST_HOME,label:Title.PAGE_BLOG_POST_HOME},
-			{value:Type.PAGE_BLOG_POST_SEARCH,label:Title.PAGE_BLOG_POST_SEARCH},
-
-			{value:Type.PAGE_CONTACT,label:Title.PAGE_CONTACT},
-			{value:Type.PAGE_EVENT,label:Title.PAGE_EVENT},
-			{value:Type.PAGE_FAQ,label:Title.PAGE_FAQ},
-			{value:Type.PAGE_GALLERY,label:Title.PAGE_GALLERY},
-			{value:Type.PAGE_HOME,label:Title.PAGE_HOME},
-			{value:Type.PAGE_PRODUCT,label:Title.PAGE_PRODUCT},
-			{value:Type.PAGE_SERVICE,label:Title.PAGE_SERVICE},
-		];
-	};
-	/*
-	static get_page_title = (data_type) => {
-		if(!data_type){
-			return "";
-		}else{
-			return String(Str.get_title(data_type.replaceAll('_',' '))).trim();
-		}
-	}
-	*/
-	static get_test = (title,option) =>{
+static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		option = Field_Logic.get_option(DataType.PAGE,option?option:{});
 		let page = DataItem.get_new(DataType.PAGE,0,Field_Logic.get_test(title,option));
