@@ -205,6 +205,9 @@ class Type {
 	static DATE_CREATE='date_create';
 	static DATE_SAVE='date_save';
 	static ID='id';
+	static OBJ='obj';
+	static LIST='list';
+	static COUNT='count';
 	static N_A='n/a';
 	static USER='user';
 	static USER_ID='user_id';
