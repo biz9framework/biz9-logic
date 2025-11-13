@@ -31,6 +31,40 @@ describe("connect", () => {
         series([
 
    function(call) {
+       let my_template = {
+           title1: "About Us",
+           title2: "aboout_link",
+           title3: "Categories",
+           title4: "category_link",
+           title5: "Create Gigs",
+           title6: "gigs_link",
+           title7: "Title 8",
+           title8: "link_8",
+           title9: "Title 9",
+           title10: "link_9",
+           title11: "Title 10",
+           title12: "link_10",
+           title13: "Title 11",
+           title14: "link_11"
+
+
+       };
+
+       let new_list = [];
+       let title_row = 1;
+       let link_row = 2;
+       for(let a = 1; a < 10; a++){
+           console.log(title_row);
+           if(my_template['title'+a]){
+                new_list.push({title:my_template['title'+title_row],link:my_template['title'+link_row]});
+               title_row = title_row + 2;
+               link_row = title_row + 1;
+           }
+       }
+
+       Log.w('cool',new_list);
+   },
+   function(call) {
        console.log('CONNECT-BASE-START');
        let data_type = DataType.PRODUCT;
        let id = 0;

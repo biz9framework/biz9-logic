@@ -1114,7 +1114,7 @@ class Field_Logic {
 			{value:'list',label:'List'},
 		];
 	};
-	static get_field_value_value = (value_type,item,value_id) =>{
+	static get_field_value_value = (value_type,item,value_id,option) =>{
 		switch(value_type){
 			case Type.FIELD_VALUE_TEXT:
 			case Type.FIELD_VALUE_NOTE:
@@ -1123,17 +1123,36 @@ class Field_Logic {
 				break;
 			case Type.FIELD_VALUE_LIST:
 				let r_list = [];
+				let a_count = 0;
+				Log.w('mmmmmmmm',value_type);
+				Log.w('oooooooo',item);
+				Log.w('pppppppp',value_id);
 				for(let a=0;a<30;a++){
-					if(!Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id,a+1)])){
-						r_list.push(item[Field_Logic.get_field_value_title(value_type,value_id,a+1)]);
-					}
+					//if(!Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id,a+1)])){
+						//r_list.push(item[Field_Logic.get_field_value_title(value_type,value_id,a+1)]);
+					//}
+						/*
+					}else{
+						let item = {};
+						if(option.list_type == 'single'){
+							if(!Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id,a+1)])){
+								r_list.push(item[Field_Logic.get_field_value_title(value_type,value_id,a+1)]);
+							}
+							else if(option.list_type == 'double'){
+								a = a + a_count + 2;
+								let item = {first_obj:!Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id,a+1)]): item[Field_Logic.get_field_value_title(value_type,value_id,a+2)],second_obj:!Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id,a+2)]): item[Field_Logic.get_field_value_title(value_type,value_id,a+2)]}
+								r_list.push(item);
+							}
+						}
+				}
+				*/
 				}
 				return r_list;
 				break;
 			default:
 				return "";
 		};
-	}
+	};
 	static get_field_value_title = (value_type,value_id,row_id) =>{
 		let type_str = '';
 		switch(value_type){
