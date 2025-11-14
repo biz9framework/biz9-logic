@@ -30,61 +30,83 @@ describe("connect", () => {
     it("_connect", () => {
         series([
 
-   function(call) {
-       let my_template = {
-           title1: "About Us",
-           title2: "aboout_link",
-           title3: "Categories",
-           title4: "category_link",
-           title5: "Create Gigs",
-           title6: "gigs_link",
-           title7: "Title 8",
-           title8: "link_8",
-           title9: "Title 9",
-           title10: "link_9",
-           title11: "Title 10",
-           title12: "link_10",
-           title13: "Title 11",
-           title14: "link_11"
+            function(call) {
+                let my_template = {
+                    title1: "About Us",
+                    title2: "aboout_link",
+                    title3: "Categories",
+                    title4: "category_link",
+                    title5: "Create Gigs",
+                    title6: "gigs_link",
+                    title7: "Home",
+                    title8: "home_link",
+                    title9: "Service",
+                    title10: "service_link",
+                    title11: "Faq",
+                    title12: "faq_link",
+                    title13: "Contact",
+                    title14: "contact_link"
+                };
+                list_type = 'double';
+                list_value_count = 2;
+                let new_list = [];
+                let row_count = 1;
+                for(let a = 1; a < 90; a++){
+                    if(!Str.check_is_null(my_template['title'+row_count])){
+                        console.log(list_value_count + row_count);
+                        for(let b = 1; b < list_value_count; b++){
+                            let item = {};
 
-
-       };
-
-       let new_list = [];
+                            item['value_'+b] = my_template['title'+row_count];
+                            if(list_value_count >=2){
+                                item['value_2'] = my_template['title'+b+a];
+                            }
+                            new_list.push(item);
+                            row_count = row_count + list_value_count;
+                        }
+                    }else{
+                        break;
+                    }
+                }
+       /*--work
+       list_value_count = 2;
        let title_row = 1;
        let link_row = 2;
-       for(let a = 1; a < 10; a++){
-           console.log(title_row);
-           if(my_template['title'+a]){
-                new_list.push({title:my_template['title'+title_row],link:my_template['title'+link_row]});
-               title_row = title_row + 2;
-               link_row = title_row + 1;
-           }
+       for(let a = 1; a < 900; a++){
+           if(!Str.check_is_null(my_template['title'+title_row])){
+                new_list.push({value_1:my_template['title'+title_row],value_2:my_template['title'+link_row]});
+                title_row = title_row + list_value_count;
+                link_row = title_row + 1;
+           }else{
+               console.log('bbbbbbbbb');
+               break;
+            }
        }
+       */
 
-       Log.w('cool',new_list);
-   },
-   function(call) {
-       console.log('CONNECT-BASE-START');
-       let data_type = DataType.PRODUCT;
-       let id = 0;
-       let parent_data_type = DataType.PRODUCT;
-       let parent_id = 3334;
-       let user_id = 0;
-       let item_list = [];
-       Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
-       Log.w('Title 2',Type.get_title(Type.ORDER_STATUS_COMPLETE));
-       //Log.w('item_list',item_list);
-       //Log.w('bind_obj_list',App_Logic.bind_item_parent_user_list(item_list));
+                Log.w('cool',new_list);
+            },
+            function(call) {
+                console.log('CONNECT-BASE-START');
+                let data_type = DataType.PRODUCT;
+                let id = 0;
+                let parent_data_type = DataType.PRODUCT;
+                let parent_id = 3334;
+                let user_id = 0;
+                let item_list = [];
+                Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
+                Log.w('Title 2',Type.get_title(Type.ORDER_STATUS_COMPLETE));
+                //Log.w('item_list',item_list);
+                //Log.w('bind_obj_list',App_Logic.bind_item_parent_user_list(item_list));
 
-       //item.id = 333;
-       //item.items = ['a','b'];
-       //Log.w('bind_obj',App_Logic.bind_item_parent_user_obj(item,parent_item,user));
-       //let stat = Stat_Logic.get_new(parent_data_type,parent_id,Type.STAT_VIEW,user_id,item);
-       //Log.w('stat',stat);
-         console.log('CONNECT-BASE-END');
-    }
-        /*
+                //item.id = 333;
+                //item.items = ['a','b'];
+                //Log.w('bind_obj',App_Logic.bind_item_parent_user_obj(item,parent_item,user));
+                //let stat = Stat_Logic.get_new(parent_data_type,parent_id,Type.STAT_VIEW,user_id,item);
+                //Log.w('stat',stat);
+                console.log('CONNECT-BASE-END');
+            }
+            /*
         function(call) {
             console.log('CONNECT-CMS-DEMO-START');
             let category_type = DataType.PRODUCT;
@@ -98,7 +120,7 @@ describe("connect", () => {
             let category_title_list = '';
 
             let item_title_list = [];
-		    let post_type_list = [];
+            let post_type_list = [];
             let val_category_title = '';
             let cat_max = 0;
             let option = {get_category:true,category_count:category_count,category_data_type:category_type,categorys:val_category_title?val_category_title:null,
@@ -111,25 +133,25 @@ describe("connect", () => {
             }
             console.log('CONNECT-CMS-DEMO-SUCCESS');
             },
-        */
+            */
             /*
             function(call) {
-                //console.log('CONNECT-START');
-                //let post_cart = Cart_Logic.get_new(DataType.PRODUCT,0,);
-                //let post_cart_list = [];
-                //let post_cart_item = Cart_Logic.get_new_cart_item(DataType.PRODUCT,123,post_cart.cart_number,1,30);
-                //let post_cart_sub_item = Cart_Logic.get_new_cart_sub_item(DataType.PRODUCT,1234,post_cart.cart_number,1,10);
-                //let post_cart_sub_item_2 = Cart_Logic.get_new_cart_sub_item(DataType.PRODUCT,1234,post_cart.cart_number,1,30);
-                //post_cart_item.cart_sub_item_list.push(post_cart_sub_item);
-                //post_cart_item.cart_sub_item_list.push(post_cart_sub_item_2);
-                //post_cart.cart_item_list.push(post_cart_item);
+            //console.log('CONNECT-START');
+            //let post_cart = Cart_Logic.get_new(DataType.PRODUCT,0,);
+            //let post_cart_list = [];
+            //let post_cart_item = Cart_Logic.get_new_cart_item(DataType.PRODUCT,123,post_cart.cart_number,1,30);
+            //let post_cart_sub_item = Cart_Logic.get_new_cart_sub_item(DataType.PRODUCT,1234,post_cart.cart_number,1,10);
+            //let post_cart_sub_item_2 = Cart_Logic.get_new_cart_sub_item(DataType.PRODUCT,1234,post_cart.cart_number,1,30);
+            //post_cart_item.cart_sub_item_list.push(post_cart_sub_item);
+            //post_cart_item.cart_sub_item_list.push(post_cart_sub_item_2);
+            //post_cart.cart_item_list.push(post_cart_item);
 
-                //Log.w('post_cart',post_cart);
-                //Log.w('post_order',Order_Logic.get_new(post_cart,{get_payment_plan:true,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_STATUS_OPEN}));
-                //Log.w('post_cart_2',Cart_Logic.get_total(post_cart));
+            //Log.w('post_cart',post_cart);
+            //Log.w('post_order',Order_Logic.get_new(post_cart,{get_payment_plan:true,payment_plan:Title.ORDER_PAYMENT_PLAN_1,payment_plan_status:Title.ORDER_PAYMENT_STATUS_OPEN}));
+            //Log.w('post_cart_2',Cart_Logic.get_total(post_cart));
 
-                //console.log('CONNECT-END');
-                //call();
+            //console.log('CONNECT-END');
+            //call();
             },
             /* --- TEST LOGIC - CONNECT - END --- */
 
