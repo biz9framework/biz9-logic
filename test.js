@@ -47,23 +47,38 @@ describe("connect", () => {
                     title13: "Contact",
                     title14: "contact_link"
                 };
-                list_type = 'double';
-                list_value_count = 2;
+                /*
+                let my_template = {
+                    title1: "About Us",
+                    title2: "aboout_link",
+                    title3: "about_id",
+                    title4: "Create Gigs",
+                    title5: "gigs_link",
+                    title6: "gigs_id",
+                    title7: "Service",
+                    title8: "service_link",
+                    title9: "service_id",
+                    title10: "Contact",
+                    title11: "contact_link",
+                    title12: "contact_id"
+                };
+                */
+
+                value_count = 2;
                 let new_list = [];
                 let row_count = 1;
                 for(let a = 1; a < 90; a++){
                     if(!Str.check_is_null(my_template['title'+row_count])){
-                        console.log(list_value_count + row_count);
-                        for(let b = 1; b < list_value_count; b++){
-                            let item = {};
-
-                            item['value_'+b] = my_template['title'+row_count];
-                            if(list_value_count >=2){
-                                item['value_2'] = my_template['title'+b+a];
-                            }
-                            new_list.push(item);
-                            row_count = row_count + list_value_count;
+                        let item = {};
+                        item['value_1'] = my_template['title'+row_count];
+                        if(value_count >=2){
+                            item['value_2'] = my_template['title'+Number(row_count+1)];
                         }
+                        if(value_count >=3){
+                            item['value_3'] = my_template['title'+Number(row_count+2)];
+                        }
+                        new_list.push(item);
+                        row_count = row_count + value_count;
                     }else{
                         break;
                     }
@@ -74,7 +89,11 @@ describe("connect", () => {
        let link_row = 2;
        for(let a = 1; a < 900; a++){
            if(!Str.check_is_null(my_template['title'+title_row])){
-                new_list.push({value_1:my_template['title'+title_row],value_2:my_template['title'+link_row]});
+                new_list.push(
+                {
+                    value_1:my_template['title'+title_row],
+                    value_2:my_template['title'+link_row]
+                });
                 title_row = title_row + list_value_count;
                 link_row = title_row + 1;
            }else{
