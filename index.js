@@ -1190,6 +1190,21 @@ class Field_Logic {
 		}
 		return item;
 	}
+	static get_value_list_group(item,value_id,group_id){
+		let full_str = 'list_value_'+value_id+"_group_"+group_id;
+		let new_list = [];
+		Log.w(full_str,full_str);
+		let count = 0;
+		for(const prop in item){
+			let new_item = {};
+			if(prop.startsWith(full_str)){
+				count = count+1;
+				new_item[prop.replace(full_str+"_","")] = item[prop];
+				new_list.push(new_item);
+			}
+		}
+		return new_list;
+	}
 	static get_value_list(item,option){
 		for(let b=0;b<parseInt(option.value_count);b++){
 			if(option.get_blank == false){
