@@ -1,4 +1,4 @@
-VERSION='9.6.2'
+VERSION='9.6.3'
 TITLE='BiZ9-Logic';
 REPO='git@github.com:biz9framework/biz9-logic.git';
 BRANCH='9.5.3'
