@@ -1118,7 +1118,7 @@ class Field_Logic {
 			return !Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id)]) ? item[Field_Logic.get_field_value_title(value_type,value_id)] : []
 		}
 	};
-	static get_field_value_title = (value_type,value_id,group_id,title) =>{
+	static get_field_value_title = (value_type,value_id,group_id,sub_field_title) =>{
 		switch(value_type){
 			case Type.FIELD_VALUE_TEXT:
 				return 'text'+'_value_'+value_id;
@@ -1130,7 +1130,7 @@ class Field_Logic {
 				return 'image'+'_value_'+value_id;
 				break;
 			case Type.FIELD_VALUE_LIST:
-				return 'list'+'_value_'+value_id +'_group_' +group_id+title;
+				return 'list'+'_value_'+value_id +'_group_' +group_id+"_"+Str.get_title_url(sub_field_title);
 				break;
 			default:
 				return 'text'+'_value_'+value_id;
