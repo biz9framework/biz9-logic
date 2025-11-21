@@ -1103,7 +1103,7 @@ class Event_Logic {
 	};
 }
 class Field_Logic {
-	static get_field_value = (item_data_type,item_id,value_type,value_id,value,value_list) => {
+	static get_field_value_old = (item_data_type,item_id,value_type,value_id,value,value_list) => {
 		return {item_data_type:item_data_type,item_id:item_id,value_type:value_type,value_id:value_id,value:value,value_list:value_list};
 	};
 	static get_item_field_value_type_list = () => {
@@ -1114,11 +1114,17 @@ class Field_Logic {
 			{value:'list',label:'List'},
 		];
 	};
-	static get_field_value_value = (value_type,item,value_id,sub_field_title) =>{
-		return !Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id,sub_field_title)]) ? item[Field_Logic.get_field_value_title(value_type,value_id,sub_field_title)] : "";
+	//static get_field_value_value = (value_type,item,value_id,group_id,title) =>{
+	static get_field_value_value = (value_type,item,value_id,title) =>{
+				return !Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id,title)]) ? item[Field_Logic.get_field_value_title(value_type,value_id,title)] : "" ? value_type != Type.FIELD_VALUE_LIST : "";
 	};
-	static get_field_value_title = (value_type,value_id,sub_field_title) =>{
-		let type_str = '';
+	//static get_field_value_title = (value_type,value_id,title) =>{
+	static get_field_value_title = (value_type,value_id,group_id,title) =>{
+		if(!title){
+			title = '';
+		}else{
+			title = "_"+Str.get_title_url(title);
+		}
 		switch(value_type){
 			case Type.FIELD_VALUE_TEXT:
 				return 'text'+'_value_'+value_id;
@@ -1130,10 +1136,10 @@ class Field_Logic {
 				return 'image'+'_value_'+value_id;
 				break;
 			case Type.FIELD_VALUE_LIST:
-				return 'list'+'_value_'+value_id +"_"+Str.get_title_url(sub_field_title);
+				return 'list'+'_value_'+value_id +'_group_' +group_id+title;
 				break;
 			default:
-				return "";
+				return 'text'+'_value_'+value_id;
 		};
 	}
 	static get_test_cost(){
