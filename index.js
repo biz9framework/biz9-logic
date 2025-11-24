@@ -1103,6 +1103,50 @@ class Event_Logic {
 	};
 }
 class Field_Logic {
+	static get_item_field_value_list = (data) => {
+		let max_value_id = 1;
+		let max_group_id = 1;
+		let full_prop_str = "";
+		for(const prop in data){
+			full_prop_str = String(prop + " "+full_prop_str);
+		}
+		for(let a = 1; a < 30; a++){
+    		const exists = Str.check_if_str_exist(full_prop_str,"list_value_"+a);
+			if(exists){
+				if(a>max_value_id){
+					max_value_id = a;
+				}
+			}
+			for(let b = 1; b < 30; b++){
+				const exists = Str.check_if_str_exist(full_prop_str,"list_value_"+a+"_group_"+b);
+				if(exists){
+					if(b>max_group_id){
+						max_group_id = b;
+					}
+				}
+			}
+		}
+		for(let a = 1; a <= max_value_id+1; a++){
+			let sub_check_str = 'list_value_'+a;
+			data[sub_check_str] = [];
+			for(let b = 1; b < max_group_id+1; b++){
+				let full_sub_check_str = sub_check_str+"_group_"+b;
+				let new_item = {};
+				for(const sub_prop in data){
+					if(sub_prop.startsWith(full_sub_check_str)){
+						new_item[sub_prop.replace(full_sub_check_str+"_","")] = data[sub_prop];
+					}
+				}
+				if(!Obj.check_is_empty(new_item)){
+					data[sub_check_str].push(new_item);
+				}
+			}
+			if(data[sub_check_str].length<=0){
+				delete data[sub_check_str];
+			}
+		}
+		return data;
+	}
 	static get_item_field_value_type_list = () => {
 		return [
 			{value:'text',label:'Text'},

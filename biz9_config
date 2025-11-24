@@ -1,7 +1,7 @@
-VERSION='9.6.7'
+VERSION='9.6.8'
 TITLE='BiZ9-Logic';
 REPO='git@github.com:biz9framework/biz9-logic.git';
-BRANCH='9.5.3'
+BRANCH='9.6.8'
 APP_ID='test_app_id';
 URL="http://localhost";
 
