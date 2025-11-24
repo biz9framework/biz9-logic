@@ -1103,6 +1103,22 @@ class Event_Logic {
 	};
 }
 class Field_Logic {
+	static get_item_max_group_id = (value_id,item) => {
+		let max_group_id = 1;
+		let full_prop_str = "";
+		for(const prop in item){
+			full_prop_str = String(prop + " "+full_prop_str);
+		}
+		for(let b = 1; b < 30; b++){
+			const exists = Str.check_if_str_exist(full_prop_str,"list_value_"+value_id+"_group_"+b);
+			if(exists){
+				if(b>max_group_id){
+					max_group_id = b;
+				}
+			}
+		}
+		return max_group_id;
+	}
 	static get_item_field_value_list = (data) => {
 		let max_value_id = 1;
 		let max_group_id = 1;
