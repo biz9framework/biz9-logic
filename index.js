@@ -1104,7 +1104,7 @@ class Event_Logic {
 }
 class Field_Logic {
 	static get_item_max_group_id = (value_id,item) => {
-		let max_group_id = 1;
+		let max_group_id = 0;
 		let full_prop_str = "";
 		for(const prop in item){
 			full_prop_str = String(prop + " "+full_prop_str);
