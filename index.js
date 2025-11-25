@@ -1175,7 +1175,7 @@ class Field_Logic {
 		if(value_type!=Type.FIELD_VALUE_LIST){
 			return !Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id)]) ? item[Field_Logic.get_field_value_title(value_type,value_id)] : ""
 		}else{
-			return !Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id)]) ? item[Field_Logic.get_field_value_title(value_type,value_id)] : []
+			return item[Field_Logic.get_field_value_list_title(value_id)] ?  item[Field_Logic.get_field_value_list_title(value_id)] : [];
 		}
 	};
 	static get_field_value_title = (value_type,value_id,group_id,sub_field_title) =>{
@@ -1249,6 +1249,10 @@ class Field_Logic {
 			}
 		}
 		return item;
+	}
+	//here
+	static get_field_value_list_title(value_id){
+		return 'list_value_'+value_id;
 	}
 	static get_value_list_group(item,value_id,group_id){
 		let full_str = 'list_value_'+value_id+"_group_"+group_id;
