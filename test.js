@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,DataType,Item_Logic,User_Logic,Page_Logic,Product_Logic,Type,Title,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic,Cart_Logic,Order_Logic,App_Logic} = require('./index');
+const {DataItem,DataType,Item_Logic,User_Logic,Page_Logic,Product_Logic,Type,Title,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic,Cart_Logic,Order_Logic,App_Logic,Field_Logic} = require('./index');
 const {Log,Num,Str} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -37,8 +37,9 @@ describe("connect", () => {
                 let parent_id = 3334;
                 let user_id = 0;
                 let item_list = [];
-                Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
-                Log.w('Title 2',Type.get_title(Type.ORDER_STATUS_COMPLETE));
+                //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
+                //Log.w('Title 2',Type.get_title(Type.ORDER_STATUS_COMPLETE));
+                Log.w('Title 2',Field_Logic.get_field_value_title(Type.FIELD_VALUE_LIST,3,4,'cool'));
                 //Log.w('item_list',item_list);
                 //Log.w('bind_obj_list',App_Logic.bind_item_parent_user_list(item_list));
 

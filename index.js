@@ -1190,7 +1190,11 @@ class Field_Logic {
 				return 'image'+'_value_'+value_id;
 				break;
 			case Type.FIELD_VALUE_LIST:
-				return 'list'+'_value_'+value_id +'_group_' +group_id+"_"+Str.get_title_url(sub_field_title);
+				if(!group_id){
+					return 'list'+'_value_'+value_id;
+				}else{
+					return 'list'+'_value_'+value_id +'_group_' +group_id+"_"+Str.get_title_url(sub_field_title);
+				}
 				break;
 			default:
 				return 'text'+'_value_'+value_id;
