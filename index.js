@@ -1109,7 +1109,7 @@ class Field_Logic {
 		for(const prop in item){
 			full_prop_str = String(prop + " "+full_prop_str);
 		}
-		for(let b = 1; b < 30; b++){
+		for(let b = 1; b < 75; b++){
 			const exists = Str.check_if_str_exist(full_prop_str,"list_value_"+value_id+"_group_"+b);
 			if(exists){
 				if(b>max_group_id){
@@ -1126,14 +1126,14 @@ class Field_Logic {
 		for(const prop in data){
 			full_prop_str = String(prop + " "+full_prop_str);
 		}
-		for(let a = 1; a < 30; a++){
+		for(let a = 1; a < 75; a++){
     		const exists = Str.check_if_str_exist(full_prop_str,"list_value_"+a);
 			if(exists){
 				if(a>max_value_id){
 					max_value_id = a;
 				}
 			}
-			for(let b = 1; b < 30; b++){
+			for(let b = 1; b < 20; b++){
 				const exists = Str.check_if_str_exist(full_prop_str,"list_value_"+a+"_group_"+b);
 				if(exists){
 					if(b>max_group_id){
