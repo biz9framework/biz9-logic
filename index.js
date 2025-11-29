@@ -78,6 +78,7 @@ class Title {
 	static PAGE_EVENT='Event';
 	static PAGE_EVENT_HOME='Event Home';
 	static PAGE_EVENT_SEARCH='Event Search';
+	static PAGE_FAQ='Faq';
 	static PAGE_GALLERY='Gallery';
 	static PAGE_GALLERY_HOME='Gallery Home';
 	static PAGE_GALLERY_SEARCH='Gallery Search';
@@ -323,17 +324,17 @@ class Type {
 	};
 	static get_page_list(){
 		return [
-			{value:Type.PAGE_ABOUT,label:Title.PAGE_ABOUT},
-			{value:Type.PAGE_BLOG_POST,label:Title.PAGE_BLOG_POST},
-			{value:Type.PAGE_BLOG_POST_HOME,label:Title.PAGE_BLOG_POST_HOME},
-			{value:Type.PAGE_BLOG_POST_SEARCH,label:Title.PAGE_BLOG_POST_SEARCH},
-			{value:Type.PAGE_CONTACT,label:Title.PAGE_CONTACT},
-			{value:Type.PAGE_EVENT,label:Title.PAGE_EVENT},
-			{value:Type.PAGE_FAQ,label:Title.PAGE_FAQ},
-			{value:Type.PAGE_GALLERY,label:Title.PAGE_GALLERY},
-			{value:Type.PAGE_HOME,label:Title.PAGE_HOME},
-			{value:Type.PAGE_PRODUCT,label:Title.PAGE_PRODUCT},
-			{value:Type.PAGE_SERVICE,label:Title.PAGE_SERVICE},
+			{value:Type.PAGE_ABOUT,label:Title.PAGE_ABOUT,url:Url.PAGE_ABOUT},
+			{value:Type.PAGE_BLOG_POST,label:Title.PAGE_BLOG_POST,url:Title.PAGE_BLOG_POST},
+			{value:Type.PAGE_BLOG_POST_HOME,label:Title.PAGE_BLOG_POST_HOME,url:Url.PAGE_BLOG_POST_HOME},
+			{value:Type.PAGE_BLOG_POST_SEARCH,label:Title.PAGE_BLOG_POST_SEARCH,url:Url.PAGE_BLOG_POST_SEARCH},
+			{value:Type.PAGE_CONTACT,label:Title.PAGE_CONTACT,label:Title.PAGE_CONTACT,url:Url.PAGE_CONTACT},
+			{value:Type.PAGE_EVENT,label:Title.PAGE_EVENT,url:Url.PAGE_EVENT},
+			{value:Type.PAGE_FAQ,label:Title.PAGE_FAQ,url:Url.PAGE_FAQ},
+			{value:Type.PAGE_GALLERY,label:Title.PAGE_GALLERY,url:Url.PAGE_GALLERY},
+			{value:Type.PAGE_HOME,label:Title.PAGE_HOME,url:Url.PAGE_HOME},
+			{value:Type.PAGE_PRODUCT,label:Title.PAGE_PRODUCT,url:Url.PAGE_PRODUCT},
+			{value:Type.PAGE_SERVICE,label:Title.PAGE_SERVICE,url:Url.PAGE_SERVICE},
 		];
 	};
 	static get_stat_type_list = () =>{

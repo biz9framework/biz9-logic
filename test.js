@@ -37,9 +37,15 @@ describe("connect", () => {
                 let parent_id = 3334;
                 let user_id = 0;
                 let item_list = [];
+                for(var a = 0; a < Type.get_page_list().length;a++){
+                    let my_type = Type.get_page_list()[a];
+                    console.log('value='+my_type.value);
+                    console.log('label='+my_type.label);
+                    console.log('url='+my_type.url);
+                }
                 //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
                 //Log.w('Title 2',Type.get_title(Type.ORDER_STATUS_COMPLETE));
-                Log.w('Title 2',Field_Logic.get_field_value_title(Type.FIELD_VALUE_LIST,3,4,'cool'));
+                //Log.w('Title 2',Field_Logic.get_field_value_title(Type.FIELD_VALUE_LIST,3,4,'cool'));
                 //Log.w('item_list',item_list);
                 //Log.w('bind_obj_list',App_Logic.bind_item_parent_user_list(item_list));
 
