@@ -39,8 +39,8 @@ describe("connect", () => {
                 let item_list = [];
                 for(var a = 0; a < Type.get_page_list().length;a++){
                     let my_type = Type.get_page_list()[a];
-                    console.log('value='+my_type.value);
-                    console.log('label='+my_type.label);
+                    //console.log('value='+my_type.value);
+                    //console.log('label='+my_type.label);
                     console.log('url='+my_type.url);
                 }
                 //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));

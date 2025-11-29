@@ -325,7 +325,7 @@ class Type {
 	static get_page_list(){
 		return [
 			{value:Type.PAGE_ABOUT,label:Title.PAGE_ABOUT,url:Url.PAGE_ABOUT},
-			{value:Type.PAGE_BLOG_POST,label:Title.PAGE_BLOG_POST,url:Title.PAGE_BLOG_POST},
+			{value:Type.PAGE_BLOG_POST,label:Title.PAGE_BLOG_POST,url:Url.PAGE_BLOG_POST},
 			{value:Type.PAGE_BLOG_POST_HOME,label:Title.PAGE_BLOG_POST_HOME,url:Url.PAGE_BLOG_POST_HOME},
 			{value:Type.PAGE_CONTACT,label:Title.PAGE_CONTACT,label:Title.PAGE_CONTACT,url:Url.PAGE_CONTACT},
 			{value:Type.PAGE_EVENT,label:Title.PAGE_EVENT,url:Url.PAGE_EVENT},
