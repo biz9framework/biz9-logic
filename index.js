@@ -80,7 +80,7 @@ class Title {
 	static PAGE_PRODUCT_HOME='Product Home';
 	static PAGE_SERVICE='Service';
 	static PAGE_SERVICE_HOME='Service Home';
-	static PAGE_TESTIMONIAL_HOME='Testimonial Home';
+	static PAGE_REVIEW_HOME='Review Home';
 	//order
 	static ORDER_NUMBER="OR-";
 	static ORDER_TRANSACTION_ID="TR-";
@@ -484,7 +484,7 @@ class Type {
 			case Type.PAGE_PRODUCT_HOME:
 			case Type.PAGE_SERVICE:
 			case Type.PAGE_SERVICE_HOME:
-			case Type.PAGE_TESTIMONIAL_HOME:
+			case Type.PAGE_REVIEW_HOME:
 			case Type.USER_ROLE_SUPER_ADMIN:
 			case Type.USER_ROLE_ADMIN:
 			case Type.USER_ROLE_MANAGER:
@@ -2074,7 +2074,7 @@ class Url {
 	static PAGE_SERVICE="page/service";
 	static PAGE_SERVICE_HOME="page/service_home";
 	static PAGE_SERVICE_SEARCH="page/service_search";
-	static PAGE_TESTIMONIAL_HOME="page/testimonial_home";
+	static PAGE_REVIEW_HOME="page/review_home";
 	//review
 	static REVIEW_POST="item/review_post";
 	static REVIEW_SEARCH="item/review_search";
