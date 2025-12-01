@@ -67,24 +67,20 @@ static get_test_list = (data_type,option) =>{
 class Title {
 	//page
 	static PAGE_ABOUT='About';
-	static PAGE_CONTACT='Contact';
-	static PAGE_HOME='Home';
 	static PAGE_BLOG_POST='Blog Post';
 	static PAGE_BLOG_POST_HOME='Blog Post Home';
-	static PAGE_BLOG_POST_SEARCH='Blog Post Search';
-	static PAGE_PRODUCT='Product';
-	static PAGE_PRODUCT_HOME='Product Home';
-	static PAGE_PRODUCT_SEARCH='Product Search';
+	static PAGE_CONTACT='Contact';
 	static PAGE_EVENT='Event';
 	static PAGE_EVENT_HOME='Event Home';
-	static PAGE_EVENT_SEARCH='Event Search';
-	static PAGE_FAQ='Faq';
+	static PAGE_FAQ='FAQs';
 	static PAGE_GALLERY='Gallery';
 	static PAGE_GALLERY_HOME='Gallery Home';
-	static PAGE_GALLERY_SEARCH='Gallery Search';
+	static PAGE_HOME='Home';
+	static PAGE_PRODUCT='Product';
+	static PAGE_PRODUCT_HOME='Product Home';
 	static PAGE_SERVICE='Service';
 	static PAGE_SERVICE_HOME='Service Home';
-	static PAGE_SERVICE_SEARCH='Service Search';
+	static PAGE_TESTIMONIAL='Testimonial';
 	//order
 	static ORDER_NUMBER="OR-";
 	static ORDER_TRANSACTION_ID="TR-";
@@ -476,19 +472,19 @@ class Type {
 				r_type = "N/A";
 			case Type.PAGE_ABOUT:
 			case Type.PAGE_BLOG_POST:
-			case Type.PAGE_BLOG_POST_DETAIL:
+			case Type.PAGE_BLOG_POST_HOME:
 			case Type.PAGE_CONTACT:
-			case Type.PAGE_CATEGORY:
 			case Type.PAGE_EVENT:
-			case Type.PAGE_EVENT_DETAIL:
+			case Type.PAGE_EVENT_HOME:
 			case Type.PAGE_FAQ:
 			case Type.PAGE_GALLERY:
-			case Type.PAGE_GALLERY_DETAIL:
+			case Type.PAGE_GALLERY_HOME:
 			case Type.PAGE_HOME:
 			case Type.PAGE_PRODUCT:
-			case Type.PAGE_PRODUCT_DETAIL:
+			case Type.PAGE_PRODUCT_HOME:
 			case Type.PAGE_SERVICE:
-			case Type.PAGE_SERVICE_DETAIL:
+			case Type.PAGE_SERVICE_HOME:
+			case Type.PAGE_TESTIMONIAL:
 			case Type.USER_ROLE_SUPER_ADMIN:
 			case Type.USER_ROLE_ADMIN:
 			case Type.USER_ROLE_MANAGER:
@@ -2060,24 +2056,25 @@ class Url {
 	static ORDER_POST="item/order_post";
 	//page
 	static PAGE_ABOUT="page/about";
-	static PAGE_CONTACT="page/contact";
-	static PAGE_HOME="page/home";
-	static PAGE_FAQ="page/faq";
 	static PAGE_BLOG_POST="page/blog_post";
 	static PAGE_BLOG_POST_HOME="page/blog_post_home";
 	static PAGE_BLOG_POST_SEARCH="page/blog_post_search";
-	static PAGE_PRODUCT="page/product";
-	static PAGE_PRODUCT_HOME="page/product_home";
-	static PAGE_PRODUCT_SEARCH="page/product_search";
+	static PAGE_CONTACT="page/contact";
 	static PAGE_EVENT="page/event";
 	static PAGE_EVENT_HOME="page/event_home";
 	static PAGE_EVENT_SEARCH="page/event_search";
+	static PAGE_FAQ="page/faq";
 	static PAGE_GALLERY="page/gallery";
 	static PAGE_GALLERY_HOME="page/gallery_home";
 	static PAGE_GALLERY_SEARCH="page/gallery_search";
+	static PAGE_HOME="page/home";
+	static PAGE_PRODUCT="page/product";
+	static PAGE_PRODUCT_HOME="page/product_home";
+	static PAGE_PRODUCT_SEARCH="page/product_search";
 	static PAGE_SERVICE="page/service";
 	static PAGE_SERVICE_HOME="page/service_home";
 	static PAGE_SERVICE_SEARCH="page/service_search";
+	static PAGE_TESTIMONIAL="page/testimonial";
 	//review
 	static REVIEW_POST="item/review_post";
 	static REVIEW_SEARCH="item/review_search";
@@ -2090,7 +2087,6 @@ class Url {
 	static STAT_SEARCH="item/stat_search";
 	//template
 	static TEMPLATE="item/template";
-
 }
 module.exports = {
 	App_Logic,
