@@ -238,6 +238,7 @@ class Type {
 	static PAGE_PRODUCT='product';
 	static PAGE_PRODUCT_HOME='product_home';
 	static PAGE_PRODUCT_SEARCH='product_search';
+	static PAGE_REVIEW_HOME='review_home';
 	static PAGE_SERVICE='service';
 	static PAGE_SERVICE_HOME='service_home';
 	static PAGE_SERVICE_SEARCH='service_search';
