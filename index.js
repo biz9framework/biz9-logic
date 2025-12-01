@@ -332,6 +332,7 @@ class Type {
 			{value:Type.PAGE_GALLERY_HOME,label:Title.PAGE_GALLERY_HOME,url:Url.PAGE_GALLERY_HOME},
 			{value:Type.PAGE_PRODUCT,label:Title.PAGE_PRODUCT,url:Url.PAGE_PRODUCT},
 			{value:Type.PAGE_PRODUCT_HOME,label:Title.PAGE_PRODUCT_HOME,url:Url.PAGE_PRODUCT_HOME},
+			{value:Type.PAGE_REVIEW_HOME,label:Title.PAGE_REVIEW_HOME,url:Url.PAGE_REVIEW_HOME},
 			{value:Type.PAGE_SERVICE,label:Title.PAGE_SERVICE,url:Url.PAGE_SERVICE},
 			{value:Type.PAGE_SERVICE_HOME,label:Title.PAGE_SERVICE_HOME,url:Url.PAGE_SERVICE_HOME},
 		];
