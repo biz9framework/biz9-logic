@@ -76,10 +76,12 @@ class Title {
 	static PAGE_GALLERY='Gallery';
 	static PAGE_GALLERY_HOME='Gallery Home';
 	static PAGE_HOME='Home';
+	static PAGE_LOGIN='Login';
 	static PAGE_PRODUCT='Product';
 	static PAGE_PRODUCT_HOME='Product Home';
 	static PAGE_SERVICE='Service';
 	static PAGE_SERVICE_HOME='Service Home';
+	static PAGE_REGISTER='Register';
 	static PAGE_REVIEW_HOME='Review Home';
 	//order
 	static ORDER_NUMBER="OR-";
@@ -235,9 +237,11 @@ class Type {
 	static PAGE_GALLERY='gallery';
 	static PAGE_GALLERY_HOME='gallery_home';
 	static PAGE_GALLERY_SEARCH='gallery_search';
+	static PAGE_LOGIN='login';
 	static PAGE_PRODUCT='product';
 	static PAGE_PRODUCT_HOME='product_home';
 	static PAGE_PRODUCT_SEARCH='product_search';
+	static PAGE_REGISTER='register';
 	static PAGE_REVIEW_HOME='review_home';
 	static PAGE_SERVICE='service';
 	static PAGE_SERVICE_HOME='service_home';
@@ -331,8 +335,10 @@ class Type {
 			{value:Type.PAGE_HOME,label:Title.PAGE_HOME,url:Url.PAGE_HOME},
 			{value:Type.PAGE_GALLERY,label:Title.PAGE_GALLERY,url:Url.PAGE_GALLERY},
 			{value:Type.PAGE_GALLERY_HOME,label:Title.PAGE_GALLERY_HOME,url:Url.PAGE_GALLERY_HOME},
+			{value:Type.PAGE_LOGIN,label:Title.PAGE_LOGIN,url:Url.PAGE_LOGIN},
 			{value:Type.PAGE_PRODUCT,label:Title.PAGE_PRODUCT,url:Url.PAGE_PRODUCT},
 			{value:Type.PAGE_PRODUCT_HOME,label:Title.PAGE_PRODUCT_HOME,url:Url.PAGE_PRODUCT_HOME},
+			{value:Type.PAGE_REGISTER,label:Title.PAGE_REGISTER,url:Url.PAGE_REGISTER},
 			{value:Type.PAGE_REVIEW_HOME,label:Title.PAGE_REVIEW_HOME,url:Url.PAGE_REVIEW_HOME},
 			{value:Type.PAGE_SERVICE,label:Title.PAGE_SERVICE,url:Url.PAGE_SERVICE},
 			{value:Type.PAGE_SERVICE_HOME,label:Title.PAGE_SERVICE_HOME,url:Url.PAGE_SERVICE_HOME},
