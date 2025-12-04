@@ -2041,6 +2041,8 @@ class Url {
 	static DELETE_SEARCH="main/crud/delete_search";
 	static GET="main/crud/get";
 	static LOGIN="user/login";
+	static LOGOUT="user/logout";
+	static REGISTER="user/register";
 	static PARENT_TOP="main/crud/parent_top";
 	static PING="ping";
 	static POST="main/crud/post";
