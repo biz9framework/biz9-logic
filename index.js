@@ -488,6 +488,7 @@ class Type {
 			case Type.PAGE_GALLERY:
 			case Type.PAGE_GALLERY_HOME:
 			case Type.PAGE_HOME:
+			case Type.PAGE_LOGIN:
 			case Type.PAGE_PRODUCT:
 			case Type.PAGE_PRODUCT_HOME:
 			case Type.PAGE_SERVICE:
@@ -2084,6 +2085,7 @@ class Url {
 	static PAGE_GALLERY_HOME="page/gallery_home";
 	static PAGE_GALLERY_SEARCH="page/gallery_search";
 	static PAGE_HOME="page/home";
+	static PAGE_LOGIN="page/login";
 	static PAGE_PRODUCT="page/product";
 	static PAGE_PRODUCT_HOME="page/product_home";
 	static PAGE_PRODUCT_SEARCH="page/product_search";
