@@ -278,8 +278,10 @@ class Type {
 	static USER_ROLE_USER='user';
 	static USER_ROLE_GUEST='guest';
 	//data_source
-	static DATA_SOURCE_CACHE="cache";
+	static DATA_SOURCE_CLIENT_CACHE="client_cache";
+	static DATA_SOURCE_SERVER_CACHE="client_cache";
 	static DATA_SOURCE_DATABASE="database";
+	static DATA_SOURCE_CLIENT="client";
 	static DATA_SOURCE_SERVER="server";
 	static DATA_SOURCE_NOT_FOUND="not_found";
 	//env
@@ -1112,7 +1114,7 @@ class Event_Logic {
 	};
 }
 class Field_Logic {
-	static get_item_max_group_id = (value_id,item) => {
+	static get_list_item_max_group_id = (value_id,item) => {
 		let max_group_id = 0;
 		let full_prop_str = "";
 		for(const prop in item){
