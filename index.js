@@ -279,7 +279,7 @@ class Type {
 	static USER_ROLE_GUEST='guest';
 	//data_source
 	static DATA_SOURCE_CLIENT_CACHE="client_cache";
-	static DATA_SOURCE_SERVER_CACHE="client_cache";
+	static DATA_SOURCE_SERVER_CACHE="server_cache";
 	static DATA_SOURCE_DATABASE="database";
 	static DATA_SOURCE_CLIENT="client";
 	static DATA_SOURCE_SERVER="server";
