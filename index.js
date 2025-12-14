@@ -103,10 +103,6 @@ class Title {
 	static ORDER_PAYMENT_METHOD_TEST="Test";
 	//cart
 	static CART_NUMBER="CA-";
-	//data_type
-	static DATA_TYPE_BLOG_POST="Blog Post";
-	static DATA_TYPE_CATEGORY="Category";
-	static DATA_TYPE_CONTENT="Content";
 	//role
 	static USER_ROLE_SUPER_ADMIN='Super Admin';
 	static USER_ROLE_ADMIN='Admin';
@@ -529,6 +525,7 @@ class Type {
 			case DataType.FAQ:
 			case DataType.FAVORITE:
 			case DataType.GALLERY:
+			case DataType.GROUP:
 			case DataType.ITEM_MAP:
 			case DataType.ITEM:
 			case DataType.LINK:
@@ -543,6 +540,7 @@ class Type {
 			case DataType.SERVICE:
 			case DataType.SECURITY:
 			case DataType.STAT:
+			case DataType.SUB_GROUP:
 			case DataType.TEMPLATE:
 			case DataType.TYPE:
 			case DataType.USER:
@@ -1452,6 +1450,8 @@ class DataType {
 	static CUSTOM_FIELD='custom_field_biz';
 	static CONTENT='content_biz';
 	static EVENT='event_biz';
+	static GROUP='group_biz';
+	static SUB_GROUP='sub_group_biz';
 	static FAQ='faq_biz';
 	static FAVORITE='favorite_biz';
 	static GALLERY='gallery_biz';
@@ -2053,7 +2053,8 @@ class Url {
 	static LOGOUT="user/logout";
 	static REGISTER="user/register";
 	static PARENT_TOP="main/crud/parent_top";
-	static PING="ping";
+	static PING_GET="ping_get";
+	static PING_POST="ping_post";
 	static POST="main/crud/post";
 	static POST_LIST="main/crud/post_list";
 	static SEARCH="main/crud/search";
