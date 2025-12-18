@@ -1976,11 +1976,11 @@ class Image_Logic {
 		param = param ? param : "";
 		return host+"/"+size + "_"+image_filename+param;
 	}
-	static get_new_by_base64 = (item_data) =>{
-        let item = DataItem.get_new(DataType.IMAGE,0,item_data);
-        item.extension = !Str.check_is_null(Str.get_file_type_from_base64(item.base64)) ? Str.get_file_type_from_base64(item.base64).extension : 'jpeg';
-        item.image_filename = !Str.check_is_null(Str.get_file_type_from_base64(item.base64)) ? Str.get_guid()+"."+Str.get_file_type_from_base64(item.base64).extension : 'not_found.jpeg';
-        item.buffer = !Str.check_is_null(Str.get_file_type_from_base64(item_data.base64)) ? Buffer.from(item_data.base64.split(';base64,').pop(), 'base64') : null
+	static get_new_by_base64 = (item_image) =>{
+        let item = DataItem.get_new(DataType.IMAGE,0,item_image);
+        item.extension = !Str.check_is_null(Str.get_file_type_from_base64(item.image_data)) ? Str.get_file_type_from_base64(item.image_data).extension : 'jpeg';
+        item.image_filename = !Str.check_is_null(Str.get_file_type_from_base64(item.image_data)) ? Str.get_guid()+"."+Str.get_file_type_from_base64(item.image_data).extension : 'not_found.jpeg';
+        item.buffer = !Str.check_is_null(Str.get_file_type_from_base64(item_image.image_data)) ? Buffer.from(item_image.image_data.split(';base64,').pop(), 'base64') : null
         return  item;
 	}
 	static get_process_list = (upload_dir,image_filename) =>{
