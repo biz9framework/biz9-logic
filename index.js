@@ -1977,7 +1977,7 @@ class Image_Logic {
 		return host+"/"+size + "_"+image_filename+param;
 	}
 	static get_new_by_base64 = (item_data) =>{
-        let item = DataItem.get_new(DataType.IMAGE,0);
+        let item = DataItem.get_new(DataType.IMAGE,0,item_data);
         item.extension = !Str.check_is_null(Str.get_file_type_from_base64(item.base64)) ? Str.get_file_type_from_base64(item.base64).extension : 'jpeg';
         item.image_filename = !Str.check_is_null(Str.get_file_type_from_base64(item.base64)) ? Str.get_guid()+"."+Str.get_file_type_from_base64(item.base64).extension : 'not_found.jpeg';
         item.buffer = !Str.check_is_null(Str.get_file_type_from_base64(item_data.base64)) ? Buffer.from(item_data.base64.split(';base64,').pop(), 'base64') : null

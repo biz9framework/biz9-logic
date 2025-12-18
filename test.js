@@ -39,6 +39,9 @@ describe("connect", () => {
 
                 let image = DataItem.get_new(DataType.IMAGE,0);
                 image.base64 = 'fsadfsd';
+                image.parnet_id = '1';
+                image.apple = 'butter';
+                Log.w('88_image',image);
                 image = Image_Logic.get_new_by_base64(image);
                 Log.w('99_result',image);
 
