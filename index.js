@@ -1960,6 +1960,30 @@ class App_Logic {
 		}
 	}
 }
+class File_Logic {
+	static url_post = (app_id,url,param) => {
+		let action_url="main/file/post";
+		return get_cloud_url_main(app_id,url,action_url,param);
+	};
+	static url_post_cdn = (app_id,url,param) => {
+		let action_url="main/file/post_cdn";
+		return get_cloud_url_main(app_id,url,action_url,param);
+	};
+	static url = (host,file_filename,size,param) =>{
+		host = host ? host : "";
+		file_filename = file_filename ? file_filename : "";
+		size = size ? size : "";
+		param = param ? param : "";
+		return host+"/"+size + "_"+file_filename+param;
+	}
+	static get_new_by_base64 = (item_file) =>{
+    	let item = DataItem.get_new(DataType.FILE,0,item_file);
+        item.extension = !Str.check_is_null(Str.get_file_type_from_base64(item.file_data)) ? Str.get_file_type_from_base64(item.file_data).extension : 'txt';
+        item.file_filename = !Str.check_is_null(Str.get_file_type_from_base64(item.file_data)) ? Str.get_guid()+ "." + item.extension : 'not_found.txt';
+        item.buffer = !Str.check_is_null(Str.get_file_type_from_base64(item_file.file_data)) ? Buffer.from(item_file.file_data.split(';base64,').pop(), 'base64') : null;
+        return item;
+    };
+};
 class Image_Logic {
 	static url_post = (app_id,url,param) => {
 		let action_url="main/image/post";
@@ -2125,6 +2149,7 @@ module.exports = {
 	DataType,
 	Demo_Logic,
 	Event_Logic,
+	File_Logic,
 	Field_Logic,
 	Favorite_Logic,
 	Gallery_Logic,
