@@ -524,6 +524,7 @@ class Type {
 			case DataType.EVENT:
 			case DataType.FAQ:
 			case DataType.FAVORITE:
+			case DataType.FILE:
 			case DataType.GALLERY:
 			case DataType.GROUP:
 			case DataType.ITEM_MAP:
@@ -1452,6 +1453,7 @@ class DataType {
 	static GROUP='group_biz';
 	static FAQ='faq_biz';
 	static FAVORITE='favorite_biz';
+	static FILE='file_biz';
 	static GALLERY='gallery_biz';
 	static IMAGE='image_biz';
 	static ITEM='item_biz';
@@ -2096,6 +2098,9 @@ class Url {
 	//field
 	static CUSTOM_FIELD="item/custom_field";
 	static FIELD_VALUE_POST="item/field_value_post";
+	//file
+	static FILE_POST="main/file/post";
+	static FILE_CDN_POST="main/file/cdn_post";
 	//image
 	static IMAGE_POST="main/image/post";
 	static IMAGE_CDN_POST="main/image/cdn_post";
