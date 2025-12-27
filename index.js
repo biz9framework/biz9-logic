@@ -42,7 +42,8 @@ class Item_Logic {
 		let copy_item = DataItem.get_new(data_type,0);
 		const keys = Object.keys(item);
 			keys.forEach(key => {
-				if(key!=Type.ID&&key!=Type.SOURCE&&key!=Type.TITLE&&key!=Type.TITLE_URL){
+				console.log(key);
+				if(key!=Type.FIELD_ID&&key!=Type.FIELD_SOURCE&&key!=Type.FIELD_TITLE&&key!=Type.FIELD_TITLE_URL&&key!=Type.FIELD_DATE_CREATE&&key!=Type.FIELD_DATE_SAVE){
 					copy_item[key]=item[key];
 				}
 			});
@@ -200,35 +201,72 @@ class Type {
 	static APP_LINK_TYPE_GOOGLE_PLAY='google_play';
 	static APP_LINK_TYPE_APPLE_STORE='apple_store';
 	static APP_LINK_TYPE_CMS='cms';
+
 	//field
-	static ASC='asc';
-	static BLANK='blank';
-	static CART_ITEM_LIST='cart_item_list';
-	static CART_SUB_ITEM_LIST='cart_sub_item_list';
-	static DATA_TYPE='data_type';
-	static DESC='desc';
-	static DATE_CREATE='date_create';
-	static DATE_SAVE='date_save';
-	static ID='id';
-	static OBJ='obj';
-	static LIST='list';
-	static COUNT='count';
-	static N_A='n/a';
-	static USER='user';
-	static USER_ID='user_id';
-	static CART_ITEM_LIST='cart_item_list';
-	static CART_SUB_ITEM_LIST='cart_sub_item_list';
-	static ORDER_ITEM_LIST='order_item_list';
-	static ORDER_SUB_ITEM_LIST='order_sub_item_list';
-	static PARENT_ID='parent_id';
-	static PARENT_ITEM='parent_item';
-	static PARENT_DATA_TYPE='parent_data_type';
-	static SETTING_VISIBLE='setting_visible';
-	static SOURCE='source';
-	static SOURCE_ID='source_id';
-	static SOURCE_PARENT_ID='source_parent_id';
-	static TITLE='title';
-	static TITLE_URL='title_url';
+    static FIELD_AUTHOR = 'author';
+ 	static FIELD_CATEGORY = 'category';
+    static FIELD_CATEGORY_TYPE = 'category_type';
+    static FIELD_COST = 'cost';
+	static FIELD_DATA_TYPE='data_type';
+	static FIELD_DATE_CREATE='date_create';
+	static FIELD_DATE_SAVE='date_save';
+	static FIELD_DATE = 'date';
+    static FIELD_DESCRIPTION = 'description';
+    static FIELD_EDIT_LOCATION = 'edit_location';
+	static FIELD_ID='id';
+    static FIELD_IMAGE_FILENAME = 'image_filename';
+    static FIELD_LOCATION = 'location';
+    static FIELD_MEETING_LINK = 'meeting_link';
+    static FIELD_NOTE = 'note';
+    static FIELD_OLD_COST = 'old_cost';
+ 	static FIELD_PARAM = 'param';
+	static FIELD_PARENT_DATA_TYPE='parent_data_type';
+	static FIELD_PARENT_ID='parent_id';
+	static FIELD_ROLE = 'role';
+	static FIELD_SOURCE='source';
+	static FIELD_SOURCE_DATA_TYPE='source_data_type';
+	static FIELD_SOURCE_ID='source_id';
+	static FIELD_SOURCE_PARENT_ID='source_parent_id';
+    static FIELD_SETTING_VISIBLE = 'setting_visible';
+    static FIELD_SETTING_DELETE_PROTECTION = 'setting_delete_protection';
+    static FIELD_SETTING_SORT_TYPE = 'setting_delete_sort_type';
+    static FIELD_STOCK = 'stock';
+    static FIELD_TAG = 'tag';
+    static FIELD_TIME = 'time';
+    static FIELD_TITLE='title';
+	static FIELD_TITLE_URL='title_url';
+    static FIELD_TYPE = 'type';
+    static FIELD_URL = 'url';
+ 	static FIELD_USER_CITY = 'city';
+    static FIELD_USER_COUNTRY = 'country';
+    static FIELD_USER_EMAIL = 'email';
+    static FIELD_USER_FIRST_NAME = 'first_name';
+    static FIELD_USER_GENDER = 'gender';
+	static FIELD_USER_ID='user_id';
+    static FIELD_USER_LAST_NAME = 'last_name';
+    static FIELD_USER_USERNAME = 'username';
+    static FIELD_USER_PASSWORD = 'password';
+    static FIELD_USER_STATE = 'state';
+    static FIELD_VALUE = 'value';
+    static FIELD_WEBSITE = 'website';
+	//title
+	static TITLE_SORT_BY_ASC='asc';
+	static TITLE_BLANK='blank';
+	static TITLE_SORT_BY_DESC='desc';
+	static TITLE_CART_ITEM_LIST='cart_item_list';
+	static TITLE_CART_SUB_ITEM_LIST='cart_sub_item_list';
+	static TITLE_OBJ='obj';
+	static TITLE_LIST='list';
+	static TITLE_COUNT='count';
+	static TITLE_N_A='n/a';
+	static TITLE_USER='user';
+	static TITLE_CART_ITEM_LIST='cart_item_list';
+	static TITLE_CART_SUB_ITEM_LIST='cart_sub_item_list';
+	static TITLE_ORDER_ITEM_LIST='order_item_list';
+	static TITLE_ORDER_SUB_ITEM_LIST='order_sub_item_list';
+	static TITLE_PARENT_ITEM='parent_item';
+	static TITLE_STAT_ITEM_LIST='stat_item_list';
+	static TITLE_STAT_SUB_ITEM_LIST='stat_item_list';
 	//page
 	static PAGE_ABOUT='about';
 	static PAGE_CONTACT='contact';
@@ -595,17 +633,17 @@ class Stat_Logic {
 		for(const prop in post_data) {
     		const value = post_data[prop];
 			if (!Array.isArray(value)
-				&& prop != Type.SOURCE
-				&& prop != Type.DATE_CREATE
-				&& prop != Type.DATE_SAVE
-				&& prop != Type.DATA_TYPE
-  				&& prop != Type.CART_ITEM_LIST
-				&& prop != Type.CART_SUB_ITEM_LIST
-                && prop != Type.ORDER_ITEM_LIST
-				&& prop != Type.ORDER_SUB_ITEM_LIST
-                && prop != Type.SOURCE
-				&& prop != Type.SOURCE_ID
-				&& prop != Type.ID) {
+				&& prop != Type.FIELD_SOURCE
+				&& prop != Type.FIELD_DATE_CREATE
+				&& prop != Type.FIELD_DATE_SAVE
+				&& prop != Type.FIELD_DATA_TYPE
+  				&& prop != Type.TITLE_CART_ITEM_LIST
+				&& prop != Type.TITLE_CART_SUB_ITEM_LIST
+                && prop != Type.TITLE_ORDER_ITEM_LIST
+				&& prop != Type.TITLE_ORDER_SUB_ITEM_LIST
+                && prop != Type.FIELD_SOURCE
+				&& prop != Type.FIELD_SOURCE_ID
+				&& prop != Type.FIELD_ID) {
 			 		filter_stat[prop] = post_data[prop];
     			}
   		}
@@ -646,12 +684,12 @@ class Order_Logic {
 		});
 		for(const key in cart) {
 			if(!Str.check_is_null(cart[key])
-				&& key != Type.ID && key != Type.DATA_TYPE
-				&& key != Type.PARENT_ITEM && key != Type.USER
-                && key != Type.CART_ITEM_LIST && key != Type.CART_SUB_ITEM_LIST
-                && key != Type.ORDER_ITEM_LIST && key != Type.ORDER_SUB_ITEM_LIST
-                && key != Type.SOURCE && key != Type.SOURCE_ID
-                && key != Type.DATE_CREATE && key != Type.DATE_SAVE){
+				&& key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
+				&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
+                && key != Type.TITLE_CART_ITEM_LIST && key != Type.TITLE_CART_SUB_ITEM_LIST
+                && key != Type.TITLE_ORDER_ITEM_LIST && key != Type.TITLE_ORDER_SUB_ITEM_LIST
+                && key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
+                && key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
 				order[key] = cart[key];
              }
         }
@@ -670,12 +708,12 @@ class Order_Logic {
 			});
 		for(const key in cart_item){
 			if(!Str.check_is_null(cart_item[key])
-				&& key != Type.ID && key != Type.DATA_TYPE
-				&& key != Type.PARENT_ITEM && key != Type.USER
-                && key != Type.CART_ITEM_LIST && key != Type.CART_SUB_ITEM_LIST
-                && key != Type.ORDER_ITEM_LIST && key != Type.ORDER_SUB_ITEM_LIST
-                && key != Type.SOURCE && key != Type.SOURCE_ID
-                && key != Type.DATE_CREATE && key != Type.DATE_SAVE){
+				&& key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
+				&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
+                && key != Type.TITLE_CART_ITEM_LIST && key != Type.TITLE_CART_SUB_ITEM_LIST
+                && key != Type.TITLE_ORDER_ITEM_LIST && key != Type.TITLE_ORDER_SUB_ITEM_LIST
+                && key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
+                && key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
 					order_item[key] = cart_item[key];
              }
         }
@@ -690,12 +728,12 @@ class Order_Logic {
 				})
 				for(const key in cart_sub_item){
 					if(!Str.check_is_null(cart_sub_item[key])
-						&& key != Type.ID && key != Type.DATA_TYPE
-						&& key != Type.PARENT_ITEM && key != Type.USER
-                		&& key != Type.CART_ITEM_LIST && key != Type.CART_SUB_ITEM_LIST
-                		&& key != Type.ORDER_ITEM_LIST && key != Type.ORDER_SUB_ITEM_LIST
-                		&& key != Type.SOURCE && key != Type.SOURCE_ID
-                		&& key != Type.DATE_CREATE && key != Type.DATE_SAVE){
+						&& key != Type.FIELD_ID && key != Type.DATA_TYPE
+						&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
+                		&& key != Type.TITLE_CART_ITEM_LIST && key != Type.TITLE_CART_SUB_ITEM_LIST
+                		&& key != Type.TITLE_ORDER_ITEM_LIST && key != Type.TITLE_ORDER_SUB_ITEM_LIST
+                		&& key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
+                		&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
 						order_sub_item[key] = cart_sub_item[key];
              		}
         		}
