@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,DataType,Item_Logic,User_Logic,Page_Logic,Product_Logic,Type,Title,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic,Cart_Logic,Order_Logic,App_Logic,Field_Logic,Image_Logic} = require('./index');
+const {DataItem,DataType,Item_Logic,User_Logic,Page_Logic,Product_Logic,Type,Title,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic,Cart_Logic,Order_Logic,App_Logic,Field_Logic,Image_Logic,Message} = require('./index');
 const {Log,Num,Str} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -44,6 +44,7 @@ describe("connect", () => {
                 Log.w('88_image',image);
                 image = Image_Logic.get_new_by_base64(image);
                 Log.w('99_result',image);
+                Log.w('error_show',Message.USER_PASSWORD_NOT_VALID);
 
                 //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
                 //Log.w('Title 2',Type.get_title(Type.ORDER_STATUS_COMPLETE));

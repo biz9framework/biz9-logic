@@ -18,6 +18,7 @@ class Message {
 	static USER_EMAIL_NEW_CONFIRM_BAD="The New and Confirm Email Dont Match.";
 	static USER_PASSWORD_NEW_CONFIRM_BAD="The New and Confirm Password Dont Match.";
 	static USER_PASSWORD_BAD="Please Enter A Valid Password.";
+	static USER_PASSWORD_NOT_VALID="Password must be between 7 and 15 characters long, have at least one uppercase and lowercase letter, and also contain at least one digit and one special character.";
 	static USER_EMAIL_NOT_UNIQUE="Email Not Availble. Please Choose Another.";
 	static USER_USERNAME_BAD="Please Enter A Valid Username.";
 	static USER_USERNAME_NOT_UNIQUE="Username Not Availble. Please Choose Another.";
@@ -37,7 +38,16 @@ class Item_Logic {
 		const item = DataItem.get_new(data_type,0,{title:title,title_url:Str.get_title_url(title),setting_visible:"1"});
 		return item;
 	};
-
+	static copy = (data_type,item)=>{
+		let copy_item = DataItem.get_new(data_type,0);
+		const keys = Object.keys(item);
+			keys.forEach(key => {
+				if(key!=Type.ID&&key!=Type.SOURCE&&key!=Type.TITLE&&key!=Type.TITLE_URL){
+					copy_item[key]=item[key];
+				}
+			});
+		return copy_item;
+	};
 	static bind_child_parent_obj = (child_obj,parent_obj)=>{
 		for(const prop in parent_obj) {
 			child_obj['parent_'+prop] = parent_obj[prop];
