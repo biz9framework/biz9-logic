@@ -49,7 +49,6 @@ class Item_Logic {
 					key!=Type.FIELD_TITLE_URL&&
 					key!=Type.FIELD_DATE_CREATE&&
 					key!=Type.FIELD_DATE_SAVE&&
-					key!=Type.TITLE_LIST&&
 					key!=Type.TITLE_OBJ&&
 					key!=Type.TITLE_USER&&
 					key!=Type.TITLE_GROUP&&
@@ -264,23 +263,23 @@ class Type {
     static FIELD_WEBSITE = 'website';
 	//title
 	static TITLE_BLANK='blank';
-	static TITLE_CART_ITEM_LIST='cart_items';
-	static TITLE_CART_SUB_ITEM_LIST='cart_sub_items';
-	static TITLE_CART_ITEM_LIST='cart_items';
-	static TITLE_CART_SUB_ITEM_LIST='cart_sub_items';
+	static TITLE_CART_ITEMS='cart_items';
+	static TITLE_CART_SUB_ITEMS='cart_sub_items';
+	static TITLE_CART_ITEMS='cart_items';
+	static TITLE_CART_SUB_ITEMS='cart_sub_items';
 	static TITLE_COUNT='count';
 	static TITLE_GROUP='group';
-	static TITLE_LIST='list';
 	static TITLE_N_A='n/a';
+	static TITLE_ITEMS='items';
 	static TITLE_OBJ='obj';
-	static TITLE_ORDER_ITEM_LIST='order_items';
-	static TITLE_ORDER_SUB_ITEM_LIST='order_sub_items';
+	static TITLE_ORDER_ITEMS='order_items';
+	static TITLE_ORDER_SUB_ITEMS='order_sub_items';
 	static TITLE_PARENT_ITEM='parent_item';
 	static TITLE_USER='user';
 	static TITLE_SORT_BY_ASC='asc';
 	static TITLE_SORT_BY_DESC='desc';
-	static TITLE_STAT_ITEM_LIST='stat_items';
-	static TITLE_STAT_SUB_ITEM_LIST='stat_items';
+	static TITLE_STAT_ITEMS='stat_items';
+	static TITLE_STAT_SUB_ITEMS='stat_items';
 	//page
 	static PAGE_ABOUT='about';
 	static PAGE_CONTACT='contact';
@@ -328,7 +327,7 @@ class Type {
 	static FIELD_VALUE_TEXT="text";
 	static FIELD_VALUE_NOTE="note";
 	static FIELD_VALUE_IMAGE="image";
-	static FIELD_VALUE_LIST="list";
+	static FIELD_VALUE_ITEMS="items";
 	//user_role
 	static USER_ROLE_SUPER_ADMIN='super_admin';
 	static USER_ROLE_ADMIN='admin';
@@ -651,10 +650,10 @@ class Stat_Logic {
 				&& prop != Type.FIELD_DATE_CREATE
 				&& prop != Type.FIELD_DATE_SAVE
 				&& prop != Type.FIELD_DATA_TYPE
-  				&& prop != Type.TITLE_CART_ITEM_LIST
-				&& prop != Type.TITLE_CART_SUB_ITEM_LIST
-                && prop != Type.TITLE_ORDER_ITEM_LIST
-				&& prop != Type.TITLE_ORDER_SUB_ITEM_LIST
+  				&& prop != Type.TITLE_CART_ITEMS
+				&& prop != Type.TITLE_CART_SUB_ITEMS
+                && prop != Type.TITLE_ORDER_ITEMS
+				&& prop != Type.TITLE_ORDER_SUB_ITEMS
                 && prop != Type.FIELD_SOURCE
 				&& prop != Type.FIELD_SOURCE_ID
 				&& prop != Type.FIELD_ID) {
@@ -700,8 +699,8 @@ class Order_Logic {
 			if(!Str.check_is_null(cart[key])
 				&& key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
 				&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
-                && key != Type.TITLE_CART_ITEM_LIST && key != Type.TITLE_CART_SUB_ITEM_LIST
-                && key != Type.TITLE_ORDER_ITEM_LIST && key != Type.TITLE_ORDER_SUB_ITEM_LIST
+                && key != Type.TITLE_CART_ITEMS && key != Type.TITLE_CART_SUB_ITEMS
+                && key != Type.TITLE_ORDER_ITEMS && key != Type.TITLE_ORDER_SUB_ITEMS
                 && key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
                 && key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
 				order[key] = cart[key];
@@ -724,8 +723,8 @@ class Order_Logic {
 			if(!Str.check_is_null(cart_item[key])
 				&& key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
 				&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
-                && key != Type.TITLE_CART_ITEM_LIST && key != Type.TITLE_CART_SUB_ITEM_LIST
-                && key != Type.TITLE_ORDER_ITEM_LIST && key != Type.TITLE_ORDER_SUB_ITEM_LIST
+                && key != Type.TITLE_CART_ITEMS && key != Type.TITLE_CART_SUB_ITEMS
+                && key != Type.TITLE_ORDER_ITEMS && key != Type.TITLE_ORDER_SUB_ITEMS
                 && key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
                 && key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
 					order_item[key] = cart_item[key];
@@ -744,8 +743,8 @@ class Order_Logic {
 					if(!Str.check_is_null(cart_sub_item[key])
 						&& key != Type.FIELD_ID && key != Type.DATA_TYPE
 						&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
-                		&& key != Type.TITLE_CART_ITEM_LIST && key != Type.TITLE_CART_SUB_ITEM_LIST
-                		&& key != Type.TITLE_ORDER_ITEM_LIST && key != Type.TITLE_ORDER_SUB_ITEM_LIST
+                		&& key != Type.TITLE_CART_ITEMS && key != Type.TITLE_CART_SUB_ITEMS
+                		&& key != Type.TITLE_ORDER_ITEMS && key != Type.TITLE_ORDER_SUB_ITEMS
                 		&& key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
                 		&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
 						order_sub_item[key] = cart_sub_item[key];
@@ -1174,14 +1173,14 @@ class Event_Logic {
 	};
 }
 class Field_Logic {
-	static get_list_item_max_group_id = (value_id,item) => {
+	static get_item_max_group_id = (value_id,item) => {
 		let max_group_id = 0;
 		let full_prop_str = "";
 		for(const prop in item){
 			full_prop_str = String(prop + " "+full_prop_str);
 		}
 		for(let b = 1; b < 75; b++){
-			const exists = Str.check_if_str_exist(full_prop_str,"list_value_"+value_id+"_group_"+b);
+			const exists = Str.check_if_str_exist(full_prop_str,"items_value_"+value_id+"_group_"+b);
 			if(exists){
 				if(b>max_group_id){
 					max_group_id = b;
@@ -1198,14 +1197,14 @@ class Field_Logic {
 			full_prop_str = String(prop + " "+full_prop_str);
 		}
 		for(let a = 1; a < 75; a++){
-    		const exists = Str.check_if_str_exist(full_prop_str,"list_value_"+a);
+    		const exists = Str.check_if_str_exist(full_prop_str,"items_value_"+a);
 			if(exists){
 				if(a>max_value_id){
 					max_value_id = a;
 				}
 			}
 			for(let b = 1; b < 20; b++){
-				const exists = Str.check_if_str_exist(full_prop_str,"list_value_"+a+"_group_"+b);
+				const exists = Str.check_if_str_exist(full_prop_str,"items_value_"+a+"_group_"+b);
 				if(exists){
 					if(b>max_group_id){
 						max_group_id = b;
@@ -1214,7 +1213,7 @@ class Field_Logic {
 			}
 		}
 		for(let a = 1; a <= max_value_id+1; a++){
-			let sub_check_str = 'list_value_'+a;
+			let sub_check_str = 'items_value_'+a;
 			data[sub_check_str] = [];
 			for(let b = 1; b < max_group_id+1; b++){
 				let full_sub_check_str = sub_check_str+"_group_"+b;
@@ -1234,19 +1233,19 @@ class Field_Logic {
 		}
 		return data;
 	}
-	static get_item_field_value_type_list = () => {
+	static get_item_field_value_types = () => {
 		return [
 			{value:'text',label:'Text'},
 			{value:'note',label:'Note'},
 			{value:'image',label:'Image'},
-			{value:'list',label:'List'},
+			{value:'items',label:'List'},
 		];
 	};
 	static get_field_value_value = (value_type,item,value_id) =>{
-		if(value_type!=Type.FIELD_VALUE_LIST){
+		if(value_type!=Type.FIELD_VALUE_ITEMS){
 			return !Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id)]) ? item[Field_Logic.get_field_value_title(value_type,value_id)] : ""
 		}else{
-			return item[Field_Logic.get_field_value_list_title(value_id)] ?  item[Field_Logic.get_field_value_list_title(value_id)] : [];
+			return item[Field_Logic.get_field_value_items_title(value_id)] ?  item[Field_Logic.get_field_value_items_title(value_id)] : [];
 		}
 	};
 	static get_field_value_title = (value_type,value_id,group_id,sub_field_title) =>{
@@ -1260,11 +1259,11 @@ class Field_Logic {
 			case Type.FIELD_VALUE_IMAGE:
 				return 'image'+'_value_'+value_id;
 				break;
-			case Type.FIELD_VALUE_LIST:
+			case Type.FIELD_VALUE_ITEMS:
 				if(!group_id){
-					return 'list'+'_value_'+value_id;
+					return 'items'+'_value_'+value_id;
 				}else{
-					return 'list'+'_value_'+value_id +'_group_' +group_id+"_"+Str.get_title_url(sub_field_title);
+					return 'items'+'_value_'+value_id +'_group_' +group_id+"_"+Str.get_title_url(sub_field_title);
 				}
 				break;
 			default:
@@ -1307,30 +1306,30 @@ class Field_Logic {
 			item.id=Num.get_guid();
 		}
 		if(option.get_value){
-			item = Field_Logic.get_value_list(item,option);
+			item = Field_Logic.get_values(item,option);
 		}
 		if(option.fields){
-			let field_list = String(option.fields).split(',');
-			for(let a = 0; a<field_list.length;a++){
+			let field_items = String(option.fields).split(',');
+			for(let a = 0; a<field_items.length;a++){
 				if(option.get_blank == true){
-					if(item[field_list[a]]){
-						item[field_list[a]] = "";
+					if(item[field_items[a]]){
+						item[field_items[a]] = "";
 					}
 				}else{
-					if(!Str.check_is_null(field_list[a])){
-						item[Str.get_title_url(field_list[a])] = Str.get_title(field_list[a]) +"_" + Num.get_id();
+					if(!Str.check_is_null(field_items[a])){
+						item[Str.get_title_url(field_items[a])] = Str.get_title(field_items[a]) +"_" + Num.get_id();
 					}
 				}
 			}
 		}
 		return item;
 	}
-	static get_field_value_list_title(value_id){
-		return 'list_value_'+value_id;
+	static get_field_value_items_title(value_id){
+		return 'items_value_'+value_id;
 	}
-	static get_value_list_group(item,value_id,group_id){
-		let full_str = 'list_value_'+value_id+"_group_"+group_id;
-		let new_list = [];
+	static get_value_items_group(item,value_id,group_id){
+		let full_str = 'items_value_'+value_id+"_group_"+group_id;
+		let items = [];
 		Log.w(full_str,full_str);
 		let count = 0;
 		for(const prop in item){
@@ -1338,12 +1337,12 @@ class Field_Logic {
 			if(prop.startsWith(full_str)){
 				count = count+1;
 				new_item[prop.replace(full_str+"_","")] = item[prop];
-				new_list.push(new_item);
+				items.push(new_item);
 			}
 		}
-		return new_list;
+		return items;
 	}
-	static get_value_list(item,option){
+	static get_values(item,option){
 		for(let b=0;b<parseInt(option.value_count);b++){
 			if(option.get_blank == false){
 				item['value_'+String(b+1)] = 'value ' + String(b+1);
@@ -1689,10 +1688,10 @@ class Category_Logic {
 		}
 		return categorys;
 	};
-	static get_category_drop_down_list_by_list = (cat_list) => {
+	static get_category_drop_down_by_items = (items) => {
 		let categorys = [];
-		for(let a=0;a<cat_list.length;a++){
-			categorys.push({value:cat_list[a].title,label:cat_list[a].title});
+		for(let a=0;a<items.length;a++){
+			categorys.push({value:items[a].title,label:items[a].title});
 		}
 		return categorys;
 	};
@@ -1841,7 +1840,7 @@ class Sub_Item_Logic {
 			}
 		);
 		if(option.get_value){
-			item = Field_Logic.get_value_list(item,option);
+			item = Field_Logic.get_values(item,option);
 		}
 		return item;
 	}
