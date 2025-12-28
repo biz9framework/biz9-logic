@@ -924,13 +924,13 @@ static get_new = (title,type,category,option) => {
 }
 class Service_Logic {
 	static get_stocks = () => {
-		const r_list=
+		const stocks=
 			[
 				{ value: "0", label: "No Sessions Availble" },
 				{ value: "1", label: "Ready For Booking" },
 				{ value: "2", label: "No Sessions Availble" }
 			];
-		return r_list;
+		return stocks;
 	};
 	static get_stock_by_value = (stock_val) => {
 		switch(stock_val)
@@ -971,7 +971,7 @@ class Service_Logic {
 	}
 	static get_test_items_by_category = (option) =>{
 		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
-		let service_list = [];
+		let services = [];
 		let categorys = Category_Logic.get_type_categorys(DataType.SERVICE,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<categorys.length;a++){
@@ -979,10 +979,10 @@ class Service_Logic {
 				item_count++;
 				let service = Service_Logic.get_test("Service "+String(parseInt(b+1)),option);
 				service.category = categorys[Num.get_id(categorys.length+1)].title;
-				service_list.push(service);
+				services.push(service);
 			}
 		}
-		return [categorys,service_list]
+		return [categorys,services]
 	};
 }
 class Content_Logic {
@@ -1008,7 +1008,7 @@ class Content_Logic {
 	}
 	static get_test_items_by_category = (option) =>{
 		option = Field_Logic.get_option(DataType.CONTENT,option?option:{});
-		let content_list = [];
+		let contents = [];
 		let categorys = Category_Logic.get_type_categorys(DataType.CONTENT,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<categorys.length;a++){
@@ -1016,10 +1016,10 @@ class Content_Logic {
 				item_count++;
 				let content = Content_Logic.get_test("Content "+String(parseInt(b+1)),option);
 				content.category = categorys[Num.get_id(categorys.length+1)].title;
-				content_list.push(content);
+				contents.push(content);
 			}
 		}
-		return [categorys,content_list]
+		return [categorys,contents]
 	};
 }
 class Template_Logic {
@@ -1057,7 +1057,7 @@ class Blog_Post_Logic {
 	}
 	static get_test_items_by_category = (option) =>{
 		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
-		let blog_post_list = [];
+		let blog_posts = [];
 		let categorys = Category_Logic.get_type_categorys(DataType.BLOG_POST,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<categorys.length;a++){
@@ -1065,10 +1065,10 @@ class Blog_Post_Logic {
 				item_count++;
 				let blog_post = Blog_Post_Logic.get_test("Blog Post "+String(parseInt(b+1)),option);
 				blog_post.category = categorys[Num.get_id(categorys.length+1)].title;
-				blog_post_list.push(blog_post);
+				blog_posts.push(blog_post);
 			}
 		}
-		return [categorys,blog_post_list]
+		return [categorys,blog_posts]
 	};
 }
 class Gallery_Logic {
@@ -1091,14 +1091,14 @@ class Gallery_Logic {
 };
 class Event_Logic {
 	static get_stocks = () => {
-		const r_list=
+		const stocks =
 			[
 				{ value: "0", label: "Sold Out" },
 				{ value: "1", label: "Less Than 25 Tickets Remaining" },
 				{ value: "2", label: "Tickets Are Availble" },
 				{ value: "3", label: "Sold Out" },
 			];
-		return r_list;
+		return stocks;
 	};
 	static get_stock_by_value = (stock_val) => {
 		switch(stock_val)
@@ -1159,7 +1159,7 @@ class Event_Logic {
 	}
 	static get_test_items_by_category = (option) =>{
 		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
-		let event_list = [];
+		let events = [];
 		let categorys = Category_Logic.get_type_categorys(DataType.EVENT,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<categorys.length;a++){
@@ -1167,10 +1167,10 @@ class Event_Logic {
 				item_count++;
 				let event = Event_Logic.get_test("Event "+String(parseInt(b+1)),option);
 				event.category = categorys[Num.get_id(categorys.length+1)].title;
-				event_list.push(event);
+				events.push(event);
 			}
 		}
-		return [categorys,event_list]
+		return [categorys,events]
 	};
 }
 class Field_Logic {
@@ -1325,7 +1325,6 @@ class Field_Logic {
 		}
 		return item;
 	}
-	//here
 	static get_field_value_list_title(value_id){
 		return 'list_value_'+value_id;
 	}
@@ -1542,20 +1541,6 @@ class Favorite_Logic {
 			parent_id:parent_id,
 			user_id:user_id
 		});
-	}
-	static old_get_favorite_by_list = (favorite_list,items) =>{
-		if(!items){
-			items = [];
-		}
-		if(items.length>0){
-		favorite_list.forEach(item => {
-			const item_match = items.find(item_find => item_find.id === item.parent_id);
-			if (item_match) {
-				item_match.is_favorite = true;
-			}
-		});
-		}
-		return items;
 	}
 	static get_user_search_filter = (item_data_type,user_id) =>{
 		return {
@@ -1862,21 +1847,21 @@ class Sub_Item_Logic {
 	}
 	static get_test_items(parent_item,top_item,option){
 		option = Field_Logic.get_option(DataType.SUB_ITEM,option?option:{});
-		let new_list = [];
+		let items = [];
 		for(let a=0;a<option.item_count;a++){
 			let item_title ="Item " + String(parseInt(a+1));
-			new_list.push(Sub_Item_Logic.get_test(item_title,parent_item,top_item,option));
+			items.push(Sub_Item_Logic.get_test(item_title,parent_item,top_item,option));
 		}
-		return new_list;
+		return items;
 	}
 	static get_test_sections(parent_item,top_item,option){
-		let new_list = [];
+		let items = [];
 		for(let a=0;a<option.section_count;a++){
 			let item_title ="Section " + String(parseInt(a+1));
 			let item = Sub_Item_Logic.get_test(item_title,parent_item,top_item,option);
-			new_list.push(item);
+			items.push(item);
 		}
-		return new_list;
+		return items;
 	}
 	static bind_parent_child_items(item,items){
 		for(let a=0;a<items.length;a++){
