@@ -237,6 +237,7 @@ class Type {
 	static FIELD_ROLE = 'role';
 	static FIELD_SOURCE='source';
 	static FIELD_SOURCE_DATA_TYPE='source_data_type';
+	static FIELD_SOURCE_KEY='source_key';
 	static FIELD_SOURCE_ID='source_id';
 	static FIELD_SOURCE_PARENT_ID='source_parent_id';
     static FIELD_SETTING_VISIBLE = 'setting_visible';
@@ -2065,7 +2066,6 @@ class Image_Logic {
 				size:0,
 				type_resize:Type.IMAGE_RESIZE_NONE,
 			},
-			/*
 			{
 				image_filename:Type.IMAGE_SIZE_THUMB+"_"+image_filename,
 				path_filename:upload_dir+"/"+Type.IMAGE_SIZE_THUMB+"_"+image_filename,
@@ -2078,7 +2078,6 @@ class Image_Logic {
 				size:720,
 				type_resize:Type.IMAGE_RESIZE_NORMAL,
 			},
-			*/
 			{
 				image_filename:Type.IMAGE_SIZE_LARGE+"_"+image_filename,
 				path_filename:upload_dir+"/"+Type.IMAGE_SIZE_LARGE+"_"+image_filename,
@@ -2097,14 +2096,12 @@ class Image_Logic {
 				size:720,
 				type_resize:Type.IMAGE_RESIZE_SQUARE,
 			},
-			/*
 			{
 				image_filename:Type.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename,
 				path_filename:upload_dir+"/"+Type.IMAGE_SIZE_SQUARE_LARGE+"_"+image_filename,
 				size:1000,
 				type_resize:Type.IMAGE_RESIZE_SQUARE,
 			},
-			*/
 		];
 	}
 }
