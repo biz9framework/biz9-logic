@@ -271,6 +271,7 @@ class Type {
 	static TITLE_COUNT='count';
 	static TITLE_GROUP='group';
 	static TITLE_N_A='n/a';
+	static TITLE_IMAGES='images';
 	static TITLE_ITEMS='items';
 	static TITLE_OBJ='obj';
 	static TITLE_ORDER_ITEMS='order_items';
@@ -629,11 +630,11 @@ class Type {
 	};
 }
 class Stat_Logic {
-	static get_new = (parent_data_type,parent_id,stat_type,user_id,post_data) => {
+	static get_new = (parent_data_type,parent_id,type,user_id,post_data) => {
 		let new_stat = DataItem.get_new(DataType.STAT,0,
 			{
 				user_id:user_id,
-				stat_type:stat_type,
+				type:type,
 				parent_data_type:parent_data_type,
 				parent_id:parent_id
 			});
