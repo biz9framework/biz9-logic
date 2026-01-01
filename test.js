@@ -32,12 +32,12 @@ describe("connect", () => {
             function(call) {
                 console.log('CONNECT-BASE-START');
                 // -->
-                let parent_item = DataItem.get_new(Type.DATA_PRODUCT,0);
+                //let parent_item = DataItem.get_new(Type.DATA_PRODUCT,0);
                 // -->
-                let join = App_Logic.get_join({},'','',{});
+                //let join = App_Logic.get_join({},'','',{});
                 // -->
-                Log.w('99_join',join);
-                //Log.w('99_result',parent_item);
+                let item = App_Logic.get_item(Type.TITLE_LIST,App_Logic.get_search(Type.DATA_ITEM,{},{},1,0));
+                Log.w('99_result',item);
 
 
                 //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
