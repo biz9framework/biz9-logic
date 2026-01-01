@@ -1979,6 +1979,14 @@ class App_Logic {
 		title = title ? title : '';
 		return {type:type,foreign_data_type:foreign_data_type,parent_field:parent_field,field:field,image:image,title:title};
 	}
+	static get_item = (type,search,field,image,title) => {
+		type = type ? type : Type.TITLE_ITEMS;
+		search = search ? search : App_Logic.get_search(Type.DATA_BLANK,{},{},1,0);
+		field = field ? field : {};
+		image = image ? image : {};
+		title = title ? title : '';
+		return {type:type,search:search,field:field,image:image,title:title};
+	}
 	static get_not_found = (data_type,id,option) =>{
 		option=option?option:{};
 		if(data_type != Type.DATA_USER){
