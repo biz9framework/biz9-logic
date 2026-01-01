@@ -68,7 +68,7 @@ class Item_Logic {
     	return child_obj;
 	};
 	static get_test = (title,data_type,id,option)=>{
-		data_type = data_type ? data_type : DataType.BLANK;
+		data_type = data_type ? data_type : Type.DATA_BLANK;
 		id = id ? id : 0;
 		option = Field_Logic.get_option(data_type,option?option:{});
 		let item = DataItem.get_new(data_type,0,Field_Logic.get_test(title,option));
@@ -150,7 +150,7 @@ class Title {
 class Demo_Logic {
 	static get_new_type = (title,option) => {
 		title = !Str.check_is_null(title)?title:Title.TYPE+" " +Num.get_id(999);
-		option = option ? option : {get_category:false,category_count:6,categorys:'',category_data_type:DataType.BLANK,get_item:false,items:'',item_data_type:DataType.BLANK,item_count:6}; const item = Item_Logic.get_new(title,DataType.TYPE); //category
+		option = option ? option : {get_category:false,category_count:6,categorys:'',category_data_type:Type.DATA_BLANK,get_item:false,items:'',item_data_type:Type.DATA_BLANK,item_count:6}; const item = Item_Logic.get_new(title,Type.DATA_TYPE); //category
 		if(option.get_category){
 			item.categorys = [];
 			let category_titles = [];
@@ -188,7 +188,7 @@ class Demo_Logic {
 						cat_item.items = [];
 					}
 					let child_item = Item_Logic.get_new(child_item_title,option.item_data_type);
-						if(option.item_data_type == DataType.PRODUCT){
+						if(option.item_data_type == Type.DATA_PRODUCT){
 							child_item.cost = Num.get_id(9000);
 							child_item.old_cost = Num.get_id(90000);
 						}
@@ -213,6 +213,41 @@ class Type {
 	static APP_LINK_TYPE_GOOGLE_PLAY='google_play';
 	static APP_LINK_TYPE_APPLE_STORE='apple_store';
 	static APP_LINK_TYPE_CMS='cms';
+
+	//data
+	static DATA_APP='app_biz';
+	static DATA_BLANK='blank_biz';
+	static DATA_BLOG_POST='blog_post_biz';
+	static DATA_CART_ITEM="cart_item_biz";
+	static DATA_CART="cart_biz";
+	static DATA_CART_ITEM="cart_item_biz";
+	static DATA_CART_SUB_ITEM="cart_sub_item_biz";
+	static DATA_CATEGORY='category_biz';
+	static DATA_CUSTOM_FIELD='custom_field_biz';
+	static DATA_CONTENT='content_biz';
+	static DATA_EVENT='event_biz';
+	static DATA_GROUP='group_biz';
+	static DATA_FAQ='faq_biz';
+	static DATA_FAVORITE='favorite_biz';
+	static DATA_FILE='file_biz';
+	static DATA_GALLERY='gallery_biz';
+	static DATA_IMAGE='image_biz';
+	static DATA_ITEM='item_biz';
+	static DATA_LINK='link_biz';
+	static DATA_ORDER="order_biz";
+	static DATA_ORDER_ITEM="order_item_biz";
+	static DATA_ORDER_SUB_ITEM="order_sub_item_biz";
+	static DATA_ORDER_PAYMENT="order_payment_biz";
+	static DATA_PRODUCT='product_biz';
+	static DATA_PAGE='page_biz';
+	static DATA_REVIEW='review_biz';
+	static DATA_SERVICE='service_biz';
+	static DATA_SECURITY='security_biz';
+	static DATA_STAT='stat_biz';
+	static DATA_TEMPLATE='template_biz';
+	static DATA_TYPE='type_biz';
+	static DATA_USER='user_biz';
+	static DATA_VIDEO='video_biz';
 
 	//field
     static FIELD_AUTHOR = 'author';
@@ -424,30 +459,30 @@ class Type {
 	};
 	static get_data_types = () =>{
 		return [
-			{title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST,label:Type.get_title(DataType.BLOG_POST),value:DataType.BLOG_POST},
-			{title:Type.get_title(DataType.CATEGORY),type:DataType.CATEGORY,label:Type.get_title(DataType.CATEGORY),value:DataType.CATEGORY},
-			{title:Type.get_title(DataType.CONTENT),type:DataType.CONTENT,label:Type.get_title(DataType.CONTENT),value:DataType.CONTENT},
-			{title:Type.get_title(DataType.EVENT),type:DataType.EVENT,label:Type.get_title(DataType.EVENT),value:DataType.EVENT},
-			{title:Type.get_title(DataType.FAQ),type:DataType.FAQ,label:Type.get_title(DataType.FAQ),value:DataType.FAQ},
-			{title:Type.get_title(DataType.GALLERY),type:DataType.GALLERY,label:Type.get_title(DataType.GALLERY),value:DataType.GALLERY},
-			{title:Type.get_title(DataType.USER),type:DataType.USER,label:Type.get_title(DataType.USER),value:DataType.USER},
-			{title:Type.get_title(DataType.PAGE),type:DataType.PAGE,label:Type.get_title(DataType.PAGE),value:DataType.PAGE},
-			{title:Type.get_title(DataType.PRODUCT),type:DataType.PRODUCT,label:Type.get_title(DataType.PRODUCT),value:DataType.PRODUCT},
-			{title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE,label:Type.get_title(DataType.SERVICE),value:DataType.SERVICE}
+			{title:Type.get_title(Type.DATA_BLOG_POST),type:Type.DATA_BLOG_POST,label:Type.get_title(Type.DATA_BLOG_POST),value:Type.DATA_BLOG_POST},
+			{title:Type.get_title(Type.DATA_CATEGORY),type:Type.DATA_CATEGORY,label:Type.get_title(Type.DATA_CATEGORY),value:Type.DATA_CATEGORY},
+			{title:Type.get_title(Type.DATA_CONTENT),type:Type.DATA_CONTENT,label:Type.get_title(Type.DATA_CONTENT),value:Type.DATA_CONTENT},
+			{title:Type.get_title(Type.DATA_EVENT),type:Type.DATA_EVENT,label:Type.get_title(Type.DATA_EVENT),value:Type.DATA_EVENT},
+			{title:Type.get_title(Type.DATA_FAQ),type:Type.DATA_FAQ,label:Type.get_title(Type.DATA_FAQ),value:Type.DATA_FAQ},
+			{title:Type.get_title(Type.DATA_GALLERY),type:Type.DATA_GALLERY,label:Type.get_title(Type.DATA_GALLERY),value:Type.DATA_GALLERY},
+			{title:Type.get_title(Type.DATA_USER),type:Type.DATA_USER,label:Type.get_title(Type.DATA_USER),value:Type.DATA_USER},
+			{title:Type.get_title(Type.DATA_PAGE),type:Type.DATA_PAGE,label:Type.get_title(Type.DATA_PAGE),value:Type.DATA_PAGE},
+			{title:Type.get_title(Type.DATA_PRODUCT),type:Type.DATA_PRODUCT,label:Type.get_title(Type.DATA_PRODUCT),value:Type.DATA_PRODUCT},
+			{title:Type.get_title(Type.DATA_SERVICE),type:Type.DATA_SERVICE,label:Type.get_title(Type.DATA_SERVICE),value:Type.DATA_SERVICE}
 		]
 	};
 	static get_types = () =>{
 		return [
-			{title:Type.get_title(DataType.BLOG_POST),type:DataType.BLOG_POST,label:Type.get_title(DataType.BLOG_POST),value:DataType.BLOG_POST},
-			{title:Type.get_title(DataType.CATEGORY),type:DataType.CATEGORY,label:Type.get_title(DataType.CATEGORY),value:DataType.CATEGORY},
-			{title:Type.get_title(DataType.CONTENT),type:DataType.CONTENT,label:Type.get_title(DataType.CONTENT),value:DataType.CONTENT},
-			{title:Type.get_title(DataType.EVENT),type:DataType.EVENT,label:Type.get_title(DataType.EVENT),value:DataType.EVENT},
-			{title:Type.get_title(DataType.GALLERY),type:DataType.GALLERY,label:Type.get_title(DataType.GALLERY),value:DataType.GALLERY},
-			{title:Type.get_title(DataType.USER),type:DataType.USER,label:Type.get_title(DataType.USER),value:DataType.USER},
-			{title:Type.get_title(DataType.PAGE),type:DataType.PAGE,label:Type.get_title(DataType.PAGE),value:DataType.PAGE},
-			{title:Type.get_title(DataType.PRODUCT),type:DataType.PRODUCT,label:Type.get_title(DataType.PRODUCT),value:DataType.PRODUCT},
-			{title:Type.get_title(DataType.SERVICE),type:DataType.SERVICE,label:Type.get_title(DataType.SERVICE),value:DataType.SERVICE},
-			{title:Type.get_title(DataType.TYPE),type:DataType.TYPE,label:Type.get_title(DataType.TYPE),value:DataType.TYPE}
+			{title:Type.get_title(Type.DATA_BLOG_POST),type:Type.DATA_BLOG_POST,label:Type.get_title(Type.DATA_BLOG_POST),value:Type.DATA_BLOG_POST},
+			{title:Type.get_title(Type.DATA_CATEGORY),type:Type.DATA_CATEGORY,label:Type.get_title(Type.DATA_CATEGORY),value:Type.DATA_CATEGORY},
+			{title:Type.get_title(Type.DATA_CONTENT),type:Type.DATA_CONTENT,label:Type.get_title(Type.DATA_CONTENT),value:Type.DATA_CONTENT},
+			{title:Type.get_title(Type.DATA_EVENT),type:Type.DATA_EVENT,label:Type.get_title(Type.DATA_EVENT),value:Type.DATA_EVENT},
+			{title:Type.get_title(Type.DATA_GALLERY),type:Type.DATA_GALLERY,label:Type.get_title(Type.DATA_GALLERY),value:Type.DATA_GALLERY},
+			{title:Type.get_title(Type.DATA_USER),type:Type.DATA_USER,label:Type.get_title(Type.DATA_USER),value:Type.DATA_USER},
+			{title:Type.get_title(Type.DATA_PAGE),type:Type.DATA_PAGE,label:Type.get_title(Type.DATA_PAGE),value:Type.DATA_PAGE},
+			{title:Type.get_title(Type.DATA_PRODUCT),type:Type.DATA_PRODUCT,label:Type.get_title(Type.DATA_PRODUCT),value:Type.DATA_PRODUCT},
+			{title:Type.get_title(Type.DATA_SERVICE),type:Type.DATA_SERVICE,label:Type.get_title(Type.DATA_SERVICE),value:Type.DATA_SERVICE},
+			{title:Type.get_title(Type.DATA_TYPE),type:Type.DATA_TYPE,label:Type.get_title(Type.DATA_TYPE),value:Type.DATA_TYPE}
 		]
 	};
 	static get_app_environments = () =>{
@@ -575,39 +610,39 @@ class Type {
 			case Type.ORDER_PAYMENT_METHOD_CASH:
 			case Type.ORDER_PAYMENT_METHOD_OTHER:
 			case Type.ORDER_PAYMENT_METHOD_TEST:
-			case DataType.APP:
-			case DataType.BLANK:
-			case DataType.BLOG_POST:
-			case DataType.CART:
-			case DataType.CART_ITEM:
-			case DataType.CART_SUB_ITEM:
-			case DataType.CATEGORY:
-			case DataType.CUSTOM_FIELD:
-			case DataType.CONTENT:
-			case DataType.EVENT:
-			case DataType.FAQ:
-			case DataType.FAVORITE:
-			case DataType.FILE:
-			case DataType.GALLERY:
-			case DataType.GROUP:
-			case DataType.ITEM_MAP:
-			case DataType.ITEM:
-			case DataType.LINK:
-			case DataType.ORDER:
-			case DataType.ORDER_ITEM:
-			case DataType.ORDER_SUB_ITEM:
-			case DataType.ORDER_PAYMENT:
-			case DataType.PRODUCT:
-			case DataType.IMAGE:
-			case DataType.PAGE:
-			case DataType.REVIEW:
-			case DataType.SERVICE:
-			case DataType.SECURITY:
-			case DataType.STAT:
-			case DataType.TEMPLATE:
-			case DataType.TYPE:
-			case DataType.USER:
-			case DataType.VIDEO:
+			case Type.DATA_APP:
+			case Type.DATA_BLANK:
+			case Type.DATA_BLOG_POST:
+			case Type.DATA_CART:
+			case Type.DATA_CART_ITEM:
+			case Type.DATA_CART_SUB_ITEM:
+			case Type.DATA_CATEGORY:
+			case Type.DATA_CUSTOM_FIELD:
+			case Type.DATA_CONTENT:
+			case Type.DATA_EVENT:
+			case Type.DATA_FAQ:
+			case Type.DATA_FAVORITE:
+			case Type.DATA_FILE:
+			case Type.DATA_GALLERY:
+			case Type.DATA_GROUP:
+			case Type.DATA_ITEM_MAP:
+			case Type.DATA_ITEM:
+			case Type.DATA_LINK:
+			case Type.DATA_ORDER:
+			case Type.DATA_ORDER_ITEM:
+			case Type.DATA_ORDER_SUB_ITEM:
+			case Type.DATA_ORDER_PAYMENT:
+			case Type.DATA_PRODUCT:
+			case Type.DATA_IMAGE:
+			case Type.DATA_PAGE:
+			case Type.DATA_REVIEW:
+			case Type.DATA_SERVICE:
+			case Type.DATA_SECURITY:
+			case Type.DATA_STAT:
+			case Type.DATA_TEMPLATE:
+			case Type.DATA_TYPE:
+			case Type.DATA_USER:
+			case Type.DATA_VIDEO:
 			r_type = String(Str.get_title(type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
 			break;
 			default:
@@ -631,7 +666,7 @@ class Type {
 }
 class Stat_Logic {
 	static get_new = (parent_data_type,parent_id,type,user_id,post_data) => {
-		let new_stat = DataItem.get_new(DataType.STAT,0,
+		let new_stat = DataItem.get_new(Type.DATA_STAT,0,
 			{
 				user_id:user_id,
 				type:type,
@@ -668,8 +703,8 @@ class Stat_Logic {
 class Page_Logic {
 static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.PAGE,option?option:{});
-		let page = DataItem.get_new(DataType.PAGE,0,Field_Logic.get_test(title,option));
+		option = Field_Logic.get_option(Type.DATA_PAGE,option?option:{});
+		let page = DataItem.get_new(Type.DATA_PAGE,0,Field_Logic.get_test(title,option));
 		if(option.get_section){
 			page.items = Sub_Item_Logic.get_test_sections(page,page,option);
 			page = Sub_Item_Logic.bind_parent_child_items(page,page.items);
@@ -677,7 +712,7 @@ static get_test = (title,option) =>{
 		return page;
 	};
 	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(DataType.PAGE,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_PAGE,option?option:{});
 		let items = [];
 		for(let a=0;a<parseInt(option.page_count)+1;a++){
 			items.push(Page_Logic.get_test( "Page " +parseInt(a+1)? !option.get_blank : "",option));
@@ -688,7 +723,7 @@ static get_test = (title,option) =>{
 class Order_Logic {
 	static get_new = (cart,option) => {
 		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1};
-		let order = DataItem.get_new(DataType.ORDER,0,{
+		let order = DataItem.get_new(Type.DATA_ORDER,0,{
 			order_number:Title.ORDER_NUMBER + Num.get_id(99999),
 			parent_data_type:cart.parent_data_type,
 			user_id:cart.user_id,
@@ -712,7 +747,7 @@ class Order_Logic {
 			order.payment_plan = option.payment_plan;
 		}
 		cart.cart_items.forEach(cart_item => {
-			let order_item = DataItem.get_new(DataType.ORDER_ITEM,0,{
+			let order_item = DataItem.get_new(Type.DATA_ORDER_ITEM,0,{
 				order_number:order.order_number,
 				parent_data_type:cart_item.parent_data_type,
 				parent_id:cart_item.parent_id,
@@ -733,7 +768,7 @@ class Order_Logic {
              }
         }
 			cart_item.cart_sub_items.forEach(cart_sub_item => {
-				let order_sub_item = DataItem.get_new(DataType.ORDER_SUB_ITEM,0,{
+				let order_sub_item = DataItem.get_new(Type.DATA_ORDER_SUB_ITEM,0,{
 					order_number:order.order_number,
 					parent_data_type:cart_sub_item.parent_data_type,
 					parent_id:cart_sub_item.parent_id,
@@ -759,7 +794,7 @@ class Order_Logic {
 		return order;
 	};
 	static get_new_order_payment = (order_number,payment_method_type,payment_amount) => {
-		return DataItem.get_new(DataType.ORDER_PAYMENT,0,
+		return DataItem.get_new(Type.DATA_ORDER_PAYMENT,0,
 			{
 				order_number:order_number,
 				payment_method_type:payment_method_type,
@@ -789,13 +824,13 @@ class Order_Logic {
 }
 class Cart_Logic {
 	static get_new = (parent_data_type,user_id) => {
-		return DataItem.get_new(DataType.CART,0,{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_items:[]});
+		return DataItem.get_new(Type.DATA_CART,0,{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_items:[]});
 	};
 	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
-		return DataItem.get_new(DataType.CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0,cart_sub_items:[]});
+		return DataItem.get_new(Type.DATA_CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0,cart_sub_items:[]});
 	};
 	static get_new_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
-		return DataItem.get_new(DataType.CART_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0});
+		return DataItem.get_new(Type.DATA_CART_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0});
 	};
     static get_total = (cart) => {
         let grand_total = 0;
@@ -820,7 +855,7 @@ class Cart_Logic {
 class Product_Logic {
 static get_new = (title,type,category,option) => {
 		option = option ? option : {};
-		const item = Item_Logic.get_new(title,DataType.PRODUCT);
+		const item = Item_Logic.get_new(title,Type.DATA_PRODUCT);
 		item.type = type;
 		item.category = category = category?category:"";
 		return item;
@@ -857,8 +892,8 @@ static get_new = (title,type,category,option) => {
 	};
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
-		let product = DataItem.get_new(DataType.PRODUCT,0,Field_Logic.get_test(title,option));
+		option = Field_Logic.get_option(Type.DATA_PRODUCT,option?option:{});
+		let product = DataItem.get_new(Type.DATA_PRODUCT,0,Field_Logic.get_test(title,option));
 		if(option.get_blank ==false){
 			product.cost = Field_Logic.get_test_cost();
 			product.old_cost = Field_Logic.get_test_cost();
@@ -883,8 +918,8 @@ static get_new = (title,type,category,option) => {
 	};
 	static get_test_cart = (cart_number,user_id,option) =>{
 		[cart_number,option] = ield_Logic.get_option_title(cart_number,option);
-		option = Field_Logic.get_option(DataType.CART,option?option:{});
-		let cart = DataItem.get_new(DataType.CART,Num.get_guid(),Field_Logic.get_test(cart_number,option));
+		option = Field_Logic.get_option(Type.DATA_CART,option?option:{});
+		let cart = DataItem.get_new(Type.DATA_CART,Num.get_guid(),Field_Logic.get_test(cart_number,option));
 		cart.user_id = user_id;
 		cart.cart_number = cart_number;
 		if(option.get_cart_item){
@@ -900,7 +935,7 @@ static get_new = (title,type,category,option) => {
 		return cart;
 	};
 	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_PRODUCT,option?option:{});
 		let items = [];
 		for(let a=0;a<option.product_count+1;a++){
 			items.push(Product_Logic.get_test("Product "+String(parseInt(a+1)),option));
@@ -908,9 +943,9 @@ static get_new = (title,type,category,option) => {
 		return items;
 	}
 	static get_test_items_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.PRODUCT,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_PRODUCT,option?option:{});
 		let products = [];
-		let categorys = Category_Logic.get_type_categorys(DataType.PRODUCT,option.category_count);
+		let categorys = Category_Logic.get_type_categorys(Type.DATA_PRODUCT,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<categorys.length;a++){
 			for(let b=0;b<option.product_count;b++){
@@ -949,8 +984,8 @@ class Service_Logic {
 	};
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
-		let service = DataItem.get_new(DataType.SERVICE,0,Field_Logic.get_test(title,option));
+		option = Field_Logic.get_option(Type.DATA_SERVICE,option?option:{});
+		let service = DataItem.get_new(Type.DATA_SERVICE,0,Field_Logic.get_test(title,option));
 		service.cost = Field_Logic.get_test_cost();
 		service.old_cost = Field_Logic.get_test_cost();
 		service.type = "Type "+String(Num.get_id());
@@ -963,7 +998,7 @@ class Service_Logic {
 		return service;
 	};
 	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_SERVICE,option?option:{});
 		let items = [];
 		for(let a=0;a<parseInt(option.service_count)+1;a++){
 			items.push(Service_Logic.get_test("Service "+String(parseInt(a+1)),option));
@@ -971,9 +1006,9 @@ class Service_Logic {
 		return items;
 	}
 	static get_test_items_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.SERVICE,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_SERVICE,option?option:{});
 		let services = [];
-		let categorys = Category_Logic.get_type_categorys(DataType.SERVICE,option.category_count);
+		let categorys = Category_Logic.get_type_categorys(Type.DATA_SERVICE,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<categorys.length;a++){
 			for(let b=0;b<parseInt(option.service_count);b++){
@@ -989,8 +1024,8 @@ class Service_Logic {
 class Content_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.CONTENT,option?option:{});
-		let content = DataItem.get_new(DataType.CONTENT,0,Field_Logic.get_test(title,option));
+		option = Field_Logic.get_option(Type.DATA_CONTENT,option?option:{});
+		let content = DataItem.get_new(Type.DATA_CONTENT,0,Field_Logic.get_test(title,option));
 		if(option.get_item){
 			content.items = Sub_Item_Logic.get_test_sections(content,content,option);
 			if(option.get_item_bind){
@@ -1000,7 +1035,7 @@ class Content_Logic {
 		return content;
 	};
 	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(DataType.CONTENT,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_CONTENT,option?option:{});
 		let items = [];
 		for(let a=0;a<parseInt(option.content_count)+1;a++){
 			items.push(Content_Logic.get_test("Content " +String(parseInt(a+1)),option));
@@ -1008,9 +1043,9 @@ class Content_Logic {
 		return items;
 	}
 	static get_test_items_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.CONTENT,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_CONTENT,option?option:{});
 		let contents = [];
-		let categorys = Category_Logic.get_type_categorys(DataType.CONTENT,option.category_count);
+		let categorys = Category_Logic.get_type_categorys(Type.DATA_CONTENT,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<categorys.length;a++){
 			for(let b=0;b<parseInt(option.content_count);b++){
@@ -1026,16 +1061,16 @@ class Content_Logic {
 class Template_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.TEMPLATE,option?option:{});
-		let template = DataItem.get_new(DataType.TEMPLATE,0,Field_Logic.get_test(title,option));
+		option = Field_Logic.get_option(Type.DATA_TEMPLATE,option?option:{});
+		let template = DataItem.get_new(Type.DATA_TEMPLATE,0,Field_Logic.get_test(title,option));
 		return template;
 	};
 }
 class Blog_Post_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
-		let blog_post = DataItem.get_new(DataType.BLOG_POST,0,Field_Logic.get_test(title,option));
+		option = Field_Logic.get_option(Type.DATA_BLOG_POST,option?option:{});
+		let blog_post = DataItem.get_new(Type.DATA_BLOG_POST,0,Field_Logic.get_test(title,option));
 		if(!option.get_blank){
 			blog_post.author="First Name "+ Num.get_id();
 			blog_post.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id(), " Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
@@ -1049,7 +1084,7 @@ class Blog_Post_Logic {
 		return blog_post;
 	};
 	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_BLOG_POST,option?option:{});
 		let items = [];
 		for(let a=0;a<parseInt(option.blog_post_count)+1;a++){
 			items.push(Blog_Post_Logic.get_test("Blog Post " +String(parseInt(a+1)),option));
@@ -1057,9 +1092,9 @@ class Blog_Post_Logic {
 		return items;
 	}
 	static get_test_items_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.BLOG_POST,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_BLOG_POST,option?option:{});
 		let blog_posts = [];
-		let categorys = Category_Logic.get_type_categorys(DataType.BLOG_POST,option.category_count);
+		let categorys = Category_Logic.get_type_categorys(Type.DATA_BLOG_POST,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<categorys.length;a++){
 			for(let b=0;b<parseInt(option.blog_post_count);b++){
@@ -1075,8 +1110,8 @@ class Blog_Post_Logic {
 class Gallery_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.GALLERY,option?option:{});
-		let gallery = DataItem.get_new(DataType.GALLERY,0,Field_Logic.get_test(title,option));
+		option = Field_Logic.get_option(Type.DATA_GALLERY,option?option:{});
+		let gallery = DataItem.get_new(Type.DATA_GALLERY,0,Field_Logic.get_test(title,option));
 		if(!option.get_blank){
 			gallery.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
 			gallery.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
@@ -1120,8 +1155,8 @@ class Event_Logic {
 	};
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
-		let event = DataItem.get_new(DataType.EVENT,0,Field_Logic.get_test(title,option));
+		option = Field_Logic.get_option(Type.DATA_EVENT,option?option:{});
+		let event = DataItem.get_new(Type.DATA_EVENT,0,Field_Logic.get_test(title,option));
 		if(!option.get_blank){
 			event.cost = Field_Logic.get_test_cost();
 			event.old_cost = Field_Logic.get_test_cost();
@@ -1151,7 +1186,7 @@ class Event_Logic {
 		return event;
 	};
 	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_EVENT,option?option:{});
 		let items = [];
 		for(let a=0;a<parseInt(option.event_count)+1;a++){
 			items.push(Event_Logic.get_test("Event "+String(parseInt(a+1)),option));
@@ -1159,9 +1194,9 @@ class Event_Logic {
 		return items;
 	}
 	static get_test_items_by_category = (option) =>{
-		option = Field_Logic.get_option(DataType.EVENT,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_EVENT,option?option:{});
 		let events = [];
-		let categorys = Category_Logic.get_type_categorys(DataType.EVENT,option.category_count);
+		let categorys = Category_Logic.get_type_categorys(Type.DATA_EVENT,option.category_count);
 		let item_count = 0;
 		for(let a=0;a<categorys.length;a++){
 			for(let b=0;b<parseInt(option.event_count);b++){
@@ -1359,7 +1394,7 @@ class Field_Logic {
 		return item;
 	};
 	static get_option(data_type,option){
-		data_type = data_type ? data_type : DataType.BLANK;
+		data_type = data_type ? data_type : Type.DATA_BLANK;
 		option = !Obj.check_is_empty(option) ? option : {get_value:false,get_item:false,get_image:false,item_count:9,value_count:9};
 		option.generate_id = option.generate_id ? option.generate_id : false;
 		option.get_image = option.get_image ? true : false;
@@ -1373,36 +1408,36 @@ class Field_Logic {
 		option.category_count = option.category_count ? option.category_count : 9;
 		option.category_title = option.category_title ? option.category_title : "";
 		option.fields = option.fields ? option.fields : [];
-		if(option.data_type==DataType.PAGE){
+		if(option.data_type==Type.DATA_PAGE){
 			option.page_count = option.page_count ? option.page_count : 9;
 			option.section_count = option.section_count ? option.section_count : 9;
 			option.get_section = option.get_section ? true : false;
 		}
-		if(data_type==DataType.PRODUCT){
+		if(data_type==Type.DATA_PRODUCT){
 			option.product_count = option.product_count ? option.product_count : 9;
 		}
-		if(data_type==DataType.SERVICE){
+		if(data_type==Type.DATA_SERVICE){
 			option.service_count = option.service_count ? option.service_count : 9;
 		}
-		if(data_type==DataType.BLOG_POST){
+		if(data_type==Type.DATA_BLOG_POST){
 			option.blog_post_count = option.blog_post_count ? option.blog_post_count : 9;
 		}
-		if(data_type==DataType.EVENT){
+		if(data_type==Type.DATA_EVENT){
 			option.event_count = option.event_count ? option.event_count : 9;
 		}
-		if(data_type==DataType.FAQ){
+		if(data_type==Type.DATA_FAQ){
 			option.question_count = option.question_count ? option.question_count : 9;
 		}
-		if(data_type==DataType.CONTENT){
+		if(data_type==Type.DATA_CONTENT){
 			option.content_count = option.content_count ? option.content_count : 9;
 		}
-		if(data_type==DataType.SUB_ITEM){
+		if(data_type==Type.DATA_SUB_ITEM){
 			option.item_count = option.item_count ? option.item_count : 9;
 		}
-		if(data_type==DataType.USER){
+		if(data_type==Type.DATA_USER){
 			option.user_count = option.user_count ? option.user_count : 9;
 		}
-		if(data_type==DataType.CART){
+		if(data_type==Type.DATA_CART){
 			option.category_title = option.category_title ? option.category_title : "";
 			option.value_count = option.value_count ? option.value_count : 9;
 			option.get_cart_item = option.get_cart_item ? option.get_cart_item : false;
@@ -1410,13 +1445,13 @@ class Field_Logic {
 			option.get_cart_sub_item = option.get_cart_sub_item ? option.get_cart_sub_item : false;
 			option.cart_sub_item_count = option.cart_sub_item_count ? option.cart_sub_item_count : 3;
 		}
-		if(data_type==DataType.CART_ITEM){
+		if(data_type==Type.DATA_CART_ITEM){
 			option.category_title = option.category_title ? option.category_title : "";
 			option.value_count = option.value_count ? option.value_count : 9;
 			option.get_cart_sub_item = option.get_cart_sub_item ? option.get_cart_sub_item : false;
 			option.cart_sub_item_count = option.cart_sub_item_count ? option.cart_sub_item_count : 1;
 		}
-		if(data_type==DataType.ORDER){
+		if(data_type==Type.DATA_ORDER){
 			option.category_title = option.category_title ? option.category_title : "";
 			option.value_count = option.value_count ? option.value_count : 9;
 			option.get_order_item = option.get_order_item ? option.get_order_item : false;
@@ -1424,7 +1459,7 @@ class Field_Logic {
 			option.get_order_sub_item = option.get_order_sub_item ? option.get_order_sub_item : false;
 			option.order_sub_item_count = option.order_sub_item_count ? option.order_sub_item_count : 3;
 		}
-		if(data_type==DataType.ORDER_ITEM){
+		if(data_type==Type.DATA_ORDER_ITEM){
 			option.category_title = option.category_title ? option.category_title : "";
 			option.value_count = option.value_count ? option.value_count : 9;
 			option.get_order_sub_item = option.get_order_sub_item ? option.get_order_sub_item : false;
@@ -1500,7 +1535,8 @@ class Field_Logic {
 		return option;
 	}
 }
-class DataType {
+/*
+class Type.DATA_{
 	static APP='app_biz';
 	static BLANK='blank_biz';
 	static BLOG_POST='blog_post_biz';
@@ -1535,9 +1571,10 @@ class DataType {
 	static USER='user_biz';
 	static VIDEO='video_biz';
 }
+*/
 class Favorite_Logic {
 	static get_new = (parent_data_type,parent_id,user_id) =>{
-		return DataItem.get_new(DataType.FAVORITE,0,{
+		return DataItem.get_new(Type.DATA_FAVORITE,0,{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
 			user_id:user_id
@@ -1561,7 +1598,7 @@ class Favorite_Logic {
 }
 class Review_Logic {
 	static get_new = (parent_data_type,parent_id,user_id,title,comment,rating) =>{
-		return DataItem.get_new(DataType.REVIEW,0,{
+		return DataItem.get_new(Type.DATA_REVIEW,0,{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
 			user_id:user_id,
@@ -1585,8 +1622,8 @@ class Review_Logic {
 			] };
 	}
 	static get_test = (item_data_type,item_id,user_id,option) =>{
-		option = Field_Logic.get_option(DataType.REVIEW,option?option:{});
-		let review = DataItem.get_new(DataType.REVIEW,0);
+		option = Field_Logic.get_option(Type.DATA_REVIEW,option?option:{});
+		let review = DataItem.get_new(Type.DATA_REVIEW,0);
 		if(!option.get_blank){
 			review.title = 'Title ' + Num.get_id();
 			review.item_data_type = item_data_type;
@@ -1617,18 +1654,18 @@ class Admin_Logic {
 	static get_new = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
 		return DataItem.get_new_full_item(
-			DataItem.get_new(DataType.ADMIN,0),
-			DataItem.get_new(DataType.ADMIN,0),
-			DataItem.get_new(DataType.ADMIN,0),{
+			DataItem.get_new(Type.DATA_ADMIN,0),
+			DataItem.get_new(Type.DATA_ADMIN,0),
+			DataItem.get_new(Type.DATA_ADMIN,0),{
 				title:title,
 				email:"",
 			});
 	};
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.ADMIN,option?option:{});
-		let item = DataItem.get_new(DataType.ADMIN,0);
-		let admin = DataItem.get_new(DataType.ADMIN,0,Field_Logic.get_test(title,option));
+		option = Field_Logic.get_option(Type.DATA_ADMIN,option?option:{});
+		let item = DataItem.get_new(Type.DATA_ADMIN,0);
+		let admin = DataItem.get_new(Type.DATA_ADMIN,0,Field_Logic.get_test(title,option));
 		if(!option.get_blank){
 			admin.email="ceo@admin"+Num.get_id()+".com";
 			admin.password="1234567";
@@ -1658,22 +1695,22 @@ class DataItem {
 class Category_Logic {
 	static get_new = (title,type,category,option) => {
 		option = option ? option : {};
-		const item = Item_Logic.get_new(title,DataType.CATEGORY);
+		const item = Item_Logic.get_new(title,Type.DATA_CATEGORY);
 		item.type = type;
 		item.category = category = category?category:"";
 		return item;
 	};
 	static get_test = (title,option) =>{
 		title = (title) ? title : "Category 1";
-		option = Field_Logic.get_option(DataType.CATEGORY,option?option:{});
-		let category = DataItem.get_new(DataType.CATEGORY,0,Field_Logic.get_test(title,option));
+		option = Field_Logic.get_option(Type.DATA_CATEGORY,option?option:{});
+		let category = DataItem.get_new(Type.DATA_CATEGORY,0,Field_Logic.get_test(title,option));
 		if(option.get_item){
 			category.items = Sub_Item_Logic.get_test_items(category,category,option);
 		}
 		return category;
 	};
 	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(DataType.CATEGORY,option);
+		option = Field_Logic.get_option(Type.DATA_CATEGORY,option);
 		let items = [];
 		for(let a=0;a<option.category_count;a++){
 			items.push(Category_Logic.get_test("Category " +String(parseInt(a+1)),option));
@@ -1681,10 +1718,10 @@ class Category_Logic {
 		return items;
 	}
 	static get_test_items_by_type = (type,option) =>{
-		option = Field_Logic.get_option(DataType.CATEGORY,option);
+		option = Field_Logic.get_option(Type.DATA_CATEGORY,option);
 		let categorys = [];
 		for(let a=0;a<option.category_count;a++){
-			let category = DataItem.get_new(DataType.CATEGORY,0,Field_Logic.get_test("Category " +String(parseInt(a+1)),option));
+			let category = DataItem.get_new(Type.DATA_CATEGORY,0,Field_Logic.get_test("Category " +String(parseInt(a+1)),option));
 			category.type = type;
 			categorys.push(category);
 		}
@@ -1776,11 +1813,11 @@ class User_Logic {
 
 	}
 	static get_guest(){
-		return DataItem.get_new(DataType.USER,0,{is_guest:true,title_url:'guest',first_name:'Guest',last_name:'User',email:'guest@email.com',title:"Guest",country:"United States"});
+		return DataItem.get_new(Type.DATA_USER,0,{is_guest:true,title_url:'guest',first_name:'Guest',last_name:'User',email:'guest@email.com',title:"Guest",country:"United States"});
 	}
 	static get_request_user(req){
 		if(!req || !req.session.user){
-			let user=DataItem.get_new(DataType.USER,Num.get_id(9999999),{is_guest:true});
+			let user=DataItem.get_new(Type.DATA_USER,Num.get_id(9999999),{is_guest:true});
 			req.session.user=user;
 		}
 		return req.session.user;
@@ -1794,8 +1831,8 @@ class User_Logic {
 	}
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(DataType.USER,option?option:{});
-		let user = DataItem.get_new(DataType.USER,0,
+		option = Field_Logic.get_option(Type.DATA_USER,option?option:{});
+		let user = DataItem.get_new(Type.DATA_USER,0,
 			Field_Logic.get_test(title,option));
 		if(option.get_blank){
 			user.first_name="";
@@ -1817,7 +1854,7 @@ class User_Logic {
 		return user;
 	};
 	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(DataType.USER,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_USER,option?option:{});
 		let items = [];
 		for(let a=0;a<option.user_count+1;a++){
 			items.push(User_Logic.get_test("User " +String(parseInt(a+1)),option));
@@ -1827,14 +1864,14 @@ class User_Logic {
 }
 class Sub_Item_Logic {
 	static get_test(title,parent_item,top_item,option){
-		option = Field_Logic.get_option(DataType.ITEM,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_ITEM,option?option:{});
 		let item_title =title;
 		let item = DataItem.get_new(
-			DataType.ITEM,0, {
+			Type.DATA_ITEM,0, {
 				top_id:top_item.id?top_item.id:0,
-				top_data_type:top_item.data_type?top_item.data_type:DataType.BLANK,
+				top_data_type:top_item.data_type?top_item.data_type:Type.DATA_BLANK,
 				parent_id:parent_item.id?parent_item.id:0,
-				parent_data_type:parent_item.data_type?parent_item.data_type:DataType.BLANK,
+				parent_data_type:parent_item.data_type?parent_item.data_type:Type.DATA_BLANK,
 				title:item_title,
 				title_url:Str.get_title_url(item_title),
 				description:"Description "+String(Num.get_id()),
@@ -1847,7 +1884,7 @@ class Sub_Item_Logic {
 		return item;
 	}
 	static get_test_items(parent_item,top_item,option){
-		option = Field_Logic.get_option(DataType.SUB_ITEM,option?option:{});
+		option = Field_Logic.get_option(Type.DATA_SUB_ITEM,option?option:{});
 		let items = [];
 		for(let a=0;a<option.item_count;a++){
 			let item_title ="Item " + String(parseInt(a+1));
@@ -1914,8 +1951,8 @@ class App_Logic {
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
 	static get_new = (title,user_id,type,option) =>{
-		option = Field_Logic.get_option(DataType.APP,option?option:{});
-		let app = DataItem.get_new(DataType.APP,0);
+		option = Field_Logic.get_option(Type.DATA_APP,option?option:{});
+		let app = DataItem.get_new(Type.DATA_APP,0);
 		app.title = title;
 		app.user_id = user_id;
 		app.type = type;
@@ -1924,9 +1961,27 @@ class App_Logic {
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
+	static get_join = (type,search,field,image,title) => {
+		type = type ? type : Type.TITLE_ITEMS;
+		search = search ? search : App_Logic.get_search(Type.DATA_BLANK,{},{},1,0);
+		field = field ? field : {};
+		image = image ? image : {};
+		title = title ? title : '';
+		return {type:type,search:search,field:field,image:image,title:title};
+	}
+	static get_foreign = (type,foreign_data_type,foreign_field,parent_field,field,image,title) => {
+		type = type ? type : Type.TITLE_ITEMS;
+		foreign_data_type = foreign_data_type ? foreign_data_type : DataType.BLANK;
+		foreign_field = foreign_field ? foreign_field : Type.FIELD_PARENT_ID;
+		parent_field = parent_field ? parent_field : parent_field;
+		field = field ? field : {};
+		image = image ? image : {};
+		title = title ? title : '';
+		return {type:type,foreign_data_type:foreign_data_type,parent_field:parent_field,field:field,image:image,title:title};
+	}
 	static get_not_found = (data_type,id,option) =>{
 		option=option?option:{};
-		if(data_type != DataType.USER){
+		if(data_type != Type.DATA_USER){
 		if(!id){
 			id=0;
 		}
@@ -1956,7 +2011,7 @@ class App_Logic {
 		if(search.data_type){
 			url = url + "&data_type="+search.data_type;
 		}else{
-			url = url + "&data_type="+DataType.BLANK;
+			url = url + "&data_type="+Type.DATA_BLANK;
 		}
 		if(search.sort_by_key){
 			url = url + "&sort_by_key="+search.sort_by_key;
@@ -2002,7 +2057,7 @@ class App_Logic {
 	static get_data_search_result = (app_id,data_type,item_count,page_count,filter,items,option) =>{
 		return{
 			option:option?option:{},
-			data_type:data_type?data_type:DataType.BLANK,
+			data_type:data_type?data_type:Type.DATA_BLANK,
 			item_count:item_count?item_count:0,
 			page_count:page_count?page_count:1,
 			filter:filter?filter:{},
@@ -2027,7 +2082,7 @@ class File_Logic {
 		return host+"/"+size + "_"+file_filename+param;
 	}
 	static get_new_by_base64 = (item_file) =>{
-    	let item = DataItem.get_new(DataType.FILE,0,item_file);
+    	let item = DataItem.get_new(Type.DATA_FILE,0,item_file);
         item.extension = !Str.check_is_null(Str.get_file_type_from_base64(item.file_data)) ? Str.get_file_type_from_base64(item.file_data).extension : 'txt';
         item.file_filename = !Str.check_is_null(Str.get_file_type_from_base64(item.file_data)) ? Str.get_guid()+ "." + item.extension : 'not_found.txt';
         item.buffer = !Str.check_is_null(Str.get_file_type_from_base64(item_file.file_data)) ? Buffer.from(item_file.file_data.split(';base64,').pop(), 'base64') : null;
@@ -2051,7 +2106,7 @@ class Image_Logic {
 		return host+"/"+size + "_"+image_filename+param;
 	}
 	static get_new_by_base64 = (item_image) =>{
-    	let item = DataItem.get_new(DataType.IMAGE,0,item_image);
+    	let item = DataItem.get_new(Type.DATA_IMAGE,0,item_image);
         item.extension = !Str.check_is_null(Str.get_file_type_from_base64(item.image_data)) ? Str.get_file_type_from_base64(item.image_data).extension : 'jpeg';
         item.image_filename = !Str.check_is_null(Str.get_file_type_from_base64(item.image_data)) ? Str.get_guid()+ "." + item.extension : 'not_found.jpeg';
         item.buffer = !Str.check_is_null(Str.get_file_type_from_base64(item_image.image_data)) ? Buffer.from(item_image.image_data.split(';base64,').pop(), 'base64') : null;
@@ -2113,6 +2168,7 @@ class Url {
 	static CART_POST="item/cart_post";
 	//cms
 	static CMS_DEMO_POST="cms/demo_post";
+	static CMS_GET="cms/get";
 	static CMS_POST="cms/post";
 	static CMS_ITEM_PARENT_TOP_TYPE_CATEGORY="cms/item_parent_top_type_category";
 	static CMS_SEARCH_ITEM_TYPE_CATEGORY="cms/search_item_type_category";
@@ -2195,7 +2251,6 @@ module.exports = {
 	Category_Logic,
 	Content_Logic,
 	DataItem,
-	DataType,
 	Demo_Logic,
 	Event_Logic,
 	File_Logic,

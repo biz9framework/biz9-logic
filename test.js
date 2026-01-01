@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,DataType,Item_Logic,User_Logic,Page_Logic,Product_Logic,Type,Title,Stat_Logic,Service_Logic,Blog_Post_Logic,Event_Logic,Demo_Logic,Cart_Logic,Order_Logic,App_Logic,Field_Logic,Image_Logic,Message} = require('./index');
+const {DataItem,Type,App_Logic} = require('./index');
 const {Log,Num,Str,Obj} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -31,11 +31,13 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-BASE-START');
-                let data_type = DataType.PRODUCT;
-                let id = 0;
-                let parent_data_type = DataType.PRODUCT;
-                let parent_id = 3334;
-                let user_id = 0;
+                // -->
+                let parent_item = DataItem.get_new(Type.DATA_PRODUCT,0);
+                // -->
+                let join = App_Logic.get_join({},'','',{});
+                // -->
+                Log.w('99_join',join);
+                //Log.w('99_result',parent_item);
 
 
                 //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
@@ -54,7 +56,7 @@ describe("connect", () => {
             /*
         function(call) {
             console.log('CONNECT-CMS-DEMO-START');
-            let category_type = DataType.PRODUCT;
+            let category_type = Type.DATA_PRODUCT;
             let category_count = 12;
             let item_count = 500;
 
@@ -82,11 +84,11 @@ describe("connect", () => {
             /*
             function(call) {
             //console.log('CONNECT-START');
-            //let post_cart = Cart_Logic.get_new(DataType.PRODUCT,0,);
+            //let post_cart = Cart_Logic.get_new(Type.DATA_PRODUCT,0,);
             //let post_cart_list = [];
-            //let post_cart_item = Cart_Logic.get_new_cart_item(DataType.PRODUCT,123,post_cart.cart_number,1,30);
-            //let post_cart_sub_item = Cart_Logic.get_new_cart_sub_item(DataType.PRODUCT,1234,post_cart.cart_number,1,10);
-            //let post_cart_sub_item_2 = Cart_Logic.get_new_cart_sub_item(DataType.PRODUCT,1234,post_cart.cart_number,1,30);
+            //let post_cart_item = Cart_Logic.get_new_cart_item(Type.DATA_PRODUCT,123,post_cart.cart_number,1,30);
+            //let post_cart_sub_item = Cart_Logic.get_new_cart_sub_item(Type.DATA_PRODUCT,1234,post_cart.cart_number,1,10);
+            //let post_cart_sub_item_2 = Cart_Logic.get_new_cart_sub_item(Type.DATA_PRODUCT,1234,post_cart.cart_number,1,30);
             //post_cart_item.cart_sub_item_list.push(post_cart_sub_item);
             //post_cart_item.cart_sub_item_list.push(post_cart_sub_item_2);
             //post_cart.cart_item_list.push(post_cart_item);
