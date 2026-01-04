@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,Type,App_Logic} = require('./index');
+const {DataItem,Type,App_Logic,Data_Logic} = require('./index');
 const {Log,Num,Str,Obj} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -36,9 +36,15 @@ describe("connect", () => {
                 // -->
                 //let join = App_Logic.get_join({},'','',{});
                 // -->
-                let item = App_Logic.get_item(Type.TITLE_LIST,App_Logic.get_search(Type.DATA_ITEM,{},{},1,0));
-                Log.w('99_result',item);
-
+                //let data = Data_Logic.get_biz(Type.DATA_BLANK,0);
+                let parent = Data_Logic.get_biz(Type.DATA_SERVICE,0,{test:true,generate_title:true});
+                let data = Data_Logic.get_biz(Type.DATA_BLANK,0,{test:true,generate_title:true,parent:parent});
+                //let data = Data_Logic.get_biz(Type.DATA_BLANK,0,{title:'cool bean',data:{field_1:'field_1',field_2:'field_2'}});
+                //let data = Data_Logic.get_biz(Type.DATA_BLANK,0,{title:'cool bean'});
+                //let data = Data_Logic.get_biz(Type.DATA_BLANK,0,{data:{field_1:'field_1',field_2:'field_2'}});
+                //let data = Data_Logic.get_biz(Type.DATA_BLANK,0,{test:true});
+                //Log.w('99_result_parent',parent);
+                //Log.w('99_result_data',data);
 
                 //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
                 //Log.w('Title 2',Type.get_title(Type.ORDER_STATUS_COMPLETE));

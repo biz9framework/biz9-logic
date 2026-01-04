@@ -829,8 +829,6 @@ class Product_Logic {
 		if(option.get_blank ==false){
 			product.cost = Field_Logic.get_test_cost();
 			product.old_cost = Field_Logic.get_test_cost();
-			product.cart_count = 0;
-			product.order_count = 0;
 			product.type = "Type "+String(Num.get_id());
 			product.sub_type = "Sub Type "+String(Num.get_id());
 			product.stock = String(Num.get_id(3-1));
@@ -986,6 +984,21 @@ class Template_Logic {
 		return template;
 	};
 }
+class Blank_Logic {
+	static get_test = (title,option) =>{
+		[title,option] = Field_Logic.get_option_title(title,option);
+		option = Field_Logic.get_option(Type.DATA_BLANK,option?option:{});
+		let blog_post = Data_Logic.get_new(Type.DATA_BLANK,0,Field_Logic.get_test(title,option));
+		if(!option.get_blank){
+			blog_post.field_1="Field 1 "+ Num.get_id();
+			blog_post.field_2="Field 2 "+ Num.get_id();
+		}else{
+			blog_post.field_1="";
+			blog_post.field_2 = "";
+		}
+		return blog_post;
+	};
+};
 class Blog_Post_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
@@ -1222,7 +1235,7 @@ class Field_Logic {
 		return String(Num.get_id(999)) + "." + String(Num.get_id(99));
 	}
 	static get_test_note = () => {
-		return "Note "+String(Num.get_id()) + " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+		return "Note "+String(Num.get_id()) + " Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 	}
 	static get_test = (title,option) =>{
 		option = !Obj.check_is_empty(option) ? option : {};
@@ -1723,30 +1736,80 @@ class User_Logic {
 	}
 }
 class Data_Logic {
-	static get_new = (data_type,id,option) => {
-		return get_new_item_main(data_type,id,option?option:{});
+	static get_new = (data_type,id,data) => {
+		return get_new_item_main(data_type,id,data?data:{});
+	};
+	static get_biz = (data_type,id,option) => {
+		option = option ? option : {};
+		option.data = option.data ? option.data : {};
+		if(option.test){
+			switch(data_type)
+			{
+				case Type.DATA_CATEGORY:
+					option.data = Obj.merge(Category_Logic.get_test(),option.data);
+					break;
+				case Type.DATA_BLOG_POST:
+					option.data = Obj.merge(Blog_Post_Logic.get_test(),option.data);
+					break;
+				case Type.DATA_SERVICE:
+					option.data = Obj.merge(Service_Logic.get_test(),option.data);
+					break;
+				case Type.DATA_PRODUCT:
+					option.data = Obj.merge(Product_Logic.get_test(),option.data);
+					break;
+				case Type.DATA_BLANK:
+					option.data = Obj.merge(Blank_Logic.get_test(),option.data);
+					break;
+				case Type.DATA_USER:
+					option.data = Obj.merge(User_Logic.get_test(),option.data);
+					break;
+					default:
+					option.data = Obj.merge(Blank_Logic.get_test(),option.data);
+					option.data.data_type = Type.DATA_GROUP;
+					break;
+			}
+		}
+		if(option.parent){
+			option.data[Type.FIELD_PARENT_DATA_TYPE] = option.parent[Type.FIELD_DATA_TYPE] ? option.parent[Type.FIELD_DATA_TYPE] : Type.DATA_BLANK;
+			option.data[Type.FIELD_PARENT_ID] = option.parent[Type.FIELD_ID] ? option.parent[Type.FIELD_ID] : 0;
+		}
+		if(option.generate_title){
+			option.title = Type.get_title(data_type) + " " +Num.get_id();
+		}
+		if(option.title){
+			option.data[Type.FIELD_TITLE] = option.title;
+			option.data[Type.FIELD_TITLE_URL] = Str.get_title_url(option.title);
+		}else{
+			option.data[Type.FIELD_TITLE] = Type.get_title(data_type);
+			option.data[Type.FIELD_TITLE_URL] = Str.get_title_url(Type.get_title(data_type));
+		}
+		let data = Data_Logic.get_new(data_type,id,option.data?option.data:{});
+		return data;
 	};
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
 		return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 	}
 	static get_search_group = (option) => {
 		option = option ? option : {};
+		let type  = option.type ? option.type : Type.TITLE_ITEMS;
 		let field = option.field ? option.field : {};
 		let title = option.title ? option.title : {};
 		let image = option.image ? option.image : {count:0,sort_by:Type.TITLE_SORT_BY_ASC};
 		let page_current = option.page_current ? option.page_current : 0;
 		let page_size = option.page_size ? option.page_size : 0;
-		return {field:field,title:title,image:image,page_current:page_current,page_size:page_size};
+		return {type:type,field:field,title:title,image:image,page_current:page_current,page_size:page_size};
 	}
 	static get_search_foreign = (type,foreign_data_type,foreign_field,parent_field,option) => {
 		option = option ? option : {};
-		type = option.type ? option.type : Type.TITLE_ITEMS;
+		type = type ? type : Type.TITLE_ITEMS;
 		foreign_data_type = foreign_data_type ? foreign_data_type : Str.get_title_url(Type.get_title(foreign_data_type,{plural:true}));
 		foreign_field = foreign_field ? foreign_field : Type.FIELD_PARENT_ID;
 		parent_field = parent_field ? parent_field : parent_field;
 		let field = option.field ? option.field : {};
 		let title = option.title ? option.title : Str.get_title_url(Type.get_title(foreign_data_type,{plural:true}));
-		return {type:type,foreign_data_type:foreign_data_type,foreign_field:foreign_field,parent_field:parent_field,type:type,field:field,title:title};
+		let page_current = option.page_current ? option.page_current : 0;
+		let page_size = option.page_size ? option.page_size : 0;
+		return {type:type,foreign_data_type:foreign_data_type,foreign_field:foreign_field,parent_field:parent_field,type:type,field:field,title:title,page_current:page_current,page_size:page_size};
 	}
 	static get_search_join = (type,search,option) => {
 		option = option ? option : {};
@@ -1756,7 +1819,7 @@ class Data_Logic {
 		let title = option.title ? option.title : Str.get_title_url(Type.get_title(search.data_type,{plural:true}));
 		let page_current = option.page_current ? option.page_current : 1;
 		let page_size = option.page_size ? option.page_size : 0;
-		return {search:search,field:field,title:title,page_current:page_current,page_size:page_size};
+		return {type:type,search:search,field:field,title:title,page_current:page_current,page_size:page_size};
 	}
 	static get_not_found = (data_type,id,option) =>{
 		option=option?option:{};
@@ -2082,6 +2145,7 @@ class Url {
 module.exports = {
 	App_Logic,
 	Admin_Logic,
+	Blank_Logic,
 	Blog_Post_Logic,
 	Cart_Logic,
 	Category_Logic,
