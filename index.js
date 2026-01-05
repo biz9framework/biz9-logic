@@ -32,57 +32,6 @@ class Message {
 	static REVIEW_REMOVE_SUCCESS="Review Remove Success.";
 	static REVIEW_USER_LOGIN="Please Login To Add Review.";
 }
-class Item_Logic {
-	static get_new = (title,data_type,option)=>{
-		option = option ? option : {};
-		const item = Data_Logic.get_new(data_type,0,{title:title,title_url:Str.get_title_url(title),setting_visible:"1"});
-		return item;
-	};
-	static copy = (data_type,item)=>{
-		let copy_item = Data_Logic.get_new(data_type,0);
-		const keys = Object.keys(item);
-		keys.forEach(key => {
-			if(
-				key!=Type.FIELD_ID&&
-				key!=Type.FIELD_SOURCE&&
-				key!=Type.FIELD_TITLE&&
-				key!=Type.FIELD_TITLE_URL&&
-				key!=Type.FIELD_DATE_CREATE&&
-				key!=Type.FIELD_DATE_SAVE&&
-				key!=Type.TITLE_OBJ&&
-				key!=Type.TITLE_USER&&
-				key!=Type.TITLE_GROUP&&
-				key!=Type.TITLE_ITEM&&
-				!Obj.check_is_array(item[key])&&
-				Obj.check_is_value(item[key])
-			){
-				copy_item[key]=item[key];
-			}
-		});
-		return copy_item;
-	};
-	static bind_child_parent_obj = (child_obj,parent_obj)=>{
-		for(const prop in parent_obj) {
-			child_obj['parent_'+prop] = parent_obj[prop];
-		}
-		return child_obj;
-	};
-	static get_test = (title,data_type,id,option)=>{
-		data_type = data_type ? data_type : Type.DATA_BLANK;
-		id = id ? id : 0;
-		option = Field_Logic.get_option(data_type,option?option:{});
-		let item = Data_Logic.get_new(data_type,0,Field_Logic.get_test(title,option));
-		return item;
-	}
-	static get_test_items = (data_type,option) =>{
-		option = Field_Logic.get_option(data_type,option?option:{});
-		let items = [];
-		for(let a=0;a<parseInt(option.item_count)+1;a++){
-			items.push(Item_Logic.get_test("Item " +String(parseInt(a+1)),data_type,option));
-		}
-		return items;
-	}
-}
 class Title {
 	//page
 	static PAGE_ABOUT='About';
@@ -601,14 +550,14 @@ class Type {
 	};
 }
 class Stat_Logic {
-	static get_new = (parent_data_type,parent_id,type,user_id,post_data) => {
-		let new_stat = Data_Logic.get_new(Type.DATA_STAT,0,
+	static get = (parent_data_type,parent_id,type,user_id,post_data) => {
+		let new_stat = Data_Logic.get(Type.DATA_STAT,0,{option:
 			{
 				user_id:user_id,
 				type:type,
 				parent_data_type:parent_data_type,
 				parent_id:parent_id
-			});
+			}});
 		if(!Obj.check_is_empty(post_data)){
 			new_stat = Obj.merge(new_stat,Stat_Logic.filter_stat(post_data));
 		}
@@ -636,26 +585,10 @@ class Stat_Logic {
 		return filter_stat;
 	}
 }
-class Page_Logic {
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_PAGE,option?option:{});
-		let page = Data_Logic.get_new(Type.DATA_PAGE,0,Field_Logic.get_test(title,option));
-		return page;
-	};
-	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_PAGE,option?option:{});
-		let items = [];
-		for(let a=0;a<parseInt(option.page_count)+1;a++){
-			items.push(Page_Logic.get_test( "Page " +parseInt(a+1)? !option.get_blank : "",option));
-		}
-		return items;
-	};
-}
 class Order_Logic {
-	static get_new = (cart,option) => {
+	static get = (cart,option) => {
 		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1};
-		let order = Data_Logic.get_new(Type.DATA_ORDER,0,{
+		let order = Data_Logic.get(Type.DATA_ORDER,0,{data:{
 			order_number:Title.ORDER_NUMBER + Num.get_id(99999),
 			parent_data_type:cart.parent_data_type,
 			user_id:cart.user_id,
@@ -663,7 +596,7 @@ class Order_Logic {
 			grand_total:cart.grand_total,
 			status:Type.ORDER_STATUS_NEW,
 			order_items:[]
-		});
+		}});
 		for(const key in cart) {
 			if(!Str.check_is_null(cart[key])
 				&& key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
@@ -678,8 +611,9 @@ class Order_Logic {
 		if(option.get_payment_plan){
 			order.payment_plan = option.payment_plan;
 		}
+		/*
 		cart.cart_items.forEach(cart_item => {
-			let order_item = Data_Logic.get_new(Type.DATA_ORDER_ITEM,0,{
+			let order_item = Data_Logic.get(Type.DATA_ORDER_ITEM,0,{data:{
 				order_number:order.order_number,
 				parent_data_type:cart_item.parent_data_type,
 				parent_id:cart_item.parent_id,
@@ -687,36 +621,31 @@ class Order_Logic {
 				quanity:cart_item.quanity?cart_item.quanity:0,
 				cost:cart_item.cost?cart_item.cost:0,
 				order_sub_items:[]
-			});
+			}});
+		});
 			for(const key in cart_item){
-				if(!Str.check_is_null(cart_item[key])
+				if(!Str.check_is_null(cart_item[key]){
 					&& key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
 					&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
 					&& key != Type.TITLE_CART_ITEMS && key != Type.TITLE_CART_SUB_ITEMS
 					&& key != Type.TITLE_ORDER_ITEMS && key != Type.TITLE_ORDER_SUB_ITEMS
 					&& key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
-					&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
-					order_item[key] = cart_item[key];
+					&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE
+					order_item[key] = cart_item[key]
 				}
 			}
 			cart_item.cart_sub_items.forEach(cart_sub_item => {
-				let order_sub_item = Data_Logic.get_new(Type.DATA_ORDER_SUB_ITEM,0,{
-					order_number:order.order_number,
-					parent_data_type:cart_sub_item.parent_data_type,
-					parent_id:cart_sub_item.parent_id,
-					user_id:order.user_id,
-					quanity:cart_sub_item.quanity?cart_sub_item.quanity:0,
-					cost:cart_sub_item.cost?cart_sub_item.cost:0
-				})
+				let order_sub_item = Data_Logic.get(Type.DATA_ORDER_SUB_ITEM,0,
+					{data:{order_number:order.order_number,parent_data_type:cart_sub_item.parent_data_type,parent_id:cart_sub_item.parent_id,user_id:order.user_id,quanity:cart_sub_item.quanity?cart_sub_item.quanity:0,cost:cart_sub_item.cost?cart_sub_item.cost:0}};
 				for(const key in cart_sub_item){
-					if(!Str.check_is_null(cart_sub_item[key])
+					if(!Str.check_is_null(cart_sub_item[key])){
 						&& key != Type.FIELD_ID && key != Type.DATA_TYPE
 						&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
 						&& key != Type.TITLE_CART_ITEMS && key != Type.TITLE_CART_SUB_ITEMS
 						&& key != Type.TITLE_ORDER_ITEMS && key != Type.TITLE_ORDER_SUB_ITEMS
 						&& key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
-						&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
-						order_sub_item[key] = cart_sub_item[key];
+						&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE{
+						order_sub_item[key] = cart_sub_item[key]{
 					}
 				}
 				order_item.order_sub_items.push(order_sub_item);
@@ -724,15 +653,17 @@ class Order_Logic {
 			order.order_items.push(order_item);
 		});
 		return order;
+		*/
 	};
-	static get_new_order_payment = (order_number,payment_method_type,payment_amount) => {
-		return Data_Logic.get_new(Type.DATA_ORDER_PAYMENT,0,
+	/*
+	static get_order_payment = (order_number,payment_method_type,payment_amount) => {
+		return Data_Logic.get(Type.DATA_ORDER_PAYMENT,0,{data:
 			{
 				order_number:order_number,
 				payment_method_type:payment_method_type,
 				payment_amount:payment_amount,
 				transaction_id:Title.ORDER_TRANSACTION_ID + Num.get_id(99999)
-			});
+			}});
 	};
 	static get_total = (order) => {
 		let grand_total = 0;
@@ -753,16 +684,17 @@ class Order_Logic {
 		order.grand_total = grand_total;
 		return order;
 	};
+	*/
 }
 class Cart_Logic {
-	static get_new = (parent_data_type,user_id) => {
-		return Data_Logic.get_new(Type.DATA_CART,0,{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_items:[]});
+	static get = (parent_data_type,user_id) => {
+		return Data_Logic.get(Type.DATA_CART,0,{data:{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_items:[]}});
 	};
-	static get_new_cart_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
-		return Data_Logic.get_new(Type.DATA_CART_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0,cart_sub_items:[]});
+	static get_cart_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
+		return Data_Logic.get(Type.DATA_CART_ITEM,0,{data:{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0,cart_sub_items:[]}});
 	};
-	static get_new_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
-		return Data_Logic.get_new(Type.DATA_CART_SUB_ITEM,0,{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0});
+	static get_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
+		return Data_Logic.get(Type.DATA_CART_SUB_ITEM,0,{data:{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0}});
 	};
 	static get_total = (cart) => {
 		let grand_total = 0;
@@ -785,9 +717,9 @@ class Cart_Logic {
 	};
 }
 class Product_Logic {
-	static get_new = (title,type,category,option) => {
+	static get = (title,type,category,option) => {
 		option = option ? option : {};
-		const item = Item_Logic.get_new(title,Type.DATA_PRODUCT);
+		const item = Item_Logic.get(title,Type.DATA_PRODUCT);
 		item.type = type;
 		item.category = category = category?category:"";
 		return item;
@@ -824,8 +756,8 @@ class Product_Logic {
 	};
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_PRODUCT,option?option:{});
-		let product = Data_Logic.get_new(Type.DATA_PRODUCT,0,Field_Logic.get_test(title,option));
+		option = option?option:{};
+		let product = Data_Logic.get(Type.DATA_PRODUCT,0,{data:Field_Logic.get_test(title,option)});
 		if(option.get_blank ==false){
 			product.cost = Field_Logic.get_test_cost();
 			product.old_cost = Field_Logic.get_test_cost();
@@ -842,47 +774,6 @@ class Product_Logic {
 			product.tag = "";
 		}
 		return product;
-	};
-	static get_test_cart = (cart_number,user_id,option) =>{
-		[cart_number,option] = ield_Logic.get_option_title(cart_number,option);
-		option = Field_Logic.get_option(Type.DATA_CART,option?option:{});
-		let cart = Data_Logic.get_new(Type.DATA_CART,Num.get_guid(),Field_Logic.get_test(cart_number,option));
-		cart.user_id = user_id;
-		cart.cart_number = cart_number;
-		if(option.get_cart_item){
-			let product_option = {product_count:option.cart_item_count,generate_id:true};
-			let products = Product_Logic.get_test_items(product_option);
-			cart.cart_items = [];
-			for(let a = 0;a<products.length;a++){
-				let product_cart_item =Cart_Logic.get_test_item(cart_number,cart.id,user_id,products[a].data_type,products[a].id,{get_value:false,get_cart_sub_item:option.get_cart_sub_item,cart_sub_item_count:option.cart_sub_item_count,generate_id:true});
-				product_cart_item.item_item = products[a];
-				cart.cart_items.push(product_cart_item);
-			}
-		}
-		return cart;
-	};
-	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_PRODUCT,option?option:{});
-		let items = [];
-		for(let a=0;a<option.product_count+1;a++){
-			items.push(Product_Logic.get_test("Product "+String(parseInt(a+1)),option));
-		}
-		return items;
-	}
-	static get_test_items_by_category = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_PRODUCT,option?option:{});
-		let products = [];
-		let categorys = Category_Logic.get_type_categorys(Type.DATA_PRODUCT,option.category_count);
-		let item_count = 0;
-		for(let a=0;a<categorys.length;a++){
-			for(let b=0;b<option.product_count;b++){
-				item_count++;
-				let product = Product_Logic.get_test("Product "+String(parseInt(b+1)),option);
-				product.category = categorys[Num.get_id(categorys.length+1)].title;
-				products.push(product);
-			}
-		}
-		return [categorys,products]
 	};
 }
 class Service_Logic {
@@ -911,8 +802,8 @@ class Service_Logic {
 	};
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_SERVICE,option?option:{});
-		let service = Data_Logic.get_new(Type.DATA_SERVICE,0,Field_Logic.get_test(title,option));
+		option = option?option:{};
+		let service = Data_Logic.get(Type.DATA_SERVICE,0,{data:Field_Logic.get_test(title,option)});
 		service.cost = Field_Logic.get_test_cost();
 		service.old_cost = Field_Logic.get_test_cost();
 		service.type = "Type "+String(Num.get_id());
@@ -921,74 +812,20 @@ class Service_Logic {
 		service.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
 		return service;
 	};
-	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_SERVICE,option?option:{});
-		let items = [];
-		for(let a=0;a<parseInt(option.service_count)+1;a++){
-			items.push(Service_Logic.get_test("Service "+String(parseInt(a+1)),option));
-		}
-		return items;
-	}
-	static get_test_items_by_category = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_SERVICE,option?option:{});
-		let services = [];
-		let categorys = Category_Logic.get_type_categorys(Type.DATA_SERVICE,option.category_count);
-		let item_count = 0;
-		for(let a=0;a<categorys.length;a++){
-			for(let b=0;b<parseInt(option.service_count);b++){
-				item_count++;
-				let service = Service_Logic.get_test("Service "+String(parseInt(b+1)),option);
-				service.category = categorys[Num.get_id(categorys.length+1)].title;
-				services.push(service);
-			}
-		}
-		return [categorys,services]
-	};
 }
 class Content_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_CONTENT,option?option:{});
-		let content = Data_Logic.get_new(Type.DATA_CONTENT,0,Field_Logic.get_test(title,option));
+		option = option?option:{};
+		let content = Data_Logic.get(Type.DATA_CONTENT,0,{data:Field_Logic.get_test(title,option)});
 		return content;
-	};
-	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_CONTENT,option?option:{});
-		let items = [];
-		for(let a=0;a<parseInt(option.content_count)+1;a++){
-			items.push(Content_Logic.get_test("Content " +String(parseInt(a+1)),option));
-		}
-		return items;
-	}
-	static get_test_items_by_category = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_CONTENT,option?option:{});
-		let contents = [];
-		let categorys = Category_Logic.get_type_categorys(Type.DATA_CONTENT,option.category_count);
-		let item_count = 0;
-		for(let a=0;a<categorys.length;a++){
-			for(let b=0;b<parseInt(option.content_count);b++){
-				item_count++;
-				let content = Content_Logic.get_test("Content "+String(parseInt(b+1)),option);
-				content.category = categorys[Num.get_id(categorys.length+1)].title;
-				contents.push(content);
-			}
-		}
-		return [categorys,contents]
-	};
-}
-class Template_Logic {
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_TEMPLATE,option?option:{});
-		let template = Data_Logic.get_new(Type.DATA_TEMPLATE,0,Field_Logic.get_test(title,option));
-		return template;
 	};
 }
 class Blank_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_BLANK,option?option:{});
-		let blog_post = Data_Logic.get_new(Type.DATA_BLANK,0,Field_Logic.get_test(title,option));
+		option = option?option:{};
+		let blog_post = Data_Logic.get(Type.DATA_BLANK,0,{data:Field_Logic.get_test(title,option)});
 		if(!option.get_blank){
 			blog_post.field_1="Field 1 "+ Num.get_id();
 			blog_post.field_2="Field 2 "+ Num.get_id();
@@ -1002,8 +839,8 @@ class Blank_Logic {
 class Blog_Post_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_BLOG_POST,option?option:{});
-		let blog_post = Data_Logic.get_new(Type.DATA_BLOG_POST,0,Field_Logic.get_test(title,option));
+		option = option?option:{};
+		let blog_post = Data_Logic.get(Type.DATA_BLOG_POST,0,{data:Field_Logic.get_test(title,option)});
 		if(!option.get_blank){
 			blog_post.author="First Name "+ Num.get_id();
 			blog_post.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id(), " Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
@@ -1013,35 +850,12 @@ class Blog_Post_Logic {
 		}
 		return blog_post;
 	};
-	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_BLOG_POST,option?option:{});
-		let items = [];
-		for(let a=0;a<parseInt(option.blog_post_count)+1;a++){
-			items.push(Blog_Post_Logic.get_test("Blog Post " +String(parseInt(a+1)),option));
-		}
-		return items;
-	}
-	static get_test_items_by_category = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_BLOG_POST,option?option:{});
-		let blog_posts = [];
-		let categorys = Category_Logic.get_type_categorys(Type.DATA_BLOG_POST,option.category_count);
-		let item_count = 0;
-		for(let a=0;a<categorys.length;a++){
-			for(let b=0;b<parseInt(option.blog_post_count);b++){
-				item_count++;
-				let blog_post = Blog_Post_Logic.get_test("Blog Post "+String(parseInt(b+1)),option);
-				blog_post.category = categorys[Num.get_id(categorys.length+1)].title;
-				blog_posts.push(blog_post);
-			}
-		}
-		return [categorys,blog_posts]
-	};
 }
 class Gallery_Logic {
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_GALLERY,option?option:{});
-		let gallery = Data_Logic.get_new(Type.DATA_GALLERY,0,Field_Logic.get_test(title,option));
+		option = option?option:{};
+		let gallery = Data_Logic.get(Type.DATA_GALLERY,0,{data:Field_Logic.get_test(title,option)});
 		if(!option.get_blank){
 			gallery.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
 			gallery.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
@@ -1082,8 +896,8 @@ class Event_Logic {
 	};
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_EVENT,option?option:{});
-		let event = Data_Logic.get_new(Type.DATA_EVENT,0,Field_Logic.get_test(title,option));
+		option = option?option:{};
+		let event = Data_Logic.get(Type.DATA_EVENT,0,{data:Field_Logic.get_test(title,option)});
 		if(!option.get_blank){
 			event.cost = Field_Logic.get_test_cost();
 			event.old_cost = Field_Logic.get_test_cost();
@@ -1108,29 +922,6 @@ class Event_Logic {
 			event.tag = "";
 		}
 		return event;
-	};
-	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_EVENT,option?option:{});
-		let items = [];
-		for(let a=0;a<parseInt(option.event_count)+1;a++){
-			items.push(Event_Logic.get_test("Event "+String(parseInt(a+1)),option));
-		}
-		return items;
-	}
-	static get_test_items_by_category = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_EVENT,option?option:{});
-		let events = [];
-		let categorys = Category_Logic.get_type_categorys(Type.DATA_EVENT,option.category_count);
-		let item_count = 0;
-		for(let a=0;a<categorys.length;a++){
-			for(let b=0;b<parseInt(option.event_count);b++){
-				item_count++;
-				let event = Event_Logic.get_test("Event "+String(parseInt(b+1)),option);
-				event.category = categorys[Num.get_id(categorys.length+1)].title;
-				events.push(event);
-			}
-		}
-		return [categorys,events]
 	};
 }
 class Field_Logic {
@@ -1457,12 +1248,12 @@ class Field_Logic {
 	}
 }
 class Favorite_Logic {
-	static get_new = (parent_data_type,parent_id,user_id) =>{
-		return Data_Logic.get_new(Type.DATA_FAVORITE,0,{
+	static get = (parent_data_type,parent_id,user_id) =>{
+		return Data_Logic.get(Type.DATA_FAVORITE,0,{data:{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
 			user_id:user_id
-		});
+		}});
 	}
 	static get_user_search_filter = (item_data_type,user_id) =>{
 		return {
@@ -1481,15 +1272,15 @@ class Favorite_Logic {
 	}
 }
 class Review_Logic {
-	static get_new = (parent_data_type,parent_id,user_id,title,comment,rating) =>{
-		return Data_Logic.get_new(Type.DATA_REVIEW,0,{
+	static get = (parent_data_type,parent_id,user_id,title,comment,rating) =>{
+		return Data_Logic.get(Type.DATA_REVIEW,0,{data:{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
 			user_id:user_id,
 			title:title ? title : "",
 			comment:comment ? comment : "",
 			rating:rating ? rating : 5
-		});
+		}});
 	}
 	static get_user_search_filter = (item_data_type,user_id) =>{
 		return {
@@ -1506,8 +1297,8 @@ class Review_Logic {
 			] };
 	}
 	static get_test = (item_data_type,item_id,user_id,option) =>{
-		option = Field_Logic.get_option(Type.DATA_REVIEW,option?option:{});
-		let review = Data_Logic.get_new(Type.DATA_REVIEW,0);
+		option = option?option:{};
+		let review = Data_Logic.get(Type.DATA_REVIEW,0);
 		if(!option.get_blank){
 			review.title = 'Title ' + Num.get_id();
 			review.item_data_type = item_data_type;
@@ -1534,71 +1325,13 @@ class Review_Logic {
 		return items;
 	};
 }
-class Admin_Logic {
-	static get_new = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		return Data_Logic.get_new_full_item(
-			Data_Logic.get_new(Type.DATA_ADMIN,0),
-			Data_Logic.get_new(Type.DATA_ADMIN,0),
-			Data_Logic.get_new(Type.DATA_ADMIN,0),{
-				title:title,
-				email:"",
-			});
-	};
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_ADMIN,option?option:{});
-		let item = Data_Logic.get_new(Type.DATA_ADMIN,0);
-		let admin = Data_Logic.get_new(Type.DATA_ADMIN,0,Field_Logic.get_test(title,option));
-		if(!option.get_blank){
-			admin.email="ceo@admin"+Num.get_id()+".com";
-			admin.password="1234567";
-		}else{
-			admin.email="";
-			admin.password="";
-		}
-		return admin;
-	};
-	static get_full_address(admin){
-		admin.address_1 = (admin.address_1) ? admin.address_1 : "";
-		admin.address_2 = (admin.address_2) ? admin.address_2 : "";
-		admin.city = (admin.city) ? admin.city : "";
-		admin.state = (admin.state) ? admin.state : "";
-		admin.zip = (admin.zip) ? admin.zip : "";
-		return admin.address_1 + " "+ admin.address_2 + " " + admin.city + " " + admin.state + " " + admin.zip;
-	}
-}
 class Category_Logic {
-	static get_new = (title,type,category,option) => {
+	static get = (title,type,category,option) => {
 		option = option ? option : {};
-		const item = Item_Logic.get_new(title,Type.DATA_CATEGORY);
+		const item = Item_Logic.get(title,Type.DATA_CATEGORY);
 		item.type = type;
 		item.category = category = category?category:"";
 		return item;
-	};
-	static get_test = (title,option) =>{
-		title = (title) ? title : "Category 1";
-		option = Field_Logic.get_option(Type.DATA_CATEGORY,option?option:{});
-		let category = Data_Logic.get_new(Type.DATA_CATEGORY,0,Field_Logic.get_test(title,option));
-		return category;
-	};
-	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_CATEGORY,option);
-		let items = [];
-		for(let a=0;a<option.category_count;a++){
-			items.push(Category_Logic.get_test("Category " +String(parseInt(a+1)),option));
-		}
-		return items;
-	}
-	static get_test_items_by_type = (type,option) =>{
-		option = Field_Logic.get_option(Type.DATA_CATEGORY,option);
-		let categorys = [];
-		for(let a=0;a<option.category_count;a++){
-			let category = Data_Logic.get_new(Type.DATA_CATEGORY,0,Field_Logic.get_test("Category " +String(parseInt(a+1)),option));
-			category.type = type;
-			categorys.push(category);
-		}
-		return categorys;
 	};
 	static get_category_drop_down_by_items = (items) => {
 		let categorys = [];
@@ -1686,11 +1419,11 @@ class User_Logic {
 
 	}
 	static get_guest(){
-		return Data_Logic.get_new(Type.DATA_USER,0,{is_guest:true,title_url:'guest',first_name:'Guest',last_name:'User',email:'guest@email.com',title:"Guest",country:"United States"});
+		return Data_Logic.get(Type.DATA_USER,0,{data:{guest:{is_guest:true,title_url:'guest',first_name:'Guest',last_name:'User',email:'guest@email.com',title:"Guest",country:"United States"}}});
 	}
 	static get_request_user(req){
 		if(!req || !req.session.user){
-			let user=Data_Logic.get_new(Type.DATA_USER,Num.get_id(9999999),{is_guest:true});
+			let user=Data_Logic.get(Type.DATA_USER,Num.get_id(9999999),{is_guest:true});
 			req.session.user=user;
 		}
 		return req.session.user;
@@ -1704,9 +1437,9 @@ class User_Logic {
 	}
 	static get_test = (title,option) =>{
 		[title,option] = Field_Logic.get_option_title(title,option);
-		option = Field_Logic.get_option(Type.DATA_USER,option?option:{});
-		let user = Data_Logic.get_new(Type.DATA_USER,0,
-			Field_Logic.get_test(title,option));
+		option = option?option:{};
+		let user = Data_Logic.get(Type.DATA_USER,0,{data:
+			Field_Logic.get_test(title,option)});
 		if(option.get_blank){
 			user.first_name="";
 			user.last_name="";
@@ -1726,20 +1459,9 @@ class User_Logic {
 		}
 		return user;
 	};
-	static get_test_items = (option) =>{
-		option = Field_Logic.get_option(Type.DATA_USER,option?option:{});
-		let items = [];
-		for(let a=0;a<option.user_count+1;a++){
-			items.push(User_Logic.get_test("User " +String(parseInt(a+1)),option));
-		}
-		return items;
-	}
 }
 class Data_Logic {
-	static get_new = (data_type,id,data) => {
-		return get_new_item_main(data_type,id,data?data:{});
-	};
-	static get_biz = (data_type,id,option) => {
+	static get = (data_type,id,option) => {
 		option = option ? option : {};
 		option.data = option.data ? option.data : {};
 		if(option.test){
@@ -1783,7 +1505,7 @@ class Data_Logic {
 			option.data[Type.FIELD_TITLE] = Type.get_title(data_type);
 			option.data[Type.FIELD_TITLE_URL] = Str.get_title_url(Type.get_title(data_type));
 		}
-		let data = Data_Logic.get_new(data_type,id,option.data?option.data:{});
+		let data = Data_Logic.get(data_type,id,{data:option.data?option.data:{}});
 		return data;
 	};
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
@@ -1821,6 +1543,29 @@ class Data_Logic {
 		let page_size = option.page_size ? option.page_size : 0;
 		return {type:type,search:search,field:field,title:title,page_current:page_current,page_size:page_size};
 	}
+	static copy = (data_type,item)=>{
+		let copy_item = Data_Logic.get(data_type,0);
+		const keys = Object.keys(item);
+		keys.forEach(key => {
+			if(
+				key!=Type.FIELD_ID&&
+				key!=Type.FIELD_SOURCE&&
+				key!=Type.FIELD_TITLE&&
+				key!=Type.FIELD_TITLE_URL&&
+				key!=Type.FIELD_DATE_CREATE&&
+				key!=Type.FIELD_DATE_SAVE&&
+				key!=Type.TITLE_OBJ&&
+				key!=Type.TITLE_USER&&
+				key!=Type.TITLE_GROUP&&
+				key!=Type.TITLE_ITEM&&
+				!Obj.check_is_array(item[key])&&
+				Obj.check_is_value(item[key])
+			){
+				copy_item[key]=item[key];
+			}
+		});
+		return copy_item;
+	};
 	static get_not_found = (data_type,id,option) =>{
 		option=option?option:{};
 		if(!data_type){
@@ -1897,9 +1642,8 @@ class App_Logic {
 		let action_url="dashboard/app_home";
 		return get_cloud_url_main(app_id,url,action_url,param);
 	};
-	static get_new = (title,user_id,type,option) =>{
-		option = Field_Logic.get_option(Type.DATA_APP,option?option:{});
-		let app = Data_Logic.get_new(Type.DATA_APP,0);
+	static get = (title,user_id,type) =>{
+		let app = Data_Logic.get(Type.DATA_APP,0);
 		app.title = title;
 		app.user_id = user_id;
 		app.type = type;
@@ -1980,8 +1724,8 @@ class File_Logic {
 		param = param ? param : "";
 		return host+"/"+size + "_"+file_filename+param;
 	}
-	static get_new_by_base64 = (item_file) =>{
-		let item = Data_Logic.get_new(Type.DATA_FILE,0,item_file);
+	static get_by_base64 = (item_file) =>{
+		let item = Data_Logic.get(Type.DATA_FILE,0,{data:item_file});
 		item.extension = !Str.check_is_null(Str.get_file_type_from_base64(item.file_data)) ? Str.get_file_type_from_base64(item.file_data).extension : 'txt';
 		item.file_filename = !Str.check_is_null(Str.get_file_type_from_base64(item.file_data)) ? Str.get_guid()+ "." + item.extension : 'not_found.txt';
 		item.buffer = !Str.check_is_null(Str.get_file_type_from_base64(item_file.file_data)) ? Buffer.from(item_file.file_data.split(';base64,').pop(), 'base64') : null;
@@ -2004,8 +1748,8 @@ class Image_Logic {
 		param = param ? param : "";
 		return host+"/"+size + "_"+image_filename+param;
 	}
-	static get_new_by_base64 = (item_image) =>{
-		let item = Data_Logic.get_new(Type.DATA_IMAGE,0,item_image);
+	static get_by_base64 = (item_image) =>{
+		let item = Data_Logic.get(Type.DATA_IMAGE,0,{data:item_image});
 		item.extension = !Str.check_is_null(Str.get_file_type_from_base64(item.image_data)) ? Str.get_file_type_from_base64(item.image_data).extension : 'jpeg';
 		item.image_filename = !Str.check_is_null(Str.get_file_type_from_base64(item.image_data)) ? Str.get_guid()+ "." + item.extension : 'not_found.jpeg';
 		item.buffer = !Str.check_is_null(Str.get_file_type_from_base64(item_image.image_data)) ? Buffer.from(item_image.image_data.split(';base64,').pop(), 'base64') : null;
@@ -2144,7 +1888,6 @@ class Url {
 }
 module.exports = {
 	App_Logic,
-	Admin_Logic,
 	Blank_Logic,
 	Blog_Post_Logic,
 	Cart_Logic,
@@ -2156,17 +1899,14 @@ module.exports = {
 	Field_Logic,
 	Favorite_Logic,
 	Gallery_Logic,
-	Item_Logic,
 	Image_Logic,
 	Message,
 	Order_Logic,
-	Page_Logic,
 	Product_Logic,
 	Review_Logic,
 	Service_Logic,
 	Stat_Logic,
 	Storage,
-	Template_Logic,
 	Type,
 	Title,
 	User_Logic,

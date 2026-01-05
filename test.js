@@ -36,13 +36,13 @@ describe("connect", () => {
                 // -->
                 //let join = App_Logic.get_join({},'','',{});
                 // -->
-                //let data = Data_Logic.get_biz(Type.DATA_BLANK,0);
-                let parent = Data_Logic.get_biz(Type.DATA_SERVICE,0,{test:true,generate_title:true});
-                let data = Data_Logic.get_biz(Type.DATA_BLANK,0,{test:true,generate_title:true,parent:parent});
-                //let data = Data_Logic.get_biz(Type.DATA_BLANK,0,{title:'cool bean',data:{field_1:'field_1',field_2:'field_2'}});
-                //let data = Data_Logic.get_biz(Type.DATA_BLANK,0,{title:'cool bean'});
-                //let data = Data_Logic.get_biz(Type.DATA_BLANK,0,{data:{field_1:'field_1',field_2:'field_2'}});
-                //let data = Data_Logic.get_biz(Type.DATA_BLANK,0,{test:true});
+                //let data = Data_Logic.get(Type.DATA_BLANK,0);
+                let parent = Data_Logic.get(Type.DATA_SERVICE,0,{test:true,generate_title:true});
+                //let data = Data_Logic.get(Type.DATA_BLANK,0,{test:true,generate_title:true,parent:parent});
+                //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean',data:{field_1:'field_1',field_2:'field_2'}});
+                //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean'});
+                //let data = Data_Logic.get(Type.DATA_BLANK,0,{data:{field_1:'field_1',field_2:'field_2'}});
+                //let data = Data_Logic.get(Type.DATA_BLANK,0,{test:true});
                 //Log.w('99_result_parent',parent);
                 //Log.w('99_result_data',data);
 
