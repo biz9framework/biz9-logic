@@ -122,25 +122,59 @@ class Type {
 	static FIELD_VALUE = 'value';
 	static FIELD_WEBSITE = 'website';
 	//title
-	static TITLE_BLANK='blank';
-	static TITLE_CART_ITEMS='cart_items';
-	static TITLE_CART_SUB_ITEMS='cart_sub_items';
-	static TITLE_CART_ITEMS='cart_items';
-	static TITLE_CART_SUB_ITEMS='cart_sub_items';
-	static TITLE_COUNT='count';
-	static TITLE_GROUP='group';
-	static TITLE_N_A='n/a';
-	static TITLE_IMAGES='images';
-	static TITLE_ITEMS='items';
-	static TITLE_ONE='one';
-	static TITLE_ORDER_ITEMS='order_items';
-	static TITLE_ORDER_SUB_ITEMS='order_sub_items';
-	static TITLE_PARENT_ITEM='parent_item';
-	static TITLE_USER='user';
-	static TITLE_SORT_BY_ASC='asc';
-	static TITLE_SORT_BY_DESC='desc';
-	static TITLE_STAT_ITEMS='stat_items';
-	static TITLE_STAT_SUB_ITEMS='stat_items';
+	static TITLE_BLANK='Blank';
+	static TITLE_CART_ITEMS='Cart Items';
+	static TITLE_CART_SUB_ITEMS='Cart Sub Items';
+	static TITLE_CART_ITEMS='Cart Items';
+	static TITLE_CART_SUB_ITEMS='Cart Sub Items';
+	static TITLE_COUNT='Count';
+	static TITLE_GROUP='Group';
+	static TITLE_N_A='N/A';
+	static TITLE_IMAGES='Images';
+	static TITLE_ITEMS='Items';
+	static TITLE_ONE='One';
+	static TITLE_ORDER_ITEMS='Order Items';
+	static TITLE_ORDER_SUB_ITEMS='order Sub Items';
+	static TITLE_PARENT_ITEM='Parent Item';
+	static TITLE_USER='User';
+	static TITLE_SORT_BY_ASC='ASC';
+	static TITLE_SORT_BY_DESC='DESC';
+	static TITLE_STAT_ITEMS='Stat Items';
+	static TITLE_STAT_SUB_ITEMS='Stat Sub Items';
+	static TITLE_ORDER_STATUS_NEW="New";
+	static TITLE_ORDER_STATUS_OPEN="Open";
+	static TITLE_ORDER_STATUS_COMPLETE="Complete";
+	static TITLE_ORDER_STATUS_RETURNED="Returned";
+	static TITLE_ORDER_STATUS_ON_HOLD="On Hold";
+	static TITLE_ORDER_STATUS_CANCELLED="Cancelled";
+	static TITLE_USER_ROLE_SUPER_ADMIN='Super Admin';
+	static TITLE_USER_ROLE_ADMIN='Admin';
+	static TITLE_USER_ROLE_MANAGER='Manager';
+	static TITLE_USER_ROLE_USER='User';
+	static TITLE_USER_ROLE_GUEST='Guest';
+	static TITLE_PAGE_ABOUT='About';
+	static TITLE_PAGE_CONTACT='Contact';
+	static TITLE_PAGE_HOME='Home';
+	static TITLE_PAGE_FAQ='Faq';
+	static TITLE_PAGE_BLOG_POST='Blog Post';
+	static TITLE_PAGE_BLOG_POST_HOME='Blog Post Home';
+	static TITLE_PAGE_BLOG_POST_SEARCH='Blog Post Search';
+	static TITLE_PAGE_EVENT='Event';
+	static TITLE_PAGE_EVENT_HOME='Event Home';
+	static TITLE_PAGE_EVENT_SEARCH='Event Search';
+	static TITLE_PAGE_GALLERY='Gallery';
+	static TITLE_PAGE_GALLERY_HOME='Gallery Home';
+	static TITLE_PAGE_GALLERY_SEARCH='Gallery Search';
+	static TITLE_PAGE_LOGIN='Login';
+	static TITLE_PAGE_PRODUCT='Product';
+	static TITLE_PAGE_PRODUCT_HOME='Product Home';
+	static TITLE_PAGE_PRODUCT_SEARCH='Product Search';
+	static TITLE_PAGE_REGISTER='Register';
+	static TITLE_PAGE_REVIEW_HOME='Review Home';
+	static TITLE_PAGE_SERVICE='Service';
+	static TITLE_PAGE_SERVICE_HOME='Service Home';
+	static TITLE_PAGE_SERVICE_SEARCH='Service Search';
+
 	//page
 	static PAGE_ABOUT='about';
 	static PAGE_CONTACT='contact';
@@ -242,20 +276,20 @@ class Type {
 
 	static get_order_statuses(){
 		return [
-			{value:Type.ORDER_STATUS_NEW,label:Title.ORDER_STATUS_NEW},
-			{value:Type.ORDER_STATUS_OPEN,label:Title.ORDER_STATUS_OPEN},
-			{value:Type.ORDER_STATUS_COMPLETE,label:Title.ORDER_STATUS_COMPLETE},
-			{value:Type.ORDER_STATUS_RETURNED,label:Title.ORDER_STATUS_RETURNED},
-			{value:Type.ORDER_STATUS_ON_HOLD,label:Title.ORDER_STATUS_ON_HOLD},
-			{value:Type.ORDER_STATUS_CANCELLED,label:Title.ORDER_STATUS_CANCELLED},
+			{value:Type.ORDER_STATUS_NEW,label:Type.TITLE_ORDER_STATUS_NEW},
+			{value:Type.ORDER_STATUS_OPEN,label:Type.TITLE_ORDER_STATUS_OPEN},
+			{value:Type.ORDER_STATUS_COMPLETE,label:Type.TITLE_ORDER_STATUS_COMPLETE},
+			{value:Type.ORDER_STATUS_RETURNED,label:Type.TITLE_ORDER_STATUS_RETURNED},
+			{value:Type.ORDER_STATUS_ON_HOLD,label:Type.TITLE_ORDER_STATUS_ON_HOLD},
+			{value:Type.ORDER_STATUS_CANCELLED,label:Type.TITLE_ORDER_STATUS_CANCELLED},
 		];
 	};
 	static get_user_roles(){
 		return [
-			{value:Type.USER_ROLE_ADMIN,label:Title.USER_ROLE_ADMIN},
-			{value:Type.USER_ROLE_MANAGER,label:Title.USER_ROLE_MANAGER},
-			{value:Type.USER_ROLE_USER,label:Title.USER_ROLE_USER},
-			{value:Type.USER_ROLE_GUEST,label:Title.USER_ROLE_GUEST},
+			{value:Type.USER_ROLE_ADMIN,label:Type.TITLE_USER_ROLE_ADMIN},
+			{value:Type.USER_ROLE_MANAGER,label:Type.TITLE_USER_ROLE_MANAGER},
+			{value:Type.USER_ROLE_USER,label:Type.TITLE_USER_ROLE_USER},
+			{value:Type.USER_ROLE_GUEST,label:Type.TITLE_USER_ROLE_GUEST},
 		];
 	};
 	static get_pages(){
@@ -411,24 +445,32 @@ class Type {
 				break;
 			case Type.ID:
 				r_type = "ID";
+				break;
 			case Type.N_A:
 				r_type = "N/A";
+				break;
 			case Type.PAGE_ABOUT:
+			case Type.PAGE_CONTACT:
+			case Type.PAGE_HOME:
+			case Type.PAGE_FAQ:
 			case Type.PAGE_BLOG_POST:
 			case Type.PAGE_BLOG_POST_HOME:
-			case Type.PAGE_CONTACT:
+			case Type.PAGE_BLOG_POST_SEARCH:
 			case Type.PAGE_EVENT:
 			case Type.PAGE_EVENT_HOME:
-			case Type.PAGE_FAQ:
+			case Type.PAGE_EVENT_SEARCH:
 			case Type.PAGE_GALLERY:
 			case Type.PAGE_GALLERY_HOME:
-			case Type.PAGE_HOME:
+			case Type.PAGE_GALLERY_SEARCH:
 			case Type.PAGE_LOGIN:
 			case Type.PAGE_PRODUCT:
 			case Type.PAGE_PRODUCT_HOME:
+			case Type.PAGE_PRODUCT_SEARCH:
+			case Type.PAGE_REGISTER:
+			case Type.PAGE_REVIEW_HOME:
 			case Type.PAGE_SERVICE:
 			case Type.PAGE_SERVICE_HOME:
-			case Type.PAGE_REVIEW_HOME:
+			case Type.PAGE_SERVICE_SEARCH:
 			case Type.USER_ROLE_SUPER_ADMIN:
 			case Type.USER_ROLE_ADMIN:
 			case Type.USER_ROLE_MANAGER:
@@ -1577,7 +1619,6 @@ module.exports = {
 	Stat_Logic,
 	Storage,
 	Type,
-	Title,
 	User_Logic,
 	Url
 };
