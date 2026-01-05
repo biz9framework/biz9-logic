@@ -783,17 +783,15 @@ class Service_Logic {
 				break;
 		}
 	};
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = option?option:{};
-		let service = Data_Logic.get(Type.DATA_SERVICE,0,{data:Field_Logic.get_test(title,option)});
-		service.cost = Field_Logic.get_test_cost();
-		service.old_cost = Field_Logic.get_test_cost();
-		service.type = "Type "+String(Num.get_id());
-		service.sub_type = "Sub Type "+String(Num.get_id());
-		service.stock = String(Num.get_id(3-1));
-		service.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
-		return service;
+	static get_test = () =>{
+		let data = {};
+		data.cost = Field_Logic.get_test_cost();
+		data.old_cost = Field_Logic.get_test_cost();
+		data.type = "Type "+String(Num.get_id());
+		data.sub_type = "Sub Type "+String(Num.get_id());
+		data.stock = String(Num.get_id(3-1));
+		data.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
+		return data;
 	};
 }
 class Content_Logic {
@@ -805,33 +803,23 @@ class Content_Logic {
 	};
 }
 class Blank_Logic {
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = option?option:{};
-		let blog_post = Data_Logic.get(Type.DATA_BLANK,0,{data:Field_Logic.get_test(title,option)});
-		if(!option.get_blank){
-			blog_post.field_1="Field 1 "+ Num.get_id();
-			blog_post.field_2="Field 2 "+ Num.get_id();
-		}else{
-			blog_post.field_1="";
-			blog_post.field_2 = "";
-		}
-		return blog_post;
+	static get_test = (option) =>{
+		let data = {};
+		data.field_1="Field 1 "+ Num.get_id();
+		data.field_2="Field 2 "+ Num.get_id();
+		return data;
 	};
 };
 class Blog_Post_Logic {
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = option?option:{};
-		let blog_post = Data_Logic.get(Type.DATA_BLOG_POST,0,{data:Field_Logic.get_test(title,option)});
-		if(!option.get_blank){
-			blog_post.author="First Name "+ Num.get_id();
-			blog_post.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id(), " Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
-		}else{
-			blog_post.author="";
-			blog_post.tag = "";
-		}
-		return blog_post;
+	static get_test = (option) =>{
+		let data = {};
+			data.author="First Name "+ Num.get_id();
+			data.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id(), " Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
+			data.category = "Category "+String(Num.get_id());
+			data.type = "Type "+String(Num.get_id());
+			data.sub_type = "Sub Type "+String(Num.get_id());
+
+		return data;
 	};
 }
 class Gallery_Logic {
@@ -1331,13 +1319,6 @@ class Review_Logic {
 	};
 }
 class Category_Logic {
-	static get = (title,type,category,option) => {
-		option = option ? option : {};
-		const item = Item_Logic.get(title,Type.DATA_CATEGORY);
-		item.type = type;
-		item.category = category = category?category:"";
-		return item;
-	};
 	static get_category_drop_down_by_items = (items) => {
 		let categorys = [];
 		for(let a=0;a<items.length;a++){
@@ -1421,7 +1402,6 @@ class User_Logic {
 		let str_first_name = !Str.check_is_null(first_name) ? first_name : "";
 		let str_last_name = !Str.check_is_null(last_name) ? last_name : "";
 		return !Str.check_is_null(String(str_first_name + " " + str_last_name)) ? String(str_first_name + " " + str_last_name).trim() : "N/A";
-
 	}
 	static get_guest(){
 		return Data_Logic.get(Type.DATA_USER,0,{data:{guest:{is_guest:true,title_url:'guest',first_name:'Guest',last_name:'User',email:'guest@email.com',title:"Guest",country:"United States"}}});
@@ -1440,31 +1420,16 @@ class User_Logic {
 		req.session.user=null;
 		delete req.session.user;
 	}
-	static get_test = (option) =>{
-		let data = {data_type:Type.DATA_PRODUCT,id:0};
-		option = option?option:{};
-		option.title = option.generate_title ? option.title : data.title = Type.get_title(data_type) + " " +Num.get_id();
-
-		let user = Data_Logic.get(Type.DATA_USER,0,{data:
-			Field_Logic.get_test(title,option)});
-		if(option.get_blank){
-			user.first_name="";
-			user.last_name="";
-			user.email="";
-			user.city="";
-			user.state="";
-			user.password="";
-			user.country="";
-		}else{
-			user.first_name="First Name "+ Num.get_id();
-			user.last_name="First Name "+ Num.get_id();
-			user.email="email"+ Num.get_id() + "@email.com";
-			user.city="City"+ Num.get_id();
-			user.state="State"+ Num.get_id();
-			user.password="1234567";
-			user.country="United States";
-		}
-		return user;
+	static get_test = () =>{
+		let data = {};
+		data.first_name="First Name "+ Num.get_id();
+		data.last_name="First Name "+ Num.get_id();
+		data.email="email"+ Num.get_id() + "@email.com";
+		data.city="City"+ Num.get_id();
+		data.state="State"+ Num.get_id();
+		data.password="1234567";
+		data.country="United States";
+		return data;
 	};
 }
 class Data_Logic {
