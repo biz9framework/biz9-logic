@@ -37,7 +37,7 @@ describe("connect", () => {
                 //let join = App_Logic.get_join({},'','',{});
                 // -->
                 //let data = Data_Logic.get(Type.DATA_BLANK,0);
-                let parent = Data_Logic.get(Type.DATA_BLANK,0,{test_blank:false,test:true,title:'cool',generate_title:true,parent:{data_type:Type.DATA_BLANK,id:2},data:{field_1:'cool1',field_2:'cool2'}});
+                let parent = Data_Logic.get(Type.DATA_REVIEW,0,{test_blank:false,test:true,title:'cool',generate_title:true,parent:{data_type:Type.DATA_BLANK,id:2},data:{field_1:'cool1',field_2:'cool2'}});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{test:true,generate_title:true,parent:parent});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean',data:{field_1:'field_1',field_2:'field_2'}});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean'});

@@ -5,8 +5,7 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const moment = require('moment');
-const { get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
-const { Log,Str,DateTime,Num,Obj } = require('biz9-utility');
+const {Str,Num,Obj} = require('biz9-utility');
 class Message {
 	static SUCCESS="Success";
 	static CONFIRM="Are You Sure?";
@@ -32,66 +31,6 @@ class Message {
 	static REVIEW_REMOVE_SUCCESS="Review Remove Success.";
 	static REVIEW_USER_LOGIN="Please Login To Add Review.";
 }
-class Title {
-	//page
-	static PAGE_ABOUT='About';
-	static PAGE_BLOG_POST='Blog Post';
-	static PAGE_BLOG_POST_HOME='Blog Post Home';
-	static PAGE_CONTACT='Contact';
-	static PAGE_EVENT='Event';
-	static PAGE_EVENT_HOME='Event Home';
-	static PAGE_FAQ='FAQs';
-	static PAGE_GALLERY='Gallery';
-	static PAGE_GALLERY_HOME='Gallery Home';
-	static PAGE_HOME='Home';
-	static PAGE_LOGIN='Login';
-	static PAGE_PRODUCT='Product';
-	static PAGE_PRODUCT_HOME='Product Home';
-	static PAGE_SERVICE='Service';
-	static PAGE_SERVICE_HOME='Service Home';
-	static PAGE_REGISTER='Register';
-	static PAGE_REVIEW_HOME='Review Home';
-	//order
-	static ORDER_NUMBER="OR-";
-	static ORDER_TRANSACTION_ID="TR-";
-	static ORDER_STATUS_CANCELLED="Cancelled";
-	static ORDER_STATUS_COMPLETE="Complete";
-	static ORDER_STATUS_NEW="New";
-	static ORDER_STATUS_OPEN="Open";
-	static ORDER_STATUS_ON_HOLD="On Hold";
-	static ORDER_STATUS_RETURNED="Returned";
-	static ORDER_PAYMENT_PLAN_NEW="New";
-	static ORDER_PAYMENT_PLAN_1="1 Payment";
-	static ORDER_PAYMENT_PLAN_2="2 Payments";
-	static ORDER_PAYMENT_PLAN_3="3 Payments";
-	static ORDER_PAYMENT_PLAN_4="4 Payments";
-	static ORDER_PAYMENT_METHOD_STRIPE="Stripe";
-	static ORDER_PAYMENT_METHOD_CASH="Cash";
-	static ORDER_PAYMENT_METHOD_OTHER="Other";
-	static ORDER_PAYMENT_METHOD_TEST="Test";
-	//cart
-	static CART_NUMBER="CA-";
-	//role
-	static USER_ROLE_SUPER_ADMIN='Super Admin';
-	static USER_ROLE_ADMIN='Admin';
-	static USER_ROLE_MANAGER='Manager';
-	static USER_ROLE_USER='User';
-	static USER_ROLE_GUEST='Guest';
-	//app
-	static APP_MOBILE="Mobile";
-	static APP_WEBSITE="Website";
-	static APP_LANDING="Landing";
-	//social
-	static SOCIAL_URL_FACEBOOK="https://facebook.com/";
-	static SOCIAL_URL_TWITTER="https://twitter.com/";
-	static SOCIAL_URL_INSTAGRAM="https://instagram.com/";
-	static SOCIAL_URL_YOUTUBE="https://youtube.com/";
-	static SOCIAL_URL_LINKEDIN="https://linkedin.com/";
-	//str
-	static CATEGORY='Category';
-	static DESCRIPTION='Description';
-	static TYPE='Type';
-}
 class Type {
 	//app_status
 	static APP_ENV_TEST='test';
@@ -101,7 +40,6 @@ class Type {
 	static APP_LINK_TYPE_GOOGLE_PLAY='google_play';
 	static APP_LINK_TYPE_APPLE_STORE='apple_store';
 	static APP_LINK_TYPE_CMS='cms';
-
 	//data
 	static DATA_APP='app_biz';
 	static DATA_BLANK='blank_biz';
@@ -135,7 +73,6 @@ class Type {
 	static DATA_TYPE='type_biz';
 	static DATA_USER='user_biz';
 	static DATA_VIDEO='video_biz';
-
 	//field
 	static FIELD_AUTHOR = 'author';
 	static FIELD_CATEGORY = 'category';
@@ -288,6 +225,21 @@ class Type {
 	static ORDER_STATUS_RETURNED="returned";
 	static ORDER_STATUS_ON_HOLD="on_hold";
 	static ORDER_STATUS_CANCELLED="cancelled";
+	//app
+	static APP_MOBILE="Mobile";
+	static APP_WEBSITE="Website";
+	static APP_LANDING="Landing";
+	//social
+	static SOCIAL_URL_FACEBOOK="https://facebook.com/";
+	static SOCIAL_URL_TWITTER="https://twitter.com/";
+	static SOCIAL_URL_INSTAGRAM="https://instagram.com/";
+	static SOCIAL_URL_YOUTUBE="https://youtube.com/";
+	static SOCIAL_URL_LINKEDIN="https://linkedin.com/";
+	//str
+	static CATEGORY='Category';
+	static DESCRIPTION='Description';
+	static TYPE='Type';
+
 	static get_order_statuses(){
 		return [
 			{value:Type.ORDER_STATUS_NEW,label:Title.ORDER_STATUS_NEW},
@@ -794,14 +746,6 @@ class Service_Logic {
 		return data;
 	};
 }
-class Content_Logic {
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = option?option:{};
-		let content = Data_Logic.get(Type.DATA_CONTENT,0,{data:Field_Logic.get_test(title,option)});
-		return content;
-	};
-}
 class Blank_Logic {
 	static get_test = (option) =>{
 		let data = {};
@@ -823,18 +767,12 @@ class Blog_Post_Logic {
 	};
 }
 class Gallery_Logic {
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = option?option:{};
-		let gallery = Data_Logic.get(Type.DATA_GALLERY,0,{data:Field_Logic.get_test(title,option)});
-		if(!option.get_blank){
-			gallery.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
-			gallery.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
-			gallery.website = "Website "+String(Num.get_id());
-		}else{
-			gallery.website = "";
-		}
-		return gallery;
+	static get_test = () =>{
+			let data = {};
+			data.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
+			data.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
+			data.website = "Website "+String(Num.get_id());
+			return data;
 	};
 };
 class Event_Logic {
@@ -865,34 +803,19 @@ class Event_Logic {
 				break;
 		}
 	};
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = option?option:{};
-		let event = Data_Logic.get(Type.DATA_EVENT,0,{data:Field_Logic.get_test(title,option)});
-		if(!option.get_blank){
-			event.cost = Field_Logic.get_test_cost();
-			event.old_cost = Field_Logic.get_test_cost();
-			event.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
-			event.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
-			event.website = "Website "+String(Num.get_id());
-			event.location = "Location "+String(Num.get_id());
-			event.meeting_link = "Meeting Link "+String(Num.get_id());
-			event.stock = String(Num.get_id(3-1));
-			event.category ="Category " + String(Num.get_id());
-			event.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
-		}else{
-			event.cost = "";
-			event.old_cost = "";
-			event.date = "";
-			event.time = "";
-			event.website = "";
-			event.location = "";
-			event.meeting_link = "";
-			event.stock = "";
-			event.category ="";
-			event.tag = "";
-		}
-		return event;
+	static get_test = () =>{
+		let data = {};
+		data.cost = Field_Logic.get_test_cost();
+		data.old_cost = Field_Logic.get_test_cost();
+		data.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
+		data.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
+		data.website = "Website "+String(Num.get_id());
+		data.location = "Location "+String(Num.get_id());
+		data.meeting_link = "Meeting Link "+String(Num.get_id());
+		data.stock = String(Num.get_id(3-1));
+		data.category ="Category " + String(Num.get_id());
+		data.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
+		return data;
 	};
 }
 class Field_Logic {
@@ -1075,7 +998,6 @@ class Field_Logic {
 	static get_value_items_group(item,value_id,group_id){
 		let full_str = 'items_value_'+value_id+"_group_"+group_id;
 		let items = [];
-		Log.w(full_str,full_str);
 		let count = 0;
 		for(const prop in item){
 			let new_item = {};
@@ -1101,144 +1023,6 @@ class Field_Logic {
 		}
 		return item;
 	};
-	static get_option(data_type,option){
-		data_type = data_type ? data_type : Type.DATA_BLANK;
-		option = !Obj.check_is_empty(option) ? option : {get_value:false,item_count:9,value_count:9};
-		option.generate_id = option.generate_id ? option.generate_id : false;
-		option.get_value = option.get_value ? true : false;
-		option.get_blank = option.get_blank ? true : false;
-		option.value_count = option.value_count ? option.value_count : 9;
-		option.section_count = option.section_count ? option.section_count : 9;
-		option.item_count = option.item_count ? option.item_count : 9;
-		option.category_count = option.category_count ? option.category_count : 9;
-		option.category_title = option.category_title ? option.category_title : "";
-		option.fields = option.fields ? option.fields : [];
-		if(option.data_type==Type.DATA_PAGE){
-			option.page_count = option.page_count ? option.page_count : 9;
-			option.section_count = option.section_count ? option.section_count : 9;
-			option.get_section = option.get_section ? true : false;
-		}
-		if(data_type==Type.DATA_PRODUCT){
-			option.product_count = option.product_count ? option.product_count : 9;
-		}
-		if(data_type==Type.DATA_SERVICE){
-			option.service_count = option.service_count ? option.service_count : 9;
-		}
-		if(data_type==Type.DATA_BLOG_POST){
-			option.blog_post_count = option.blog_post_count ? option.blog_post_count : 9;
-		}
-		if(data_type==Type.DATA_EVENT){
-			option.event_count = option.event_count ? option.event_count : 9;
-		}
-		if(data_type==Type.DATA_FAQ){
-			option.question_count = option.question_count ? option.question_count : 9;
-		}
-		if(data_type==Type.DATA_CONTENT){
-			option.content_count = option.content_count ? option.content_count : 9;
-		}
-		if(data_type==Type.DATA_SUB_ITEM){
-			option.item_count = option.item_count ? option.item_count : 9;
-		}
-		if(data_type==Type.DATA_USER){
-			option.user_count = option.user_count ? option.user_count : 9;
-		}
-		if(data_type==Type.DATA_CART){
-			option.category_title = option.category_title ? option.category_title : "";
-			option.value_count = option.value_count ? option.value_count : 9;
-			option.get_cart_item = option.get_cart_item ? option.get_cart_item : false;
-			option.cart_item_count = option.cart_item_count ? option.cart_item_count : 5;
-			option.get_cart_sub_item = option.get_cart_sub_item ? option.get_cart_sub_item : false;
-			option.cart_sub_item_count = option.cart_sub_item_count ? option.cart_sub_item_count : 3;
-		}
-		if(data_type==Type.DATA_CART_ITEM){
-			option.category_title = option.category_title ? option.category_title : "";
-			option.value_count = option.value_count ? option.value_count : 9;
-			option.get_cart_sub_item = option.get_cart_sub_item ? option.get_cart_sub_item : false;
-			option.cart_sub_item_count = option.cart_sub_item_count ? option.cart_sub_item_count : 1;
-		}
-		if(data_type==Type.DATA_ORDER){
-			option.category_title = option.category_title ? option.category_title : "";
-			option.value_count = option.value_count ? option.value_count : 9;
-			option.get_order_item = option.get_order_item ? option.get_order_item : false;
-			option.order_item_count = option.order_item_count ? option.order_item_count : 5;
-			option.get_order_sub_item = option.get_order_sub_item ? option.get_order_sub_item : false;
-			option.order_sub_item_count = option.order_sub_item_count ? option.order_sub_item_count : 3;
-		}
-		if(data_type==Type.DATA_ORDER_ITEM){
-			option.category_title = option.category_title ? option.category_title : "";
-			option.value_count = option.value_count ? option.value_count : 9;
-			option.get_order_sub_item = option.get_order_sub_item ? option.get_order_sub_item : false;
-			option.order_sub_item_count = option.order_sub_item_count ? option.order_sub_item_count : 1;
-		}
-		return option;
-	}
-	static get_option_title = (title,option) =>{
-		if(!title){
-			let title = '';
-		}
-		if(!option){
-			let option = {};
-		}
-		if(!Str.check_is_null(title) && Obj.check_is_empty(option)){
-			if(Obj.check_is_empty(option)){
-				if(!Str.check_is_null(title) && Obj.check_is_empty(option)){
-					if(typeof title === 'string'){
-						option = {};
-					}else{
-						option = title;
-						title = "Test " + Num.get_id();
-					}
-				}
-			}
-		}else{
-			if(Str.check_is_null(title) && Obj.check_is_empty(option)){
-				title = "Test " + Num.get_id();
-				option = {};
-			}
-		}
-		return [title,option];
-	}
-	static get_option_admin(req){
-		let option = {};
-		option.value_count = req.query.value_count ? req.query.value_count : 9;
-		option.section_count = req.query.section_count ? req.query.section_count : 9;
-
-		option.get_faq = req.query.get_faq ? req.query.get_faq : false;
-		option.question_count = req.query.question_count ? req.query.question_count : 9;
-
-		option.get_blog_post = req.query.get_blog_post ? req.query.get_blog_post : false;
-		option.get_category_blog_post = req.query.get_category_blog_post ? req.query.get_category_blog_post : false;
-		option.category_blog_post_count = req.query.category_blog_post_count ? req.query.category_blog_post_count : 9;
-		option.blog_post_count = req.query.blog_post_count ? req.query.blog_post_count : 9;
-
-		option.get_product = req.query.get_product ? req.query.get_product : false;
-		option.get_category_product = req.query.get_category_product ? req.query.get_category_product : false;
-		option.category_product_count = req.query.category_product_count ? req.query.category_product_count : 9;
-		option.product_count = req.query.product_count ? req.query.product_count : 9;
-
-		option.get_service = req.query.get_service ? req.query.get_service : false;
-		option.get_category_service = req.query.get_category_service ? req.query.get_category_service : false;
-		option.category_service_count = req.query.category_service_count ? req.query.category_service_count : 9;
-		option.service_count = req.query.service_count ? req.query.service_count : 9;
-
-		option.get_event = req.query.get_event ? req.query.get_event : false;
-		option.get_category_event = req.query.get_category_event ? req.query.get_category_event : false;
-		option.category_event_count = req.query.category_event_count ? req.query.category_event_count : 9;
-		option.event_count = req.query.event_count ? req.query.event_count : 9;
-
-		option.get_product_review = req.query.get_product_review ? req.query.get_product_review : false;
-		option.product_review_count = req.query.product_review_count ? req.query.product_review_count : 19;
-
-		option.get_business_review = req.query.get_business_review ? req.query.get_business_review : false;
-		option.business_review_count = req.query.business_review_count ? req.query.business_review_count : 19;
-
-		option.user_count = req.query.user_count ? req.query.user_count : 9;
-		option.get_admin = req.query.get_admin ? req.query.get_admin : false;
-		option.get_template = req.query.get_template ? req.query.get_template : false;
-		option.get_page = req.query.get_page ? req.query.get_page : false;
-
-		return option;
-	}
 }
 class Favorite_Logic {
 	static get = (parent_data_type,parent_id,user_id) =>{
@@ -1289,33 +1073,14 @@ class Review_Logic {
 				{ parent_id: { $regex:String(parent_id), $options: "i" } },
 			] };
 	}
-	static get_test = (item_data_type,item_id,user_id,option) =>{
-		option = option?option:{};
-		let review = Data_Logic.get(Type.DATA_REVIEW,0);
-		if(!option.get_blank){
-			review.title = 'Title ' + Num.get_id();
-			review.item_data_type = item_data_type;
-			review.item_id = item_id;
-			review.rating = Num.get_id(6);
-			review.user_id = user_id;
-			review.comment = "My comment "+ Field_Logic.get_test_note();
-		}else{
-			review.title = '';
-			review.item_data_type = item_data_type;
-			review.item_id = item_id;
-			review.rating = 0;
-			review.user_id = user_id;
-			review.comment = "";
-		}
-		return review;
-	};
-	static get_test_items=(option)=>{
-		option = !Obj.check_is_empty(option) ? option : {review_count:19};
-		let items = [];
-		for(let a=0;a<option.review_count;a++){
-			items.push(Review_Logic.get_test(option));
-		}
-		return items;
+	static get_test = () =>{
+		let data = {};
+		data.item_data_type = item_data_type;
+		data.item_id = item_id;
+		data.rating = Num.get_id(6);
+		data.user_id = user_id;
+		data.comment = "My comment "+ Field_Logic.get_test_note();
+		return data;
 	};
 }
 class Category_Logic {
@@ -1362,18 +1127,6 @@ class Storage {
 	}
 }
 class User_Logic {
-	static url_register = (app_id,url,param) => {
-		let action_url="user/register";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static url_login = (app_id,url,param) => {
-		let action_url="user/login";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static url_logout = (app_id,url,param) => {
-		let action_url="user/logout";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
 	static get_country_state_city(item){
 		let country_state_city = "";
 		if(item.country == "United States"){
@@ -1440,18 +1193,20 @@ class Data_Logic {
 		if(option.test){
 			switch(data_type)
 			{
-				case Type.DATA_CATEGORY:
-					data = Obj.merge(Category_Logic.get_test(),data);
-					break;
 				case Type.DATA_BLOG_POST:
 					data = Obj.merge(Blog_Post_Logic.get_test(),data);
 					break;
 				case Type.DATA_SERVICE:
 					data = Obj.merge(Service_Logic.get_test(),data);
 					break;
+				case Type.DATA_EVENT:
+					data = Obj.merge(Event_Logic.get_test(),data);
+					break;
 				case Type.DATA_PRODUCT:
 					data = Obj.merge(Product_Logic.get_test(),data);
 					break;
+				case Type.DATA_CONTENT:
+				case Type.DATA_CATEGORY:
 				case Type.DATA_BLANK:
 					data = Obj.merge(Blank_Logic.get_test(),data);
 					break;
@@ -1566,54 +1321,20 @@ class Data_Logic {
 
 }
 class App_Logic {
-	static get_url = (app_id,host,url,param) => {
-		return get_cloud_url_main(app_id,host,url,param);
-	};
-	static bind_item_parent_users = (item,parent_item,user)=>{
-		for(const prop in parent_item) {
-			item['parent_'+prop] = parent_item[prop];
-		}
-		for(const prop in user) {
-			item['user_'+prop] = user[prop];
-		}
-		return item;
-	};
-	static bind_item_parent_users = (items)=>{
-		for(let item of items) {
-			item = App_Logic.bind_item_parent_user_obj(item);
-		}
-		return items;
-	};
-	static bind_item_parent_user_obj = (item)=>{
-		if(!item.user){
-			item.user = {};
-		}
-		if(!item.parent_item){
-			item.parent_item = {};
-		}
-		for(const prop in item.parent_item) {
-			item['parent_'+prop] = item.parent_item[prop];
-		}
-		for(const prop in item.user) {
-			item['user_'+prop] = item.user[prop];
-		}
-		return item;
-	};
-	static url_dashboard_user_home = (app_id,url,param) => {
-		let action_url="dashboard/user_home";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static url_dashboard_app_home = (app_id,url,param) => {
-		let action_url="dashboard/app_home";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static get = (title,user_id,type) =>{
+static get = (title,user_id,type) =>{
 		let app = Data_Logic.get(Type.DATA_APP,0);
 		app.title = title;
 		app.user_id = user_id;
 		app.type = type;
 		return app;
 	}
+	static get_url = (app_id,host,url,param) => {
+ 		if(!params){
+        	params='';
+    	}
+    	var app_id_url='?app_id='+app_id;
+    	return domain_url+"/"+action_url+app_id_url + params;
+	};
 	static get_search_query(search){
 		let url = "";
 		if(search.data_type){
@@ -1674,14 +1395,6 @@ class App_Logic {
 	}
 }
 class File_Logic {
-	static url_post = (app_id,url,param) => {
-		let action_url="main/file/post";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static url_post_cdn = (app_id,url,param) => {
-		let action_url="main/file/post_cdn";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
 	static url = (host,file_filename,size,param) =>{
 		host = host ? host : "";
 		file_filename = file_filename ? file_filename : "";
@@ -1698,14 +1411,6 @@ class File_Logic {
 	};
 };
 class Image_Logic {
-	static url_post = (app_id,url,param) => {
-		let action_url="main/image/post";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
-	static url_post_cdn = (app_id,url,param) => {
-		let action_url="main/image/post_cdn";
-		return get_cloud_url_main(app_id,url,action_url,param);
-	};
 	static url = (host,image_filename,size,param) =>{
 		host = host ? host : "";
 		image_filename = image_filename ? image_filename : "";
@@ -1857,7 +1562,6 @@ module.exports = {
 	Blog_Post_Logic,
 	Cart_Logic,
 	Category_Logic,
-	Content_Logic,
 	Data_Logic,
 	Event_Logic,
 	File_Logic,
