@@ -5,7 +5,7 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const moment = require('moment');
-const { get_new_item_main,get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
+const { get_data_config_main,get_cloud_url_main,get_biz_item_main,get_cloud_filter_obj_main,get_new_full_item_main } = require('./main');
 const { Log,Str,DateTime,Num,Obj } = require('biz9-utility');
 class Message {
 	static SUCCESS="Success";
@@ -717,13 +717,6 @@ class Cart_Logic {
 	};
 }
 class Product_Logic {
-	static get = (title,type,category,option) => {
-		option = option ? option : {};
-		const item = Item_Logic.get(title,Type.DATA_PRODUCT);
-		item.type = type;
-		item.category = category = category?category:"";
-		return item;
-	};
 	static get_stocks = () => {
 		const stocks=
 			[
@@ -754,26 +747,16 @@ class Product_Logic {
 				break;
 		}
 	};
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
-		option = option?option:{};
-		let product = Data_Logic.get(Type.DATA_PRODUCT,0,{data:Field_Logic.get_test(title,option)});
-		if(option.get_blank ==false){
-			product.cost = Field_Logic.get_test_cost();
-			product.old_cost = Field_Logic.get_test_cost();
-			product.type = "Type "+String(Num.get_id());
-			product.sub_type = "Sub Type "+String(Num.get_id());
-			product.stock = String(Num.get_id(3-1));
-			product.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
-		}else{
-			product.cost = "";
-			product.old_cost = "";
-			product.type = "";
-			product.sub_type = "";
-			product.stock = "";
-			product.tag = "";
-		}
-		return product;
+	static get_test = (option) =>{
+		let data = {};
+		data.cost = Field_Logic.get_test_cost();
+		data.old_cost = Field_Logic.get_test_cost();
+		data.category = "Category "+String(Num.get_id());
+		data.type = "Type "+String(Num.get_id());
+		data.sub_type = "Sub Type "+String(Num.get_id());
+		data.stock = String(Num.get_id(3-1));
+		data.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
+		return data;
 	};
 }
 class Service_Logic {
@@ -925,6 +908,28 @@ class Event_Logic {
 	};
 }
 class Field_Logic {
+	static get_base_option = (data,option) => {
+		if(option.title){
+			data[Type.FIELD_TITLE] = option.title;
+			data[Type.FIELD_TITLE_URL] = Str.get_title_url(option.title);
+		}
+		if(option.title){
+			data[Type.FIELD_TITLE] = Type.get_title(data.data_type);
+			data[Type.FIELD_TITLE_URL] = Str.get_title_url(data[Type.FIELD_TITLE]);
+		}
+		if(option.generate_title){
+			data[Type.FIELD_TITLE] = Type.get_title(data.data_type) + " " +Num.get_id();
+			data[Type.FIELD_TITLE_URL] = Str.get_title_url(data[Type.FIELD_TITLE]);
+		}
+		if(option.parent){
+			data[Type.FIELD_PARENT_DATA_TYPE] = option.parent[Type.FIELD_DATA_TYPE] ? option.parent[Type.FIELD_DATA_TYPE] : Type.DATA_BLANK;
+			data[Type.FIELD_PARENT_ID] = option.parent[Type.FIELD_ID] ? option.parent[Type.FIELD_ID] : 0;
+		}
+		if(option.data){
+			data = Obj.merge(data,option.data);
+		}
+		return data;
+	};
 	static get_item_max_group_id = (value_id,item) => {
 		let max_group_id = 0;
 		let full_prop_str = "";
@@ -1435,9 +1440,11 @@ class User_Logic {
 		req.session.user=null;
 		delete req.session.user;
 	}
-	static get_test = (title,option) =>{
-		[title,option] = Field_Logic.get_option_title(title,option);
+	static get_test = (option) =>{
+		let data = {data_type:Type.DATA_PRODUCT,id:0};
 		option = option?option:{};
+		option.title = option.generate_title ? option.title : data.title = Type.get_title(data_type) + " " +Num.get_id();
+
 		let user = Data_Logic.get(Type.DATA_USER,0,{data:
 			Field_Logic.get_test(title,option)});
 		if(option.get_blank){
@@ -1462,50 +1469,43 @@ class User_Logic {
 }
 class Data_Logic {
 	static get = (data_type,id,option) => {
+		let data = {data_type:data_type,id:id};
 		option = option ? option : {};
-		option.data = option.data ? option.data : {};
+		data = Field_Logic.get_base_option(data,option);
 		if(option.test){
 			switch(data_type)
 			{
 				case Type.DATA_CATEGORY:
-					option.data = Obj.merge(Category_Logic.get_test(),option.data);
+					data = Obj.merge(Category_Logic.get_test(),data);
 					break;
 				case Type.DATA_BLOG_POST:
-					option.data = Obj.merge(Blog_Post_Logic.get_test(),option.data);
+					data = Obj.merge(Blog_Post_Logic.get_test(),data);
 					break;
 				case Type.DATA_SERVICE:
-					option.data = Obj.merge(Service_Logic.get_test(),option.data);
+					data = Obj.merge(Service_Logic.get_test(),data);
 					break;
 				case Type.DATA_PRODUCT:
-					option.data = Obj.merge(Product_Logic.get_test(),option.data);
+					data = Obj.merge(Product_Logic.get_test(),data);
 					break;
 				case Type.DATA_BLANK:
-					option.data = Obj.merge(Blank_Logic.get_test(),option.data);
+					data = Obj.merge(Blank_Logic.get_test(),data);
 					break;
 				case Type.DATA_USER:
-					option.data = Obj.merge(User_Logic.get_test(),option.data);
+					data = Obj.merge(User_Logic.get_test(),data);
 					break;
 					default:
-					option.data = Obj.merge(Blank_Logic.get_test(),option.data);
-					option.data.data_type = Type.DATA_GROUP;
+					data = Obj.merge(Blank_Logic.get_test(),data);
+					data.data_type = Type.DATA_BLANK;
 					break;
 			}
 		}
-		if(option.parent){
-			option.data[Type.FIELD_PARENT_DATA_TYPE] = option.parent[Type.FIELD_DATA_TYPE] ? option.parent[Type.FIELD_DATA_TYPE] : Type.DATA_BLANK;
-			option.data[Type.FIELD_PARENT_ID] = option.parent[Type.FIELD_ID] ? option.parent[Type.FIELD_ID] : 0;
+		if(option.test_blank){
+			for(const field in data){
+				if(field != Type.FIELD_ID && field != Type.FIELD_DATA_TYPE){
+					data[field] = '';
+				}
+			}
 		}
-		if(option.generate_title){
-			option.title = Type.get_title(data_type) + " " +Num.get_id();
-		}
-		if(option.title){
-			option.data[Type.FIELD_TITLE] = option.title;
-			option.data[Type.FIELD_TITLE_URL] = Str.get_title_url(option.title);
-		}else{
-			option.data[Type.FIELD_TITLE] = Type.get_title(data_type);
-			option.data[Type.FIELD_TITLE_URL] = Str.get_title_url(Type.get_title(data_type));
-		}
-		let data = Data_Logic.get(data_type,id,{data:option.data?option.data:{}});
 		return data;
 	};
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {

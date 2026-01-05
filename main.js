@@ -9,21 +9,6 @@ const biz9_config_local=__dirname+"/../../"+"biz9_config";
 const get_cloud_param_obj_main = (data_type,filter,sort_by,page_current,page_size) => {
     return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
 }
-const get_new_item_main = (data_type,id,option) => {
-    if(!id){
-        id='0';
-    }
-    let item = {data_type:data_type,id:id};
-    if(!option){
-        option = {};
-    }
-    if(option){
-        for (const key in option) {
-            item[key] = option[key];
-        }
-    }
-    return item;
-}
 const get_new_full_item_main = (org_item,parent_item,top_item,option) => {
     if(!option){
         option = {};
@@ -65,7 +50,6 @@ const get_title_main = (data_type) => {
 	}
 
 module.exports = {
-    get_new_item_main,
     get_cloud_url_main,
     get_cloud_param_obj_main,
     get_title_url_main,
