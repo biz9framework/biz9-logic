@@ -43,8 +43,13 @@ describe("connect", () => {
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean'});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{data:{field_1:'field_1',field_2:'field_2'}});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{test:true});
+                // -->
+                //let data_items = Type.get_order_statuses();
+                let data_items = Type.get_app_links();
+                // -->
                 //Log.w('99_result_data',data);
-                Log.w('99_result_parent',parent);
+                //Log.w('99_result_parent',parent);
+                Log.w('99_result_data_items',data_items);
 
                 //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
                 //Log.w('Title 2',Type.get_title(Type.ORDER_STATUS_COMPLETE));

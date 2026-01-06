@@ -122,6 +122,25 @@ class Type {
 	static FIELD_VALUE = 'value';
 	static FIELD_WEBSITE = 'website';
 	//title
+	static TITLE_DATA_BLOG_POST = 'Blog Post';
+	static TITLE_DATA_CATEGORY = 'Category';
+	static TITLE_DATA_CONTENT = 'Content';
+	static TITLE_DATA_EVENT = 'Event';
+	static TITLE_DATA_FAQ = 'Faq';
+	static TITLE_DATA_GALLERY = 'Gallery';
+	static TITLE_DATA_USER = 'User';
+	static TITLE_DATA_PAGE = 'Page';
+	static TITLE_DATA_PRODUCT = 'Product';
+	static TITLE_DATA_SERVICE = 'Service';
+	//
+	static TITLE_APP_ENV_TEST='Test';
+	static TITLE_APP_ENV_STAGE='Stage';
+	static TITLE_APP_ENV_PROD='Production';
+	static TITLE_APP_LINK_TYPE_WEBSITE='Website';
+	static TITLE_APP_LINK_TYPE_GOOGLE_PLAY='Google Play';
+	static TITLE_APP_LINK_TYPE_APPLE_STORE='Apple Store';
+	static TITLE_APP_LINK_TYPE_CMS='CMS';
+	//
 	static TITLE_BLANK='Blank';
 	static TITLE_CART_ITEMS='Cart Items';
 	static TITLE_CART_SUB_ITEMS='Cart Sub Items';
@@ -273,224 +292,81 @@ class Type {
 	static CATEGORY='Category';
 	static DESCRIPTION='Description';
 	static TYPE='Type';
-
 	static get_order_statuses(){
 		return [
-			{value:Type.ORDER_STATUS_NEW,label:Type.TITLE_ORDER_STATUS_NEW},
-			{value:Type.ORDER_STATUS_OPEN,label:Type.TITLE_ORDER_STATUS_OPEN},
-			{value:Type.ORDER_STATUS_COMPLETE,label:Type.TITLE_ORDER_STATUS_COMPLETE},
-			{value:Type.ORDER_STATUS_RETURNED,label:Type.TITLE_ORDER_STATUS_RETURNED},
-			{value:Type.ORDER_STATUS_ON_HOLD,label:Type.TITLE_ORDER_STATUS_ON_HOLD},
-			{value:Type.ORDER_STATUS_CANCELLED,label:Type.TITLE_ORDER_STATUS_CANCELLED},
+			{value:Type.ORDER_STATUS_NEW,label:Type.TITLE_ORDER_STATUS_NEW,title:Type.TITLE_ORDER_STATUS_NEW},
+			{value:Type.ORDER_STATUS_OPEN,label:Type.TITLE_ORDER_STATUS_OPEN,title:Type.TITLE_ORDER_STATUS_OPEN},
+			{value:Type.ORDER_STATUS_COMPLETE,label:Type.TITLE_ORDER_STATUS_COMPLETE,title:Type.TITLE_ORDER_STATUS_COMPLETE},
+			{value:Type.ORDER_STATUS_RETURNED,label:Type.TITLE_ORDER_STATUS_RETURNED,title:Type.TITLE_ORDER_STATUS_RETURNED},
+			{value:Type.ORDER_STATUS_ON_HOLD,label:Type.TITLE_ORDER_STATUS_ON_HOLD,title:Type.TITLE_ORDER_STATUS_ON_HOLD},
+			{value:Type.ORDER_STATUS_CANCELLED,label:Type.TITLE_ORDER_STATUS_CANCELLED,title:Type.TITLE_ORDER_STATUS_CANCELLED},
 		];
 	};
 	static get_user_roles(){
 		return [
-			{value:Type.USER_ROLE_ADMIN,label:Type.TITLE_USER_ROLE_ADMIN},
-			{value:Type.USER_ROLE_MANAGER,label:Type.TITLE_USER_ROLE_MANAGER},
-			{value:Type.USER_ROLE_USER,label:Type.TITLE_USER_ROLE_USER},
-			{value:Type.USER_ROLE_GUEST,label:Type.TITLE_USER_ROLE_GUEST},
+			{value:Type.USER_ROLE_ADMIN,label:Type.TITLE_USER_ROLE_ADMIN,title:Type.TITLE_USER_ROLE_ADMIN},
+			{value:Type.USER_ROLE_MANAGER,label:Type.TITLE_USER_ROLE_MANAGER,title:Type.TITLE_USER_ROLE_MANAGER},
+			{value:Type.USER_ROLE_USER,label:Type.TITLE_USER_ROLE_USER,title:Type.TITLE_USER_ROLE_USER},
+			{value:Type.USER_ROLE_GUEST,label:Type.TITLE_USER_ROLE_GUEST,title:Type.TITLE_USER_ROLE_GUEST},
 		];
 	};
 	static get_pages(){
 		return [
-			{value:Type.PAGE_ABOUT,label:Title.PAGE_ABOUT,url:Url.PAGE_ABOUT},
-			{value:Type.PAGE_BLOG_POST,label:Title.PAGE_BLOG_POST,url:Url.PAGE_BLOG_POST},
-			{value:Type.PAGE_BLOG_POST_HOME,label:Title.PAGE_BLOG_POST_HOME,url:Url.PAGE_BLOG_POST_HOME},
-			{value:Type.PAGE_CONTACT,label:Title.PAGE_CONTACT,label:Title.PAGE_CONTACT,url:Url.PAGE_CONTACT},
-			{value:Type.PAGE_EVENT,label:Title.PAGE_EVENT,url:Url.PAGE_EVENT},
-			{value:Type.PAGE_EVENT_HOME,label:Title.PAGE_EVENT_HOME,url:Url.PAGE_EVENT_HOME},
-			{value:Type.PAGE_FAQ,label:Title.PAGE_FAQ,url:Url.PAGE_FAQ},
-			{value:Type.PAGE_HOME,label:Title.PAGE_HOME,url:Url.PAGE_HOME},
-			{value:Type.PAGE_GALLERY,label:Title.PAGE_GALLERY,url:Url.PAGE_GALLERY},
-			{value:Type.PAGE_GALLERY_HOME,label:Title.PAGE_GALLERY_HOME,url:Url.PAGE_GALLERY_HOME},
-			{value:Type.PAGE_LOGIN,label:Title.PAGE_LOGIN,url:Url.PAGE_LOGIN},
-			{value:Type.PAGE_PRODUCT,label:Title.PAGE_PRODUCT,url:Url.PAGE_PRODUCT},
-			{value:Type.PAGE_PRODUCT_HOME,label:Title.PAGE_PRODUCT_HOME,url:Url.PAGE_PRODUCT_HOME},
-			{value:Type.PAGE_REGISTER,label:Title.PAGE_REGISTER,url:Url.PAGE_REGISTER},
-			{value:Type.PAGE_REVIEW_HOME,label:Title.PAGE_REVIEW_HOME,url:Url.PAGE_REVIEW_HOME},
-			{value:Type.PAGE_SERVICE,label:Title.PAGE_SERVICE,url:Url.PAGE_SERVICE},
-			{value:Type.PAGE_SERVICE_HOME,label:Title.PAGE_SERVICE_HOME,url:Url.PAGE_SERVICE_HOME},
+			{value:Type.PAGE_ABOUT,title:Type.TITLE_PAGE_ABOUT,label:Type.TITLE_PAGE_ABOUT,url:Url.PAGE_ABOUT},
+			{value:Type.PAGE_BLOG_POST,title:Type.TITLE_PAGE_BLOG_POST,label:Type.TITLE_PAGE_BLOG_POST,url:Url.PAGE_BLOG_POST},
+			{value:Type.PAGE_BLOG_POST_HOME,title:Type.TITLE_PAGE_BLOG_POST_HOME,label:Type.TITLE_PAGE_BLOG_POST_HOME,url:Url.PAGE_BLOG_POST_HOME},
+			{value:Type.PAGE_CONTACT,title:Type.TITLE_PAGE_CONTACT,label:Type.TITLE_PAGE_CONTACT,url:Url.PAGE_CONTACT},
+			{value:Type.PAGE_EVENT,title:Type.TITLE_PAGE_EVENT,label:Type.TITLE_PAGE_EVENT,url:Url.PAGE_EVENT},
+			{value:Type.PAGE_EVENT_HOME,title:Type.TITLE_PAGE_EVENT_HOME,label:Type.TITLE_PAGE_EVENT_HOME,url:Url.PAGE_EVENT_HOME},
+			{value:Type.PAGE_FAQ,title:Type.TITLE_PAGE_FAQ,label:Type.TITLE_PAGE_FAQ,url:Url.PAGE_FAQ},
+			{value:Type.PAGE_HOME,title:Type.TITLE_PAGE_HOME,label:Type.TITLE_PAGE_HOME,url:Url.PAGE_HOME},
+			{value:Type.PAGE_GALLERY,title:Type.TITLE_PAGE_GALLERY,label:Type.TITLE_PAGE_GALLERY,url:Url.PAGE_GALLERY},
+			{value:Type.PAGE_GALLERY_HOME,title:Type.TITLE_PAGE_GALLERY_HOME,label:Type.TITLE_PAGE_GALLERY_HOME,url:Url.PAGE_GALLERY_HOME},
+			{value:Type.PAGE_LOGIN,title:Type.TITLE_PAGE_LOGIN,label:Type.TITLE_PAGE_LOGIN,url:Url.PAGE_LOGIN},
+			{value:Type.PAGE_PRODUCT,title:Type.TITLE_PAGE_PRODUCT,label:Type.TITLE_PAGE_PRODUCT,url:Url.PAGE_PRODUCT},
+			{value:Type.PAGE_PRODUCT_HOME,title:Type.TITLE_PAGE_PRODUCT_HOME,label:Type.TITLE_PAGE_PRODUCT_HOME,url:Url.PAGE_PRODUCT_HOME},
+			{value:Type.PAGE_REGISTER,title:Type.TITLE_PAGE_REGISTER,label:Type.TITLE_PAGE_REGISTER,url:Url.REGISTER},
+			{value:Type.PAGE_REVIEW_HOME,title:Type.TITLE_PAGE_REVIEW_HOME,label:Type.TITLE_PAGE_REVIEW_HOME,url:Url.PAGE_REVIEW_HOME},
+			{value:Type.PAGE_SERVICE,title:Type.TITLE_PAGE_SERVICE,label:Type.TITLE_PAGE_SERVICE,url:Url.PAGE_SERVICE},
+			{value:Type.PAGE_SERVICE_HOME,title:Type.TITLE_PAGE_SERVICE_HOME,label:Type.TITLE_PAGE_SERVICE_HOME,url:Url.PAGE_SERVICE_HOME},
 		];
 	};
 	static get_stat_types = () =>{
 		return [
-			{title:Type.get_title(Type.STAT_CART),type:Type.STAT_CART,label:Type.get_title(Type.STAT_CART),value:Type.STAT_CART},
-			{title:Type.get_title(Type.STAT_CART_ITEM),type:Type.STAT_CART_ITEM,label:Type.get_title(Type.STAT_CART_ITEM),value:Type.STAT_CART_ITEM},
-			{title:Type.get_title(Type.STAT_CART_SUB_ITEM),type:Type.STAT_CART_SUB_ITEM,label:Type.get_title(Type.STAT_CART_SUB_ITEM),value:Type.STAT_CART_SUB_ITEM},
-			{title:Type.get_title(Type.STAT_FAVORITE),type:Type.STAT_FAVORITE,label:Type.get_title(Type.STAT_FAVORITE),value:Type.STAT_FAVORITE},
-			{title:Type.get_title(Type.STAT_LIKE),type:Type.STAT_LIKE,label:Type.get_title(Type.STAT_LIKE),value:Type.STAT_LIKE},
-			{title:Type.get_title(Type.STAT_LOGIN),type:Type.STAT_LOGIN,label:Type.get_title(Type.STAT_LOGIN),value:Type.STAT_LOGIN},
-			{title:Type.get_title(Type.STAT_ORDER),type:Type.STAT_ORDER,label:Type.get_title(Type.STAT_ORDER),value:Type.STAT_ORDER},
-			{title:Type.get_title(Type.STAT_ORDER_ITEM),type:Type.STAT_ORDER_ITEM,label:Type.get_title(Type.STAT_ORDER_ITEM),value:Type.STAT_ORDER_ITEM},
-			{title:Type.get_title(Type.STAT_ORDER_SUB_ITEM),type:Type.STAT_ORDER_SUB_ITEM,label:Type.get_title(Type.STAT_ORDER_SUB_ITEM),value:Type.STAT_ORDER_ITEM},
-			{title:Type.get_title(Type.STAT_ORDER_PAYMENT),type:Type.STAT_ORDER_PAYMENT,label:Type.get_title(Type.STAT_ORDER_PAYMENT),value:Type.STAT_ORDER_PAYMENT},
-			{title:Type.get_title(Type.STAT_REGISTER),type:Type.STAT_REGISTER,label:Type.get_title(Type.STAT_REGISTER),value:Type.STAT_REGISTER},
-			{title:Type.get_title(Type.STAT_REVIEW),type:Type.STAT_REVIEW,label:Type.get_title(Type.STAT_REVIEW),value:Type.STAT_REVIEW},
-			{title:Type.get_title(Type.STAT_VIEW),type:Type.STAT_VIEW,label:Type.get_title(Type.STAT_VIEW),value:Type.STAT_VIEW},
+			{title:Type.get_data_type_by_type(Type.STAT_CART),type:Type.STAT_CART,label:Type.get_data_type_by_type(Type.STAT_CART),value:Type.STAT_CART},
+			{title:Type.get_data_type_by_type(Type.STAT_CART_ITEM),type:Type.STAT_CART_ITEM,label:Type.get_data_type_by_type(Type.STAT_CART_ITEM),value:Type.STAT_CART_ITEM},
+			{title:Type.get_data_type_by_type(Type.STAT_CART_SUB_ITEM),type:Type.STAT_CART_SUB_ITEM,label:Type.get_data_type_by_type(Type.STAT_CART_SUB_ITEM),value:Type.STAT_CART_SUB_ITEM},
+			{title:Type.get_data_type_by_type(Type.STAT_FAVORITE),type:Type.STAT_FAVORITE,label:Type.get_data_type_by_type(Type.STAT_FAVORITE),value:Type.STAT_FAVORITE},
+			{title:Type.get_data_type_by_type(Type.STAT_LIKE),type:Type.STAT_LIKE,label:Type.get_data_type_by_type(Type.STAT_LIKE),value:Type.STAT_LIKE},
+			{title:Type.get_data_type_by_type(Type.STAT_LOGIN),type:Type.STAT_LOGIN,label:Type.get_data_type_by_type(Type.STAT_LOGIN),value:Type.STAT_LOGIN},
+			{title:Type.get_data_type_by_type(Type.STAT_ORDER),type:Type.STAT_ORDER,label:Type.get_data_type_by_type(Type.STAT_ORDER),value:Type.STAT_ORDER},
+			{title:Type.get_data_type_by_type(Type.STAT_ORDER_ITEM),type:Type.STAT_ORDER_ITEM,label:Type.get_data_type_by_type(Type.STAT_ORDER_ITEM),value:Type.STAT_ORDER_ITEM},
+			{title:Type.get_data_type_by_type(Type.STAT_ORDER_SUB_ITEM),type:Type.STAT_ORDER_SUB_ITEM,label:Type.get_data_type_by_type(Type.STAT_ORDER_SUB_ITEM),value:Type.STAT_ORDER_ITEM},
+			{title:Type.get_data_type_by_type(Type.STAT_ORDER_PAYMENT),type:Type.STAT_ORDER_PAYMENT,label:Type.get_data_type_by_type(Type.STAT_ORDER_PAYMENT),value:Type.STAT_ORDER_PAYMENT},
+			{title:Type.get_data_type_by_type(Type.STAT_REGISTER),type:Type.STAT_REGISTER,label:Type.get_data_type_by_type(Type.STAT_REGISTER),value:Type.STAT_REGISTER},
+			{title:Type.get_data_type_by_type(Type.STAT_REVIEW),type:Type.STAT_REVIEW,label:Type.get_data_type_by_type(Type.STAT_REVIEW),value:Type.STAT_REVIEW},
+			{title:Type.get_data_type_by_type(Type.STAT_VIEW),type:Type.STAT_VIEW,label:Type.get_data_type_by_type(Type.STAT_VIEW),value:Type.STAT_VIEW},
 		]
 	};
 	static get_data_types = () =>{
 		return [
-			{title:Type.get_title(Type.DATA_BLOG_POST),type:Type.DATA_BLOG_POST,label:Type.get_title(Type.DATA_BLOG_POST),value:Type.DATA_BLOG_POST},
-			{title:Type.get_title(Type.DATA_CATEGORY),type:Type.DATA_CATEGORY,label:Type.get_title(Type.DATA_CATEGORY),value:Type.DATA_CATEGORY},
-			{title:Type.get_title(Type.DATA_CONTENT),type:Type.DATA_CONTENT,label:Type.get_title(Type.DATA_CONTENT),value:Type.DATA_CONTENT},
-			{title:Type.get_title(Type.DATA_EVENT),type:Type.DATA_EVENT,label:Type.get_title(Type.DATA_EVENT),value:Type.DATA_EVENT},
-			{title:Type.get_title(Type.DATA_FAQ),type:Type.DATA_FAQ,label:Type.get_title(Type.DATA_FAQ),value:Type.DATA_FAQ},
-			{title:Type.get_title(Type.DATA_GALLERY),type:Type.DATA_GALLERY,label:Type.get_title(Type.DATA_GALLERY),value:Type.DATA_GALLERY},
-			{title:Type.get_title(Type.DATA_USER),type:Type.DATA_USER,label:Type.get_title(Type.DATA_USER),value:Type.DATA_USER},
-			{title:Type.get_title(Type.DATA_PAGE),type:Type.DATA_PAGE,label:Type.get_title(Type.DATA_PAGE),value:Type.DATA_PAGE},
-			{title:Type.get_title(Type.DATA_PRODUCT),type:Type.DATA_PRODUCT,label:Type.get_title(Type.DATA_PRODUCT),value:Type.DATA_PRODUCT},
-			{title:Type.get_title(Type.DATA_SERVICE),type:Type.DATA_SERVICE,label:Type.get_title(Type.DATA_SERVICE),value:Type.DATA_SERVICE}
+			{title:Type.TITLE_DATA_BLOG_POST,label:Type.TITLE_DATA_BLOG_POST,type:Type.DATA_BLOG_POST,value:Type.DATA_BLOG_POST},
+			{title:Type.TITLE_DATA_CATEGORY,label:Type.TITLE_DATA_CATEGORY,type:Type.DATA_CATEGORY,value:Type.DATA_CATEGORY},
+			{title:Type.TITLE_DATA_CONTENT,label:Type.TITLE_DATA_CONTENT,type:Type.DATA_CONTENT,value:Type.DATA_CONTENT},
+			{title:Type.TITLE_DATA_EVENT,type:Type.DATA_EVENT,value:Type.DATA_EVENT},
+			{title:Type.TITLE_DATA_FAQ,label:Type.TITLE_DATA_EVENT,type:Type.DATA_FAQ,value:Type.DATA_FAQ},
+			{title:Type.TITLE_DATA_GALLERY,label:Type.TITLE_DATA_GALLERY,type:Type.DATA_GALLERY,label:Type.get_data_type_by_type(Type.DATA_GALLERY),value:Type.DATA_GALLERY},
+			{title:Type.TITLE_DATA_USER,label:Type.TITLE_DATA_USER,type:Type.DATA_USER,value:Type.DATA_USER},
+			{title:Type.TITLE_DATA_PAGE,label:Type.TITLE_DATA_PAGE,type:Type.DATA_PAGE,value:Type.DATA_PAGE},
+			{title:Type.TITLE_DATA_PRODUCT,label:Type.TITLE_DATA_PAGE,type:Type.DATA_PRODUCT,value:Type.DATA_PRODUCT},
+			{title:Type.TITLE_DATA_SERVICE,label:Type.TITLE_DATA_PRODUCT,type:Type.DATA_SERVICE,value:Type.DATA_SERVICE}
 		]
 	};
-	static get_types = () =>{
-		return [
-			{title:Type.get_title(Type.DATA_BLOG_POST),type:Type.DATA_BLOG_POST,label:Type.get_title(Type.DATA_BLOG_POST),value:Type.DATA_BLOG_POST},
-			{title:Type.get_title(Type.DATA_CATEGORY),type:Type.DATA_CATEGORY,label:Type.get_title(Type.DATA_CATEGORY),value:Type.DATA_CATEGORY},
-			{title:Type.get_title(Type.DATA_CONTENT),type:Type.DATA_CONTENT,label:Type.get_title(Type.DATA_CONTENT),value:Type.DATA_CONTENT},
-			{title:Type.get_title(Type.DATA_EVENT),type:Type.DATA_EVENT,label:Type.get_title(Type.DATA_EVENT),value:Type.DATA_EVENT},
-			{title:Type.get_title(Type.DATA_GALLERY),type:Type.DATA_GALLERY,label:Type.get_title(Type.DATA_GALLERY),value:Type.DATA_GALLERY},
-			{title:Type.get_title(Type.DATA_USER),type:Type.DATA_USER,label:Type.get_title(Type.DATA_USER),value:Type.DATA_USER},
-			{title:Type.get_title(Type.DATA_PAGE),type:Type.DATA_PAGE,label:Type.get_title(Type.DATA_PAGE),value:Type.DATA_PAGE},
-			{title:Type.get_title(Type.DATA_PRODUCT),type:Type.DATA_PRODUCT,label:Type.get_title(Type.DATA_PRODUCT),value:Type.DATA_PRODUCT},
-			{title:Type.get_title(Type.DATA_SERVICE),type:Type.DATA_SERVICE,label:Type.get_title(Type.DATA_SERVICE),value:Type.DATA_SERVICE},
-			{title:Type.get_title(Type.DATA_TYPE),type:Type.DATA_TYPE,label:Type.get_title(Type.DATA_TYPE),value:Type.DATA_TYPE}
-		]
-	};
-	static get_app_environments = () =>{
-		return [
-			{title:Type.get_title(Type.APP_ENV_TEST),type:Type.APP_ENV_TEST,label:Type.get_title(Type.APP_ENV_TEST),value:Type.APP_ENV_TEST},
-			{title:Type.get_title(Type.APP_ENV_STAGE),type:Type.APP_ENV_STAGE,label:Type.get_title(Type.APP_ENV_STAGE),value:Type.APP_ENV_STAGE},
-			{title:Type.get_title(Type.APP_ENV_PROD),type:Type.APP_ENV_PROD,label:Type.get_title(Type.APP_ENV_PROD),value:Type.APP_ENV_PROD},
-		]
-	};
-	static get_app_links = () =>{
-		return [
-			{title:Type.get_title(Type.APP_LINK_TYPE_WEBSITE),type:Type.APP_LINK_TYPE_WEBSITE,label:Type.get_title(Type.APP_LINK_TYPE_WEBSITE),value:Type.APP_LINK_TYPE_WEBSITE},
-			{title:Type.get_title(Type.APP_LINK_TYPE_GOOGLE_PLAY),type:Type.APP_LINK_TYPE_GOOGLE_PLAY,label:Type.get_title(Type.APP_LINK_TYPE_GOOGLE_PLAY),value:Type.APP_LINK_TYPE_GOOGLE_PLAY},
-			{title:Type.get_title(Type.APP_LINK_TYPE_APPLE_STORE),type:Type.APP_LINK_TYPE_APPLE_STORE,label:Type.get_title(Type.APP_LINK_TYPE_APPLE_STORE),value:Type.APP_LINK_TYPE_APPLE_STORE},
-		]
-	};
-	//9_get_title
-	static get_title = (type,option)=>{
-		/* option
-		 * lowercase = ex. true,false / def. false
-		 * plural = ex. true,false /  def. false
-		 * url = ex. true,false /  def. false
-		 */
-		type = type?type:"";
-		let r_type = "";
-		option = option ? option : {lowercase:false,plural:false,url:false};
-		switch(type){
-			case Type.STAT_CART:
-				r_type = "Cart";
-				break;
-			case Type.STAT_CART_ITEM:
-				r_type = "Cart Item";
-				break;
-			case Type.STAT_CART_SUB_ITEM:
-				r_type = "Cart Sub Item";
-				break;
-			case Type.STAT_FAVORITE:
-				r_type = "Favorite";
-				break;
-			case Type.STAT_LIKE:
-				r_type = "Like";
-				break;
-			case Type.STAT_LOGIN:
-				r_type = "Login";
-				break;
-			case Type.STAT_ORDER:
-				r_type = "Order";
-				break;
-			case Type.STAT_ORDER_ITEM:
-				r_type = "Order Item";
-				break;
-			case Type.STAT_ORDER_SUB_ITEM:
-				r_type = "Order Sub Item";
-				break;
-			case Type.STAT_ORDER_PAYMENT:
-				r_type = "Order Payment";
-				break;
-			case Type.STAT_REGISTER:
-				r_type = "Register";
-				break;
-			case Type.STAT_REVIEW:
-				r_type = "Review";
-				break;
-			case Type.STAT_VIEW:
-				r_type = "View";
-				break;
-			case Type.APP_ENV_TEST:
-				r_type = "Testing";
-				break;
-			case Type.APP_ENV_STAGE:
-				r_type = "Staging";
-				break;
-			case Type.APP_ENV_PROD:
-				r_type = "Production";
-				break;
-			case Type.APP_LINK_TYPE_WEBSITE:
-				r_type = "Website";
-				break;
-			case Type.APP_LINK_TYPE_GOOGLE_PLAY:
-				r_type = "Google Play";
-				break;
-			case Type.APP_LINK_TYPE_APPLE_STORE:
-				r_type = "Apple Store";
-				break;
-			case Type.APP_LINK_TYPE_CMS:
-				r_type = "Content Management System";
-				break;
-			case Type.ID:
-				r_type = "ID";
-				break;
-			case Type.N_A:
-				r_type = "N/A";
-				break;
-			case Type.PAGE_ABOUT:
-			case Type.PAGE_CONTACT:
-			case Type.PAGE_HOME:
-			case Type.PAGE_FAQ:
-			case Type.PAGE_BLOG_POST:
-			case Type.PAGE_BLOG_POST_HOME:
-			case Type.PAGE_BLOG_POST_SEARCH:
-			case Type.PAGE_EVENT:
-			case Type.PAGE_EVENT_HOME:
-			case Type.PAGE_EVENT_SEARCH:
-			case Type.PAGE_GALLERY:
-			case Type.PAGE_GALLERY_HOME:
-			case Type.PAGE_GALLERY_SEARCH:
-			case Type.PAGE_LOGIN:
-			case Type.PAGE_PRODUCT:
-			case Type.PAGE_PRODUCT_HOME:
-			case Type.PAGE_PRODUCT_SEARCH:
-			case Type.PAGE_REGISTER:
-			case Type.PAGE_REVIEW_HOME:
-			case Type.PAGE_SERVICE:
-			case Type.PAGE_SERVICE_HOME:
-			case Type.PAGE_SERVICE_SEARCH:
-			case Type.USER_ROLE_SUPER_ADMIN:
-			case Type.USER_ROLE_ADMIN:
-			case Type.USER_ROLE_MANAGER:
-			case Type.USER_ROLE_USER:
-			case Type.USER_ROLE_GUEST:
-			case Type.ORDER_STATUS_NEW:
-			case Type.ORDER_STATUS_OPEN:
-			case Type.ORDER_STATUS_COMPLETE:
-			case Type.ORDER_STATUS_RETURNED:
-			case Type.ORDER_STATUS_ON_HOLD:
-			case Type.ORDER_STATUS_CANCELLED:
-			case Type.ORDER_PAYMENT_PLAN_NEW:
-			case Type.ORDER_PAYMENT_PLAN_1:
-			case Type.ORDER_PAYMENT_PLAN_2:
-			case Type.ORDER_PAYMENT_PLAN_3:
-			case Type.ORDER_PAYMENT_PLAN_4:
-			case Type.ORDER_PAYMENT_METHOD_STRIPE:
-			case Type.ORDER_PAYMENT_METHOD_CASH:
-			case Type.ORDER_PAYMENT_METHOD_OTHER:
-			case Type.ORDER_PAYMENT_METHOD_TEST:
+	static get_data_type_by_type = (data_type,option) =>{
+		data_type = data_type?data_type:"";
+			let r_type = "";
+			option = option ? option : {lowercase:false,plural:false,url:false};
+		switch(data_type){
 			case Type.DATA_APP:
 			case Type.DATA_BLANK:
 			case Type.DATA_BLOG_POST:
@@ -522,12 +398,9 @@ class Type {
 			case Type.DATA_TYPE:
 			case Type.DATA_USER:
 			case Type.DATA_VIDEO:
-				r_type = String(Str.get_title(type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
-				break;
-			default:
-				r_type = "N/A";
-				break;
-		}
+			r_type = String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
+			break;
+		};
 		if(option.plural){
 			r_type = r_type + 's';
 		}
@@ -539,8 +412,35 @@ class Type {
 		}
 		return r_type;
 	};
-	static get_type_title = (data_type) => {
-		return String(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz','')).trim();
+
+	static get_data_types = () =>{
+		return [
+			{title:Type.get_data_type_by_type(Type.DATA_BLOG_POST),type:Type.DATA_BLOG_POST,label:Type.get_data_type_by_type(Type.DATA_BLOG_POST),value:Type.DATA_BLOG_POST},
+			{title:Type.get_data_type_by_type(Type.DATA_CATEGORY),type:Type.DATA_CATEGORY,label:Type.get_data_type_by_type(Type.DATA_CATEGORY),value:Type.DATA_CATEGORY},
+			{title:Type.get_data_type_by_type(Type.DATA_CONTENT),type:Type.DATA_CONTENT,label:Type.get_data_type_by_type(Type.DATA_CONTENT),value:Type.DATA_CONTENT},
+			{title:Type.get_data_type_by_type(Type.DATA_EVENT),type:Type.DATA_EVENT,label:Type.get_data_type_by_type(Type.DATA_EVENT),value:Type.DATA_EVENT},
+			{title:Type.get_data_type_by_type(Type.DATA_GALLERY),type:Type.DATA_GALLERY,label:Type.get_data_type_by_type(Type.DATA_GALLERY),value:Type.DATA_GALLERY},
+			{title:Type.get_data_type_by_type(Type.DATA_USER),type:Type.DATA_USER,label:Type.get_data_type_by_type(Type.DATA_USER),value:Type.DATA_USER},
+			{title:Type.get_data_type_by_type(Type.DATA_PAGE),type:Type.DATA_PAGE,label:Type.get_data_type_by_type(Type.DATA_PAGE),value:Type.DATA_PAGE},
+			{title:Type.get_data_type_by_type(Type.DATA_PRODUCT),type:Type.DATA_PRODUCT,label:Type.get_data_type_by_type(Type.DATA_PRODUCT),value:Type.DATA_PRODUCT},
+			{title:Type.get_data_type_by_type(Type.DATA_SERVICE),type:Type.DATA_SERVICE,label:Type.get_data_type_by_type(Type.DATA_SERVICE),value:Type.DATA_SERVICE},
+			{title:Type.get_data_type_by_type(Type.DATA_TYPE),type:Type.DATA_TYPE,label:Type.get_data_type_by_type(Type.DATA_TYPE),value:Type.DATA_TYPE}
+		]
+	};
+	static get_app_environments = () =>{
+		return [
+			{label:Type.TITLE_APP_ENV_STAGE,title:Type.TITLE_APP_ENV_TEST,type:Type.APP_ENV_TEST,value:Type.APP_ENV_TEST},
+			{label:Type.TITLE_APP_ENV_STAGE,title:Type.TITLE_APP_ENV_STAGE,type:Type.APP_ENV_STAGE,value:Type.APP_ENV_STAGE},
+			{label:Type.TITLE_APP_ENV_PROD,title:Type.TITLE_APP_ENV_PROD,type:Type.APP_ENV_PROD,value:Type.APP_ENV_PROD},
+		]
+	};
+	static get_app_links = () =>{
+		return [
+			{title:Type.TITLE_APP_LINK_TYPE_WEBSITE,label:Type.TITLE_APP_LINK_TYPE_WEBSITE,type:Type.APP_LINK_TYPE_WEBSITE,value:Type.APP_LINK_TYPE_WEBSITE},
+			{title:Type.TITLE_APP_LINK_TYPE_GOOGLE_PLAY,label:Type.TITLE_APP_LINK_TYPE_GOOGLE_PLAY,type:Type.APP_LINK_TYPE_GOOGLE_PLAY,value:Type.APP_LINK_TYPE_GOOGLE_PLAY},
+			{title:Type.TITLE_APP_LINK_TYPE_APPLE_STORE,label:Type.TITLE_APP_LINK_TYPE_APPLE_STORE,type:Type.APP_LINK_TYPE_APPLE_STORE,value:Type.APP_LINK_TYPE_APPLE_STORE},
+			{title:Type.TITLE_APP_LINK_TYPE_CMS,label:Type.TITLE_APP_LINK_TYPE_CMS,type:Type.APP_LINK_TYPE_CMS,value:Type.APP_LINK_TYPE_CMS},
+		]
 	};
 }
 class Stat_Logic {
@@ -867,11 +767,11 @@ class Field_Logic {
 			data[Type.FIELD_TITLE_URL] = Str.get_title_url(option.title);
 		}
 		if(option.title){
-			data[Type.FIELD_TITLE] = Type.get_title(data.data_type);
+			data[Type.FIELD_TITLE] = Type.get_data_type_by_type(data.data_type);
 			data[Type.FIELD_TITLE_URL] = Str.get_title_url(data[Type.FIELD_TITLE]);
 		}
 		if(option.generate_title){
-			data[Type.FIELD_TITLE] = Type.get_title(data.data_type) + " " +Num.get_id();
+			data[Type.FIELD_TITLE] = Type.get_data_type_by_type(data.data_type) + " " +Num.get_id();
 			data[Type.FIELD_TITLE_URL] = Str.get_title_url(data[Type.FIELD_TITLE]);
 		}
 		if(option.parent){
@@ -1286,11 +1186,11 @@ class Data_Logic {
 	static get_search_foreign = (type,foreign_data_type,foreign_field,parent_field,option) => {
 		option = option ? option : {};
 		type = type ? type : Type.TITLE_ITEMS;
-		foreign_data_type = foreign_data_type ? foreign_data_type : Str.get_title_url(Type.get_title(foreign_data_type,{plural:true}));
+		foreign_data_type = foreign_data_type ? foreign_data_type : Str.get_title_url(Type.get_data_type_by_type(foreign_data_type,{plural:true}));
 		foreign_field = foreign_field ? foreign_field : Type.FIELD_PARENT_ID;
 		parent_field = parent_field ? parent_field : parent_field;
 		let field = option.field ? option.field : {};
-		let title = option.title ? option.title : Str.get_title_url(Type.get_title(foreign_data_type,{plural:true}));
+		let title = option.title ? option.title : Str.get_title_url(Type.get_data_type_by_type(foreign_data_type,{plural:true}));
 		let page_current = option.page_current ? option.page_current : 0;
 		let page_size = option.page_size ? option.page_size : 0;
 		return {type:type,foreign_data_type:foreign_data_type,foreign_field:foreign_field,parent_field:parent_field,type:type,field:field,title:title,page_current:page_current,page_size:page_size};
@@ -1300,7 +1200,7 @@ class Data_Logic {
 		type = type ? type : Type.TITLE_ITEMS;
 		search = search ? search : Data_Logic.get_search(Type.DATA_BLANK,{},{},1,0);
 		let field = option.field ? option.field : {};
-		let title = option.title ? option.title : Str.get_title_url(Type.get_title(search.data_type,{plural:true}));
+		let title = option.title ? option.title : Str.get_title_url(Type.get_data_type_by_type(search.data_type,{plural:true}));
 		let page_current = option.page_current ? option.page_current : 1;
 		let page_size = option.page_size ? option.page_size : 0;
 		return {type:type,search:search,field:field,title:title,page_current:page_current,page_size:page_size};
