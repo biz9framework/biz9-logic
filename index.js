@@ -770,7 +770,7 @@ class Field_Logic {
 			data[Type.FIELD_TITLE] = Type.get_data_type_by_type(data.data_type);
 			data[Type.FIELD_TITLE_URL] = Str.get_title_url(data[Type.FIELD_TITLE]);
 		}
-		if(option.generate_title){
+		if(option.generate_title || option.test){
 			data[Type.FIELD_TITLE] = Type.get_data_type_by_type(data.data_type) + " " +Num.get_id();
 			data[Type.FIELD_TITLE_URL] = Str.get_title_url(data[Type.FIELD_TITLE]);
 		}
@@ -1271,11 +1271,11 @@ static get = (title,user_id,type) =>{
 		return app;
 	}
 	static get_url = (app_id,host,url,param) => {
- 		if(!params){
-        	params='';
+ 		if(!param){
+        	param='';
     	}
     	var app_id_url='?app_id='+app_id;
-    	return domain_url+"/"+action_url+app_id_url + params;
+    	return host+"/"+url+app_id_url + param;
 	};
 	static get_search_query(search){
 		let url = "";

@@ -36,20 +36,22 @@ describe("connect", () => {
                 // -->
                 //let join = App_Logic.get_join({},'','',{});
                 // -->
-                //let data = Data_Logic.get(Type.DATA_BLANK,0);
-                let parent = Data_Logic.get(Type.DATA_REVIEW,0,{test_blank:false,test:true,title:'cool',generate_title:true,parent:{data_type:Type.DATA_BLANK,id:2},data:{field_1:'cool1',field_2:'cool2'}});
+                let data = Data_Logic.get(Type.DATA_BLANK,0,{data:{}});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{test:true,generate_title:true,parent:parent});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean',data:{field_1:'field_1',field_2:'field_2'}});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean'});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{data:{field_1:'field_1',field_2:'field_2'}});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{test:true});
                 // -->
+                //
+                //let parent = Data_Logic.get(Type.DATA_REVIEW,0,{test_blank:false,test:true,title:'cool',generate_title:true,parent:{data_type:Type.DATA_BLANK,id:2},data:{field_1:'cool1',field_2:'cool2'}});
                 //let data_items = Type.get_order_statuses();
-                let data_items = Type.get_app_links();
                 // -->
-                //Log.w('99_result_data',data);
+                //let data_items = Type.get_app_links();
+                // -->
+                Log.w('99_result_data',data);
                 //Log.w('99_result_parent',parent);
-                Log.w('99_result_data_items',data_items);
+                //Log.w('99_result_data_items',data_items);
 
                 //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
                 //Log.w('Title 2',Type.get_title(Type.ORDER_STATUS_COMPLETE));
