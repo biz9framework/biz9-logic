@@ -445,7 +445,7 @@ class Type {
 }
 class Stat_Logic {
 	static get = (parent_data_type,parent_id,type,user_id,post_data) => {
-		let new_stat = Data_Logic.get(Type.DATA_STAT,0,{option:
+		let new_stat = Data_Logic.get_new(Type.DATA_STAT,0,{option:
 			{
 				user_id:user_id,
 				type:type,
@@ -482,7 +482,7 @@ class Stat_Logic {
 class Order_Logic {
 	static get = (cart,option) => {
 		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1};
-		let order = Data_Logic.get(Type.DATA_ORDER,0,{data:{
+		let order = Data_Logic.get_new(Type.DATA_ORDER,0,{data:{
 			order_number:Title.ORDER_NUMBER + Num.get_id(99999),
 			parent_data_type:cart.parent_data_type,
 			user_id:cart.user_id,
@@ -507,7 +507,7 @@ class Order_Logic {
 		}
 		/*
 		cart.cart_items.forEach(cart_item => {
-			let order_item = Data_Logic.get(Type.DATA_ORDER_ITEM,0,{data:{
+			let order_item = Data_Logic.get_new(Type.DATA_ORDER_ITEM,0,{data:{
 				order_number:order.order_number,
 				parent_data_type:cart_item.parent_data_type,
 				parent_id:cart_item.parent_id,
@@ -529,7 +529,7 @@ class Order_Logic {
 				}
 			}
 			cart_item.cart_sub_items.forEach(cart_sub_item => {
-				let order_sub_item = Data_Logic.get(Type.DATA_ORDER_SUB_ITEM,0,
+				let order_sub_item = Data_Logic.get_new(Type.DATA_ORDER_SUB_ITEM,0,
 					{data:{order_number:order.order_number,parent_data_type:cart_sub_item.parent_data_type,parent_id:cart_sub_item.parent_id,user_id:order.user_id,quanity:cart_sub_item.quanity?cart_sub_item.quanity:0,cost:cart_sub_item.cost?cart_sub_item.cost:0}};
 				for(const key in cart_sub_item){
 					if(!Str.check_is_null(cart_sub_item[key])){
@@ -551,7 +551,7 @@ class Order_Logic {
 	};
 	/*
 	static get_order_payment = (order_number,payment_method_type,payment_amount) => {
-		return Data_Logic.get(Type.DATA_ORDER_PAYMENT,0,{data:
+		return Data_Logic.get_new(Type.DATA_ORDER_PAYMENT,0,{data:
 			{
 				order_number:order_number,
 				payment_method_type:payment_method_type,
@@ -582,13 +582,13 @@ class Order_Logic {
 }
 class Cart_Logic {
 	static get = (parent_data_type,user_id) => {
-		return Data_Logic.get(Type.DATA_CART,0,{data:{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_items:[]}});
+		return Data_Logic.get_new(Type.DATA_CART,0,{data:{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_items:[]}});
 	};
 	static get_cart_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
-		return Data_Logic.get(Type.DATA_CART_ITEM,0,{data:{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0,cart_sub_items:[]}});
+		return Data_Logic.get_new(Type.DATA_CART_ITEM,0,{data:{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0,cart_sub_items:[]}});
 	};
 	static get_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
-		return Data_Logic.get(Type.DATA_CART_SUB_ITEM,0,{data:{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0}});
+		return Data_Logic.get_new(Type.DATA_CART_SUB_ITEM,0,{data:{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0}});
 	};
 	static get_total = (cart) => {
 		let grand_total = 0;
@@ -968,7 +968,7 @@ class Field_Logic {
 }
 class Favorite_Logic {
 	static get = (parent_data_type,parent_id,user_id) =>{
-		return Data_Logic.get(Type.DATA_FAVORITE,0,{data:{
+		return Data_Logic.get_new(Type.DATA_FAVORITE,0,{data:{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
 			user_id:user_id
@@ -992,7 +992,7 @@ class Favorite_Logic {
 }
 class Review_Logic {
 	static get = (parent_data_type,parent_id,user_id,title,comment,rating) =>{
-		return Data_Logic.get(Type.DATA_REVIEW,0,{data:{
+		return Data_Logic.get_new(Type.DATA_REVIEW,0,{data:{
 			parent_data_type:parent_data_type,
 			parent_id:parent_id,
 			user_id:user_id,
@@ -1099,11 +1099,11 @@ class User_Logic {
 		return !Str.check_is_null(String(str_first_name + " " + str_last_name)) ? String(str_first_name + " " + str_last_name).trim() : "N/A";
 	}
 	static get_guest(){
-		return Data_Logic.get(Type.DATA_USER,0,{data:{guest:{is_guest:true,title_url:'guest',first_name:'Guest',last_name:'User',email:'guest@email.com',title:"Guest",country:"United States"}}});
+		return Data_Logic.get_new(Type.DATA_USER,0,{data:{guest:{is_guest:true,title_url:'guest',first_name:'Guest',last_name:'User',email:'guest@email.com',title:"Guest",country:"United States"}}});
 	}
 	static get_request_user(req){
 		if(!req || !req.session.user){
-			let user=Data_Logic.get(Type.DATA_USER,Num.get_id(9999999),{is_guest:true});
+			let user=Data_Logic.get_new(Type.DATA_USER,Num.get_id(9999999),{is_guest:true});
 			req.session.user=user;
 		}
 		return req.session.user;
@@ -1128,7 +1128,7 @@ class User_Logic {
 	};
 }
 class Data_Logic {
-	static get = (data_type,id,option) => {
+	static get_new = (data_type,id,option) => {
 		let data = {data_type:data_type,id:id};
 		option = option ? option : {};
 		data = Field_Logic.get_base_option(data,option);
@@ -1205,8 +1205,8 @@ class Data_Logic {
 		let page_size = option.page_size ? option.page_size : 0;
 		return {type:type,search:search,field:field,title:title,page_current:page_current,page_size:page_size};
 	}
-	static copy = (data_type,item)=>{
-		let copy_item = Data_Logic.get(data_type,0);
+	static get_copy = (data_type,item)=>{
+		let copy_item = Data_Logic.get_new(data_type,0);
 		const keys = Object.keys(item);
 		keys.forEach(key => {
 			if(
@@ -1260,11 +1260,10 @@ class Data_Logic {
 			return user;
 		}
 	};
-
 }
 class App_Logic {
 static get = (title,user_id,type) =>{
-		let app = Data_Logic.get(Type.DATA_APP,0);
+		let app = Data_Logic.get_new(Type.DATA_APP,0);
 		app.title = title;
 		app.user_id = user_id;
 		app.type = type;
@@ -1325,16 +1324,6 @@ static get = (title,user_id,type) =>{
 		}
 		return Data_Logic.get_search(query.data_type,filter,sort_by,query.page_current,query.page_size);
 	}
-	static get_data_search_result = (app_id,data_type,item_count,page_count,filter,items,option) =>{
-		return{
-			option:option?option:{},
-			data_type:data_type?data_type:Type.DATA_BLANK,
-			item_count:item_count?item_count:0,
-			page_count:page_count?page_count:1,
-			filter:filter?filter:{},
-			items:items?items:[]
-		}
-	}
 }
 class File_Logic {
 	static url = (host,file_filename,size,param) =>{
@@ -1345,7 +1334,7 @@ class File_Logic {
 		return host+"/"+size + "_"+file_filename+param;
 	}
 	static get_by_base64 = (item_file) =>{
-		let item = Data_Logic.get(Type.DATA_FILE,0,{data:item_file});
+		let item = Data_Logic.get_new(Type.DATA_FILE,0,{data:item_file});
 		item.extension = !Str.check_is_null(Str.get_file_type_from_base64(item.file_data)) ? Str.get_file_type_from_base64(item.file_data).extension : 'txt';
 		item.file_filename = !Str.check_is_null(Str.get_file_type_from_base64(item.file_data)) ? Str.get_guid()+ "." + item.extension : 'not_found.txt';
 		item.buffer = !Str.check_is_null(Str.get_file_type_from_base64(item_file.file_data)) ? Buffer.from(item_file.file_data.split(';base64,').pop(), 'base64') : null;
@@ -1361,7 +1350,7 @@ class Image_Logic {
 		return host+"/"+size + "_"+image_filename+param;
 	}
 	static get_by_base64 = (item_image) =>{
-		let item = Data_Logic.get(Type.DATA_IMAGE,0,{data:item_image});
+		let item = Data_Logic.get_new(Type.DATA_IMAGE,0,{data:item_image});
 		item.extension = !Str.check_is_null(Str.get_file_type_from_base64(item.image_data)) ? Str.get_file_type_from_base64(item.image_data).extension : 'jpeg';
 		item.image_filename = !Str.check_is_null(Str.get_file_type_from_base64(item.image_data)) ? Str.get_guid()+ "." + item.extension : 'not_found.jpeg';
 		item.buffer = !Str.check_is_null(Str.get_file_type_from_base64(item_image.image_data)) ? Buffer.from(item_image.image_data.split(';base64,').pop(), 'base64') : null;
