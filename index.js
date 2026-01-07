@@ -121,6 +121,16 @@ class Type {
 	static FIELD_USER_STATE = 'state';
 	static FIELD_VALUE = 'value';
 	static FIELD_WEBSITE = 'website';
+	static FIELD_RESULT_OK = 'resultOK';
+	static FIELD_RESULT_OK_DELETE = 'delete_resultOK';
+	static FIELD_RESULT_OK_DELETE_CACHE = 'delete_cache_resultOK';
+	static FIELD_RESULT_OK_DELETE_DATABASE = 'delete_database_resultOK';
+	static FIELD_RESULT_OK_EMAIL = 'email_resultOK';
+	static FIELD_RESULT_OK_USER = 'user_resultOK';
+	static FIELD_RESULT_OK_UNIQUE = 'unique_resultOK';
+	static FIELD_RESULT_OK_FAVORITE_ADD = 'favorite_resultOK';
+	static FIELD_RESULT_OK_GROUP_DELETE = 'group_delete_resultOK';
+	static FIELD_RESULT_OK_IMAGE_DELETE = 'image_delete_resultOK';
 	//title
 	static TITLE_DATA_BLOG_POST = 'Blog Post';
 	static TITLE_DATA_CATEGORY = 'Category';
@@ -193,6 +203,9 @@ class Type {
 	static TITLE_PAGE_SERVICE='Service';
 	static TITLE_PAGE_SERVICE_HOME='Service Home';
 	static TITLE_PAGE_SERVICE_SEARCH='Service Search';
+	static TITLE_SOURCE_DATABASE='Database';
+	static TITLE_SOURCE_CACHE='Cache';
+	static TITLE_SOURCE_NOT_FOUND='Not-Found';
 
 	//page
 	static PAGE_ABOUT='about';
@@ -771,7 +784,7 @@ class Field_Logic {
 			data[Type.FIELD_TITLE_URL] = Str.get_title_url(data[Type.FIELD_TITLE]);
 		}
 		if(option.generate_title || option.test){
-			data[Type.FIELD_TITLE] = Type.get_data_type_by_type(data.data_type) + " " +Num.get_id();
+			data[Type.FIELD_TITLE] = Type.get_data_type_by_type(data.data_type) + " " +Num.get_id(999);
 			data[Type.FIELD_TITLE_URL] = Str.get_title_url(data[Type.FIELD_TITLE]);
 		}
 		if(option.parent){
@@ -889,7 +902,7 @@ class Field_Logic {
 	static get_test = (title,option) =>{
 		option = !Obj.check_is_empty(option) ? option : {};
 		let item = {};
-		if(option.get_blank == true){
+		if(option.blank == true){
 			option.category_title = "";
 			item = {
 				title:title,
@@ -921,7 +934,7 @@ class Field_Logic {
 		if(option.fields){
 			let field_items = String(option.fields).split(',');
 			for(let a = 0; a<field_items.length;a++){
-				if(option.get_blank == true){
+				if(option.blank == true){
 					if(item[field_items[a]]){
 						item[field_items[a]] = "";
 					}
@@ -953,7 +966,7 @@ class Field_Logic {
 	}
 	static get_values(item,option){
 		for(let b=0;b<parseInt(option.value_count);b++){
-			if(option.get_blank == false){
+			if(option.blank == false){
 				item['value_'+String(b+1)] = 'value ' + String(b+1);
 				item['field_'+String(b+1)] = Str.get_title_url(item['value_'+String(b+1)]);
 				item[Str.get_title_url('value ' + String(b+1))] = item.title + ' value ' + String(b+1);
@@ -1128,6 +1141,9 @@ class User_Logic {
 	};
 }
 class Data_Logic {
+	static get = (data_type,id,option) => {
+		return Data_Logic.get_new(data_type,id,option);
+	};
 	static get_new = (data_type,id,option) => {
 		let data = {data_type:data_type,id:id};
 		option = option ? option : {};
@@ -1157,7 +1173,7 @@ class Data_Logic {
 					break;
 					default:
 					data = Obj.merge(Blank_Logic.get_test(),data);
-					data.data_type = Type.DATA_BLANK;
+					data.data_type = data_type;
 					break;
 			}
 		}
@@ -1240,23 +1256,21 @@ class Data_Logic {
 			if(!id){
 				id=0;
 			}
-			let item = Item_Logic.get_test("",data_type,id,{get_blank:true})
+			let item = Data_Logic.get(data_type,id);
 			item.id = 0;
 			item.id_key = id;
 			item.title = "Item Not Found";
 			item.title_url = Str.get_title_url(item.title);
-			item.images = [];
-			item.items = [];
+			item.source = Type.TITLE_SOURCE_NOT_FOUND;
 			return item;
 		}else{
-			let user = User_Logic.get_test("",{get_blank:true})
+			let user = Data_Logic.get(data_type,id);
 			user.id = 0;
 			user.id_key = id;
 			user.title = "User Not Found";
 			user.first_name = "User Not Found";
 			user.title_url = Str.get_title_url(user.title);
-			user.images = [];
-			user.items = [];
+			user.source = Type.TITLE_SOURCE_NOT_FOUND;
 			return user;
 		}
 	};
