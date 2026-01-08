@@ -126,6 +126,7 @@ class Type {
 	static FIELD_RESULT_OK_DELETE_CACHE = 'delete_cache_resultOK';
 	static FIELD_RESULT_OK_DELETE_DATABASE = 'delete_database_resultOK';
 	static FIELD_RESULT_OK_EMAIL = 'email_resultOK';
+	static FIELD_RESULT_OK_USER_NAME = 'user_name_resultOK';
 	static FIELD_RESULT_OK_USER = 'user_resultOK';
 	static FIELD_RESULT_OK_UNIQUE = 'unique_resultOK';
 	static FIELD_RESULT_OK_FAVORITE_ADD = 'favorite_resultOK';
