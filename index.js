@@ -1429,10 +1429,7 @@ class Url {
 	static CMS_DEMO_POST="cms/demo_post";
 	static CMS_GET="cms/get";
 	static CMS_POST="cms/post";
-	static CMS_ITEM_PARENT_TOP_TYPE_CATEGORY="cms/item_parent_top_type_category";
 	static CMS_SEARCH_ITEM_TYPE_CATEGORY="cms/search_item_type_category";
-	//content
-	static CONTENT="item/content";
 	//crud
 	static COPY="main/crud/copy";
 	static DELETE="main/crud/delete";
