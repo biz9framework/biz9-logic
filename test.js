@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {DataItem,Type,App_Logic,Data_Logic} = require('./index');
+const {Type,App_Logic,Data_Logic} = require('./index');
 const {Log,Num,Str,Obj} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -32,12 +32,12 @@ describe("connect", () => {
             function(call) {
                 console.log('CONNECT-BASE-START');
                 // -->
-                //let parent_item = DataItem.get_new(Type.DATA_PRODUCT,0);
+                let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0);
                 // -->
                 //let join = App_Logic.get_join({},'','',{});
                 // -->
-                let data = Data_Logic.get(Type.DATA_BLANK,0,{data:{}});
-                //let data = Data_Logic.get(Type.DATA_BLANK,0,{test:true,generate_title:true,parent:parent});
+                //let data = Data_Logic.get(Type.DATA_BLANK,0,{test:true});
+                let data = Data_Logic.get(Type.DATA_PRODUCT,0,{test:true,parent:parent,data:{title:'cool',title_url:'cool'}});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean',data:{field_1:'field_1',field_2:'field_2'}});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean'});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{data:{field_1:'field_1',field_2:'field_2'}});

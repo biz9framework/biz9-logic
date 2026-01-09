@@ -1222,7 +1222,7 @@ class Data_Logic {
 		let page_size = option.page_size ? option.page_size : 0;
 		return {type:type,search:search,field:field,title:title,page_current:page_current,page_size:page_size};
 	}
-	static get_copy = (data_type,item)=>{
+	static copy = (data_type,item)=>{
 		let copy_item = Data_Logic.get_new(data_type,0);
 		const keys = Object.keys(item);
 		keys.forEach(key => {
