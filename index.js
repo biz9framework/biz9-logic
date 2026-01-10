@@ -1209,8 +1209,9 @@ class Data_Logic {
 		let type  = option.type ? option.type : Type.TITLE_ITEMS;
 		let field = option.field ? option.field : {};
 		let title = option.title ? option.title : {};
-		let image = option.image ? option.image : {count:0,sort_by:Type.TITLE_SORT_BY_ASC};
-		let page_current = option.page_current ? option.page_current : 0;
+		let image_show = option.image_show ? option.image_show : {};
+		let image = option.image ? option.image : {show:false};
+		let page_current = option.page_current ? option.page_current : 1;
 		let page_size = option.page_size ? option.page_size : 0;
 		return {type:type,field:field,title:title,image:image,page_current:page_current,page_size:page_size};
 	}
@@ -1222,7 +1223,7 @@ class Data_Logic {
 		parent_field = parent_field ? parent_field : parent_field;
 		let field = option.field ? option.field : {};
 		let title = option.title ? option.title : Str.get_title_url(Type.get_data_type_by_type(foreign_data_type,{plural:true}));
-		let page_current = option.page_current ? option.page_current : 0;
+		let page_current = option.page_current ? option.page_current : 1;
 		let page_size = option.page_size ? option.page_size : 0;
 		return {type:type,foreign_data_type:foreign_data_type,foreign_field:foreign_field,parent_field:parent_field,type:type,field:field,title:title,page_current:page_current,page_size:page_size};
 	}
