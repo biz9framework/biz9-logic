@@ -37,7 +37,7 @@ describe("connect", () => {
                 //let join = App_Logic.get_join({},'','',{});
                 // -->
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{test:true});
-                let data = Data_Logic.get(Type.DATA_PRODUCT,0,{test:true,parent:parent,data:{title:'cool',title_url:'cool'}});
+                let data = Data_Logic.get(Type.DATA_PRODUCT,0,{test:true,count:1,parent:parent,data:{title:'cool',title_url:'cool'}});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean',data:{field_1:'field_1',field_2:'field_2'}});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{title:'cool bean'});
                 //let data = Data_Logic.get(Type.DATA_BLANK,0,{data:{field_1:'field_1',field_2:'field_2'}});

@@ -5,7 +5,7 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Logic-JS
 */
 const moment = require('moment');
-const {Str,Num,Obj} = require('biz9-utility');
+const {Str,Num,Obj,Log} = require('biz9-utility');
 class Message {
 	static SUCCESS="Success";
 	static CONFIRM="Are You Sure?";
@@ -1142,41 +1142,44 @@ class User_Logic {
 	};
 }
 class Data_Logic {
-	static get = (data_type,id,option) => {
-		return Data_Logic.get_new(data_type,id,option);
-	};
 	static get_new = (data_type,id,option) => {
-		let data = {data_type:data_type,id:id};
-		option = option ? option : {};
-		data = Field_Logic.get_base_option(data,option);
-		if(option.test){
+		return Data_Logic.get(data_type,id,option);
+	};
+	// --> options / test / test_blank / title / generate_title / count
+	static get = (data_type,id,option) => {
+		function get_test_data(data_type){
 			switch(data_type)
 			{
 				case Type.DATA_BLOG_POST:
-					data = Obj.merge(Blog_Post_Logic.get_test(),data);
+					return Blog_Post_Logic.get_test();
 					break;
 				case Type.DATA_SERVICE:
-					data = Obj.merge(Service_Logic.get_test(),data);
+					return Service_Logic.get_test();
 					break;
 				case Type.DATA_EVENT:
-					data = Obj.merge(Event_Logic.get_test(),data);
-					break;
+					return Event_Logic.get_test();
+					breaip
 				case Type.DATA_PRODUCT:
-					data = Obj.merge(Product_Logic.get_test(),data);
+					return Product_Logic.get_test();
 					break;
 				case Type.DATA_CONTENT:
 				case Type.DATA_CATEGORY:
 				case Type.DATA_BLANK:
-					data = Obj.merge(Blank_Logic.get_test(),data);
+					return Blank_Logic.get_test();
 					break;
 				case Type.DATA_USER:
-					data = Obj.merge(User_Logic.get_test(),data);
+					return User_Logic.get_test();
 					break;
 					default:
-					data = Obj.merge(Blank_Logic.get_test(),data);
-					data.data_type = data_type;
+					return Blank_Logic.get_test();
 					break;
 			}
+		}
+		let data = {data_type:data_type,id:id};
+		option = option ? option : {count:0};
+		data = Field_Logic.get_base_option(data,option);
+		if(option.test){
+			data = Obj.merge(get_test_data(data_type),data);
 		}
 		if(option.test_blank){
 			for(const field in data){
@@ -1184,6 +1187,17 @@ class Data_Logic {
 					data[field] = '';
 				}
 			}
+		}
+		if(option.count>1){
+			let items = [];
+			for(let a = 0;a<option.count;a++){
+				let my_title = Type.get_data_type_by_type(data_type) + " " +Num.get_id(999);
+				let test_data = Obj.merge(data,get_test_data(data.data_type));
+				test_data[Type.FIELD_TITLE] = my_title;
+				test_data[Type.FIELD_TITLE_URL] = Str.get_title_url(my_title);
+				items.push(test_data);
+			}
+			data = items;
 		}
 		return data;
 	};
@@ -1428,7 +1442,6 @@ class Url {
 	//cms
 	static CMS_DEMO_POST="cms/demo_post";
 	static CMS_GET="cms/get";
-	static CMS_POST="cms/post";
 	static CMS_SEARCH_ITEM_TYPE_CATEGORY="cms/search_item_type_category";
 	//crud
 	static COPY="main/crud/copy";
