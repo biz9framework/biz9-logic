@@ -93,7 +93,6 @@ class Type {
 	static FIELD_PARAM = 'param';
 	static FIELD_PARENT_DATA_TYPE='parent_data_type';
 	static FIELD_PARENT_ID='parent_id';
-	static FIELD_ROLE = 'role';
 	static FIELD_SOURCE='source';
 	static FIELD_SOURCE_DATA_TYPE='source_data_type';
 	static FIELD_SOURCE_KEY='source_key';
@@ -118,6 +117,7 @@ class Type {
 	static FIELD_USER_LAST_NAME = 'last_name';
 	static FIELD_USER_USERNAME = 'username';
 	static FIELD_USER_PASSWORD = 'password';
+	static FIELD_USER_ROLE = 'role';
 	static FIELD_USER_STATE = 'state';
 	static FIELD_VALUE = 'value';
 	static FIELD_WEBSITE = 'website';
