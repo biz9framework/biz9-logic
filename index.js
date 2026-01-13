@@ -1114,6 +1114,9 @@ class Data_Logic {
 				let test_data = Obj.merge(data,get_test_data(data.data_type));
 				test_data[Type.FIELD_TITLE] = my_title;
 				test_data[Type.FIELD_TITLE_URL] = Str.get_title_url(my_title);
+		        if(option.data){
+			        test_data = Obj.merge(test_data,option.data);
+		        }
 				items.push(test_data);
 			}
 			data = items;
