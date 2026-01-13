@@ -995,7 +995,12 @@ class User_Logic {
 		];
 	};
     static get_user_role_by_type(type){
-         return User_Logic.get_user_roles().find(item_find => item_find.value === type);
+        let item_match =  User_Logic.get_user_roles().find(item_find => item_find.value === type);
+        if(item_match){
+            return item_match;
+        }else{
+	        return {value:Type.DATA_BLANK,label:'Blank User',title:'Blank User'};
+        }
 	};
 	static get_country_state_city(item){
 		let country_state_city = "";
