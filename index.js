@@ -167,8 +167,8 @@ class Type {
 	static TITLE_ORDER_SUB_ITEMS='order Sub Items';
 	static TITLE_PARENT_ITEM='Parent Item';
 	static TITLE_USER='User';
-	static TITLE_SORT_BY_ASC='ASC';
-	static TITLE_SORT_BY_DESC='DESC';
+	static TITLE_SORT_BY_ASC='asc';
+	static TITLE_SORT_BY_DESC='desc';
 	static TITLE_STAT_ITEMS='Stat Items';
 	static TITLE_STAT_SUB_ITEMS='Stat Sub Items';
 	static TITLE_ORDER_STATUS_NEW="New";
@@ -1097,8 +1097,8 @@ class Data_Logic {
 			data = Obj.merge(get_test_data(data_type),data);
 		}
 	    if(option.title){
-			data[Type.FIELD_TITLE_URL] = option.title;
-			data[Type.FIELD_TITLE] = Str.get_title_url(option.title);
+			data[Type.FIELD_TITLE] = option.title;
+			data[Type.FIELD_TITLE_URL] = Str.get_title_url(option.title);
 		}
 		if(option.blank){
 			for(const field in data){
