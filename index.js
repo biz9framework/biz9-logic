@@ -986,7 +986,6 @@ static get_pages(){
 
 }
 class User_Logic {
-
     static get_user_roles(){
 		return [
 			{value:Type.USER_ROLE_ADMIN,label:Type.TITLE_USER_ROLE_ADMIN,title:Type.TITLE_USER_ROLE_ADMIN},
@@ -994,6 +993,9 @@ class User_Logic {
 			{value:Type.USER_ROLE_USER,label:Type.TITLE_USER_ROLE_USER,title:Type.TITLE_USER_ROLE_USER},
 			{value:Type.USER_ROLE_GUEST,label:Type.TITLE_USER_ROLE_GUEST,title:Type.TITLE_USER_ROLE_GUEST},
 		];
+	};
+    static get_user_role_by_type(type){
+         return User_Logic.get_user_roles().find(item_find => item_find.value === type);
 	};
 	static get_country_state_city(item){
 		let country_state_city = "";
