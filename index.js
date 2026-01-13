@@ -659,10 +659,6 @@ class Field_Logic {
 			data[Type.FIELD_TITLE] = option.title;
 			data[Type.FIELD_TITLE_URL] = Str.get_title_url(option.title);
 		}
-		if(option.title){
-			data[Type.FIELD_TITLE] = Data_Logic.get_data_type_by_type(data.data_type);
-			data[Type.FIELD_TITLE_URL] = Str.get_title_url(data[Type.FIELD_TITLE]);
-		}
 		if(option.generate_title || option.test){
 			data[Type.FIELD_TITLE] = Data_Logic.get_data_type_by_type(data.data_type) + " " +Num.get_id(999);
 			data[Type.FIELD_TITLE_URL] = Str.get_title_url(data[Type.FIELD_TITLE]);
@@ -1064,7 +1060,7 @@ class Data_Logic {
 	static get_new = (data_type,id,option) => {
 		return Data_Logic.get(data_type,id,option);
 	};
-	// --> options / test / blank / title / generate_title / count
+	// --> option  = / test / blank / title / generate_title / count / data
 	static get = (data_type,id,option) => {
 		function get_test_data(data_type){
 			switch(data_type)
