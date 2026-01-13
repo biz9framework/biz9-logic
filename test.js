@@ -33,7 +33,7 @@ describe("connect", () => {
                 console.log('CONNECT-BASE-START');
                 // -->
                 //let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0);
-                let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0,{test:true,title:'cool'});
+                let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0,{test:true,title:'cool',blank:true});
                 // -->
                 //let join = App_Logic.get_join({},'','',{});
                 // -->
