@@ -33,6 +33,7 @@ describe("connect", () => {
                 console.log('CONNECT-BASE-START');
                 // -->
                 //let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0);
+                let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0,{test:true,title:'cool'});
                 // -->
                 //let join = App_Logic.get_join({},'','',{});
                 // -->
@@ -49,9 +50,9 @@ describe("connect", () => {
                 // -->
                 //let data_items = Type.get_app_links();
                 // -->
-                let data = User_Logic.get_user_role_by_type(Type.USER_ROLE_USER);
-                Log.w('99_result_data',data.label);
-                //Log.w('99_result_parent',parent);
+                //let data = User_Logic.get_user_role_by_type(Type.USER_ROLE_USER);
+                //Log.w('99_result_data',data.label);
+                Log.w('99_result_parent',parent);
                 //Log.w('99_result_data_items',data_items);
 
                 //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));

@@ -1064,7 +1064,7 @@ class Data_Logic {
 	static get_new = (data_type,id,option) => {
 		return Data_Logic.get(data_type,id,option);
 	};
-	// --> options / test / test_blank / title / generate_title / count
+	// --> options / test / blank / title / generate_title / count
 	static get = (data_type,id,option) => {
 		function get_test_data(data_type){
 			switch(data_type)
@@ -1100,7 +1100,11 @@ class Data_Logic {
 		if(option.test){
 			data = Obj.merge(get_test_data(data_type),data);
 		}
-		if(option.test_blank){
+	    if(option.title){
+			data[Type.FIELD_TITLE_URL] = option.title;
+			data[Type.FIELD_TITLE] = Str.get_title_url(option.title);
+		}
+		if(option.blank){
 			for(const field in data){
 				if(field != Type.FIELD_ID && field != Type.FIELD_DATA_TYPE){
 					data[field] = '';
