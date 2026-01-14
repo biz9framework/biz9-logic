@@ -1207,7 +1207,7 @@ class Data_Logic {
 		foreign_data_type = foreign_data_type ? foreign_data_type : Str.get_title_url(Data_Logic.get_data_type_by_type(foreign_data_type,{plural:true}));
 		foreign_field = foreign_field ? foreign_field : Type.FIELD_PARENT_ID;
 		parent_field = parent_field ? parent_field : parent_field;
-		let field = option.field ? option.field : {};
+		let field = option.field ? option.field : null;
 		let title = option.title ? option.title : Str.get_title_url(Data_Logic.get_data_type_by_type(foreign_data_type,{plural:true}));
 		let page_current = option.page_current ? option.page_current : 1;
 		let page_size = option.page_size ? option.page_size : 0;
