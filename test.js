@@ -33,7 +33,7 @@ describe("connect", () => {
                 console.log('CONNECT-BASE-START');
                 // -->
                 //let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0);
-                let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0,{test:true,count:3,blank:false,data:{field_1:'apple'}});
+                //let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0,{test:true,count:3,blank:false,data:{field_1:'apple'}});
                 // -->
                 //let join = App_Logic.get_join({},'','',{});
                 // -->
@@ -52,7 +52,7 @@ describe("connect", () => {
                 // -->
                 //let data = User_Logic.get_user_role_by_type(Type.USER_ROLE_USER);
                 //Log.w('99_result_data',data.label);
-                Log.w('99_result_parent',parent);
+                //Log.w('99_result_parent',parent);
                 //Log.w('99_result_data_items',data_items);
 
                 //Log.w('Title',Type.get_title(Type.ORDER_STATUS_NEW));
@@ -60,12 +60,14 @@ describe("connect", () => {
                 //Log.w('Title 2',Field_Logic.get_field_value_title(Type.FIELD_VALUE_LIST,3,4,'cool'));
                 //Log.w('item_list',item_list);
                 //Log.w('bind_obj_list',App_Logic.bind_item_parent_user_list(item_list));
+                //Log.w('countries',User_Logic.get_countries());
 
                 //item.id = 333;
                 //item.items = ['a','b'];
                 //Log.w('bind_obj',App_Logic.bind_item_parent_user_obj(item,parent_item,user));
                 //let stat = Stat_Logic.get_new(parent_data_type,parent_id,Type.STAT_VIEW,user_id,item);
                 //Log.w('stat',stat);
+                Log.w('blog_post',Data_Logic.get(Type.DATA_BLOG_POST,0,{test:true,count:9}));
                 console.log('CONNECT-BASE-END');
             }
             /*

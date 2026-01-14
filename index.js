@@ -534,8 +534,8 @@ class Product_Logic {
 				break;
 		}
 	};
-	static get_test = (option) =>{
-		let data = {};
+	static get_test = () =>{
+		let data = Data_Logic.get(Type.DATA_PRODUCT,0);
 		data.cost = Field_Logic.get_test_cost();
 		data.old_cost = Field_Logic.get_test_cost();
 		data.category = "Category "+String(Num.get_id());
@@ -581,33 +581,43 @@ class Service_Logic {
 		return data;
 	};
 }
+class Content_Logic {
+	static get_test = () =>{
+	    let data = Data_Logic.get(Type.DATA_CONTENT,0);
+		data.field_1="Field 1 "+ Num.get_id();
+		data.field_2="Field 2 "+ Num.get_id();
+		return data;
+	};
+};
+
 class Blank_Logic {
-	static get_test = (option) =>{
-		let data = {};
+	static get_test = () =>{
+	    let data = Data_Logic.get(Type.DATA_BLANK,0);
 		data.field_1="Field 1 "+ Num.get_id();
 		data.field_2="Field 2 "+ Num.get_id();
 		return data;
 	};
 };
 class Blog_Post_Logic {
-	static get_test = (option) =>{
-		let data = {};
-			data.author="First Name "+ Num.get_id();
+	static get_test = () =>{
+		    let data = Data_Logic.get(Type.DATA_BLOG_POST,0);
+			data.author="Full Name "+ Num.get_id();
 			data.tag = "Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id(), " Tag "+ Num.get_id() + ", Tag "+Num.get_id() + ", Tag "+ Num.get_id();
 			data.category = "Category "+String(Num.get_id());
 			data.type = "Type "+String(Num.get_id());
 			data.sub_type = "Sub Type "+String(Num.get_id());
-
+			data.description = "Description "+String(Num.get_id());
+			data.note = Field_Logic.get_test_note();
 		return data;
 	};
 }
 class Gallery_Logic {
 	static get_test = () =>{
-			let data = {};
-			data.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
-			data.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
-			data.website = "Website "+String(Num.get_id());
-			return data;
+	let data = Data_Logic.get(Type.DATA_GALLERY,0);
+	data.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
+	data.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
+	data.website = "Website "+String(Num.get_id());
+	return data;
 	};
 };
 class Event_Logic {
@@ -639,8 +649,8 @@ class Event_Logic {
 		}
 	};
 	static get_test = () =>{
-		let data = {};
-		data.cost = Field_Logic.get_test_cost();
+		let data = Data_Logic.get(Type.DATA_EVENT,0);
+	    data.cost = Field_Logic.get_test_cost();
 		data.old_cost = Field_Logic.get_test_cost();
 		data.date = String(String(Num.get_id(2030)) + "-" + String(Num.get_id(13)) + "-" + String(Num.get_id(30))).trim();
 		data.time = String(Num.get_id(24)) + ":" + String(Num.get_id(59));
@@ -905,11 +915,11 @@ class Review_Logic {
 			] };
 	}
 	static get_test = () =>{
-		let data = {};
-		data.item_data_type = item_data_type;
-		data.item_id = item_id;
+	    let data = Data_Logic.get(Type.DATA_REVIEW,0);
+		data.user_id = 1;
+		data.parent_data_type = Type.DATA_BLANK;;
+		data.parent_id = 1;
 		data.rating = Num.get_id(6);
-		data.user_id = user_id;
 		data.comment = "My comment "+ Field_Logic.get_test_note();
 		return data;
 	};
@@ -921,6 +931,12 @@ class Category_Logic {
 			categorys.push({value:items[a].title,label:items[a].title});
 		}
 		return categorys;
+	};
+	static get_test = () =>{
+	    let data = Data_Logic.get(Type.DATA_CATEGORY,0);
+		data.field_1="Field 1 "+ Num.get_id();
+		data.field_2="Field 2 "+ Num.get_id();
+		return data;
 	};
 };
 class Storage {
@@ -979,7 +995,6 @@ static get_pages(){
 			{value:Type.PAGE_SERVICE_HOME,title:Type.TITLE_PAGE_SERVICE_HOME,label:Type.TITLE_PAGE_SERVICE_HOME,url:Url.PAGE_SERVICE_HOME},
 		];
 	};
-
 }
 class User_Logic {
     static get_user_roles(){
@@ -1045,16 +1060,1077 @@ class User_Logic {
 		delete req.session.user;
 	}
 	static get_test = () =>{
-		let data = {};
-		data.first_name="First Name "+ Num.get_id();
+		let data = Data_Logic.get(Type.DATA_USER,0);
+	    data.first_name="First Name "+ Num.get_id();
 		data.last_name="First Name "+ Num.get_id();
 		data.email="email"+ Num.get_id() + "@email.com";
-		data.city="City"+ Num.get_id();
-		data.state="State"+ Num.get_id();
+		data.city="City "+ Num.get_id();
+		data.state= User_Logic.get_states()[Num.get_id(User_Logic.get_states().length)].label;
+		data.country= User_Logic.get_countries()[Num.get_id(User_Logic.get_countries().length)].label;
 		data.password="1234567";
-		data.country="United States";
 		return data;
 	};
+   	static get_countries = () =>{
+return [
+    {label: 'United States', value: 'United States'},
+  {
+       value: 'Afghanistan',
+       label: 'Afghanistan'
+    },
+    {
+       value: 'Albania',
+       label: 'Albania'
+    },
+    {
+       value: 'Algeria',
+       label: 'Algeria'
+    },
+    {
+       value: 'American Samoa',
+       label: 'American Samoa'
+    },
+    {
+       value: 'Andorra',
+       label: 'Andorra'
+    },
+    {
+       value: 'Angola',
+       label: 'Angola'
+    },
+    {
+       value: 'Anguilla',
+       label: 'Anguilla'
+    },
+    {
+       value: 'Antarctica',
+       label: 'Antarctica'
+    },
+    {
+       value: 'Antigua and Barbuda',
+       label: 'Antigua and Barbuda'
+    },
+    {
+       value: 'Argentina',
+       label: 'Argentina'
+    },
+    {
+       value: 'Armenia',
+       label: 'Armenia'
+    },
+    {
+       value: 'Aruba',
+       label: 'Aruba'
+    },
+    {
+       value: 'Australia',
+       label: 'Australia'
+    },
+    {
+       value: 'Austria',
+       label: 'Austria'
+    },
+    {
+       value: 'Azerbaijan',
+       label: 'Azerbaijan'
+    },
+    {
+       value: 'Bahamas',
+       label: 'Bahamas'
+    },
+    {
+       value: 'Bahrain',
+       label: 'Bahrain'
+    },
+    {
+       value: 'Bangladesh',
+       label: 'Bangladesh'
+    },
+    {
+       value: 'Barbados',
+       label: 'Barbados'
+    },
+    {
+       value: 'Belarus',
+       label: 'Belarus'
+    },
+    {
+       value: 'Belgium',
+       label: 'Belgium'
+    },
+    {
+       value: 'Belize',
+       label: 'Belize'
+    },
+    {
+       value: 'Benin',
+       label: 'Benin'
+    },
+    {
+       value: 'Bermuda',
+       label: 'Bermuda'
+    },
+    {
+       value: 'Bhutan',
+       label: 'Bhutan'
+    },
+    {
+       value: 'Bolivia (Plurinational State of)',
+       label: 'Bolivia (Plurinational State of)'
+    },
+    {
+       value: 'Bonaire, Sint Eustatius and Saba',
+       label: 'Bonaire, Sint Eustatius and Saba'
+    },
+    {
+       value: 'Bosnia and Herzegovina',
+       label: 'Bosnia and Herzegovina'
+    },
+    {
+       value: 'Botswana',
+       label: 'Botswana'
+    },
+    {
+       value: 'Bouvet Island',
+       label: 'Bouvet Island'
+    },
+    {
+       value: 'Brazil',
+       label: 'Brazil'
+    },
+    {
+       value: 'British Indian Ocean Territory',
+       label: 'British Indian Ocean Territory'
+    },
+    {
+       value: 'Brunei Darussalam',
+       label: 'Brunei Darussalam'
+    },
+    {
+       value: 'Bulgaria',
+       label: 'Bulgaria'
+    },
+    {
+       value: 'Burkina Faso',
+       label: 'Burkina Faso'
+    },
+    {
+       value: 'Burundi',
+       label: 'Burundi'
+    },
+    {
+       value: 'Cabo Verde',
+       label: 'Cabo Verde'
+    },
+    {
+       value: 'Cambodia',
+       label: 'Cambodia'
+    },
+    {
+       value: 'Cameroon',
+       label: 'Cameroon'
+    },
+    {
+       value: 'Canada',
+       label: 'Canada'
+    },
+    {
+       value: 'Cayman Islands',
+       label: 'Cayman Islands'
+    },
+    {
+       value: 'Central African Republic',
+       label: 'Central African Republic'
+    },
+    {
+       value: 'Chad',
+       label: 'Chad'
+    },
+    {
+       value: 'Chile',
+       label: 'Chile'
+    },
+    {
+       value: 'China',
+       label: 'China'
+    },
+    {
+       value: 'Christmas Island',
+       label: 'Christmas Island'
+    },
+    {
+       value: 'Cocos (Keeling) Islands',
+       label: 'Cocos (Keeling) Islands'
+    },
+    {
+       value: 'Colombia',
+       label: 'Colombia'
+    },
+    {
+       value: 'Comoros',
+       label: 'Comoros'
+    },
+    {
+       value: 'Congo',
+       label: 'Congo'
+    },
+    {
+       value: 'Congo (Democratic Republic of the)',
+       label: 'Congo (Democratic Republic of the)'
+    },
+    {
+       value: 'Cook Islands',
+       label: 'Cook Islands'
+    },
+    {
+       value: 'Costa Rica',
+       label: 'Costa Rica'
+    },
+    {
+       value: 'Croatia',
+       label: 'Croatia'
+    },
+    {
+       value: 'Cuba',
+       label: 'Cuba'
+    },
+    {
+       value: 'Curaçao',
+       label: 'Curaçao'
+    },
+    {
+       value: 'Cyprus',
+       label: 'Cyprus'
+    },
+    {
+       value: 'Czechia',
+       label: 'Czechia'
+    },
+    {
+       value: "Côte d'Ivoire",
+       label: "Côte d'Ivoire"
+    },
+    {
+       value: 'Denmark',
+       label: 'Denmark'
+    },
+    {
+       value: 'Djibouti',
+       label: 'Djibouti'
+    },
+    {
+       value: 'Dominica',
+       label: 'Dominica'
+    },
+    {
+       value: 'Dominican Republic',
+       label: 'Dominican Republic'
+    },
+    {
+       value: 'Ecuador',
+       label: 'Ecuador'
+    },
+    {
+       value: 'Egypt',
+       label: 'Egypt'
+    },
+    {
+       value: 'El Salvador',
+       label: 'El Salvador'
+    },
+    {
+       value: 'Equatorial Guinea',
+       label: 'Equatorial Guinea'
+    },
+    {
+       value: 'Eritrea',
+       label: 'Eritrea'
+    },
+    {
+       value: 'Estonia',
+       label: 'Estonia'
+    },
+    {
+       value: 'Ethiopia',
+       label: 'Ethiopia'
+    },
+    {
+       value: 'Falkland Islands (Malvinas)',
+       label: 'Falkland Islands (Malvinas)'
+    },
+    {
+       value: 'Faroe Islands',
+       label: 'Faroe Islands'
+    },
+    {
+       value: 'Fiji',
+       label: 'Fiji'
+    },
+    {
+       value: 'Finland',
+       label: 'Finland'
+    },
+    {
+       value: 'France',
+       label: 'France'
+    },
+    {
+       value: 'French Guiana',
+       label: 'French Guiana'
+    },
+    {
+       value: 'French Polynesia',
+       label: 'French Polynesia'
+    },
+    {
+       value: 'French Southern Territories',
+       label: 'French Southern Territories'
+    },
+    {
+       value: 'Gabon',
+       label: 'Gabon'
+    },
+    {
+       value: 'Gambia',
+       label: 'Gambia'
+    },
+    {
+       value: 'Georgia',
+       label: 'Georgia'
+    },
+    {
+       value: 'Germany',
+       label: 'Germany'
+    },
+    {
+       value: 'Ghana',
+       label: 'Ghana'
+    },
+    {
+       value: 'Gibraltar',
+       label: 'Gibraltar'
+    },
+    {
+       value: 'Greece',
+       label: 'Greece'
+    },
+    {
+       value: 'Greenland',
+       label: 'Greenland'
+    },
+    {
+       value: 'Grenada',
+       label: 'Grenada'
+    },
+    {
+       value: 'Guadeloupe',
+       label: 'Guadeloupe'
+    },
+    {
+       value: 'Guam',
+       label: 'Guam'
+    },
+    {
+       value: 'Guatemala',
+       label: 'Guatemala'
+    },
+    {
+       value: 'Guernsey',
+       label: 'Guernsey'
+    },
+    {
+       value: 'Guinea',
+       label: 'Guinea'
+    },
+    {
+       value: 'Guinea-Bissau',
+       label: 'Guinea-Bissau'
+    },
+    {
+       value: 'Guyana',
+       label: 'Guyana'
+    },
+    {
+       value: 'Haiti',
+       label: 'Haiti'
+    },
+    {
+       value: 'Heard Island and McDonald Islands',
+       label: 'Heard Island and McDonald Islands'
+    },
+    {
+       value: 'Holy See',
+       label: 'Holy See'
+    },
+    {
+       value: 'Honduras',
+       label: 'Honduras'
+    },
+    {
+       value: 'Hong Kong',
+       label: 'Hong Kong'
+    },
+    {
+       value: 'Hungary',
+       label: 'Hungary'
+    },
+    {
+       value: 'Iceland',
+       label: 'Iceland'
+    },
+    {
+       value: 'India',
+       label: 'India'
+    },
+    {
+       value: 'Indonesia',
+       label: 'Indonesia'
+    },
+    {
+       value: 'Iran (Islamic Republic of)',
+       label: 'Iran (Islamic Republic of)'
+    },
+    {
+       value: 'Iraq',
+       label: 'Iraq'
+    },
+    {
+       value: 'Ireland',
+       label: 'Ireland'
+    },
+    {
+       value: 'Isle of Man',
+       label: 'Isle of Man'
+    },
+    {
+       value: 'Israel',
+       label: 'Israel'
+    },
+    {
+       value: 'Italy',
+       label: 'Italy'
+    },
+    {
+       value: 'Jamaica',
+       label: 'Jamaica'
+    },
+    {
+       value: 'Japan',
+       label: 'Japan'
+    },
+    {
+       value: 'Jersey',
+       label: 'Jersey'
+    },
+    {
+       value: 'Jordan',
+       label: 'Jordan'
+    },
+    {
+       value: 'Kazakhstan',
+       label: 'Kazakhstan'
+    },
+    {
+       value: 'Kenya',
+       label: 'Kenya'
+    },
+    {
+       value: 'Kiribati',
+       label: 'Kiribati'
+    },
+    {
+       value: "Korea (Democratic People's Republic of)",
+       label: "Korea (Democratic People's Republic of)"
+    },
+    {
+       value: 'Korea (Republic of)',
+       label: 'Korea (Republic of)'
+    },
+    {
+       value: 'Kuwait',
+       label: 'Kuwait'
+    },
+    {
+       value: 'Kyrgyzstan',
+       label: 'Kyrgyzstan'
+    },
+    {
+       value: "Lao People's Democratic Republic",
+       label: "Lao People's Democratic Republic"
+    },
+    {
+       value: 'Latvia',
+       label: 'Latvia'
+    },
+    {
+       value: 'Lebanon',
+       label: 'Lebanon'
+    },
+    {
+       value: 'Lesotho',
+       label: 'Lesotho'
+    },
+    {
+       value: 'Liberia',
+       label: 'Liberia'
+    },
+    {
+       value: 'Libya',
+       label: 'Libya'
+    },
+    {
+       value: 'Liechtenstein',
+       label: 'Liechtenstein'
+    },
+    {
+       value: 'Lithuania',
+       label: 'Lithuania'
+    },
+    {
+       value: 'Luxembourg',
+       label: 'Luxembourg'
+    },
+    {
+       value: 'Macao',
+       label: 'Macao'
+    },
+    {
+       value: 'Macedonia (the former Yugoslav Republic of)',
+       label: 'Macedonia (the former Yugoslav Republic of)'
+    },
+    {
+       value: 'Madagascar',
+       label: 'Madagascar'
+    },
+    {
+       value: 'Malawi',
+       label: 'Malawi'
+    },
+    {
+       value: 'Malaysia',
+       label: 'Malaysia'
+    },
+    {
+       value: 'Maldives',
+       label: 'Maldives'
+    },
+    {
+       value: 'Mali',
+       label: 'Mali'
+    },
+    {
+       value: 'Malta',
+       label: 'Malta'
+    },
+    {
+       value: 'Marshall Islands',
+       label: 'Marshall Islands'
+    },
+    {
+       value: 'Martinique',
+       label: 'Martinique'
+    },
+    {
+       value: 'Mauritania',
+       label: 'Mauritania'
+    },
+    {
+       value: 'Mauritius',
+       label: 'Mauritius'
+    },
+    {
+       value: 'Mayotte',
+       label: 'Mayotte'
+    },
+    {
+       value: 'Mexico',
+       label: 'Mexico'
+    },
+    {
+       value: 'Micronesia (Federated States of)',
+       label: 'Micronesia (Federated States of)'
+    },
+    {
+       value: 'Moldova (Republic of)',
+       label: 'Moldova (Republic of)'
+    },
+    {
+       value: 'Monaco',
+       label: 'Monaco'
+    },
+    {
+       value: 'Mongolia',
+       label: 'Mongolia'
+    },
+    {
+       value: 'Montenegro',
+       label: 'Montenegro'
+    },
+    {
+       value: 'Montserrat',
+       label: 'Montserrat'
+    },
+    {
+       value: 'Morocco',
+       label: 'Morocco'
+    },
+    {
+       value: 'Mozambique',
+       label: 'Mozambique'
+    },
+    {
+       value: 'Myanmar',
+       label: 'Myanmar'
+    },
+    {
+       value: 'Namibia',
+       label: 'Namibia'
+    },
+    {
+       value: 'Nauru',
+       label: 'Nauru'
+    },
+    {
+       value: 'Nepal',
+       label: 'Nepal'
+    },
+    {
+       value: 'Netherlands',
+       label: 'Netherlands'
+    },
+    {
+       value: 'New Caledonia',
+       label: 'New Caledonia'
+    },
+    {
+       value: 'New Zealand',
+       label: 'New Zealand'
+    },
+    {
+       value: 'Nicaragua',
+       label: 'Nicaragua'
+    },
+    {
+       value: 'Niger',
+       label: 'Niger'
+    },
+    {
+       value: 'Nigeria',
+       label: 'Nigeria'
+    },
+    {
+       value: 'Niue',
+       label: 'Niue'
+    },
+    {
+       value: 'Norfolk Island',
+       label: 'Norfolk Island'
+    },
+    {
+       value: 'Northern Mariana Islands',
+       label: 'Northern Mariana Islands'
+    },
+    {
+       value: 'Norway',
+       label: 'Norway'
+    },
+    {
+       value: 'Oman',
+       label: 'Oman'
+    },
+    {
+       value: 'Pakistan',
+       label: 'Pakistan'
+    },
+    {
+       value: 'Palau',
+       label: 'Palau'
+    },
+    {
+       value: 'Palestine, State of',
+       label: 'Palestine, State of'
+    },
+    {
+       value: 'Panama',
+       label: 'Panama'
+    },
+    {
+       value: 'Papua New Guinea',
+       label: 'Papua New Guinea'
+    },
+    {
+       value: 'Paraguay',
+       label: 'Paraguay'
+    },
+    {
+       value: 'Peru',
+       label: 'Peru'
+    },
+    {
+       value: 'Philippines',
+       label: 'Philippines'
+    },
+    {
+       value: 'Pitcairn',
+       label: 'Pitcairn'
+    },
+    {
+       value: 'Poland',
+       label: 'Poland'
+    },
+    {
+       value: 'Portugal',
+       label: 'Portugal'
+    },
+    {
+       value: 'Puerto Rico',
+       label: 'Puerto Rico'
+    },
+    {
+       value: 'Qatar',
+       label: 'Qatar'
+    },
+    {
+       value: 'Romania',
+       label: 'Romania'
+    },
+    {
+       value: 'Russian Federation',
+       label: 'Russian Federation'
+    },
+    {
+       value: 'Rwanda',
+       label: 'Rwanda'
+    },
+    {
+       value: 'Réunion',
+       label: 'Réunion'
+    },
+    {
+       value: 'Saint Barthélemy',
+       label: 'Saint Barthélemy'
+    },
+    {
+       value: 'Saint Helena, Ascension and Tristan da Cunha',
+       label: 'Saint Helena, Ascension and Tristan da Cunha'
+    },
+    {
+       value: 'Saint Kitts and Nevis',
+       label: 'Saint Kitts and Nevis'
+    },
+    {
+       value: 'Saint Lucia',
+       label: 'Saint Lucia'
+    },
+    {
+       value: 'Saint Martin (French part)',
+       label: 'Saint Martin (French part)'
+    },
+    {
+       value: 'Saint Pierre and Miquelon',
+       label: 'Saint Pierre and Miquelon'
+    },
+    {
+       value: 'Saint Vincent and the Grenadines',
+       label: 'Saint Vincent and the Grenadines'
+    },
+    {
+       value: 'Samoa',
+       label: 'Samoa'
+    },
+    {
+       value: 'San Marino',
+       label: 'San Marino'
+    },
+    {
+       value: 'Sao Tome and Principe',
+       label: 'Sao Tome and Principe'
+    },
+    {
+       value: 'Saudi Arabia',
+       label: 'Saudi Arabia'
+    },
+    {
+       value: 'Senegal',
+       label: 'Senegal'
+    },
+    {
+       value: 'Serbia',
+       label: 'Serbia'
+    },
+    {
+       value: 'Seychelles',
+       label: 'Seychelles'
+    },
+    {
+       value: 'Sierra Leone',
+       label: 'Sierra Leone'
+    },
+    {
+       value: 'Singapore',
+       label: 'Singapore'
+    },
+    {
+       value: 'Sint Maarten (Dutch part)',
+       label: 'Sint Maarten (Dutch part)'
+    },
+    {
+       value: 'Slovakia',
+       label: 'Slovakia'
+    },
+    {
+       value: 'Slovenia',
+       label: 'Slovenia'
+    },
+    {
+       value: 'Solomon Islands',
+       label: 'Solomon Islands'
+    },
+    {
+       value: 'Somalia',
+       label: 'Somalia'
+    },
+    {
+       value: 'South Africa',
+       label: 'South Africa'
+    },
+    {
+       value: 'South Georgia and the South Sandwich Islands',
+       label: 'South Georgia and the South Sandwich Islands'
+    },
+    {
+       value: 'South Sudan',
+       label: 'South Sudan'
+    },
+    {
+       value: 'Spain',
+       label: 'Spain'
+    },
+    {
+       value: 'Sri Lanka',
+       label: 'Sri Lanka'
+    },
+    {
+       value: 'Sudan',
+       label: 'Sudan'
+    },
+    {
+       value: 'Suriname',
+       label: 'Suriname'
+    },
+    {
+       value: 'Svalbard and Jan Mayen',
+       label: 'Svalbard and Jan Mayen'
+    },
+    {
+       value: 'Swaziland',
+       label: 'Swaziland'
+    },
+    {
+       value: 'Sweden',
+       label: 'Sweden'
+    },
+    {
+       value: 'Switzerland',
+       label: 'Switzerland'
+    },
+    {
+       value: 'Syrian Arab Republic',
+       label: 'Syrian Arab Republic'
+    },
+    {
+       value: 'Taiwan Republic of China',
+       label: 'Taiwan Republic of China'
+    },
+    {
+       value: 'Tajikistan',
+       label: 'Tajikistan'
+    },
+    {
+       value: 'Tanzania, United Republic of',
+       label: 'Tanzania, United Republic of'
+    },
+    {
+       value: 'Thailand',
+       label: 'Thailand'
+    },
+    {
+       value: 'Timor-Leste',
+       label: 'Timor-Leste'
+    },
+    {
+       value: 'Togo',
+       label: 'Togo'
+    },
+    {
+       value: 'Tokelau',
+       label: 'Tokelau'
+    },
+    {
+       value: 'Tonga',
+       label: 'Tonga'
+    },
+    {
+       value: 'Trinidad and Tobago',
+       label: 'Trinidad and Tobago'
+    },
+    {
+       value: 'Tunisia',
+       label: 'Tunisia'
+    },
+    {
+       value: 'Turkey',
+       label: 'Turkey'
+    },
+    {
+       value: 'Turkmenistan',
+       label: 'Turkmenistan'
+    },
+    {
+       value: 'Turks and Caicos Islands',
+       label: 'Turks and Caicos Islands'
+    },
+    {
+       value: 'Tuvalu',
+       label: 'Tuvalu'
+    },
+    {
+       value: 'Uganda',
+       label: 'Uganda'
+    },
+    {
+       value: 'Ukraine',
+       label: 'Ukraine'
+    },
+    {
+       value: 'United Arab Emirates',
+       label: 'United Arab Emirates'
+    },
+    {
+       value: 'United Kingdom of Great Britain and Northern Ireland',
+       label: 'United Kingdom of Great Britain and Northern Ireland'
+    },
+    {
+       value: 'United States Minor Outlying Islands',
+       label: 'United States Minor Outlying Islands'
+    },
+    {
+       value: 'United States of America',
+       label: 'United States of America'
+    },
+    {
+       value: 'Uruguay',
+       label: 'Uruguay'
+    },
+    {
+       value: 'Uzbekistan',
+       label: 'Uzbekistan'
+    },
+    {
+       value: 'Vanuatu',
+       label: 'Vanuatu'
+    },
+    {
+       value: 'Venezuela (Bolivarian Republic of)',
+       label: 'Venezuela (Bolivarian Republic of)'
+    },
+    {
+       value: 'Vietnam',
+       label: 'Vietnam'
+    },
+    {
+       value: 'Virgin Islands (British)',
+       label: 'Virgin Islands (British)'
+    },
+    {
+       value: 'Virgin Islands (U.S.)',
+       label: 'Virgin Islands (U.S.)'
+    },
+    {
+       value: 'Wallis and Futuna',
+       label: 'Wallis and Futuna'
+    },
+    {
+       value: 'Western Sahara',
+       label: 'Western Sahara'
+    },
+    {
+       value: 'Yemen',
+       label: 'Yemen'
+    },
+    {
+       value: 'Zambia',
+       label: 'Zambia'
+    },
+    {
+       value: 'Zimbabwe',
+       label: 'Zimbabwe'
+    },
+    {
+       value: 'Åland Islands',
+       label: 'Åland Islands'
+    }
+ ];
+
+    };
+   	static get_states = () =>{
+    return       [
+	{
+        label: "Other",
+        value: "Other"
+    },
+    { label: "Alaska", value: "Alaska" },
+  { label: "Alabama", value: "Alabama" },
+  { label: "Arkansas", value: "Arkansas" },
+  { label: "Arizona", value: "Arizona" },
+  { label: "California", value: "California" },
+  { label: "Colorado", value: "Colorado" },
+  { label: "Connecticut", value: "Connecticut" },
+  { label: "District of Columbia", value: "District of Columbia" },
+  { label: "Delaware", value: "Delaware" },
+  { label: "Florida", value: "Florida" },
+  { label: "Georgia", value: "Georgia" },
+  { label: "Hawaii", value: "Hawaii" },
+  { label: "Iowa", value: "Iowa" },
+  { label: "Idaho", value: "Idaho" },
+  { label: "IL", value: "Illinois" },
+  { label: "Illinois", value: "Indiana" },
+  { label: "Kansas", value: "Kansas" },
+  { label: "Kentucky", value: "Kentucky" },
+  { label: "Louisiana", value: "Louisiana" },
+  { label: "Massachusetts", value: "Massachusetts" },
+  { label: "Maryland", value: "Maryland" },
+  { label: "Maine", value: "Maine" },
+  { label: "Michigan", value: "Michigan" },
+  { label: "Minnesota", value: "Minnesota" },
+  { label: "Missouri", value: "Missouri" },
+  { label: "Mississippi", value: "Mississippi" },
+  { label: "Montana", value: "Montana" },
+  { label: "North Carolina", value: "North Carolina" },
+  { label: "North Dakota", value: "North Dakota" },
+  { label: "Nebraska", value: "Nebraska" },
+  { label: "New Hampshire", value: "New Hampshire" },
+  { label: "New Jersey", value: "New Jersey" },
+  { label: "New Mexico", value: "New Mexico" },
+  { label: "Nevada", value: "Nevada" },
+  { label: "New York", value: "NewYork" },
+  { label: "Ohio", value: "Ohio" },
+  { label: "Oklahoma", value: "Oklahoma" },
+  { label: "Oregon", value: "Oregon" },
+  { label: "Pennsylvania", value: "Pennsylvania" },
+  { label: "Rhode Island", value: "Rhode Island" },
+  { label: "South Carolina", value: "South Carolina" },
+  { label: "South Dakota", value: "South Dakota" },
+  { label: "Tennessee", value: "Tennessee" },
+  { label: "Texas", value: "Texas" },
+  { label: "Utah", value: "Utah" },
+  { label: "Virginia", value: "Virginia" },
+  { label: "Vermont", value: "Vermont" },
+  { label: "Washington", value: "Washington" },
+  { label: "Wisconsin", value: "Wisconsin" },
+  { label: "West Virginia", value: "West Virginia" },
+  { label: "Wyoming", value: "Wyoming" },
+    ];
+}
 }
 class Data_Logic {
 	static get_new = (data_type,id,option) => {
@@ -1077,11 +2153,14 @@ class Data_Logic {
 				case Type.DATA_PRODUCT:
 					return Product_Logic.get_test();
 					break;
+		        case Type.DATA_REVIEW:
+					return Review_Logic.get_test();
+					break;
 				case Type.DATA_CONTENT:
 				case Type.DATA_CATEGORY:
 				case Type.DATA_BLANK:
 					return Blank_Logic.get_test();
-					break;
+				break;
 				case Type.DATA_USER:
 					return User_Logic.get_test();
 					break;
@@ -1453,7 +2532,6 @@ class Url {
 	static GET="main/crud/get";
 	static LOGIN="user/login";
 	static LOGOUT="user/logout";
-	static REGISTER="user/register";
 	static PARENT_TOP="main/crud/parent_top";
 	static PING_GET="ping_get";
 	static PING_POST="ping_post";
@@ -1497,6 +2575,7 @@ class Url {
 	static PAGE_PRODUCT="page/product";
 	static PAGE_PRODUCT_HOME="page/product_home";
 	static PAGE_PRODUCT_SEARCH="page/product_search";
+	static PAGE_REGISTER="user/register";
 	static PAGE_SERVICE="page/service";
 	static PAGE_SERVICE_HOME="page/service_home";
 	static PAGE_SERVICE_SEARCH="page/service_search";
@@ -1520,6 +2599,7 @@ module.exports = {
 	Blog_Post_Logic,
 	Cart_Logic,
 	Category_Logic,
+	Content_Logic,
 	Data_Logic,
 	Event_Logic,
 	File_Logic,
