@@ -2138,6 +2138,7 @@ class Data_Logic {
 	};
 	// --> option  = / test / blank / title / generate_title / count / data
 	static get = (data_type,id,option) => {
+        option = option ? option : {};
 		function get_test_data(data_type){
 			switch(data_type)
 			{
@@ -2169,7 +2170,12 @@ class Data_Logic {
 					break;
 			}
 		}
-		let data = {data_type:data_type,id:id};
+        let data = null;
+       	if(option.count>1){
+		    data = [];
+        }else{
+	        data = {data_type:data_type,id:id};
+        }
 		option = option ? option : {count:0};
 		data = Field_Logic.get_base_option(data,option);
 		if(option.test){
