@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {Type,App_Logic,Data_Logic,User_Logic} = require('./index');
+const {Type,App_Logic,Data_Logic,User_Logic,Cart_Logic} = require('./index');
 const {Log,Num,Str,Obj} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -31,6 +31,15 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-BASE-START');
+                // -->
+                // -- CART START -- //
+                let product = Data_Logic.get(Type.DATA_PRODUCT,Num.get_id(),{test:true});
+                let cart = Cart_Logic.get(Type.DATA_PRODUCT,'123',{cart_code:'CA'});
+                //Log.w('product',product);
+                Log.w('cart_sub_items',Cart_Logic.get_cart_sub_items());
+                //Log.w('cart',cart);
+
+                // -- CART END -- //
                 // -->
                 //let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0);
                 //let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0,{test:true,count:3,blank:false,data:{field_1:'apple'}});
@@ -67,7 +76,7 @@ describe("connect", () => {
                 //Log.w('bind_obj',App_Logic.bind_item_parent_user_obj(item,parent_item,user));
                 //let stat = Stat_Logic.get_new(parent_data_type,parent_id,Type.STAT_VIEW,user_id,item);
                 //Log.w('stat',stat);
-                Log.w('blog_post',Data_Logic.get(Type.DATA_BLOG_POST,0,{test:true,count:9}));
+                //Log.w('blog_post',Data_Logic.get(Type.DATA_BLOG_POST,0,{test:true,count:9}));
                 console.log('CONNECT-BASE-END');
             }
         ], function(err) {

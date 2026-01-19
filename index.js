@@ -144,6 +144,11 @@ class Type {
 	static TITLE_DATA_PRODUCT = 'Product';
 	static TITLE_DATA_SERVICE = 'Service';
 	//
+	static TITLE_CART_SUB_TYPE_STANDARD = 'Standard';
+	static TITLE_CART_SUB_TYPE_SHIPPING = 'Shipping';
+	static TITLE_CART_SUB_TYPE_COUPON = 'Coupon';
+	static TITLE_CART_SUB_TYPE_GIFT_CARD = 'Gift Card';
+	//
 	static TITLE_APP_ENV_TEST='Test';
 	static TITLE_APP_ENV_STAGE='Stage';
 	static TITLE_APP_ENV_PROD='Production';
@@ -474,15 +479,25 @@ class Order_Logic {
 	*/
 }
 class Cart_Logic {
-	static get = (parent_data_type,user_id) => {
-		return Data_Logic.get_new(Type.DATA_CART,0,{data:{user_id:user_id,cart_number:Title.CART_NUMBER + Num.get_id(99999),parent_data_type:parent_data_type,grand_total:0,cart_items:[]}});
+	static get = (user_id,option) => {
+        option = option ? option : {};
+        let cart_code = option.cart_code ? option.cart_code+"-" : "";
+		return Data_Logic.get_new(Type.DATA_CART,0,{data:{user_id:user_id,cart_number:cart_code + Num.get_id(99999),grand_total:0,cart_items:[]}});
 	};
 	static get_cart_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
 		return Data_Logic.get_new(Type.DATA_CART_ITEM,0,{data:{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0,cart_sub_items:[]}});
 	};
-	static get_cart_sub_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
-		return Data_Logic.get_new(Type.DATA_CART_SUB_ITEM,0,{data:{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0}});
+	static get_cart_sub_item = (cart_item_id,type,quanity,cost) =>{
+		return Data_Logic.get_new(Type.DATA_CART_SUB_ITEM,0,{data:{type:type.id,cart_item_id:cart_item_id,quanity:quanity?quanity:0,cost:cost?cost:0}});
 	};
+    static get_cart_sub_items = () =>{
+        return [
+            	{value:Str.get_title_url(Type.TITLE_CART_SUB_TYPE_STANDARD),title:Type.TITLE_CART_SUB_TYPE_STANDARD,label:Type.TITLE_CART_SUB_TYPE_STANDARD},
+            	{value:Str.get_title_url(Type.TITLE_CART_SUB_TYPE_SHIPPING),title:Type.TITLE_CART_SUB_TYPE_SHIPPING,label:Type.TITLE_CART_SUB_TYPE_SHIPPING},
+            	{value:Str.get_title_url(Type.TITLE_CART_SUB_TYPE_COUPON),title:Type.TITLE_CART_SUB_TYPE_COUPON,label:Type.TITLE_CART_SUB_TYPE_COUPON},
+            	{value:Str.get_title_url(Type.TITLE_CART_SUB_TYPE_GIFT_CARD),title:Type.TITLE_CART_SUB_TYPE_GIFT_CARD,label:Type.TITLE_CART_SUB_TYPE_GIFT_CARD}
+		];
+    };
 	static get_total = (cart) => {
 		let grand_total = 0;
 		cart.cart_items.forEach(cart_item => {
