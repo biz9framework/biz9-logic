@@ -33,10 +33,17 @@ describe("connect", () => {
                 console.log('CONNECT-BASE-START');
                 // -->
                 // -- CART START -- //
-                let product = Data_Logic.get(Type.DATA_PRODUCT,Num.get_id(),{test:true});
-                let cart = Cart_Logic.get(Type.DATA_PRODUCT,'123',{cart_code:'CA'});
+                let user = Data_Logic.get(Type.USER,Num.get_id(),{test:true});
+                let cart_product_1 = Data_Logic.get(Type.DATA_PRODUCT,Num.get_id(),{test:true});
+                let cart_sub_item_product_1 = Data_Logic.get(Type.DATA_PRODUCT,Num.get_id(),{test:true});
+                let cart = Cart_Logic.get(user.id,{cart_code:'CA'});
+                let cart_item = Cart_Logic.get_cart_item(cart_product_1.data_type,cart_product_1.id,1,cart_product_1.cost,{cart_code:'CA'});
+                cart_item.id = Num.get_id();
+                let cart_sub_item = Cart_Logic.get_cart_sub_item(cart_item.id,Type.TITLE_CART_SUB_TYPE_STANDARD,1,cart_sub_item_product_1.cost);
                 //Log.w('product',product);
-                Log.w('cart_sub_items',Cart_Logic.get_cart_sub_items());
+                //Log.w('cart_sub_items',Cart_Logic.get_cart_sub_items());
+                Log.w('cart_item',cart_item);
+                Log.w('cart_sub_item',cart_sub_item);
                 //Log.w('cart',cart);
 
                 // -- CART END -- //

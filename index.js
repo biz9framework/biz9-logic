@@ -484,11 +484,11 @@ class Cart_Logic {
         let cart_code = option.cart_code ? option.cart_code+"-" : "";
 		return Data_Logic.get_new(Type.DATA_CART,0,{data:{user_id:user_id,cart_number:cart_code + Num.get_id(99999),grand_total:0,cart_items:[]}});
 	};
-	static get_cart_item = (parent_data_type,parent_id,cart_number,quanity,cost) =>{
-		return Data_Logic.get_new(Type.DATA_CART_ITEM,0,{data:{parent_data_type:parent_data_type,parent_id:parent_id,cart_number:cart_number,quanity:quanity?quanity:0,cost:cost?cost:0,cart_sub_items:[]}});
+	static get_cart_item = (parent_data_type,parent_id,quanity,cost) =>{
+		return Data_Logic.get_new(Type.DATA_CART_ITEM,0,{data:{parent_data_type:parent_data_type,parent_id:parent_id,quanity:quanity?quanity:0,cost:cost?cost:0,cart_sub_items:[]}});
 	};
 	static get_cart_sub_item = (cart_item_id,type,quanity,cost) =>{
-		return Data_Logic.get_new(Type.DATA_CART_SUB_ITEM,0,{data:{type:type.id,cart_item_id:cart_item_id,quanity:quanity?quanity:0,cost:cost?cost:0}});
+		return Data_Logic.get_new(Type.DATA_CART_SUB_ITEM,0,{data:{type:type,cart_item_id:cart_item_id,quanity:quanity,cost:cost}});
 	};
     static get_cart_sub_items = () =>{
         return [
