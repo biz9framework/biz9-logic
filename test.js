@@ -55,13 +55,19 @@ describe("connect", () => {
                 // -- ORDER START -- //
                 // -- order start //
                 let order = Order_Logic.get(cart,{order_code:'OR'});
-                Log.w('order',order);
-                Log.w('order_items',order.order_items[0]);
+                //Log.w('order',order);
+                //Log.w('order_items',order.order_items[0]);
                 // -- order end //
                 // -- order item start //
                 // -- order item end //
 
                 // -- ORDER END -- //
+
+                // -- LIST START -- //
+                let data_type = Data_Logic.get_data_type_by_type(Type.DATA_PRODUCT,{plural:true});
+                Log.w('my_data_type',data_type);
+
+                // -- LIST END -- //
 
                 // -->
                 //let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0);
