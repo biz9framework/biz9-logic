@@ -56,6 +56,7 @@ describe("connect", () => {
                 // -- order start //
                 let order = Order_Logic.get(cart,{order_code:'OR'});
                 Log.w('order',order);
+                Log.w('order_items',order.order_items[0]);
                 // -- order end //
                 // -- order item start //
                 // -- order item end //

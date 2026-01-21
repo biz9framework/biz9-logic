@@ -78,6 +78,9 @@ class Type {
 	static FIELD_CART_NUMBER = 'cart_number';
 	static FIELD_CART_ID = 'cart_id';
 	static FIELD_CART_ITEM_ID = 'cart_item_id';
+	static FIELD_ORDER_NUMBER = 'order_number';
+	static FIELD_ORDER_ID = 'order_id';
+	static FIELD_ORDER_ITEM_ID = 'order_item_id';
 	static FIELD_CATEGORY = 'category';
 	static FIELD_CATEGORY_TYPE = 'category_type';
     static FIELD_COST = 'cost';
@@ -414,8 +417,8 @@ class Order_Logic {
 	            let order_sub_item = Data_Logic.get_new(Type.DATA_ORDER_SUB_ITEM,0,{data:{
                     type:cart_sub_item.type,
                     cart_item_id:cart_sub_item.cart_item_id,
-                    quanity:cart_sub_item.uanity,
-                    cost:cart_sub_item.ost
+                    quanity:cart_sub_item.quanity,
+                    cost:cart_sub_item.cost
                 }});
             for(const key in cart_sub_item){
                 if(!Obj.check_is_array(order_sub_item[key]) && Obj.check_is_object(order_sub_item[key])
@@ -441,17 +444,6 @@ class Order_Logic {
 			{value:Type.ORDER_STATUS_CANCELLED,label:Type.TITLE_ORDER_STATUS_CANCELLED,title:Type.TITLE_ORDER_STATUS_CANCELLED},
 		];
 	};
-
-	/*
-	static get_order_payment = (order_number,payment_method_type,payment_amount) => {
-		return Data_Logic.get_new(Type.DATA_ORDER_PAYMENT,0,{data:
-			{
-				order_number:order_number,
-				payment_method_type:payment_method_type,
-				payment_amount:payment_amount,
-				transaction_id:Title.ORDER_TRANSACTION_ID + Num.get_id(99999)
-			}});
-	};
 	static get_total = (order) => {
 		let grand_total = 0;
 		order.order_items.forEach(order_item => {
@@ -471,7 +463,16 @@ class Order_Logic {
 		order.grand_total = grand_total;
 		return order;
 	};
-	*/
+
+	static get_order_payment = (order_number,payment_method_type,payment_amount) => {
+		return Data_Logic.get_new(Type.DATA_ORDER_PAYMENT,0,{data:
+			{
+				order_number:order_number,
+				payment_method_type:payment_method_type,
+				payment_amount:payment_amount,
+				transaction_id:Title.ORDER_TRANSACTION_ID + Num.get_id(99999)
+			}});
+	};
 }
 class Cart_Logic {
 	static get = (user_id,option) => {
