@@ -75,9 +75,13 @@ class Type {
 	static DATA_VIDEO='video_biz';
 	//field
 	static FIELD_AUTHOR = 'author';
+	static FIELD_CART_NUMBER = 'cart_number';
+	static FIELD_CART_ID = 'cart_id';
+	static FIELD_CART_ITEM_ID = 'cart_item_id';
 	static FIELD_CATEGORY = 'category';
 	static FIELD_CATEGORY_TYPE = 'category_type';
-	static FIELD_COST = 'cost';
+    static FIELD_COST = 'cost';
+	static FIELD_GRAND_TOTAL = 'grand_total';
 	static FIELD_DATA_TYPE='data_type';
 	static FIELD_DATE_CREATE='date_create';
 	static FIELD_DATE_SAVE='date_save';
