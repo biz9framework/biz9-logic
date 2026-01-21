@@ -147,12 +147,7 @@ class Type {
 	static TITLE_DATA_PAGE = 'Page';
 	static TITLE_DATA_PRODUCT = 'Product';
 	static TITLE_DATA_SERVICE = 'Service';
-	//
-	static TITLE_CART_SUB_TYPE_STANDARD = 'Standard';
-	static TITLE_CART_SUB_TYPE_SHIPPING = 'Shipping';
-	static TITLE_CART_SUB_TYPE_COUPON = 'Coupon';
-	static TITLE_CART_SUB_TYPE_GIFT_CARD = 'Gift Card';
-	//
+    //
 	static TITLE_APP_ENV_TEST='Test';
 	static TITLE_APP_ENV_STAGE='Stage';
 	static TITLE_APP_ENV_PROD='Production';
@@ -294,6 +289,12 @@ class Type {
 	static IMAGE_RESIZE_NORMAL="normal";
 	static IMAGE_RESIZE_SQUARE="squre";
 	static IMAGE_RESIZE_NONE="none";
+	//
+	static CART_SUB_TYPE_STANDARD = 'standard';
+	static CART_SUB_TYPE_SHIPPING = 'shipping';
+	static CART_SUB_TYPE_COUPON = 'coupon';
+	static CART_SUB_TYPE_GIFT_CARD = 'gift_card';
+
 	//order
 	static ORDER_STATUS_NEW="new";
 	static ORDER_STATUS_OPEN="open";
@@ -372,10 +373,10 @@ class Stat_Logic {
 }
 class Order_Logic {
 	static get = (cart,option) => {
-		option = option?option:{get_payment_plan:false,payment_plan:Title.ORDER_PAYMENT_PLAN_1};
+		option = option?option:{};
+        let order_code = option.order_code ? option.order_code+"-" : "";
 		let order = Data_Logic.get_new(Type.DATA_ORDER,0,{data:{
-			order_number:Title.ORDER_NUMBER + Num.get_id(99999),
-			parent_data_type:cart.parent_data_type,
+			order_number:order_code + Num.get_id(99999),
 			user_id:cart.user_id,
 			cart_number:cart.cart_number,
 			grand_total:cart.grand_total,
@@ -383,20 +384,14 @@ class Order_Logic {
 			order_items:[]
 		}});
 		for(const key in cart) {
-			if(!Str.check_is_null(cart[key])
-				&& key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
-				&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
-				&& key != Type.TITLE_CART_ITEMS && key != Type.TITLE_CART_SUB_ITEMS
-				&& key != Type.TITLE_ORDER_ITEMS && key != Type.TITLE_ORDER_SUB_ITEMS
-				&& key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
-				&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
+		    if(!Obj.check_is_array(cart[key]) && Obj.check_is_object(cart[key])
+                && key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
+                && key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
+				&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE)
+			{
 				order[key] = cart[key];
 			}
 		}
-		if(option.get_payment_plan){
-			order.payment_plan = option.payment_plan;
-		}
-		/*
 		cart.cart_items.forEach(cart_item => {
 			let order_item = Data_Logic.get_new(Type.DATA_ORDER_ITEM,0,{data:{
 				order_number:order.order_number,
@@ -407,38 +402,34 @@ class Order_Logic {
 				cost:cart_item.cost?cart_item.cost:0,
 				order_sub_items:[]
 			}});
-		});
-			for(const key in cart_item){
-				if(!Str.check_is_null(cart_item[key]){
-					&& key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
-					&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
-					&& key != Type.TITLE_CART_ITEMS && key != Type.TITLE_CART_SUB_ITEMS
-					&& key != Type.TITLE_ORDER_ITEMS && key != Type.TITLE_ORDER_SUB_ITEMS
+		    for(const key in cart_item){
+		        if(!Obj.check_is_array(cart_item[key]) && Obj.check_is_object(cart_item[key])
+            		&& key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
 					&& key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
-					&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE
+					&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
 					order_item[key] = cart_item[key]
 				}
 			}
-			cart_item.cart_sub_items.forEach(cart_sub_item => {
-				let order_sub_item = Data_Logic.get_new(Type.DATA_ORDER_SUB_ITEM,0,
-					{data:{order_number:order.order_number,parent_data_type:cart_sub_item.parent_data_type,parent_id:cart_sub_item.parent_id,user_id:order.user_id,quanity:cart_sub_item.quanity?cart_sub_item.quanity:0,cost:cart_sub_item.cost?cart_sub_item.cost:0}};
-				for(const key in cart_sub_item){
-					if(!Str.check_is_null(cart_sub_item[key])){
-						&& key != Type.FIELD_ID && key != Type.DATA_TYPE
-						&& key != Type.TITLE_PARENT_ITEM && key != Type.TITLE_USER
-						&& key != Type.TITLE_CART_ITEMS && key != Type.TITLE_CART_SUB_ITEMS
-						&& key != Type.TITLE_ORDER_ITEMS && key != Type.TITLE_ORDER_SUB_ITEMS
-						&& key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
-						&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE{
-						order_sub_item[key] = cart_sub_item[key]{
-					}
-				}
-				order_item.order_sub_items.push(order_sub_item);
-			});
-			order.order_items.push(order_item);
+            cart_item.cart_sub_items.forEach(cart_sub_item => {
+	            let order_sub_item = Data_Logic.get_new(Type.DATA_ORDER_SUB_ITEM,0,{data:{
+                    type:cart_sub_item.type,
+                    cart_item_id:cart_sub_item.cart_item_id,
+                    quanity:cart_sub_item.uanity,
+                    cost:cart_sub_item.ost
+                }});
+            for(const key in cart_sub_item){
+                if(!Obj.check_is_array(order_sub_item[key]) && Obj.check_is_object(order_sub_item[key])
+            	    && key != Type.FIELD_ID && key != Type.FIELD_DATA_TYPE
+					&& key != Type.FIELD_SOURCE && key != Type.FIELD_SOURCE_ID
+					&& key != Type.FIELD_DATE_CREATE && key != Type.FIELD_DATE_SAVE){
+					order_sub_item[key] = cart_sub_item[key]
+			    }
+            }
+            order_item.order_sub_items.push(order_sub_item);
+	    });
+            order.order_items.push(order_item);
 		});
 		return order;
-		*/
 	};
 	static get_order_statuses(){
 		return [
@@ -496,10 +487,10 @@ class Cart_Logic {
 	};
     static get_cart_sub_items = () =>{
         return [
-            	{value:Str.get_title_url(Type.TITLE_CART_SUB_TYPE_STANDARD),title:Type.TITLE_CART_SUB_TYPE_STANDARD,label:Type.TITLE_CART_SUB_TYPE_STANDARD},
-            	{value:Str.get_title_url(Type.TITLE_CART_SUB_TYPE_SHIPPING),title:Type.TITLE_CART_SUB_TYPE_SHIPPING,label:Type.TITLE_CART_SUB_TYPE_SHIPPING},
-            	{value:Str.get_title_url(Type.TITLE_CART_SUB_TYPE_COUPON),title:Type.TITLE_CART_SUB_TYPE_COUPON,label:Type.TITLE_CART_SUB_TYPE_COUPON},
-            	{value:Str.get_title_url(Type.TITLE_CART_SUB_TYPE_GIFT_CARD),title:Type.TITLE_CART_SUB_TYPE_GIFT_CARD,label:Type.TITLE_CART_SUB_TYPE_GIFT_CARD}
+            	{title:Str.get_title(Type.CART_SUB_TYPE_STANDARD),label:Str.get_title(Type.CART_SUB_TYPE_STANDARD),type:Type.CART_SUB_TYPE_STANDARD},
+            	{title:Str.get_title(Type.CART_SUB_TYPE_SHIPPING),label:Str.get_title(Type.CART_SUB_TYPE_SHIPPING),type:Type.CART_SUB_TYPE_SHIPPING},
+            	{title:Str.get_title(Type.CART_SUB_TYPE_COUPON),label:Str.get_title(Type.CART_SUB_TYPE_COUPON),type:Type.CART_SUB_TYPE_COUPON},
+            	{title:Str.get_title(Type.CART_SUB_TYPE_GIFT_CARD),label:Str.get_title(Type.CART_SUB_TYPE_GIFT_CARD),type:Type.CART_SUB_TYPE_GIFT_CARD}
 		];
     };
 	static get_total = (cart) => {

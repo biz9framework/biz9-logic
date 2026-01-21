@@ -1,5 +1,5 @@
 const series = require('async-series');
-const {Type,App_Logic,Data_Logic,User_Logic,Cart_Logic} = require('./index');
+const {Type,App_Logic,Data_Logic,User_Logic,Cart_Logic,Order_Logic} = require('./index');
 const {Log,Num,Str,Obj} = require('biz9-utility');
 const {Scriptz}= require('biz9-scriptz');
 
@@ -36,17 +36,32 @@ describe("connect", () => {
                 let user = Data_Logic.get(Type.USER,Num.get_id(),{test:true});
                 let cart_product_1 = Data_Logic.get(Type.DATA_PRODUCT,Num.get_id(),{test:true});
                 let cart_sub_item_product_1 = Data_Logic.get(Type.DATA_PRODUCT,Num.get_id(),{test:true});
+                //let cart_sub_item_product_2 = Data_Logic.get(Type.DATA_PRODUCT,Num.get_id(),{test:true});
+                // -- cart start //
                 let cart = Cart_Logic.get(user.id,{cart_code:'CA'});
-                let cart_item = Cart_Logic.get_cart_item(cart_product_1.data_type,cart_product_1.id,1,cart_product_1.cost,{cart_code:'CA'});
-                cart_item.id = Num.get_id();
-                let cart_sub_item = Cart_Logic.get_cart_sub_item(cart_item.id,Type.TITLE_CART_SUB_TYPE_STANDARD,1,cart_sub_item_product_1.cost);
-                //Log.w('product',product);
-                //Log.w('cart_sub_items',Cart_Logic.get_cart_sub_items());
-                Log.w('cart_item',cart_item);
-                Log.w('cart_sub_item',cart_sub_item);
-                //Log.w('cart',cart);
-
+                // -- cart end //
+                // -- cart item start //
+                let cart_item_1 = Cart_Logic.get_cart_item(cart_product_1.data_type,cart_product_1.id,1,cart_product_1.cost,{cart_code:'CA'});
+                cart_item_1.id = Num.get_id();
+                // -- cart item sub item start //
+                let cart_sub_item_1 = Cart_Logic.get_cart_sub_item(cart_item_1.id,Type.CART_SUB_TYPE_STANDARD,1,cart_sub_item_product_1.cost);
+                // -- cart item sub item end //
+                // -- bind start //
+                cart_item_1.cart_sub_items.push(cart_sub_item_1);
+                cart.cart_items.push(cart_item_1);
+                cart = Cart_Logic.get_total(cart);
+                // -- bind end //
                 // -- CART END -- //
+                // -- ORDER START -- //
+                // -- order start //
+                let order = Order_Logic.get(cart,{order_code:'OR'});
+                Log.w('order',order);
+                // -- order end //
+                // -- order item start //
+                // -- order item end //
+
+                // -- ORDER END -- //
+
                 // -->
                 //let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0);
                 //let parent = Data_Logic.get_new(Type.DATA_PRODUCT,0,{test:true,count:3,blank:false,data:{field_1:'apple'}});
