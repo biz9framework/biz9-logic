@@ -171,8 +171,6 @@ class Type {
 	static TITLE_ORDER_SUB_ITEMS='order Sub Items';
 	static TITLE_PARENT_ITEM='Parent Item';
 	static TITLE_USER='User';
-	static TITLE_SORT_BY_ASC='asc';
-	static TITLE_SORT_BY_DESC='desc';
 	static TITLE_STAT_ITEMS='Stat Items';
 	static TITLE_STAT_SUB_ITEMS='Stat Sub Items';
 	static TITLE_ORDER_STATUS_NEW="New";
@@ -239,6 +237,8 @@ class Type {
 	static SEARCH_ITEMS='items';
 	static SEARCH_ONE='one';
 	static SEARCH_COUNT='count';
+    static SEARCH_SORT_BY_ASC='asc';
+	static SEARCH_SORT_BY_DESC='desc';
 	//stat
 	static STAT_CART='cart_post';
 	static STAT_CART_ITEM='cart_item_post';
@@ -2291,7 +2291,7 @@ class Data_Logic {
 		option = option ? option : {};
 		let type  = option.type ? option.type : Type.SEARCH_ITEMS;
 		let field = option.field ? option.field : {};
-		let title = option.title ? option.title : {};
+		let title = option.title ? Str.get_title_url(option.title) : {};
 		let image_show = option.image_show ? option.image_show : {};
 		let image = option.image ? option.image : {show:false};
 		let page_current = option.page_current ? option.page_current : 1;
@@ -2305,7 +2305,7 @@ class Data_Logic {
 		foreign_field = foreign_field ? foreign_field : Type.FIELD_PARENT_ID;
 		parent_field = parent_field ? parent_field : parent_field;
 		let field = option.field ? option.field : null;
-		let title = option.title ? option.title : Str.get_title_url(Data_Logic.get_data_type_by_type(foreign_data_type,{plural:true}));
+		let title = option.title ? Str.get_title_url(option.title) : Str.get_title_url(Data_Logic.get_data_type_by_type(foreign_data_type,{plural:true}));
 		let page_current = option.page_current ? option.page_current : 1;
 		let page_size = option.page_size ? option.page_size : 0;
 		return {type:type,foreign_data_type:foreign_data_type,foreign_field:foreign_field,parent_field:parent_field,type:type,field:field,title:title,page_current:page_current,page_size:page_size};
@@ -2315,8 +2315,12 @@ class Data_Logic {
 		type = type ? type : Type.SEARCH_ITEMS;
 		search = search ? search : Data_Logic.get_search(Type.DATA_BLANK,{},{},1,0);
 		let field = option.field ? option.field : {};
-		let title = option.title ? option.title : Str.get_title_url(Data_Logic.get_data_type_by_type(search.data_type,{plural:true}));
-		return {type:type,search:search,field:field,title:title};
+		let distinct = option.distinct ? option.distinct : null; //distinct:{field:'title',sort_by:Type.SEARCH_SORT_BY_DESC}
+		let title = option.title ? Str.get_title_url(option.title) : Str.get_title_url(Data_Logic.get_data_type_by_type(search.data_type,{plural:true}));
+		let foreigns = option.foreigns ? option.foreigns : [];
+	    let page_current = option.page_current ? option.page_current : 1;
+		let page_size = option.page_size ? option.page_size : 0;
+		return {type:type,search:search,field:field,title:title,distinct:distinct,foreigns:foreigns,page_current:page_current,page_size:page_size};
 	}
 	static copy = (data_type,item)=>{
 		let copy_item = Data_Logic.get_new(data_type,0);
