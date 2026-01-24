@@ -67,6 +67,7 @@ class Type {
 	static DATA_PAGE='page_biz';
 	static DATA_REVIEW='review_biz';
 	static DATA_SERVICE='service_biz';
+	static DATA_SUB_VALUE='sub_value_biz';
 	static DATA_SECURITY='security_biz';
 	static DATA_STAT='stat_biz';
 	static DATA_TEMPLATE='template_biz';
@@ -2148,6 +2149,9 @@ class Data_Logic {
 	static get_new = (data_type,id,option) => {
 		return Data_Logic.get(data_type,id,option);
 	};
+	static get_sub_value = (parent_data_type,parent_id,title,value) => {
+		return  Data_Logic.get(Type.DATA_SUB_VALUE,0,{title:title,data:{parent_data_type:parent_data_type,parent_id:parent_id,value:value}});
+	};
 	// --> option  = / test / blank / title / generate_title / count / data
 	static get = (data_type,id,option) => {
         option = option ? option : {};
@@ -2218,6 +2222,34 @@ class Data_Logic {
 			}
 			data = items;
 		}
+	    if(option.sub_value_count>1){
+            if(Obj.check_is_array(data)){
+	            for(let a = 0;a<data.length;a++){
+                    data[a].sub_values = [];
+	                for(let b = 1;b<option.sub_value_count+1;b++){
+                        let title = '';
+                        let value = '';
+                        if(!option.blank){
+                            title = 'title '+Num.get_id();
+                            value = 'value '+Num.get_id();
+                        }
+                        data[a].sub_values.push(Data_Logic.get_sub_value(data.data_type,data.id,title,value));
+                    }
+                }
+            }else{
+                data.sub_values = [];
+                for(let b = 1;b<option.sub_value_count+1;b++){
+                        let title = '';
+                        let value = '';
+                        if(!option.blank){
+                            title = 'title '+Num.get_id();
+                            value = 'value '+Num.get_id();
+                        }
+                        data.sub_values.push(Data_Logic.get_sub_value(data.data_type,data.id,title,value));
+                    }
+                }
+        }
+
 		return data;
 	};
 	static get_data_type_by_type = (data_type,option) =>{

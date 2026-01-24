@@ -31,8 +31,23 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-BASE-START');
+                // -- PAGE START -- //
+                // -->
+                // - SubValue
+                // -- parent_data_type
+                // -- parent_id
+                // -- title
+                // -- value
+                // -- title_url
+                let page = Data_Logic.get(Type.DATA_PAGE,3,{test:true,count:2,sub_value_count:3});
+                //let sub_value = Data_Logic.get_sub_value(page.data_type,page.id,'new_title','my_value');
+                Log.w('33_page',page);
+                // -- PAGE END -- //
+                // --
+                console.log('CONNECT-BASE-START');
                 // -->
                 // -- CART START -- //
+                /*
                 let user = Data_Logic.get(Type.USER,Num.get_id(),{test:true});
                 let cart_product_1 = Data_Logic.get(Type.DATA_PRODUCT,Num.get_id(),{test:true});
                 let cart_sub_item_product_1 = Data_Logic.get(Type.DATA_PRODUCT,Num.get_id(),{test:true});
@@ -51,10 +66,11 @@ describe("connect", () => {
                 cart.cart_items.push(cart_item_1);
                 cart = Cart_Logic.get_total(cart);
                 // -- bind end //
+                */
                 // -- CART END -- //
                 // -- ORDER START -- //
                 // -- order start //
-                let order = Order_Logic.get(cart,{order_code:'OR'});
+                //let order = Order_Logic.get(cart,{order_code:'OR'});
                 //Log.w('order',order);
                 //Log.w('order_items',order.order_items[0]);
                 // -- order end //
@@ -64,8 +80,8 @@ describe("connect", () => {
                 // -- ORDER END -- //
 
                 // -- LIST START -- //
-                let data_type = Data_Logic.get_data_type_by_type(Type.DATA_PRODUCT,{plural:true});
-                Log.w('my_data_type',data_type);
+                //let data_type = Data_Logic.get_data_type_by_type(Type.DATA_PRODUCT,{plural:true});
+                //Log.w('my_data_type',data_type);
 
                 // -- LIST END -- //
 
