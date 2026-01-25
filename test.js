@@ -39,9 +39,13 @@ describe("connect", () => {
                 // -- title
                 // -- value
                 // -- title_url
-                let page = Data_Logic.get(Type.DATA_PAGE,3,{test:true,count:2,sub_value_count:3});
+                //let page = Data_Logic.get(Type.DATA_PAGE,3,{blank:false,test:false,sub_value_count:1});
+                let page = Data_Logic.get(Type.DATA_PRODUCT,0,{blank:false,test:true,sub_value_count:1,title:'cool'});
+                //let page = Data_Logic.get(Type.DATA_PRODUCT,3,{blank:true,test:true,count:2});
                 //let sub_value = Data_Logic.get_sub_value(page.data_type,page.id,'new_title','my_value');
-                Log.w('33_page',page);
+                //Log.w('33_page',page);
+                //Log.w('33_page',page[0]);
+                //Log.w('44_page',page[0].sub_values);
                 // -- PAGE END -- //
                 // --
                 console.log('CONNECT-BASE-START');
