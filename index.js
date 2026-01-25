@@ -106,6 +106,7 @@ class Type {
 	static FIELD_SOURCE_KEY='source_key';
 	static FIELD_SOURCE_ID='source_id';
 	static FIELD_SOURCE_PARENT_ID='source_parent_id';
+	static FIELD_SECTION = 'section';
 	static FIELD_SETTING_VISIBLE = 'setting_visible';
 	static FIELD_SETTING_DELETE_PROTECTION = 'setting_delete_protection';
 	static FIELD_SETTING_SORT_TYPE = 'setting_delete_sort_type';
