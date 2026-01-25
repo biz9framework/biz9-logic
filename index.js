@@ -778,7 +778,8 @@ class Field_Logic {
 			return item[Field_Logic.get_field_value_items_title(value_id)] ?  item[Field_Logic.get_field_value_items_title(value_id)] : [];
 		}
 	};
-	static get_field_value_title_old = (value_type,value_id,group_id,sub_field_title) =>{
+    //remove
+	static get_field_value_title = (value_type,value_id,group_id,sub_field_title) =>{
 		switch(value_type){
 			case Type.FIELD_VALUE_TEXT:
 				return 'text'+'_value_'+value_id;
