@@ -208,14 +208,10 @@ class Type {
 	static TITLE_PAGE_SERVICE='Service';
 	static TITLE_PAGE_SERVICE_HOME='Service Home';
 	static TITLE_PAGE_SERVICE_SEARCH='Service Search';
-    //page_section
-	static TITLE_PAGE_SECTION_HEADER='Header Section';
-	static TITLE_PAGE_SECTION_BODY='Body Section';
-	static TITLE_PAGE_SECTION_FOOTER='Footer Section';
-    //source
 	static TITLE_SOURCE_DATABASE='Database';
 	static TITLE_SOURCE_CACHE='Cache';
 	static TITLE_SOURCE_NOT_FOUND='Not-Found';
+
 	//page
 	static PAGE_ABOUT='about';
 	static PAGE_CONTACT='contact';
@@ -1002,14 +998,6 @@ class Page_Logic {
 			data.value="Value "+ Num.get_id();
 		return data;
 	};
-    static get_page_section(type){
-		let page_section_list = [
-			{value:Type.PAGE_SECTION_HEADER,title:Type.TITLE_PAGE_SECTION_HEADER,label:Type.TITLE_PAGE_SECTION_HEADER},
-			{value:Type.PAGE_SECTION_BODY,title:Type.TITLE_PAGE_SECTION_BODY,label:Type.TITLE_PAGE_SECTION_BODY},
-			{value:Type.PAGE_SECTION_FOOTER,title:Type.TITLE_PAGE_SECTION_FOOTER,label:Type.TITLE_PAGE_SECTION_FOOTER},
-        ];
-        return page_section_list.find(item_find => item_find.value === type)? page_section_list.find(item_find => item_find.value === type) : {value:Type.PAGE_SECTION_BODY,title:Type.TITLE_PAGE_SECTION_BODY,label:Type.TITLE_PAGE_SECTION_BODY};
-    };
     static get_pages(){
 		return [
 			{value:Type.PAGE_ABOUT,title:Type.TITLE_PAGE_ABOUT,label:Type.TITLE_PAGE_ABOUT,url:Url.PAGE_ABOUT},
