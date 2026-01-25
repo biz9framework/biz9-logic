@@ -773,9 +773,9 @@ class Field_Logic {
     //remove
 	static get_field_value_value = (value_type,item,value_id) =>{
 		if(value_type!=Type.FIELD_VALUE_ITEMS){
-			return !Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id)]) ? item[Field_Logic.get_field_value_title(value_type,value_id)] : ""
+			return ""
 		}else{
-			return item[Field_Logic.get_field_value_items_title(value_id)] ?  item[Field_Logic.get_field_value_items_title(value_id)] : [];
+			return  [];
 		}
 	};
     //remove
