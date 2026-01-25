@@ -770,7 +770,8 @@ class Field_Logic {
 			{value:'items',label:'List'},
 		];
 	};
-	static get_field_value_value_old = (value_type,item,value_id) =>{
+    //remove
+	static get_field_value_value = (value_type,item,value_id) =>{
 		if(value_type!=Type.FIELD_VALUE_ITEMS){
 			return !Str.check_is_null(item[Field_Logic.get_field_value_title(value_type,value_id)]) ? item[Field_Logic.get_field_value_title(value_type,value_id)] : ""
 		}else{
