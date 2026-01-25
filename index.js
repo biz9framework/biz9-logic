@@ -2162,7 +2162,6 @@ class Data_Logic {
 	// --> option  = / test / blank / title / sub_value_count / count / data
 	static get = (data_type,id,option) => {
         option = option ? option : {};
-
         function get_blank_field(data){
             for(const field in data){
 				if(
@@ -2228,7 +2227,6 @@ class Data_Logic {
 		if(option.blank){
 			data = get_blank_field(data);
 		}
-
 		if(option.count>0){
 			let items = [];
 			for(let a = 1;a<option.count+1;a++){
@@ -2253,7 +2251,6 @@ class Data_Logic {
 			}
 			data = items;
 		}
-
 	    if(option.sub_value_count>0){
             if(Obj.check_is_array(data)){
 	            for(let a = 0;a<data.length;a++){
@@ -2280,8 +2277,6 @@ class Data_Logic {
                     }
                 }
         }
-        Log.w('22_data',data);
-
 		return data;
 	};
 	static get_data_type_by_type = (data_type,option) =>{
