@@ -2178,8 +2178,8 @@ class Data_Logic {
         let type = option.type ? option.type : Type.SUB_VALUE_TYPE_TEXT; // SUB_VALUE_TYPE_TEXT,NOTE,IMAGE,ITEMS
 		return  Data_Logic.get(Type.DATA_SUB_VALUE,0,{title:title,data:{parent_data_type:parent_data_type,parent_id:parent_id,value:value,type:type}});
 	};
-	static get_sub_value_page_edit = (parent_data_type,parent_id,section_type) => {
-        return {parent_data_type:parent_data_type,parent_id:parent_id,section_type:section_type};
+	static get_page_sub_value_edit = (page_id,section_type) => {
+        return {parent_data_type:Type.DATA_PAGE,parent_id:page,section_type:section_type};
     };
 	// --> option  = / test / blank / title / sub_value_count / count / data
 	static get = (data_type,id,option) => {
