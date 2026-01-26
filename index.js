@@ -1011,7 +1011,7 @@ class Page_Logic {
         return page_section_list.find(item_find => item_find.value === type)? page_section_list.find(item_find => item_find.value === type) : {value:Type.PAGE_SECTION_BODY,title:Type.TITLE_PAGE_SECTION_BODY,label:Type.TITLE_PAGE_SECTION_BODY};
     };
 	static get_page_sub_value_edit = (page_id,section_type) => {
-        return {parent_data_type:Type.DATA_PAGE,parent_id:page,section_type:section_type};
+        return {parent_data_type:Type.DATA_PAGE,parent_id:page_id,section_type:section_type};
     };
     static get_pages(){
 		return [
