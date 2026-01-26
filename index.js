@@ -250,10 +250,10 @@ class Type {
     static SEARCH_SORT_BY_ASC='asc';
 	static SEARCH_SORT_BY_DESC='desc';
     //sub_value
-	static SUB_VALUE_TYPE_TEXT = 'text';
-	static SUB_VALUE_TYPE_NOTE = 'note';
-	static SUB_VALUE_TYPE_IMAGE = 'image';
-	static SUB_VALUE_TYPE_ITEMS = 'items';
+	static SUB_VALUE_TEXT = 'text';
+	static SUB_VALUE_NOTE = 'note';
+	static SUB_VALUE_IMAGE = 'image';
+	static SUB_VALUE_ITEMS = 'items';
 	//stat
 	static STAT_CART='cart_post';
 	static STAT_CART_ITEM='cart_item_post';
@@ -2178,7 +2178,7 @@ class Data_Logic {
 	static get_sub_value = (parent_data_type,parent_id,title,option) => {
         option = option ? option : {};
         let value = option.value ? option.value : '';
-        let type = option.type ? option.type : Type.SUB_VALUE_TYPE_TEXT; // SUB_VALUE_TYPE_TEXT,NOTE,IMAGE,ITEMS
+        let type = option.type ? option.type : Type.SUB_VALUE_TEXT; // SUB_VALUE_TEXT,NOTE,IMAGE,ITEMS
 		return  Data_Logic.get(Type.DATA_SUB_VALUE,0,{title:title,data:{parent_data_type:parent_data_type,parent_id:parent_id,value:value,type:type}});
 	};
 // --> option  = / test / blank / title / sub_value_count / count / data
@@ -2333,11 +2333,15 @@ class Data_Logic {
 			case Type.DATA_SERVICE:
 			case Type.DATA_SECURITY:
 			case Type.DATA_STAT:
+			case Type.DATA_SUB_VALUE:
 			case Type.DATA_TEMPLATE:
 			case Type.DATA_TYPE:
 			case Type.DATA_USER:
 			case Type.DATA_VIDEO:
 			r_type = String(Str.get_title(data_type.replaceAll('_',' ').replaceAll('dt','').replace('biz',''))).trim();
+			break;
+            default:
+            r_type = 'Blank';
 			break;
 		};
 		if(option.plural){
@@ -2362,7 +2366,8 @@ class Data_Logic {
 			{title:Data_Logic.get_data_type_by_type(Type.DATA_PAGE),type:Type.DATA_PAGE,label:Type.get_data_type_by_type(Type.DATA_PAGE),value:Type.DATA_PAGE},
 			{title:Data_Logic.get_data_type_by_type(Type.DATA_PRODUCT),type:Type.DATA_PRODUCT,label:Type.get_data_type_by_type(Type.DATA_PRODUCT),value:Type.DATA_PRODUCT},
 			{title:Data_Logic.get_data_type_by_type(Type.DATA_SERVICE),type:Type.DATA_SERVICE,label:Type.get_data_type_by_type(Type.DATA_SERVICE),value:Type.DATA_SERVICE},
-			{title:Data_Logic.get_data_type_by_type(Type.DATA_TYPE),type:Type.DATA_TYPE,label:Type.get_data_type_by_type(Type.DATA_TYPE),value:Type.DATA_TYPE}
+			{title:Data_Logic.get_data_type_by_type(Type.DATA_TYPE),type:Type.DATA_TYPE,label:Type.get_data_type_by_type(Type.DATA_TYPE),value:Type.DATA_TYPE},
+			{title:Data_Logic.get_data_type_by_type(Type.DATA_SUB_VALUE),type:Type.DATA_SUB_VALUE,label:Type.get_data_type_by_type(Type.DATA_SUB_VALUE),value:Type.DATA_SUB_VALUE}
 		]
 	};
 	static get_search = (data_type,filter,sort_by,page_current,page_size) => {
