@@ -1010,6 +1010,9 @@ class Page_Logic {
         ];
         return page_section_list.find(item_find => item_find.value === type)? page_section_list.find(item_find => item_find.value === type) : {value:Type.PAGE_SECTION_BODY,title:Type.TITLE_PAGE_SECTION_BODY,label:Type.TITLE_PAGE_SECTION_BODY};
     };
+	static get_page_sub_value_edit = (page_id,section_type) => {
+        return {parent_data_type:Type.DATA_PAGE,parent_id:page,section_type:section_type};
+    };
     static get_pages(){
 		return [
 			{value:Type.PAGE_ABOUT,title:Type.TITLE_PAGE_ABOUT,label:Type.TITLE_PAGE_ABOUT,url:Url.PAGE_ABOUT},
@@ -2178,10 +2181,7 @@ class Data_Logic {
         let type = option.type ? option.type : Type.SUB_VALUE_TYPE_TEXT; // SUB_VALUE_TYPE_TEXT,NOTE,IMAGE,ITEMS
 		return  Data_Logic.get(Type.DATA_SUB_VALUE,0,{title:title,data:{parent_data_type:parent_data_type,parent_id:parent_id,value:value,type:type}});
 	};
-	static get_page_sub_value_edit = (page_id,section_type) => {
-        return {parent_data_type:Type.DATA_PAGE,parent_id:page,section_type:section_type};
-    };
-	// --> option  = / test / blank / title / sub_value_count / count / data
+// --> option  = / test / blank / title / sub_value_count / count / data
 	static get = (data_type,id,option) => {
         option = option ? option : {};
         function get_blank_field(data){
