@@ -96,6 +96,7 @@ class Type {
 	static FIELD_IMAGE_FILENAME = 'image_filename';
 	static FIELD_ITEMS_TITLE = 'items_title';
 	static FIELD_IMAGES = 'images';
+	static FIELD_ITEMS = 'items';
 	static FIELD_LOCATION = 'location';
 	static FIELD_MEETING_LINK = 'meeting_link';
 	static FIELD_NOTE = 'note';
