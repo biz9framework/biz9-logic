@@ -120,6 +120,7 @@ class Type {
 	static FIELD_TITLE='title';
 	static FIELD_TITLE_URL='title_url';
 	static FIELD_GROUP_ID='group_id';
+	static FIELD_TEMP_ID='temp_id';
 	static FIELD_TYPE = 'type';
 	static FIELD_URL = 'url';
 	static FIELD_USER_CITY = 'city';
