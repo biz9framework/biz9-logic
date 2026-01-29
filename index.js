@@ -115,6 +115,7 @@ class Type {
 	static FIELD_SETTING_SORT_TYPE = 'setting_delete_sort_type';
 	static FIELD_STOCK = 'stock';
 	static FIELD_TAG = 'tag';
+	static FIELD_ROW_TITLE = 'row_title';
 	static FIELD_TIME = 'time';
 	static FIELD_TITLE='title';
 	static FIELD_TITLE_URL='title_url';
