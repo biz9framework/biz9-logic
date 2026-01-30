@@ -2414,8 +2414,9 @@ class Data_Logic {
 		let page_size = option.page_size ? option.page_size : 0;
 		return {type:type,search:search,field:field,title:title,distinct:distinct,foreigns:foreigns,page_current:page_current,page_size:page_size};
 	}
-	static copy = (data_type,item)=>{
+	static copy = (data_type,item,option)=>{
 		let copy_item = Data_Logic.get_new(data_type,0);
+        option = option ? option : {};
 		const keys = Object.keys(item);
 		keys.forEach(key => {
 			if(
@@ -2435,6 +2436,10 @@ class Data_Logic {
 				copy_item[key]=item[key];
 			}
 		});
+        if(option.title){
+            copy_item.title = option.title;
+            copy_item.title_url = Str.get_title_url(option.title);
+        }
 		return copy_item;
 	};
 	static get_not_found = (data_type,id,option) =>{
