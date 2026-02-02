@@ -95,6 +95,7 @@ class Type {
 	static FIELD_ID='id';
 	static FIELD_IMAGE_FILENAME = 'image_filename';
 	static FIELD_ITEMS_TITLE = 'items_title';
+	static FIELD_ITEMS_VALUE = 'items_value';
 	static FIELD_IMAGES = 'images';
 	static FIELD_ITEMS = 'items';
 	static FIELD_LOCATION = 'location';
@@ -119,6 +120,7 @@ class Type {
 	static FIELD_TIME = 'time';
 	static FIELD_TITLE='title';
 	static FIELD_TITLE_URL='title_url';
+	static FIELD='field';
 	static FIELD_GROUP_ID='group_id';
 	static FIELD_TEMP_ID='temp_id';
 	static FIELD_TYPE = 'type';
@@ -2687,7 +2689,7 @@ class Url {
 	static PAGE_GALLERY="page/gallery";
 	static PAGE_GALLERY_HOME="page/gallery_home";
 	static PAGE_GALLERY_SEARCH="page/gallery_search";
-	static PAGE_HOME="page/home";
+	static PAGE_HOME="index";
 	static PAGE_LOGIN="page/login";
 	static PAGE_PRODUCT="page/product";
 	static PAGE_PRODUCT_HOME="page/product_home";
