@@ -2187,7 +2187,16 @@ class Data_Logic {
         option = option ? option : {};
         let value = option.value ? option.value : '';
         let type = option.type ? option.type : Type.SUB_VALUE_TEXT; // SUB_VALUE_TEXT,NOTE,IMAGE,ITEMS
-		return  Data_Logic.get(Type.DATA_SUB_VALUE,0,{title:title,data:{parent_data_type:parent_data_type,parent_id:parent_id,value:value,type:type}});
+        let sub_value_data = {parent_data_type:parent_data_type,parent_id:parent_id,type:type};
+        if(type == Type.SUB_VALUE_ITEMS){
+            sub_value_data[Type.FIELD_ITEMS_TITLE] = title;
+            sub_value_data[Type.FIELD_ITEMS_VALUE] = value;
+        }else{
+            sub_value_data[Type.FIELD_TITLE] = title;
+            sub_value_data[Type.FIELD_TITLE_URL] = Str.get_title_url(title);
+            sub_value_data[Type.FIELD_VALUE] = value;
+        }
+		return Data_Logic.get(Type.DATA_SUB_VALUE,0,{data:sub_value_data});
 	};
 // --> option  = / test / blank / title / sub_value_count / count / data
 	static get = (data_type,id,option) => {
