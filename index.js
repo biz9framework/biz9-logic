@@ -94,6 +94,7 @@ class Type {
 	static FIELD_EDIT_LOCATION = 'edit_location';
 	static FIELD_ID='id';
 	static FIELD_IMAGE_FILENAME = 'image_filename';
+	static FIELD_ITEMS_FIELD = 'items_field';
 	static FIELD_ITEMS_TITLE = 'items_title';
 	static FIELD_ITEMS_VALUE = 'items_value';
 	static FIELD_IMAGES = 'images';
