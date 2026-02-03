@@ -2433,8 +2433,6 @@ class Data_Logic {
 			if(
 				key!=Type.FIELD_ID&&
 				key!=Type.FIELD_SOURCE&&
-				key!=Type.FIELD_TITLE&&
-				key!=Type.FIELD_TITLE_URL&&
 				key!=Type.FIELD_DATE_CREATE&&
 				key!=Type.FIELD_DATE_SAVE&&
 				key!=Type.TITLE_OBJ&&
@@ -2447,10 +2445,6 @@ class Data_Logic {
 				copy_item[key]=item[key];
 			}
 		});
-        if(option.title){
-            copy_item.title = option.title;
-            copy_item.title_url = Str.get_title_url(option.title);
-        }
 		return copy_item;
 	};
 	static get_not_found = (data_type,id,option) =>{
