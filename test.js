@@ -31,6 +31,11 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-BASE-START');
+                // -- REVIEW START -- //
+                let review = Data_Logic.get(Type.DATA_REVIEW,0,{test:true,count:5,user:true});
+                Log.w('reviews',review);
+                // -- REVIEW END -- //
+
                 // -- PAGE START -- //
                 // -->
                 // - SubValue
@@ -41,17 +46,17 @@ describe("connect", () => {
                 // -- title_url
                 //let page_section = Page_Logic.get_page_section(Type.PAGE_SECTION_HEADER);
                 //Log.w('page_section',page_section);
-                let page = Data_Logic.get(Type.DATA_PAGE,3,{blank:false,test:false,sub_value_count:1});
+                //let page = Data_Logic.get(Type.DATA_PAGE,3,{blank:false,test:false,sub_value_count:1});
                 //let page = Data_Logic.get(Type.DATA_PRODUCT,0,{blank:false,test:true,count:3,sub_value_count:1,title:'cool'});
                 //let page = Data_Logic.get(Type.DATA_PRODUCT,3,{blank:true,test:true,count:2});
-                let sub_value = Data_Logic.get_sub_value(page.data_type,page.id,'my_title',{type:Type.SUB_VALUE_TITLE,value:'my_value1'});
-                Log.w('44_sub_value',sub_value);
+                //let sub_value = Data_Logic.get_sub_value(page.data_type,page.id,'my_title',{type:Type.SUB_VALUE_TITLE,value:'my_value1'});
+                //Log.w('44_sub_value',sub_value);
                 //Log.w('33_page',page);
                 //Log.w('33_page',page[0]);
                 //Log.w('44_page',page[0].sub_values);
                 // -- PAGE END -- //
                 // --
-                console.log('CONNECT-BASE-START');
+                //console.log('CONNECT-BASE-START');
                 // -->
                 // -- CART START -- //
                 /*

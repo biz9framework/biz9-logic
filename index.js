@@ -126,6 +126,7 @@ class Type {
     static FIELD_TEMP_ID='temp_id';
     static FIELD_TYPE = 'type';
     static FIELD_URL = 'url';
+    static FIELD_USER = 'user';
     static FIELD_USER_CITY = 'city';
     static FIELD_USER_COUNTRY = 'country';
     static FIELD_USER_EMAIL = 'email';
@@ -947,8 +948,8 @@ class Review_Logic {
     }
     static get_test = () =>{
         let data = Data_Logic.get(Type.DATA_REVIEW,0);
-        data.user_id = 1;
-        data.parent_data_type = Type.DATA_BLANK;;
+        data[Type.FIELD_USER] = User_Logic.get_test();
+        data.parent_data_type = Type.DATA_BLANK;
         data.parent_id = 1;
         data.rating = Num.get_id(6);
         data.comment = "My comment "+ Field_Logic.get_test_note();
@@ -2224,7 +2225,7 @@ class Data_Logic {
         }
         return Data_Logic.get(Type.DATA_SUB_VALUE,0,{data:sub_value_data});
     };
-    // --> option  = / test / blank / title / sub_value_count / count / data
+    // --> option  = / test / blank / title / sub_value_count / count / user / data
     static get = (data_type,id,option) => {
         option = option ? option : {};
         function get_blank_field(data){
@@ -2341,6 +2342,9 @@ class Data_Logic {
                     data.sub_values.push(Data_Logic.get_sub_value(data.data_type,data.id,title,{value:value}));
                 }
             }
+        }
+        if(option.user){
+            data[Type.FIELD_USER] = User_Logic.get_test();
         }
         return data;
     };
