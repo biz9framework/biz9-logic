@@ -22,12 +22,20 @@ describe("connect", () => {
                 call()
             },
             function(call) {
+                let list = [
+                    {id:1,title:'cool'},
+                    {id:2,title:'cool2'},
+                    {id:3,title:'cool'}
+                ];
+                Log.w('distinct_field',Obj.get_distinct_list(list,'title'));
+                /*
                 console.log('aaaaaa');
                  Log.w('check_is_value',Obj.check_is_value('aa'));
                  Log.w('check_is_value',Obj.check_is_value(2));
                  Log.w('check_is_value',Obj.check_is_value({a:'cool'}));
                  Log.w('check_is_value',Obj.check_is_value(['a','b','c']));
                 console.log('bbbbb');
+                */
                 //console.log('GET-DATETIME-START');
                 //const now = new Date();
                 ////let date_here = DateTime.get_date_short_str_date(now);
