@@ -1110,6 +1110,9 @@ class User_Logic {
     }
     static get_test = () =>{
         let data = Data_Logic.get(Type.DATA_USER,0);
+        data.title="user_name_"+ Num.get_id();
+        data.title_url = Str.get_title_url(data.title);
+        data.title="UserName"+ Num.get_id();
         data.first_name="First Name "+ Num.get_id();
         data.last_name="First Name "+ Num.get_id();
         data.email="email"+ Num.get_id() + "@email.com";
