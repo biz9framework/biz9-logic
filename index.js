@@ -897,6 +897,16 @@ class Field_Logic {
     };
     */
 }
+class Faq_Logic {
+    static get_test = () =>{
+        let data = Data_Logic.get(Type.DATA_FAQ,0);
+        data.title = "Faq Title "+ Num.get_id();
+        data.title_url = Str.get_title_url(data.title);
+        data.question = "Question "+ Num.get_id() +" "+ Field_Logic.get_test_note();
+        data.answer = "Answer "+Num.get_id() +" "+ Field_Logic.get_test_note();
+        return data;
+    };
+}
 class Favorite_Logic {
     static get = (parent_data_type,parent_id,user_id) =>{
         return Data_Logic.get_new(Type.DATA_FAVORITE,0,{data:{
@@ -2273,6 +2283,9 @@ class Data_Logic {
                 case Type.DATA_USER:
                     return User_Logic.get_test(option);
                     break;
+                case Type.DATA_FAQ:
+                    return Faq_Logic.get_test();
+                    break;
                 default:
                     return Blank_Logic.get_test(option);
                     break;
@@ -2760,6 +2773,7 @@ module.exports = {
     File_Logic,
     Field_Logic,
     Favorite_Logic,
+    Faq_Logic,
     Gallery_Logic,
     Image_Logic,
     Message,

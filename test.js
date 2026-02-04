@@ -31,9 +31,15 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-BASE-START');
+                // -- FAQ START -- //
+                let faq = Data_Logic.get(Type.DATA_FAQ,0,{test:true,count:5});
+                Log.w('faq',faq);
+                // -- FAQ END -- //
+
+
                 // -- REVIEW START -- //
-                let review = Data_Logic.get(Type.DATA_REVIEW,0,{test:true,count:5,user:true});
-                Log.w('reviews',review);
+                //let review = Data_Logic.get(Type.DATA_REVIEW,0,{test:true,count:5,user:true});
+                //Log.w('reviews',review);
                 // -- REVIEW END -- //
 
                 // -- PAGE START -- //
