@@ -1038,9 +1038,9 @@ class Template_Logic {
         ];
         return template_section_list.find(item_find => item_find.value === type)? template_section_list.find(item_find => item_find.value === type) : {value:Type.TEMPLATE_SECTION_BODY,title:Type.TITLE_TEMPLATE_SECTION_BODY,label:Type.TITLE_TEMPLATE_SECTION_BODY};
     };
-    static get_template_sub_value_edit = (section_type) => {
-        return {section_type:section_type};
-    };
+    static get_template_sub_value_edit = (template_id,section_type) => {
+        return {parent_data_type:Type.DATA_TEMPLATE,parent_id:template_id,section_type:section_type};
+     };
 }
 class Page_Logic {
     static get_test = () =>{
