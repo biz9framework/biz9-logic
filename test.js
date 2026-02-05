@@ -31,9 +31,13 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-BASE-START');
+                // -- PAGE_SUB_VALUE_EDIT START -- //
+                let page_sub_value_edit = Page_Logic.get_page_sub_value_edit(Type.DATA_PAGE,Type.PAGE_SECTION_BODY);
+                Log.w('page_sub_value_edit',page_sub_value_edit);
+                // -- PAGE_SUB_VALUE_EDIT END -- //
                 // -- FAQ START -- //
-                let faq = Data_Logic.get(Type.DATA_FAQ,0,{test:true,count:5});
-                Log.w('faq',faq);
+                //let faq = Data_Logic.get(Type.DATA_FAQ,0,{test:true,count:5});
+                //Log.w('faq',faq);
                 // -- FAQ END -- //
 
 

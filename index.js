@@ -100,6 +100,7 @@ class Type {
     static FIELD_IMAGES = 'images';
     static FIELD_ITEMS = 'items';
     static FIELD_LOCATION = 'location';
+    static FIELD_MESSAGE = 'message';
     static FIELD_MEETING_LINK = 'meeting_link';
     static FIELD_NOTE = 'note';
     static FIELD_OLD_COST = 'old_cost';
@@ -1058,7 +1059,7 @@ class Page_Logic {
         return page_section_list.find(item_find => item_find.value === type)? page_section_list.find(item_find => item_find.value === type) : {value:Type.PAGE_SECTION_BODY,title:Type.TITLE_PAGE_SECTION_BODY,label:Type.TITLE_PAGE_SECTION_BODY};
     };
     static get_page_sub_value_edit = (page_id,section_type) => {
-        return {parent_data_type:Type.DATA_PAGE,parent_id:page_id,section_type:section_type};
+        return {parent_data_type:Type.DATA_PAGE,parent_id:page_id,section_type:section_type,event_handler:section_type + "_"+Type.FIELD_MESSAGE};
     };
     static get_pages(){
         return [
