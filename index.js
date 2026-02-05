@@ -222,6 +222,10 @@ class Type {
     static TITLE_PAGE_SECTION_HEADER='Header Section';
     static TITLE_PAGE_SECTION_BODY='Body Section';
     static TITLE_PAGE_SECTION_FOOTER='Footer Section';
+    //template_section
+    static TITLE_TEMPLATE_SECTION_HEADER='Header Section';
+    static TITLE_TEMPLATE_SECTION_BODY='Body Section';
+    static TITLE_TEMPLATE_SECTION_FOOTER='Footer Section';
     //source
     static TITLE_SOURCE_DATABASE='Database';
     static TITLE_SOURCE_CACHE='Cache';
@@ -253,6 +257,10 @@ class Type {
     static PAGE_SECTION_HEADER='page_section_header';
     static PAGE_SECTION_BODY='page_section_body';
     static PAGE_SECTION_FOOTER='page_section_footer';
+    //template_section
+    static TEMPLATE_SECTION_HEADER='template_section_header';
+    static TEMPLATE_SECTION_BODY='template_section_body';
+    static TEMPLATE_SECTION_FOOTER='template_section_footer';
     //search
     static SEARCH_ITEMS='items';
     static SEARCH_ONE='one';
@@ -1014,6 +1022,25 @@ class Storage {
             }
         }
     }
+}
+class Template_Logic {
+ static get_test = () =>{
+        let data = Data_Logic.get(Type.DATA_TEMPLATE,0);
+        data.title="Title "+ Num.get_id();
+        data.value="Value "+ Num.get_id();
+        return data;
+    };
+    static get_template_section(type){
+        let template_section_list = [
+            {value:Type.TEMPLATE_SECTION_HEADER,title:Type.TITLE_TEMPLATE_SECTION_HEADER,label:Type.TITLE_TEMPLATE_SECTION_HEADER},
+            {value:Type.TEMPLATE_SECTION_BODY,title:Type.TITLE_TEMPLATE_SECTION_BODY,label:Type.TITLE_TEMPLATE_SECTION_BODY},
+            {value:Type.TEMPLATE_SECTION_FOOTER,title:Type.TITLE_TEMPLATE_SECTION_FOOTER,label:Type.TITLE_TEMPLATE_SECTION_FOOTER},
+        ];
+        return template_section_list.find(item_find => item_find.value === type)? template_section_list.find(item_find => item_find.value === type) : {value:Type.TEMPLATE_SECTION_BODY,title:Type.TITLE_TEMPLATE_SECTION_BODY,label:Type.TITLE_TEMPLATE_SECTION_BODY};
+    };
+    static get_template_sub_value_edit = (section_type) => {
+        return {section_type:section_type};
+    };
 }
 class Page_Logic {
     static get_test = () =>{
