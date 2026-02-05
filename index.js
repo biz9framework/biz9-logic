@@ -2811,6 +2811,7 @@ module.exports = {
     Service_Logic,
     Stat_Logic,
     Storage,
+    Template_Logic,
     Type,
     User_Logic,
     Url
