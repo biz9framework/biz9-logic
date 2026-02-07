@@ -31,14 +31,46 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-BASE-START');
+                // -- SEARCH START -- //
+                //let search = Data_Logic.get_search(Type.DATA_USER,{},{},1,0,{cool:'bean'});
+                let search = Data_Logic.get_search(Type.DATA_USER,{},{},10,33,{field:{id:1,title:1}});
+
+                Log.w('11_search',search);
+                // -- SEARCH END -- //
+
+
+                // -- GET START -- //
+                /*
+                let user = Data_Logic.get(Type.DATA_USER,123,{test:true});
+                let parent = Data_Logic.get(Type.DATA_PRODUCT,404,{test:true,user:user});
+                let group = Data_Logic.get(Type.DATA_GROUP,123,{test:true,parent:parent});
+                let image = Data_Logic.get(Type.DATA_IMAGE,0,{test:true,parent:group,user:user,count:2});
+                //Log.w('11_parent',parent);
+                Log.w('11_item',image);
+                //Log.w('22_item',group);
+                Log.w('parent',parent);
+                */
+                // -- GET END -- //
+
+
                 // -- PAGE_SUB_VALUE_EDIT START -- //
-                let page_sub_value_edit = Page_Logic.get_page_sub_value_edit(Type.DATA_PAGE,Type.PAGE_SECTION_BODY);
-                Log.w('page_sub_value_edit',page_sub_value_edit);
+                //let page_sub_value_edit = Page_Logic.get_page_sub_value_edit(Type.DATA_PAGE,Type.PAGE_SECTION_BODY);
+                //Log.w('page_sub_value_edit',page_sub_value_edit);
                 // -- PAGE_SUB_VALUE_EDIT END -- //
                 // -- FAQ START -- //
                 //let faq = Data_Logic.get(Type.DATA_FAQ,0,{test:true,count:5});
                 //Log.w('faq',faq);
                 // -- FAQ END -- //
+
+                // -- GROUP START -- //
+                /*
+                let option = {groups:[Data_Logic.get_search_group({image:true})]};
+                let parent = Data_Logic.get(Type.DATA_PRODUCT,0,option);
+                Log.w('option',option);
+                Log.w('parent',parent);
+                */
+                // -- GROUP END -- //
+
 
 
                 // -- REVIEW START -- //

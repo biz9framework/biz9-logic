@@ -117,6 +117,8 @@ class Type {
     static FIELD_SETTING_DELETE_PROTECTION = 'setting_delete_protection';
     static FIELD_SETTING_SORT_TYPE = 'setting_delete_sort_type';
     static FIELD_STOCK = 'stock';
+    static FIELD_STAT = 'stat';
+    static FIELD_STAT_TYPE = 'stat_type';
     static FIELD_TAG = 'tag';
     static FIELD_ROW_TITLE = 'row_title';
     static FIELD_TIME = 'time';
@@ -151,6 +153,7 @@ class Type {
     static FIELD_RESULT_OK_UNIQUE = 'unique_resultOK';
     static FIELD_RESULT_OK_FAVORITE_ADD = 'favorite_resultOK';
     static FIELD_RESULT_OK_GROUP_DELETE = 'group_delete_resultOK';
+    static FIELD_RESULT_OK_GROUP_IMAGE_DELETE = 'group_image_delete_resultOK';
     static FIELD_RESULT_OK_IMAGE_DELETE = 'image_delete_resultOK';
     //title
     static TITLE_DATA_BLOG_POST = 'Blog Post';
@@ -357,16 +360,14 @@ class Type {
 }
 class Stat_Logic {
     static get = (parent_data_type,parent_id,type,user_id,post_data) => {
-        let new_stat = Data_Logic.get_new(Type.DATA_STAT,0,{option:
-            {
-                user_id:user_id,
-                type:type,
-                parent_data_type:parent_data_type,
-                parent_id:parent_id
-            }});
+        let new_stat = Data_Logic.get_new(Type.DATA_STAT,0);
         if(!Obj.check_is_empty(post_data)){
             new_stat = Obj.merge(new_stat,Stat_Logic.filter_stat(post_data));
         }
+        new_stat[Type.FIELD_PARENT_DATA_TYPE] = parent_data_type;
+        new_stat[Type.FIELD_PARENT_ID] = parent_id;
+        new_stat[Type.FIELD_STAT_TYPE] = type;
+        new_stat[Type.FIELD_USER_ID] = user_id;
         return new_stat;
     };
     static get_stat_types = () =>{
@@ -386,7 +387,6 @@ class Stat_Logic {
             {title:Data_Logic.get_data_type_by_type(Type.STAT_VIEW),type:Type.STAT_VIEW,label:Type.get_data_type_by_type(Type.STAT_VIEW),value:Type.STAT_VIEW},
         ]
     };
-
     static filter_stat = (post_data) =>{
         let filter_stat = {};
         for(const prop in post_data) {
@@ -635,7 +635,6 @@ class Content_Logic {
         return data;
     };
 };
-
 class Blank_Logic {
     static get_test = (option) =>{
         let data = Data_Logic.get(Type.DATA_BLANK,0);
@@ -724,6 +723,9 @@ class Field_Logic {
         if(option.parent){
             data[Type.FIELD_PARENT_DATA_TYPE] = option.parent[Type.FIELD_DATA_TYPE] ? option.parent[Type.FIELD_DATA_TYPE] : Type.DATA_BLANK;
             data[Type.FIELD_PARENT_ID] = option.parent[Type.FIELD_ID] ? option.parent[Type.FIELD_ID] : 0;
+        }
+        if(option.user){
+            data[Type.FIELD_USER_ID] = option.user[Type.FIELD_ID] ? option.user[Type.FIELD_ID] : 0;
         }
         if(option.data){
             data = Obj.merge(data,option.data);
@@ -1148,6 +1150,7 @@ class User_Logic {
     }
     static get_test = () =>{
         let data = Data_Logic.get(Type.DATA_USER,0);
+        data.role=Type.USER_ROLE_GUEST;
         data.title="user_name_"+ Num.get_id();
         data.title_url = Str.get_title_url(data.title);
         data.title="UserName"+ Num.get_id();
@@ -2266,7 +2269,7 @@ class Data_Logic {
         }
         return Data_Logic.get(Type.DATA_SUB_VALUE,0,{data:sub_value_data});
     };
-    // --> option  = / test / blank / title / sub_value_count / count / user / data
+    // --> option  = / test / blank / title / sub_value_count / count / user / parent / data
     static get = (data_type,id,option) => {
         option = option ? option : {};
         function get_blank_field(data){
@@ -2303,6 +2306,9 @@ class Data_Logic {
                 case Type.DATA_REVIEW:
                     return Review_Logic.get_test(option);
                     break;
+                case Type.DATA_IMAGE:
+                    return Image_Logic.get_test(option);
+                    break;
                 case Type.DATA_CONTENT:
                 case Type.DATA_CATEGORY:
                 case Type.DATA_BLANK:
@@ -2330,10 +2336,6 @@ class Data_Logic {
         if(option.test){
             data = Obj.merge(get_test_data(data_type),data);
         }
-        if(option.title){
-            data[Type.FIELD_TITLE] = option.title;
-            data[Type.FIELD_TITLE_URL] = Str.get_title_url(option.title);
-        }
         if(option.blank){
             data = get_blank_field(data);
         }
@@ -2342,6 +2344,7 @@ class Data_Logic {
             for(let a = 1;a<option.count+1;a++){
                 let test_data = Field_Logic.get_base_option(data,option);
                 let my_title = Data_Logic.get_data_type_by_type(data_type) + " " +Num.get_id(999);
+
                 if(option.test){
                     test_data = Obj.merge(data,get_test_data(data_type));
                 }
@@ -2386,9 +2389,6 @@ class Data_Logic {
                     data.sub_values.push(Data_Logic.get_sub_value(data.data_type,data.id,title,{value:value}));
                 }
             }
-        }
-        if(option.user){
-            data[Type.FIELD_USER] = User_Logic.get_test();
         }
         return data;
     };
@@ -2461,16 +2461,16 @@ class Data_Logic {
             {title:Data_Logic.get_data_type_by_type(Type.DATA_SUB_VALUE),type:Type.DATA_SUB_VALUE,label:Type.get_data_type_by_type(Type.DATA_SUB_VALUE),value:Type.DATA_SUB_VALUE}
         ]
     };
-    static get_search = (data_type,filter,sort_by,page_current,page_size) => {
-        return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size};
+    static get_search = (data_type,filter,sort_by,page_current,page_size,option) => {
+        option = option ?? {};
+        return {data_type:data_type,filter:filter,sort_by:sort_by,page_current:page_current,page_size:page_size,option:option};
     }
     static get_search_group = (option) => {
         option = option ? option : {};
         let type  = option.type ? option.type : Type.SEARCH_ITEMS;
         let field = option.field ? option.field : {};
         let title = option.title ? Str.get_title_url(option.title) : {};
-        let image_show = option.image_show ? option.image_show : {};
-        let image = option.image ? option.image : {show:false};
+        let image = option.image ? option.image : false;
         let page_current = option.page_current ? option.page_current : 1;
         let page_size = option.page_size ? option.page_size : 0;
         return {type:type,field:field,title:title,image:image,page_current:page_current,page_size:page_size};
@@ -2648,6 +2648,12 @@ class File_Logic {
     };
 };
 class Image_Logic {
+    static get_test = (option) =>{
+        let data = Data_Logic.get(Type.DATA_IMAGE,0);
+        data.field_1="Field 1 "+ Num.get_id();
+        data.field_2="Field 2 "+ Num.get_id();
+        return data;
+    };
     static url = (host,image_filename,size,param) =>{
         host = host ? host : "";
         image_filename = image_filename ? image_filename : "";
