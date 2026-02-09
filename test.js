@@ -33,9 +33,8 @@ describe("connect", () => {
                 console.log('CONNECT-BASE-START');
                 // -- SEARCH START -- //
                 //let search = Data_Logic.get_search(Type.DATA_USER,{},{},1,0,{cool:'bean'});
-                let search = Data_Logic.get_search(Type.DATA_USER,{},{},10,33,{field:{id:1,title:1}});
-
-                Log.w('11_search',search);
+                //let search = Data_Logic.get_search(Type.DATA_USER,{},{},10,33,{field:{id:1,title:1}});
+                //Log.w('11_search',search);
                 // -- SEARCH END -- //
 
 
@@ -125,6 +124,8 @@ describe("connect", () => {
                 // -- ORDER START -- //
                 // -- order start //
                 //let order = Order_Logic.get(cart,{order_code:'OR'});
+                let order_payment = Order_Logic.get_order_payment('123',Type.PAYMENT_METHOD_CASH,'1.00',{transaction_code:'TR'});
+                Log.w('22_order_payment',order_payment);
                 //Log.w('order',order);
                 //Log.w('order_items',order.order_items[0]);
                 // -- order end //

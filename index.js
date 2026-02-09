@@ -40,6 +40,8 @@ class Type {
     static APP_LINK_TYPE_GOOGLE_PLAY='google_play';
     static APP_LINK_TYPE_APPLE_STORE='apple_store';
     static APP_LINK_TYPE_CMS='cms';
+    //cart
+    static CART_CODE='CA';
     //data
     static DATA_APP='app_biz';
     static DATA_BLANK='blank_biz';
@@ -314,6 +316,11 @@ class Type {
     static DATA_SOURCE_CLIENT="client";
     static DATA_SOURCE_SERVER="server";
     static DATA_SOURCE_NOT_FOUND="not_found";
+    //payment_method_types
+    static PAYMENT_METHOD_CASH="cash";
+    static PAYMENT_METHOD_CHECK="check";
+    static PAYMENT_METHOD_CREDIT_CARD="credit_card";
+    static PAYMENT_METHOD_BANK_TRANSFER="bank_transfer";
     //env
     static ENV_TEST="test";
     static ENV_STAGE="stage";
@@ -335,8 +342,8 @@ class Type {
     static CART_SUB_TYPE_SHIPPING = 'shipping';
     static CART_SUB_TYPE_COUPON = 'coupon';
     static CART_SUB_TYPE_GIFT_CARD = 'gift_card';
-
     //order
+    static ORDER_CODE="OC";
     static ORDER_STATUS_NEW="new";
     static ORDER_STATUS_OPEN="open";
     static ORDER_STATUS_COMPLETE="complete";
@@ -499,13 +506,14 @@ class Order_Logic {
         return order;
     };
 
-    static get_order_payment = (order_number,payment_method_type,payment_amount) => {
+    static get_order_payment = (order_number,payment_method_type,payment_amount,option) => {
+        let transaction_code = option.transaction_code ? option.transaction_code+"-" : "";
         return Data_Logic.get_new(Type.DATA_ORDER_PAYMENT,0,{data:
             {
                 order_number:order_number,
                 payment_method_type:payment_method_type,
                 payment_amount:payment_amount,
-                transaction_id:Title.ORDER_TRANSACTION_ID + Num.get_id(99999)
+                transaction_id:transaction_code + Num.get_id(99999)
             }});
     };
 }
