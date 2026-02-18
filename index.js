@@ -70,6 +70,7 @@ class Table {
 }
 class Data_Logic {
     static get = (table,id,option) => {
+        option = !Obj.check_is_empty(option) ? option : {};
         /* Option
          * count / 3
          * parent / {parent_table,parent_id}
@@ -134,9 +135,9 @@ class Data_Logic {
         let page_size = option.page_size ? option.page_size : 0;
         return {value_type:value_type,foreign_table:foreign_table,foreign_field:foreign_field,parent_field:parent_field,field:field,title:title,page_current:page_current,page_size:page_size};
     };
-    static get_search_join = (type,search,option) => {
+    static get_join = (value_type,search,option) => {
         option = !Obj.check_is_empty(option)  ? option : {};
-        type = type ? type : Type.SEARCH_ITEMS;
+        value_type = value_type ? value_type : Value_Type.ITEMS;
         search = search ? search : Data_Logic.get_search(Type.DATA_BLANK,{},{},1,0);
         let field = option.field ? option.field : {};
         let distinct = option.distinct ? option.distinct : null; //distinct:{field:'title',sort_by:Type.SEARCH_SORT_BY_DESC}
@@ -144,23 +145,22 @@ class Data_Logic {
         let foreigns = option.foreigns ? option.foreigns : [];
         let page_current = option.page_current ? option.page_current : 1;
         let page_size = option.page_size ? option.page_size : 0;
-        return {type:type,search:search,field:field,title:title,distinct:distinct,foreigns:foreigns,page_current:page_current,page_size:page_size};
+        return {value_type:value_type,search:search,field:field,title:title,distinct:distinct,foreigns:foreigns,page_current:page_current,page_size:page_size};
     }
-    /*
-    static copy = (data_type,item,option)=>{
-        let copy_item = Data_Logic.get_new(data_type,0);
+    static copy = (table,item,option)=>{
+        let copy_item = Data_Logic.get_new(table,0);
         option = !Obj.check_is_empty(option)  ? option : {};
         const keys = Object.keys(item);
         keys.forEach(key => {
             if(
-                key!=Type.FIELD_ID&&
-                key!=Type.FIELD_SOURCE&&
-                key!=Type.FIELD_DATE_CREATE&&
-                key!=Type.FIELD_DATE_SAVE&&
-                key!=Type.TITLE_OBJ&&
-                key!=Type.TITLE_USER&&
-                key!=Type.TITLE_GROUP&&
-                key!=Type.TITLE_ITEM&&
+                key!=Field.ID&&
+                key!=Field.SOURCE&&
+                key!=Field.DATE_CREATE&&
+                key!=Field.DATE_SAVE&&
+                key!=Field.OBJ&&
+                key!=Field.USER&&
+                key!=Field.GROUP&&
+                key!=Field.TEM&&
                 !Obj.check_is_array(item[key])&&
                 Obj.check_is_value(item[key])
             ){
@@ -169,39 +169,23 @@ class Data_Logic {
         });
         return copy_item;
     };
-    static get_not_found = (data_type,id,option) =>{
+    static get_not_found = (table,id,option) =>{
         option=!Obj.check_is_empty(option)?option:{};
-        if(!data_type){
-            data_type = Type.DATA_BLANK;
+        if(!table){
+            table = Table.BLANK;
         }
         if(!id){
             id = 0;
         }
-        if(data_type != Type.DATA_USER){
-            if(!id){
-                id=0;
-            }
-            let item = Data_Logic.get(data_type,id);
-            item.id = 0;
-            item.id_key = id;
-            item.title = "Item Not Found";
-            item.title_url = Str.get_title_url(item.title);
-            item.source = Type.TITLE_SOURCE_NOT_FOUND;
-            return item;
-        }else{
-            let user = Data_Logic.get(data_type,id);
-            user.id = 0;
-            user.id_key = id;
-            user.title = "User Not Found";
-            user.first_name = "User Not Found";
-            user.title_url = Str.get_title_url(user.title);
-            user.source = Type.TITLE_SOURCE_NOT_FOUND;
-            return user;
-        }
+        let item = Data_Logic.get(table,id);
+        item.id = 0;
+        item.id_key = id;
+        item.title = "Item Not Found";
+        item.title_url = Str.get_title_url(item.title);
+        item.source = Title.SOURCE_NOT_FOUND;
+        return item;
     };
-    */
 }
-
 module.exports = {
     Data_Logic,
     Table,

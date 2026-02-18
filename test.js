@@ -11,14 +11,10 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-BASE-START');
-                //let parent = Data_Logic.get(Project_Table.PRODUCT,0,{count:3});
-                //Log.w('parent',parent);
-                //let search = Data_Logic.get_search(Project_Table.PRODUCT,{},{},1,0,{});
-                //Log.w('search',search);
-                //let group = Data_Logic.get_group({value_type:Value_Type.ITEMS});
-                //Log.w('group',group);
-                let foreign = Data_Logic.get_foreign(Value_Type.ITEMS,Table.BLANK,'cool','apple',{title:'ffff'});
-                Log.w('foreign',foreign);
+                //let data = Data_Logic.get(Project_Table.PRODUCT,0);
+                let data = Data_Logic.get_not_found(Project_Table.PRODUCT,0);
+                Log.w('www',data);
+
 
 
                 // -- POST-START --//
