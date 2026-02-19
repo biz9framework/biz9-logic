@@ -130,7 +130,7 @@ class Data_Logic {
         foreign_field = foreign_field ? foreign_field : Type.FIELD_PARENT_ID;
         parent_field = parent_field ? parent_field : parent_field;
         let field = option.field ? option.field : null;
-        let title = option.title ? Str.get_title_url(option.title) : Str.get_lower_case(Title.FOREIGN);
+        let title = option.title ? Str.get_title_url(option.title) : Str.get_lower_case(Str.get_plural(Title.FOREIGN));
         let page_current = option.page_current ? option.page_current : 1;
         let page_size = option.page_size ? option.page_size : 0;
         return {value_type:value_type,foreign_table:foreign_table,foreign_field:foreign_field,parent_field:parent_field,field:field,title:title,page_current:page_current,page_size:page_size};
@@ -141,7 +141,7 @@ class Data_Logic {
         search = search ? search : Data_Logic.get_search(Type.DATA_BLANK,{},{},1,0);
         let field = option.field ? option.field : {};
         let distinct = option.distinct ? option.distinct : null; //distinct:{field:'title',sort_by:Type.SEARCH_SORT_BY_DESC}
-        let title = option.title ? Str.get_title_url(option.title) : Str.get_lower_case(Title.JOIN);
+        let title = option.title ? Str.get_title_url(option.title) : Str.get_lower_case(Str.get_plural(Title.JOIN));
         let foreigns = option.foreigns ? option.foreigns : [];
         let page_current = option.page_current ? option.page_current : 1;
         let page_size = option.page_size ? option.page_size : 0;
