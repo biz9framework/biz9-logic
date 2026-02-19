@@ -148,7 +148,7 @@ class Data_Logic {
         return {value_type:value_type,search:search,field:field,title:title,distinct:distinct,foreigns:foreigns,page_current:page_current,page_size:page_size};
     }
     static copy = (table,item,option)=>{
-        let copy_item = Data_Logic.get_new(table,0);
+        let copy_item = Data_Logic.get(table,0);
         option = !Obj.check_is_empty(option)  ? option : {};
         const keys = Object.keys(item);
         keys.forEach(key => {
@@ -160,10 +160,11 @@ class Data_Logic {
                 key!=Field.OBJ&&
                 key!=Field.USER&&
                 key!=Field.GROUP&&
-                key!=Field.TEM&&
+                key!=Field.ITEM&&
                 !Obj.check_is_array(item[key])&&
                 Obj.check_is_value(item[key])
-            ){
+            )
+            {
                 copy_item[key]=item[key];
             }
         });

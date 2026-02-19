@@ -11,9 +11,9 @@ describe("connect", () => {
         series([
             function(call) {
                 console.log('CONNECT-BASE-START');
-                //let data = Data_Logic.get(Project_Table.PRODUCT,0);
-                let data = Data_Logic.get_not_found(Project_Table.PRODUCT,0);
-                Log.w('www',data);
+                let data = Data_Logic.get(Project_Table.PRODUCT,0,{data:{cool:'apple',bean:'butter'}});
+                let copy_data = Data_Logic.copy(Project_Table.PRODUCT,data);
+                Log.w('ccc',copy_data);
 
 
 
