@@ -117,7 +117,7 @@ class Data_Logic {
         option = !Obj.check_is_empty(option)  ? option : {};
         let value_type  = option.value_type ? option.value_type : Value_Type.ITEMS;
         let field = option.field ? option.field : {};
-        let title = option.title ? Str.get_title_url(option.title) : Str.get_lower_case(Title.GROUP);
+        let title = option.title ? Str.get_title_url(option.title) : {};
         let page_current = option.page_current ? option.page_current : 1;
         let page_size = option.page_size ? option.page_size : 0;
         let foreigns = option.foreigns ? option.foreigns : [];
